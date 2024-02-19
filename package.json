@@ -20,5 +20,8 @@
   "devDependencies": {
     "sass": "^1.71.0",
     "vitepress": "^1.0.0-rc.43"
+  },
+  "dependencies": {
+    "@tenado/char8": "^1.0.5"
   }
 }
