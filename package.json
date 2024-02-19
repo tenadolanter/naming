@@ -1,0 +1,24 @@
+{
+  "name": "naming",
+  "version": "1.0.0",
+  "description": "取名",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenadolanter/naming.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tenadolanter/naming/issues"
+  },
+  "homepage": "https://github.com/tenadolanter/naming#readme",
+  "devDependencies": {
+    "sass": "^1.71.0",
+    "vitepress": "^1.0.0-rc.43"
+  }
+}
