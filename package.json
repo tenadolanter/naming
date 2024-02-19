@@ -1,0 +1,35 @@
+{
+  "name": "naming",
+  "version": "1.0.0",
+  "description": "取名",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenadolanter/naming.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tenadolanter/naming/issues"
+  },
+  "homepage": "https://github.com/tenadolanter/naming#readme",
+  "devDependencies": {
+    "sass": "^1.71.0",
+    "vite-plugin-style-import": "^2.0.0",
+    "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "@tenado/char8": "^1.0.6",
+    "@tenado/cnchar": "^1.0.5",
+    "@tenado/element5": "^1.0.4",
+    "@tenado/lunarjs": "^1.0.9",
+    "dayjs": "^1.11.10",
+    "element-plus": "^2.5.6",
+    "vue": "^3.4.19"
+  }
+}
