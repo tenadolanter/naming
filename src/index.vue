@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Header></Header>
+    <!-- <Header></Header> -->
     <Content></Content>
     <Footer></Footer>
   </div>
