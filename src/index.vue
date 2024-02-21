@@ -1,16 +1,13 @@
 <template>
   <div class="wrap">
-    <Content></Content>
+    12121
+    <el-button type="success">121</el-button>
   </div>
 </template>
 
-<script>
-import Content from "./components/content.vue";
-export default {
-  components: {
-    Content,
-  },
-}
+<script setup>
+import { ElButton } from 'element-plus';
+import 'element-plus/dist/index.css'
 
 </script>
 
