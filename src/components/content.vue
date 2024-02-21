@@ -26,6 +26,7 @@
 
 <script setup>
 import { ElButton, ElForm, ElFormItem, ElInput, ElDatePicker, ElTimePicker, ElSelect, ElOption } from 'element-plus';
+// import { getYearMonthDay } from "../utils/index.js";
 import { reactive, ref } from "vue";
 
 const formRef = ref();
@@ -48,13 +49,20 @@ const handlerSumbit = async (formEl) => {
   if (!formEl) return
   const validate = await formEl.validate();
   if(validate) {
-    console.log("formValue", formValue);
+    // console.log("formValue", formValue);
+    handlerData(formValue);
   }
 }
 
 const handlerReset = (formEl) => {
   if (!formEl) return
   formEl.resetFields();
+}
+
+const handlerData = (formData) => {
+  const date = formData.date;
+  // const dateData = getYearMonthDay(date);
+  // console.log(dateData);
 }
 
 </script>
