@@ -1,14 +1,16 @@
 <template>
   <div class="wrap">
-    12121
-    <el-button type="success">121</el-button>
+    <Header></Header>
+    <Content></Content>
+    <Footer></Footer>
   </div>
 </template>
 
 <script setup>
-import { ElButton } from 'element-plus';
 import 'element-plus/dist/index.css'
-
+import Content from "./components/content.vue"
+import Header from "./components/header.vue"
+import Footer from "./components/footer.vue"
 </script>
 
 <style scoped lang="scss">
