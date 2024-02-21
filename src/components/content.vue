@@ -67,7 +67,8 @@ const handlerData = (formData) => {
   console.log("dateData", dateData);
   const lunarData = getLunar(dateData.year, dateData.month, dateData.day)
   info.lunar = lunarData;
-  const char8Data = getChar8(dateData.year, dateData.month, dateData.day)
+  const { lYear, lMonth, lDay } = info.lunar ?? {};
+  const char8Data = getChar8(lYear, lMonth, lDay)
   info.char8 = char8Data;
   console.log(info);
 }
