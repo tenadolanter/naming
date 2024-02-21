@@ -2,13 +2,13 @@
   <div class="content-wrap">
     <el-form :model="formValue" :rules="formRules" ref="formRef" status-icon label-width="120px" size="large">
       <el-form-item label="姓氏" prop="surname">
-        <el-input v-model="formValue.surname" placeholder="输入孩子的姓氏"></el-input>
+        <el-input v-model="formValue.surname" placeholder="输入孩子的姓氏" style="width: 500px"></el-input>
       </el-form-item>
       <el-form-item label="阳历日期" prop="date">
-        <el-date-picker v-model="formValue.date" type="date" value-format="YYYY-MM-DD" placeholder="选择一个日期" style="width: 100%"></el-date-picker>
+        <el-date-picker v-model="formValue.date" type="date" value-format="YYYY-MM-DD" placeholder="选择一个日期" style="width: 500px"></el-date-picker>
       </el-form-item>
       <el-form-item label="时间" prop="time">
-        <el-time-picker v-model="formValue.time" value-format="HH:mm" placeholder="选择一个时间" style="width: 100%"></el-time-picker>
+        <el-time-picker v-model="formValue.time" value-format="HH:mm" placeholder="选择一个时间" style="width: 500px"></el-time-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handlerSumbit(formRef)">起名</el-button>
