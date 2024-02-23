@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/tenadolanter/naming#readme",
   "devDependencies": {
-    "babel-plugin-component": "^1.1.1",
     "sass": "^1.71.0",
     "vitepress": "^1.0.0-rc.43"
   },
@@ -27,8 +26,6 @@
     "@tenado/lunarjs": "^1.0.9",
     "dayjs": "^1.11.10",
     "element-plus": "^2.5.6",
-    "install": "^0.13.0",
-    "npm": "^10.4.0",
     "vue": "^3.4.19"
   }
 }
