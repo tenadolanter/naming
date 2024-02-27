@@ -26,7 +26,7 @@
 
 <script setup>
 import { ElButton, ElForm, ElFormItem, ElInput, ElDatePicker, ElTimePicker, ElSelect, ElOption } from 'element-plus';
-import { getYearMonthDay, getLunar, getChar8 } from "../utils/index.js";
+import { getYearMonthDay, getLunar, getChar8, getElement5 } from "../utils/index.js";
 import { reactive, ref } from "vue";
 
 const formRef = ref();
@@ -59,16 +59,12 @@ const handlerReset = (formEl) => {
   formEl.resetFields();
 }
 
-const handlerData = (formData) => {
+const handlerData = () => {
   let info = {  ...formValue };
-  const date = formData.date;
-  const time = formData.time;
-  const dateData = getYearMonthDay(date, time);
-  console.log("dateData", dateData);
-  const lunarData = getLunar(dateData.year, dateData.month, dateData.day)
-  info.lunar = lunarData;
-  const char8Data = getChar8(dateData.year, dateData.month, dateData.day)
-  info.char8 = char8Data;
+  getYearMonthDay(info);
+  getLunar(info)
+  getChar8(info)
+  getElement5(info)
   console.log(info);
 }
 
