@@ -4,9 +4,28 @@ import char8 from "@tenado/char8";
 import element5 from "@tenado/element5";
 import cnchar from "@tenado/cnchar";
 
+export const utilRandom = (arr) => {
+  const length = arr.length;
+  const randomIndex = Math.floor(Math.random() * length);
+  return arr[randomIndex];
+}
 
 export const getCnChar = (info, nums = 50) => {
-  console.log(cnchar)
+  let results = [];
+  const getName = (info) => {
+    let result = [];
+    const { sex } = info;
+    const firstConfig = utilRandom(cnchar.filter(item => !item.sex || item.sex === sex))
+    result.push(firstConfig);
+    const secondConfig = utilRandom(cnchar.filter(item => !item.sex || item.sex === sex))
+    result.push(secondConfig);
+    return result;
+  }
+  for(let i = 0; i < nums; i++) {
+    const name = getName(info);
+    results.push(name)
+  }
+  info.names = results;
 }
 
 
