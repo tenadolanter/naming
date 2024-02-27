@@ -2,11 +2,11 @@ import dayjs from "dayjs";
 import { solar2lunar } from "@tenado/lunarjs";
 import char8 from "@tenado/char8";
 import element5 from "@tenado/element5";
-// import cnchar from "@tenado/cnchar";
+import cnchar from "@tenado/cnchar";
 
 
 export const getCnChar = (info, nums = 50) => {
-
+  console.log(cnchar)
 }
 
 
