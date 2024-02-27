@@ -26,7 +26,7 @@
 
 <script setup>
 import { ElButton, ElForm, ElFormItem, ElInput, ElDatePicker, ElTimePicker, ElSelect, ElOption } from 'element-plus';
-import { getYearMonthDay, getLunar, getChar8, getElement5 } from "../utils/index.js";
+import { getYearMonthDay, getLunar, getChar8, getElement5, getCnChar } from "../utils/index.js";
 import { reactive, ref } from "vue";
 
 const formRef = ref();
@@ -65,6 +65,7 @@ const handlerData = () => {
   getLunar(info)
   getChar8(info)
   getElement5(info)
+  getCnChar(info)
   console.log(info);
 }
 
