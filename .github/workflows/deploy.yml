@@ -13,7 +13,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm i
+      - run: rm -rf package-lock.json
+      - run: rm -rf node_modules
+      - run: npm install
 
       - name: Build Docs
         run: npm run docs:build
