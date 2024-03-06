@@ -11,6 +11,11 @@ export const utilRandom = (arr) => {
 }
 
 export const getCnChar = (info, nums = 50) => {
+  // 字的笔画不要太多
+  // 不用生僻字
+  // 相同部首的字
+  // 两个字读音相识
+  // 前后鼻音如lian liang、yin ying、wen wei
   let results = [];
   const getName = (info) => {
     let result = [];
