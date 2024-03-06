@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tenadolanter/naming#readme",
   "devDependencies": {
     "sass": "^1.71.0",
+    "vite-plugin-style-import": "^2.0.0",
     "vitepress": "^1.0.0-rc.43"
   },
   "dependencies": {
