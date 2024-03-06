@@ -5,7 +5,7 @@
         <el-input v-model="formValue.surname" placeholder="输入孩子的姓氏" style="width: 500px"></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
-        <el-select v-model="formValue.sex" placeholder="输入孩子的姓氏" clearable style="width: 500px">
+        <el-select v-model="formValue.sex" placeholder="选择孩子的性别" clearable style="width: 500px">
           <el-option label="男" value="男"></el-option>
           <el-option label="女" value="女"></el-option>
         </el-select>
