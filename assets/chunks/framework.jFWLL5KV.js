@@ -8504,7 +8504,7 @@ function createRouter(loadPageModule, fallbackComponent) {
       if (link2 && !link2.closest(".vp-raw") && (link2 instanceof SVGElement || !link2.download)) {
         const { target } = link2;
         const { href, origin, pathname, hash, search } = new URL(link2.href instanceof SVGAnimatedString ? link2.href.animVal : link2.href, link2.baseURI);
-        const currentUrl = window.location;
+        const currentUrl = new URL(window.location.href);
         if (!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && !target && origin === currentUrl.origin && treatAsHtml(pathname)) {
           e.preventDefault();
           if (pathname === currentUrl.pathname && search === currentUrl.search) {
@@ -8515,7 +8515,7 @@ function createRouter(loadPageModule, fallbackComponent) {
             if (hash) {
               scrollTo$1(link2, hash, link2.classList.contains("header-anchor"));
             } else {
-              updateHistory(href);
+              updateHistory(href, false);
               window.scrollTo(0, 0);
             }
           } else {
@@ -8564,10 +8564,14 @@ function scrollTo$1(el, hash, smooth = false) {
     requestAnimationFrame(scrollToTarget);
   }
 }
-function updateHistory(href) {
+function updateHistory(href, emitHashChange = true) {
   if (inBrowser && normalizeHref(href) !== normalizeHref(location.href)) {
+    const currentHash = location.hash;
     history.replaceState({ scrollPosition: window.scrollY }, document.title);
     history.pushState(null, "", href);
+    if (emitHashChange && new URL(href, fakeHost).hash !== currentHash) {
+      window.dispatchEvent(new Event("hashchange"));
+    }
   }
 }
 function normalizeHref(href) {

@@ -4,8 +4,8 @@ function __vite__mapDeps(indexes) {
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }
-import { j as inBrowser, ax as useUpdateHead, ay as RouterSymbol, az as initData, aA as dataSymbol, aB as Content, aC as ClientOnly, aD as siteDataRef, aE as createSSRApp, aF as createRouter, aG as pathToFile, aH as __vitePreload, d as defineComponent, u as useData, l as onMounted, z as watchEffect, aI as usePrefetch, aJ as useCopyCode, aK as useCodeGroups, aL as h } from "./chunks/framework.C1ex38rk.js";
-import { t as theme } from "./chunks/theme.hkcU7DxR.js";
+import { j as inBrowser, ax as useUpdateHead, ay as RouterSymbol, az as initData, aA as dataSymbol, aB as Content, aC as ClientOnly, aD as siteDataRef, aE as createSSRApp, aF as createRouter, aG as pathToFile, aH as __vitePreload, d as defineComponent, u as useData, l as onMounted, z as watchEffect, aI as usePrefetch, aJ as useCopyCode, aK as useCodeGroups, aL as h } from "./chunks/framework.jFWLL5KV.js";
+import { t as theme } from "./chunks/theme.DY_itaKC.js";
 function resolveThemeExtends(theme2) {
   if (theme2.extends) {
     const base = resolveThemeExtends(theme2.extends);
@@ -44,6 +44,7 @@ const VitePressApp = defineComponent({
   }
 });
 async function createApp() {
+  globalThis.__VITEPRESS__ = true;
   const router = newRouter();
   const app = newApp();
   app.provide(RouterSymbol, router);
