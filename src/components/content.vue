@@ -61,6 +61,7 @@
           class="name-item"
           v-for="(item, index) in formInfo.names"
           :key="index"
+          @click="handlerItemClick(index)"
         >
           {{ formInfo.surname + item.map((ele) => ele.char).join("") }}
         </div>
@@ -137,7 +138,9 @@ export default {
       getElement5(info);
       getCnChar(info);
       this.formInfo = info;
-      console.log(info, this.formInfo);
+    },
+    handlerItemClick(index){
+      console.log(this.formInfo, this.formInfo.names[index]);
     },
   },
 };
@@ -145,11 +148,11 @@ export default {
 
 <style scoped lang="scss">
 .content-wrap {
+  margin-top: 24px;
   max-width: 1000px;
   margin: 0 auto;
-  padding-top: 24px;
+  padding: 20px;
   .result {
-    padding: 16px;
     .result-title {
       font-weight: bold;
       margin-bottom: 16px;
@@ -163,6 +166,11 @@ export default {
         border: 1px solid rgba(0, 0, 0, 0.8);
         background-color: rgba(255, 255, 255, 0.8);
         cursor: pointer;
+        &:hover {
+          background-color: #409eff;
+          color: #fff;
+          font-weight: bold;
+        }
       }
     }
   }
