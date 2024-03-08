@@ -2805,184 +2805,184 @@ const useProp = (name) => {
     return (_b = (_a2 = vm == null ? void 0 : vm.proxy) == null ? void 0 : _a2.$props) == null ? void 0 : _b[name];
   });
 };
-var E$1 = "top", R$2 = "bottom", W$2 = "right", P$2 = "left", me = "auto", G$2 = [E$1, R$2, W$2, P$2], U$1 = "start", J$1 = "end", Xe = "clippingParents", je = "viewport", K$1 = "popper", Ye = "reference", De = G$2.reduce(function(t2, e) {
-  return t2.concat([e + "-" + U$1, e + "-" + J$1]);
-}, []), Ee = [].concat(G$2, [me]).reduce(function(t2, e) {
-  return t2.concat([e, e + "-" + U$1, e + "-" + J$1]);
+var E$2 = "top", R$2 = "bottom", W$2 = "right", P$2 = "left", me = "auto", G$2 = [E$2, R$2, W$2, P$2], U$1 = "start", J$1 = "end", Xe = "clippingParents", je = "viewport", K$1 = "popper", Ye = "reference", De = G$2.reduce(function(t, e) {
+  return t.concat([e + "-" + U$1, e + "-" + J$1]);
+}, []), Ee = [].concat(G$2, [me]).reduce(function(t, e) {
+  return t.concat([e, e + "-" + U$1, e + "-" + J$1]);
 }, []), Ge = "beforeRead", Je = "read", Ke = "afterRead", Qe = "beforeMain", Ze = "main", et$1 = "afterMain", tt$1 = "beforeWrite", nt$1 = "write", rt$1 = "afterWrite", ot$1 = [Ge, Je, Ke, Qe, Ze, et$1, tt$1, nt$1, rt$1];
-function C$2(t2) {
-  return t2 ? (t2.nodeName || "").toLowerCase() : null;
+function C$2(t) {
+  return t ? (t.nodeName || "").toLowerCase() : null;
 }
-function H$2(t2) {
-  if (t2 == null)
+function H$2(t) {
+  if (t == null)
     return window;
-  if (t2.toString() !== "[object Window]") {
-    var e = t2.ownerDocument;
+  if (t.toString() !== "[object Window]") {
+    var e = t.ownerDocument;
     return e && e.defaultView || window;
   }
-  return t2;
+  return t;
 }
-function Q$2(t2) {
-  var e = H$2(t2).Element;
-  return t2 instanceof e || t2 instanceof Element;
+function Q$2(t) {
+  var e = H$2(t).Element;
+  return t instanceof e || t instanceof Element;
 }
-function B$2(t2) {
-  var e = H$2(t2).HTMLElement;
-  return t2 instanceof e || t2 instanceof HTMLElement;
+function B$2(t) {
+  var e = H$2(t).HTMLElement;
+  return t instanceof e || t instanceof HTMLElement;
 }
-function Pe(t2) {
+function Pe(t) {
   if (typeof ShadowRoot == "undefined")
     return false;
-  var e = H$2(t2).ShadowRoot;
-  return t2 instanceof e || t2 instanceof ShadowRoot;
+  var e = H$2(t).ShadowRoot;
+  return t instanceof e || t instanceof ShadowRoot;
 }
-function Mt(t2) {
-  var e = t2.state;
+function Mt(t) {
+  var e = t.state;
   Object.keys(e.elements).forEach(function(n) {
-    var r2 = e.styles[n] || {}, o = e.attributes[n] || {}, i = e.elements[n];
-    !B$2(i) || !C$2(i) || (Object.assign(i.style, r2), Object.keys(o).forEach(function(a) {
+    var r2 = e.styles[n] || {}, o = e.attributes[n] || {}, i2 = e.elements[n];
+    !B$2(i2) || !C$2(i2) || (Object.assign(i2.style, r2), Object.keys(o).forEach(function(a) {
       var s = o[a];
-      s === false ? i.removeAttribute(a) : i.setAttribute(a, s === true ? "" : s);
+      s === false ? i2.removeAttribute(a) : i2.setAttribute(a, s === true ? "" : s);
     }));
   });
 }
-function Rt(t2) {
-  var e = t2.state, n = { popper: { position: e.options.strategy, left: "0", top: "0", margin: "0" }, arrow: { position: "absolute" }, reference: {} };
+function Rt(t) {
+  var e = t.state, n = { popper: { position: e.options.strategy, left: "0", top: "0", margin: "0" }, arrow: { position: "absolute" }, reference: {} };
   return Object.assign(e.elements.popper.style, n.popper), e.styles = n, e.elements.arrow && Object.assign(e.elements.arrow.style, n.arrow), function() {
     Object.keys(e.elements).forEach(function(r2) {
-      var o = e.elements[r2], i = e.attributes[r2] || {}, a = Object.keys(e.styles.hasOwnProperty(r2) ? e.styles[r2] : n[r2]), s = a.reduce(function(f, c2) {
+      var o = e.elements[r2], i2 = e.attributes[r2] || {}, a = Object.keys(e.styles.hasOwnProperty(r2) ? e.styles[r2] : n[r2]), s = a.reduce(function(f, c2) {
         return f[c2] = "", f;
       }, {});
-      !B$2(o) || !C$2(o) || (Object.assign(o.style, s), Object.keys(i).forEach(function(f) {
+      !B$2(o) || !C$2(o) || (Object.assign(o.style, s), Object.keys(i2).forEach(function(f) {
         o.removeAttribute(f);
       }));
     });
   };
 }
 var Ae = { name: "applyStyles", enabled: true, phase: "write", fn: Mt, effect: Rt, requires: ["computeStyles"] };
-function q$2(t2) {
-  return t2.split("-")[0];
+function q$2(t) {
+  return t.split("-")[0];
 }
 var X$2 = Math.max, ve = Math.min, Z$1 = Math.round;
-function ee(t2, e) {
+function ee(t, e) {
   e === void 0 && (e = false);
-  var n = t2.getBoundingClientRect(), r2 = 1, o = 1;
-  if (B$2(t2) && e) {
-    var i = t2.offsetHeight, a = t2.offsetWidth;
-    a > 0 && (r2 = Z$1(n.width) / a || 1), i > 0 && (o = Z$1(n.height) / i || 1);
+  var n = t.getBoundingClientRect(), r2 = 1, o = 1;
+  if (B$2(t) && e) {
+    var i2 = t.offsetHeight, a = t.offsetWidth;
+    a > 0 && (r2 = Z$1(n.width) / a || 1), i2 > 0 && (o = Z$1(n.height) / i2 || 1);
   }
   return { width: n.width / r2, height: n.height / o, top: n.top / o, right: n.right / r2, bottom: n.bottom / o, left: n.left / r2, x: n.left / r2, y: n.top / o };
 }
-function ke(t2) {
-  var e = ee(t2), n = t2.offsetWidth, r2 = t2.offsetHeight;
-  return Math.abs(e.width - n) <= 1 && (n = e.width), Math.abs(e.height - r2) <= 1 && (r2 = e.height), { x: t2.offsetLeft, y: t2.offsetTop, width: n, height: r2 };
+function ke(t) {
+  var e = ee(t), n = t.offsetWidth, r2 = t.offsetHeight;
+  return Math.abs(e.width - n) <= 1 && (n = e.width), Math.abs(e.height - r2) <= 1 && (r2 = e.height), { x: t.offsetLeft, y: t.offsetTop, width: n, height: r2 };
 }
-function it$1(t2, e) {
+function it$1(t, e) {
   var n = e.getRootNode && e.getRootNode();
-  if (t2.contains(e))
+  if (t.contains(e))
     return true;
   if (n && Pe(n)) {
     var r2 = e;
     do {
-      if (r2 && t2.isSameNode(r2))
+      if (r2 && t.isSameNode(r2))
         return true;
       r2 = r2.parentNode || r2.host;
     } while (r2);
   }
   return false;
 }
-function N$2(t2) {
-  return H$2(t2).getComputedStyle(t2);
+function N$2(t) {
+  return H$2(t).getComputedStyle(t);
 }
-function Wt(t2) {
-  return ["table", "td", "th"].indexOf(C$2(t2)) >= 0;
+function Wt(t) {
+  return ["table", "td", "th"].indexOf(C$2(t)) >= 0;
 }
-function I(t2) {
-  return ((Q$2(t2) ? t2.ownerDocument : t2.document) || window.document).documentElement;
+function I(t) {
+  return ((Q$2(t) ? t.ownerDocument : t.document) || window.document).documentElement;
 }
-function ge(t2) {
-  return C$2(t2) === "html" ? t2 : t2.assignedSlot || t2.parentNode || (Pe(t2) ? t2.host : null) || I(t2);
+function ge(t) {
+  return C$2(t) === "html" ? t : t.assignedSlot || t.parentNode || (Pe(t) ? t.host : null) || I(t);
 }
-function at$1(t2) {
-  return !B$2(t2) || N$2(t2).position === "fixed" ? null : t2.offsetParent;
+function at$1(t) {
+  return !B$2(t) || N$2(t).position === "fixed" ? null : t.offsetParent;
 }
-function Bt(t2) {
+function Bt(t) {
   var e = navigator.userAgent.toLowerCase().indexOf("firefox") !== -1, n = navigator.userAgent.indexOf("Trident") !== -1;
-  if (n && B$2(t2)) {
-    var r2 = N$2(t2);
+  if (n && B$2(t)) {
+    var r2 = N$2(t);
     if (r2.position === "fixed")
       return null;
   }
-  var o = ge(t2);
+  var o = ge(t);
   for (Pe(o) && (o = o.host); B$2(o) && ["html", "body"].indexOf(C$2(o)) < 0; ) {
-    var i = N$2(o);
-    if (i.transform !== "none" || i.perspective !== "none" || i.contain === "paint" || ["transform", "perspective"].indexOf(i.willChange) !== -1 || e && i.willChange === "filter" || e && i.filter && i.filter !== "none")
+    var i2 = N$2(o);
+    if (i2.transform !== "none" || i2.perspective !== "none" || i2.contain === "paint" || ["transform", "perspective"].indexOf(i2.willChange) !== -1 || e && i2.willChange === "filter" || e && i2.filter && i2.filter !== "none")
       return o;
     o = o.parentNode;
   }
   return null;
 }
-function se(t2) {
-  for (var e = H$2(t2), n = at$1(t2); n && Wt(n) && N$2(n).position === "static"; )
+function se(t) {
+  for (var e = H$2(t), n = at$1(t); n && Wt(n) && N$2(n).position === "static"; )
     n = at$1(n);
-  return n && (C$2(n) === "html" || C$2(n) === "body" && N$2(n).position === "static") ? e : n || Bt(t2) || e;
+  return n && (C$2(n) === "html" || C$2(n) === "body" && N$2(n).position === "static") ? e : n || Bt(t) || e;
 }
-function Le(t2) {
-  return ["top", "bottom"].indexOf(t2) >= 0 ? "x" : "y";
+function Le(t) {
+  return ["top", "bottom"].indexOf(t) >= 0 ? "x" : "y";
 }
-function fe(t2, e, n) {
-  return X$2(t2, ve(e, n));
+function fe(t, e, n) {
+  return X$2(t, ve(e, n));
 }
-function St(t2, e, n) {
-  var r2 = fe(t2, e, n);
+function St(t, e, n) {
+  var r2 = fe(t, e, n);
   return r2 > n ? n : r2;
 }
 function st$1() {
   return { top: 0, right: 0, bottom: 0, left: 0 };
 }
-function ft(t2) {
-  return Object.assign({}, st$1(), t2);
+function ft(t) {
+  return Object.assign({}, st$1(), t);
 }
-function ct(t2, e) {
+function ct(t, e) {
   return e.reduce(function(n, r2) {
-    return n[r2] = t2, n;
+    return n[r2] = t, n;
   }, {});
 }
-var Tt = function(t2, e) {
-  return t2 = typeof t2 == "function" ? t2(Object.assign({}, e.rects, { placement: e.placement })) : t2, ft(typeof t2 != "number" ? t2 : ct(t2, G$2));
+var Tt = function(t, e) {
+  return t = typeof t == "function" ? t(Object.assign({}, e.rects, { placement: e.placement })) : t, ft(typeof t != "number" ? t : ct(t, G$2));
 };
-function Ht(t2) {
-  var e, n = t2.state, r2 = t2.name, o = t2.options, i = n.elements.arrow, a = n.modifiersData.popperOffsets, s = q$2(n.placement), f = Le(s), c2 = [P$2, W$2].indexOf(s) >= 0, u2 = c2 ? "height" : "width";
-  if (!(!i || !a)) {
-    var m2 = Tt(o.padding, n), v2 = ke(i), l2 = f === "y" ? E$1 : P$2, h = f === "y" ? R$2 : W$2, p2 = n.rects.reference[u2] + n.rects.reference[f] - a[f] - n.rects.popper[u2], g2 = a[f] - n.rects.reference[f], x2 = se(i), y2 = x2 ? f === "y" ? x2.clientHeight || 0 : x2.clientWidth || 0 : 0, $2 = p2 / 2 - g2 / 2, d = m2[l2], b2 = y2 - v2[u2] - m2[h], w2 = y2 / 2 - v2[u2] / 2 + $2, O2 = fe(d, w2, b2), j2 = f;
+function Ht(t) {
+  var e, n = t.state, r2 = t.name, o = t.options, i2 = n.elements.arrow, a = n.modifiersData.popperOffsets, s = q$2(n.placement), f = Le(s), c2 = [P$2, W$2].indexOf(s) >= 0, u2 = c2 ? "height" : "width";
+  if (!(!i2 || !a)) {
+    var m2 = Tt(o.padding, n), v2 = ke(i2), l2 = f === "y" ? E$2 : P$2, h = f === "y" ? R$2 : W$2, p2 = n.rects.reference[u2] + n.rects.reference[f] - a[f] - n.rects.popper[u2], g = a[f] - n.rects.reference[f], x2 = se(i2), y = x2 ? f === "y" ? x2.clientHeight || 0 : x2.clientWidth || 0 : 0, $2 = p2 / 2 - g / 2, d2 = m2[l2], b2 = y - v2[u2] - m2[h], w2 = y / 2 - v2[u2] / 2 + $2, O2 = fe(d2, w2, b2), j2 = f;
     n.modifiersData[r2] = (e = {}, e[j2] = O2, e.centerOffset = O2 - w2, e);
   }
 }
-function Ct(t2) {
-  var e = t2.state, n = t2.options, r2 = n.element, o = r2 === void 0 ? "[data-popper-arrow]" : r2;
+function Ct(t) {
+  var e = t.state, n = t.options, r2 = n.element, o = r2 === void 0 ? "[data-popper-arrow]" : r2;
   o != null && (typeof o == "string" && (o = e.elements.popper.querySelector(o), !o) || !it$1(e.elements.popper, o) || (e.elements.arrow = o));
 }
 var pt = { name: "arrow", enabled: true, phase: "main", fn: Ht, effect: Ct, requires: ["popperOffsets"], requiresIfExists: ["preventOverflow"] };
-function te(t2) {
-  return t2.split("-")[1];
+function te(t) {
+  return t.split("-")[1];
 }
 var qt = { top: "auto", right: "auto", bottom: "auto", left: "auto" };
-function Vt(t2) {
-  var e = t2.x, n = t2.y, r2 = window, o = r2.devicePixelRatio || 1;
+function Vt(t) {
+  var e = t.x, n = t.y, r2 = window, o = r2.devicePixelRatio || 1;
   return { x: Z$1(e * o) / o || 0, y: Z$1(n * o) / o || 0 };
 }
-function ut(t2) {
-  var e, n = t2.popper, r2 = t2.popperRect, o = t2.placement, i = t2.variation, a = t2.offsets, s = t2.position, f = t2.gpuAcceleration, c2 = t2.adaptive, u2 = t2.roundOffsets, m2 = t2.isFixed, v2 = a.x, l2 = v2 === void 0 ? 0 : v2, h = a.y, p2 = h === void 0 ? 0 : h, g2 = typeof u2 == "function" ? u2({ x: l2, y: p2 }) : { x: l2, y: p2 };
-  l2 = g2.x, p2 = g2.y;
-  var x2 = a.hasOwnProperty("x"), y2 = a.hasOwnProperty("y"), $2 = P$2, d = E$1, b2 = window;
+function ut(t) {
+  var e, n = t.popper, r2 = t.popperRect, o = t.placement, i2 = t.variation, a = t.offsets, s = t.position, f = t.gpuAcceleration, c2 = t.adaptive, u2 = t.roundOffsets, m2 = t.isFixed, v2 = a.x, l2 = v2 === void 0 ? 0 : v2, h = a.y, p2 = h === void 0 ? 0 : h, g = typeof u2 == "function" ? u2({ x: l2, y: p2 }) : { x: l2, y: p2 };
+  l2 = g.x, p2 = g.y;
+  var x2 = a.hasOwnProperty("x"), y = a.hasOwnProperty("y"), $2 = P$2, d2 = E$2, b2 = window;
   if (c2) {
     var w2 = se(n), O2 = "clientHeight", j2 = "clientWidth";
-    if (w2 === H$2(n) && (w2 = I(n), N$2(w2).position !== "static" && s === "absolute" && (O2 = "scrollHeight", j2 = "scrollWidth")), w2 = w2, o === E$1 || (o === P$2 || o === W$2) && i === J$1) {
-      d = R$2;
+    if (w2 === H$2(n) && (w2 = I(n), N$2(w2).position !== "static" && s === "absolute" && (O2 = "scrollHeight", j2 = "scrollWidth")), w2 = w2, o === E$2 || (o === P$2 || o === W$2) && i2 === J$1) {
+      d2 = R$2;
       var A2 = m2 && w2 === b2 && b2.visualViewport ? b2.visualViewport.height : w2[O2];
       p2 -= A2 - r2.height, p2 *= f ? 1 : -1;
     }
-    if (o === P$2 || (o === E$1 || o === R$2) && i === J$1) {
+    if (o === P$2 || (o === E$2 || o === R$2) && i2 === J$1) {
       $2 = W$2;
       var k2 = m2 && w2 === b2 && b2.visualViewport ? b2.visualViewport.width : w2[j2];
       l2 -= k2 - r2.width, l2 *= f ? 1 : -1;
@@ -2991,93 +2991,93 @@ function ut(t2) {
   var D = Object.assign({ position: s }, c2 && qt), S2 = u2 === true ? Vt({ x: l2, y: p2 }) : { x: l2, y: p2 };
   if (l2 = S2.x, p2 = S2.y, f) {
     var L2;
-    return Object.assign({}, D, (L2 = {}, L2[d] = y2 ? "0" : "", L2[$2] = x2 ? "0" : "", L2.transform = (b2.devicePixelRatio || 1) <= 1 ? "translate(" + l2 + "px, " + p2 + "px)" : "translate3d(" + l2 + "px, " + p2 + "px, 0)", L2));
+    return Object.assign({}, D, (L2 = {}, L2[d2] = y ? "0" : "", L2[$2] = x2 ? "0" : "", L2.transform = (b2.devicePixelRatio || 1) <= 1 ? "translate(" + l2 + "px, " + p2 + "px)" : "translate3d(" + l2 + "px, " + p2 + "px, 0)", L2));
   }
-  return Object.assign({}, D, (e = {}, e[d] = y2 ? p2 + "px" : "", e[$2] = x2 ? l2 + "px" : "", e.transform = "", e));
+  return Object.assign({}, D, (e = {}, e[d2] = y ? p2 + "px" : "", e[$2] = x2 ? l2 + "px" : "", e.transform = "", e));
 }
-function Nt(t2) {
-  var e = t2.state, n = t2.options, r2 = n.gpuAcceleration, o = r2 === void 0 ? true : r2, i = n.adaptive, a = i === void 0 ? true : i, s = n.roundOffsets, f = s === void 0 ? true : s, c2 = { placement: q$2(e.placement), variation: te(e.placement), popper: e.elements.popper, popperRect: e.rects.popper, gpuAcceleration: o, isFixed: e.options.strategy === "fixed" };
+function Nt(t) {
+  var e = t.state, n = t.options, r2 = n.gpuAcceleration, o = r2 === void 0 ? true : r2, i2 = n.adaptive, a = i2 === void 0 ? true : i2, s = n.roundOffsets, f = s === void 0 ? true : s, c2 = { placement: q$2(e.placement), variation: te(e.placement), popper: e.elements.popper, popperRect: e.rects.popper, gpuAcceleration: o, isFixed: e.options.strategy === "fixed" };
   e.modifiersData.popperOffsets != null && (e.styles.popper = Object.assign({}, e.styles.popper, ut(Object.assign({}, c2, { offsets: e.modifiersData.popperOffsets, position: e.options.strategy, adaptive: a, roundOffsets: f })))), e.modifiersData.arrow != null && (e.styles.arrow = Object.assign({}, e.styles.arrow, ut(Object.assign({}, c2, { offsets: e.modifiersData.arrow, position: "absolute", adaptive: false, roundOffsets: f })))), e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-placement": e.placement });
 }
 var Me = { name: "computeStyles", enabled: true, phase: "beforeWrite", fn: Nt, data: {} }, ye = { passive: true };
-function It(t2) {
-  var e = t2.state, n = t2.instance, r2 = t2.options, o = r2.scroll, i = o === void 0 ? true : o, a = r2.resize, s = a === void 0 ? true : a, f = H$2(e.elements.popper), c2 = [].concat(e.scrollParents.reference, e.scrollParents.popper);
-  return i && c2.forEach(function(u2) {
+function It(t) {
+  var e = t.state, n = t.instance, r2 = t.options, o = r2.scroll, i2 = o === void 0 ? true : o, a = r2.resize, s = a === void 0 ? true : a, f = H$2(e.elements.popper), c2 = [].concat(e.scrollParents.reference, e.scrollParents.popper);
+  return i2 && c2.forEach(function(u2) {
     u2.addEventListener("scroll", n.update, ye);
   }), s && f.addEventListener("resize", n.update, ye), function() {
-    i && c2.forEach(function(u2) {
+    i2 && c2.forEach(function(u2) {
       u2.removeEventListener("scroll", n.update, ye);
     }), s && f.removeEventListener("resize", n.update, ye);
   };
 }
 var Re = { name: "eventListeners", enabled: true, phase: "write", fn: function() {
 }, effect: It, data: {} }, _t = { left: "right", right: "left", bottom: "top", top: "bottom" };
-function be(t2) {
-  return t2.replace(/left|right|bottom|top/g, function(e) {
+function be(t) {
+  return t.replace(/left|right|bottom|top/g, function(e) {
     return _t[e];
   });
 }
 var zt = { start: "end", end: "start" };
-function lt(t2) {
-  return t2.replace(/start|end/g, function(e) {
+function lt(t) {
+  return t.replace(/start|end/g, function(e) {
     return zt[e];
   });
 }
-function We(t2) {
-  var e = H$2(t2), n = e.pageXOffset, r2 = e.pageYOffset;
+function We(t) {
+  var e = H$2(t), n = e.pageXOffset, r2 = e.pageYOffset;
   return { scrollLeft: n, scrollTop: r2 };
 }
-function Be(t2) {
-  return ee(I(t2)).left + We(t2).scrollLeft;
+function Be(t) {
+  return ee(I(t)).left + We(t).scrollLeft;
 }
-function Ft(t2) {
-  var e = H$2(t2), n = I(t2), r2 = e.visualViewport, o = n.clientWidth, i = n.clientHeight, a = 0, s = 0;
-  return r2 && (o = r2.width, i = r2.height, /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (a = r2.offsetLeft, s = r2.offsetTop)), { width: o, height: i, x: a + Be(t2), y: s };
+function Ft(t) {
+  var e = H$2(t), n = I(t), r2 = e.visualViewport, o = n.clientWidth, i2 = n.clientHeight, a = 0, s = 0;
+  return r2 && (o = r2.width, i2 = r2.height, /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (a = r2.offsetLeft, s = r2.offsetTop)), { width: o, height: i2, x: a + Be(t), y: s };
 }
-function Ut(t2) {
-  var e, n = I(t2), r2 = We(t2), o = (e = t2.ownerDocument) == null ? void 0 : e.body, i = X$2(n.scrollWidth, n.clientWidth, o ? o.scrollWidth : 0, o ? o.clientWidth : 0), a = X$2(n.scrollHeight, n.clientHeight, o ? o.scrollHeight : 0, o ? o.clientHeight : 0), s = -r2.scrollLeft + Be(t2), f = -r2.scrollTop;
-  return N$2(o || n).direction === "rtl" && (s += X$2(n.clientWidth, o ? o.clientWidth : 0) - i), { width: i, height: a, x: s, y: f };
+function Ut(t) {
+  var e, n = I(t), r2 = We(t), o = (e = t.ownerDocument) == null ? void 0 : e.body, i2 = X$2(n.scrollWidth, n.clientWidth, o ? o.scrollWidth : 0, o ? o.clientWidth : 0), a = X$2(n.scrollHeight, n.clientHeight, o ? o.scrollHeight : 0, o ? o.clientHeight : 0), s = -r2.scrollLeft + Be(t), f = -r2.scrollTop;
+  return N$2(o || n).direction === "rtl" && (s += X$2(n.clientWidth, o ? o.clientWidth : 0) - i2), { width: i2, height: a, x: s, y: f };
 }
-function Se(t2) {
-  var e = N$2(t2), n = e.overflow, r2 = e.overflowX, o = e.overflowY;
+function Se(t) {
+  var e = N$2(t), n = e.overflow, r2 = e.overflowX, o = e.overflowY;
   return /auto|scroll|overlay|hidden/.test(n + o + r2);
 }
-function dt(t2) {
-  return ["html", "body", "#document"].indexOf(C$2(t2)) >= 0 ? t2.ownerDocument.body : B$2(t2) && Se(t2) ? t2 : dt(ge(t2));
+function dt(t) {
+  return ["html", "body", "#document"].indexOf(C$2(t)) >= 0 ? t.ownerDocument.body : B$2(t) && Se(t) ? t : dt(ge(t));
 }
-function ce(t2, e) {
+function ce(t, e) {
   var n;
   e === void 0 && (e = []);
-  var r2 = dt(t2), o = r2 === ((n = t2.ownerDocument) == null ? void 0 : n.body), i = H$2(r2), a = o ? [i].concat(i.visualViewport || [], Se(r2) ? r2 : []) : r2, s = e.concat(a);
+  var r2 = dt(t), o = r2 === ((n = t.ownerDocument) == null ? void 0 : n.body), i2 = H$2(r2), a = o ? [i2].concat(i2.visualViewport || [], Se(r2) ? r2 : []) : r2, s = e.concat(a);
   return o ? s : s.concat(ce(ge(a)));
 }
-function Te(t2) {
-  return Object.assign({}, t2, { left: t2.x, top: t2.y, right: t2.x + t2.width, bottom: t2.y + t2.height });
+function Te(t) {
+  return Object.assign({}, t, { left: t.x, top: t.y, right: t.x + t.width, bottom: t.y + t.height });
 }
-function Xt(t2) {
-  var e = ee(t2);
-  return e.top = e.top + t2.clientTop, e.left = e.left + t2.clientLeft, e.bottom = e.top + t2.clientHeight, e.right = e.left + t2.clientWidth, e.width = t2.clientWidth, e.height = t2.clientHeight, e.x = e.left, e.y = e.top, e;
+function Xt(t) {
+  var e = ee(t);
+  return e.top = e.top + t.clientTop, e.left = e.left + t.clientLeft, e.bottom = e.top + t.clientHeight, e.right = e.left + t.clientWidth, e.width = t.clientWidth, e.height = t.clientHeight, e.x = e.left, e.y = e.top, e;
 }
-function ht$1(t2, e) {
-  return e === je ? Te(Ft(t2)) : Q$2(e) ? Xt(e) : Te(Ut(I(t2)));
+function ht$1(t, e) {
+  return e === je ? Te(Ft(t)) : Q$2(e) ? Xt(e) : Te(Ut(I(t)));
 }
-function Yt(t2) {
-  var e = ce(ge(t2)), n = ["absolute", "fixed"].indexOf(N$2(t2).position) >= 0, r2 = n && B$2(t2) ? se(t2) : t2;
+function Yt(t) {
+  var e = ce(ge(t)), n = ["absolute", "fixed"].indexOf(N$2(t).position) >= 0, r2 = n && B$2(t) ? se(t) : t;
   return Q$2(r2) ? e.filter(function(o) {
     return Q$2(o) && it$1(o, r2) && C$2(o) !== "body";
   }) : [];
 }
-function Gt(t2, e, n) {
-  var r2 = e === "clippingParents" ? Yt(t2) : [].concat(e), o = [].concat(r2, [n]), i = o[0], a = o.reduce(function(s, f) {
-    var c2 = ht$1(t2, f);
+function Gt(t, e, n) {
+  var r2 = e === "clippingParents" ? Yt(t) : [].concat(e), o = [].concat(r2, [n]), i2 = o[0], a = o.reduce(function(s, f) {
+    var c2 = ht$1(t, f);
     return s.top = X$2(c2.top, s.top), s.right = ve(c2.right, s.right), s.bottom = ve(c2.bottom, s.bottom), s.left = X$2(c2.left, s.left), s;
-  }, ht$1(t2, i));
+  }, ht$1(t, i2));
   return a.width = a.right - a.left, a.height = a.bottom - a.top, a.x = a.left, a.y = a.top, a;
 }
-function mt(t2) {
-  var e = t2.reference, n = t2.element, r2 = t2.placement, o = r2 ? q$2(r2) : null, i = r2 ? te(r2) : null, a = e.x + e.width / 2 - n.width / 2, s = e.y + e.height / 2 - n.height / 2, f;
+function mt(t) {
+  var e = t.reference, n = t.element, r2 = t.placement, o = r2 ? q$2(r2) : null, i2 = r2 ? te(r2) : null, a = e.x + e.width / 2 - n.width / 2, s = e.y + e.height / 2 - n.height / 2, f;
   switch (o) {
-    case E$1:
+    case E$2:
       f = { x: a, y: e.y - n.height };
       break;
     case R$2:
@@ -3095,7 +3095,7 @@ function mt(t2) {
   var c2 = o ? Le(o) : null;
   if (c2 != null) {
     var u2 = c2 === "y" ? "height" : "width";
-    switch (i) {
+    switch (i2) {
       case U$1:
         f[c2] = f[c2] - (e[u2] / 2 - n[u2] / 2);
         break;
@@ -3106,49 +3106,49 @@ function mt(t2) {
   }
   return f;
 }
-function ne(t2, e) {
+function ne(t, e) {
   e === void 0 && (e = {});
-  var n = e, r2 = n.placement, o = r2 === void 0 ? t2.placement : r2, i = n.boundary, a = i === void 0 ? Xe : i, s = n.rootBoundary, f = s === void 0 ? je : s, c2 = n.elementContext, u2 = c2 === void 0 ? K$1 : c2, m2 = n.altBoundary, v2 = m2 === void 0 ? false : m2, l2 = n.padding, h = l2 === void 0 ? 0 : l2, p2 = ft(typeof h != "number" ? h : ct(h, G$2)), g2 = u2 === K$1 ? Ye : K$1, x2 = t2.rects.popper, y2 = t2.elements[v2 ? g2 : u2], $2 = Gt(Q$2(y2) ? y2 : y2.contextElement || I(t2.elements.popper), a, f), d = ee(t2.elements.reference), b2 = mt({ reference: d, element: x2, strategy: "absolute", placement: o }), w2 = Te(Object.assign({}, x2, b2)), O2 = u2 === K$1 ? w2 : d, j2 = { top: $2.top - O2.top + p2.top, bottom: O2.bottom - $2.bottom + p2.bottom, left: $2.left - O2.left + p2.left, right: O2.right - $2.right + p2.right }, A2 = t2.modifiersData.offset;
+  var n = e, r2 = n.placement, o = r2 === void 0 ? t.placement : r2, i2 = n.boundary, a = i2 === void 0 ? Xe : i2, s = n.rootBoundary, f = s === void 0 ? je : s, c2 = n.elementContext, u2 = c2 === void 0 ? K$1 : c2, m2 = n.altBoundary, v2 = m2 === void 0 ? false : m2, l2 = n.padding, h = l2 === void 0 ? 0 : l2, p2 = ft(typeof h != "number" ? h : ct(h, G$2)), g = u2 === K$1 ? Ye : K$1, x2 = t.rects.popper, y = t.elements[v2 ? g : u2], $2 = Gt(Q$2(y) ? y : y.contextElement || I(t.elements.popper), a, f), d2 = ee(t.elements.reference), b2 = mt({ reference: d2, element: x2, strategy: "absolute", placement: o }), w2 = Te(Object.assign({}, x2, b2)), O2 = u2 === K$1 ? w2 : d2, j2 = { top: $2.top - O2.top + p2.top, bottom: O2.bottom - $2.bottom + p2.bottom, left: $2.left - O2.left + p2.left, right: O2.right - $2.right + p2.right }, A2 = t.modifiersData.offset;
   if (u2 === K$1 && A2) {
     var k2 = A2[o];
     Object.keys(j2).forEach(function(D) {
-      var S2 = [W$2, R$2].indexOf(D) >= 0 ? 1 : -1, L2 = [E$1, R$2].indexOf(D) >= 0 ? "y" : "x";
+      var S2 = [W$2, R$2].indexOf(D) >= 0 ? 1 : -1, L2 = [E$2, R$2].indexOf(D) >= 0 ? "y" : "x";
       j2[D] += k2[L2] * S2;
     });
   }
   return j2;
 }
-function Jt(t2, e) {
+function Jt(t, e) {
   e === void 0 && (e = {});
-  var n = e, r2 = n.placement, o = n.boundary, i = n.rootBoundary, a = n.padding, s = n.flipVariations, f = n.allowedAutoPlacements, c2 = f === void 0 ? Ee : f, u2 = te(r2), m2 = u2 ? s ? De : De.filter(function(h) {
+  var n = e, r2 = n.placement, o = n.boundary, i2 = n.rootBoundary, a = n.padding, s = n.flipVariations, f = n.allowedAutoPlacements, c2 = f === void 0 ? Ee : f, u2 = te(r2), m2 = u2 ? s ? De : De.filter(function(h) {
     return te(h) === u2;
   }) : G$2, v2 = m2.filter(function(h) {
     return c2.indexOf(h) >= 0;
   });
   v2.length === 0 && (v2 = m2);
   var l2 = v2.reduce(function(h, p2) {
-    return h[p2] = ne(t2, { placement: p2, boundary: o, rootBoundary: i, padding: a })[q$2(p2)], h;
+    return h[p2] = ne(t, { placement: p2, boundary: o, rootBoundary: i2, padding: a })[q$2(p2)], h;
   }, {});
   return Object.keys(l2).sort(function(h, p2) {
     return l2[h] - l2[p2];
   });
 }
-function Kt(t2) {
-  if (q$2(t2) === me)
+function Kt(t) {
+  if (q$2(t) === me)
     return [];
-  var e = be(t2);
-  return [lt(t2), e, lt(e)];
+  var e = be(t);
+  return [lt(t), e, lt(e)];
 }
-function Qt(t2) {
-  var e = t2.state, n = t2.options, r2 = t2.name;
+function Qt(t) {
+  var e = t.state, n = t.options, r2 = t.name;
   if (!e.modifiersData[r2]._skip) {
-    for (var o = n.mainAxis, i = o === void 0 ? true : o, a = n.altAxis, s = a === void 0 ? true : a, f = n.fallbackPlacements, c2 = n.padding, u2 = n.boundary, m2 = n.rootBoundary, v2 = n.altBoundary, l2 = n.flipVariations, h = l2 === void 0 ? true : l2, p2 = n.allowedAutoPlacements, g2 = e.options.placement, x2 = q$2(g2), y2 = x2 === g2, $2 = f || (y2 || !h ? [be(g2)] : Kt(g2)), d = [g2].concat($2).reduce(function(z2, V2) {
+    for (var o = n.mainAxis, i2 = o === void 0 ? true : o, a = n.altAxis, s = a === void 0 ? true : a, f = n.fallbackPlacements, c2 = n.padding, u2 = n.boundary, m2 = n.rootBoundary, v2 = n.altBoundary, l2 = n.flipVariations, h = l2 === void 0 ? true : l2, p2 = n.allowedAutoPlacements, g = e.options.placement, x2 = q$2(g), y = x2 === g, $2 = f || (y || !h ? [be(g)] : Kt(g)), d2 = [g].concat($2).reduce(function(z2, V2) {
       return z2.concat(q$2(V2) === me ? Jt(e, { placement: V2, boundary: u2, rootBoundary: m2, padding: c2, flipVariations: h, allowedAutoPlacements: p2 }) : V2);
-    }, []), b2 = e.rects.reference, w2 = e.rects.popper, O2 = /* @__PURE__ */ new Map(), j2 = true, A2 = d[0], k2 = 0; k2 < d.length; k2++) {
-      var D = d[k2], S2 = q$2(D), L2 = te(D) === U$1, re = [E$1, R$2].indexOf(S2) >= 0, oe = re ? "width" : "height", M2 = ne(e, { placement: D, boundary: u2, rootBoundary: m2, altBoundary: v2, padding: c2 }), T2 = re ? L2 ? W$2 : P$2 : L2 ? R$2 : E$1;
+    }, []), b2 = e.rects.reference, w2 = e.rects.popper, O2 = /* @__PURE__ */ new Map(), j2 = true, A2 = d2[0], k2 = 0; k2 < d2.length; k2++) {
+      var D = d2[k2], S2 = q$2(D), L2 = te(D) === U$1, re = [E$2, R$2].indexOf(S2) >= 0, oe = re ? "width" : "height", M2 = ne(e, { placement: D, boundary: u2, rootBoundary: m2, altBoundary: v2, padding: c2 }), T2 = re ? L2 ? W$2 : P$2 : L2 ? R$2 : E$2;
       b2[oe] > w2[oe] && (T2 = be(T2));
       var pe = be(T2), _2 = [];
-      if (i && _2.push(M2[S2] <= 0), s && _2.push(M2[T2] <= 0, M2[pe] <= 0), _2.every(function(z2) {
+      if (i2 && _2.push(M2[S2] <= 0), s && _2.push(M2[T2] <= 0, M2[pe] <= 0), _2.every(function(z2) {
         return z2;
       })) {
         A2 = D, j2 = false;
@@ -3158,7 +3158,7 @@ function Qt(t2) {
     }
     if (j2)
       for (var ue = h ? 3 : 1, xe = function(z2) {
-        var V2 = d.find(function(de) {
+        var V2 = d2.find(function(de) {
           var ae = O2.get(de);
           if (ae)
             return ae.slice(0, z2).every(function(Y2) {
@@ -3176,107 +3176,107 @@ function Qt(t2) {
   }
 }
 var vt = { name: "flip", enabled: true, phase: "main", fn: Qt, requiresIfExists: ["offset"], data: { _skip: false } };
-function gt(t2, e, n) {
-  return n === void 0 && (n = { x: 0, y: 0 }), { top: t2.top - e.height - n.y, right: t2.right - e.width + n.x, bottom: t2.bottom - e.height + n.y, left: t2.left - e.width - n.x };
+function gt(t, e, n) {
+  return n === void 0 && (n = { x: 0, y: 0 }), { top: t.top - e.height - n.y, right: t.right - e.width + n.x, bottom: t.bottom - e.height + n.y, left: t.left - e.width - n.x };
 }
-function yt(t2) {
-  return [E$1, W$2, R$2, P$2].some(function(e) {
-    return t2[e] >= 0;
+function yt(t) {
+  return [E$2, W$2, R$2, P$2].some(function(e) {
+    return t[e] >= 0;
   });
 }
-function Zt(t2) {
-  var e = t2.state, n = t2.name, r2 = e.rects.reference, o = e.rects.popper, i = e.modifiersData.preventOverflow, a = ne(e, { elementContext: "reference" }), s = ne(e, { altBoundary: true }), f = gt(a, r2), c2 = gt(s, o, i), u2 = yt(f), m2 = yt(c2);
+function Zt(t) {
+  var e = t.state, n = t.name, r2 = e.rects.reference, o = e.rects.popper, i2 = e.modifiersData.preventOverflow, a = ne(e, { elementContext: "reference" }), s = ne(e, { altBoundary: true }), f = gt(a, r2), c2 = gt(s, o, i2), u2 = yt(f), m2 = yt(c2);
   e.modifiersData[n] = { referenceClippingOffsets: f, popperEscapeOffsets: c2, isReferenceHidden: u2, hasPopperEscaped: m2 }, e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-reference-hidden": u2, "data-popper-escaped": m2 });
 }
 var bt = { name: "hide", enabled: true, phase: "main", requiresIfExists: ["preventOverflow"], fn: Zt };
-function en(t2, e, n) {
-  var r2 = q$2(t2), o = [P$2, E$1].indexOf(r2) >= 0 ? -1 : 1, i = typeof n == "function" ? n(Object.assign({}, e, { placement: t2 })) : n, a = i[0], s = i[1];
+function en(t, e, n) {
+  var r2 = q$2(t), o = [P$2, E$2].indexOf(r2) >= 0 ? -1 : 1, i2 = typeof n == "function" ? n(Object.assign({}, e, { placement: t })) : n, a = i2[0], s = i2[1];
   return a = a || 0, s = (s || 0) * o, [P$2, W$2].indexOf(r2) >= 0 ? { x: s, y: a } : { x: a, y: s };
 }
-function tn(t2) {
-  var e = t2.state, n = t2.options, r2 = t2.name, o = n.offset, i = o === void 0 ? [0, 0] : o, a = Ee.reduce(function(u2, m2) {
-    return u2[m2] = en(m2, e.rects, i), u2;
+function tn(t) {
+  var e = t.state, n = t.options, r2 = t.name, o = n.offset, i2 = o === void 0 ? [0, 0] : o, a = Ee.reduce(function(u2, m2) {
+    return u2[m2] = en(m2, e.rects, i2), u2;
   }, {}), s = a[e.placement], f = s.x, c2 = s.y;
   e.modifiersData.popperOffsets != null && (e.modifiersData.popperOffsets.x += f, e.modifiersData.popperOffsets.y += c2), e.modifiersData[r2] = a;
 }
 var wt = { name: "offset", enabled: true, phase: "main", requires: ["popperOffsets"], fn: tn };
-function nn(t2) {
-  var e = t2.state, n = t2.name;
+function nn(t) {
+  var e = t.state, n = t.name;
   e.modifiersData[n] = mt({ reference: e.rects.reference, element: e.rects.popper, strategy: "absolute", placement: e.placement });
 }
 var He = { name: "popperOffsets", enabled: true, phase: "read", fn: nn, data: {} };
-function rn(t2) {
-  return t2 === "x" ? "y" : "x";
+function rn(t) {
+  return t === "x" ? "y" : "x";
 }
-function on(t2) {
-  var e = t2.state, n = t2.options, r2 = t2.name, o = n.mainAxis, i = o === void 0 ? true : o, a = n.altAxis, s = a === void 0 ? false : a, f = n.boundary, c2 = n.rootBoundary, u2 = n.altBoundary, m2 = n.padding, v2 = n.tether, l2 = v2 === void 0 ? true : v2, h = n.tetherOffset, p2 = h === void 0 ? 0 : h, g2 = ne(e, { boundary: f, rootBoundary: c2, padding: m2, altBoundary: u2 }), x2 = q$2(e.placement), y2 = te(e.placement), $2 = !y2, d = Le(x2), b2 = rn(d), w2 = e.modifiersData.popperOffsets, O2 = e.rects.reference, j2 = e.rects.popper, A2 = typeof p2 == "function" ? p2(Object.assign({}, e.rects, { placement: e.placement })) : p2, k2 = typeof A2 == "number" ? { mainAxis: A2, altAxis: A2 } : Object.assign({ mainAxis: 0, altAxis: 0 }, A2), D = e.modifiersData.offset ? e.modifiersData.offset[e.placement] : null, S2 = { x: 0, y: 0 };
+function on(t) {
+  var e = t.state, n = t.options, r2 = t.name, o = n.mainAxis, i2 = o === void 0 ? true : o, a = n.altAxis, s = a === void 0 ? false : a, f = n.boundary, c2 = n.rootBoundary, u2 = n.altBoundary, m2 = n.padding, v2 = n.tether, l2 = v2 === void 0 ? true : v2, h = n.tetherOffset, p2 = h === void 0 ? 0 : h, g = ne(e, { boundary: f, rootBoundary: c2, padding: m2, altBoundary: u2 }), x2 = q$2(e.placement), y = te(e.placement), $2 = !y, d2 = Le(x2), b2 = rn(d2), w2 = e.modifiersData.popperOffsets, O2 = e.rects.reference, j2 = e.rects.popper, A2 = typeof p2 == "function" ? p2(Object.assign({}, e.rects, { placement: e.placement })) : p2, k2 = typeof A2 == "number" ? { mainAxis: A2, altAxis: A2 } : Object.assign({ mainAxis: 0, altAxis: 0 }, A2), D = e.modifiersData.offset ? e.modifiersData.offset[e.placement] : null, S2 = { x: 0, y: 0 };
   if (w2) {
-    if (i) {
-      var L2, re = d === "y" ? E$1 : P$2, oe = d === "y" ? R$2 : W$2, M2 = d === "y" ? "height" : "width", T2 = w2[d], pe = T2 + g2[re], _2 = T2 - g2[oe], ue = l2 ? -j2[M2] / 2 : 0, xe = y2 === U$1 ? O2[M2] : j2[M2], ie = y2 === U$1 ? -j2[M2] : -O2[M2], le = e.elements.arrow, z2 = l2 && le ? ke(le) : { width: 0, height: 0 }, V2 = e.modifiersData["arrow#persistent"] ? e.modifiersData["arrow#persistent"].padding : st$1(), de = V2[re], ae = V2[oe], Y2 = fe(0, O2[M2], z2[M2]), jt = $2 ? O2[M2] / 2 - ue - Y2 - de - k2.mainAxis : xe - Y2 - de - k2.mainAxis, Dt = $2 ? -O2[M2] / 2 + ue + Y2 + ae + k2.mainAxis : ie + Y2 + ae + k2.mainAxis, Oe = e.elements.arrow && se(e.elements.arrow), Et = Oe ? d === "y" ? Oe.clientTop || 0 : Oe.clientLeft || 0 : 0, Ce = (L2 = D == null ? void 0 : D[d]) != null ? L2 : 0, Pt = T2 + jt - Ce - Et, At = T2 + Dt - Ce, qe = fe(l2 ? ve(pe, Pt) : pe, T2, l2 ? X$2(_2, At) : _2);
-      w2[d] = qe, S2[d] = qe - T2;
+    if (i2) {
+      var L2, re = d2 === "y" ? E$2 : P$2, oe = d2 === "y" ? R$2 : W$2, M2 = d2 === "y" ? "height" : "width", T2 = w2[d2], pe = T2 + g[re], _2 = T2 - g[oe], ue = l2 ? -j2[M2] / 2 : 0, xe = y === U$1 ? O2[M2] : j2[M2], ie = y === U$1 ? -j2[M2] : -O2[M2], le = e.elements.arrow, z2 = l2 && le ? ke(le) : { width: 0, height: 0 }, V2 = e.modifiersData["arrow#persistent"] ? e.modifiersData["arrow#persistent"].padding : st$1(), de = V2[re], ae = V2[oe], Y2 = fe(0, O2[M2], z2[M2]), jt = $2 ? O2[M2] / 2 - ue - Y2 - de - k2.mainAxis : xe - Y2 - de - k2.mainAxis, Dt = $2 ? -O2[M2] / 2 + ue + Y2 + ae + k2.mainAxis : ie + Y2 + ae + k2.mainAxis, Oe = e.elements.arrow && se(e.elements.arrow), Et = Oe ? d2 === "y" ? Oe.clientTop || 0 : Oe.clientLeft || 0 : 0, Ce = (L2 = D == null ? void 0 : D[d2]) != null ? L2 : 0, Pt = T2 + jt - Ce - Et, At = T2 + Dt - Ce, qe = fe(l2 ? ve(pe, Pt) : pe, T2, l2 ? X$2(_2, At) : _2);
+      w2[d2] = qe, S2[d2] = qe - T2;
     }
     if (s) {
-      var Ve, kt = d === "x" ? E$1 : P$2, Lt = d === "x" ? R$2 : W$2, F2 = w2[b2], he = b2 === "y" ? "height" : "width", Ne = F2 + g2[kt], Ie = F2 - g2[Lt], $e = [E$1, P$2].indexOf(x2) !== -1, _e = (Ve = D == null ? void 0 : D[b2]) != null ? Ve : 0, ze = $e ? Ne : F2 - O2[he] - j2[he] - _e + k2.altAxis, Fe = $e ? F2 + O2[he] + j2[he] - _e - k2.altAxis : Ie, Ue = l2 && $e ? St(ze, F2, Fe) : fe(l2 ? ze : Ne, F2, l2 ? Fe : Ie);
+      var Ve, kt = d2 === "x" ? E$2 : P$2, Lt = d2 === "x" ? R$2 : W$2, F2 = w2[b2], he = b2 === "y" ? "height" : "width", Ne = F2 + g[kt], Ie = F2 - g[Lt], $e = [E$2, P$2].indexOf(x2) !== -1, _e = (Ve = D == null ? void 0 : D[b2]) != null ? Ve : 0, ze = $e ? Ne : F2 - O2[he] - j2[he] - _e + k2.altAxis, Fe = $e ? F2 + O2[he] + j2[he] - _e - k2.altAxis : Ie, Ue = l2 && $e ? St(ze, F2, Fe) : fe(l2 ? ze : Ne, F2, l2 ? Fe : Ie);
       w2[b2] = Ue, S2[b2] = Ue - F2;
     }
     e.modifiersData[r2] = S2;
   }
 }
 var xt = { name: "preventOverflow", enabled: true, phase: "main", fn: on, requiresIfExists: ["offset"] };
-function an(t2) {
-  return { scrollLeft: t2.scrollLeft, scrollTop: t2.scrollTop };
+function an(t) {
+  return { scrollLeft: t.scrollLeft, scrollTop: t.scrollTop };
 }
-function sn(t2) {
-  return t2 === H$2(t2) || !B$2(t2) ? We(t2) : an(t2);
+function sn(t) {
+  return t === H$2(t) || !B$2(t) ? We(t) : an(t);
 }
-function fn(t2) {
-  var e = t2.getBoundingClientRect(), n = Z$1(e.width) / t2.offsetWidth || 1, r2 = Z$1(e.height) / t2.offsetHeight || 1;
+function fn(t) {
+  var e = t.getBoundingClientRect(), n = Z$1(e.width) / t.offsetWidth || 1, r2 = Z$1(e.height) / t.offsetHeight || 1;
   return n !== 1 || r2 !== 1;
 }
-function cn(t2, e, n) {
+function cn(t, e, n) {
   n === void 0 && (n = false);
-  var r2 = B$2(e), o = B$2(e) && fn(e), i = I(e), a = ee(t2, o), s = { scrollLeft: 0, scrollTop: 0 }, f = { x: 0, y: 0 };
-  return (r2 || !r2 && !n) && ((C$2(e) !== "body" || Se(i)) && (s = sn(e)), B$2(e) ? (f = ee(e, true), f.x += e.clientLeft, f.y += e.clientTop) : i && (f.x = Be(i))), { x: a.left + s.scrollLeft - f.x, y: a.top + s.scrollTop - f.y, width: a.width, height: a.height };
+  var r2 = B$2(e), o = B$2(e) && fn(e), i2 = I(e), a = ee(t, o), s = { scrollLeft: 0, scrollTop: 0 }, f = { x: 0, y: 0 };
+  return (r2 || !r2 && !n) && ((C$2(e) !== "body" || Se(i2)) && (s = sn(e)), B$2(e) ? (f = ee(e, true), f.x += e.clientLeft, f.y += e.clientTop) : i2 && (f.x = Be(i2))), { x: a.left + s.scrollLeft - f.x, y: a.top + s.scrollTop - f.y, width: a.width, height: a.height };
 }
-function pn(t2) {
+function pn(t) {
   var e = /* @__PURE__ */ new Map(), n = /* @__PURE__ */ new Set(), r2 = [];
-  t2.forEach(function(i) {
-    e.set(i.name, i);
+  t.forEach(function(i2) {
+    e.set(i2.name, i2);
   });
-  function o(i) {
-    n.add(i.name);
-    var a = [].concat(i.requires || [], i.requiresIfExists || []);
+  function o(i2) {
+    n.add(i2.name);
+    var a = [].concat(i2.requires || [], i2.requiresIfExists || []);
     a.forEach(function(s) {
       if (!n.has(s)) {
         var f = e.get(s);
         f && o(f);
       }
-    }), r2.push(i);
+    }), r2.push(i2);
   }
-  return t2.forEach(function(i) {
-    n.has(i.name) || o(i);
+  return t.forEach(function(i2) {
+    n.has(i2.name) || o(i2);
   }), r2;
 }
-function un(t2) {
-  var e = pn(t2);
+function un(t) {
+  var e = pn(t);
   return ot$1.reduce(function(n, r2) {
     return n.concat(e.filter(function(o) {
       return o.phase === r2;
     }));
   }, []);
 }
-function ln(t2) {
+function ln(t) {
   var e;
   return function() {
     return e || (e = new Promise(function(n) {
       Promise.resolve().then(function() {
-        e = void 0, n(t2());
+        e = void 0, n(t());
       });
     })), e;
   };
 }
-function dn(t2) {
-  var e = t2.reduce(function(n, r2) {
+function dn(t) {
+  var e = t.reduce(function(n, r2) {
     var o = n[r2.name];
     return n[r2.name] = o ? Object.assign({}, o, r2, { options: Object.assign({}, o.options, r2.options), data: Object.assign({}, o.data, r2.data) }) : r2, n;
   }, {});
@@ -3286,38 +3286,38 @@ function dn(t2) {
 }
 var Ot = { placement: "bottom", modifiers: [], strategy: "absolute" };
 function $t() {
-  for (var t2 = arguments.length, e = new Array(t2), n = 0; n < t2; n++)
+  for (var t = arguments.length, e = new Array(t), n = 0; n < t; n++)
     e[n] = arguments[n];
   return !e.some(function(r2) {
     return !(r2 && typeof r2.getBoundingClientRect == "function");
   });
 }
-function we(t2) {
-  t2 === void 0 && (t2 = {});
-  var e = t2, n = e.defaultModifiers, r2 = n === void 0 ? [] : n, o = e.defaultOptions, i = o === void 0 ? Ot : o;
+function we(t) {
+  t === void 0 && (t = {});
+  var e = t, n = e.defaultModifiers, r2 = n === void 0 ? [] : n, o = e.defaultOptions, i2 = o === void 0 ? Ot : o;
   return function(a, s, f) {
-    f === void 0 && (f = i);
-    var c2 = { placement: "bottom", orderedModifiers: [], options: Object.assign({}, Ot, i), modifiersData: {}, elements: { reference: a, popper: s }, attributes: {}, styles: {} }, u2 = [], m2 = false, v2 = { state: c2, setOptions: function(p2) {
-      var g2 = typeof p2 == "function" ? p2(c2.options) : p2;
-      h(), c2.options = Object.assign({}, i, c2.options, g2), c2.scrollParents = { reference: Q$2(a) ? ce(a) : a.contextElement ? ce(a.contextElement) : [], popper: ce(s) };
+    f === void 0 && (f = i2);
+    var c2 = { placement: "bottom", orderedModifiers: [], options: Object.assign({}, Ot, i2), modifiersData: {}, elements: { reference: a, popper: s }, attributes: {}, styles: {} }, u2 = [], m2 = false, v2 = { state: c2, setOptions: function(p2) {
+      var g = typeof p2 == "function" ? p2(c2.options) : p2;
+      h(), c2.options = Object.assign({}, i2, c2.options, g), c2.scrollParents = { reference: Q$2(a) ? ce(a) : a.contextElement ? ce(a.contextElement) : [], popper: ce(s) };
       var x2 = un(dn([].concat(r2, c2.options.modifiers)));
-      return c2.orderedModifiers = x2.filter(function(y2) {
-        return y2.enabled;
+      return c2.orderedModifiers = x2.filter(function(y) {
+        return y.enabled;
       }), l2(), v2.update();
     }, forceUpdate: function() {
       if (!m2) {
-        var p2 = c2.elements, g2 = p2.reference, x2 = p2.popper;
-        if ($t(g2, x2)) {
-          c2.rects = { reference: cn(g2, se(x2), c2.options.strategy === "fixed"), popper: ke(x2) }, c2.reset = false, c2.placement = c2.options.placement, c2.orderedModifiers.forEach(function(j2) {
+        var p2 = c2.elements, g = p2.reference, x2 = p2.popper;
+        if ($t(g, x2)) {
+          c2.rects = { reference: cn(g, se(x2), c2.options.strategy === "fixed"), popper: ke(x2) }, c2.reset = false, c2.placement = c2.options.placement, c2.orderedModifiers.forEach(function(j2) {
             return c2.modifiersData[j2.name] = Object.assign({}, j2.data);
           });
-          for (var y2 = 0; y2 < c2.orderedModifiers.length; y2++) {
+          for (var y = 0; y < c2.orderedModifiers.length; y++) {
             if (c2.reset === true) {
-              c2.reset = false, y2 = -1;
+              c2.reset = false, y = -1;
               continue;
             }
-            var $2 = c2.orderedModifiers[y2], d = $2.fn, b2 = $2.options, w2 = b2 === void 0 ? {} : b2, O2 = $2.name;
-            typeof d == "function" && (c2 = d({ state: c2, options: w2, name: O2, instance: v2 }) || c2);
+            var $2 = c2.orderedModifiers[y], d2 = $2.fn, b2 = $2.options, w2 = b2 === void 0 ? {} : b2, O2 = $2.name;
+            typeof d2 == "function" && (c2 = d2({ state: c2, options: w2, name: O2, instance: v2 }) || c2);
           }
         }
       }
@@ -3335,11 +3335,11 @@ function we(t2) {
     });
     function l2() {
       c2.orderedModifiers.forEach(function(p2) {
-        var g2 = p2.name, x2 = p2.options, y2 = x2 === void 0 ? {} : x2, $2 = p2.effect;
+        var g = p2.name, x2 = p2.options, y = x2 === void 0 ? {} : x2, $2 = p2.effect;
         if (typeof $2 == "function") {
-          var d = $2({ state: c2, name: g2, instance: v2, options: y2 }), b2 = function() {
+          var d2 = $2({ state: c2, name: g, instance: v2, options: y }), b2 = function() {
           };
-          u2.push(d || b2);
+          u2.push(d2 || b2);
         }
       });
     }
@@ -4061,8 +4061,8 @@ var Form = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__file", "form.vue"]]);
 var define_process_env_default = {};
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2];
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
@@ -4182,7 +4182,7 @@ function format(template) {
   for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     args[_key - 1] = arguments[_key];
   }
-  var i = 0;
+  var i2 = 0;
   var len = args.length;
   if (typeof template === "function") {
     return template.apply(null, args);
@@ -4192,17 +4192,17 @@ function format(template) {
       if (x2 === "%%") {
         return "%";
       }
-      if (i >= len) {
+      if (i2 >= len) {
         return x2;
       }
       switch (x2) {
         case "%s":
-          return String(args[i++]);
+          return String(args[i2++]);
         case "%d":
-          return Number(args[i++]);
+          return Number(args[i2++]);
         case "%j":
           try {
-            return JSON.stringify(args[i++]);
+            return JSON.stringify(args[i2++]);
           } catch (_2) {
             return "[Circular]";
           }
@@ -4333,11 +4333,11 @@ function isErrorObj(obj) {
 }
 function getValue(value, path) {
   var v2 = value;
-  for (var i = 0; i < path.length; i++) {
+  for (var i2 = 0; i2 < path.length; i2++) {
     if (v2 == void 0) {
       return v2;
     }
-    v2 = v2[path[i]];
+    v2 = v2[path[i2]];
   }
   return v2;
 }
@@ -4916,8 +4916,8 @@ var Schema = /* @__PURE__ */ function() {
           errors.push(e);
         }
       }
-      for (var i = 0; i < results.length; i++) {
-        add(results[i]);
+      for (var i2 = 0; i2 < results.length; i2++) {
+        add(results[i2]);
       }
       if (!errors.length) {
         callback(null, source);
@@ -5334,12 +5334,12 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
         }
       }
       if (required4 !== void 0) {
-        const requiredRules = rules2.map((rule, i) => [rule, i]).filter(([rule]) => Object.keys(rule).includes("required"));
+        const requiredRules = rules2.map((rule, i2) => [rule, i2]).filter(([rule]) => Object.keys(rule).includes("required"));
         if (requiredRules.length > 0) {
-          for (const [rule, i] of requiredRules) {
+          for (const [rule, i2] of requiredRules) {
             if (rule.required === required4)
               continue;
-            rules2[i] = { ...rule, required: required4 };
+            rules2[i2] = { ...rule, required: required4 };
           }
         } else {
           rules2.push({ required: required4 });
@@ -8280,19 +8280,19 @@ function convertToPercentage(n) {
 function pad2(c2) {
   return c2.length === 1 ? "0" + c2 : String(c2);
 }
-function rgbToRgb(r2, g2, b2) {
+function rgbToRgb(r2, g, b2) {
   return {
     r: bound01(r2, 255) * 255,
-    g: bound01(g2, 255) * 255,
+    g: bound01(g, 255) * 255,
     b: bound01(b2, 255) * 255
   };
 }
-function rgbToHsl(r2, g2, b2) {
+function rgbToHsl(r2, g, b2) {
   r2 = bound01(r2, 255);
-  g2 = bound01(g2, 255);
+  g = bound01(g, 255);
   b2 = bound01(b2, 255);
-  var max = Math.max(r2, g2, b2);
-  var min = Math.min(r2, g2, b2);
+  var max = Math.max(r2, g, b2);
+  var min = Math.min(r2, g, b2);
   var h = 0;
   var s = 0;
   var l2 = (max + min) / 2;
@@ -8300,83 +8300,83 @@ function rgbToHsl(r2, g2, b2) {
     s = 0;
     h = 0;
   } else {
-    var d = max - min;
-    s = l2 > 0.5 ? d / (2 - max - min) : d / (max + min);
+    var d2 = max - min;
+    s = l2 > 0.5 ? d2 / (2 - max - min) : d2 / (max + min);
     switch (max) {
       case r2:
-        h = (g2 - b2) / d + (g2 < b2 ? 6 : 0);
+        h = (g - b2) / d2 + (g < b2 ? 6 : 0);
         break;
-      case g2:
-        h = (b2 - r2) / d + 2;
+      case g:
+        h = (b2 - r2) / d2 + 2;
         break;
       case b2:
-        h = (r2 - g2) / d + 4;
+        h = (r2 - g) / d2 + 4;
         break;
     }
     h /= 6;
   }
   return { h, s, l: l2 };
 }
-function hue2rgb(p2, q2, t2) {
-  if (t2 < 0) {
-    t2 += 1;
+function hue2rgb(p2, q2, t) {
+  if (t < 0) {
+    t += 1;
   }
-  if (t2 > 1) {
-    t2 -= 1;
+  if (t > 1) {
+    t -= 1;
   }
-  if (t2 < 1 / 6) {
-    return p2 + (q2 - p2) * (6 * t2);
+  if (t < 1 / 6) {
+    return p2 + (q2 - p2) * (6 * t);
   }
-  if (t2 < 1 / 2) {
+  if (t < 1 / 2) {
     return q2;
   }
-  if (t2 < 2 / 3) {
-    return p2 + (q2 - p2) * (2 / 3 - t2) * 6;
+  if (t < 2 / 3) {
+    return p2 + (q2 - p2) * (2 / 3 - t) * 6;
   }
   return p2;
 }
 function hslToRgb(h, s, l2) {
   var r2;
-  var g2;
+  var g;
   var b2;
   h = bound01(h, 360);
   s = bound01(s, 100);
   l2 = bound01(l2, 100);
   if (s === 0) {
-    g2 = l2;
+    g = l2;
     b2 = l2;
     r2 = l2;
   } else {
     var q2 = l2 < 0.5 ? l2 * (1 + s) : l2 + s - l2 * s;
     var p2 = 2 * l2 - q2;
     r2 = hue2rgb(p2, q2, h + 1 / 3);
-    g2 = hue2rgb(p2, q2, h);
+    g = hue2rgb(p2, q2, h);
     b2 = hue2rgb(p2, q2, h - 1 / 3);
   }
-  return { r: r2 * 255, g: g2 * 255, b: b2 * 255 };
+  return { r: r2 * 255, g: g * 255, b: b2 * 255 };
 }
-function rgbToHsv(r2, g2, b2) {
+function rgbToHsv(r2, g, b2) {
   r2 = bound01(r2, 255);
-  g2 = bound01(g2, 255);
+  g = bound01(g, 255);
   b2 = bound01(b2, 255);
-  var max = Math.max(r2, g2, b2);
-  var min = Math.min(r2, g2, b2);
+  var max = Math.max(r2, g, b2);
+  var min = Math.min(r2, g, b2);
   var h = 0;
   var v2 = max;
-  var d = max - min;
-  var s = max === 0 ? 0 : d / max;
+  var d2 = max - min;
+  var s = max === 0 ? 0 : d2 / max;
   if (max === min) {
     h = 0;
   } else {
     switch (max) {
       case r2:
-        h = (g2 - b2) / d + (g2 < b2 ? 6 : 0);
+        h = (g - b2) / d2 + (g < b2 ? 6 : 0);
         break;
-      case g2:
-        h = (b2 - r2) / d + 2;
+      case g:
+        h = (b2 - r2) / d2 + 2;
         break;
       case b2:
-        h = (r2 - g2) / d + 4;
+        h = (r2 - g) / d2 + 4;
         break;
     }
     h /= 6;
@@ -8387,21 +8387,21 @@ function hsvToRgb(h, s, v2) {
   h = bound01(h, 360) * 6;
   s = bound01(s, 100);
   v2 = bound01(v2, 100);
-  var i = Math.floor(h);
-  var f = h - i;
+  var i2 = Math.floor(h);
+  var f = h - i2;
   var p2 = v2 * (1 - s);
   var q2 = v2 * (1 - f * s);
-  var t2 = v2 * (1 - (1 - f) * s);
-  var mod = i % 6;
-  var r2 = [v2, q2, p2, p2, t2, v2][mod];
-  var g2 = [t2, v2, v2, q2, p2, p2][mod];
-  var b2 = [p2, p2, t2, v2, v2, q2][mod];
-  return { r: r2 * 255, g: g2 * 255, b: b2 * 255 };
+  var t = v2 * (1 - (1 - f) * s);
+  var mod = i2 % 6;
+  var r2 = [v2, q2, p2, p2, t, v2][mod];
+  var g = [t, v2, v2, q2, p2, p2][mod];
+  var b2 = [p2, p2, t, v2, v2, q2][mod];
+  return { r: r2 * 255, g: g * 255, b: b2 * 255 };
 }
-function rgbToHex(r2, g2, b2, allow3Char) {
+function rgbToHex(r2, g, b2, allow3Char) {
   var hex2 = [
     pad2(Math.round(r2).toString(16)),
-    pad2(Math.round(g2).toString(16)),
+    pad2(Math.round(g).toString(16)),
     pad2(Math.round(b2).toString(16))
   ];
   if (allow3Char && hex2[0].startsWith(hex2[0].charAt(1)) && hex2[1].startsWith(hex2[1].charAt(1)) && hex2[2].startsWith(hex2[2].charAt(1))) {
@@ -8409,10 +8409,10 @@ function rgbToHex(r2, g2, b2, allow3Char) {
   }
   return hex2.join("");
 }
-function rgbaToHex(r2, g2, b2, a, allow4Char) {
+function rgbaToHex(r2, g, b2, a, allow4Char) {
   var hex2 = [
     pad2(Math.round(r2).toString(16)),
-    pad2(Math.round(g2).toString(16)),
+    pad2(Math.round(g).toString(16)),
     pad2(Math.round(b2).toString(16)),
     pad2(convertDecimalToHex(a))
   ];
@@ -8421,8 +8421,8 @@ function rgbaToHex(r2, g2, b2, a, allow4Char) {
   }
   return hex2.join("");
 }
-function convertDecimalToHex(d) {
-  return Math.round(parseFloat(d) * 255).toString(16);
+function convertDecimalToHex(d2) {
+  return Math.round(parseFloat(d2) * 255).toString(16);
 }
 function convertHexToDecimal(h) {
   return parseIntFromHex(h) / 255;
@@ -8874,9 +8874,9 @@ var TinyColor = (
     };
     TinyColor2.prototype.toRgbString = function() {
       var r2 = Math.round(this.r);
-      var g2 = Math.round(this.g);
+      var g = Math.round(this.g);
       var b2 = Math.round(this.b);
-      return this.a === 1 ? "rgb(".concat(r2, ", ").concat(g2, ", ").concat(b2, ")") : "rgba(".concat(r2, ", ").concat(g2, ", ").concat(b2, ", ").concat(this.roundA, ")");
+      return this.a === 1 ? "rgb(".concat(r2, ", ").concat(g, ", ").concat(b2, ")") : "rgba(".concat(r2, ", ").concat(g, ", ").concat(b2, ", ").concat(this.roundA, ")");
     };
     TinyColor2.prototype.toPercentageRgb = function() {
       var fmt = function(x2) {
@@ -9108,8 +9108,8 @@ var TinyColor = (
       var h = hsl.h;
       var result = [this];
       var increment = 360 / n;
-      for (var i = 1; i < n; i++) {
-        result.push(new TinyColor2({ h: (h + i * increment) % 360, s: hsl.s, l: hsl.l }));
+      for (var i2 = 1; i2 < n; i2++) {
+        result.push(new TinyColor2({ h: (h + i2 * increment) % 360, s: hsl.s, l: hsl.l }));
       }
       return result;
     };
@@ -9279,65 +9279,65 @@ function getDefaultExportFromCjs(x2) {
 }
 var dayjs_min = { exports: {} };
 (function(module2, exports2) {
-  !function(t2, e) {
+  !function(t, e) {
     module2.exports = e();
   }(commonjsGlobal, function() {
-    var t2 = 1e3, e = 6e4, n = 36e5, r2 = "millisecond", i = "second", s = "minute", u2 = "hour", a = "day", o = "week", c2 = "month", f = "quarter", h = "year", d = "date", l2 = "Invalid Date", $2 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y2 = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t3) {
-      var e2 = ["th", "st", "nd", "rd"], n2 = t3 % 100;
-      return "[" + t3 + (e2[(n2 - 20) % 10] || e2[n2] || e2[0]) + "]";
-    } }, m2 = function(t3, e2, n2) {
-      var r3 = String(t3);
-      return !r3 || r3.length >= e2 ? t3 : "" + Array(e2 + 1 - r3.length).join(n2) + t3;
-    }, v2 = { s: m2, z: function(t3) {
-      var e2 = -t3.utcOffset(), n2 = Math.abs(e2), r3 = Math.floor(n2 / 60), i2 = n2 % 60;
-      return (e2 <= 0 ? "+" : "-") + m2(r3, 2, "0") + ":" + m2(i2, 2, "0");
-    }, m: function t3(e2, n2) {
+    var t = 1e3, e = 6e4, n = 36e5, r2 = "millisecond", i2 = "second", s = "minute", u2 = "hour", a = "day", o = "week", c2 = "month", f = "quarter", h = "year", d2 = "date", l2 = "Invalid Date", $2 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
+      var e2 = ["th", "st", "nd", "rd"], n2 = t2 % 100;
+      return "[" + t2 + (e2[(n2 - 20) % 10] || e2[n2] || e2[0]) + "]";
+    } }, m2 = function(t2, e2, n2) {
+      var r3 = String(t2);
+      return !r3 || r3.length >= e2 ? t2 : "" + Array(e2 + 1 - r3.length).join(n2) + t2;
+    }, v2 = { s: m2, z: function(t2) {
+      var e2 = -t2.utcOffset(), n2 = Math.abs(e2), r3 = Math.floor(n2 / 60), i3 = n2 % 60;
+      return (e2 <= 0 ? "+" : "-") + m2(r3, 2, "0") + ":" + m2(i3, 2, "0");
+    }, m: function t2(e2, n2) {
       if (e2.date() < n2.date())
-        return -t3(n2, e2);
-      var r3 = 12 * (n2.year() - e2.year()) + (n2.month() - e2.month()), i2 = e2.clone().add(r3, c2), s2 = n2 - i2 < 0, u3 = e2.clone().add(r3 + (s2 ? -1 : 1), c2);
-      return +(-(r3 + (n2 - i2) / (s2 ? i2 - u3 : u3 - i2)) || 0);
-    }, a: function(t3) {
-      return t3 < 0 ? Math.ceil(t3) || 0 : Math.floor(t3);
-    }, p: function(t3) {
-      return { M: c2, y: h, w: o, d: a, D: d, h: u2, m: s, s: i, ms: r2, Q: f }[t3] || String(t3 || "").toLowerCase().replace(/s$/, "");
-    }, u: function(t3) {
-      return void 0 === t3;
-    } }, g2 = "en", D = {};
-    D[g2] = M2;
-    var p2 = "$isDayjsObject", S2 = function(t3) {
-      return t3 instanceof _2 || !(!t3 || !t3[p2]);
-    }, w2 = function t3(e2, n2, r3) {
-      var i2;
+        return -t2(n2, e2);
+      var r3 = 12 * (n2.year() - e2.year()) + (n2.month() - e2.month()), i3 = e2.clone().add(r3, c2), s2 = n2 - i3 < 0, u3 = e2.clone().add(r3 + (s2 ? -1 : 1), c2);
+      return +(-(r3 + (n2 - i3) / (s2 ? i3 - u3 : u3 - i3)) || 0);
+    }, a: function(t2) {
+      return t2 < 0 ? Math.ceil(t2) || 0 : Math.floor(t2);
+    }, p: function(t2) {
+      return { M: c2, y: h, w: o, d: a, D: d2, h: u2, m: s, s: i2, ms: r2, Q: f }[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
+    }, u: function(t2) {
+      return void 0 === t2;
+    } }, g = "en", D = {};
+    D[g] = M2;
+    var p2 = "$isDayjsObject", S2 = function(t2) {
+      return t2 instanceof _2 || !(!t2 || !t2[p2]);
+    }, w2 = function t2(e2, n2, r3) {
+      var i3;
       if (!e2)
-        return g2;
+        return g;
       if ("string" == typeof e2) {
         var s2 = e2.toLowerCase();
-        D[s2] && (i2 = s2), n2 && (D[s2] = n2, i2 = s2);
+        D[s2] && (i3 = s2), n2 && (D[s2] = n2, i3 = s2);
         var u3 = e2.split("-");
-        if (!i2 && u3.length > 1)
-          return t3(u3[0]);
+        if (!i3 && u3.length > 1)
+          return t2(u3[0]);
       } else {
         var a2 = e2.name;
-        D[a2] = e2, i2 = a2;
+        D[a2] = e2, i3 = a2;
       }
-      return !r3 && i2 && (g2 = i2), i2 || !r3 && g2;
-    }, O2 = function(t3, e2) {
-      if (S2(t3))
-        return t3.clone();
+      return !r3 && i3 && (g = i3), i3 || !r3 && g;
+    }, O2 = function(t2, e2) {
+      if (S2(t2))
+        return t2.clone();
       var n2 = "object" == typeof e2 ? e2 : {};
-      return n2.date = t3, n2.args = arguments, new _2(n2);
+      return n2.date = t2, n2.args = arguments, new _2(n2);
     }, b2 = v2;
-    b2.l = w2, b2.i = S2, b2.w = function(t3, e2) {
-      return O2(t3, { locale: e2.$L, utc: e2.$u, x: e2.$x, $offset: e2.$offset });
+    b2.l = w2, b2.i = S2, b2.w = function(t2, e2) {
+      return O2(t2, { locale: e2.$L, utc: e2.$u, x: e2.$x, $offset: e2.$offset });
     };
     var _2 = function() {
-      function M3(t3) {
-        this.$L = w2(t3.locale, null, true), this.parse(t3), this.$x = this.$x || t3.x || {}, this[p2] = true;
+      function M3(t2) {
+        this.$L = w2(t2.locale, null, true), this.parse(t2), this.$x = this.$x || t2.x || {}, this[p2] = true;
       }
       var m3 = M3.prototype;
-      return m3.parse = function(t3) {
-        this.$d = function(t4) {
-          var e2 = t4.date, n2 = t4.utc;
+      return m3.parse = function(t2) {
+        this.$d = function(t3) {
+          var e2 = t3.date, n2 = t3.utc;
           if (null === e2)
             return /* @__PURE__ */ new Date(NaN);
           if (b2.u(e2))
@@ -9347,107 +9347,107 @@ var dayjs_min = { exports: {} };
           if ("string" == typeof e2 && !/Z$/i.test(e2)) {
             var r3 = e2.match($2);
             if (r3) {
-              var i2 = r3[2] - 1 || 0, s2 = (r3[7] || "0").substring(0, 3);
-              return n2 ? new Date(Date.UTC(r3[1], i2, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s2)) : new Date(r3[1], i2, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s2);
+              var i3 = r3[2] - 1 || 0, s2 = (r3[7] || "0").substring(0, 3);
+              return n2 ? new Date(Date.UTC(r3[1], i3, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s2)) : new Date(r3[1], i3, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s2);
             }
           }
           return new Date(e2);
-        }(t3), this.init();
+        }(t2), this.init();
       }, m3.init = function() {
-        var t3 = this.$d;
-        this.$y = t3.getFullYear(), this.$M = t3.getMonth(), this.$D = t3.getDate(), this.$W = t3.getDay(), this.$H = t3.getHours(), this.$m = t3.getMinutes(), this.$s = t3.getSeconds(), this.$ms = t3.getMilliseconds();
+        var t2 = this.$d;
+        this.$y = t2.getFullYear(), this.$M = t2.getMonth(), this.$D = t2.getDate(), this.$W = t2.getDay(), this.$H = t2.getHours(), this.$m = t2.getMinutes(), this.$s = t2.getSeconds(), this.$ms = t2.getMilliseconds();
       }, m3.$utils = function() {
         return b2;
       }, m3.isValid = function() {
         return !(this.$d.toString() === l2);
-      }, m3.isSame = function(t3, e2) {
-        var n2 = O2(t3);
+      }, m3.isSame = function(t2, e2) {
+        var n2 = O2(t2);
         return this.startOf(e2) <= n2 && n2 <= this.endOf(e2);
-      }, m3.isAfter = function(t3, e2) {
-        return O2(t3) < this.startOf(e2);
-      }, m3.isBefore = function(t3, e2) {
-        return this.endOf(e2) < O2(t3);
-      }, m3.$g = function(t3, e2, n2) {
-        return b2.u(t3) ? this[e2] : this.set(n2, t3);
+      }, m3.isAfter = function(t2, e2) {
+        return O2(t2) < this.startOf(e2);
+      }, m3.isBefore = function(t2, e2) {
+        return this.endOf(e2) < O2(t2);
+      }, m3.$g = function(t2, e2, n2) {
+        return b2.u(t2) ? this[e2] : this.set(n2, t2);
       }, m3.unix = function() {
         return Math.floor(this.valueOf() / 1e3);
       }, m3.valueOf = function() {
         return this.$d.getTime();
-      }, m3.startOf = function(t3, e2) {
-        var n2 = this, r3 = !!b2.u(e2) || e2, f2 = b2.p(t3), l3 = function(t4, e3) {
-          var i2 = b2.w(n2.$u ? Date.UTC(n2.$y, e3, t4) : new Date(n2.$y, e3, t4), n2);
-          return r3 ? i2 : i2.endOf(a);
-        }, $3 = function(t4, e3) {
-          return b2.w(n2.toDate()[t4].apply(n2.toDate("s"), (r3 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e3)), n2);
-        }, y3 = this.$W, M4 = this.$M, m4 = this.$D, v3 = "set" + (this.$u ? "UTC" : "");
+      }, m3.startOf = function(t2, e2) {
+        var n2 = this, r3 = !!b2.u(e2) || e2, f2 = b2.p(t2), l3 = function(t3, e3) {
+          var i3 = b2.w(n2.$u ? Date.UTC(n2.$y, e3, t3) : new Date(n2.$y, e3, t3), n2);
+          return r3 ? i3 : i3.endOf(a);
+        }, $3 = function(t3, e3) {
+          return b2.w(n2.toDate()[t3].apply(n2.toDate("s"), (r3 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e3)), n2);
+        }, y2 = this.$W, M4 = this.$M, m4 = this.$D, v3 = "set" + (this.$u ? "UTC" : "");
         switch (f2) {
           case h:
             return r3 ? l3(1, 0) : l3(31, 11);
           case c2:
             return r3 ? l3(1, M4) : l3(0, M4 + 1);
           case o:
-            var g3 = this.$locale().weekStart || 0, D2 = (y3 < g3 ? y3 + 7 : y3) - g3;
+            var g2 = this.$locale().weekStart || 0, D2 = (y2 < g2 ? y2 + 7 : y2) - g2;
             return l3(r3 ? m4 - D2 : m4 + (6 - D2), M4);
           case a:
-          case d:
+          case d2:
             return $3(v3 + "Hours", 0);
           case u2:
             return $3(v3 + "Minutes", 1);
           case s:
             return $3(v3 + "Seconds", 2);
-          case i:
+          case i2:
             return $3(v3 + "Milliseconds", 3);
           default:
             return this.clone();
         }
-      }, m3.endOf = function(t3) {
-        return this.startOf(t3, false);
-      }, m3.$set = function(t3, e2) {
-        var n2, o2 = b2.p(t3), f2 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a] = f2 + "Date", n2[d] = f2 + "Date", n2[c2] = f2 + "Month", n2[h] = f2 + "FullYear", n2[u2] = f2 + "Hours", n2[s] = f2 + "Minutes", n2[i] = f2 + "Seconds", n2[r2] = f2 + "Milliseconds", n2)[o2], $3 = o2 === a ? this.$D + (e2 - this.$W) : e2;
+      }, m3.endOf = function(t2) {
+        return this.startOf(t2, false);
+      }, m3.$set = function(t2, e2) {
+        var n2, o2 = b2.p(t2), f2 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a] = f2 + "Date", n2[d2] = f2 + "Date", n2[c2] = f2 + "Month", n2[h] = f2 + "FullYear", n2[u2] = f2 + "Hours", n2[s] = f2 + "Minutes", n2[i2] = f2 + "Seconds", n2[r2] = f2 + "Milliseconds", n2)[o2], $3 = o2 === a ? this.$D + (e2 - this.$W) : e2;
         if (o2 === c2 || o2 === h) {
-          var y3 = this.clone().set(d, 1);
-          y3.$d[l3]($3), y3.init(), this.$d = y3.set(d, Math.min(this.$D, y3.daysInMonth())).$d;
+          var y2 = this.clone().set(d2, 1);
+          y2.$d[l3]($3), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
         } else
           l3 && this.$d[l3]($3);
         return this.init(), this;
-      }, m3.set = function(t3, e2) {
-        return this.clone().$set(t3, e2);
-      }, m3.get = function(t3) {
-        return this[b2.p(t3)]();
+      }, m3.set = function(t2, e2) {
+        return this.clone().$set(t2, e2);
+      }, m3.get = function(t2) {
+        return this[b2.p(t2)]();
       }, m3.add = function(r3, f2) {
-        var d2, l3 = this;
+        var d3, l3 = this;
         r3 = Number(r3);
-        var $3 = b2.p(f2), y3 = function(t3) {
+        var $3 = b2.p(f2), y2 = function(t2) {
           var e2 = O2(l3);
-          return b2.w(e2.date(e2.date() + Math.round(t3 * r3)), l3);
+          return b2.w(e2.date(e2.date() + Math.round(t2 * r3)), l3);
         };
         if ($3 === c2)
           return this.set(c2, this.$M + r3);
         if ($3 === h)
           return this.set(h, this.$y + r3);
         if ($3 === a)
-          return y3(1);
+          return y2(1);
         if ($3 === o)
-          return y3(7);
-        var M4 = (d2 = {}, d2[s] = e, d2[u2] = n, d2[i] = t2, d2)[$3] || 1, m4 = this.$d.getTime() + r3 * M4;
+          return y2(7);
+        var M4 = (d3 = {}, d3[s] = e, d3[u2] = n, d3[i2] = t, d3)[$3] || 1, m4 = this.$d.getTime() + r3 * M4;
         return b2.w(m4, this);
-      }, m3.subtract = function(t3, e2) {
-        return this.add(-1 * t3, e2);
-      }, m3.format = function(t3) {
+      }, m3.subtract = function(t2, e2) {
+        return this.add(-1 * t2, e2);
+      }, m3.format = function(t2) {
         var e2 = this, n2 = this.$locale();
         if (!this.isValid())
           return n2.invalidDate || l2;
-        var r3 = t3 || "YYYY-MM-DDTHH:mm:ssZ", i2 = b2.z(this), s2 = this.$H, u3 = this.$m, a2 = this.$M, o2 = n2.weekdays, c3 = n2.months, f2 = n2.meridiem, h2 = function(t4, n3, i3, s3) {
-          return t4 && (t4[n3] || t4(e2, r3)) || i3[n3].slice(0, s3);
-        }, d2 = function(t4) {
-          return b2.s(s2 % 12 || 12, t4, "0");
-        }, $3 = f2 || function(t4, e3, n3) {
-          var r4 = t4 < 12 ? "AM" : "PM";
+        var r3 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i3 = b2.z(this), s2 = this.$H, u3 = this.$m, a2 = this.$M, o2 = n2.weekdays, c3 = n2.months, f2 = n2.meridiem, h2 = function(t3, n3, i4, s3) {
+          return t3 && (t3[n3] || t3(e2, r3)) || i4[n3].slice(0, s3);
+        }, d3 = function(t3) {
+          return b2.s(s2 % 12 || 12, t3, "0");
+        }, $3 = f2 || function(t3, e3, n3) {
+          var r4 = t3 < 12 ? "AM" : "PM";
           return n3 ? r4.toLowerCase() : r4;
         };
-        return r3.replace(y2, function(t4, r4) {
-          return r4 || function(t5) {
-            switch (t5) {
+        return r3.replace(y, function(t3, r4) {
+          return r4 || function(t4) {
+            switch (t4) {
               case "YY":
                 return String(e2.$y).slice(-2);
               case "YYYY":
@@ -9477,9 +9477,9 @@ var dayjs_min = { exports: {} };
               case "HH":
                 return b2.s(s2, 2, "0");
               case "h":
-                return d2(1);
+                return d3(1);
               case "hh":
-                return d2(2);
+                return d3(2);
               case "a":
                 return $3(s2, u3, true);
               case "A":
@@ -9495,16 +9495,16 @@ var dayjs_min = { exports: {} };
               case "SSS":
                 return b2.s(e2.$ms, 3, "0");
               case "Z":
-                return i2;
+                return i3;
             }
             return null;
-          }(t4) || i2.replace(":", "");
+          }(t3) || i3.replace(":", "");
         });
       }, m3.utcOffset = function() {
         return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
-      }, m3.diff = function(r3, d2, l3) {
-        var $3, y3 = this, M4 = b2.p(d2), m4 = O2(r3), v3 = (m4.utcOffset() - this.utcOffset()) * e, g3 = this - m4, D2 = function() {
-          return b2.m(y3, m4);
+      }, m3.diff = function(r3, d3, l3) {
+        var $3, y2 = this, M4 = b2.p(d3), m4 = O2(r3), v3 = (m4.utcOffset() - this.utcOffset()) * e, g2 = this - m4, D2 = function() {
+          return b2.m(y2, m4);
         };
         switch (M4) {
           case h:
@@ -9517,32 +9517,32 @@ var dayjs_min = { exports: {} };
             $3 = D2() / 3;
             break;
           case o:
-            $3 = (g3 - v3) / 6048e5;
+            $3 = (g2 - v3) / 6048e5;
             break;
           case a:
-            $3 = (g3 - v3) / 864e5;
+            $3 = (g2 - v3) / 864e5;
             break;
           case u2:
-            $3 = g3 / n;
+            $3 = g2 / n;
             break;
           case s:
-            $3 = g3 / e;
+            $3 = g2 / e;
             break;
-          case i:
-            $3 = g3 / t2;
+          case i2:
+            $3 = g2 / t;
             break;
           default:
-            $3 = g3;
+            $3 = g2;
         }
         return l3 ? $3 : b2.a($3);
       }, m3.daysInMonth = function() {
         return this.endOf(c2).$D;
       }, m3.$locale = function() {
         return D[this.$L];
-      }, m3.locale = function(t3, e2) {
-        if (!t3)
+      }, m3.locale = function(t2, e2) {
+        if (!t2)
           return this.$L;
-        var n2 = this.clone(), r3 = w2(t3, e2, true);
+        var n2 = this.clone(), r3 = w2(t2, e2, true);
         return r3 && (n2.$L = r3), n2;
       }, m3.clone = function() {
         return b2.w(this.$d, this);
@@ -9556,30 +9556,30 @@ var dayjs_min = { exports: {} };
         return this.$d.toUTCString();
       }, M3;
     }(), k2 = _2.prototype;
-    return O2.prototype = k2, [["$ms", r2], ["$s", i], ["$m", s], ["$H", u2], ["$W", a], ["$M", c2], ["$y", h], ["$D", d]].forEach(function(t3) {
-      k2[t3[1]] = function(e2) {
-        return this.$g(e2, t3[0], t3[1]);
+    return O2.prototype = k2, [["$ms", r2], ["$s", i2], ["$m", s], ["$H", u2], ["$W", a], ["$M", c2], ["$y", h], ["$D", d2]].forEach(function(t2) {
+      k2[t2[1]] = function(e2) {
+        return this.$g(e2, t2[0], t2[1]);
       };
-    }), O2.extend = function(t3, e2) {
-      return t3.$i || (t3(e2, _2, O2), t3.$i = true), O2;
-    }, O2.locale = w2, O2.isDayjs = S2, O2.unix = function(t3) {
-      return O2(1e3 * t3);
-    }, O2.en = D[g2], O2.Ls = D, O2.p = {}, O2;
+    }), O2.extend = function(t2, e2) {
+      return t2.$i || (t2(e2, _2, O2), t2.$i = true), O2;
+    }, O2.locale = w2, O2.isDayjs = S2, O2.unix = function(t2) {
+      return O2(1e3 * t2);
+    }, O2.en = D[g], O2.Ls = D, O2.p = {}, O2;
   });
 })(dayjs_min);
 var dayjs_minExports = dayjs_min.exports;
 const dayjs = /* @__PURE__ */ getDefaultExportFromCjs(dayjs_minExports);
 var customParseFormat$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
+  !function(e, t) {
+    module2.exports = t();
   }(commonjsGlobal, function() {
-    var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t2 = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d\d/, r2 = /\d\d?/, i = /\d*[^-_:/,()\s\d]+/, o = {}, s = function(e2) {
+    var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d\d/, r2 = /\d\d?/, i2 = /\d*[^-_:/,()\s\d]+/, o = {}, s = function(e2) {
       return (e2 = +e2) + (e2 > 68 ? 1900 : 2e3);
     };
     var a = function(e2) {
-      return function(t3) {
-        this[e2] = +t3;
+      return function(t2) {
+        this[e2] = +t2;
       };
     }, f = [/[+-]\d\d:?(\d\d)?|Z/, function(e2) {
       (this.zone || (this.zone = {})).offset = function(e3) {
@@ -9587,26 +9587,26 @@ var customParseFormat$1 = { exports: {} };
           return 0;
         if ("Z" === e3)
           return 0;
-        var t3 = e3.match(/([+-]|\d\d)/g), n2 = 60 * t3[1] + (+t3[2] || 0);
-        return 0 === n2 ? 0 : "+" === t3[0] ? -n2 : n2;
+        var t2 = e3.match(/([+-]|\d\d)/g), n2 = 60 * t2[1] + (+t2[2] || 0);
+        return 0 === n2 ? 0 : "+" === t2[0] ? -n2 : n2;
       }(e2);
     }], h = function(e2) {
-      var t3 = o[e2];
-      return t3 && (t3.indexOf ? t3 : t3.s.concat(t3.f));
-    }, u2 = function(e2, t3) {
+      var t2 = o[e2];
+      return t2 && (t2.indexOf ? t2 : t2.s.concat(t2.f));
+    }, u2 = function(e2, t2) {
       var n2, r3 = o.meridiem;
       if (r3) {
-        for (var i2 = 1; i2 <= 24; i2 += 1)
-          if (e2.indexOf(r3(i2, 0, t3)) > -1) {
-            n2 = i2 > 12;
+        for (var i3 = 1; i3 <= 24; i3 += 1)
+          if (e2.indexOf(r3(i3, 0, t2)) > -1) {
+            n2 = i3 > 12;
             break;
           }
       } else
-        n2 = e2 === (t3 ? "pm" : "PM");
+        n2 = e2 === (t2 ? "pm" : "PM");
       return n2;
-    }, d = { A: [i, function(e2) {
+    }, d2 = { A: [i2, function(e2) {
       this.afternoon = u2(e2, false);
-    }], a: [i, function(e2) {
+    }], a: [i2, function(e2) {
       this.afternoon = u2(e2, true);
     }], S: [/\d/, function(e2) {
       this.milliseconds = 100 * +e2;
@@ -9614,78 +9614,78 @@ var customParseFormat$1 = { exports: {} };
       this.milliseconds = 10 * +e2;
     }], SSS: [/\d{3}/, function(e2) {
       this.milliseconds = +e2;
-    }], s: [r2, a("seconds")], ss: [r2, a("seconds")], m: [r2, a("minutes")], mm: [r2, a("minutes")], H: [r2, a("hours")], h: [r2, a("hours")], HH: [r2, a("hours")], hh: [r2, a("hours")], D: [r2, a("day")], DD: [n, a("day")], Do: [i, function(e2) {
-      var t3 = o.ordinal, n2 = e2.match(/\d+/);
-      if (this.day = n2[0], t3)
+    }], s: [r2, a("seconds")], ss: [r2, a("seconds")], m: [r2, a("minutes")], mm: [r2, a("minutes")], H: [r2, a("hours")], h: [r2, a("hours")], HH: [r2, a("hours")], hh: [r2, a("hours")], D: [r2, a("day")], DD: [n, a("day")], Do: [i2, function(e2) {
+      var t2 = o.ordinal, n2 = e2.match(/\d+/);
+      if (this.day = n2[0], t2)
         for (var r3 = 1; r3 <= 31; r3 += 1)
-          t3(r3).replace(/\[|\]/g, "") === e2 && (this.day = r3);
-    }], M: [r2, a("month")], MM: [n, a("month")], MMM: [i, function(e2) {
-      var t3 = h("months"), n2 = (h("monthsShort") || t3.map(function(e3) {
+          t2(r3).replace(/\[|\]/g, "") === e2 && (this.day = r3);
+    }], M: [r2, a("month")], MM: [n, a("month")], MMM: [i2, function(e2) {
+      var t2 = h("months"), n2 = (h("monthsShort") || t2.map(function(e3) {
         return e3.slice(0, 3);
       })).indexOf(e2) + 1;
       if (n2 < 1)
         throw new Error();
       this.month = n2 % 12 || n2;
-    }], MMMM: [i, function(e2) {
-      var t3 = h("months").indexOf(e2) + 1;
-      if (t3 < 1)
+    }], MMMM: [i2, function(e2) {
+      var t2 = h("months").indexOf(e2) + 1;
+      if (t2 < 1)
         throw new Error();
-      this.month = t3 % 12 || t3;
+      this.month = t2 % 12 || t2;
     }], Y: [/[+-]?\d+/, a("year")], YY: [n, function(e2) {
       this.year = s(e2);
     }], YYYY: [/\d{4}/, a("year")], Z: f, ZZ: f };
     function c2(n2) {
-      var r3, i2;
-      r3 = n2, i2 = o && o.formats;
-      for (var s2 = (n2 = r3.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, function(t3, n3, r4) {
+      var r3, i3;
+      r3 = n2, i3 = o && o.formats;
+      for (var s2 = (n2 = r3.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, function(t2, n3, r4) {
         var o2 = r4 && r4.toUpperCase();
-        return n3 || i2[r4] || e[r4] || i2[o2].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(e2, t4, n4) {
-          return t4 || n4.slice(1);
+        return n3 || i3[r4] || e[r4] || i3[o2].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(e2, t3, n4) {
+          return t3 || n4.slice(1);
         });
-      })).match(t2), a2 = s2.length, f2 = 0; f2 < a2; f2 += 1) {
-        var h2 = s2[f2], u3 = d[h2], c3 = u3 && u3[0], l2 = u3 && u3[1];
+      })).match(t), a2 = s2.length, f2 = 0; f2 < a2; f2 += 1) {
+        var h2 = s2[f2], u3 = d2[h2], c3 = u3 && u3[0], l2 = u3 && u3[1];
         s2[f2] = l2 ? { regex: c3, parser: l2 } : h2.replace(/^\[|\]$/g, "");
       }
       return function(e2) {
-        for (var t3 = {}, n3 = 0, r4 = 0; n3 < a2; n3 += 1) {
-          var i3 = s2[n3];
-          if ("string" == typeof i3)
-            r4 += i3.length;
+        for (var t2 = {}, n3 = 0, r4 = 0; n3 < a2; n3 += 1) {
+          var i4 = s2[n3];
+          if ("string" == typeof i4)
+            r4 += i4.length;
           else {
-            var o2 = i3.regex, f3 = i3.parser, h3 = e2.slice(r4), u4 = o2.exec(h3)[0];
-            f3.call(t3, u4), e2 = e2.replace(u4, "");
+            var o2 = i4.regex, f3 = i4.parser, h3 = e2.slice(r4), u4 = o2.exec(h3)[0];
+            f3.call(t2, u4), e2 = e2.replace(u4, "");
           }
         }
         return function(e3) {
-          var t4 = e3.afternoon;
-          if (void 0 !== t4) {
+          var t3 = e3.afternoon;
+          if (void 0 !== t3) {
             var n4 = e3.hours;
-            t4 ? n4 < 12 && (e3.hours += 12) : 12 === n4 && (e3.hours = 0), delete e3.afternoon;
+            t3 ? n4 < 12 && (e3.hours += 12) : 12 === n4 && (e3.hours = 0), delete e3.afternoon;
           }
-        }(t3), t3;
+        }(t2), t2;
       };
     }
-    return function(e2, t3, n2) {
+    return function(e2, t2, n2) {
       n2.p.customParseFormat = true, e2 && e2.parseTwoDigitYear && (s = e2.parseTwoDigitYear);
-      var r3 = t3.prototype, i2 = r3.parse;
+      var r3 = t2.prototype, i3 = r3.parse;
       r3.parse = function(e3) {
-        var t4 = e3.date, r4 = e3.utc, s2 = e3.args;
+        var t3 = e3.date, r4 = e3.utc, s2 = e3.args;
         this.$u = r4;
         var a2 = s2[1];
         if ("string" == typeof a2) {
-          var f2 = true === s2[2], h2 = true === s2[3], u3 = f2 || h2, d2 = s2[2];
-          h2 && (d2 = s2[2]), o = this.$locale(), !f2 && d2 && (o = n2.Ls[d2]), this.$d = function(e4, t5, n3) {
+          var f2 = true === s2[2], h2 = true === s2[3], u3 = f2 || h2, d3 = s2[2];
+          h2 && (d3 = s2[2]), o = this.$locale(), !f2 && d3 && (o = n2.Ls[d3]), this.$d = function(e4, t4, n3) {
             try {
-              if (["x", "X"].indexOf(t5) > -1)
-                return new Date(("X" === t5 ? 1e3 : 1) * e4);
-              var r5 = c2(t5)(e4), i3 = r5.year, o2 = r5.month, s3 = r5.day, a3 = r5.hours, f3 = r5.minutes, h3 = r5.seconds, u4 = r5.milliseconds, d3 = r5.zone, l3 = /* @__PURE__ */ new Date(), m3 = s3 || (i3 || o2 ? 1 : l3.getDate()), M3 = i3 || l3.getFullYear(), Y2 = 0;
-              i3 && !o2 || (Y2 = o2 > 0 ? o2 - 1 : l3.getMonth());
-              var p2 = a3 || 0, v2 = f3 || 0, D = h3 || 0, g2 = u4 || 0;
-              return d3 ? new Date(Date.UTC(M3, Y2, m3, p2, v2, D, g2 + 60 * d3.offset * 1e3)) : n3 ? new Date(Date.UTC(M3, Y2, m3, p2, v2, D, g2)) : new Date(M3, Y2, m3, p2, v2, D, g2);
+              if (["x", "X"].indexOf(t4) > -1)
+                return new Date(("X" === t4 ? 1e3 : 1) * e4);
+              var r5 = c2(t4)(e4), i4 = r5.year, o2 = r5.month, s3 = r5.day, a3 = r5.hours, f3 = r5.minutes, h3 = r5.seconds, u4 = r5.milliseconds, d4 = r5.zone, l3 = /* @__PURE__ */ new Date(), m3 = s3 || (i4 || o2 ? 1 : l3.getDate()), M3 = i4 || l3.getFullYear(), Y2 = 0;
+              i4 && !o2 || (Y2 = o2 > 0 ? o2 - 1 : l3.getMonth());
+              var p2 = a3 || 0, v2 = f3 || 0, D = h3 || 0, g = u4 || 0;
+              return d4 ? new Date(Date.UTC(M3, Y2, m3, p2, v2, D, g + 60 * d4.offset * 1e3)) : n3 ? new Date(Date.UTC(M3, Y2, m3, p2, v2, D, g)) : new Date(M3, Y2, m3, p2, v2, D, g);
             } catch (e5) {
               return /* @__PURE__ */ new Date("");
             }
-          }(t4, a2, r4), this.init(), d2 && true !== d2 && (this.$L = this.locale(d2).$L), u3 && t4 != this.format(a2) && (this.$d = /* @__PURE__ */ new Date("")), o = {};
+          }(t3, a2, r4), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a2) && (this.$d = /* @__PURE__ */ new Date("")), o = {};
         } else if (a2 instanceof Array)
           for (var l2 = a2.length, m2 = 1; m2 <= l2; m2 += 1) {
             s2[1] = a2[m2 - 1];
@@ -9697,7 +9697,7 @@ var customParseFormat$1 = { exports: {} };
             m2 === l2 && (this.$d = /* @__PURE__ */ new Date(""));
           }
         else
-          i2.call(this, e3);
+          i3.call(this, e3);
       };
     };
   });
@@ -9773,8 +9773,8 @@ const makeList = (total, method4) => {
   var _a2;
   const arr = [];
   const disabledArr = method4 == null ? void 0 : method4();
-  for (let i = 0; i < total; i++) {
-    arr.push((_a2 = disabledArr == null ? void 0 : disabledArr.includes(i)) != null ? _a2 : false);
+  for (let i2 = 0; i2 < total; i2++) {
+    arr.push((_a2 = disabledArr == null ? void 0 : disabledArr.includes(i2)) != null ? _a2 : false);
   }
   return arr;
 };
@@ -10085,7 +10085,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         }
       } else {
         if (isArray$1(props.modelValue)) {
-          dayOrDays = props.modelValue.map((d) => parseDate(d, props.valueFormat, lang.value));
+          dayOrDays = props.modelValue.map((d2) => parseDate(d2, props.valueFormat, lang.value));
         } else {
           dayOrDays = parseDate(props.modelValue, props.valueFormat, lang.value);
         }
@@ -11052,7 +11052,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     } = pickerBase.props;
     const { getAvailableHours, getAvailableMinutes, getAvailableSeconds } = buildAvailableTimeSlotGetter(disabledHours, disabledMinutes, disabledSeconds);
     const ns = useNamespace("time");
-    const { t: t2, lang } = useLocale();
+    const { t, lang } = useLocale();
     const selectionRange = ref([0, 2]);
     const oldValue = useOldValue(props);
     const transitionName = computed(() => {
@@ -11174,12 +11174,12 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
                 type: "button",
                 class: normalizeClass([unref(ns).be("panel", "btn"), "cancel"]),
                 onClick: handleCancel
-              }, toDisplayString(unref(t2)("el.datepicker.cancel")), 3),
+              }, toDisplayString(unref(t)("el.datepicker.cancel")), 3),
               createBaseVNode("button", {
                 type: "button",
                 class: normalizeClass([unref(ns).be("panel", "btn"), "confirm"]),
                 onClick: _cache[0] || (_cache[0] = ($event) => handleConfirm())
-              }, toDisplayString(unref(t2)("el.datepicker.confirm")), 3)
+              }, toDisplayString(unref(t)("el.datepicker.confirm")), 3)
             ], 2)
           ], 2)) : createCommentVNode("v-if", true)
         ]),
@@ -11204,12 +11204,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     const props = __props;
     const makeSelectRange = (start, end) => {
       const result = [];
-      for (let i = start; i <= end; i++) {
-        result.push(i);
+      for (let i2 = start; i2 <= end; i2++) {
+        result.push(i2);
       }
       return result;
     };
-    const { t: t2, lang } = useLocale();
+    const { t, lang } = useLocale();
     const nsTime = useNamespace("time");
     const nsPicker = useNamespace("picker");
     const pickerBase = inject("EP_PICKER_BASE");
@@ -11361,7 +11361,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       if (!days)
         return null;
       if (isArray$1(days)) {
-        return days.map((d) => dayjs(d, props.format).locale(lang.value));
+        return days.map((d2) => dayjs(d2, props.format).locale(lang.value));
       }
       return dayjs(days, props.format).locale(lang.value);
     };
@@ -11369,13 +11369,13 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       if (!days)
         return null;
       if (isArray$1(days)) {
-        return days.map((d) => d.format(props.format));
+        return days.map((d2) => d2.format(props.format));
       }
       return days.format(props.format);
     };
     const getDefaultValue2 = () => {
       if (isArray$1(defaultValue)) {
-        return defaultValue.map((d) => dayjs(d).locale(lang.value));
+        return defaultValue.map((d2) => dayjs(d2).locale(lang.value));
       }
       const defaultDay = dayjs(defaultValue).locale(lang.value);
       return [defaultDay, defaultDay.add(60, "m")];
@@ -11399,7 +11399,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           }, [
             createBaseVNode("div", {
               class: normalizeClass(unref(nsTime).be("range-picker", "header"))
-            }, toDisplayString(unref(t2)("el.datepicker.startTime")), 3),
+            }, toDisplayString(unref(t)("el.datepicker.startTime")), 3),
             createBaseVNode("div", {
               class: normalizeClass(unref(startContainerKls))
             }, [
@@ -11424,7 +11424,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           }, [
             createBaseVNode("div", {
               class: normalizeClass(unref(nsTime).be("range-picker", "header"))
-            }, toDisplayString(unref(t2)("el.datepicker.endTime")), 3),
+            }, toDisplayString(unref(t)("el.datepicker.endTime")), 3),
             createBaseVNode("div", {
               class: normalizeClass(unref(endContainerKls))
             }, [
@@ -11452,13 +11452,13 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
             type: "button",
             class: normalizeClass([unref(nsTime).be("panel", "btn"), "cancel"]),
             onClick: _cache[0] || (_cache[0] = ($event) => handleCancel())
-          }, toDisplayString(unref(t2)("el.datepicker.cancel")), 3),
+          }, toDisplayString(unref(t)("el.datepicker.cancel")), 3),
           createBaseVNode("button", {
             type: "button",
             class: normalizeClass([unref(nsTime).be("panel", "btn"), "confirm"]),
             disabled: unref(btnConfirmDisabled),
             onClick: _cache[1] || (_cache[1] = ($event) => handleConfirm())
-          }, toDisplayString(unref(t2)("el.datepicker.confirm")), 11, _hoisted_1$a)
+          }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, _hoisted_1$a)
         ], 2)
       ], 2)) : createCommentVNode("v-if", true);
     };
@@ -11524,25 +11524,25 @@ var localeData$1 = { exports: {} };
   !function(n, e) {
     module2.exports = e();
   }(commonjsGlobal, function() {
-    return function(n, e, t2) {
+    return function(n, e, t) {
       var r2 = e.prototype, o = function(n2) {
         return n2 && (n2.indexOf ? n2 : n2.s);
-      }, u2 = function(n2, e2, t3, r3, u3) {
-        var i2 = n2.name ? n2 : n2.$locale(), a2 = o(i2[e2]), s2 = o(i2[t3]), f = a2 || s2.map(function(n3) {
+      }, u2 = function(n2, e2, t2, r3, u3) {
+        var i3 = n2.name ? n2 : n2.$locale(), a2 = o(i3[e2]), s2 = o(i3[t2]), f = a2 || s2.map(function(n3) {
           return n3.slice(0, r3);
         });
         if (!u3)
           return f;
-        var d = i2.weekStart;
+        var d2 = i3.weekStart;
         return f.map(function(n3, e3) {
-          return f[(e3 + (d || 0)) % 7];
+          return f[(e3 + (d2 || 0)) % 7];
         });
-      }, i = function() {
-        return t2.Ls[t2.locale()];
+      }, i2 = function() {
+        return t.Ls[t.locale()];
       }, a = function(n2, e2) {
         return n2.formats[e2] || function(n3) {
-          return n3.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(n4, e3, t3) {
-            return e3 || t3.slice(1);
+          return n3.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(n4, e3, t2) {
+            return e3 || t2.slice(1);
           });
         }(n2.formats[e2.toUpperCase()]);
       }, s = function() {
@@ -11565,33 +11565,33 @@ var localeData$1 = { exports: {} };
       };
       r2.localeData = function() {
         return s.bind(this)();
-      }, t2.localeData = function() {
-        var n2 = i();
+      }, t.localeData = function() {
+        var n2 = i2();
         return { firstDayOfWeek: function() {
           return n2.weekStart || 0;
         }, weekdays: function() {
-          return t2.weekdays();
+          return t.weekdays();
         }, weekdaysShort: function() {
-          return t2.weekdaysShort();
+          return t.weekdaysShort();
         }, weekdaysMin: function() {
-          return t2.weekdaysMin();
+          return t.weekdaysMin();
         }, months: function() {
-          return t2.months();
+          return t.months();
         }, monthsShort: function() {
-          return t2.monthsShort();
+          return t.monthsShort();
         }, longDateFormat: function(e2) {
           return a(n2, e2);
         }, meridiem: n2.meridiem, ordinal: n2.ordinal };
-      }, t2.months = function() {
-        return u2(i(), "months");
-      }, t2.monthsShort = function() {
-        return u2(i(), "monthsShort", "months", 3);
-      }, t2.weekdays = function(n2) {
-        return u2(i(), "weekdays", null, null, n2);
-      }, t2.weekdaysShort = function(n2) {
-        return u2(i(), "weekdaysShort", "weekdays", 3, n2);
-      }, t2.weekdaysMin = function(n2) {
-        return u2(i(), "weekdaysMin", "weekdays", 2, n2);
+      }, t.months = function() {
+        return u2(i2(), "months");
+      }, t.monthsShort = function() {
+        return u2(i2(), "monthsShort", "months", 3);
+      }, t.weekdays = function(n2) {
+        return u2(i2(), "weekdays", null, null, n2);
+      }, t.weekdaysShort = function(n2) {
+        return u2(i2(), "weekdaysShort", "weekdays", 3, n2);
+      }, t.weekdaysMin = function(n2) {
+        return u2(i2(), "weekdaysMin", "weekdays", 2, n2);
       };
     };
   });
@@ -11711,44 +11711,44 @@ var Tag = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__file", "tag.vue"]]);
 const ElTag = withInstall(Tag);
 var advancedFormat$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
+  !function(e, t) {
+    module2.exports = t();
   }(commonjsGlobal, function() {
-    return function(e, t2) {
-      var r2 = t2.prototype, n = r2.format;
+    return function(e, t) {
+      var r2 = t.prototype, n = r2.format;
       r2.format = function(e2) {
-        var t3 = this, r3 = this.$locale();
+        var t2 = this, r3 = this.$locale();
         if (!this.isValid())
           return n.bind(this)(e2);
         var s = this.$utils(), a = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
           switch (e3) {
             case "Q":
-              return Math.ceil((t3.$M + 1) / 3);
+              return Math.ceil((t2.$M + 1) / 3);
             case "Do":
-              return r3.ordinal(t3.$D);
+              return r3.ordinal(t2.$D);
             case "gggg":
-              return t3.weekYear();
+              return t2.weekYear();
             case "GGGG":
-              return t3.isoWeekYear();
+              return t2.isoWeekYear();
             case "wo":
-              return r3.ordinal(t3.week(), "W");
+              return r3.ordinal(t2.week(), "W");
             case "w":
             case "ww":
-              return s.s(t3.week(), "w" === e3 ? 1 : 2, "0");
+              return s.s(t2.week(), "w" === e3 ? 1 : 2, "0");
             case "W":
             case "WW":
-              return s.s(t3.isoWeek(), "W" === e3 ? 1 : 2, "0");
+              return s.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
             case "k":
             case "kk":
-              return s.s(String(0 === t3.$H ? 24 : t3.$H), "k" === e3 ? 1 : 2, "0");
+              return s.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
             case "X":
-              return Math.floor(t3.$d.getTime() / 1e3);
+              return Math.floor(t2.$d.getTime() / 1e3);
             case "x":
-              return t3.$d.getTime();
+              return t2.$d.getTime();
             case "z":
-              return "[" + t3.offsetName() + "]";
+              return "[" + t2.offsetName() + "]";
             case "zzz":
-              return "[" + t3.offsetName("long") + "]";
+              return "[" + t2.offsetName("long") + "]";
             default:
               return e3;
           }
@@ -11762,22 +11762,22 @@ var advancedFormatExports = advancedFormat$1.exports;
 const advancedFormat = /* @__PURE__ */ getDefaultExportFromCjs(advancedFormatExports);
 var weekOfYear$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
+  !function(e, t) {
+    module2.exports = t();
   }(commonjsGlobal, function() {
-    var e = "week", t2 = "year";
-    return function(i, n, r2) {
+    var e = "week", t = "year";
+    return function(i2, n, r2) {
       var f = n.prototype;
-      f.week = function(i2) {
-        if (void 0 === i2 && (i2 = null), null !== i2)
-          return this.add(7 * (i2 - this.week()), "day");
+      f.week = function(i3) {
+        if (void 0 === i3 && (i3 = null), null !== i3)
+          return this.add(7 * (i3 - this.week()), "day");
         var n2 = this.$locale().yearStart || 1;
         if (11 === this.month() && this.date() > 25) {
-          var f2 = r2(this).startOf(t2).add(1, t2).date(n2), s = r2(this).endOf(e);
+          var f2 = r2(this).startOf(t).add(1, t).date(n2), s = r2(this).endOf(e);
           if (f2.isBefore(s))
             return 1;
         }
-        var a = r2(this).startOf(t2).date(n2).startOf(e).subtract(1, "millisecond"), o = this.diff(a, e, true);
+        var a = r2(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o = this.diff(a, e, true);
         return o < 0 ? r2(this).startOf("week").week() : Math.ceil(o);
       }, f.weeks = function(e2) {
         return void 0 === e2 && (e2 = null), this.week(e2);
@@ -11789,13 +11789,13 @@ var weekOfYearExports = weekOfYear$1.exports;
 const weekOfYear = /* @__PURE__ */ getDefaultExportFromCjs(weekOfYearExports);
 var weekYear$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
+  !function(e, t) {
+    module2.exports = t();
   }(commonjsGlobal, function() {
-    return function(e, t2) {
-      t2.prototype.weekYear = function() {
-        var e2 = this.month(), t3 = this.week(), n = this.year();
-        return 1 === t3 && 11 === e2 ? n + 1 : 0 === e2 && t3 >= 52 ? n - 1 : n;
+    return function(e, t) {
+      t.prototype.weekYear = function() {
+        var e2 = this.month(), t2 = this.week(), n = this.year();
+        return 1 === t2 && 11 === e2 ? n + 1 : 0 === e2 && t2 >= 52 ? n - 1 : n;
       };
     };
   });
@@ -11804,13 +11804,13 @@ var weekYearExports = weekYear$1.exports;
 const weekYear = /* @__PURE__ */ getDefaultExportFromCjs(weekYearExports);
 var dayOfYear$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
+  !function(e, t) {
+    module2.exports = t();
   }(commonjsGlobal, function() {
-    return function(e, t2, n) {
-      t2.prototype.dayOfYear = function(e2) {
-        var t3 = Math.round((n(this).startOf("day") - n(this).startOf("year")) / 864e5) + 1;
-        return null == e2 ? t3 : this.add(e2 - t3, "day");
+    return function(e, t, n) {
+      t.prototype.dayOfYear = function(e2) {
+        var t2 = Math.round((n(this).startOf("day") - n(this).startOf("year")) / 864e5) + 1;
+        return null == e2 ? t2 : this.add(e2 - t2, "day");
       };
     };
   });
@@ -11819,12 +11819,12 @@ var dayOfYearExports = dayOfYear$1.exports;
 const dayOfYear = /* @__PURE__ */ getDefaultExportFromCjs(dayOfYearExports);
 var isSameOrAfter$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, t2) {
-    module2.exports = t2();
+  !function(e, t) {
+    module2.exports = t();
   }(commonjsGlobal, function() {
-    return function(e, t2) {
-      t2.prototype.isSameOrAfter = function(e2, t3) {
-        return this.isSame(e2, t3) || this.isAfter(e2, t3);
+    return function(e, t) {
+      t.prototype.isSameOrAfter = function(e2, t2) {
+        return this.isSame(e2, t2) || this.isAfter(e2, t2);
       };
     };
   });
@@ -11833,12 +11833,12 @@ var isSameOrAfterExports = isSameOrAfter$1.exports;
 const isSameOrAfter = /* @__PURE__ */ getDefaultExportFromCjs(isSameOrAfterExports);
 var isSameOrBefore$1 = { exports: {} };
 (function(module2, exports2) {
-  !function(e, i) {
-    module2.exports = i();
+  !function(e, i2) {
+    module2.exports = i2();
   }(commonjsGlobal, function() {
-    return function(e, i) {
-      i.prototype.isSameOrBefore = function(e2, i2) {
-        return this.isSame(e2, i2) || this.isBefore(e2, i2);
+    return function(e, i2) {
+      i2.prototype.isSameOrBefore = function(e2, i3) {
+        return this.isSame(e2, i3) || this.isBefore(e2, i3);
       };
     };
   });
@@ -11940,7 +11940,7 @@ const isValidRange = (range3) => {
 const getDefaultValue = (defaultValue, { lang, unit: unit2, unlinkPanels }) => {
   let start;
   if (isArray$1(defaultValue)) {
-    let [left, right] = defaultValue.map((d) => dayjs(d).locale(lang));
+    let [left, right] = defaultValue.map((d2) => dayjs(d2).locale(lang));
     if (!unlinkPanels) {
       right = left.add(1, unit2);
     }
@@ -12071,7 +12071,7 @@ const useBasicDateTable = (props, emit) => {
     const _selectedDate = unref(selectedDate);
     const shouldIncrement = setDateText(cell, { count, rowIndex, columnIndex });
     const cellDate = cell.dayjs.toDate();
-    cell.selected = _selectedDate.find((d) => d.isSame(cell.dayjs, "day"));
+    cell.selected = _selectedDate.find((d2) => d2.isSame(cell.dayjs, "day"));
     cell.isSelected = !!cell.selected;
     cell.isCurrent = isCurrent(cell);
     cell.disabled = disabledDate2 == null ? void 0 : disabledDate2(cellDate);
@@ -12213,7 +12213,7 @@ const useBasicDateTable = (props, emit) => {
     });
   };
   const handleDatesPick = (newDate, selected) => {
-    const newValue = selected ? castArray(props.parsedValue).filter((d) => (d == null ? void 0 : d.valueOf()) !== newDate.valueOf()) : castArray(props.parsedValue).concat([newDate]);
+    const newValue = selected ? castArray(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.valueOf()) !== newDate.valueOf()) : castArray(props.parsedValue).concat([newDate]);
     emit("pick", newValue);
   };
   const handlePickDate = (event, isKeyboardMovement = false) => {
@@ -12284,13 +12284,13 @@ const useBasicDateTableDOM = (props, {
   isWeekActive
 }) => {
   const ns = useNamespace("date-table");
-  const { t: t2 } = useLocale();
+  const { t } = useLocale();
   const tableKls = computed(() => [
     ns.b(),
     { "is-week-mode": props.selectionMode === "week" }
   ]);
-  const tableLabel = computed(() => t2("el.datepicker.dateTablePrompt"));
-  const weekLabel = computed(() => t2("el.datepicker.week"));
+  const tableLabel = computed(() => t("el.datepicker.dateTablePrompt"));
+  const weekLabel = computed(() => t("el.datepicker.week"));
   const getCellClasses = (cell) => {
     const classes = [];
     if (isNormalDay(cell.type) && !cell.disabled) {
@@ -12334,7 +12334,7 @@ const useBasicDateTableDOM = (props, {
     weekLabel,
     getCellClasses,
     getRowKls,
-    t: t2
+    t
   };
 };
 const basicCellProps = buildProps({
@@ -12392,7 +12392,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
       handleMouseMove,
       handleFocus
     } = useBasicDateTable(props, emit);
-    const { tableLabel, tableKls, weekLabel, getCellClasses, getRowKls, t: t2 } = useBasicDateTableDOM(props, {
+    const { tableLabel, tableKls, weekLabel, getCellClasses, getRowKls, t } = useBasicDateTableDOM(props, {
       isCurrent,
       isWeekActive
     });
@@ -12420,9 +12420,9 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(WEEKS), (week, key) => {
               return openBlock(), createElementBlock("th", {
                 key,
-                "aria-label": unref(t2)("el.datepicker.weeksFull." + week),
+                "aria-label": unref(t)("el.datepicker.weeksFull." + week),
                 scope: "col"
-              }, toDisplayString(unref(t2)("el.datepicker.weeks." + week)), 9, _hoisted_3$6);
+              }, toDisplayString(unref(t)("el.datepicker.weeks." + week)), 9, _hoisted_3$6);
             }), 128))
           ]),
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(rows), (row, rowKey) => {
@@ -12471,7 +12471,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
     };
     const ns = useNamespace("month-table");
-    const { t: t2, lang } = useLocale();
+    const { t, lang } = useLocale();
     const tbodyRef = ref();
     const currentCellRef = ref();
     const months = ref(props.date.locale("en").localeData().monthsShort().map((_2) => _2.toLowerCase()));
@@ -12486,11 +12486,11 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       var _a2, _b;
       const rows2 = tableRows.value;
       const now2 = dayjs().locale(lang.value).startOf("month");
-      for (let i = 0; i < 3; i++) {
-        const row = rows2[i];
+      for (let i2 = 0; i2 < 3; i2++) {
+        const row = rows2[i2];
         for (let j2 = 0; j2 < 4; j2++) {
           const cell = row[j2] || (row[j2] = {
-            row: i,
+            row: i2,
             column: j2,
             type: "normal",
             inRange: false,
@@ -12500,7 +12500,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
             disabled: false
           });
           cell.type = "normal";
-          const index = i * 4 + j2;
+          const index = i2 * 4 + j2;
           const calTime = props.date.startOf("year").month(index);
           const calEndDate = props.rangeState.endDate || props.maxDate || props.rangeState.selecting && props.minDate || null;
           cell.inRange = !!(props.minDate && calTime.isSameOrAfter(props.minDate, "month") && calEndDate && calTime.isSameOrBefore(calEndDate, "month")) || !!(props.minDate && calTime.isSameOrBefore(props.minDate, "month") && calEndDate && calTime.isSameOrAfter(calEndDate, "month"));
@@ -12615,7 +12615,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("table", {
         role: "grid",
-        "aria-label": unref(t2)("el.datepicker.monthTablePrompt"),
+        "aria-label": unref(t)("el.datepicker.monthTablePrompt"),
         class: normalizeClass(unref(ns).b()),
         onClick: handleMonthTableClick,
         onMousemove: handleMouseMove
@@ -12633,7 +12633,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   ref: (el) => isSelectedCell(cell) && (currentCellRef.value = el),
                   class: normalizeClass(getCellStyle(cell)),
                   "aria-selected": `${isSelectedCell(cell)}`,
-                  "aria-label": unref(t2)(`el.datepicker.month${+cell.text + 1}`),
+                  "aria-label": unref(t)(`el.datepicker.month${+cell.text + 1}`),
                   tabindex: isSelectedCell(cell) ? 0 : -1,
                   onKeydown: [
                     withKeys(withModifiers(handleMonthTableClick, ["prevent", "stop"]), ["space"]),
@@ -12641,7 +12641,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   ]
                 }, [
                   createBaseVNode("div", null, [
-                    createBaseVNode("span", _hoisted_3$5, toDisplayString(unref(t2)("el.datepicker.months." + months.value[cell.text])), 1)
+                    createBaseVNode("span", _hoisted_3$5, toDisplayString(unref(t)("el.datepicker.months." + months.value[cell.text])), 1)
                   ])
                 ], 42, _hoisted_2$6);
               }), 128))
@@ -12677,7 +12677,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
     };
     const ns = useNamespace("year-table");
-    const { t: t2, lang } = useLocale();
+    const { t, lang } = useLocale();
     const tbodyRef = ref();
     const currentCellRef = ref();
     const startYear = computed(() => {
@@ -12691,7 +12691,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       const kls = {};
       const today = dayjs().locale(lang.value);
       kls.disabled = props.disabledDate ? datesInYear(year, lang.value).every(props.disabledDate) : false;
-      kls.current = castArray(props.parsedValue).findIndex((d) => d.year() === year) >= 0;
+      kls.current = castArray(props.parsedValue).findIndex((d2) => d2.year() === year) >= 0;
       kls.today = today.year() === year;
       return kls;
     };
@@ -12710,7 +12710,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             emit("pick", castArray(props.parsedValue), false);
             return;
           }
-          const newValue = hasClass(target, "current") ? castArray(props.parsedValue).filter((d) => (d == null ? void 0 : d.year()) !== Number(year)) : castArray(props.parsedValue).concat([dayjs(year)]);
+          const newValue = hasClass(target, "current") ? castArray(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.year()) !== Number(year)) : castArray(props.parsedValue).concat([dayjs(year)]);
           emit("pick", newValue);
         } else {
           emit("pick", Number(year));
@@ -12730,7 +12730,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("table", {
         role: "grid",
-        "aria-label": unref(t2)("el.datepicker.yearTablePrompt"),
+        "aria-label": unref(t)("el.datepicker.yearTablePrompt"),
         class: normalizeClass(unref(ns).b()),
         onClick: handleYearTableClick
       }, [
@@ -12738,26 +12738,26 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
           ref_key: "tbodyRef",
           ref: tbodyRef
         }, [
-          (openBlock(), createElementBlock(Fragment, null, renderList(3, (_2, i) => {
-            return createBaseVNode("tr", { key: i }, [
+          (openBlock(), createElementBlock(Fragment, null, renderList(3, (_2, i2) => {
+            return createBaseVNode("tr", { key: i2 }, [
               (openBlock(), createElementBlock(Fragment, null, renderList(4, (__, j2) => {
                 return openBlock(), createElementBlock(Fragment, {
-                  key: i + "_" + j2
+                  key: i2 + "_" + j2
                 }, [
-                  i * 4 + j2 < 10 ? (openBlock(), createElementBlock("td", {
+                  i2 * 4 + j2 < 10 ? (openBlock(), createElementBlock("td", {
                     key: 0,
                     ref_for: true,
-                    ref: (el) => isSelectedCell(unref(startYear) + i * 4 + j2) && (currentCellRef.value = el),
-                    class: normalizeClass(["available", getCellKls(unref(startYear) + i * 4 + j2)]),
-                    "aria-selected": `${isSelectedCell(unref(startYear) + i * 4 + j2)}`,
-                    tabindex: isSelectedCell(unref(startYear) + i * 4 + j2) ? 0 : -1,
+                    ref: (el) => isSelectedCell(unref(startYear) + i2 * 4 + j2) && (currentCellRef.value = el),
+                    class: normalizeClass(["available", getCellKls(unref(startYear) + i2 * 4 + j2)]),
+                    "aria-selected": `${isSelectedCell(unref(startYear) + i2 * 4 + j2)}`,
+                    tabindex: isSelectedCell(unref(startYear) + i2 * 4 + j2) ? 0 : -1,
                     onKeydown: [
                       withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["space"]),
                       withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["enter"])
                     ]
                   }, [
                     createBaseVNode("div", null, [
-                      createBaseVNode("span", _hoisted_3$4, toDisplayString(unref(startYear) + i * 4 + j2), 1)
+                      createBaseVNode("span", _hoisted_3$4, toDisplayString(unref(startYear) + i2 * 4 + j2), 1)
                     ])
                   ], 42, _hoisted_2$5)) : (openBlock(), createElementBlock("td", _hoisted_4$3))
                 ], 64);
@@ -12786,7 +12786,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const dpNs = useNamespace("date-picker");
     const attrs = useAttrs$1();
     const slots = useSlots();
-    const { t: t2, lang } = useLocale();
+    const { t, lang } = useLocale();
     const pickerBase = inject("EP_PICKER_BASE");
     const popper = inject(TOOLTIP_INJECTION_KEY);
     const { shortcuts, disabledDate: disabledDate2, cellClassName, defaultTime } = pickerBase.props;
@@ -12864,7 +12864,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
     const currentView = ref("date");
     const yearLabel = computed(() => {
-      const yearTranslation = t2("el.datepicker.year");
+      const yearTranslation = t("el.datepicker.year");
       if (currentView.value === "year") {
         const startYear = Math.floor(year.value / 10) * 10;
         if (yearTranslation) {
@@ -13053,7 +13053,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       return dayjs.isDayjs(date5) && date5.isValid() && (disabledDate2 ? !disabledDate2(date5.toDate()) : true);
     };
     const formatToString = (value) => {
-      return Array.isArray(value) ? value.map((_2) => _2.format(props.format)) : value.format(props.format);
+      return isArray$1(value) ? value.map((_2) => _2.format(props.format)) : value.format(props.format);
     };
     const parseUserInput = (value) => {
       return dayjs(value, props.format).locale(lang.value);
@@ -13226,7 +13226,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 class: normalizeClass(unref(dpNs).e("editor-wrap"))
               }, [
                 createVNode(unref(ElInput), {
-                  placeholder: unref(t2)("el.datepicker.selectDate"),
+                  placeholder: unref(t)("el.datepicker.selectDate"),
                   "model-value": unref(visibleDate),
                   size: "small",
                   "validate-event": false,
@@ -13238,7 +13238,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 class: normalizeClass(unref(dpNs).e("editor-wrap"))
               }, [
                 createVNode(unref(ElInput), {
-                  placeholder: unref(t2)("el.datepicker.selectTime"),
+                  placeholder: unref(t)("el.datepicker.selectTime"),
                   "model-value": unref(visibleTime),
                   size: "small",
                   "validate-event": false,
@@ -13267,7 +13267,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               }, [
                 createBaseVNode("button", {
                   type: "button",
-                  "aria-label": unref(t2)(`el.datepicker.prevYear`),
+                  "aria-label": unref(t)(`el.datepicker.prevYear`),
                   class: normalizeClass(["d-arrow-left", unref(ppNs).e("icon-btn")]),
                   onClick: _cache[2] || (_cache[2] = ($event) => moveByYear(false))
                 }, [
@@ -13280,7 +13280,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 ], 10, _hoisted_2$4),
                 withDirectives(createBaseVNode("button", {
                   type: "button",
-                  "aria-label": unref(t2)(`el.datepicker.prevMonth`),
+                  "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
                   onClick: _cache[3] || (_cache[3] = ($event) => moveByMonth(false))
                 }, [
@@ -13312,7 +13312,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 ]),
                 onKeydown: _cache[6] || (_cache[6] = withKeys(($event) => showPicker("month"), ["enter"])),
                 onClick: _cache[7] || (_cache[7] = ($event) => showPicker("month"))
-              }, toDisplayString(unref(t2)(`el.datepicker.month${unref(month) + 1}`)), 35), [
+              }, toDisplayString(unref(t)(`el.datepicker.month${unref(month) + 1}`)), 35), [
                 [vShow, currentView.value === "date"]
               ]),
               createBaseVNode("span", {
@@ -13320,7 +13320,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
               }, [
                 withDirectives(createBaseVNode("button", {
                   type: "button",
-                  "aria-label": unref(t2)(`el.datepicker.nextMonth`),
+                  "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-right"]),
                   onClick: _cache[8] || (_cache[8] = ($event) => moveByMonth(true))
                 }, [
@@ -13335,7 +13335,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 ]),
                 createBaseVNode("button", {
                   type: "button",
-                  "aria-label": unref(t2)(`el.datepicker.nextYear`),
+                  "aria-label": unref(t)(`el.datepicker.nextYear`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
                   onClick: _cache[9] || (_cache[9] = ($event) => moveByYear(true))
                 }, [
@@ -13398,7 +13398,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             onClick: changeToNow
           }, {
             default: withCtx(() => [
-              createTextVNode(toDisplayString(unref(t2)("el.datepicker.now")), 1)
+              createTextVNode(toDisplayString(unref(t)("el.datepicker.now")), 1)
             ]),
             _: 1
           }, 8, ["class", "disabled"]), [
@@ -13412,7 +13412,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             onClick: onConfirm
           }, {
             default: withCtx(() => [
-              createTextVNode(toDisplayString(unref(t2)("el.datepicker.confirm")), 1)
+              createTextVNode(toDisplayString(unref(t)("el.datepicker.confirm")), 1)
             ]),
             _: 1
           }, 8, ["class", "disabled"])
@@ -13461,7 +13461,7 @@ const useRangePicker = (props, {
   const { emit } = getCurrentInstance();
   const { pickerNs } = inject(ROOT_PICKER_INJECTION_KEY);
   const drpNs = useNamespace("date-range-picker");
-  const { t: t2, lang } = useLocale();
+  const { t, lang } = useLocale();
   const handleShortcutClick = useShortcut(lang);
   const minDate = ref();
   const maxDate = ref();
@@ -13523,7 +13523,7 @@ const useRangePicker = (props, {
     handleRangeConfirm,
     handleShortcutClick,
     onSelect,
-    t: t2
+    t
   };
 };
 const _hoisted_1$5 = ["onClick"];
@@ -13564,7 +13564,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       handleRangeConfirm,
       handleShortcutClick,
       onSelect,
-      t: t2
+      t
     } = useRangePicker(props, {
       defaultValue,
       leftDate,
@@ -13581,10 +13581,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       max: null
     });
     const leftLabel = computed(() => {
-      return `${leftDate.value.year()} ${t2("el.datepicker.year")} ${t2(`el.datepicker.month${leftDate.value.month() + 1}`)}`;
+      return `${leftDate.value.year()} ${t("el.datepicker.year")} ${t(`el.datepicker.month${leftDate.value.month() + 1}`)}`;
     });
     const rightLabel = computed(() => {
-      return `${rightDate.value.year()} ${t2("el.datepicker.year")} ${t2(`el.datepicker.month${rightDate.value.month() + 1}`)}`;
+      return `${rightDate.value.year()} ${t("el.datepicker.year")} ${t(`el.datepicker.month${rightDate.value.month() + 1}`)}`;
     });
     const leftYear = computed(() => {
       return leftDate.value.year();
@@ -13896,7 +13896,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   createVNode(unref(ElInput), {
                     size: "small",
                     disabled: unref(rangeState).selecting,
-                    placeholder: unref(t2)("el.datepicker.startDate"),
+                    placeholder: unref(t)("el.datepicker.startDate"),
                     class: normalizeClass(unref(drpNs).e("editor")),
                     "model-value": unref(minVisibleDate),
                     "validate-event": false,
@@ -13911,7 +13911,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     size: "small",
                     class: normalizeClass(unref(drpNs).e("editor")),
                     disabled: unref(rangeState).selecting,
-                    placeholder: unref(t2)("el.datepicker.startTime"),
+                    placeholder: unref(t)("el.datepicker.startTime"),
                     "model-value": unref(minVisibleTime),
                     "validate-event": false,
                     onFocus: _cache[2] || (_cache[2] = ($event) => minTimePickerVisible.value = true),
@@ -13947,7 +13947,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     size: "small",
                     class: normalizeClass(unref(drpNs).e("editor")),
                     disabled: unref(rangeState).selecting,
-                    placeholder: unref(t2)("el.datepicker.endDate"),
+                    placeholder: unref(t)("el.datepicker.endDate"),
                     "model-value": unref(maxVisibleDate),
                     readonly: !unref(minDate),
                     "validate-event": false,
@@ -13962,7 +13962,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     size: "small",
                     class: normalizeClass(unref(drpNs).e("editor")),
                     disabled: unref(rangeState).selecting,
-                    placeholder: unref(t2)("el.datepicker.endTime"),
+                    placeholder: unref(t)("el.datepicker.endTime"),
                     "model-value": unref(maxVisibleTime),
                     readonly: !unref(minDate),
                     "validate-event": false,
@@ -13991,7 +13991,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-left"]),
-                  "aria-label": unref(t2)(`el.datepicker.prevYear`),
+                  "aria-label": unref(t)(`el.datepicker.prevYear`),
                   onClick: leftPrevYear
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14004,7 +14004,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
-                  "aria-label": unref(t2)(`el.datepicker.prevMonth`),
+                  "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   onClick: leftPrevMonth
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14019,7 +14019,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   type: "button",
                   disabled: !unref(enableYearArrow),
                   class: normalizeClass([[unref(ppNs).e("icon-btn"), { "is-disabled": !unref(enableYearArrow) }], "d-arrow-right"]),
-                  "aria-label": unref(t2)(`el.datepicker.nextYear`),
+                  "aria-label": unref(t)(`el.datepicker.nextYear`),
                   onClick: leftNextYear
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14037,7 +14037,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     unref(ppNs).e("icon-btn"),
                     { "is-disabled": !unref(enableMonthArrow) }
                   ], "arrow-right"]),
-                  "aria-label": unref(t2)(`el.datepicker.nextMonth`),
+                  "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   onClick: leftNextMonth
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14073,7 +14073,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   type: "button",
                   disabled: !unref(enableYearArrow),
                   class: normalizeClass([[unref(ppNs).e("icon-btn"), { "is-disabled": !unref(enableYearArrow) }], "d-arrow-left"]),
-                  "aria-label": unref(t2)(`el.datepicker.prevYear`),
+                  "aria-label": unref(t)(`el.datepicker.prevYear`),
                   onClick: rightPrevYear
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14091,7 +14091,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     unref(ppNs).e("icon-btn"),
                     { "is-disabled": !unref(enableMonthArrow) }
                   ], "arrow-left"]),
-                  "aria-label": unref(t2)(`el.datepicker.prevMonth`),
+                  "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   onClick: rightPrevMonth
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14103,7 +14103,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 ], 10, _hoisted_7)) : createCommentVNode("v-if", true),
                 createBaseVNode("button", {
                   type: "button",
-                  "aria-label": unref(t2)(`el.datepicker.nextYear`),
+                  "aria-label": unref(t)(`el.datepicker.nextYear`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
                   onClick: rightNextYear
                 }, [
@@ -14117,7 +14117,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-right"]),
-                  "aria-label": unref(t2)(`el.datepicker.nextMonth`),
+                  "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   onClick: rightNextMonth
                 }, [
                   createVNode(unref(ElIcon), null, {
@@ -14156,7 +14156,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             onClick: handleClear
           }, {
             default: withCtx(() => [
-              createTextVNode(toDisplayString(unref(t2)("el.datepicker.clear")), 1)
+              createTextVNode(toDisplayString(unref(t)("el.datepicker.clear")), 1)
             ]),
             _: 1
           }, 8, ["class"])) : createCommentVNode("v-if", true),
@@ -14168,7 +14168,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             onClick: _cache[10] || (_cache[10] = ($event) => unref(handleRangeConfirm)(false))
           }, {
             default: withCtx(() => [
-              createTextVNode(toDisplayString(unref(t2)("el.datepicker.confirm")), 1)
+              createTextVNode(toDisplayString(unref(t)("el.datepicker.confirm")), 1)
             ]),
             _: 1
           }, 8, ["class", "disabled"])
@@ -14191,7 +14191,7 @@ const useMonthRangeHeader = ({
   leftDate,
   rightDate
 }) => {
-  const { t: t2 } = useLocale();
+  const { t } = useLocale();
   const leftPrevYear = () => {
     leftDate.value = leftDate.value.subtract(1, "year");
     if (!unlinkPanels.value) {
@@ -14211,10 +14211,10 @@ const useMonthRangeHeader = ({
     rightDate.value = rightDate.value.subtract(1, "year");
   };
   const leftLabel = computed(() => {
-    return `${leftDate.value.year()} ${t2("el.datepicker.year")}`;
+    return `${leftDate.value.year()} ${t("el.datepicker.year")}`;
   });
   const rightLabel = computed(() => {
-    return `${rightDate.value.year()} ${t2("el.datepicker.year")}`;
+    return `${rightDate.value.year()} ${t("el.datepicker.year")}`;
   });
   const leftYear = computed(() => {
     return leftDate.value.year();
@@ -14771,7 +14771,7 @@ function useInput(handleInput) {
 }
 const MINIMUM_INPUT_WIDTH = 11;
 const useSelect = (props, emit) => {
-  const { t: t2 } = useLocale();
+  const { t } = useLocale();
   const contentId = useId();
   const nsSelect = useNamespace("select");
   const nsInput = useNamespace("input");
@@ -14842,15 +14842,15 @@ const useSelect = (props, emit) => {
   const debounce$1 = computed(() => props.remote ? 300 : 0);
   const emptyText = computed(() => {
     if (props.loading) {
-      return props.loadingText || t2("el.select.loading");
+      return props.loadingText || t("el.select.loading");
     } else {
       if (props.remote && !states.inputValue && states.options.size === 0)
         return false;
       if (props.filterable && states.inputValue && states.options.size > 0 && filteredOptionsCount.value === 0) {
-        return props.noMatchText || t2("el.select.noMatch");
+        return props.noMatchText || t("el.select.noMatch");
       }
       if (states.options.size === 0) {
-        return props.noDataText || t2("el.select.noData");
+        return props.noDataText || t("el.select.noData");
       }
     }
     return null;
@@ -14860,7 +14860,7 @@ const useSelect = (props, emit) => {
     const list = Array.from(states.options.values());
     const newList = [];
     states.optionValues.forEach((item) => {
-      const index = list.findIndex((i) => i.value === item);
+      const index = list.findIndex((i2) => i2.value === item);
       if (index > -1) {
         newList.push(list[index]);
       }
@@ -14903,7 +14903,7 @@ const useSelect = (props, emit) => {
   });
   const currentPlaceholder = computed(() => {
     var _a2;
-    const _placeholder = (_a2 = props.placeholder) != null ? _a2 : t2("el.select.placeholder");
+    const _placeholder = (_a2 = props.placeholder) != null ? _a2 : t("el.select.placeholder");
     return props.multiple || !hasModelValue.value ? _placeholder : states.selectedLabel;
   });
   watch(() => props.modelValue, (val, oldVal) => {
@@ -15004,8 +15004,8 @@ const useSelect = (props, emit) => {
     const isObjectValue = toRawType(value).toLowerCase() === "object";
     const isNull = toRawType(value).toLowerCase() === "null";
     const isUndefined2 = toRawType(value).toLowerCase() === "undefined";
-    for (let i = states.cachedOptions.size - 1; i >= 0; i--) {
-      const cachedOption = cachedOptionsArray.value[i];
+    for (let i2 = states.cachedOptions.size - 1; i2 >= 0; i2--) {
+      const cachedOption = cachedOptionsArray.value[i2];
       const isEqualValue = isObjectValue ? get(cachedOption.value, props.valueKey) === get(value, props.valueKey) : cachedOption.value === value;
       if (isEqualValue) {
         option = {
@@ -15151,9 +15151,9 @@ const useSelect = (props, emit) => {
       return arr.indexOf(value);
     const valueKey = props.valueKey;
     let index = -1;
-    arr.some((item, i) => {
+    arr.some((item, i2) => {
       if (toRaw(get(item, valueKey)) === get(value, valueKey)) {
-        index = i;
+        index = i2;
         return true;
       }
       return false;
@@ -15984,7 +15984,7 @@ const O$2 = "星期", S$1 = [
   "八",
   "九",
   "十"
-], E = [
+], E$1 = [
   "鼠",
   "牛",
   "虎",
@@ -16287,27 +16287,27 @@ const O$2 = "星期", S$1 = [
   return a === 10 ? x2 = "初十" : a === 20 ? x2 = "二十" : a === 30 ? x2 = "三十" : (x2 = q$1[Math.floor(a / 10)], x2 += B$1[a % 10]), x2;
 }, x0 = (a) => {
   const x2 = (a - 4) % 12;
-  return E[x2];
+  return E$1[x2];
 }, W$1 = (a, x2, s) => {
   let n = parseInt(a), e = parseInt(x2), u2 = parseInt(s), c2;
   n ? c2 = new Date(n, e - 1, u2) : c2 = /* @__PURE__ */ new Date(), n = c2.getFullYear(), e = c2.getMonth() + 1, u2 = c2.getDate();
   let h = c2.getDay();
   const I2 = O$2 + S$1[h];
   h == 0 && (h = 7);
-  let y2 = false;
+  let y = false;
   const l2 = /* @__PURE__ */ new Date();
-  l2.getFullYear() == n && l2.getMonth() + 1 == e && l2.getDate() == u2 && (y2 = true);
-  const o = n + "-" + e + "-" + u2, M2 = e + "-" + u2, g2 = X$1(e, u2);
-  let d = (Date.UTC(n, e - 1, u2) - Date.UTC(r, k$1 - 1, U)) / 864e5, b2 = 0, t2;
-  for (t2 = r; t2 <= v && d > 0; t2++)
-    b2 = m(t2), d -= b2;
-  d < 0 && (d += b2, t2--);
-  const f = t2;
-  let D = F(f), i = false;
-  for (t2 = 1; t2 <= 12 && d > 0; t2++)
-    D > 0 && t2 == D + 1 && !i ? (--t2, i = true, b2 = C$1(f)) : b2 = w$1(f, t2), i && t2 === D + 1 && (i = false), d -= b2;
-  d === 0 && D > 0 && t2 === D + 1 && (i ? i = false : (i = true, --t2)), d < 0 && (d += b2, --t2);
-  let p2 = t2, Y2 = d + 1;
+  l2.getFullYear() == n && l2.getMonth() + 1 == e && l2.getDate() == u2 && (y = true);
+  const o = n + "-" + e + "-" + u2, M2 = e + "-" + u2, g = X$1(e, u2);
+  let d2 = (Date.UTC(n, e - 1, u2) - Date.UTC(r, k$1 - 1, U)) / 864e5, b2 = 0, t;
+  for (t = r; t <= v && d2 > 0; t++)
+    b2 = m(t), d2 -= b2;
+  d2 < 0 && (d2 += b2, t--);
+  const f = t;
+  let D = F(f), i2 = false;
+  for (t = 1; t <= 12 && d2 > 0; t++)
+    D > 0 && t == D + 1 && !i2 ? (--t, i2 = true, b2 = C$1(f)) : b2 = w$1(f, t), i2 && t === D + 1 && (i2 = false), d2 -= b2;
+  d2 === 0 && D > 0 && t === D + 1 && (i2 ? i2 = false : (i2 = true, --t)), d2 < 0 && (d2 += b2, --t);
+  let p2 = t, Y2 = d2 + 1;
   const Z2 = f + "-" + p2 + "-" + Y2, j2 = p2 + "-" + Y2, z2 = $$1(f), A2 = L$1(p2), G2 = a0(Y2), K2 = x0(f);
   return {
     sDate: o,
@@ -16315,7 +16315,7 @@ const O$2 = "星期", S$1 = [
     sMonth: e,
     sDay: u2,
     sFestival: H$1[M2] || "",
-    astro: g2,
+    astro: g,
     week: h,
     lDate: Z2,
     lYear: f,
@@ -16324,12 +16324,12 @@ const O$2 = "星期", S$1 = [
     lFestival: J[j2] || "",
     cnYear: z2,
     // 闰
-    cnMonth: (i ? "闰" : "") + A2,
+    cnMonth: (i2 ? "闰" : "") + A2,
     cnDay: G2,
     cnWeek: I2,
     zodiac: K2,
-    isLeap: i,
-    isToday: y2
+    isLeap: i2,
+    isToday: y
   };
 };
 const z = "星期", W = [
@@ -16649,45 +16649,45 @@ const z = "星期", W = [
   62034,
   54560
 ], N = (n) => {
-  let t2 = 348;
+  let t = 348;
   for (let e = 32768; e > 8; e >>= 1)
-    t2 += p$1[n - G$1] & e ? 1 : 0;
-  return t2 + T(n);
-}, tt = (n, t2) => p$1[n - G$1] & 65536 >> t2 ? 30 : 29, w = (n) => p$1[n - G$1] & 15, T = (n) => w(n) ? p$1[n - G$1] & 65536 ? 30 : 29 : 0, et = (n, t2) => {
-  const e = (n * 2 - (t2 < $[n - 1] ? 2 : 0)) / 2;
+    t += p$1[n - G$1] & e ? 1 : 0;
+  return t + T(n);
+}, tt = (n, t) => p$1[n - G$1] & 65536 >> t ? 30 : 29, w = (n) => p$1[n - G$1] & 15, T = (n) => w(n) ? p$1[n - G$1] & 65536 ? 30 : 29 : 0, et = (n, t) => {
+  const e = (n * 2 - (t < $[n - 1] ? 2 : 0)) / 2;
   return X[e];
 }, nt = (n) => {
-  const t2 = (n - 4) % 10, e = (n - 4) % 12;
-  return R[t2] + V[e] + "年";
+  const t = (n - 4) % 10, e = (n - 4) % 12;
+  return R[t] + V[e] + "年";
 }, at = (n) => {
-  let t2 = j$1[n - 1];
-  return t2 += q, t2;
+  let t = j$1[n - 1];
+  return t += q, t;
 }, rt = (n) => {
-  let t2;
-  return n === 10 ? t2 = "初十" : n === 20 ? t2 = "二十" : n === 30 ? t2 = "三十" : (t2 = B[Math.floor(n / 10)], t2 += K[n % 10]), t2;
+  let t;
+  return n === 10 ? t = "初十" : n === 20 ? t = "二十" : n === 30 ? t = "三十" : (t = B[Math.floor(n / 10)], t += K[n % 10]), t;
 }, ht = (n) => {
-  const t2 = (n - 4) % 12;
-  return O$1[t2];
-}, it = (n, t2, e) => {
-  let h = parseInt(n), r2 = parseInt(t2), a = parseInt(e), i;
-  h ? i = new Date(h, r2 - 1, a) : i = /* @__PURE__ */ new Date(), h = i.getFullYear(), r2 = i.getMonth() + 1, a = i.getDate();
-  let o = i.getDay();
-  const g2 = z + W[o];
+  const t = (n - 4) % 12;
+  return O$1[t];
+}, it = (n, t, e) => {
+  let h = parseInt(n), r2 = parseInt(t), a = parseInt(e), i2;
+  h ? i2 = new Date(h, r2 - 1, a) : i2 = /* @__PURE__ */ new Date(), h = i2.getFullYear(), r2 = i2.getMonth() + 1, a = i2.getDate();
+  let o = i2.getDay();
+  const g = z + W[o];
   o == 0 && (o = 7);
   let Z2 = false;
   const x2 = /* @__PURE__ */ new Date();
   x2.getFullYear() == h && x2.getMonth() + 1 == r2 && x2.getDate() == a && (Z2 = true);
   const D = h + "-" + r2 + "-" + a, E2 = r2 + "-" + a, F2 = et(r2, a);
-  let y2 = (Date.UTC(h, r2 - 1, a) - Date.UTC(G$1, C - 1, H)) / 864e5, m2 = 0, s;
-  for (s = G$1; s <= A$1 && y2 > 0; s++)
-    m2 = N(s), y2 -= m2;
-  y2 < 0 && (y2 += m2, s--);
+  let y = (Date.UTC(h, r2 - 1, a) - Date.UTC(G$1, C - 1, H)) / 864e5, m2 = 0, s;
+  for (s = G$1; s <= A$1 && y > 0; s++)
+    m2 = N(s), y -= m2;
+  y < 0 && (y += m2, s--);
   const _2 = s;
-  let M2 = w(_2), d = false;
-  for (s = 1; s <= 12 && y2 > 0; s++)
-    M2 > 0 && s == M2 + 1 && !d ? (--s, d = true, m2 = T(_2)) : m2 = tt(_2, s), d && s === M2 + 1 && (d = false), y2 -= m2;
-  y2 === 0 && M2 > 0 && s === M2 + 1 && (d ? d = false : (d = true, --s)), y2 < 0 && (y2 += m2, --s);
-  let f = s, I2 = y2 + 1;
+  let M2 = w(_2), d2 = false;
+  for (s = 1; s <= 12 && y > 0; s++)
+    M2 > 0 && s == M2 + 1 && !d2 ? (--s, d2 = true, m2 = T(_2)) : m2 = tt(_2, s), d2 && s === M2 + 1 && (d2 = false), y -= m2;
+  y === 0 && M2 > 0 && s === M2 + 1 && (d2 ? d2 = false : (d2 = true, --s)), y < 0 && (y += m2, --s);
+  let f = s, I2 = y + 1;
   const L2 = _2 + "-" + f + "-" + I2, k2 = f + "-" + I2, v2 = nt(_2), J2 = at(f), U2 = rt(I2), b2 = ht(_2);
   return {
     sDate: D,
@@ -16704,11 +16704,11 @@ const z = "星期", W = [
     lFestival: Q[k2] || "",
     cnYear: v2,
     // 闰
-    cnMonth: (d ? "闰" : "") + J2,
+    cnMonth: (d2 ? "闰" : "") + J2,
     cnDay: U2,
-    cnWeek: g2,
+    cnWeek: g,
     zodiac: b2,
-    isLeap: d,
+    isLeap: d2,
     isToday: Z2
   };
 }, c = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"], u = [
@@ -16728,20 +16728,20 @@ const z = "星期", W = [
   if (!n)
     return 0;
   n.length > 5 && (n = n.substring(0, 5));
-  let t2 = 1;
+  let t = 1;
   for (let e = 1; e < 22; e += 2) {
     if (n >= (e < 10 ? "0" : "") + e + ":00" && n <= (e + 1 < 10 ? "0" : "") + (e + 1) + ":59")
-      return t2;
-    t2++;
+      return t;
+    t++;
   }
   return 0;
 };
 class l {
-  constructor(t2) {
-    const e = l._compute(t2);
+  constructor(t) {
+    const e = l._compute(t);
     this.yearGan = e.yearGan, this.yearZhi = e.yearZhi, this.monthGan = e.monthGan, this.monthZhi = e.monthZhi, this.dayGan = e.dayGan, this.dayZhi = e.dayZhi, this.timeGan = e.timeGan, this.timeZhi = e.timeZhi;
   }
-  static _compute(t2) {
+  static _compute(t) {
     const e = {
       yearGan: "",
       yearZhi: "",
@@ -16752,18 +16752,18 @@ class l {
       timeGan: "",
       timeZhi: ""
     };
-    return l._computeYear(e, t2), l._computeMonth(e, t2), l._computeDay(e, t2), l._computeTime(e, t2), e;
+    return l._computeYear(e, t), l._computeMonth(e, t), l._computeDay(e, t), l._computeTime(e, t), e;
   }
-  static _computeYear(t2, e) {
+  static _computeYear(t, e) {
     const r2 = e.getYear() - 4;
-    let a = r2 % 10, i = r2 % 12;
-    a < 0 && (a += 10), i < 0 && (i += 12), t2.yearGan = c == null ? void 0 : c[a], t2.yearZhi = u == null ? void 0 : u[i], t2.yearGanIndex = a, t2.yearZhiIndex = i;
+    let a = r2 % 10, i2 = r2 % 12;
+    a < 0 && (a += 10), i2 < 0 && (i2 += 12), t.yearGan = c == null ? void 0 : c[a], t.yearZhi = u == null ? void 0 : u[i2], t.yearGanIndex = a, t.yearZhiIndex = i2;
   }
-  static _computeMonth(t2, e) {
-    const h = e.getMonth() - 1, a = ((t2.yearGanIndex + 1) * 2 + h) % 10, i = (h + 2) % 12;
-    t2.monthGan = c == null ? void 0 : c[a], t2.monthZhi = u == null ? void 0 : u[i], t2.monthGanIndex = a, t2.monthZhiIndex = i;
+  static _computeMonth(t, e) {
+    const h = e.getMonth() - 1, a = ((t.yearGanIndex + 1) * 2 + h) % 10, i2 = (h + 2) % 12;
+    t.monthGan = c == null ? void 0 : c[a], t.monthZhi = u == null ? void 0 : u[i2], t.monthGanIndex = a, t.monthZhiIndex = i2;
   }
-  static _computeDay(t2, e) {
+  static _computeDay(t, e) {
     const h = e._solar, r2 = new S(
       h.getYear(),
       h.getMonth(),
@@ -16771,20 +16771,20 @@ class l {
       12,
       0,
       0
-    ), a = Math.floor(r2.getJulianDay()) - 11, i = a % 10, o = a % 12;
-    t2.dayGan = c == null ? void 0 : c[i], t2.dayZhi = u == null ? void 0 : u[o], t2.dayGanIndex = i, t2.dayZhiIndex = o;
-    let g2 = i;
+    ), a = Math.floor(r2.getJulianDay()) - 11, i2 = a % 10, o = a % 12;
+    t.dayGan = c == null ? void 0 : c[i2], t.dayZhi = u == null ? void 0 : u[o], t.dayGanIndex = i2, t.dayZhiIndex = o;
+    let g = i2;
     const Z2 = e._hour, x2 = e._minute, D = (Z2 < 10 ? "0" : "") + Z2 + ":" + (x2 < 10 ? "0" : "") + x2;
-    D >= "23:00" && D <= "23:59" && (g2++, g2 >= 10 && (g2 -= 10), dayZhiExact++, dayZhiExact >= 12 && (dayZhiExact -= 12)), t2.dayGanIndexExact = g2;
+    D >= "23:00" && D <= "23:59" && (g++, g >= 10 && (g -= 10), dayZhiExact++, dayZhiExact >= 12 && (dayZhiExact -= 12)), t.dayGanIndexExact = g;
   }
-  static _computeTime(t2, e) {
-    const h = e._hour, r2 = e._minute, a = (h < 10 ? "0" : "") + h + ":" + (r2 < 10 ? "0" : "") + r2, i = st(a), o = (t2.dayGanIndexExact % 5 * 2 + i) % 10;
-    t2.timeGan = c == null ? void 0 : c[o], t2.timeZhi = u == null ? void 0 : u[i];
+  static _computeTime(t, e) {
+    const h = e._hour, r2 = e._minute, a = (h < 10 ? "0" : "") + h + ":" + (r2 < 10 ? "0" : "") + r2, i2 = st(a), o = (t.dayGanIndexExact % 5 * 2 + i2) % 10;
+    t.timeGan = c == null ? void 0 : c[o], t.timeZhi = u == null ? void 0 : u[i2];
   }
 }
 class Y {
-  constructor(t2, e, h, r2 = 0, a = 0, i = 0, o) {
-    this._year = t2, this._month = e, this._day = h, this._hour = r2, this._minute = a, this._second = i, this._solar = o, this._char8 = new l(this);
+  constructor(t, e, h, r2 = 0, a = 0, i2 = 0, o) {
+    this._year = t, this._month = e, this._day = h, this._hour = r2, this._minute = a, this._second = i2, this._solar = o, this._char8 = new l(this);
   }
   getYear() {
     return this._year;
@@ -16828,14 +16828,14 @@ class Y {
   getTimeZhi() {
     return this._char8.timeZhi;
   }
-  static fromSolar(t2) {
-    const e = it(t2.getYear(), t2.getMonth(), t2.getDay());
-    return new Y(e.lYear, e.lMonth, e.lDay, t2.getHour(), t2.getMinute(), t2.getSecond(), t2);
+  static fromSolar(t) {
+    const e = it(t.getYear(), t.getMonth(), t.getDay());
+    return new Y(e.lYear, e.lMonth, e.lDay, t.getHour(), t.getMinute(), t.getSecond(), t);
   }
 }
 class S {
-  constructor(t2, e, h, r2 = 0, a = 0, i = 0) {
-    this._year = t2, this._month = e, this._day = h, this._hour = r2, this._minute = a, this._second = i;
+  constructor(t, e, h, r2 = 0, a = 0, i2 = 0) {
+    this._year = t, this._month = e, this._day = h, this._hour = r2, this._minute = a, this._second = i2;
   }
   getYear() {
     return this._year;
@@ -16859,12 +16859,12 @@ class S {
     return Y.fromSolar(this);
   }
   getJulianDay() {
-    let t2 = this._year, e = this._month, h = this._day + ((this._second / 60 + this._minute) / 60 + this._hour) / 24, r2 = 0, a = false;
-    return t2 * 372 + e * 31 + Math.floor(h) >= 588829 && (a = true), e <= 2 && (e += 12, t2--), a && (r2 = Math.floor(t2 / 100), r2 = 2 - r2 + Math.floor(r2 / 4)), Math.floor(365.25 * (t2 + 4716)) + Math.floor(30.6001 * (e + 1)) + h + r2 - 1524.5;
+    let t = this._year, e = this._month, h = this._day + ((this._second / 60 + this._minute) / 60 + this._hour) / 24, r2 = 0, a = false;
+    return t * 372 + e * 31 + Math.floor(h) >= 588829 && (a = true), e <= 2 && (e += 12, t--), a && (r2 = Math.floor(t / 100), r2 = 2 - r2 + Math.floor(r2 / 4)), Math.floor(365.25 * (t + 4716)) + Math.floor(30.6001 * (e + 1)) + h + r2 - 1524.5;
   }
 }
-const ot = (n, t2, e, h = 0, r2 = 0, a = 0) => new S(n, t2, e, h, r2, a).getLunar()._char8;
-const p = {
+const ot = (n, t, e, h = 0, r2 = 0, a = 0) => new S(n, t, e, h, r2, a).getLunar()._char8;
+const E = {
   甲: "木",
   乙: "木",
   丙: "火",
@@ -16875,13 +16875,13 @@ const p = {
   辛: "金",
   壬: "水",
   癸: "水"
-}, y = ["金", "木", "水", "火", "土"], b = {
+}, b = ["金", "木", "水", "火", "土"], O = {
   金: "土",
   木: "水",
   水: "金",
   火: "木",
   土: "火"
-}, G = {
+}, d = {
   甲: {
     子: 1.2,
     丑: 1.06,
@@ -16924,7 +16924,7 @@ const p = {
     戌: 1.04,
     亥: 1
   },
-  丙: {
+  丁: {
     子: 1,
     丑: 1,
     寅: 1.2,
@@ -17022,7 +17022,7 @@ const p = {
     戌: 1.06,
     亥: 1.14
   }
-}, O = {
+}, A = {
   子: {
     癸: {
       子: 1.2,
@@ -17383,56 +17383,57 @@ const p = {
       亥: 0.798
     }
   }
-}, A = (s) => {
-  const o = s.char8[4];
-  s.main = p[o];
 }, M = (s) => {
-  const c2 = s.main, o = b[c2];
-  s.similars = [c2, o];
+  const o = s.char8[4];
+  s.main = E[o];
 }, j = (s) => {
-  let c2 = s.similars, o = [];
-  y.forEach((t2) => {
-    c2.includes(t2) || o.push(t2);
-  }), s.differents = o;
-}, g = (s, c2, o) => {
-  var n;
-  const t2 = p[c2], e = ((n = s == null ? void 0 : s.score) == null ? void 0 : n[t2]) || 0;
-  s.score[t2] = e + o;
+  const c2 = s.main, o = O[c2];
+  s.similars = [c2, o];
 }, x = (s) => {
+  let c2 = s.similars, o = [];
+  b.forEach((r2) => {
+    c2.includes(r2) || o.push(r2);
+  }), s.differents = o;
+}, p = (s, c2, o) => {
+  var i2;
+  const r2 = E[c2], h = ((i2 = s == null ? void 0 : s.score) == null ? void 0 : i2[r2]) || 0;
+  s.score[r2] = h + o;
+}, G = (s) => {
   const c2 = s.char8, o = c2[3];
-  c2.forEach((i, a) => {
-    if (a % 2 === 0) {
-      const r2 = G[i][o];
-      g(s, i, r2);
+  c2.forEach((a, e) => {
+    var t;
+    if (e % 2 === 0) {
+      const n = (t = d == null ? void 0 : d[a]) == null ? void 0 : t[o];
+      p(s, a, n);
     } else {
-      const r2 = O[i];
-      Object.keys(r2).forEach((f) => {
-        const S2 = r2[f][o];
-        g(s, f, S2);
+      const n = A[a];
+      Object.keys(n).forEach((S2) => {
+        const f = n[S2][o];
+        p(s, S2, f);
       });
     }
   });
-  const t2 = (i, a) => {
-    let r2 = 0;
-    return a.forEach((f) => {
-      r2 = r2 + (i.score[f] || 0);
-    }), r2;
-  }, { similars: e, differents: n } = s;
-  s.similarScore = t2(s, e), s.differentScore = t2(s, n);
+  const r2 = (a, e) => {
+    let t = 0;
+    return e.forEach((n) => {
+      t = t + (a.score[n] || 0);
+    }), t;
+  }, { similars: h, differents: i2 } = s;
+  s.similarScore = r2(s, h), s.differentScore = r2(s, i2);
 }, L = (s) => {
   let c2 = [];
   s.shorts = c2;
 }, Z = (s) => {
-  const { similarScore: c2, differentScore: o, similars: t2, differents: e } = s ?? {}, n = c2 - o, i = Math.abs(n), a = (f, S2, h) => {
-    const { score: d = {} } = f ?? {};
+  const { similarScore: c2, differentScore: o, similars: r2, differents: h } = s ?? {}, i2 = c2 - o, a = Math.abs(i2), e = (n, S2, f) => {
+    const { score: g = {} } = n ?? {};
     return S2.forEach((l2) => {
-      h || (h = l2);
-      const E2 = d[h] || 0, u2 = d[l2] || 0;
-      E2 > u2 && (h = l2);
-    }), h;
+      f || (f = l2);
+      const u2 = g[f] || 0, y = g[l2] || 0;
+      u2 > y && (f = l2);
+    }), f;
   };
-  let r2 = "";
-  i > 0.8 && (n > 0 ? r2 = a(s, e) : r2 = a(s, t2)), s.supplyOf = r2;
+  let t = "";
+  a > 0.8 && (i2 > 0 ? t = e(s, h) : t = e(s, r2)), s.supplyOf = t;
 }, k = (s) => {
   let c2 = {
     char8: s,
@@ -17447,9 +17448,9 @@ const p = {
     similarScore: 0,
     differentScore: 0
   };
-  return Array.isArray(s) && s.length === 8 && (A(c2), M(c2), j(c2), x(c2), L(c2), Z(c2)), c2;
+  return Array.isArray(s) && s.length === 8 && (M(c2), j(c2), x(c2), G(c2), L(c2), Z(c2)), c2;
 };
-const t = [
+const i = [
   {
     char: "一",
     spell: "yī",
@@ -17457,11 +17458,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧ",
     tradition: "一",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "最小的正整数。见〖数字〗。表示同一：咱们是～家人。你们～路走。这不是～码事。表示另一：番茄～名西红柿。表示整个；全：～冬。～生。～路平安。～屋子人。～身的汗。表示专一：～心～意。表示动作是一次，或表示动作是短暂的，或表示动作是试试的。a）用在重叠的动词（多为单音）中间：歇～歇。笑～笑。让我闻～闻。b）用在动词之后，动量词之前：笑～声。看～眼。让我们商量～下。用在动词或动量词前面，表示先做某个动作（下文说明动作结果）：～跳跳了过去。～脚把它踢开。他在旁边～站，再也不说什么。与“就”配合，表示两个动作紧接着发生：～请就来。～说就明白了。一旦；一经：～失足成千古恨。“一”字单用或在一词一句末尾念阴平，如“十一、一一得一”，在去声字前念阳平，如“一半、一共”，在阴平、阳平、上声字前念去声，如“一天、一年、一点”。本词典为简便起见，条目中的“一”字，都注阴平。我国民族音乐音阶上的一级，乐谱上用作记音符号，相当于简谱的“”。见〖工尺〗。"
   },
   {
     char: "丁",
@@ -17470,11 +17473,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧㄥ",
     tradition: "丁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ding",
+    explain: "天干的第四位。现常用来表示顺序的第四。人口：人～。～口。指成年男子或从事某种劳动的人：壮～。园～。遭遇；碰到：～忧。蔬菜、肉类等切成的小方块：肉～。黄瓜～。"
   },
   {
     char: "七",
@@ -17487,7 +17492,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "七",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "六加一后所得的数目。见〖数字〗。旧时人死后每隔七天祭奠一次，直到第四十九天为止，共分七个“七”。姓。"
   },
   {
     char: "万",
@@ -17500,7 +17507,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "萬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wan",
+    explain: "数目。十个一千。比喻很多：～众。～般。副词。极；很；绝对：～没想到。～不得已。"
   },
   {
     char: "丈",
@@ -17513,7 +17522,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "丈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "长度单位，10尺等于1丈，10丈等于1引。1市丈合3又1/3米。丈量（土地）：清～。春耕前要把地～完。古时对老年男子的尊称：老～。丈夫（用于某些亲戚的尊称）：姑～（姑夫）。姐～（姐夫）。"
   },
   {
     char: "三",
@@ -17522,11 +17533,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄢ",
     tradition: "三",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "san",
+    explain: "二加一后所得的数目。见〖数字〗。表示多数或多次：～思。～缄其口。姓。"
   },
   {
     char: "上",
@@ -17535,11 +17548,13 @@ const t = [
     radical: "⺊",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄤˋ",
     tradition: "上",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shang",
+    explain: "下的相反，与「下」相对：位居高处。山上、楼上、上面　次序在前的。上集、上卷、上篇　(3)等级高的。上级、上等　(4)品质好的。上策、上货　(5)升高。上楼、上山、上车　去、到。上工、上班、上任向前冲。大伙儿上啊！进呈。上书、上奏、上菜添附、增加：涂抹。上粉、上彩　安装。上刺刀　(3)扭转加力。上发条登载、发表。上报、上电视达到某种标准。成千上万接名词后，表示位置、范围等：表示在物体的表面。水上、桌上　表示在某个范围中。世上、书上、心上　(3)表示在某方面。感情上、理论上、事实上　(4)表示在某个过程中。一路上接动词后，表示动作的状态：表示动作趋向。与来、去连用。爬上来、走上去　表示动作的目的或成果。锁上门、考上学校"
   },
   {
     char: "下",
@@ -17548,11 +17563,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄚˋ",
     tradition: "下",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xia",
+    explain: "方位词。位置在低处的：～游。～部。山～。往～看。等次或品级低的：～等。～级。～策。～品。方位词。次序或时间在后的：～次。～半年。～不为例。向下面：～达。～行。方位词。表示属于一定范围、情况、条件等：名～。部～。在党的领导～。在这种情况～。表示当某个时间或时节：时～。节～。年～。用在数目字后面，表示方面或方位：两～都同意。往四～一看。姓。由高处到低处：～山。～楼。顺流而～。（雨、雪等）降落：～雨。～雪。～霜。发布；投递：～命令。～通知。～战书。去；到（处所）：～乡。～车间。～馆子。退场：八一队的五号～，三号上。这一场戏你应该从右边的旁门～。放入：～种。～面条。～本钱。～网捞鱼。进行（棋类游艺或比赛）：～围棋。咱们～两盘象棋吧!卸除；取下：～装。把敌人的枪～了。把窗户～下来。做出（言论、判断等）：～结论。～批语。～定义。低于；少于：参加大会的不～三千人。用在“两、几”后面，表示本领、技能：他真有两～。就这么几～，你还要逞能?‖也说下子。表示由高处到低处：坐～。躺～。传～一道命令。21.表示有空间，能容纳：坐得～。这个剧场能容～上千人。这间屋子太小，睡不～六个人。22.表示动作的完成或结果：打～基础。定～计策。准备～材料。"
   },
   {
     char: "不",
@@ -17561,11 +17578,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄨˋ",
     tradition: "不",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bu",
+    explain: "表示疑问、未定。同「否」。"
   },
   {
     char: "与",
@@ -17578,7 +17597,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "與",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "同类、朋党。民胞物与、连与成朋给予。赠与、授与等待。时不我与推举、选拔。通「举」。选贤与能支持、赞助。与人为善介词：相当于「跟」、「和」，表示交与的对象。与虎谋皮　相当于「跟」、「随」，表示依循的对象。与日俱增连词。相当于「和」、「跟」、「同」，表示并列关系。我与你、山与水"
   },
   {
     char: "丐",
@@ -17591,20 +17612,9 @@ const t = [
     mark: "ㄍㄞˋ",
     tradition: "丐",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "丑",
-    spell: "chǒu",
-    stroke: "4",
-    radical: "乛",
-    struct: "独体结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄔㄡˇ",
-    tradition: "醜",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "gai",
+    explain: "乞求：乞～。文言中又指给予。"
   },
   {
     char: "专",
@@ -17613,11 +17623,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄨㄢ",
     tradition: "專",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuan",
+    explain: "集中在一件事上的：～心。～题。～业。～款。～科。在学术技能某方面有特长：他知识面广，但不～。光；只；专门：他～爱挑别人的毛病。王大夫～治皮肤病。独自掌握和占有：～制。～权。～利。姓。“耑”"
   },
   {
     char: "且",
@@ -17626,11 +17638,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄐㄩ",
     tradition: "且",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qie",
+    explain: "暂时。姑且、得过且过又、并。而且、既高且大将、近。用于文言文。旦暮且下"
   },
   {
     char: "世",
@@ -17639,11 +17653,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕˋ",
     tradition: "世",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "时代：近～。当～。人的一生：一生一～。一代传一代的：～医。～交。指有世交关系的：～叔。一代一代父子相承而形成的辈分：第十五～孙。世界；社会：举～无双。公之于～。地质年代分期的第四级。如新生代第四纪分成更新世和全新世。"
   },
   {
     char: "丘",
@@ -17652,11 +17668,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄡ",
     tradition: "丘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiu",
+    explain: "土堆；小山：小～。坟墓：～垄。用砖石将灵柩封闭起来。也指这样的坟墓。量词。水田分隔成大小不同的块，一块叫一丘：一～田。"
   },
   {
     char: "丙",
@@ -17665,11 +17683,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄅㄧㄥˇ",
     tradition: "丙",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bing",
+    explain: "天干的第三位。现常用来表示顺序的第三。指火：付～。"
   },
   {
     char: "业",
@@ -17682,7 +17702,9 @@ const t = [
     mark: "ㄧㄝˋ",
     tradition: "業",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "行业：工～。农～。林～。畜牧～。饮食～。各行各～。职业：就～。转～。～余。无～。学业：肄～。修～。毕～。结～。事业：功～。创～。～绩。产业；财产：家～。～主。从事（某种行业）：～农。～商。姓。佛教徒称一切行为、言语、思想为业，分别叫做身业、口业、意业，合称三业，包括善恶两面，一般专指恶业。已经：～已。～经。"
   },
   {
     char: "丛",
@@ -17695,7 +17717,9 @@ const t = [
     mark: "ㄘㄨㄥˊ",
     tradition: "叢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cong",
+    explain: "聚集：～生。～集。生长在一起的草木：草～。树～。泛指聚集在一起的人或东西：人～。论～。刀～剑树。用于聚集生长在一起的草木：一～杂草。姓。"
   },
   {
     char: "东",
@@ -17704,11 +17728,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄉㄨㄥ",
     tradition: "東",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "dong",
+    explain: "方位词。四个主要方向之一，太阳升起的一边：～边儿。～方。～风。～城。城～。大江～去。主人（古时主位在东，宾位在西）：房～。股～。～家。东道：我做～，请你们吃饭。姓。"
   },
   {
     char: "丝",
@@ -17721,7 +17747,9 @@ const t = [
     mark: "ㄙ",
     tradition: "絲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "si",
+    explain: "蚕吐的像线的东西，是绸缎的原料。像丝的东西：粉～。尼龙～。形容极小，细微：～毫。一～不苟。市制长度、质量单位。10丝为1毫。"
   },
   {
     char: "丢",
@@ -17734,7 +17762,9 @@ const t = [
     mark: "ㄉㄧㄡ",
     tradition: "丢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "diu",
+    explain: "遗失；失去：钱包～了。～了工作。扔：不要随地～果皮。搁置；放：技术～久了就生疏了。只有这件事～不开。"
   },
   {
     char: "两",
@@ -17743,11 +17773,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄤˇ",
     tradition: "兩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "liang",
+    explain: "“两”和“二”用法不全同。读数目字只用“二”不用“两”，如“一、二、三、四”。小数和分数只用“二”不用“两”，如“零点二（0.2），三分之二”。序数也只用“二”，如“第二、二哥”。在一般量词前，用“两”不用“二”。在传统的度量衡单位前，“两”和“二”一般都可用，用“二”为多（“二两”不能说“两两”）。新的度量衡单位前一般用“两”，如“两吨、两公里”。在多位数中，百、十、个位用“二”不用“两”，如“二百二十二”。“千、万、亿”的前面，“两”和“二”一般都可用，但如“三万二千”、“两亿二千万”，“千”在“万、亿”后，以用“二”为常。双方：～便。～可。～全其美。～相情愿。表示不定的数目，和“几”差不多：过～天再说。他真有～下子。我跟你说～句话。姓。质量或重量单位，10钱等于1两，旧制16两等于1斤，1两合31.25克；后改为10市两等于1市斤，1两合50克。"
   },
   {
     char: "严",
@@ -17760,20 +17792,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "嚴",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "丧",
-    spell: "sàng",
-    stroke: "8",
-    radical: "十",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄙㄤˋ",
-    tradition: "喪",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "yan",
+    explain: "严密；紧密：～紧。戒～。谨～。把瓶口封～了。他嘴～，从来不乱说。严厉；严格：庄～。威～。～办。～加管束。纪律很～。程度深；厉害：～冬。～寒。～刑。指父亲：家～。姓。"
   },
   {
     char: "个",
@@ -17782,11 +17803,13 @@ const t = [
     radical: "人",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄍㄜˋ",
     tradition: "個",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ge",
+    explain: "量词。用于没有专用量词的名词（有些名词除有专用量词外也能用“个”）：一～人。两～单位。单独的：～体。～人。人或物的体积：大～子。这瓜～儿不小。"
   },
   {
     char: "中",
@@ -17795,11 +17818,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄨㄥˋ",
     tradition: "中",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "zhong",
+    explain: "方位词。跟四周的距离相等；中心：～央。华～。居～。指中国：～文。古今～外。方位词。范围内；内部：家～。水～。山～。心～。队伍～。位置在两端之间的：～指。～锋。～年。～秋。～途。等级在两端之间的：～农。～学。～型。～等。不偏不倚：～庸。适～。中人：作～。适于；合于：～用。～看。～听。成；行；好：～不～?。这办法～。饭这就～了。姓。"
   },
   {
     char: "丰",
@@ -17808,11 +17833,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄈㄥ",
     tradition: "豐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "丰富：～满。～盛。～收。～衣足食。大：～碑。～功伟绩。姓。美好的容貌和姿态：～采。～姿。～韵。"
   },
   {
     char: "串",
@@ -17821,11 +17848,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄨㄢˋ",
     tradition: "串",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chuan",
+    explain: "连贯：贯～。～讲。连贯起来的东西：珠子～儿。羊肉～儿。连不成～儿了。用于连贯起来的东西：一～珍珠。两～儿糖葫芦。勾结（做坏事）：～供。～骗。错误地连接：电话～线。字印得太密，容易看～行。由这里到那里走动：走街～巷。～亲戚。到处乱～。担任非本行当的戏曲角色：客～。反～。～演。两种不同的东西混杂在一起而改变了原来的特征：～味。～秧儿。姓。"
   },
   {
     char: "临",
@@ -17834,11 +17863,13 @@ const t = [
     radical: "丨",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄣˊ",
     tradition: "臨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "靠近；对着：～街。～河。背山～水。居高～下。如～大敌。来到；到达：光～。莅～。身～其境。双喜～门。临近；临到（某一行为发生的时间），含有将要、快要的意思：～睡。～毕业。这是我～离开北京的时候买的。照着字画模仿：～摹。～帖。～画。～得挺像。姓。"
   },
   {
     char: "丸",
@@ -17847,11 +17878,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄨㄢˊ",
     tradition: "丸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wan",
+    explain: "小而呈球形的东西：弹～。中成药剂型之一。按规定处方，将药物粉碎成细粉，加适宜的黏合剂做成圆球形制品，可分蜜丸、水丸、糊丸等。"
   },
   {
     char: "丹",
@@ -17860,11 +17893,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄢ",
     tradition: "丹",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "dan",
+    explain: "红色：～砂（朱砂）︱～桂。中成药剂型之一。多由数种矿物类药物用升华或熔合等方法制成；也有用一般混合方法制成的。常用以配制丸、散或锭等制剂：补心～。"
   },
   {
     char: "为",
@@ -17877,7 +17912,9 @@ const t = [
     mark: "ㄨㄟˊ",
     tradition: "爲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "做：有～。事在人～。敢作敢～。大有可～。充当：选他～代表。变成；成：一分～二。化～乌有。变沙漠～良田。是：十寸～一尺。姓。被（跟“所”字合用）：这种艺术形式～广大人民所喜闻乐见。常跟“何”相应，表示疑问或感叹：何以家～（要家干什么）?附于某些单音形容词后，构成表示程度、范围的副词：大～高兴。广～传播。深～感动。附于某些表示程度的单音副词后，加强语气：极～重要。甚～便利。颇～可观。尤～出色。"
   },
   {
     char: "主",
@@ -17886,11 +17923,13 @@ const t = [
     radical: "亠",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄨˋ",
     tradition: "主",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhu",
+    explain: "1.权力或财物的所有者，家庭的首脑：～人。物～。失～（失掉财物的人）。当家作～。2.旧时臣子称君王，下级称上级，仆人称家主：君～。～上。3.对事物的意见或认为应当如何处理，决定：～张。～见。～意。～义。4.对事物有决定权力：民～。自～。～持。～宰。～权（一个国家的独立自主的权力）。5.最重要的，最基本的：～次。～要。～力。～将（jiàng）。6.预示：早霞～雨。7.旧时为死人立的牌位：木～。神～。8.基督教、伊斯兰教对所信仰的神或本教创始人的称呼。9.姓。"
   },
   {
     char: "丽",
@@ -17903,7 +17942,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "麗",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "好看；美丽：壮～。秀～。风和日～。姓。附着：附～。"
   },
   {
     char: "举",
@@ -17916,7 +17957,9 @@ const t = [
     mark: "ㄐㄩˇ",
     tradition: "舉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ju",
+    explain: "往上托；往上伸：～重。～手。高～着红旗。举动：义～。壮～。一～一动。一～两得。兴起；起：～义。～兵。～火。生（孩子）：～一男。推选；选举：推～。～代表。公～他做学习组长。举人的简称：中～。武～。提出：列～。～一反三。～个例子。全：～座（所有在座的人）。～国。～世。姓。"
   },
   {
     char: "乃",
@@ -17925,11 +17968,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄋㄞˇ",
     tradition: "乃",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nai",
+    explain: "是：失败～成功之母。连词。于是：因时间仓促，～作罢。副词。才：唯虚心～能进步。文言副词。竟：～至如此。文言人称代词。你；你的：～翁（你的父亲）。"
   },
   {
     char: "久",
@@ -17938,11 +17983,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄡˇ",
     tradition: "久",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiu",
+    explain: "时间长（跟“暂”相对）：～别。～经锻炼。我离开家乡已经很～了。时间的长短：你来了有多～?。历时三个月之～。姓。"
   },
   {
     char: "么",
@@ -17951,11 +17998,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "e",
     tradition: "麽",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "me",
+    explain: "词尾：怎～。这～。多～。什～。助词，表示含蓄语气，用在前半句末了：不让你去～，你又要去。"
   },
   {
     char: "义",
@@ -17964,11 +18013,13 @@ const t = [
     radical: "丶",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄧˊ",
     tradition: "義",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "公正合宜的道理；正义：道～。大～灭亲。～不容辞。合乎正义或公益的：～举。～演。情谊：情～。忘恩负～。因抚养或拜认而成为亲属的：～父。～女。人工制造的（人体的部分）：～齿。～肢。姓。意义；道理：字～。定～。微言大～。"
   },
   {
     char: "之",
@@ -17977,11 +18028,13 @@ const t = [
     radical: "丶",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓ",
     tradition: "之",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "往：由京～沪。君将何～?人称代词。代替人或事物（限于做宾语）：求～不得。取～不尽。操～过急。言～成理。取而代～。有过～无不及。反其道而行～。人称代词。虚用，无所指：久而久～。不觉手之舞～，足之蹈～。指示代词。这；那：～二虫。～子于钓。用在定语和中心词之间，组成偏正词组。a）表示领属关系：赤子～心。钟鼓～声。以子～矛，攻子～盾。b）表示一般的修饰关系：光荣～家。无价～宝。缓兵～计。千里～外。意料～中。十分～九。用在主谓结构之间，取消它的独立性，使变成偏正结构：中国～大。战斗～激烈。大道～行也，天下为公。如因势利导，则如水～就下，极为自然。"
   },
   {
     char: "乌",
@@ -17990,11 +18043,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄨˋ",
     tradition: "烏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wu",
+    explain: "黑色的。  【组词】：乌发、乌木、乌云乌鸦的简称。  【组词】：月落乌啼霜满天，江枫渔火对愁眠。（唐．张继〈枫桥夜泊〉诗）"
   },
   {
     char: "乍",
@@ -18007,7 +18062,9 @@ const t = [
     mark: "ㄓㄚˋ",
     tradition: "乍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zha",
+    explain: "刚刚；起初：初来～到。分别多年，～一见都不认识了。忽然；突然：～冷～热。山风～起。同“奓”（zhà）。姓。"
   },
   {
     char: "乎",
@@ -18020,7 +18077,9 @@ const t = [
     mark: "ㄏㄨ",
     tradition: "乎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hu",
+    explain: "表示疑问或反问，跟“吗”相同：王侯将相宁有种～?表示选择的疑问，跟“呢”相同：然～?否～?表示揣度，跟“吧”相同：成败兴亡之机，其在斯～?表示祈使，跟“吧”相同：长铗归来～!动词后缀，作用跟“于”相同：在～。无须～。出～意料。合～规律。超～寻常。形容词或副词后缀：巍巍～。郁郁～。迥～不同。确～重要。跟“啊”相同：天～!"
   },
   {
     char: "乏",
@@ -18029,11 +18088,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄈㄚˊ",
     tradition: "乏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fa",
+    explain: "缺乏：～味。贫～。不～其人。疲倦：疲～。解～。走～了。人困马～。没力量；不起作用：～话。～煤。贴～了的膏药。"
   },
   {
     char: "乐",
@@ -18042,11 +18103,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄜˋ",
     tradition: "樂",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "le",
+    explain: "快乐：欢~，~事，~不可支，~而忘返，心里~得像开了花。乐于：~此不疲。笑：他说了个笑话把大家逗~了。（lè）姓（与yuè不同姓）。"
   },
   {
     char: "乒",
@@ -18055,11 +18118,13 @@ const t = [
     radical: "丿",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄆㄧㄥ",
     tradition: "乒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ping",
+    explain: "拟声词。枪声或物体撞击的声音。指乒乓球：～坛。"
   },
   {
     char: "乓",
@@ -18068,11 +18133,13 @@ const t = [
     radical: "丿",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄆㄤ",
     tradition: "乓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pang",
+    explain: "形容枪声、关门声、东西砸破声等：～的一声枪响。乒乒～～响成一片。"
   },
   {
     char: "乔",
@@ -18085,7 +18152,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "喬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiao",
+    explain: "高：～木。做假：～装打扮。"
   },
   {
     char: "乖",
@@ -18098,7 +18167,9 @@ const t = [
     mark: "ㄍㄨㄞ",
     tradition: "乖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guai",
+    explain: "（小孩儿）不闹；听话：小宝很～，阿姨都喜欢他。伶俐；机警：这孩子嘴～。上了一次当，他也学得～多了。违反；背离：～违。有～人情。（性情、行为）不正常：～戾。～谬。"
   },
   {
     char: "乘",
@@ -18107,11 +18178,13 @@ const t = [
     radical: "禾",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄥˊ",
     tradition: "乘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "骑；坐（交通工具）：～马。～车。趁；就着：～便。～隙。运算方法之一。最简单的是一个数使另一个数变成若干倍的数的运算。佛教的教理和教派：大～。小～。"
   },
   {
     char: "乙",
@@ -18120,11 +18193,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄧˇ",
     tradition: "乙",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yi",
+    explain: "1.天干的第二位。见〖干支〗。2.（Yǐ）姓。3.我国民族音乐音阶上的一级，乐谱上用作记音符号，相当于简谱的“7”。见〖工尺〗。4.画“乙”字形状的记号，从前读书写字时常常用到，例如读书读到一个地方暂时停止，在上面画个“ㄥ”形的记号，或是写字有颠倒、遗漏，用曲折的线勾过来或把补写的字勾进去，都叫做“乙”。古书没有标点，到一段终了而下无空格时，有时也画个“ㄥ”形记号，表示第二行起是另一段。"
   },
   {
     char: "九",
@@ -18133,11 +18208,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄡˇ",
     tradition: "九",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiu",
+    explain: "八加一后所得的数目。见〖数字〗。从冬至起每九天是一个“九”，从一“九”数起，二“九”、三“九”，一直数到九“九”为止：数～。冬练三～，夏练三伏。～尽寒尽。表示多次或多数：～霄。～泉。三弯～转。～死一生。姓。"
   },
   {
     char: "乞",
@@ -18146,11 +18223,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧˇ",
     tradition: "乞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qi",
+    explain: "向人讨；乞求：～怜。～食。～援。姓。"
   },
   {
     char: "也",
@@ -18159,11 +18238,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄝˇ",
     tradition: "也",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ye",
+    explain: "1.表示判断或解释的语气：孔子，鲁人～。非不能～，是不为～。2.表示疑问或反诘的语气：何～?。是可忍也，孰不可忍～?3.表示句中的停顿：大道之行～，天下为公。地之相去～，千有余里。4.姓。5.表示同样：水库可以灌溉、发电，～可以养鱼。6.单用或叠用，强调两事并列或对待：他会英语，～会法语。游客里面～有坐车的，～有步行的。7.叠用，表示无论这样或那样，结果都相同：你去我～去，你不去我～去。他左想～不是，右想～不是。8.用在转折或让步的句子里（常跟上文的“虽然、即使”等呼应），隐含结果相同的意思：虽然雨下得很大，他～来了。即使你不说，我～知道（你说了，我知道；你不说，我也同样知道）。9.表示委婉：你～得对人宽容点儿嘛。这事儿～只好如此了。10.表示强调（有时跟上文的“连”字呼应）：七八岁的孩子～学会电脑了。连爷爷～乐得合不拢嘴。"
   },
   {
     char: "习",
@@ -18172,11 +18253,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄧˊ",
     tradition: "習",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xi",
+    explain: "学习；复习；练习：自～。实～。～艺。修文～武。对某事物常常接触而熟悉：～见。～闻。～以为常。习惯：积～。恶～。相沿成～。姓。"
   },
   {
     char: "乡",
@@ -18189,7 +18272,9 @@ const t = [
     mark: "ㄒㄧㄤ",
     tradition: "鄉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "1.农村。与“城”相对：上山下～。城～交流。2.自己生长的地方或祖籍：家～。故～。3.本地的：～土。4.行政区划单位。在县之下。5.古又同“向往”的“向（xiàng）”。"
   },
   {
     char: "书",
@@ -18198,11 +18283,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄨ",
     tradition: "書",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "写字；记录；书写：～法。大～特～。振笔直～。字体：楷～。隶～。装订成册的著作：一本～。一部～。一套～。丛～。新～。古～。～店。书信：家～。～札。文件：证～。保证～。说明～。挑战～。白皮～。姓。"
   },
   {
     char: "买",
@@ -18211,24 +18298,13 @@ const t = [
     radical: "乛",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄞˇ",
     tradition: "買",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "乱",
-    spell: "luàn",
-    stroke: "7",
-    radical: "舌",
-    struct: "左右结构",
-    five: "火",
-    method: "-",
-    mark: "ㄌㄨㄢˋ",
-    tradition: "亂",
-    sex: "",
-    tone: 4
+    tone: 3,
+    pinyin: "mai",
+    explain: "购买；拿钱换东西。与“卖”相对。用金钱或其他手段拉拢：收～。～通。"
   },
   {
     char: "乳",
@@ -18241,7 +18317,9 @@ const t = [
     mark: "ㄖㄨˇ",
     tradition: "乳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ru",
+    explain: "生殖：孳～。乳房：～罩。～腺。奶汁：母～。～牛。代～粉。水～交融。像奶汁的东西：豆～。～胶。初生的；幼小的：～燕。～猪。～牙。"
   },
   {
     char: "乾",
@@ -18254,7 +18332,9 @@ const t = [
     mark: "ㄑㄧㄢˊ",
     tradition: "",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qian",
+    explain: "八卦之一。卦形是，代表天、阳。六十四卦之一。上乾（）下乾（）。象徵君子应自强不息之意。阳刚、男性的。乾道、乾宅"
   },
   {
     char: "了",
@@ -18263,11 +18343,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄠˇ",
     tradition: "瞭",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "le",
+    explain: "1.用在动词或形容词后面，表示动作或变化已经完成。a）用于实际已经发生的动作或变化：这个小组受到～表扬。水位已经低～两米。b）用于预期的或假设的动作：你先去，我下～班就去。他要知道～这个消息，一定也很高兴。2.用在句子的末尾或句中停顿的地方，表示变化或出现新的情况。a）表示已经出现或将要出现某种情况：下雨～。春天～，桃花都开～。他吃了饭～。天快黑～，今天去不成～。b）表示在某种条件之下出现某种情况：天一下雨，我就不出门～。你早来一天就见着他～。c）表示认识、想法、主张、行动等有变化：我现在明白他的意思～。他本来不想去，后来还是去～。d）表示催促或劝止：走～，走～，不能再等～!。好～，不要老说这些事～!"
   },
   {
     char: "予",
@@ -18276,11 +18358,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄩˊ",
     tradition: "予",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "给：授～奖状。免～处分。请～批准。"
   },
   {
     char: "争",
@@ -18293,7 +18377,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "争",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "因意见不一致而相互辩诘：～论。是非之～。力求获得或达到：为祖国～光。力～上游。竞争；争夺：～先恐后。只～朝夕。疑问代词。怎么；如何（见于早期白话）：～奈。"
   },
   {
     char: "事",
@@ -18306,7 +18392,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "事",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "事情：国～。公～。事故：出～。平安无～。职业：谋～。关系；责任：回去吧，没有你的～了。从事：大～宣传。侍奉；伺候：～亲。不～王侯。"
   },
   {
     char: "二",
@@ -18315,11 +18403,13 @@ const t = [
     radical: "二",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄦˋ",
     tradition: "二",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "er",
+    explain: "数目。一加一的和。序数：一穷～白。两样：不～价。"
   },
   {
     char: "于",
@@ -18328,11 +18418,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄩˊ",
     tradition: "于",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "a）在：她生～1949年。来信已～日前收到。黄河发源～青海。b）向：问道～盲。告慰～知己。求救～人。c）给：嫁祸～人。献身～科学事业。d）对；对于：忠～祖国。有益～人民。形势～我们有利。e）自；从：青出～蓝。出～自愿。f）表示比较：大～。少～。高～。低～。g）表示被动：见笑～大方之家。后缀。a）动词后缀：合～。属～。在～。至～。b）形容词后缀：勇～负责。善～调度。易～了解。难～实行。“於”姓。"
   },
   {
     char: "亏",
@@ -18341,11 +18433,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄎㄨㄟ",
     tradition: "虧",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kui",
+    explain: "受损失；亏折：～本。盈～。～损。做生意～了。欠缺；短少：血～。理～。功～一篑。亏负：～心。人不～地，地不～人。你放心吧，我～不了你。多亏：～他提醒我，我才想起来。反说，表示讥讽：这样不合理的话，倒～你说得出来。～你还是哥哥，一点儿也不知道让着弟弟。"
   },
   {
     char: "云",
@@ -18354,11 +18448,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄩㄣˊ",
     tradition: "雲",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "yun",
+    explain: "1.说：人～亦～。不知所～。2.表示强调：岁～暮矣。3.在空中悬浮的由水滴、冰晶聚集形成的物体。4.指云南：～腿（云南宣威一带出产的火腿）。5.姓。"
   },
   {
     char: "互",
@@ -18367,11 +18463,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄨˋ",
     tradition: "互",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hu",
+    explain: "“互”一般直接修饰单音节动词，修饰双音节动词只用于否定式。姓。"
   },
   {
     char: "五",
@@ -18384,7 +18482,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "五",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "四加一后所得的数目。见〖数字〗。姓。我国民族音乐音阶上的一级，乐谱上用作记音符号。相当于简谱的“6”。见〖工尺〗。"
   },
   {
     char: "井",
@@ -18393,11 +18493,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄥˇ",
     tradition: "井",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jing",
+    explain: "从地面往下凿成的能取水的深洞，洞壁多砌上砖石：水～。一口～。双眼～。形状像井的东西：矿～。油～。竖～。探～。渗～。天～。古制八家为一井，后借指人口聚居的地方或乡里：乡～。市～。～邑。背～离乡。二十八宿之一。姓。形容整齐：～然。～～有条。"
   },
   {
     char: "亚",
@@ -18406,11 +18508,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄚˋ",
     tradition: "亚",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "ya",
+    explain: "较差：他的技术不～于你。次一等：～军。～热带。化合价较低的；酸根或化合物中少含一个氢原子或氧原子的：硫酸～铁（FeSO4）。～氨基（NH）。～硫酸（H2SO3）。姓。指亚洲。"
   },
   {
     char: "些",
@@ -18423,20 +18527,9 @@ const t = [
     mark: "ㄒㄧㄝ",
     tradition: "些",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "亡",
-    spell: "wáng",
-    stroke: "3",
-    radical: "亠",
-    struct: "独体结构",
-    five: "水",
-    method: "会意",
-    mark: "ㄨㄤˊ",
-    tradition: "亡",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "xie",
+    explain: "助词。用于句末，表示疑问、感叹、劝阻等语气。  【组词】：魂兮归来，南方不可以止些。（《楚辞．宋玉．招魂》）"
   },
   {
     char: "交",
@@ -18445,11 +18538,13 @@ const t = [
     radical: "亠",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄠ",
     tradition: "交",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "把事物转移给有关方面：～活。～税。～公粮。把任务～给我们这个组吧。到（某一时辰或季节）：～子时。明天就～冬至了。～九的天气。连接；交叉：～界。两直线～于一点。相连接的时间或地方：春夏之～。太行山在河北、山西两省之～。结交；交往：～朋友。建～。友谊；交情：绝～。一面之～。（人）性交；（动植物）交配：～媾。杂～。互相：～换。～流。～易。～谈。一齐；同时（发生）：～加。～迫。～集。姓。同“跤”（jiāo）。"
   },
   {
     char: "亥",
@@ -18458,11 +18553,13 @@ const t = [
     radical: "亠",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄞˋ",
     tradition: "亥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hai",
+    explain: "地支的第十二位。亥时，旧式记时法，相当于二十一点到二十三点。"
   },
   {
     char: "亦",
@@ -18471,11 +18568,13 @@ const t = [
     radical: "亠",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧˋ",
     tradition: "亦",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "也（表示同样）；也是：反之～然。人云～云。姓。"
   },
   {
     char: "产",
@@ -18484,11 +18583,13 @@ const t = [
     radical: "立",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄢˇ",
     tradition: "產",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chan",
+    explain: "人或动物的幼体从母体中分离出来：～妇。～科。～卵。～下一个男孩儿。创造物质财富或精神财富；生产：～销。增～。转～。出产：～棉。～煤。东北～大豆。物产；产品：土～。特～。水～。产业：家～。财～。破～。姓。"
   },
   {
     char: "亩",
@@ -18497,11 +18598,13 @@ const t = [
     radical: "亠",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄨˇ",
     tradition: "畝",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mu",
+    explain: "地积单位，10分等于1亩，100亩等于1顷。1市亩等于60平方丈，合666.7平方米。"
   },
   {
     char: "享",
@@ -18514,7 +18617,9 @@ const t = [
     mark: "ㄒㄧㄤˇ",
     tradition: "享",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xiang",
+    explain: "享受：～用。坐～其成。有福同～。同“飨”。姓。"
   },
   {
     char: "京",
@@ -18523,11 +18628,13 @@ const t = [
     radical: "亠",
     struct: "上中下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄥ",
     tradition: "京",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "国家的首都：～城。～都。北京的简称：～广线。京族。古代数目。指一千万。"
   },
   {
     char: "亭",
@@ -18536,11 +18643,13 @@ const t = [
     radical: "亠",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄧㄥˊ",
     tradition: "亭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ting",
+    explain: "亭子，一种有顶无墙一般只有一间的建筑物。多建在公园里：凉～。像亭子的小房：书～。古又同“渟”。"
   },
   {
     char: "亮",
@@ -18549,11 +18658,13 @@ const t = [
     radical: "亠",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄤˋ",
     tradition: "亮",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "liang",
+    explain: "光线强：明～。豁～。这盏灯不～。发光：天～了。手电筒～了一下。屋子里～着灯光。（声音）强；响亮：洪～。她的歌声脆而～。使声音响亮：～起嗓子。（心胸、思想等）开朗；清楚：心明眼～。听他这么一说，心里就～了。显露；显示：～相。把底儿～出来。这种热带的蝙蝠，一～翅膀足有脸盆大。姓。"
   },
   {
     char: "亲",
@@ -18562,11 +18673,13 @@ const t = [
     radical: "立",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄣ",
     tradition: "親",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qin",
+    explain: "有血统或夫妻关系的：～属。～人。～缘。双～（父母）。～眷。婚姻：～事。因婚姻联成的关系：～戚。～故。～邻。～朋。称呼同一地方的人：乡～。本身，自己的：～睹。～聆。～笔。感情好，关系密切：～密。相～。～睦。～疏。用嘴唇接触表示喜爱：～吻。"
   },
   {
     char: "人",
@@ -18575,11 +18688,13 @@ const t = [
     radical: "人",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄖㄣˊ",
     tradition: "人",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ren",
+    explain: "能制造工具并使用工具进行劳动的高等动物：男～。女～。～们。～类。每人；一般人：～手一册。～所共知。指成年人：长大成～。指某种人：工～。军～。主～。介绍～。别人：～云亦云。待～诚恳。指人的品质、性格或名誉：丢～。这个同志～很好。他～老实。指人的身体或意识：这两天～不大舒服。送到医院～已经昏迷过去了。指人手、人才：～浮于事。我们这里正缺～。（Rén）姓。"
   },
   {
     char: "亿",
@@ -18592,7 +18707,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "億",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "数目。一万万。古指十万。数目非常大：～万。"
   },
   {
     char: "什",
@@ -18605,7 +18722,9 @@ const t = [
     mark: "ㄕㄣˊ",
     tradition: "什",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shen",
+    explain: "由十个合成的一组。古代户籍十家为什，军队十人为什，《诗经》的雅、颂十篇为什。同“十”：～一（十分之一）。～百（十倍或百倍）。各种的；杂样的：～锦。～物。诗篇：篇～。佳～。"
   },
   {
     char: "仁",
@@ -18618,7 +18737,9 @@ const t = [
     mark: "ㄖㄣˊ",
     tradition: "仁",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "ren",
+    explain: "仁爱：～心。～政。～至义尽。敬辞，用于对对方的尊称：～兄。～弟。～伯。姓。果核或果壳最里头较柔软的部分，大多可以吃：杏～儿。核桃～儿。花生～儿。虾～儿。"
   },
   {
     char: "仅",
@@ -18627,11 +18748,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄣˋ",
     tradition: "僅",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jin",
+    explain: "仅仅：不～如此。绝无～有。买完这些书，身上～剩下五元钱。姓。"
   },
   {
     char: "仆",
@@ -18644,20 +18767,9 @@ const t = [
     mark: "ㄆㄨˊ",
     tradition: "僕",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "仇",
-    spell: "chóu",
-    stroke: "4",
-    radical: "亻",
-    struct: "左右结构",
-    five: "金",
-    method: "",
-    mark: "",
-    tradition: "仇",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pu",
+    explain: "旧时受人雇佣、在生活上供役使的人：～人。女～。谦辞。旧时男子称自己。"
   },
   {
     char: "今",
@@ -18670,7 +18782,9 @@ const t = [
     mark: "ㄐㄧㄣ",
     tradition: "今",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jin",
+    explain: "现在；现代（跟“古”相对）：当～。～人。厚～薄古。古为～用。当前的（年、天及其部分）：～天。～晨。～春。指示代词。此；这：～番。～次。姓。"
   },
   {
     char: "介",
@@ -18679,11 +18793,13 @@ const t = [
     radical: "人",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄝˋ",
     tradition: "介",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "在两者当中：～绍。媒～。这座山～于两县之间。介绍：内容简～。存留；放在（心里）：～意。～怀。姓。铠甲：～胄。甲壳：～虫。～壳。耿直；有骨气：耿～。用于人，相当于“个”（多表示微贱）：一～书生。一～武夫。古典戏曲剧本中，指示角色表演动作时的用语，如笑介、饮酒介等。"
   },
   {
     char: "仍",
@@ -18696,7 +18812,9 @@ const t = [
     mark: "ㄖㄥˊ",
     tradition: "仍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "reng",
+    explain: "副词。依然：他虽然有病，～不肯放下工作。依照：一～其旧（完全照旧）。延续不断：频～。"
   },
   {
     char: "从",
@@ -18709,7 +18827,9 @@ const t = [
     mark: "ㄘㄨㄥˊ",
     tradition: "從",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cong",
+    explain: "跟随。跟从、随从依顺。从命、服从、言听计从参与、加入。从事、从政、投笔从戎向来。他非常节俭，从不乱花用。自、由、循。从今以后、从宽办理"
   },
   {
     char: "仑",
@@ -18722,7 +18842,9 @@ const t = [
     mark: "ㄌㄩㄣˊ",
     tradition: "侖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lun",
+    explain: "条理；伦次。“昆仑”的“仑”。"
   },
   {
     char: "仓",
@@ -18731,11 +18853,13 @@ const t = [
     radical: "人",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄘㄤ",
     tradition: "倉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cang",
+    explain: "收藏谷物的建筑物：米～。粮～。～储。～房。姓。"
   },
   {
     char: "仔",
@@ -18748,7 +18872,9 @@ const t = [
     mark: "ㄗㄞˇ",
     tradition: "仔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zai",
+    explain: "〈方〉具有某种特征或从事一定职业的年轻男子同“崽”，儿子；孩子"
   },
   {
     char: "他",
@@ -18761,7 +18887,9 @@ const t = [
     mark: "ㄊㄚ",
     tradition: "他",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ta",
+    explain: "“五四”以前“他”兼称男性、女性以及一切事物。现代书面语里，“他”一般只用来称男性。但是在性别不明或没有区分的必要时，“他”只是泛指，不分男性和女性：从笔迹上看不出～是男的还是女的。一个人要是离开了集体，～就将一事无成。人称代词。虚指（用在动词和数量词之间）：睡～一觉。唱～几句。盖～三间瓦房。指示代词。指别一方面或其他地方：早已～去。留作～用。指示代词。另外的；其他的：～人。～乡。～日。姓。"
   },
   {
     char: "仗",
@@ -18774,7 +18902,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "仗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "兵器的总称：仪～。明火执～。拿着（兵器）：～剑。凭借；倚仗：狗～人势。他～着自己老子的势力欺负人。指战争或战斗：胜～。败～。这一～打得真漂亮。打好春耕生产这一～。"
   },
   {
     char: "付",
@@ -18787,7 +18917,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "付",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "授予；交给专指给钱同“{副}”"
   },
   {
     char: "仙",
@@ -18800,7 +18932,9 @@ const t = [
     mark: "ㄒㄧㄢ",
     tradition: "仙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xian",
+    explain: "仙人；神仙：成～。求～。（Xiān）姓。"
   },
   {
     char: "代",
@@ -18813,7 +18947,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "代",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "代替：～课。～笔。～销。代理：～局长。姓。历史的分期；时代：古～。近～。现～。当～。朝代：汉～。改朝换～。世系的辈分：第二～。下一～。老一～。我们这一～。地质年代分期的第二级，代以上为宙，如显生宙分为古生代、中生代和新生代，代以下为纪。跟代相应的地层系统分类单位叫做界。"
   },
   {
     char: "令",
@@ -18826,7 +18962,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "令",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ling",
+    explain: "命令。使得：～人兴奋。美好：～名。敬辞。用于对方的亲属或有关系的人：～兄（称对方的哥哥）。时节：冬～。古代官名：县～。古又同“鸰（líng）”。"
   },
   {
     char: "以",
@@ -18835,11 +18973,13 @@ const t = [
     radical: "人",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧˇ",
     tradition: "以",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "yi",
+    explain: "用；拿：～少胜多。晓之～理。赠～鲜花。依；按照：～次。～音序排列。因：何～知之?。不～人废言。表示目的：～广视听。～待时机。于；在（时间）：中华人民共和国～1949年10月1日宣告成立。跟“而”相同：城高～厚，地广～深。姓。用在单纯的方位词前，组成合成的方位词或方位结构，表示时间、方位、数量的界限：～前。～上。三日～后。县级～上。长江～南。五千～内。二十岁～下。"
   },
   {
     char: "仪",
@@ -18852,7 +18992,9 @@ const t = [
     mark: "ㄧˊ",
     tradition: "儀",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "人的外表：～表。～容。威～。礼节；仪式：司～。行礼如～。礼物：贺～。谢～。倾心；向往：心～已久。姓。仪器：～表。地动～。半圆～。"
   },
   {
     char: "们",
@@ -18865,7 +19007,9 @@ const t = [
     mark: "",
     tradition: "們",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "men",
+    explain: "图们江（TúménJiāng），水名，发源于吉林，流入日本海。图们（Túmén），地名，在吉林。"
   },
   {
     char: "仰",
@@ -18874,11 +19018,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄤˊ",
     tradition: "仰",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yang",
+    explain: "抬头，脸向上看。与「俯」相对。  【组词】：仰首、仰望、仰天长啸　◎敬慕。  【组词】：景仰、敬仰、仰慕依赖。  【组词】：仰赖、仰仗、仰人鼻息"
   },
   {
     char: "仲",
@@ -18887,11 +19033,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄨㄥˋ",
     tradition: "仲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhong",
+    explain: "地位居中的：～裁。指农历一季的第二个月：～秋。在弟兄排行里代表第二：～兄。～弟。伯～叔季。姓。"
   },
   {
     char: "件",
@@ -18904,7 +19052,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "件",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "用于个体事物：一～事。三～公文。两～衣裳。（～儿）指可以一一计算的事物：铸～。工～。零～儿。案～。文件：来～。急～。密～。姓。"
   },
   {
     char: "价",
@@ -18917,7 +19067,9 @@ const t = [
     mark: "ㄐㄧㄚˋ",
     tradition: "價",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "价格：物～。调～。物美～廉。无～之宝。这个～可不贵。价值：等～交换。化合价的简称：氢是一～的元素。姓。"
   },
   {
     char: "任",
@@ -18930,7 +19082,9 @@ const t = [
     mark: "ㄖㄣˊ",
     tradition: "任",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ren",
+    explain: "使用；委派：～人唯贤。～命。担当或承受：～课。～劳～怨。职务；责任：到～。担负重～。介词。由着；听凭：～其自然。去哪里～你自己决定。连词。不论；无论：～你怎么说，我也不同意。量词。用于担任职务的次数：为官一～，造福一方。古又同“妊”。"
   },
   {
     char: "份",
@@ -18943,7 +19097,9 @@ const t = [
     mark: "ㄈㄣˋ",
     tradition: "份",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fen",
+    explain: "整体中的一个单位。  【组词】：股份量词：计算定量事物的单位。  【组词】：一份工作、两份薪水、一份报纸、三份资料、五份甜点。"
   },
   {
     char: "仿",
@@ -18956,7 +19112,9 @@ const t = [
     mark: "ㄈㄤˇ",
     tradition: "仿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fang",
+    explain: "效法；照着样做：～造。～制。照范本写的字：写一张～。大～。像；似：面貌相～。“仿佛”的“仿”。"
   },
   {
     char: "企",
@@ -18969,7 +19127,9 @@ const t = [
     mark: "ㄑㄧˇ",
     tradition: "企",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qi",
+    explain: "抬起脚后跟站着，今用为盼望的意思：～盼。～望。"
   },
   {
     char: "伊",
@@ -18982,7 +19142,9 @@ const t = [
     mark: "ㄧ",
     tradition: "伊",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "用于词语的前面，加强语气或感情色彩：～始。～于胡底。～谁之力?姓。五四运动前后有的文学作品中用“伊”专指女性，后来改用“她”。"
   },
   {
     char: "伍",
@@ -18995,7 +19157,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "伍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "古代军队的最小单位，由五个人编成，现在泛指军队：队～。入～。行～。同伙的人：羞与为～。“五”的大写。见〖数字〗。姓。"
   },
   {
     char: "伏",
@@ -19008,7 +19172,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "伏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "身体向前靠在物体上；趴：～案。～在桌子上。低下去：起～。此起彼～。隐藏：潜～。～击。昼～夜出。初伏、中伏、末伏的统称；伏天：入～。初～。三～天。每～十天。屈服；低头承认；被迫接受：～诛。使屈服；降伏：降龙～虎。姓。伏特的简称。1安的电流通过电阻为1欧的导线时，导线两端的电压是1伏。"
   },
   {
     char: "伐",
@@ -19021,7 +19187,9 @@ const t = [
     mark: "ㄈㄚˊ",
     tradition: "伐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fa",
+    explain: "砍（树）：～木。～了几棵树。攻打：征～。讨～。北～。姓。自夸：～善。不矜不～（不自大自夸）。"
   },
   {
     char: "休",
@@ -19034,7 +19202,9 @@ const t = [
     mark: "ㄒㄧㄡ",
     tradition: "休",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiu",
+    explain: "歇息。  【组词】：休息、休养、休憩停歇、终止。  【组词】：休会、休学、休兵不要。  【组词】：休想、休问喜悦、快乐。  【组词】：休戚丈夫解除与妻子的婚姻关系。  【组词】：休妻"
   },
   {
     char: "众",
@@ -19047,7 +19217,9 @@ const t = [
     mark: "ㄓㄨㄥˋ",
     tradition: "衆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhong",
+    explain: "许多（跟“寡”相对）：～多。～人。寡不敌～。～志成城。许多人：听～。观～。群～。～所周知。姓。"
   },
   {
     char: "优",
@@ -19060,7 +19232,9 @@ const t = [
     mark: "ㄧㄡ",
     tradition: "優",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "you",
+    explain: "优良；美好（跟“劣”相对）：～美。～等。充足；富裕：～渥。～裕。优待：拥军～属。姓。旧时称演戏的人：～伶。名～。"
   },
   {
     char: "伙",
@@ -19073,7 +19247,9 @@ const t = [
     mark: "ㄏㄨㄛˇ",
     tradition: "夥",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "huo",
+    explain: "伙食：起～。包～。同伴；伙计：～伴。～友。由同伴组成的集体：合～。入～。成群搭～。用于人群：一～人。分成两～。三个一群，五个一～。共同；联合：～同。～办。几个人～着干。姓。"
   },
   {
     char: "会",
@@ -19086,7 +19262,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "會",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "聚合；合在一起：～合。～齐。～诊。～审。见面；会见：～面。～客。昨天没有～着他。有一定目的的集会：晚～。舞～。开～。报告～。晚上有一个～。某些团体：工～。妇女联合～。庙会：赶～。民间朝山进香或酬神求年成时所组织的集体活动，如香会、迎神赛会等。民间一种小规模经济互助组织，入会成员按期平均交款，分期轮流使用。主要的城市：都～。省～。时机：机～。适逢其～。应当：长风破浪～有时。理解；懂得：体～。误～。心领神～。只可意～，不可言传。熟习；通晓：～英文。～两出京戏。助动词。表示懂得怎样做或有能力做（多半指需要学习的事情）：我不～滑冰。这孩子刚～走路，还不大～说话。助动词。表示擅长：能说～道。～写～画的人倒不太讲究纸的好坏。助动词。表示有可能实现：他不～不来。树上的果子熟了，自然～掉下来。付账：～账。我～过了。见〖会儿〗、〖会子〗。"
   },
   {
     char: "伞",
@@ -19095,11 +19273,13 @@ const t = [
     radical: "人",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄢˇ",
     tradition: "傘",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "san",
+    explain: "挡雨或遮太阳的用具，用油纸、布、塑料等制成，中间有柄，可以张合：一把～。旱～。雨～。形状像伞的东西：降落～。灯～。姓。"
   },
   {
     char: "伟",
@@ -19112,7 +19292,9 @@ const t = [
     mark: "ㄨㄟˇ",
     tradition: "偉",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "wei",
+    explain: "高大：魁～。卓越；伟大：～人。丰功～绩。"
   },
   {
     char: "传",
@@ -19125,7 +19307,9 @@ const t = [
     mark: "ㄔㄨㄢˊ",
     tradition: "傳",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chuan",
+    explain: "由一方交给另一方；由上代交给下代：流～。由前向后～。古代～下来的文化遗产。传授：师～。把自己的手艺～给人。传播：宣～。胜利的消息～遍全国。传导：～电。～热。表达：～神。～情。发出命令叫人来：～讯。把他～来。传染：这种病～人。姓。"
   },
   {
     char: "伤",
@@ -19138,7 +19322,9 @@ const t = [
     mark: "ㄕㄤ",
     tradition: "傷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shang",
+    explain: "人体或其他物体受到的损坏：作战负～。探～仪。损害：～筋动骨。～感情。因故得病：～风。～寒。～食。悲哀：～心。悲～。妨碍：无～大体。"
   },
   {
     char: "伦",
@@ -19151,20 +19337,9 @@ const t = [
     mark: "ㄌㄩㄣˊ",
     tradition: "倫",
     sex: "男",
-    tone: 2
-  },
-  {
-    char: "伪",
-    spell: "wěi",
-    stroke: "6",
-    radical: "亻",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄨㄟˇ",
-    tradition: "僞",
-    sex: "",
-    tone: 3
+    tone: 2,
+    pinyin: "lun",
+    explain: "人伦：～常。～理。五～。天～。条理；次序：～次。同类；同等：不～不类。比拟不～。英勇绝～。姓。"
   },
   {
     char: "伯",
@@ -19177,7 +19352,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "伯",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "bo",
+    explain: "见〖大伯子〗。"
   },
   {
     char: "估",
@@ -19190,7 +19367,9 @@ const t = [
     mark: "ㄍㄨˋ",
     tradition: "估",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gu",
+    explain: "→估衣"
   },
   {
     char: "伴",
@@ -19203,7 +19382,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "伴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ban",
+    explain: "同伴：搭个～儿。结～同行。让我来跟你做个～儿吧。陪伴；陪同：～唱。～送。词典～我一生。姓。"
   },
   {
     char: "伶",
@@ -19216,7 +19397,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "伶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "旧时指戏曲演员：～人。名～。坤～。老～工（年老有经验的演员）。"
   },
   {
     char: "伸",
@@ -19229,7 +19412,9 @@ const t = [
     mark: "ㄕㄣ",
     tradition: "伸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shen",
+    explain: "舒展开；拉长：～手。～长。通“申”：～冤。"
   },
   {
     char: "伺",
@@ -19242,7 +19427,9 @@ const t = [
     mark: "ㄘˋ",
     tradition: "伺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "si",
+    explain: "侦察；守候：窥～。～机。"
   },
   {
     char: "似",
@@ -19255,7 +19442,9 @@ const t = [
     mark: "ㄙˋ",
     tradition: "似",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "像；如同：～是而非。何其相～乃尔。副词。似乎；好像：～属可信。貌～有理。胜过；超过：人民的生活一天好～一天。"
   },
   {
     char: "佃",
@@ -19268,7 +19457,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "佃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "农民向地主租种土地。姓。"
   },
   {
     char: "但",
@@ -19281,7 +19472,9 @@ const t = [
     mark: "ㄉㄢˋ",
     tradition: "但",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dan",
+    explain: "只；仅仅：～愿如此。不求有功，～求无过。辽阔的原野上，～见麦浪随风起伏。但是：屋子小，～挺干净。工作虽然忙，～一点也没放松学习。姓。"
   },
   {
     char: "位",
@@ -19294,7 +19487,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "位",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "所在或所占的地方：部～。座～。各就各～。职位；地位：名～。特指君主的地位：即～。在～。篡～。一个数中每个数码所占的位置：个～。百～。十～数。用于人（含敬意）：诸～。各～。家里来了几～客人。姓。"
   },
   {
     char: "低",
@@ -19307,7 +19502,9 @@ const t = [
     mark: "ㄉㄧ",
     tradition: "低",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "di",
+    explain: "从下向上距离小；离地面近（跟“高”相对，同）：～空。飞机～飞绕场一周。水位降～了。在一般标准或平均程度之下：～地。声音太～。眼高手～。等级在下的：～年级学生。我比哥哥～一班。（头）向下垂：～着头。"
   },
   {
     char: "住",
@@ -19320,7 +19517,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "住",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "居住；住宿：你～在什么地方?。～了一夜。停住；止住：～手。～嘴。雨～了。做动词的补语。a）表示牢固或稳当：拿～。捉～。把～了方向盘。牢牢记～老师的教导。b）表示停顿或静止：一句话把他问～了。当时他就愣～了。c）跟“得”（或“不”）连用，表示力量够得上（或够不上）；胜任：支持不～。禁得～风吹雨打。姓。"
   },
   {
     char: "佑",
@@ -19333,7 +19532,9 @@ const t = [
     mark: "ㄧㄡˋ",
     tradition: "佑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "you",
+    explain: "扶助；保护：保～。"
   },
   {
     char: "体",
@@ -19346,7 +19547,9 @@ const t = [
     mark: "ㄊㄧˇ",
     tradition: "體",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ti",
+    explain: "人、动物的全身：身～。～重。～温。～质。～征（医生在检查病人时所发现的异常变化）。～能。～貌。～魄（体格和精力）。～育。～无完肤。身体的一部分：四～。五～投地。事物的本身或全部：物～。主～。群～。物质存在的状态或形状：固～。液～。～积。文章或书法的样式、风格：～裁（文学作品的表现形式，可分为诗歌，散文，小说，戏剧等）。文～（文章的体裁，如“骚～”、“骈～”、“旧～诗”）。字～。事物的格局、规矩：～系。～制。亲身经验、领悟：～知（亲自查知）。～味。身～力行（xíng）。设身处地为人着想：～谅。～贴。～恤。与“用”相对。“体”与“用”是中国古典哲学的一对范畴，指“本体”和“作用”。一般认为“体”是最根本的、内在的；“用”是“体”的外在表现。"
   },
   {
     char: "何",
@@ -19359,7 +19562,9 @@ const t = [
     mark: "ㄏㄜˊ",
     tradition: "何",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "什么。  【组词】：何故、何处、何时为什么。  【组词】：何必、何不、何乐不为岂、怎么。  【组词】：何只、何足挂齿多么。表示程度。  【组词】：何等、何其不幸那里。  【组词】：佳人今何在？姓。"
   },
   {
     char: "余",
@@ -19372,7 +19577,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "餘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "剩下来的；多余的：～粮。零数：十～人。一斤～。文言人称代词。我。“餘”，另见“馀”"
   },
   {
     char: "佛",
@@ -19385,7 +19592,9 @@ const t = [
     mark: "ㄈㄛˊ",
     tradition: "佛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fo",
+    explain: "通「佛」。  【组词】：仿佛"
   },
   {
     char: "作",
@@ -19398,7 +19607,9 @@ const t = [
     mark: "ㄗㄨㄛˋ",
     tradition: "作",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zuo",
+    explain: "劳动；劳作：精耕细～。～息制度。起：振～。枪声大～。写作；作品：著～。佳～。假装：～态。装模～样。当作；作为：过期～废。进行某种活动：同不良倾向～斗争。自～自受。同“做”。"
   },
   {
     char: "你",
@@ -19411,7 +19622,9 @@ const t = [
     mark: "ㄋㄧˇ",
     tradition: "你",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ni",
+    explain: "人称代词。有时也用来指称“你们”：～校。～局。～公司。“你”跟“我”或“他”配合，表示“这个…”和“那个…”的意思：三个人～看看我，我看看～，谁也没说话。～一条，他一条，一共提出了五六十条建议。"
   },
   {
     char: "佣",
@@ -19424,7 +19637,9 @@ const t = [
     mark: "ㄩㄥˋ",
     tradition: "傭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yong",
+    explain: "雇用：雇～。指被雇用的人：女～。"
   },
   {
     char: "佩",
@@ -19437,7 +19652,9 @@ const t = [
     mark: "ㄆㄟˋ",
     tradition: "佩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pei",
+    explain: "（把小巧的东西）带（挂、别、系等）在身上某一部分：～刀。胸前～着纪念章。腰间～着一支手枪。心悦诚服：钦～。古时系在衣带上的饰物：玉～。"
   },
   {
     char: "佳",
@@ -19450,7 +19667,9 @@ const t = [
     mark: "ㄐㄧㄚ",
     tradition: "佳",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "jia",
+    explain: "美；好：～句。～音。最～方案。成绩甚～。身体欠～。姓。"
   },
   {
     char: "使",
@@ -19463,7 +19682,9 @@ const t = [
     mark: "ㄕˇ",
     tradition: "使",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shi",
+    explain: "派遣；支使：～唤。～人去打听消息。使用：～拖拉机耕地。这支笔很好～。～上点肥料。让；叫；致使：办事～群众满意。加强质量管理，～产品合格率不断上升。假如。奉使命办事的人：～节。大～。公～。特～。学～（科举时代派到各省去主持考试的官员）。"
   },
   {
     char: "侄",
@@ -19476,7 +19697,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "侄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "侄子，称哥哥或弟弟的儿子。也指同辈男性亲属或朋友的儿子。"
   },
   {
     char: "侈",
@@ -19489,7 +19712,9 @@ const t = [
     mark: "ㄔˇ",
     tradition: "侈",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chi",
+    explain: "浪费：奢～。夸大；过分：～谈。"
   },
   {
     char: "例",
@@ -19502,7 +19727,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "例",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "用来说明情况的或可作依据的事物：举～。援～。规则：条～。按条例规定的；照成规进行的：～会。～行公事。"
   },
   {
     char: "侍",
@@ -19515,7 +19742,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "侍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "陪伴侍候：服～。～立。姓。"
   },
   {
     char: "供",
@@ -19528,7 +19757,9 @@ const t = [
     mark: "ㄍㄨㄥˋ",
     tradition: "供",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gong",
+    explain: "把祭品陈列在祖先、神佛的像或牌位前以示敬奉：案上～着水果。旧时祭祖先或求神拜佛用的祭品：上～。受审者口述案情。也指叙述案情的话或文字：～认。口～。"
   },
   {
     char: "依",
@@ -19541,7 +19772,9 @@ const t = [
     mark: "ㄧˇ",
     tradition: "依",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "依靠：唇齿相～。依从；答应：你只要答应一个条件，我就～你。介词。按照：～次前进。古又同“扆（yǐ）”。"
   },
   {
     char: "侠",
@@ -19554,7 +19787,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "俠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "旧指仗义勇为、扶弱抑强、爱打抱不平的人或行为：豪～。～气。古又同“夹（jiá）”。古又同“挟（xié）”。"
   },
   {
     char: "侣",
@@ -19563,11 +19798,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "侣",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "同伴：伴～。旧～。情～。姓。"
   },
   {
     char: "侥",
@@ -19580,7 +19817,9 @@ const t = [
     mark: "ㄐㄧㄠˇ",
     tradition: "僥",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "见〔僬侥〕"
   },
   {
     char: "侦",
@@ -19593,7 +19832,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "偵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "暗中察看；调查：～探。～查。"
   },
   {
     char: "侧",
@@ -19606,7 +19847,9 @@ const t = [
     mark: "ㄘㄜˋ",
     tradition: "側",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ce",
+    explain: "旁边。  【组词】：两侧、侧面、随侍在侧倾斜。  【组词】：侧身、侧耳倾听"
   },
   {
     char: "侨",
@@ -19619,7 +19862,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "僑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiao",
+    explain: "寄居在国外：～居。～胞。寄居在国外的人：华～。"
   },
   {
     char: "侮",
@@ -19632,7 +19877,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "侮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "欺负；轻慢：欺～。外～。御～。民意不可～。"
   },
   {
     char: "侯",
@@ -19641,11 +19888,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄡˊ",
     tradition: "侯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hou",
+    explain: "闽侯（Mǐnhòu），地名，在福建。"
   },
   {
     char: "侵",
@@ -19658,7 +19907,9 @@ const t = [
     mark: "ㄑㄧㄣ",
     tradition: "侵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qin",
+    explain: "侵入：～害。入～。接近（天明）：～晓。～晨。姓。"
   },
   {
     char: "便",
@@ -19671,7 +19922,9 @@ const t = [
     mark: "ㄅㄧㄢˋ",
     tradition: "便",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bian",
+    explain: "顺利，没有困难或阻碍：～当。～利。～道。～民。简单的，礼节上非正式的：～宴。～衣。～函（形式比较简便的信件）。简～。～宜。随～（适当地，看事实需要而自行处理事情）。便利的时候：～中请来信。就：说了～做。排泄屎尿或排泄出来的屎尿：大～。～秘。"
   },
   {
     char: "促",
@@ -19684,7 +19937,9 @@ const t = [
     mark: "ㄘㄨˋ",
     tradition: "促",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cu",
+    explain: "时间短：短～。急～。催；推动：督～。把生产～上去。靠近：～膝谈心。"
   },
   {
     char: "俄",
@@ -19697,7 +19952,9 @@ const t = [
     mark: "ㄜˊ",
     tradition: "俄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "e",
+    explain: "时间很短；突然间：～顷。～而。姓。指俄罗斯。"
   },
   {
     char: "俊",
@@ -19710,7 +19967,9 @@ const t = [
     mark: "ㄐㄩㄣˋ",
     tradition: "俊",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "jun",
+    explain: "相貌清秀好看：～秀。～俏。这个孩子长得好～呀!才智出众的：～杰。英～。～士。姓。“隽”"
   },
   {
     char: "俏",
@@ -19723,7 +19982,9 @@ const t = [
     mark: "ㄑㄧㄠˋ",
     tradition: "俏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qiao",
+    explain: "容貌秀美、体态轻盈。  【组词】：俊俏、俏丽活泼有趣。  【组词】：俏皮指货物的销路好或价格提升。  【组词】：行情看俏"
   },
   {
     char: "俐",
@@ -19736,7 +19997,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "俐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "见〖伶俐〗。"
   },
   {
     char: "俗",
@@ -19749,7 +20012,9 @@ const t = [
     mark: "ㄙㄨˊ",
     tradition: "俗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "su",
+    explain: "风俗：习～。移风易～。大众的；通行的；习见的：约定～成。通～。趣味不高的；令人厌恶的：庸～。～气。没出家的人；世俗：僧～。还～。"
   },
   {
     char: "俘",
@@ -19762,7 +20027,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "俘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "作战时把敌人捉住：～获。作战时被捉住的敌人：战～。"
   },
   {
     char: "保",
@@ -19775,7 +20042,9 @@ const t = [
     mark: "ㄅㄠˇ",
     tradition: "保",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "bao",
+    explain: "保护；保卫：～健。～家卫国。保持：～温。～鲜。保证；担保（做到）：～质～量。～你一学就会。担保（不犯罪、不逃走等）：～释。取～候审。保人；保证人：作～。交～。旧时户籍的编制单位。参看〖保甲〗。姓。"
   },
   {
     char: "信",
@@ -19788,7 +20057,9 @@ const t = [
     mark: "ㄒㄧㄣˋ",
     tradition: "信",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "xin",
+    explain: "把言语写成文字传达给特定对象的书面文件。  【组词】：书信、平信、挂号信消息。  【组词】：音信、凶信、口信诚实不欺。  【组词】：忠信、信实、讲信修睦凭证、凭据。  【组词】：印信、信物听从、不怀疑。  【组词】：相信、深信不疑、不可置信随意。  【组词】：信步、信手拈来、信口开河"
   },
   {
     char: "俩",
@@ -19801,7 +20072,9 @@ const t = [
     mark: "ㄌㄧㄚˇ",
     tradition: "倆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "liang",
+    explain: "两个（后面不能再用量词）：姐妹～。不多；几个：刚有了～钱儿，就不知道迈哪条腿了。就那么～人，还成得了气候！"
   },
   {
     char: "俭",
@@ -19814,7 +20087,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "儉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "节省。与“奢”相对：勤～建国。省吃～用。"
   },
   {
     char: "修",
@@ -19827,7 +20102,9 @@ const t = [
     mark: "ㄒㄧㄡ",
     tradition: "修",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiu",
+    explain: "修饰：装～。～辞。修理；整治：～车。～桥补路。一定要把淮河～好。写；编写：～函。～史。～县志。（学问、品行方面）学习和锻炼：～养。～业。进～。这学期多～了两门课。修行（迷信）：～炼。～仙。兴建；建筑：～建。～水库。新～了一条铁路。剪或削，使整齐：～树枝。～指甲。指修正主义：反～防～。姓。长；高：～长。～竹。"
   },
   {
     char: "俯",
@@ -19840,7 +20117,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "俯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "敬辞，旧时公文书信中用来称对方对自己的行动：～允。"
   },
   {
     char: "俱",
@@ -19853,7 +20132,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "俱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "全、都。  【组词】：一应俱全、万事俱备、百废俱兴"
   },
   {
     char: "俺",
@@ -19866,7 +20147,9 @@ const t = [
     mark: "ㄢˇ",
     tradition: "俺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "an",
+    explain: "我们（不包括听话的人）：你先去，～几个随后就到。我：你们都走吧，～一个人留下就行了。"
   },
   {
     char: "倍",
@@ -19879,7 +20162,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "倍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "跟原数相等的数，某数的几倍就是用几乘某数：三的五～是十五。加倍：勇气～增。事半功～。"
   },
   {
     char: "倒",
@@ -19892,7 +20177,9 @@ const t = [
     mark: "ㄉㄠˋ",
     tradition: "倒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dao",
+    explain: "竖立的东西躺下来：摔～。墙～了。～塌。～台。打～。卧～。对调，转移，更换，改换：～手。～换。～车。～卖。～仓。～戈。"
   },
   {
     char: "倔",
@@ -19905,7 +20192,9 @@ const t = [
     mark: "ㄐㄩㄝˊ",
     tradition: "倔",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jue",
+    explain: "性子直，态度生硬：～头～脑。"
   },
   {
     char: "倘",
@@ -19914,11 +20203,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄤˊ",
     tradition: "倘",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tang",
+    explain: "连词。如果；假使：～能坚持，一定胜利。"
   },
   {
     char: "候",
@@ -19931,7 +20222,9 @@ const t = [
     mark: "ㄏㄡˋ",
     tradition: "候",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hou",
+    explain: "等待：～车。你稍～一会儿，他马上就来。问候；问好：致～。敬～起居。时节：时～。气～。～鸟。古代五天为一候，现在气象学上仍沿用：～温。（～儿）情况：征～。火～。"
   },
   {
     char: "倚",
@@ -19944,7 +20237,9 @@ const t = [
     mark: "ㄧˇ",
     tradition: "倚",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yi",
+    explain: "靠着：～马千言。～着门框朝外看。仗恃：～势欺人。～老卖老。偏；歪：不偏不～。姓。"
   },
   {
     char: "借",
@@ -19957,7 +20252,9 @@ const t = [
     mark: "ㄐㄧㄝˋ",
     tradition: "藉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "暂时使用别人的物品或金钱；借进：向他～书。跟人～钱。把笔～给我用一下。把物品或金钱暂时供别人使用；借出：～书给他。～钱给人。假托：～故。～端。凭借；利用：～助。～手（假手）。（有时跟“着”连用）引进动作、行为所利用或凭借的时机、事物等：～着灯光看书。～出差的机会调查方言。“藉”"
   },
   {
     char: "倡",
@@ -19970,7 +20267,9 @@ const t = [
     mark: "ㄔㄤˋ",
     tradition: "倡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chang",
+    explain: "发起、领导。倡导、提倡"
   },
   {
     char: "倦",
@@ -19983,7 +20282,9 @@ const t = [
     mark: "ㄐㄩㄢˋ",
     tradition: "倦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "juan",
+    explain: "疲劳：困～。厌烦；懈怠：诲人不～。孜孜不～。"
   },
   {
     char: "债",
@@ -19996,7 +20297,9 @@ const t = [
     mark: "ㄓㄞˋ",
     tradition: "債",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhai",
+    explain: "欠别人的钱：借～。欠～。还～。公～。血～。"
   },
   {
     char: "值",
@@ -20009,7 +20312,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "值",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "价钱：币～。价～。相当；值得：这支笔～五元。不～一提。碰到；遇上：正～佳节。担任轮到的职务：～班。～日。数学上按照数学式演算所得的结果：比～。函数～。"
   },
   {
     char: "倾",
@@ -20018,11 +20323,13 @@ const t = [
     radical: "亻",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄥ",
     tradition: "傾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "歪；斜：～斜。身子向前～着。倾向：左～。右～。倒塌：～覆。大厦将～。使器物反转或歪斜，尽数倒出里面的东西：～箱倒箧。～盆大雨。用尽（力量）：～听。～诉。～全力把工作做好。压倒：权～朝野。"
   },
   {
     char: "假",
@@ -20035,7 +20342,9 @@ const t = [
     mark: "ㄐㄧㄚˋ",
     tradition: "假",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jia",
+    explain: "虚伪的；不真实的；伪造的；人造的（跟“真”相对）：～话。～发。～山。～证件。～仁～义。假定：～设。～说。假如：～若。～使。借用：久～不归。～公济私。不～思索。姓。"
   },
   {
     char: "偎",
@@ -20048,7 +20357,9 @@ const t = [
     mark: "ㄨㄟ",
     tradition: "偎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wei",
+    explain: "亲热地靠着；紧挨着：～依。孩子～在母亲的怀里。"
   },
   {
     char: "偏",
@@ -20061,7 +20372,9 @@ const t = [
     mark: "ㄆㄧㄢ",
     tradition: "偏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pian",
+    explain: "不正；倾斜（跟“正”相对）：～锋。太阳～西了。仅注重一方面或对人对事不公正：～重。～爱。兼听则明，～信则暗。～于基础理论的研究。辅助的；不占主要地位的：～将。～师。与某个标准相比有差距：体温～高。工资～低。收入中等～上。客套话，表示先用或已用过茶饭等（多接用“了”字）：我～过了，您请用吧。姓。偏偏：不让我去我～去。庄稼正需要雨水的时候，可天～不下雨。"
   },
   {
     char: "做",
@@ -20074,7 +20387,9 @@ const t = [
     mark: "ㄗㄨㄛˋ",
     tradition: "做",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zuo",
+    explain: "制造：～衣服。用这木头～张桌子。写作：～文章。从事某种工作或活动：～工。～事。～买卖。举行庆祝或纪念活动：～寿。～生日。充当；担任：～母亲的。～官。～教员。～保育员。今天开会由他～主席。当做：树皮可以～造纸的原料。这篇文章可以～教材。结成（某种关系）：～亲。～对头。～朋友。假装出（某种模样）：～样子。～鬼脸。～痛苦状。"
   },
   {
     char: "停",
@@ -20087,7 +20402,9 @@ const t = [
     mark: "ㄊㄧㄥˊ",
     tradition: "停",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ting",
+    explain: "停止；停留；停放：表～了。顺路到上海～了两天。汽车～在门口。妥帖：～妥。～当。总份数中的一份：十～儿有八～儿是坏的。"
   },
   {
     char: "健",
@@ -20100,7 +20417,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "健",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "强健：～康。～全。使强健：～身。～胃。在某一方面显示的程度超过一般；善于：～谈。～忘。姓。"
   },
   {
     char: "偶",
@@ -20113,20 +20432,9 @@ const t = [
     mark: "ㄡˇ",
     tradition: "偶",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "偷",
-    spell: "tōu",
-    stroke: "11",
-    radical: "亻",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄊㄡ",
-    tradition: "偷",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "ou",
+    explain: "用木头、泥土等制成的人像：木～。～像。双数；成对的（跟“奇（jī）”相对）：～数。～蹄类。无独有～。配偶：佳～。姓。偶然；偶尔：中途～遇。～一为之。～感风寒。"
   },
   {
     char: "偿",
@@ -20139,7 +20447,9 @@ const t = [
     mark: "ㄔㄤˊ",
     tradition: "償",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chang",
+    explain: "归还；抵补：～还。得不～失。满足：如愿以～。"
   },
   {
     char: "傀",
@@ -20152,7 +20462,9 @@ const t = [
     mark: "ㄎㄨㄟˇ",
     tradition: "傀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kui",
+    explain: "→傀儡"
   },
   {
     char: "傅",
@@ -20165,7 +20477,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "傅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "辅助；教导。负责教导或传授技艺的人：师～。姓（近年也有俗写作付的）。附着；加上：皮之不存，毛将安～?涂抹；搽：～粉。"
   },
   {
     char: "傍",
@@ -20178,7 +20492,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "傍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bang",
+    explain: "靠；靠近：船～了岸。依山～水。临近（指时间）：～晚。依靠；依附：～人门户。"
   },
   {
     char: "储",
@@ -20191,7 +20507,9 @@ const t = [
     mark: "ㄔㄨˇ",
     tradition: "儲",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chu",
+    explain: "储藏；存放：～蓄。～金。～粮备荒。已经确定为继承皇位等最高统治权的人：立～。王～。～君。姓。"
   },
   {
     char: "催",
@@ -20204,33 +20522,9 @@ const t = [
     mark: "ㄘㄨㄟ",
     tradition: "催",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "傲",
-    spell: "ào",
-    stroke: "12",
-    radical: "亻",
-    struct: "左中右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄠˋ",
-    tradition: "傲",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "傻",
-    spell: "shǎ",
-    stroke: "13",
-    radical: "亻",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄕㄚˇ",
-    tradition: "傻",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "cui",
+    explain: "叫人赶快行动或做某事：图书馆来信，～他还书。使事物的产生和变化加快：～生。～眠。～肥。姓。"
   },
   {
     char: "像",
@@ -20243,7 +20537,9 @@ const t = [
     mark: "ㄒㄧㄤˋ",
     tradition: "像",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiang",
+    explain: "比照人物制成的形象：画～。塑～。肖～。从物体发出的光线经平面镜、球面镜、透镜、棱镜等反射或折射后所形成的与原物相似的图景。分为实像和虚像。在形象上相同或有某些共同点：他的面貌～他哥哥。好像：～要下雨了。比如：～大熊猫这样的珍稀动物，要加以保护。姓。"
   },
   {
     char: "僚",
@@ -20256,7 +20552,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "僚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "官吏：官～。指在同一官署任职的官吏：同～。～属。"
   },
   {
     char: "僧",
@@ -20269,7 +20567,9 @@ const t = [
     mark: "ㄙㄥ",
     tradition: "僧",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "seng",
+    explain: "出家修行的男性佛教徒；和尚：～人。～衣。[僧伽之省，梵saṃgha]姓。"
   },
   {
     char: "僵",
@@ -20282,7 +20582,9 @@ const t = [
     mark: "ㄐㄧㄤ",
     tradition: "僵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "僵硬：～尸。手脚都冻～了。事情难于处理，停滞不进：大家一时想不出适当的话，情形非常～。不要把事情弄～了，以致无法解决。收敛笑容，使表情严肃：他～着脸。"
   },
   {
     char: "僻",
@@ -20295,7 +20597,9 @@ const t = [
     mark: "ㄆㄧˋ",
     tradition: "僻",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pi",
+    explain: "偏僻：～巷。荒～。～处一隅。性情古怪，跟一般人合不来：怪～。孤～。不常见的（多指文字）：生～。冷～。～字（冷僻的字）。"
   },
   {
     char: "儒",
@@ -20308,7 +20612,9 @@ const t = [
     mark: "ㄖㄨˊ",
     tradition: "儒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ru",
+    explain: "旧时泛指读书人：～生。～医。古代从巫、史、祝、卜中分化出来的专司礼仪的人。儒家：～术。通“懦（nuò）”。懦弱：偷～转脱。"
   },
   {
     char: "儡",
@@ -20321,7 +20627,9 @@ const t = [
     mark: "ㄌㄟˊ",
     tradition: "儡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lei",
+    explain: "见〖傀儡〗。"
   },
   {
     char: "儿",
@@ -20330,11 +20638,13 @@ const t = [
     radical: "儿",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄦˊ",
     tradition: "兒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "er",
+    explain: "雄性的：～马。～狗。后缀（注音作r）。名词后缀，主要有下面几种作用。a）表示小：盆儿、棍儿、窟窿儿、小车儿。b）表示词性变化：吃儿、盖儿、卷（juǎn）儿（动词名词化）；亮儿、尖儿、零碎儿（形容词名词化）。c）表示具体事物抽象化：门儿、根儿、油水儿。d）区别不同事物：白面—白面儿（海洛因），老家—老家儿（父母和家中其他长辈）。少数动词的后缀：玩～。火～。参看〖儿化〗。“兒”"
   },
   {
     char: "允",
@@ -20347,7 +20657,9 @@ const t = [
     mark: "ㄩㄣˇ",
     tradition: "允",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yun",
+    explain: "允许：应～。不～。～诺。姓。公平；适当：～当。公～。平～。"
   },
   {
     char: "元",
@@ -20356,11 +20668,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄩㄢˊ",
     tradition: "元",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "朝代。蒙古孛儿只斤·铁木真于1206年建立。1271年忽必烈定国号为元。1279年灭宋。定都大都（今北京）。姓。"
   },
   {
     char: "兄",
@@ -20373,7 +20687,9 @@ const t = [
     mark: "ㄒㄩㄥ",
     tradition: "兄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiong",
+    explain: "哥哥：父～。胞～。从～。亲戚中同辈而年纪比自己大的男子：表～。对男性朋友的尊称：仁～。"
   },
   {
     char: "充",
@@ -20386,7 +20702,9 @@ const t = [
     mark: "ㄔㄨㄥ",
     tradition: "充",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chong",
+    explain: "满；足：～沛。～分。～其量。装满；塞住：～电。～塞。～耳不闻。担任；当：～当。～任。冒充：～行家。以次～好。打肿脸～胖子。姓。"
   },
   {
     char: "兆",
@@ -20395,11 +20713,13 @@ const t = [
     radical: "儿",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄠˋ",
     tradition: "兆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhao",
+    explain: "数目。指一百万。古代也指一万亿。事前出现的迹象：预～。征～。预示：瑞雪～丰年。古指占卜吉凶时灼龟甲所成的裂纹。"
   },
   {
     char: "先",
@@ -20412,7 +20732,9 @@ const t = [
     mark: "ㄒㄧㄢ",
     tradition: "先",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "xian",
+    explain: "时间或次序在前的（跟“后”相对）：～进。～例。事～。领～。争～恐后。有言在～。表示某一行为或事件发生在前：他比我～到。我～说几句。暂时：这件事情～放一放，以后再考虑。祖先；上代：～人。尊称死去的人：～父。～烈。～哲。先前：小王的技术比～强多了。你～怎么不告诉我?姓。"
   },
   {
     char: "光",
@@ -20425,7 +20747,9 @@ const t = [
     mark: "ㄍㄨㄤ",
     tradition: "光",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "guang",
+    explain: "通常指照在物体上，使人能看见物体的那种物质，如太阳光、灯光、月光，以及看不见的红外线和紫外线等。也叫光波、光线。景物：风～。春～明媚。光彩；荣誉：为国增～。比喻好处：沾～。叨～。借～。敬辞，表示光荣，用于对方来临：～临。～顾。光大；使显耀：～前裕后。～宗耀祖。明亮：～明。～泽。光滑；光溜：磨～。这种纸很～。一点儿不剩；全没有了；完了：精～。用～。把敌人消灭～。姓。"
   },
   {
     char: "克",
@@ -20434,11 +20758,13 @@ const t = [
     radical: "十",
     struct: "上中下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄎㄜˋ",
     tradition: "剋",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "ke",
+    explain: "能：～勤～俭。不～分身。克服；克制：～己。以柔～刚。攻下据点；战胜：～复。～敌。攻必～。消化：～食。～化。姓。严格限定（期限）：～期。～日。质量或重量单位，符号g。1克等于1千克（公斤）的千分之一。[法gramme]藏族地区容量单位，1克青稞约重25市斤。藏族地区地积单位，播种1克（约25市斤）种子的土地称为1克地，1克约合1市亩。“剋（尅）”"
   },
   {
     char: "免",
@@ -20451,7 +20777,9 @@ const t = [
     mark: "ㄇㄧㄢˇ",
     tradition: "免",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mian",
+    explain: "去除：～费。～职。避免：～疫。不要；不可：～开尊口。闲人～进。"
   },
   {
     char: "兑",
@@ -20464,7 +20792,9 @@ const t = [
     mark: "ㄉㄨㄟˋ",
     tradition: "兑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dui",
+    explain: "交换。  【组词】：兑换凭票据支付或领取现金。  【组词】：兑付、汇兑、挤兑八卦之一。卦形是，代表沼泽。六十四卦之一。兑下兑上。有亨通而利于守正的意思。"
   },
   {
     char: "兔",
@@ -20473,11 +20803,13 @@ const t = [
     radical: "⺈",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄊㄨˋ",
     tradition: "兔",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tu",
+    explain: "哺乳动物，头部略像鼠，耳大，上唇中间分裂，尾短而向上翘，前肢比后肢短，善于跳跃，跑得很快。有家兔和野兔等。肉可以吃，毛可供纺织，毛皮可以制衣物。通称兔子。"
   },
   {
     char: "党",
@@ -20490,7 +20822,9 @@ const t = [
     mark: "ㄉㄤˇ",
     tradition: "黨",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dang",
+    explain: "政党。在中国特指中国共产党：～校。入～。由私人利害关系结成的小集团：结～营私。偏袒：～同伐异。旧指亲族：父～。母～。古代的乡里组织：乡～。"
   },
   {
     char: "兜",
@@ -20503,7 +20837,9 @@ const t = [
     mark: "ㄉㄡ",
     tradition: "兜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dou",
+    explain: "口袋或口袋一类的东西：衣～。网～。做成兜形把东西拢住：用手巾～着。招揽（顾客）：～售。绕着：～圈子。承担起来；包下来：天大的事有我～着。"
   },
   {
     char: "兢",
@@ -20516,7 +20852,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "兢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "〔～～〕小心，谨慎，如“～～业业”、“战战～～”。"
   },
   {
     char: "入",
@@ -20525,11 +20863,13 @@ const t = [
     radical: "入",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄖㄨˋ",
     tradition: "入",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ru",
+    explain: "进去。与“出”相对：～场。～冬。参加：～伍。～团。合乎；合于：～情～理。收入：岁～。入声。"
   },
   {
     char: "全",
@@ -20542,7 +20882,9 @@ const t = [
     mark: "ㄑㄩㄢˊ",
     tradition: "全",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "quan",
+    explain: "完备；齐全：这部书不～。东西预备～了。棉花苗已出～。保全；使完整不缺：两～其美。整个：～神贯注。～家光荣。～书十五卷。完全；都：～不是新的。不～是新的。他讲的话我～记下来了。姓。"
   },
   {
     char: "八",
@@ -20551,11 +20893,13 @@ const t = [
     radical: "八",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄚ",
     tradition: "八",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "七加一后所得的数目。见〖数字〗。姓。"
   },
   {
     char: "公",
@@ -20568,7 +20912,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "公",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "属于国家或集体的（跟“私”相对）：～款。～物。～事公办。共同的；大家承认的：～分母。～议。～约。属于国际间的：～海。～制。～历。使公开：～布。～之于世。公平；公正：～买～卖。大～无私。秉～办理。公事；公务：办～。～余。因～出差。姓。封建五等爵位的第一等：～爵。～侯。王～大臣。对上了年纪的男子的尊称：诸～。张～。丈夫的父亲；公公：～婆。属性词。（禽兽）雄性的（跟“母”相对）：～羊。这只小鸡是～的。"
   },
   {
     char: "六",
@@ -20581,7 +20927,9 @@ const t = [
     mark: "ㄌㄧㄡˋ",
     tradition: "六",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liu",
+    explain: "数目。五加一的和。工尺谱记音符号之一。相当于简谱的“5”。"
   },
   {
     char: "兰",
@@ -20590,11 +20938,13 @@ const t = [
     radical: "丷",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄌㄢˊ",
     tradition: "蘭",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "lan",
+    explain: "兰花，多年生常绿草本植物。花清香，可盆栽供观赏。兰草，即泽兰，多年生草本植物。叶卵圆形或披针形，边缘有锯齿。"
   },
   {
     char: "共",
@@ -20603,11 +20953,13 @@ const t = [
     radical: "八",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄥˋ",
     tradition: "共",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gong",
+    explain: "一起、一同。共鸣、共事、共襄盛举合计、总计。共计、总共相同的。共识、共相分享、合用。愿车马衣轻裘与朋友共，敝之而无憾。（《论语．公冶长》）共产党的简称。俄共、中共"
   },
   {
     char: "关",
@@ -20620,7 +20972,9 @@ const t = [
     mark: "ㄍㄨㄢ",
     tradition: "關",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guan",
+    explain: "使开着的物体合拢：～窗户。把抽屉～上。使机器等停止运转；使电气装置结束工作状态：～机。～灯。～电视。放在里面不使出来：鸟儿～在笼子里。监狱是～犯人的。（企业等）倒闭；歇业：有一年，镇上～了好几家店铺。古代在交通险要或边境出入的地方设置的守卫处所：～口。～防。山海～。嘉峪～。我的责任就是不让废品混过～去。城门外附近的地区：城～。北～。～厢。门闩：门插～儿。斩～落锁。货物出口和进口查验收税的地方：海～。～税。比喻重要的转折点或不容易度过的一段时间：难～。只要突破这一～，就好办了。姓。"
   },
   {
     char: "兴",
@@ -20629,11 +20983,13 @@ const t = [
     radical: "八",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄥˋ",
     tradition: "興",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "xing",
+    explain: "兴盛；流行：复～。新～。现在已经不～这种式样了。使盛行：大～调查研究之风。开始；发动；创立：～办。～工。～利除弊。百废俱～。起；起来：晨～（早晨起来）。夙～夜寐。准许（多用于否定式）：说话要有根据，不～胡说。或许：明天他也～来，也～不来。姓。"
   },
   {
     char: "兵",
@@ -20646,7 +21002,9 @@ const t = [
     mark: "ㄅㄧㄥ",
     tradition: "兵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bing",
+    explain: "战士；军队：当～。～种。军队中的最低等级：上等～。武器：～工厂。短～相接。关于军事或战争的：～书。纸上谈～。"
   },
   {
     char: "其",
@@ -20655,11 +21013,13 @@ const t = [
     radical: "八",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧ",
     tradition: "其",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "他的、他们的。各得其所、人尽其才、听其自然这个、那样。表示指示。其中、不厌其烦、查无其事岂、难道。欲加之罪，其无辞乎？《左传．僖公十年》）助词。言念君子，温其如玉。（《诗经．秦风．小戎》）"
   },
   {
     char: "具",
@@ -20672,7 +21032,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "具",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "用具：家～。文～。具有：～备。粗～规模。备；办：～结。谨～薄礼。才能；才干：才～。干城之～。写出；陈述：～名。条～时弊。量词。用于棺材、尸体和某些器物：一～尸体。"
   },
   {
     char: "典",
@@ -20685,7 +21047,9 @@ const t = [
     mark: "ㄉㄧㄢˇ",
     tradition: "典",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dian",
+    explain: "标准；法则：～范。～章。典范性书籍：词～。引经据～。典故：用～。出～。典礼：盛～。大～。主持；主管：～试。～狱。姓。一方把土地、房屋等押给另一方使用，换取一笔钱，不付利息，议定年限，到期还款，收回原物。"
   },
   {
     char: "养",
@@ -20694,11 +21058,13 @@ const t = [
     radical: "丷",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄤˇ",
     tradition: "養",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yang",
+    explain: "抚育，供给生活品：～育。赡～。抚～。～家。饲养动物，培植花草：～花。～殖。生育，生小孩儿。抚养的（非亲生的）：～子。～父。～母。教育，训练：培～。教～。使身心得到滋补和休息：～病。～心。～性。休～。营～。～精蓄锐。保护修补：～路。"
   },
   {
     char: "兼",
@@ -20711,20 +21077,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "兼",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "兽",
-    spell: "shòu",
-    stroke: "11",
-    radical: "口",
-    struct: "上中下结构",
-    five: "金",
-    method: "-",
-    mark: "ㄕㄡˋ",
-    tradition: "獸",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "jian",
+    explain: "把两份并在一起；加倍：～旬（二十天）。～程。所具有的或所涉及的不只一方面：～职。～听则明，偏信则暗。"
   },
   {
     char: "冀",
@@ -20737,7 +21092,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "冀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "希望；希图：希～。～求。～盼。～其成功。河北的别称：～中平原。姓。"
   },
   {
     char: "内",
@@ -20750,7 +21107,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "内",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nei",
+    explain: "里。相对于外而言。  【组词】：室内、国内　◎心里、心意。  【组词】：内咎、内省宫廷、朝廷。  【组词】：宫廷大内脏腑。  【组词】：铭感五内"
   },
   {
     char: "冈",
@@ -20759,11 +21118,13 @@ const t = [
     radical: "冂",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄍㄤ",
     tradition: "岡",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gang",
+    explain: "山脊；山梁：～峦（luán）起伏。景阳～。"
   },
   {
     char: "册",
@@ -20772,11 +21133,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄘㄜˋ",
     tradition: "册",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ce",
+    explain: "古称编串好的竹简。现指本子：画～。名～。帝王赐封爵位、称号等：～封。～立。量词。用于书：这部书共四～。"
   },
   {
     char: "再",
@@ -20789,7 +21152,9 @@ const t = [
     mark: "ㄗㄞˋ",
     tradition: "再",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zai",
+    explain: "1.表示已经重复的动作用“又”，表示将要重复的动作用“再”：这部书前几天我又读了一遍，以后有时间我还要～读一遍。b）表示更加：高点儿，～高点儿。～多一点儿就好了。c）表示如果继续下去就会怎样：学习～不努力，就得留级了。离开车只剩半个钟头了，～不走可赶不上了。d）表示即使继续下去也不会怎样：你～解释，他也不会同意的。e）表示一个动作发生在另一个动作结束之后：咱们看完了这个节目～走。你把材料整理好～动笔。f）表示另外有所补充：～则。～不然。院子里种着迎春、牡丹、海棠、石榴，～就是玫瑰和月季。2.再继续；再出现：青春不～。良机难～。3.姓。"
   },
   {
     char: "冒",
@@ -20798,11 +21163,13 @@ const t = [
     radical: "曰",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄠˋ",
     tradition: "冒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mao",
+    explain: "透出；往上升：～汗。～烟。～火苗子。顶着；不顾（危险、恶劣环境等）：～雨。～险。鲁莽；轻率：～失。～昧。假充：～名。～牌。"
   },
   {
     char: "冕",
@@ -20815,7 +21182,9 @@ const t = [
     mark: "ㄇㄧㄢˇ",
     tradition: "冕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mian",
+    explain: "古代帝王、诸侯所戴的礼帽。宋朝以后，专指皇帝的礼帽。喻指体育、文艺等竞赛中第一名的荣誉地位：卫～。"
   },
   {
     char: "冗",
@@ -20824,11 +21193,13 @@ const t = [
     radical: "冖",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄖㄨㄥˇ",
     tradition: "冗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "rong",
+    explain: "多余的：～员。文章～长。烦琐；繁忙：～杂。～忙。繁忙的事：拨～。"
   },
   {
     char: "写",
@@ -20837,11 +21208,13 @@ const t = [
     radical: "冖",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄝˋ",
     tradition: "寫",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xie",
+    explain: "书写：～字。写作：～诗。描摹：～生。古又同“泻（xiè）”。"
   },
   {
     char: "军",
@@ -20854,7 +21227,9 @@ const t = [
     mark: "ㄐㄩㄣ",
     tradition: "軍",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "jun",
+    explain: "军队：我～。陆～。解放～。参～。裁～。生产大～。劳动后备～。军队的编制单位，下辖若干师：第一～。敌人的兵力估计有两个～。（Jūn）姓。"
   },
   {
     char: "农",
@@ -20863,11 +21238,13 @@ const t = [
     radical: "丶",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄋㄨㄥˊ",
     tradition: "農",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nong",
+    explain: "农业：务～。～具。～田水利。～林牧副渔。农民：老～。茶～。菜～。姓。"
   },
   {
     char: "冠",
@@ -20880,7 +21257,9 @@ const t = [
     mark: "ㄍㄨㄢˋ",
     tradition: "冠",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "guan",
+    explain: "帽子：皇～。桂～。衣～整齐。怒发冲～。形状像帽子或在顶上的东西：鸡～。树～。"
   },
   {
     char: "冤",
@@ -20893,7 +21272,9 @@ const t = [
     mark: "ㄩㄢ",
     tradition: "冤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yuan",
+    explain: "冤枉；冤屈：～情。鸣～。申～。含～负屈。冤仇：～家。结～。上当；吃亏：花～钱。白跑一趟，真～!欺骗：你别～人!"
   },
   {
     char: "冬",
@@ -20906,7 +21287,9 @@ const t = [
     mark: "ㄉㄨㄥ",
     tradition: "鼕",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "dong",
+    explain: "冬季：隆～。～耕。～眠。在北京住了两～。（Dōng）姓。同“咚”。"
   },
   {
     char: "冯",
@@ -20919,7 +21302,9 @@ const t = [
     mark: "ㄈㄥˊ",
     tradition: "馮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "feng",
+    explain: "姓。"
   },
   {
     char: "冰",
@@ -20932,7 +21317,9 @@ const t = [
     mark: "ㄅㄧㄥ",
     tradition: "冰",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "bing",
+    explain: "水在0℃或0℃以下凝结成的固体：湖里结～了。因接触凉的东西而感到寒冷：刚到中秋，河水已经有些～腿了。把东西和冰或凉水放在一起或放在冰箱里使凉：把汽水～上。像冰的东西：～片。～糖。干～。姓。"
   },
   {
     char: "冲",
@@ -20945,7 +21332,9 @@ const t = [
     mark: "ㄔㄨㄥˋ",
     tradition: "衝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chong",
+    explain: "用水或酒浇注，水撞击：～茶。～剂。～洗。～荡。向上钻，直上：～腾。～入云霄。破解不祥：～喜。空虚，谦虚：“大盈若～，其用不穷”。～挹（yì）。谦～。幼小：～昧。～弱。～龄。方言，山区的平地：韶山～。通行的大路，重要的地方：要～。首当其～。不顾一切，一直向前：～锋。横～直撞。猛烈地撞击：～力。～突。收支账目互相抵销：～账。情感强烈：～动。兴（xìng）～～。太阳系中，除水星和金星外，其余的某一个行星进行到与地球、太阳成一条直线而地球正处在这个行星与太阳之间的位置时称“冲”。"
   },
   {
     char: "决",
@@ -20958,7 +21347,9 @@ const t = [
     mark: "ㄐㄩㄝˊ",
     tradition: "决",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jue",
+    explain: "水冲破堤岸；开口子：～口。确定；拿定主意：表～。犹豫不～。确定最后胜负：～赛。～出前三名。副词。一定：～不后退。处（chǔ）死：枪～。处～。"
   },
   {
     char: "况",
@@ -20971,7 +21362,9 @@ const t = [
     mark: "ㄎㄨㄤˋ",
     tradition: "况",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuang",
+    explain: "情形：近～。战～。比方：以古～今。文言连词。表示更进一层，相当于“况且”“何况”：江河尚能跨越，～此等沟洫乎？"
   },
   {
     char: "冶",
@@ -20984,7 +21377,9 @@ const t = [
     mark: "ㄧㄝˇ",
     tradition: "冶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ye",
+    explain: "熔炼（金属）：～金。过分的装饰；不正派的打扮：～容。妖～。"
   },
   {
     char: "冷",
@@ -20997,7 +21392,9 @@ const t = [
     mark: "ㄌㄥˇ",
     tradition: "冷",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "leng",
+    explain: "温度低；感觉温度低（跟“热”相对）：～水。现在还不算～，雪后才～呢。你～不～?使冷（多指食物）：太烫了，～一下再吃。不热情；不温和：～面孔。～言～语。～～地说了声“好吧”。寂静；不热闹：～落。～清清。生僻；少见的：～僻。～字。不受欢迎的；没人过问的：～货。～门。乘人不备的；暗中的；突然的：～箭。～枪。～不防。比喻灰心或失望：心灰意～。看到他严厉的目光，我的心～了半截。姓。"
   },
   {
     char: "冻",
@@ -21010,7 +21407,9 @@ const t = [
     mark: "ㄉㄨㄥˋ",
     tradition: "凍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dong",
+    explain: "（液体或含水分的东西）遇冷凝固：不～港。缸里的水～了。白菜要抢收入窖，不能让它～坏。汤汁等凝结成的半固体：肉～儿。鱼～儿。受冷或感到冷：今天衣服穿少了，真～得慌。机体的组织由于温度过低而受损伤：～害。我的脚～了。姓。"
   },
   {
     char: "净",
@@ -21023,7 +21422,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "净",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "清洁：～化。～水。～土。～心（a.清净的心；b.心里没有牵挂）。～院（佛寺。亦称“净宇”）。干～。洁～。窗明几～。使干净：～面。～手（大小便）。空，什么也没有：～尽。单纯，纯粹的：～利。～值。～价。～重（zhòng）。纯～。单，只，全：满地～是树叶。中国传统戏剧扮演男人的角色名：～角（亦称“花脸”、“黑头”）。"
   },
   {
     char: "凄",
@@ -21036,7 +21437,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "凄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "寒冷：风雨～～。形容冷落萧条：～凉。～清。形容悲伤难过：～然。～切。"
   },
   {
     char: "准",
@@ -21049,7 +21452,9 @@ const t = [
     mark: "ㄓㄨㄣˇ",
     tradition: "準",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhun",
+    explain: "准许：批～。不～迟到或早退。标准：～绳。水～。～则。以此为～。依据；依照：～此办理。准确：瞄～。钟走得不～。他投球很～。一定：我明天～去。他不～能来。任务～能完成。前缀，表示程度上虽不完全够，但可以作为某类事物看待的：～将。～平原。姓。"
   },
   {
     char: "凉",
@@ -21062,7 +21467,9 @@ const t = [
     mark: "ㄌㄧㄤˊ",
     tradition: "",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liang",
+    explain: "温度低；冷（指天气时，比“冷”的程度浅）：阴～。～水。过了秋分天就～了。比喻灰心或失望：听到这消息，他心里就～了。悲伤；愁苦：凄～。悲～。冷落；不热闹：荒～。苍～。姓。"
   },
   {
     char: "凌",
@@ -21075,7 +21482,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "凌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "侵犯；欺侮：欺～。～辱。盛气～人。逼近：～晨。升高；在空中：～空。～云。～霄。姓。冰（多指块状或锥状的）：冰～。～锥。河里起了～。"
   },
   {
     char: "减",
@@ -21088,7 +21497,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "减",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "从总体或某个数量中去掉一部分：削～。裁～。～员。偷工～料。五～三是二。降低；衰退：～价。～色。工作热情有增无～。人虽老了，干活还是不～当年!"
   },
   {
     char: "凑",
@@ -21101,7 +21512,9 @@ const t = [
     mark: "ㄘㄡˋ",
     tradition: "凑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cou",
+    explain: "拼凑；聚集：～钱。～足了人数。大家～到这里来听他讲故事。碰；赶：～巧。～热闹。接近：往前～～。～到跟前。她拿起一束鲜花～着鼻子闻。"
   },
   {
     char: "凛",
@@ -21114,7 +21527,9 @@ const t = [
     mark: "ㄌㄧㄣˇ",
     tradition: "凛",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lin",
+    explain: "寒冷：～冽。严肃；严厉：～遵（严肃地遵照）。～然。～若冰霜。畏惧；害怕：～于夜行。"
   },
   {
     char: "凝",
@@ -21127,7 +21542,9 @@ const t = [
     mark: "ㄋㄧㄥˊ",
     tradition: "凝",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "ning",
+    explain: "由气体变成液体或由液体结成固体：～结。～固。注意力集中：～神。～视。"
   },
   {
     char: "几",
@@ -21136,11 +21553,13 @@ const t = [
     radical: "几",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧˇ",
     tradition: "幾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ji",
+    explain: "询问数量多少：～个人？。来了～天？表示不定的数目：十～岁。～十个。所剩无～。"
   },
   {
     char: "凡",
@@ -21149,11 +21568,13 @@ const t = [
     radical: "几",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄢˊ",
     tradition: "凡",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "fan",
+    explain: "平凡：～庸。自命不～。宗教迷信和神话中称人世间：思～。下～。姓。凡是：～年满十八岁公民都有选举权与被选举权。总共：不知～几。全书～二十卷。大概；要略：大～。发～。我国民族音乐音阶上的一级，乐谱上用作记音符号，相当于简谱的“4”。见〖工尺〗。"
   },
   {
     char: "凤",
@@ -21166,7 +21587,9 @@ const t = [
     mark: "ㄈㄥˋ",
     tradition: "鳳",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "feng",
+    explain: "凤凰，古代传说中的百鸟之王。雄的叫凤，雌的叫凰。"
   },
   {
     char: "凫",
@@ -21179,7 +21602,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "鳧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "野鸭。凫水，游泳。"
   },
   {
     char: "凭",
@@ -21192,7 +21617,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "憑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "（身子）靠着：～几。倚靠；倚仗：这事儿能不能办成，就全～你了。证据：～据。文～。不足为～。表示凭借、根据：～票付款。～经验判断。劳动人民～着智慧和双手创造世界。姓。无论：～你跑多快，我也赶得上。"
   },
   {
     char: "凯",
@@ -21205,7 +21632,9 @@ const t = [
     mark: "ㄎㄞˇ",
     tradition: "凱",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kai",
+    explain: "胜利的乐歌：～歌。～旋。奏～而归。姓。"
   },
   {
     char: "凰",
@@ -21218,7 +21647,9 @@ const t = [
     mark: "ㄏㄨㄤˊ",
     tradition: "凰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "见〖凤凰〗。"
   },
   {
     char: "凳",
@@ -21231,20 +21662,9 @@ const t = [
     mark: "ㄉㄥˋ",
     tradition: "凳",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "凶",
-    spell: "xiōng",
-    stroke: "4",
-    radical: "凵",
-    struct: "半包围结构",
-    five: "水",
-    method: "-",
-    mark: "ㄒㄩㄥ",
-    tradition: "凶",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "deng",
+    explain: "凳子：方～。板～。竹～儿。"
   },
   {
     char: "凸",
@@ -21253,11 +21673,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄊㄨ",
     tradition: "凸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tu",
+    explain: "高于周围（跟“凹”相对）：～出。～起。挺胸～肚。凹～不平。"
   },
   {
     char: "凹",
@@ -21266,11 +21688,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄠ",
     tradition: "凹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ao",
+    explain: "低于周围（跟“凸”相对）：～地。～凸不平。地板～下去一块。"
   },
   {
     char: "出",
@@ -21283,7 +21707,9 @@ const t = [
     mark: "ㄔㄨ",
     tradition: "齣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chu",
+    explain: "从里面到外面（跟“进、入”相对）：～来。～去。～门。～国。～院。来到：～席。～场。超出：～轨。～界。不～三年。往外拿：～钱。～布告。～题目。～主意。出产；产生：～煤。～木材。我们厂里～了不少劳动模范。发生：～问题。这事儿～在1962年。出版：这家出版社～了不少好书。发出；发泄：～芽儿。～汗。～天花。～气。引文、典故等见于某处：语～《老子》。显露：～名。～面。～头。～洋相。显得量多：机米做饭～饭。这面蒸馒头～数儿。支出：～纳。量入为～。跟“往”连用，表示向外：散会了，大家往～走。一本传奇中的一个大段落叫一出，戏曲的一个独立剧目也叫一出：三～戏。趋向动词。用在动词后表示向外、显露或完成：看得～。看不～。拿～一张纸。跑～大门。看～问题。做～成绩。"
   },
   {
     char: "击",
@@ -21292,11 +21718,13 @@ const t = [
     radical: "凵",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧ",
     tradition: "撃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "打；敲：～鼓。旁敲侧～。攻打：袭～。声东～西。碰：撞～。肩摩毂（gǔ）～。接触：目～。"
   },
   {
     char: "函",
@@ -21305,11 +21733,13 @@ const t = [
     radical: "凵",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄢˊ",
     tradition: "函",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "han",
+    explain: "匣；封套：石～。全书共四～。信件：来～。～授。包容；包含。"
   },
   {
     char: "凿",
@@ -21318,11 +21748,13 @@ const t = [
     radical: "业",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄗㄠˊ",
     tradition: "鑿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zao",
+    explain: "凿子，挖槽或打孔用的工具。打孔；挖掘：～一个眼儿。～井抗旱。明确；真实：确～。榫（sǔn）眼：圆～方枘。"
   },
   {
     char: "刀",
@@ -21335,7 +21767,9 @@ const t = [
     mark: "",
     tradition: "刀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dao",
+    explain: "切、割、削、砍、铡用的工具，一般用钢铁制成：菜～。镰～。铡～。铣～。一把～。用于劈或刺的兵器：大～。朴～。刺～。形状像刀的东西：冰～。双～电闸。计算纸张的单位，通常一百张为一刀。姓。"
   },
   {
     char: "刁",
@@ -21344,11 +21778,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧㄠ",
     tradition: "刁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "diao",
+    explain: "狡猾：放～。逞～。那个人真～。挑食过分：嘴特别～。姓。"
   },
   {
     char: "刃",
@@ -21357,11 +21793,13 @@ const t = [
     radical: "刀",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄖㄣˋ",
     tradition: "刃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ren",
+    explain: "刀、剑等锋利的部分；刀口：刀～。剪子卷～儿了。刀：手持利～。白～战。用刀杀：手～寇仇。"
   },
   {
     char: "分",
@@ -21374,7 +21812,9 @@ const t = [
     mark: "ㄈㄣˋ",
     tradition: "分",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fen",
+    explain: "区划开：～开。划～。～野（划分的范围）。～界。～明。条～缕析。～解。由整体中取出或产生出一部分：～发。～忧。～心劳神。由机构内独立出的部分：～会。～行（háng）。散，离：～裂。～离。～别。～崩离析。～门别类。辨别：区～。～析。区划而成的部分：二～之一。一半：人生百年，昼夜各～。春～。秋～。"
   },
   {
     char: "切",
@@ -21387,7 +21827,9 @@ const t = [
     mark: "ㄑㄧㄝˋ",
     tradition: "切",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qie",
+    explain: "用刀把物品分成若干部分：～西瓜。把肉～成丝儿。～断敌军退路。直线与圆、直线与球、圆与圆、平面与球或球与球只有一个交点时叫做切。"
   },
   {
     char: "刊",
@@ -21400,7 +21842,9 @@ const t = [
     mark: "ㄎㄢ",
     tradition: "刊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kan",
+    explain: "削除；改正：～谬补缺。～误。刻：～石。～版。排版印刷：～行。创～。出版物。多指期刊。也指报上定期出的有专门内容的一版：丛～。月～。副～。"
   },
   {
     char: "刑",
@@ -21413,7 +21857,9 @@ const t = [
     mark: "ㄒㄧㄥˊ",
     tradition: "刑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xing",
+    explain: "刑罚：徒～。死～。指对犯罪嫌疑人的体罚：用～。～讯。古又同“型”。"
   },
   {
     char: "划",
@@ -21426,7 +21872,9 @@ const t = [
     mark: "ㄏㄨㄚˊ",
     tradition: "劃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hua",
+    explain: "拨水前进：~船、~桨。合算：~得来、~不来。用尖锐的东西把别的东西分开或在表面上刻过去、擦过去：~玻璃、~根火柴、手上~了一个口子。"
   },
   {
     char: "列",
@@ -21439,7 +21887,9 @@ const t = [
     mark: "ㄌㄧㄝˋ",
     tradition: "列",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lie",
+    explain: "排列：罗～。～队。按清单上～的一项一项地清点。安排到某类事物之中：～入议程。把发展教育事业～为重要任务之一。行列：出～。前～。用于成行列的事物：一～火车。类：不在此～。各；众：～国。～位观众。姓。"
   },
   {
     char: "刘",
@@ -21448,11 +21898,13 @@ const t = [
     radical: "文",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄡˊ",
     tradition: "劉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "姓。"
   },
   {
     char: "则",
@@ -21465,7 +21917,9 @@ const t = [
     mark: "ㄗㄜˊ",
     tradition: "則",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ze",
+    explain: "规范；榜样：以身作～。规则：细～。效法：～先烈之言行。连词。1.表示承接关系：有～改之，无～加勉。表示转折关系：欲速～不达。是；乃是：此～余之过也。与“作”义相近，宋、元、明小说戏曲里常用：～甚（作什么）。不～声。量词。用于成文的条数：试题三～。新闻两～。"
   },
   {
     char: "刚",
@@ -21478,7 +21932,9 @@ const t = [
     mark: "ㄍㄤ",
     tradition: "剛",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "gang",
+    explain: "硬；坚强（跟“柔”相对）：～强。～直。他的性情太～。姓。恰好：不大不小，～合适。表示勉强达到某种程度；仅仅：清早出发的时候天还很黑，～能看出前面的人的背包。表示行动或情况发生在不久以前：他～从上海回来。那时弟弟～学会走路。用在复句里，后面用“就”字呼应，表示两件事紧接：～过立春，天气就异乎寻常地热了起来。"
   },
   {
     char: "创",
@@ -21491,7 +21947,9 @@ const t = [
     mark: "ㄔㄨㄤˋ",
     tradition: "創",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chuang",
+    explain: "开始（做）；（初次）做：～办。首～。～下规矩。～新记录。"
   },
   {
     char: "初",
@@ -21504,7 +21962,9 @@ const t = [
     mark: "ㄔㄨ",
     tradition: "初",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chu",
+    explain: "开始的：～夏。～冬。开始的一段时间：年～。月～。本学期～。第一个：～伏。～旬。～一（农历每月的第一天，等于“第一个一”，区别于“十一、二十一”）。～十（农历每月的第十天，等于“第一个十”，区别于“二十、三十”）。第一次；刚开始：～试。～出茅庐。～学乍练。最低的（等级）：～级。～等。原来的：～心。～志。～愿。原来的情况：和好如～。姓。"
   },
   {
     char: "删",
@@ -21517,7 +21977,9 @@ const t = [
     mark: "ㄕㄢ",
     tradition: "删",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shan",
+    explain: "去掉文辞中的某些字句：～改。这一句可以～去。"
   },
   {
     char: "判",
@@ -21530,7 +21992,9 @@ const t = [
     mark: "ㄆㄢˋ",
     tradition: "判",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pan",
+    explain: "分开；分辨：～别。～断。～明。明显（有区别）：新旧社会～然不同。前后～若两人。评定：裁～。评～。～卷子。判决：审～。～案。公～。～了徒刑。"
   },
   {
     char: "刨",
@@ -21543,7 +22007,9 @@ const t = [
     mark: "ㄅㄠˋ",
     tradition: "刨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pao",
+    explain: "使用镐、锄头等向下向里用力：～土。～坑。～白薯。刨除：十五天～去五天，只剩下十天了。"
   },
   {
     char: "利",
@@ -21556,7 +22022,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "利",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "锋利；锐利（跟“钝”相对）：～刃。～爪。顺利；便利：不～。成败～钝。利益（跟“害、弊”相对）：～弊。有～。兴～除害。利润或利息：暴～。薄～多销。本～两清。使有利：～国～民。毫不～己，专门～人。姓。"
   },
   {
     char: "别",
@@ -21569,7 +22037,9 @@ const t = [
     mark: "ㄅㄧㄝˊ",
     tradition: "彆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bie",
+    explain: "分离：告～。临～纪念。久～重逢。～了，我的母校。另外：～人。～称。～有用心。转动；转变：她把头～了过去。这个人的脾气一时～不过来。姓。区分；区别：辨～。鉴～。分门～类。差别：天渊之～。类别：性～。职～。派～。级～。用别针等把另一样东西附着或固定在纸、布等物体上：把两张发票～在一起。胸前～着一朵红花。插住；用东西卡住：皮带上～着一支枪。把门～上。用腿使绊把对方摔倒。两辆车朝同一方向行驶时，一辆车强行驶入另一辆车的车道，使不能正常行进：～车。表示禁止或劝阻，跟“不要”的意思相同：～冒冒失失的。你～走了，在这儿住两天吧。～一个人说了算。表示揣测，通常跟“是”字合用（所揣测的事情，往往是自己所不愿意的）：约定的时间都过了，～是他不来了吧?"
   },
   {
     char: "刮",
@@ -21582,7 +22052,9 @@ const t = [
     mark: "ㄍㄨㄚ",
     tradition: "颳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gua",
+    explain: "用刀等贴着物体的表面移动，把物体表面上的某些东西去掉或取下来：～胡子。～锅。～下一层皮。在物体表面上涂抹（多用于糨糊一类稠东西）：～糨子。搜刮（财物）。（风）吹：又～起风来了!"
   },
   {
     char: "到",
@@ -21595,7 +22067,9 @@ const t = [
     mark: "ㄉㄠˋ",
     tradition: "到",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dao",
+    explain: "1.达于某一点；到达；达到：～期。迟～。火车～站了。从星期三～星期五。2.往：～郊外去。～群众中去。3.用作动词的补语，表示动作有结果：看～。办得～。说～一定要做～。想不～你来了。4.周到：想得很～。有不～的地方请原谅。5.姓。"
   },
   {
     char: "制",
@@ -21604,11 +22078,13 @@ const t = [
     radical: "刂",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓˋ",
     tradition: "製",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "制造：～版。～革。～图。炼～。缝～。这块奖牌是用铜～成的。拟订；规定：～定。因地～宜。用强力约束；限定；管束：压～。限～。管～。节～。～伏。制度：全民所有～。民主集中～。姓。"
   },
   {
     char: "刷",
@@ -21621,7 +22097,9 @@ const t = [
     mark: "ㄕㄨㄚˋ",
     tradition: "刷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shua",
+    explain: "（～儿）刷子：牙～。板～。用刷子清除或涂抹：～牙。～鞋。～锅。用石灰浆～墙。比喻除名；淘汰：他不守劳动纪律，让厂里给～了。今年高考他被～了下来。形容迅速擦过去的声音：风刮得树叶子～～地响。～～地下起雨来了。"
   },
   {
     char: "券",
@@ -21634,7 +22112,9 @@ const t = [
     mark: "ㄑㄩㄢˋ",
     tradition: "券",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "quan",
+    explain: "票据或作凭证的纸片：入场～。债～。注：《第一批异体字整理表》将“劵”作为“券”的异体字。其实“劵”本为“倦”的异体字，“券”和“劵”在意义上并无关联，故不将“劵”作为“券”的异体字。"
   },
   {
     char: "刹",
@@ -21647,20 +22127,9 @@ const t = [
     mark: "ㄔㄚˋ",
     tradition: "刹",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "刺",
-    spell: "cì",
-    stroke: "8",
-    radical: "刂",
-    struct: "左右结构",
-    five: "金",
-    method: "",
-    mark: "",
-    tradition: "刺",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sha",
+    explain: "止住（车、机器等）：把车～住。～住不正之风。"
   },
   {
     char: "刻",
@@ -21673,7 +22142,9 @@ const t = [
     mark: "ㄎㄜˋ",
     tradition: "刻",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ke",
+    explain: "雕刻：～图章。计算时间的单位。用钟表计时，十五分钟为一刻。古代用漏壶记时，一昼夜共一百刻。时间：即～。立～。形容程度深：深～。～苦。刻薄：尖～。苛～。同“克”。"
   },
   {
     char: "刽",
@@ -21686,7 +22157,9 @@ const t = [
     mark: "ㄍㄨㄟˋ",
     tradition: "劊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gui",
+    explain: "砍；斩。"
   },
   {
     char: "剂",
@@ -21699,7 +22172,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "劑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "调和；调（tiáo）配：调～。配制的药物：针～。冲～。麻醉～。指某些起化学作用或物理作用的物质：杀虫～。冷冻～。剂子：面～儿。做～儿。用于若干味药配合起来的汤药：一～药。也说服（fù）。"
   },
   {
     char: "剃",
@@ -21712,7 +22187,9 @@ const t = [
     mark: "ㄊㄧˋ",
     tradition: "剃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ti",
+    explain: "用特制的刀子刮去（头发、胡须等）：～刀。～光头。～胡子。"
   },
   {
     char: "削",
@@ -21725,7 +22202,9 @@ const t = [
     mark: "ㄒㄧㄠ",
     tradition: "削",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "义同“削（xiāo）”。专用于复合词：～减。剥～。"
   },
   {
     char: "前",
@@ -21738,7 +22217,9 @@ const t = [
     mark: "ㄑㄧㄢˊ",
     tradition: "前",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qian",
+    explain: "方位词。在正面的（指空间，跟“后”相对）：～门。村～村后。往前走：勇往直～。畏缩不～。方位词。次序靠近头里的（跟“后”相对）：～排。他的成绩在班里总是～三名。方位词。过去的；较早的（指时间，跟“后”相对）：～天。从～。～几年。～功尽弃。～所未有。～无古人，后无来者。方位词。从前的（指现在改变了名称的机构等）：～政务院。方位词。指某事物产生之前：～科学（科学产生之前）。～资本主义（资本主义产生之前）。方位词。未来的（用于展望）：～程。～景。事情要往～看，不要往后看。前线；前方：支～。姓。"
   },
   {
     char: "剑",
@@ -21751,7 +22232,9 @@ const t = [
     mark: "",
     tradition: "劍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "古代兵器，长条形，一端尖，两边有刃，安有短柄。现在击剑运动用的剑，剑身是细长的钢条，无刃，顶端为一小圆球。（Jiàn）姓。"
   },
   {
     char: "剔",
@@ -21764,7 +22247,9 @@ const t = [
     mark: "ㄊㄧ",
     tradition: "剔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ti",
+    explain: "从骨头上把肉刮下来：把骨头～得干干净净。从缝隙里往外挑（tiǎo）：～牙缝儿。～指甲。剔除：挑～。把烂了的果子～出去。汉字的笔画，即挑（tiǎo）"
   },
   {
     char: "剖",
@@ -21777,7 +22262,9 @@ const t = [
     mark: "ㄆㄡ",
     tradition: "剖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pou",
+    explain: "破开：解～。～视。分辨；分析：～析。～白。"
   },
   {
     char: "剥",
@@ -21790,7 +22277,9 @@ const t = [
     mark: "ㄅㄠ",
     tradition: "剥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "去掉外面的皮或壳：～花生。～皮。"
   },
   {
     char: "剧",
@@ -21803,7 +22292,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "劇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "戏剧：演～。话～。独幕～。这个～的主题很鲜明。惨～。丑～。（Jù）姓。猛烈；厉害：～烈。～痛。～饮。～变。加～。"
   },
   {
     char: "剩",
@@ -21816,7 +22307,9 @@ const t = [
     mark: "ㄕㄥˋ",
     tradition: "剩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sheng",
+    explain: "剩余：～饭。～货。大家都走了，只～下他一个人。姓。"
   },
   {
     char: "剪",
@@ -21829,7 +22322,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "剪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "剪刀。形状像剪刀的器具：夹～。火～。用剪刀等使东西断开：～裁。～纸。～指甲。～几尺布做衣服。除去：～除。～灭。～草除根。姓。"
   },
   {
     char: "副",
@@ -21842,7 +22337,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "副",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "职务是辅助的或担任辅佐职务的人。副手、排副、副总统附带的。副作用、副产品次要的。与「正」相对。副本、副业、副食品符合、相称。名副其实量词。计算成套、成组物品的单位。俗作「付」。一副碗筷、两副耳环、三副眼镜"
   },
   {
     char: "割",
@@ -21855,7 +22352,9 @@ const t = [
     mark: "ㄍㄜ",
     tradition: "割",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "截断；放弃：～草。～爱。古指宰杀：～羊。～鸡焉用牛刀。"
   },
   {
     char: "剿",
@@ -21868,7 +22367,9 @@ const t = [
     mark: "ㄔㄠ",
     tradition: "剿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "灭绝、消灭。  【组词】：围剿、清剿"
   },
   {
     char: "劈",
@@ -21881,7 +22382,9 @@ const t = [
     mark: "ㄆㄧˇ",
     tradition: "劈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pi",
+    explain: "用刀斧等砍或由纵面破开：～木柴。～成两半。～风斩浪。（木头等）裂开：板子～了。钢笔尖写～了。（嗓音）变得嘶哑：他喊了半天，声音都快～了。正对着；冲着（人的头、脸、胸部）：～头。～脸。雷电毁坏或击毙：老树让雷～了。简单机械，由两个斜面合成，纵剖面呈三角形，如楔子和刀、斧等的刃儿就属于这一类。"
   },
   {
     char: "力",
@@ -21890,11 +22393,13 @@ const t = [
     radical: "力",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧˋ",
     tradition: "力",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "物体之间的相互作用，是使物体获得加速度和发生形变的外因。力有三个要素，即力的大小、方向和作用点。力量；能力：人～。物～。目～。脑～。药～。理解～。说服～。战斗～。特指体力：大～士。四肢无～。用～推车。尽力；努力：～争上游。维护甚～。姓。"
   },
   {
     char: "劝",
@@ -21903,11 +22408,13 @@ const t = [
     radical: "又",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄩㄢˋ",
     tradition: "勸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "quan",
+    explain: "拿道理说服人，使人听从：规～。～导。～解。他身体不好，你应该～他休息休息。勉励：～勉。～学。姓。"
   },
   {
     char: "办",
@@ -21920,7 +22427,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "辦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ban",
+    explain: "处理；料理：～事。～个手续。经营；建设：民～公助。大～农业。购置；备办：～货。～酒席。处罚；惩罚：首恶必～。指作为行政机构的办公室：招生～。外～。"
   },
   {
     char: "功",
@@ -21933,7 +22442,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "功",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "功劳（跟“过”相对）：立～。记一大～。成效和表现成效的事情（多指较大的）：教育之～。～亏一篑。大～告成。好大喜～。技术和技术修养：唱～。～架。基本～。一个力使物体沿力的方向通过一段距离，这个力就对物体做了功。"
   },
   {
     char: "加",
@@ -21946,7 +22457,9 @@ const t = [
     mark: "ㄐㄧㄚ",
     tradition: "加",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jia",
+    explain: "两个或两个以上的东西或数目合在一起：二～三等于五。功上～功。使数量比原来大或程度比原来高；增加：～大。～强。～快。～速。～多。～急。～了一个人。把本来没有的添上去：～符号。～注解。“加”跟“加以”用法不同之点是“加”多用在单音节状语之后。姓。"
   },
   {
     char: "务",
@@ -21959,7 +22472,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "務",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "事情：事～。任～。公～。从事；致力：～农。好高～远。旧时收税的关卡（今只用于地名）：曹家～（在河北）。商酒～（在河南）。务必：～须。除恶～尽。～请按时参加。姓。"
   },
   {
     char: "劣",
@@ -21972,7 +22487,9 @@ const t = [
     mark: "ㄌㄧㄝˋ",
     tradition: "劣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lie",
+    explain: "坏；不好（跟“优”相对）：～等。～势。～马。恶～。低～。优～。"
   },
   {
     char: "动",
@@ -21985,7 +22502,9 @@ const t = [
     mark: "ㄉㄨㄥˋ",
     tradition: "動",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dong",
+    explain: "（事物）改变原来位置或脱离静止状态（跟“静”相对）：流～。风吹草～。你坐着别～。“働”是“劳动”的“动（動）”的异体字。改变（事物）原来的位置或样子：搬～。挪～。改～。～用。兴师～众。使用；使起作用：～笔。～手。～脑筋。触动（思想感情）：～心。～怒。～了公愤。感动：～人。不为亲情所～。吃；喝（多用于否定式）：这病不宜～荤腥。他向来不～酒。动不动；常常：～辄得咎。影片一经上演，观众～以万计。"
   },
   {
     char: "助",
@@ -21998,7 +22517,9 @@ const t = [
     mark: "ㄔㄨˊ",
     tradition: "助",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "辅佐、帮忙。  【组词】：互助、援助、守望相助"
   },
   {
     char: "努",
@@ -22011,7 +22532,9 @@ const t = [
     mark: "ㄋㄩˇ",
     tradition: "努",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nu",
+    explain: "竭力使出：～力。突出：～目。～嘴。〈方〉由于用力过度而身体受内伤。书法用语。指汉字笔画的竖。参见〔永字八法〕"
   },
   {
     char: "劫",
@@ -22024,7 +22547,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "劫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "威逼；胁迫：～持。灾难：浩～。遭～。～后余生。[劫波之省，梵kalpa]"
   },
   {
     char: "励",
@@ -22037,7 +22562,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "勵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "劝勉：勉～。鼓～。奖～。振奋；振作：～精图治。姓。"
   },
   {
     char: "劲",
@@ -22050,7 +22577,9 @@ const t = [
     mark: "ㄐㄧㄣˋ",
     tradition: "勁",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "力气：使～。手～。精神；情绪：鼓足干～。冲（chòng）～儿。兴趣：干得挺有～儿。神情；样子：瞧他那股泄气～儿。脏～儿。"
   },
   {
     char: "劳",
@@ -22063,7 +22592,9 @@ const t = [
     mark: "ㄌㄠˊ",
     tradition: "勞",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lao",
+    explain: "劳动：按～分配。不～而获。烦劳（请别人做事所用的客气话）：～驾。～您走一趟。劳苦；疲劳：任～任怨。积～成疾。功劳：勋～。汗马之～。慰劳：犒～。～军。姓。"
   },
   {
     char: "势",
@@ -22076,7 +22607,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "勢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "势力：权～。人多～众。仗～欺人。一切事物力量表现出来的趋向：来～。～如破竹。自然界的现象或形势：山～。地～。水～汹涌。政治、军事或其他社会活动方面的状况或情势：局～。大～所趋。姿态：手～。姿～。雄性生殖器：去～。"
   },
   {
     char: "勃",
@@ -22089,7 +22622,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "勃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "旺盛、兴起。  【组词】：蓬勃、生气勃勃→勃然"
   },
   {
     char: "勇",
@@ -22102,7 +22637,9 @@ const t = [
     mark: "ㄩㄥˇ",
     tradition: "勇",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "勇敢：～武。奋～。越战越～。智～双全。清朝称战争时期临时招募，不在平时编制之内的兵：散兵游～。姓。"
   },
   {
     char: "勉",
@@ -22115,7 +22652,9 @@ const t = [
     mark: "ㄇㄧㄢˇ",
     tradition: "勉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mian",
+    explain: "努力：～力以从。勤～。奋～。勉励：互～。有则改之，无则加～。力量不够或不愿做，但仍坚持去做：～为其难。"
   },
   {
     char: "勋",
@@ -22124,11 +22663,13 @@ const t = [
     radical: "力",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄣ",
     tradition: "勛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xun",
+    explain: "功勋：～业。～劳。屡建奇～。勋章：授～。"
   },
   {
     char: "勒",
@@ -22141,7 +22682,9 @@ const t = [
     mark: "ㄌㄜˋ",
     tradition: "勒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "le",
+    explain: "带嚼子的马笼头。收住缰绳不让骡马等前进：悬崖～马。强制；逼迫：～令。～派。～索。统率：亲～六军。姓。雕刻：～石。～碑。勒克斯的简称。1流（流明）的光通量均匀地照在1平方米面积上时的光照度是1勒。"
   },
   {
     char: "勘",
@@ -22150,11 +22693,13 @@ const t = [
     radical: "力",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄎㄢ",
     tradition: "勘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kan",
+    explain: "校订；核对：～误。校～。实地查看；探测：～探。～查。～验。"
   },
   {
     char: "募",
@@ -22167,7 +22712,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "募",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "募集（财物或兵员等）：～捐。～款。招～。"
   },
   {
     char: "勤",
@@ -22180,7 +22727,9 @@ const t = [
     mark: "ㄑㄧㄣˊ",
     tradition: "勤",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "qin",
+    explain: "尽力多做或不断地做（跟“懒、惰”相对）：手～。～学苦练。人～地不懒。次数多；经常：～洗澡。夏季雨水～。他来得最～，差不多天天来。勤务：内～。外～。在规定时间内准时到班的工作或劳动：出～。缺～。考～。执～。空～。地～。姓。"
   },
   {
     char: "勺",
@@ -22189,11 +22738,13 @@ const t = [
     radical: "勹",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄕㄠˊ",
     tradition: "勺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shao",
+    explain: "一种有柄可以舀（yǎo）东西的器具：小～。铁～。市制容量单位。10撮为1勺，10勺为1合（gě）。"
   },
   {
     char: "勾",
@@ -22206,7 +22757,9 @@ const t = [
     mark: "ㄍㄡˋ",
     tradition: "勾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gou",
+    explain: "用笔画出钩形符号，表示删除或截取：～销。把这篇文章里最精彩的对话～出来。画出形象的边缘；描画：用铅笔～一个轮廓。用灰、水泥等涂抹砖石建筑物的缝：～墙缝。调和使黏：～芡。招引；引：～引。～魂。这件事～起了我的回忆。结合：～结。～通。姓。我国古代称不等腰直角三角形中较短的直角边。"
   },
   {
     char: "勿",
@@ -22215,11 +22768,13 @@ const t = [
     radical: "勹",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄨˋ",
     tradition: "勿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "表示禁止或劝阻，相当于“不要”：切～上当。请～入内。"
   },
   {
     char: "匀",
@@ -22232,7 +22787,9 @@ const t = [
     mark: "ㄩㄣˊ",
     tradition: "匀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yun",
+    explain: "均匀：颜色涂得不～。使均匀：把粉～～。这两份多少不均，再～一～吧。抽出一部分给别人或做别用：～出一部分粮食支援灾区。工作太忙，～不出时间照顾家里。"
   },
   {
     char: "包",
@@ -22245,7 +22802,9 @@ const t = [
     mark: "ㄅㄠ",
     tradition: "包",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bao",
+    explain: "用纸、布或其他薄片把东西裹起来：～书。～饺子。头上～着一条白毛巾。包好了的东西：药～。邮～。打了个～。装东西的口袋：书～。把零碎东西装进～儿里。病～儿。坏～儿。淘气～儿。用于成包的东西：两～大米。一大～衣服。物体或身体上鼓起来的疙瘩：树干上有个大～。腿上起了个～。毡制的圆顶帐篷：蒙古～。围绕；包围：火苗～住了锅台。骑兵分两路～过去。容纳在里头；总括在一起：～含。～罗。无所不～。把整个任务承担下来，负责完成：～医。～教。～片儿（负责完成一定地段或范围的工作）。姓。"
   },
   {
     char: "匆",
@@ -22254,11 +22813,13 @@ const t = [
     radical: "勹",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄘㄨㄥ",
     tradition: "匆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cong",
+    explain: "急；忙：～忙。～促。"
   },
   {
     char: "匈",
@@ -22267,11 +22828,13 @@ const t = [
     radical: "勹",
     struct: "半包围结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄥ",
     tradition: "匈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiong",
+    explain: "同“胸”。"
   },
   {
     char: "匕",
@@ -22280,11 +22843,13 @@ const t = [
     radical: "匕",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄅㄧˇ",
     tradition: "匕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bi",
+    explain: "古人取食的器具，后代的羹匙由它演变而来。指匕首：图穷～见。"
   },
   {
     char: "化",
@@ -22297,7 +22862,9 @@ const t = [
     mark: "ㄏㄨㄚˋ",
     tradition: "化",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hua",
+    explain: "改变、变易。教化、千变万化、潜移默化死。物化、羽化、鹤化物体消融、改变形状。溶化、消化、火化消除。化痰止渴求乞、乞讨。化缘、募化置于名词或形容词之后，表示转变成某种状态或性质。绿化、电气化、现代化化学的简称。理化、化工"
   },
   {
     char: "北",
@@ -22310,7 +22877,9 @@ const t = [
     mark: "ㄅㄟˇ",
     tradition: "北",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bei",
+    explain: "北极所在的方向。与「南」相对。  【组词】：北方、北极圈、北回归线失败、败逃。  【组词】：败北、追亡逐北"
   },
   {
     char: "匙",
@@ -22323,7 +22892,9 @@ const t = [
     mark: "ㄔˊ",
     tradition: "匙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "匙子：汤～。茶～。羹～。"
   },
   {
     char: "匠",
@@ -22332,11 +22903,13 @@ const t = [
     radical: "匚",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄤˋ",
     tradition: "匠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiang",
+    explain: "工匠：铁～。铜～。木～。瓦～。石～。能工巧～。指在某方面很有造诣的人：宗～。文学巨～。"
   },
   {
     char: "匣",
@@ -22349,7 +22922,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "匣",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "收藏东西的器具，通常指小型的，盖可以开合：～子。木～。梳头～。"
   },
   {
     char: "匪",
@@ -22362,7 +22937,9 @@ const t = [
     mark: "ㄈㄟˇ",
     tradition: "匪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fei",
+    explain: "强盗：土～。盗～。副词。不；非：获益～浅（得到不少的好处）。"
   },
   {
     char: "匹",
@@ -22375,7 +22952,9 @@ const t = [
     mark: "ㄆㄧˇ",
     tradition: "匹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pi",
+    explain: "比得上；相当；相配：～配。难与为～。单独：～夫。姓。用于马、骡等：两～骡子。三～马。用于整卷的绸或布（五十尺、一百尺不等）：一～绸子。两～布。“疋”"
   },
   {
     char: "区",
@@ -22388,7 +22967,9 @@ const t = [
     mark: "ㄡ",
     tradition: "區",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qu",
+    explain: "分别：～别。～分。地域：工业～。风景～。行政区划单位。有跟省平行的民族自治区以及市辖区、县辖区等。"
   },
   {
     char: "医",
@@ -22401,7 +22982,9 @@ const t = [
     mark: "ㄧ",
     tradition: "醫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "医生：军～。牙～。延～诊治。医学：中～。西～。～科。他是学～的。医治：～术。他把我的病～好了。头痛～头，脚痛～脚，不是根本办法。姓。"
   },
   {
     char: "匾",
@@ -22414,7 +22997,9 @@ const t = [
     mark: "ㄅㄧㄢˇ",
     tradition: "匾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bian",
+    explain: "上面题着作为标记或表示赞扬文字的长方形木牌（也有用绸布做成的）：横～。绣金～。门上挂着一块～。用竹篾编成的器具，圆形平底，边框很浅，用来养蚕或盛粮食。"
   },
   {
     char: "匿",
@@ -22427,7 +23012,9 @@ const t = [
     mark: "ㄋㄧˋ",
     tradition: "匿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ni",
+    explain: "隐藏；不让人知道：隐～。～名。～居深山。～影藏形。"
   },
   {
     char: "十",
@@ -22436,11 +23023,13 @@ const t = [
     radical: "十",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕˊ",
     tradition: "十",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "九加一后所得的数目。见〖数字〗。表示达到顶点：～足。～分。～成的把握。姓。"
   },
   {
     char: "千",
@@ -22453,7 +23042,9 @@ const t = [
     mark: "ㄑㄧㄢ",
     tradition: "韆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qian",
+    explain: "1.数目。十个一百。2.比喻很多：～锤百炼。3.“秋千”的“千”。"
   },
   {
     char: "升",
@@ -22462,11 +23053,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄥ",
     tradition: "升",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sheng",
+    explain: "由低往高移动（跟“降”相对）：～旗。上～。旭日东～。（等级）提高（跟“降”相对）：～级。容量单位，符号L（l）。1升等于1000毫升。容量单位，10合（gě）等于1升，10升等于1斗。1市升合1升。量粮食的器具，容量为斗的十分之一。姓。"
   },
   {
     char: "午",
@@ -22475,11 +23068,13 @@ const t = [
     radical: "丿、十",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄨˇ",
     tradition: "午",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "地支的第七位。午时，旧式记时法，相当于十一点到十三点。日中的时候（十二点）。"
   },
   {
     char: "半",
@@ -22492,7 +23087,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "半",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ban",
+    explain: "二分之一；一半（没有整数时用在量词前，有整数时用在量词后）：～尺。一斤～。～价。过～。一年～载。在…中间：～夜。～路上。～山腰。～途而废。表示很少：一星～点儿。一鳞～爪。不完全：～新的楼房。房门～开着。姓。"
   },
   {
     char: "华",
@@ -22505,7 +23102,9 @@ const t = [
     mark: "ㄏㄨㄚˊ",
     tradition: "華",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "hua",
+    explain: "中国古称华夏，今称中华，简称华。华侨、华人、华语时光、时间。年华、韶华、岁华文采、文饰。朴实无华繁荣、旺盛。繁华、荣华文章、事物等精要、精采的部分。精华、含英咀华美丽而有光彩。华美、华丽化妆用的粉。洗尽铅华虚空不实的。华而不实、华言不可尽信花白。华发用于与对方相关事物的敬辞。华翰、华诞"
   },
   {
     char: "协",
@@ -22518,20 +23117,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "協",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "卑",
-    spell: "bēi",
-    stroke: "8",
-    radical: "十",
-    struct: "上下结构",
-    five: "水",
-    method: "会意",
-    mark: "ㄅㄟ",
-    tradition: "卑",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "xie",
+    explain: "调和；和谐：～调。～和。共同：～同。～力。协助：～理。～办。姓。"
   },
   {
     char: "卒",
@@ -22544,7 +23132,9 @@ const t = [
     mark: "ㄘㄨˋ",
     tradition: "卒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zu",
+    explain: "兵：士～。小～。差役：走～。死亡：生～年月。完毕：～业。文言副词。到底；终于：～胜敌军。"
   },
   {
     char: "卓",
@@ -22557,7 +23147,9 @@ const t = [
     mark: "ㄓㄨㄛˊ",
     tradition: "卓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "高而直：～立。高明；不平凡：～见。～越。古又同“桌（zhuō）”。"
   },
   {
     char: "单",
@@ -22566,11 +23158,13 @@ const t = [
     radical: "丷",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄢˊ",
     tradition: "單",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dan",
+    explain: "1.不复杂：～纯。简～。～调（diào）。2.独一：～独。～一。～词。3.只，仅：做事～靠热情不够。4.奇（jī）数的：～日。～号。5.薄，弱：～薄。6.衣服被褥只有一层的：～裤。～衣。7.覆盖用的布：被～。床～。8.记载事物用的纸片：～据。传～。名～。9.和尚称禅堂的坐床。"
   },
   {
     char: "卖",
@@ -22579,11 +23173,13 @@ const t = [
     radical: "十",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄞˋ",
     tradition: "賣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mai",
+    explain: "拿东西换钱（跟“买”相对）：～房子。把余粮～给国家。为了自己的利益出卖祖国或亲友：～国。把朋友给～了。尽量用出来；不吝惜：～劲儿。～力气。故意表现在外面，让人看见：～功。～弄。～俏。旧时饭馆中称一个菜为一卖：一～炒腰花。姓。"
   },
   {
     char: "南",
@@ -22592,11 +23188,13 @@ const t = [
     radical: "十",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄋㄚ",
     tradition: "南",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nan",
+    explain: "方向。清晨面向太阳时右手的一边。与“北”相对：指～针。～方。指中国南方：～货。～味。"
   },
   {
     char: "博",
@@ -22609,7 +23207,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "博",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "（量）多；丰富：渊～。地大物～。～而不精。通晓：～古通今。大：宽衣～带。姓。博取；取得：聊～一笑。以～欢心。古代的一种棋戏，后来泛指赌博：～徒。～局。"
   },
   {
     char: "卜",
@@ -22618,11 +23218,13 @@ const t = [
     radical: "卜",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄨˇ",
     tradition: "蔔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bo",
+    explain: "古人灼烧龟甲或牛骨，辨视其裂纹以推断事情吉凶的习俗。  【组词】：占卜、龟卜泛指一般预测吉凶的方法。  【组词】：卜卦预料、预测。  【组词】：生死未卜选择。  【组词】：卜居、卜邻姓。"
   },
   {
     char: "占",
@@ -22635,7 +23237,9 @@ const t = [
     mark: "ㄓㄢˋ",
     tradition: "占",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhan",
+    explain: "占据：霸～。强～。攻～。～座位。处在某一种地位或属于某一种情形：～优势。～上风。赞成的～多数。"
   },
   {
     char: "卡",
@@ -22648,7 +23252,9 @@ const t = [
     mark: "ㄎㄚˇ",
     tradition: "卡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ka",
+    explain: "卡车，载重的大汽车：十轮~。卡片，小的纸片（一般是比较硬的纸）：资料~|贺年~。卡路里的简称，热量的非法定计量单位，符号cal,1克纯水的温度升高1摄氏度所需的热量为1卡，合4.1868焦。[卡通]（外）1.动画片。漫画。"
   },
   {
     char: "卢",
@@ -22661,7 +23267,9 @@ const t = [
     mark: "ㄌㄩˊ",
     tradition: "盧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lu",
+    explain: "姓。"
   },
   {
     char: "卤",
@@ -22670,11 +23278,13 @@ const t = [
     radical: "卤",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "鹵、滷",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lu",
+    explain: "卤水。一种烹饪方法。把原料（不切碎）放入较大的锅中，加盐及其他调料煮。一种浇在面条等食物上的浓汁。一般先用肉片、鸡蛋等做汤最后勾芡。古又同“虏”。古又同“鲁莽”的“鲁”。古又同“橹”。"
   },
   {
     char: "卦",
@@ -22687,7 +23297,9 @@ const t = [
     mark: "ㄍㄨㄚˋ",
     tradition: "卦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gua",
+    explain: "古代占卜用的符号。也泛指用其他方式预测到的吉凶祸福的象征性结果：占～。算～。参见〔八卦〕"
   },
   {
     char: "卧",
@@ -22700,7 +23312,9 @@ const t = [
     mark: "ㄨㄛˋ",
     tradition: "卧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wo",
+    explain: "躺下：仰～。～倒。病得很重，在床上～了三天。使婴儿躺下：把小孩儿～在炕上。（动物）趴：～牛。鸡～在窝里。睡觉用的：～室。～房。～铺。指卧铺：硬～。软～。把去壳的鸡蛋放到开水里煮：～个鸡子儿。"
   },
   {
     char: "卫",
@@ -22713,7 +23327,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "衛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "保护：守～。自～。生活中或某些球类比赛中担负保护、防守任务的：门～。后～。周朝国名。公元前11世纪中叶建立。在今河北南部和河南北部一带。公元前254年为魏所灭。公元前241年在秦支持下复国。公元前209年为秦所灭。"
   },
   {
     char: "印",
@@ -22726,7 +23342,9 @@ const t = [
     mark: "ㄧㄣˋ",
     tradition: "印",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yin",
+    explain: "图章，戳记：～章。～玺。～记。～把子（亦喻政权）。痕迹：手～。指～。～子（ａ.痕迹；ｂ．高利贷的一种，全称“～～钱”）。用油墨、染料之类把文字或图画留在纸、布、器皿等材料上：～刷。排～。～制。～发（fā）。彼此符合：～证。心心相～。外界事物反映在脑中所留下的形象：～象。姓。"
   },
   {
     char: "危",
@@ -22739,7 +23357,9 @@ const t = [
     mark: "ㄨㄟ",
     tradition: "危",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wei",
+    explain: "危险；不安全（跟“安”相对）：～急。～难。转～为安。居安思～。使处于危险境地；损害：～害。～及。指人快要死：临～。病～。高；高耸：～冠。～樯。～楼。端正；正直：正襟～坐。二十八宿之一。姓。"
   },
   {
     char: "即",
@@ -22752,7 +23372,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "即",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "靠近；接触：若～若离。可望而不可～。到；开始从事：～位。当下；目前：～日。～期。成功在～。就着（当前环境）：～景。姓。就是：荷花～莲花。非此～彼。就；便：一触～发。招之～来。闻过～改。即使：～无他方之支援，也能按期完成任务。"
   },
   {
     char: "却",
@@ -22765,7 +23387,9 @@ const t = [
     mark: "ㄑㄩㄝˋ",
     tradition: "却",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "que",
+    explain: "后退：退～。～步。使退却：～敌。推辞；拒绝：推～。～之不恭。盛情难～。去；掉：冷～。忘～。失～信心。姓。表示转折，比“倒、可”的语气略轻：有许多话要说，一时～说不出来。文章虽短～很有力。"
   },
   {
     char: "卵",
@@ -22774,11 +23398,13 @@ const t = [
     radical: "丿",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄨㄢˇ",
     tradition: "卵",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "luan",
+    explain: "动植物的雌性生殖细胞，与精子结合后产生第二代。昆虫学上特指受精的卵，是昆虫生活周期的第一个发育阶段。某些动物由卵细胞发育成的借以繁殖传代的物质，如鸟卵、蛇卵、龟卵等。称睾丸或阴茎（多指人的）。"
   },
   {
     char: "卷",
@@ -22791,7 +23417,9 @@ const t = [
     mark: "ㄐㄩㄢˋ",
     tradition: "捲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "juan",
+    explain: "机关里保存的文件：～宗。调～。查～。"
   },
   {
     char: "卸",
@@ -22804,7 +23432,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "卸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "把运输的东西从运输工具上搬下来：～货。～行李。把加在人身上的东西取下来或去掉：～装。～肩。把牲口身上拴的套解开取下来：～牲口。把零件从机械上拆下来：拆～。～螺丝。解除；推卸：～任。～责。"
   },
   {
     char: "卿",
@@ -22817,7 +23447,9 @@ const t = [
     mark: "ㄑㄧㄥ",
     tradition: "卿",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "古时高级官名：～相。古时君称臣。古时夫妻或好朋友之间表示亲爱的称呼。姓。"
   },
   {
     char: "厂",
@@ -22826,11 +23458,13 @@ const t = [
     radical: "厂",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄢ",
     tradition: "廠",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chang",
+    explain: "占地宽广，可以制造、修理或存放器物的场所。  【组词】：工厂、厂房、自来水厂"
   },
   {
     char: "厅",
@@ -22843,7 +23477,9 @@ const t = [
     mark: "ㄊㄧㄥ",
     tradition: "廳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ting",
+    explain: "聚会或招待客人用的房间：大～。门～。客～。餐～。中央或部一级机关办事部门的名称：办公～。某些省属机关的名称：教育～。财政～。"
   },
   {
     char: "历",
@@ -22856,7 +23492,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "歷、曆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "经历；经过：来～。～程。～时半年。身～其境。统指过去的各个或各次：～年。～代。～次。～届。遍；一个一个地：～访各校。～试诸方，均无成效。姓。推算年月日和节气的方法；历法：阳～。阴～。农～。记录年月日和节气的书、表等：日～。挂～。天文～。"
   },
   {
     char: "厉",
@@ -22865,11 +23503,13 @@ const t = [
     radical: "厂",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧˋ",
     tradition: "厲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "严格：～行节约。严肃；猛烈：正言～色。雷～风行。古又同“砺”。古又同“疠”。古又同“励”。古又同“癞（lài）”。"
   },
   {
     char: "压",
@@ -22878,11 +23518,13 @@ const t = [
     radical: "厂",
     struct: "半包围结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄚˋ",
     tradition: "壓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ya",
+    explain: "1.从上面加力：～住。～碎。～缩。泰山～顶。2.用威力制服、镇服：镇～。～服。～迫。3.控制，使稳定，使平静：～价。～住阵脚。4.搁置：积～。5.逼近：大兵～境。6.赌博时在某一门上下注：～宝（亦作“押宝”）。"
   },
   {
     char: "厌",
@@ -22895,7 +23537,9 @@ const t = [
     mark: "ㄧㄚ",
     tradition: "厭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ya",
+    explain: "不喜欢；憎恶：～烦。～弃。满足：学而不～。"
   },
   {
     char: "厕",
@@ -22908,7 +23552,9 @@ const t = [
     mark: "ㄘㄜˋ",
     tradition: "厠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ce",
+    explain: "厕所：男～。女～。公～。茅～。夹杂在里面；参与：～身。杂～（混杂）。"
   },
   {
     char: "厘",
@@ -22921,7 +23567,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "厘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "（某些计量单位的）百分之一：～米。～升。计量单位名称。a）长度，10毫等于1厘，10厘等于1分。b）质量或重量，10毫等于1厘，10厘等于1分。c）地积，10厘等于1分。利率，年利率1厘是每年百分之一，月利率1厘是每月千分之一。整理；治理：～定。“釐”"
   },
   {
     char: "厚",
@@ -22934,7 +23582,9 @@ const t = [
     mark: "ㄏㄡˋ",
     tradition: "厚",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "hou",
+    explain: "扁平物上下两面之间的距离大（跟“薄”相对）：～木板。～棉衣。嘴唇很～。厚度：下了两寸～的雪。（感情）深：深情～谊。交情很～。厚道：宽～。忠～。（利润）大；（礼物价值）大：～利。～礼。（味道）浓：酒味很～。（家产）富有；殷实：家底儿～。优待；推崇；重视：～此薄彼。～今薄古。姓。"
   },
   {
     char: "原",
@@ -22947,7 +23597,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "原",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "最初的；开始的：～始。～人。～生动物。属性词。原来；本来：～地。～作者。～班人马。～有人数。没加工的：～棉。～煤。～油。姓。原谅：～宥。情有可～。宽广平坦的地方：平～。高～。草～。～野。同“塬”。"
   },
   {
     char: "厢",
@@ -22960,7 +23612,9 @@ const t = [
     mark: "ㄒㄧㄤ",
     tradition: "厢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "厢房，正房前面两旁的房屋：东～。西～。像房子那样间隔的地方：车～。靠近城的地区：城～。边，方面：两～。这～。"
   },
   {
     char: "厦",
@@ -22973,7 +23627,9 @@ const t = [
     mark: "ㄕㄚˋ",
     tradition: "廈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xia",
+    explain: "1.高大的房子：高楼大～。2.房子伸出的后廊：前廊后～。"
   },
   {
     char: "厨",
@@ -22982,11 +23638,13 @@ const t = [
     radical: "厂",
     struct: "半包围结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄨˊ",
     tradition: "厨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chu",
+    explain: "厨房，专用于做饭菜的地方。指烹调工作或从事烹调工作的人：掌～。名～。"
   },
   {
     char: "去",
@@ -22995,11 +23653,13 @@ const t = [
     radical: "土",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄩˋ",
     tradition: "去",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qu",
+    explain: "从所在地到别的地方（跟“来”相对）：～路。～向。从成都～重庆。他～了三天，还没回来。离开：～国。～世。～职。～留两便。失去；失掉：大势已～。除去；除掉：～病。～火。～皮。这句话～几个字就简洁了。距离：两地相～四十里。～今五十年。过去的（时间，多指过去的一年）：～年。～秋（去年秋天）。～冬今春。婉辞，指人死：他不到四十岁就先～了。表示离开说话人所在地自行做某件事时用“去”，表示到说话人所在地参与某件事时用“来”。的“去”可以一前一后同时用，表示去了要做某件事：他～听报告～了。用在“大、多、远”等形容词后，表示“非常…”，“…极了”的意思（后面加“了”）：这座楼可大了～了!。他到过的地方多了～了!⑿去声：平上～入。扮演（戏曲里的角色）：在《断桥》中，他～白娘子。用在动词后，表示人或事物随动作离开原来的地方：拿～。捎～。用在动词后，表示动作的继续等：信步走～（=过去）。让他说～（=下去）。一眼看～（=上去）。"
   },
   {
     char: "县",
@@ -23008,11 +23668,13 @@ const t = [
     radical: "厶",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄢˋ",
     tradition: "縣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "地方政府的行政区域名称。古时隶属州、府、道，今在省之下、乡镇之上。  【组词】：云林县、嘉义县"
   },
   {
     char: "叁",
@@ -23025,7 +23687,9 @@ const t = [
     mark: "ㄙㄢ",
     tradition: "叁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "san",
+    explain: "数目“三”的大写。多用于票证、账目等。"
   },
   {
     char: "参",
@@ -23034,11 +23698,13 @@ const t = [
     radical: "厶",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄘㄢ",
     tradition: "參",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "can",
+    explain: "加入。参战、参选、参军验查、验证。参考、参照商讨、研究。参禅、参透、参话头进谒。参拜、参见"
   },
   {
     char: "又",
@@ -23047,11 +23713,13 @@ const t = [
     radical: "又",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄡˋ",
     tradition: "又",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "you",
+    explain: "表示重复或继续：他拿着这封信看了～看。人类社会的生产活动，是一步～一步地由低级向高级发展。表示几种情况或性质同时存在。a）单用：五四运动是反帝国主义的运动，～是反封建的运动。b）连用：～快～好。～香～脆。表示意思上更进一层：冬季日短，～是阴天，夜色早已笼罩了整个市镇。表示在某个范围之外有所补充：生活费之外，～发给五十块钱做零用。表示整数之外再加零数：一～二分之一。表示有矛盾的两件事情（多叠用）：她～想去，～想不去，拿不定主意。表示转折，有“可是”的意思：刚才有个事儿要问你，这会儿～想不起来了。用在否定句或反问句里，加强语气：我～不是客人，你就不用客气了。这点小事～费得了多大工夫?"
   },
   {
     char: "叉",
@@ -23064,7 +23732,9 @@ const t = [
     mark: "",
     tradition: "叉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cha",
+    explain: "叉子，一端有两个以上长齿，用以刺取物体的器具：鱼～。钢～。用叉子刺取：～鱼。像叉的形状。也指叉形符号：交～。打～号。"
   },
   {
     char: "及",
@@ -23077,7 +23747,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "及",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "1.达到：波～。普～。～格。目力所～。由表～里。将～十载。2.赶上：～时。～早。望尘莫～。3.比得上：论学习，我不～他。4.推及；顾及：老吾老，以～人之老。攻其一点，不～其余。5.姓。6.用“及”连接的成分多在意义上有主次之分，主要的成分放在“及”的前面。"
   },
   {
     char: "友",
@@ -23090,7 +23762,9 @@ const t = [
     mark: "ㄧㄡˇ",
     tradition: "友",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "you",
+    explain: "朋友：好～。战～。相好；亲近：～爱。～好。有友好关系的：～人。～邦。～军。姓。"
   },
   {
     char: "双",
@@ -23099,11 +23773,13 @@ const t = [
     radical: "又",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄨㄤ",
     tradition: "雙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shuang",
+    explain: "属性词。两个（多为对称的，跟“单”相对）：～翅。举～手赞成。男女～方。用于成对的东西：一～鞋。一～手。买～袜子。属性词。偶数的（二、四、六、八等，跟“单”相对）：～数。～号。加倍的：～料。～份。姓。"
   },
   {
     char: "反",
@@ -23116,7 +23792,9 @@ const t = [
     mark: "ㄈㄢˇ",
     tradition: "反",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fan",
+    explain: "颠倒的；方向相背的。与“正”相对：～面。～作用。指反革命、反动派：肃～。反抗；反对：～法西斯。～封建。翻转：～复。～败为胜。推及：举一～三。回；还：～击。～问。副词。反而：画虎不成～类犬。古同“返”。"
   },
   {
     char: "发",
@@ -23129,7 +23807,9 @@ const t = [
     mark: "ㄈㄚˋ",
     tradition: "發、髪",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "fa",
+    explain: "送出；交付：～货。分～。印～。～了一封信。发射：～炮。百～百中。产生；发生：～芽。～电。～水。～病。表达：～表。～布。～誓。～言。～议论。扩大；开展：～展。～扬。～育。因得到大量财物而兴旺：～家。暴～户。他这两年跑买卖可～了。食物等因发酵或水浸而膨胀：面～了。～海参。放散；散开：～散。挥～。蒸～。揭露；打开：～现。揭～。～掘。姓。"
   },
   {
     char: "叔",
@@ -23138,11 +23818,13 @@ const t = [
     radical: "又",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄨ",
     tradition: "叔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "叔父：二～。称呼跟父亲辈分相同而年纪较小的男子：表～。李～。丈夫的弟弟；小叔子：～嫂。在弟兄排行的次序里代表第三：伯仲～季。姓。"
   },
   {
     char: "取",
@@ -23155,7 +23837,9 @@ const t = [
     mark: "ㄑㄩˇ",
     tradition: "取",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qu",
+    explain: "拿到手里：～款。～行李。把电灯泡～下来。得到；招致：～乐。～暖。自～灭亡。采取；选取：～道。录～。可～。给孩子～个名儿。姓。"
   },
   {
     char: "受",
@@ -23168,7 +23852,9 @@ const t = [
     mark: "ㄕㄡˋ",
     tradition: "受",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shou",
+    explain: "接受：～贿。～教育。～到帮助。遭受：～灾。～批评。～委屈。忍受；禁受：～不了。～得住。适合：～吃（吃着有味）。～看（看着舒服）。～听（听着入耳）。"
   },
   {
     char: "变",
@@ -23177,11 +23863,13 @@ const t = [
     radical: "又",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄧㄢˋ",
     tradition: "變",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bian",
+    explain: "和原来不同；变化；改变：情况～了。～了样儿。改变（性质、状态）；变成：沙漠～良田。后进～先进。使改变：～废为宝。～农业国为工业国。能变化的；已变化的：～数。～态。变卖：～产。变通：通权达～。有重大影响的突然变化：事～。～乱。指变文：目连～。姓。"
   },
   {
     char: "叙",
@@ -23194,7 +23882,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "叙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "说；记述：～别。～事。同“序”。"
   },
   {
     char: "叛",
@@ -23207,7 +23897,9 @@ const t = [
     mark: "ㄆㄢˋ",
     tradition: "叛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pan",
+    explain: "背叛：～贼。～匪。反～。众～亲离。离经～道。"
   },
   {
     char: "叠",
@@ -23220,7 +23912,9 @@ const t = [
     mark: "ㄉㄧㄝˊ",
     tradition: "叠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "die",
+    explain: "一层加上一层；重复：重～。～石为山。层见～出。折叠（衣被、纸张等）：～衣服。把信～好装在信封里。姓。"
   },
   {
     char: "口",
@@ -23229,11 +23923,13 @@ const t = [
     radical: "口",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄎㄡˇ",
     tradition: "口",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kou",
+    explain: "嘴。出入通过的地方：门～。海～。特指港口。也特指长城的关口：转～。出～转内销。～外。古北～。行业；系统；专业方向：对～支援。文教～。专业不对～。容器与外面相通的部位：碗～儿。瓶子～儿。指人口：户～。拖家带～。指口味：～重。破裂的地方：裂～。疮～。刀剑等的锋刃：刀卷～了。骡、马、驴等的年龄（因可以由牙齿的状况判断）：这匹马六岁～。量词。用于人，也用于某些家畜或器物：三～人。一～猪。两～缸。"
   },
   {
     char: "古",
@@ -23246,7 +23942,9 @@ const t = [
     mark: "ㄍㄨˇ",
     tradition: "古",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gu",
+    explain: "古代（跟“今”相对）：远～。厚今薄～。经历多年的：～画。～城。这座庙～得很。具有古代风格的：～拙。～朴。真挚纯朴：人心不～。古体诗：五～。七～。姓。"
   },
   {
     char: "句",
@@ -23255,11 +23953,13 @@ const t = [
     radical: "勹",
     struct: "半包围结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄡ",
     tradition: "句",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "句子：语～。词～。造～。用于语言：三～话不离本行。写了两～诗。"
   },
   {
     char: "另",
@@ -23272,7 +23972,9 @@ const t = [
     mark: "ㄌㄧㄥˋ",
     tradition: "另",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ling",
+    explain: "别的，以外：～外。～行（xíng）。～议。～眼看待。～起炉灶（ａ．喻重新做起；ｂ．喻另立门户，另搞一套）。"
   },
   {
     char: "叨",
@@ -23285,7 +23987,9 @@ const t = [
     mark: "ㄉㄠ",
     tradition: "叨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dao",
+    explain: "表示承受的谦词。  【组词】：叨光、叨教、叨荣表示超过本分的谦词。  【组词】：叨扰、叨陪末座"
   },
   {
     char: "只",
@@ -23294,11 +23998,13 @@ const t = [
     radical: "口",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓˇ",
     tradition: "衹、隻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "单独的：～身。片纸～字。独具～眼。a）用于某些成对的东西的一个：两～耳朵。两～手。一～袜子一～鞋。b）用于动物（多指飞禽、走兽）：一～鸡。两～兔子。c）用于某些器具：一～箱子。d）用于船只：一～小船。"
   },
   {
     char: "叫",
@@ -23311,7 +24017,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "叫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiao",
+    explain: "呼喊：～喊。～嚣（呼喊，吵闹）。～阵。～座（戏曲或演员能吸引观众，看的人多）。～苦不迭。鸣冤～屈。"
   },
   {
     char: "召",
@@ -23324,7 +24032,9 @@ const t = [
     mark: "ㄓㄠˋ",
     tradition: "召",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhao",
+    explain: "召唤：～集。他已被上级～回北京。姓。寺庙（多用于地名）：乌审～。罗布～（都在内蒙古）。[蒙]"
   },
   {
     char: "叭",
@@ -23337,7 +24047,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "叭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "拟声词。断裂、敲打等的声音：～的一声折断了。佛教咒语用字。"
   },
   {
     char: "叮",
@@ -23350,7 +24062,9 @@ const t = [
     mark: "ㄉㄧㄥ",
     tradition: "叮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ding",
+    explain: "蚊子等用针形口器吸食。进一步（问、告诉）：～问。临走，她又～了我一句，你明天可来啊！再三（嘱咐）：～嘱。"
   },
   {
     char: "可",
@@ -23363,7 +24077,9 @@ const t = [
     mark: "ㄎㄜˋ",
     tradition: "可",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "ke",
+    explain: "许可：认～。能够：牢不～破。值得：～爱。连词。却；可是。表示转折：他年纪不大，力气～不小。副词。1.表示强调：在抗旱斗争中群众的劲头～大啦！2.用在疑问句中加强疑问语气：你～知道？。都说这办法好，～谁敢担保不出问题呢？适合：～人意。～口。～心。文言副词。大约：年～二十。"
   },
   {
     char: "台",
@@ -23376,7 +24092,9 @@ const t = [
     mark: "ㄊㄞˊ",
     tradition: "臺、颱、檯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tai",
+    explain: "平而高的建筑物，便于在上面远望：瞭望～。塔～。亭～楼阁。公共场所室内外高出地面便于讲话或表演的设备（用砖砌或用木料制成）：讲～。舞～。主席～。某些做座子用的器物：锅～。磨～。灯～。蜡～。（～儿）像台的东西：井～。窗～儿。桌子或类似桌子的器物：写字～。梳妆～。乒乓球～。a）用于整场演出的戏剧、歌舞等：一～戏。一～晚会。b）用于机器、仪器等：一～机床。三～天文望远镜。指台湾省：～胞。敬辞，旧时用于称呼对方或跟对方有关的动作：兄～。～鉴。姓。见〖台风〗1。"
   },
   {
     char: "史",
@@ -23389,7 +24107,9 @@ const t = [
     mark: "ㄕˇ",
     tradition: "史",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shi",
+    explain: "历史：～学。近代～。世界～。有～以来。古代掌管记载史实的官。古代图书四部分类法（经史子集）中的第二类：～书。～部。姓。"
   },
   {
     char: "右",
@@ -23402,7 +24122,9 @@ const t = [
     mark: "ㄧㄡˋ",
     tradition: "右",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "you",
+    explain: "方位词。面向南时靠西的一边（跟“左”相对，下同）：～方。～手。靠～走。方位词。西：山～（太行山以西的地方，过去也专指山西省）。上1（古人以右为尊）：无出其～。崇尚：～文。保守的；反动的：～派。～倾。同“佑”。姓。"
   },
   {
     char: "叶",
@@ -23415,7 +24137,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "葉",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "叶子，植物的营养器官之一：树～。复～。某些像叶子的薄片：铜～。扇～。同“页”。较长时期的某一段：20世纪中～。"
   },
   {
     char: "号",
@@ -23428,7 +24152,9 @@ const t = [
     mark: "ㄏㄠˋ",
     tradition: "號",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hao",
+    explain: "名称：国～。年～。原指名和字以外另起的别号，后来也指名以外另起的字：苏轼字子瞻，～东坡。孔明是诸葛亮的～。商店：商～。银～。分～。宝～。标志；信号：记～。问～。加减～。暗～儿。击掌为～。排定的次第：挂～。编～。表示等级：大～。中～。小～。五～字。种；类：这～人甭理他。这～生意不能做。（～儿）指某种人员：病～。伤～。彩～。表示次序（多放在数字后）。a）一般的：第三～简报。门牌二～。b）特指一个月里的日子：五月一～是国际劳动节。姓。号令：发～施令。号筒。军队或乐队里所用的西式喇叭。用号吹出的表示一定意义的声音：起床～。集合～。冲锋～。"
   },
   {
     char: "司",
@@ -23441,7 +24167,9 @@ const t = [
     mark: "ㄙ",
     tradition: "司",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "si",
+    explain: "1.主持；操作；经营：～机。～炉。各～其事。2.中央部一级机关中按业务划分的单位（级别比部低，比处高）：人事～。外交部礼宾～。3.姓。"
   },
   {
     char: "叹",
@@ -23450,24 +24178,13 @@ const t = [
     radical: "口",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄢˋ",
     tradition: "嘆",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "叼",
-    spell: "diāo",
-    stroke: "5",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄉㄧㄠ",
-    tradition: "叼",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "tan",
+    explain: "叹气：～息。可～。长吁短～。吟哦：咏～。一唱三～。发出赞美的声音：赞～。～为奇迹。"
   },
   {
     char: "叽",
@@ -23480,20 +24197,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "嘰",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "吁",
-    spell: "xū",
-    stroke: "6",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄒㄩ",
-    tradition: "籲",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "拟声词。小鸟或小鸡的叫声：小鸟～～叫。"
   },
   {
     char: "吃",
@@ -23506,7 +24212,9 @@ const t = [
     mark: "ㄔ",
     tradition: "吃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chi",
+    explain: "1.把食物等放到嘴里经过咀嚼咽下去（包括吸、喝）：～饭。～奶。～药。2.依靠某种事物来生活：～老本。靠山～山，靠水～水。3.吸收（液体）：道林纸不～墨。4.消灭（多用于军事、棋戏）：～掉敌人一个团。拿车～他的炮。5.承受；禁受：～得消。～不住。6.受；挨：～亏。～惊。～批评。7.耗费：～力。～劲。8.被（多见于早期白话）：～他耻笑。9.见〖口吃〗。"
   },
   {
     char: "各",
@@ -23519,20 +24227,9 @@ const t = [
     mark: "ㄍㄜˋ",
     tradition: "各",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "吆",
-    spell: "yāo",
-    stroke: "6",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄧㄠ",
-    tradition: "吆",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "ge",
+    explain: "群体中的单数。  【组词】：各国、各位个别的。  【组词】：各自、各个击破"
   },
   {
     char: "合",
@@ -23545,7 +24242,9 @@ const t = [
     mark: "ㄍㄜˇ",
     tradition: "閤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "闭；合拢：～眼。笑得～不上嘴。结合到一起；凑到一起；共同（跟“分”相对）：～办。同心～力。全：～村。～家团聚。符合：～情～理。正～心意。折合；共计：一公顷～十五市亩。这件衣服连工带料～多少钱?应当；应该：理～声明。旧小说中指交战的回合：大战三十余～。在太阳系中，当行星运行到与太阳、地球成一直线，并且地球不在太阳与该行星之间的位置时，叫做合。姓。我国民族音乐音阶上的一级，乐谱上用作记音符号，相当于简谱的“”。见〖工尺〗。“閤”"
   },
   {
     char: "吉",
@@ -23558,7 +24257,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "吉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "吉利；吉祥。与“凶”相对：逢凶化～。吉林的简称。"
   },
   {
     char: "吊",
@@ -23567,11 +24268,13 @@ const t = [
     radical: "口",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧㄠˋ",
     tradition: "吊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "diao",
+    explain: "悬挂：门前～着两盏红灯笼。祭奠死者或慰问死者的家属等：～丧。用绳子向上提或向下放：把篮子～下来。收回：～销。给皮桶子加面或里子：～皮袄。把球轻轻打到对方防守薄弱的地方：～底线。打～结合。量词。旧时钱币单位。一千个制钱或值一千个制钱的铜币数量叫一吊。"
   },
   {
     char: "同",
@@ -23584,7 +24287,9 @@ const t = [
     mark: "ㄊㄨㄥˊ",
     tradition: "同",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tong",
+    explain: "相同；一样：～类。～岁。～工～酬。大～小异。条件不～。～是一双手，我为什么干不过他?跟…相同：～上。～前。“弍”～“二”。共同：一～。会～。陪～。一同；一齐（从事）：～甘苦，共患难。我们俩～住一个宿舍。引进动作的对象，跟“跟”相同：有事～群众商量。引进比较的事物，跟“跟”相同：他～哥哥一样聪明。今年的气候～往年不一样。表示与某事有无联系，跟“跟”相同：他～这件事无关。表示替人做事，跟“给”相同：这封信我一直～你保存着。你别着急，我～你出个主意。表示联合关系，跟“和”相同：我～你一起去。姓。"
   },
   {
     char: "名",
@@ -23597,7 +24302,9 @@ const t = [
     mark: "ㄇㄧㄥˊ",
     tradition: "名",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ming",
+    explain: "名字；名称：人～。书～。命～。报～。给他起个～儿。名字叫做：这位女英雄姓刘～胡兰。名义：你不该以出差为～，到处游山玩水。名声；名誉：出～。有～。世界闻～。出名的；有名声的：～医。～著。～画。～山。说出：莫～其妙。不可～状。占有：一文不～。不～一钱。a）用于人：三百多～工作人员。录取新生四十～。b）用于名次：第三～。姓。"
   },
   {
     char: "后",
@@ -23610,7 +24317,9 @@ const t = [
     mark: "ㄏㄡˋ",
     tradition: "後",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hou",
+    explain: "方位词。在背面的（指空间，跟“前”相对）：～门。村前村～。方位词。未来的；较晚的（指时间，跟“前、先”相对）：～天。日～。～辈。先来～到。方位词。次序靠近末尾的（跟“前、先”相对）：～排。～十五名。后代的人，指子孙等：无～。君主的妻子：皇～。～妃。古代称君主：商之先～。姓。"
   },
   {
     char: "吏",
@@ -23623,7 +24332,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "吏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "旧时没有品级的小公务人员：胥～。旧时泛指官吏：大～。酷～。姓。"
   },
   {
     char: "吐",
@@ -23636,7 +24347,9 @@ const t = [
     mark: "ㄊㄨˋ",
     tradition: "吐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tu",
+    explain: "使东西从嘴里出来：～核儿（húr）。～痰。从口儿或缝儿里长出来或露出来：～穗儿。～絮。蚕～丝。说出来：谈～。～露。～字。～实情。"
   },
   {
     char: "向",
@@ -23649,7 +24362,9 @@ const t = [
     mark: "ㄒㄧㄤˋ",
     tradition: "嚮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiang",
+    explain: "方向：志～。风～。对着，特指脸或正面对着（跟“背”相对）：～阳。面～讲台。两人相～而行。将近；接近：～晓。～晚。偏袒：老乡～老乡。表示动作的方向：～东走。～先进工作者学习。从胜利走～胜利。姓。向来：～有研究。～无此例。"
   },
   {
     char: "吓",
@@ -23662,7 +24377,9 @@ const t = [
     mark: "ㄏㄜˋ",
     tradition: "嚇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xia",
+    explain: "使害怕：～了一跳。别～着孩子。"
   },
   {
     char: "吕",
@@ -23671,11 +24388,13 @@ const t = [
     radical: "口",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "吕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "见〖律吕〗。姓。"
   },
   {
     char: "吗",
@@ -23688,7 +24407,9 @@ const t = [
     mark: "ㄇㄚˊ",
     tradition: "嗎",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "ma",
+    explain: "助词：表示疑问的语气。这个问题可以解决吗？　表示停顿的语气，有提示下文的作用。这个吗，让我再考虑考虑。"
   },
   {
     char: "君",
@@ -23701,7 +24422,9 @@ const t = [
     mark: "ㄐㄩㄣ",
     tradition: "君",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "jun",
+    explain: "古代国家的最高统治者。敬辞。称对方：汪～。诸～。"
   },
   {
     char: "吝",
@@ -23714,20 +24437,9 @@ const t = [
     mark: "ㄌㄧㄣˋ",
     tradition: "吝",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "吞",
-    spell: "tūn",
-    stroke: "7",
-    radical: "口",
-    struct: "上下结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄊㄨㄣ",
-    tradition: "吞",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "lin",
+    explain: "小气；舍不得：～啬。悭（qiān）～。不～赐教（向人征求意见时用的客气话）。"
   },
   {
     char: "吟",
@@ -23740,7 +24452,9 @@ const t = [
     mark: "ㄧㄣˊ",
     tradition: "吟",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yin",
+    explain: "吟咏：～诗。抱膝长～。呻吟；叹息。古典诗歌的一种名称：《秦妇～》。水龙～。姓。“唫”"
   },
   {
     char: "吠",
@@ -23753,7 +24467,9 @@ const t = [
     mark: "ㄈㄟˋ",
     tradition: "吠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fei",
+    explain: "（狗）叫：狂～。鸡鸣犬～。"
   },
   {
     char: "否",
@@ -23766,7 +24482,9 @@ const t = [
     mark: "ㄈㄡˇ",
     tradition: "否",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fou",
+    explain: "不是这样，表示不同意。否定：～决。～认。“是否”“可否”等表示“是不是”“可不可”等意思。"
   },
   {
     char: "吧",
@@ -23779,7 +24497,9 @@ const t = [
     mark: "ㄅㄚ",
     tradition: "吧",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "助词：表示商量、请求等语气。  【组词】：教教我吧！　表示指使。  【组词】：快走吧！　(3)表示同意。  【组词】：好吧！　(4)表示推测。  【组词】：明天该不会下雨吧！　(5)表示感叹。  【组词】：算了吧！"
   },
   {
     char: "吨",
@@ -23792,7 +24512,9 @@ const t = [
     mark: "ㄉㄨㄣ",
     tradition: "噸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dun",
+    explain: "质量或重量单位，符号t。1吨等于1000千克。英美制质量或重量单位。英国为英吨，美国为美吨。[英ton]登记吨的简称。船舶运输时按货物的体积计算运费用的单位，根据不同的货物定出体积换算成吨数的不同标准。"
   },
   {
     char: "吩",
@@ -23805,7 +24527,9 @@ const t = [
     mark: "ㄈㄣ",
     tradition: "吩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fen",
+    explain: "〔吩咐〕口头指派或命令；嘱咐。"
   },
   {
     char: "含",
@@ -23818,7 +24542,9 @@ const t = [
     mark: "ㄏㄢˊ",
     tradition: "含",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "han",
+    explain: "东西放在嘴里，不咽下也不吐出：～一口水。～着橄榄。藏在里面；包括在内；容纳：～着眼泪。这种梨～水分很多。工龄满三十年以上（～三十年）者均可申请。带有某种意思、情感等，不完全表露出来：～怒。～羞。谈吐中～着一种失落感。"
   },
   {
     char: "听",
@@ -23831,33 +24557,9 @@ const t = [
     mark: "ㄊㄧㄥ",
     tradition: "聽",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "吭",
-    spell: "kēng",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄏㄤˊ",
-    tradition: "吭",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "吮",
-    spell: "shǔn",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄕㄨㄣˇ",
-    tradition: "吮",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "ting",
+    explain: "用耳朵接受声音：～广播。服从；接受；照办：一切行动～指挥。不～劝告。任凭：～其自然。判断；治理：垂帘～政。英语音译词。金属制的密封罐、筒等。也用作量词：～装香烟。一～啤酒。"
   },
   {
     char: "启",
@@ -23870,20 +24572,9 @@ const t = [
     mark: "ㄑㄧˇ",
     tradition: "啓",
     sex: "男",
-    tone: 3
-  },
-  {
-    char: "吱",
-    spell: "zī",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄗ",
-    tradition: "吱",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "qi",
+    explain: "打开：～封。～门。某某～（信封上用语，表示由某人拆信）。开导：～蒙。～发。开始：～行。～用。陈述：敬～者（旧时用于书信的开端）。某某～（用于书信末署名处）。旧时文体之一，较简短的书信：小～。谢～。姓。"
   },
   {
     char: "吴",
@@ -23896,33 +24587,9 @@ const t = [
     mark: "ㄨˊ",
     tradition: "吴",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "吵",
-    spell: "chǎo",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄔㄠˇ",
-    tradition: "吵",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "吸",
-    spell: "xī",
-    stroke: "6",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄒㄧ",
-    tradition: "吸",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "wu",
+    explain: "周朝国名（？—前473）。在今江苏、安徽、浙江一带，建都于吴（今江苏苏州）。公元前473年为越所灭。朝代名。1.三国之一（222—280）。孙权建立。在长江中下游和东南沿海一带，建都建业（今南京），国号吴，也称孙吴或东吴。为晋所灭。十国之一（902—937）。杨行密建立。建都广陵（今江苏扬州）。为南唐所灭。"
   },
   {
     char: "吹",
@@ -23935,7 +24602,9 @@ const t = [
     mark: "ㄔㄨㄟ",
     tradition: "吹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chui",
+    explain: "合拢嘴唇用力出气：～灯。～一口气。吹气演奏：～笛子。（风、气流等）流动；冲击：风～雨打。～风机。说大话；夸口：先别～，做出成绩来再说。他胡～一通，你还真信。吹捧：又～又拍。（事情、交情）破裂；不成功：婚事告～。这个月的计划又～了。"
   },
   {
     char: "吻",
@@ -23948,33 +24617,9 @@ const t = [
     mark: "ㄨㄣˇ",
     tradition: "吻",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "吼",
-    spell: "hǒu",
-    stroke: "7",
-    radical: "口",
-    struct: "左中右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄏㄡˇ",
-    tradition: "吼",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "呀",
-    spell: "yā",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄧㄚ",
-    tradition: "呀",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "wen",
+    explain: "嘴唇：接～。唇～。用嘴唇接触人或物，表示喜爱。动物的嘴，也指低等动物的口器或头部前端突出的部分。"
   },
   {
     char: "呆",
@@ -23987,7 +24632,9 @@ const t = [
     mark: "ㄉㄞ",
     tradition: "呆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dai",
+    explain: "傻；愚蠢：痴～。不灵活；死板：～头～脑。两眼发～。同“待（dāi）”。注：呆旧读ái，此义又作“騃”。故《第一批异体字整理表》将“騃”作为“呆（ái）”的异体字处理。后《普通话异读词审音表》规定“呆”统读dāi，而“騃”并无dāi音，故不将“騃”作为“呆（dāi）”的异体字。"
   },
   {
     char: "呈",
@@ -24000,7 +24647,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "呈",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "具有（某种形式）；呈现（某种颜色、状态）：果实～长圆形。毛皮～暗褐色。恭敬地送上去：谨～。～上名片。呈文：签～。姓。"
   },
   {
     char: "告",
@@ -24013,7 +24662,9 @@ const t = [
     mark: "ㄍㄠˋ",
     tradition: "告",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gao",
+    explain: "把事情向人陈述、解说：～诉。～知。广～。报～。通～。忠～。向国家行政司法机关检举、控诉：～状。到法院去～他。为了某事而请求：～假。～贷。表明：～辞。自～奋勇。宣布或表示某种情况的实现：～成。～罄。～一段落。事情已～结束。姓。"
   },
   {
     char: "呐",
@@ -24026,7 +24677,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "呐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "na",
+    explain: "[呐喊]大声叫喊：摇旗～。～助威。"
   },
   {
     char: "呕",
@@ -24039,7 +24692,9 @@ const t = [
     mark: "ㄡˇ",
     tradition: "嘔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ou",
+    explain: "吐。作呕、呕血、呕心沥血"
   },
   {
     char: "员",
@@ -24052,33 +24707,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "員",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "呛",
-    spell: "qiāng",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄑㄧㄤˋ",
-    tradition: "嗆",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "呜",
-    spell: "wū",
-    stroke: "7",
-    radical: "口",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄨ",
-    tradition: "嗚",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "yun",
+    explain: "工作或学习的人：职～。学～。团体或组织中的成员：会～。党～。周围：幅～（领土面积）。量词。用于武将：一～猛将。"
   },
   {
     char: "呢",
@@ -24091,7 +24722,9 @@ const t = [
     mark: "ㄋㄧˊ",
     tradition: "呢",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "ne",
+    explain: "用在疑问句（特指问、选择问、正反问）的末尾，表示疑问的语气：这个道理在哪儿～?。你学提琴～，还是学钢琴～?。你们劳动力够不够～?。人～?都到哪儿去了?。他们都有任务了，我～?用在陈述句的末尾，表示确认事实，使对方信服（多含夸张的语气）：收获不小～。晚场电影八点才开～。远得很，有两三千里地～。这个药灵得很～，敷上就不疼。用在陈述句的末尾，表示动作或情况正在继续：她在井边打水～。别走了，外面下着雨～。老张，门外有人找你～。用在句中表示停顿（多为对举）：如今～，可比往年强多了。喜欢～，就买下；不喜欢～，就别买。“呐”"
   },
   {
     char: "周",
@@ -24100,11 +24733,13 @@ const t = [
     radical: "冂",
     struct: "半包围结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄡ",
     tradition: "周",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhou",
+    explain: "周围；圆形的外围：四～。圆～。绕地球一～。环绕；绕一圈：～而复始。普遍；整个；全：众所～知。～天。～身。时间的一轮；特指一个星期：～期。一～。完备：招待不～。计划～密。接济；救济：～济。～急。朝代名。1.（约前1046—前256）。周武王灭商后建立。从周建立到公元前771年周幽王被杀，建都镐京（今陕西西安），史称西周。从公元前770年周平王东迁洛邑（今河南洛阳西），到公元前256年被秦所灭，史称东周。东周分为春秋、战国两个时期。北朝之一（557—581）。宇文觉灭西魏后建立。建都长安（今陕西西安），国号周，史称北周。为隋所灭。五代之一（951—960）。郭威灭后汉后建立。建都汴（今河南开封），国号周，史称后周。为北宋所灭。古又同“中（zhōng）”：不～于用（不中用）。"
   },
   {
     char: "味",
@@ -24117,33 +24752,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "味",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "呵",
-    spell: "hē",
-    stroke: "8",
-    radical: "口",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄚ",
-    tradition: "呵",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "呻",
-    spell: "shēn",
-    stroke: "8",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄕㄣ",
-    tradition: "呻",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "wei",
+    explain: "物质所具有的能使舌头得到某种味觉的特性：～道。滋～。甜～儿。津津有～。物质所具有的能使鼻子得到某种嗅觉的特性：气～。香～儿。这种～儿很好闻。意味；趣味：文笔艰涩无～。这本书越读越有～儿。指某类菜肴、食品：腊～。美～。野～。山珍海～。辨别味道：体～。用于中药：这个方子共有七～药。"
   },
   {
     char: "呼",
@@ -24156,7 +24767,9 @@ const t = [
     mark: "ㄏㄨ",
     tradition: "呼",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hu",
+    explain: "生物体把体内的气体排出体外（跟“吸”相对）：～吸。～出一口气。大声喊：～声。欢～。～口号。大声疾～。叫；叫人来：直～其名。一～百诺。～之即来，挥之即去。姓。形容风声等：北风～～地吹。"
   },
   {
     char: "命",
@@ -24169,20 +24782,9 @@ const t = [
     mark: "ㄇㄧㄥˋ",
     tradition: "命",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "咆",
-    spell: "páo",
-    stroke: "8",
-    radical: "口",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄆㄠˊ",
-    tradition: "咆",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "ming",
+    explain: "动植物的生活能力：生～。救～。逃～。拼～。～脉。性～。相依为～。迷信认为生来就注定的贫富、寿数等：天～。～相（xiàng）。～运（a.迷信指生死、贫富和一切遭遇；b.喻发展变化的趋向，如“人民一定能掌握自己的～～”）。上级对下级的指示：奉～。遵～。～令。使～。给予（名称等）：～名。～题。～意。指派，使用：～官。"
   },
   {
     char: "和",
@@ -24195,7 +24797,9 @@ const t = [
     mark: "ㄏㄜˊ",
     tradition: "和",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "平和；和缓：温～。柔～。～颜悦色。和谐；和睦：～衷共济。弟兄不～。结束战争或争执：讲～。媾～。军阀之间一会儿打，一会儿～，弄得百姓不得安生。（下棋或赛球）不分胜负：～棋。～局。末了一盘～了。姓。连带：～盘托出。～衣而卧（不脱衣服睡觉）。引进相关或比较的对象：他～大家讲他过去的经历。柜台正～我一样高。表示联合；跟；与：工人～农民都是国家的主人。加法运算中，一个数加上另一个数所得的数，如6+4=10中，10是和。也叫和数。指日本：～服。"
   },
   {
     char: "咏",
@@ -24208,7 +24812,9 @@ const t = [
     mark: "ㄩㄥˇ",
     tradition: "咏",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "唱；抑扬顿挫地念：歌～。吟～。（以某种事物为题）做诗：～梅。～雪。"
   },
   {
     char: "咐",
@@ -24217,50 +24823,13 @@ const t = [
     radical: "口",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄨˋ",
     tradition: "咐",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "咒",
-    spell: "zhòu",
-    stroke: "8",
-    radical: "几",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄓㄡˋ",
-    tradition: "咒",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "咕",
-    spell: "gū",
-    stroke: "8",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄍㄨ",
-    tradition: "咕",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "咖",
-    spell: "kā",
-    stroke: "8",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄍㄚ",
-    tradition: "咖",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "fu",
+    explain: "见〖嘱咐〗。"
   },
   {
     char: "咙",
@@ -24269,24 +24838,13 @@ const t = [
     radical: "口",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄨㄥˊ",
     tradition: "嚨",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "咧",
-    spell: "liē",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄧe",
-    tradition: "咧",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "long",
+    explain: "见〖喉咙〗。"
   },
   {
     char: "咨",
@@ -24299,7 +24857,9 @@ const t = [
     mark: "ㄗ",
     tradition: "咨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zi",
+    explain: "商量；询问（政事）。叹气的声音：～嗟。"
   },
   {
     char: "咪",
@@ -24312,20 +24872,9 @@ const t = [
     mark: "ㄇㄧˇ",
     tradition: "咪",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "咬",
-    spell: "yǎo",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄧㄠˇ",
-    tradition: "咬",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "mi",
+    explain: "拟声词。猫叫声。"
   },
   {
     char: "咱",
@@ -24338,20 +24887,9 @@ const t = [
     mark: "ㄗㄢˊ",
     tradition: "咱",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "咳",
-    spell: "hāi",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄏㄞˊ",
-    tradition: "咳",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "zan",
+    explain: "我。咱现在已三十多岁了。我们，包括听话者。酒菜当前，咱爷儿俩一定得好好享受一番。"
   },
   {
     char: "咸",
@@ -24364,20 +24902,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "鹹",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "咽",
-    spell: "yān",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄧㄢˋ",
-    tradition: "咽",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "xian",
+    explain: "全；都：～受其益。老少～宜。姓。像盐的味道：～鱼。菜太～。"
   },
   {
     char: "哀",
@@ -24390,7 +24917,9 @@ const t = [
     mark: "ㄞ",
     tradition: "哀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ai",
+    explain: "悲伤；悲痛：悲～。～鸣。悼念：～悼。默～。怜悯：～怜。～矜。～其不幸。姓。"
   },
   {
     char: "品",
@@ -24403,33 +24932,9 @@ const t = [
     mark: "ㄆㄧㄣˇ",
     tradition: "品",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "哄",
-    spell: "hǒng",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄏㄨㄥˋ",
-    tradition: "哄",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "哆",
-    spell: "duō",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "会意",
-    mark: "ㄉㄨㄛ",
-    tradition: "哆",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "pin",
+    explain: "物品：商～。产～。战利～。等级：上～。下～。精～。极～。封建时代官吏的级别，共分九品。种类：～种。～类。品质：人～。～德。辨别好坏；品评：～茶。这人究竟怎么样，你慢慢就～出来了。吹（管乐器，多指箫）：～箫。～竹弹丝。姓。"
   },
   {
     char: "哈",
@@ -24442,7 +24947,9 @@ const t = [
     mark: "ㄏㄚˋ",
     tradition: "哈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ha",
+    explain: "张口呼气：～气。拟声词。笑声：～～大笑。叹词。表示满意：～！试验成功了。稍微弯着（腰）：～腰。"
   },
   {
     char: "响",
@@ -24455,20 +24962,9 @@ const t = [
     mark: "ㄒㄧㄤˇ",
     tradition: "響",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "哎",
-    spell: "āi",
-    stroke: "8",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄞ",
-    tradition: "哎",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "xiang",
+    explain: "回声：～应。影～。如～斯应（比喻反应迅速）。发出声音：钟～了。全场～起暴风雨般的掌声。使发出声音：～枪。～锣。响亮：炮声真～。声音：声～。你听见～儿了吗?"
   },
   {
     char: "哑",
@@ -24481,33 +24977,9 @@ const t = [
     mark: "ㄧㄚˇ",
     tradition: "啞",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "哗",
-    spell: "huá",
-    stroke: "9",
-    radical: "口",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄨㄚˊ",
-    tradition: "嘩",
-    sex: "",
-    tone: 2
-  },
-  {
-    char: "哟",
-    spell: "yō",
-    stroke: "9",
-    radical: "口",
-    struct: "左中右结构",
-    five: "木",
-    method: "形声",
-    mark: "o",
-    tradition: "喲",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "ya",
+    explain: "不能说话或说不出话来：～巴。～口无言。嗓子沙哑：～嗓。（旧读è）笑声：～然失笑。"
   },
   {
     char: "哥",
@@ -24520,7 +24992,9 @@ const t = [
     mark: "ㄍㄜ",
     tradition: "哥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "哥哥：大～。二～。亲戚中同辈而年纪比自己大的男子：表～。称呼年纪跟自己差不多的男子（含亲热意）：李二～。（Gē）姓。"
   },
   {
     char: "哨",
@@ -24533,20 +25007,9 @@ const t = [
     mark: "ㄕㄠˋ",
     tradition: "哨",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "哩",
-    spell: "lī",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄧ",
-    tradition: "哩",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "shao",
+    explain: "侦察；巡逻：～探。为警戒、侦察等任务而设的岗位：～卡。岗～。观察～。放～。支；队（用于军队）：一～人马。姓。（鸟）叫。说话；闲谈（含贬义）：神聊海～。哨子：吹～儿。"
   },
   {
     char: "哪",
@@ -24559,7 +25022,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "哪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "na",
+    explain: "→哪吒"
   },
   {
     char: "哭",
@@ -24572,20 +25037,9 @@ const t = [
     mark: "ㄎㄨ",
     tradition: "哭",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "哮",
-    spell: "xiào",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄒㄧㄠˋ",
-    tradition: "哮",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "ku",
+    explain: "因痛苦悲哀或感情激动而流泪，有时候还发出声音：～诉。放声大～。"
   },
   {
     char: "哲",
@@ -24598,7 +25052,9 @@ const t = [
     mark: "ㄓㄜˊ",
     tradition: "哲",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "zhe",
+    explain: "智慧卓越或有卓越智慧的人：～人。先～。"
   },
   {
     char: "哺",
@@ -24611,7 +25067,9 @@ const t = [
     mark: "ㄅㄨˇ",
     tradition: "哺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bu",
+    explain: "喂（不会取食的幼儿）：～育。～乳。咀嚼着的食物：一饭三吐～。"
   },
   {
     char: "哼",
@@ -24624,33 +25082,9 @@ const t = [
     mark: "ㄏㄥ",
     tradition: "哼",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "唁",
-    spell: "yàn",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄧㄢˋ",
-    tradition: "唁",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "唆",
-    spell: "suō",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙㄨㄛ",
-    tradition: "唆",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "heng",
+    explain: "鼻子发出声音：痛得～了几声。低声唱或吟哦：他一边走一边～着小曲儿。这几首诗是在旅途上～出来的。"
   },
   {
     char: "唇",
@@ -24663,20 +25097,9 @@ const t = [
     mark: "ㄔㄨㄣˊ",
     tradition: "唇",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "唉",
-    spell: "āi",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄞˋ",
-    tradition: "唉",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "chun",
+    explain: "人或某些动物口的周围的肌肉组织。通称嘴唇。"
   },
   {
     char: "唐",
@@ -24689,20 +25112,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "唐",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "唠",
-    spell: "lào",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄠˊ",
-    tradition: "嘮",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "tang",
+    explain: "（言谈）虚夸：～大无验。空；徒然：功不～捐（工夫不白费）。传说中的朝代名，尧所建。朝代。a）公元618—907，李渊和他的儿子李世民所建，建都长安（今陕西西安）。b）后唐。姓。"
   },
   {
     char: "唤",
@@ -24715,20 +25127,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "唤",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "唧",
-    spell: "jī",
-    stroke: "10",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄧ",
-    tradition: "唧",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "huan",
+    explain: "发出大声，使对方觉醒、注意或随声而来：呼～。～醒。～起。"
   },
   {
     char: "唬",
@@ -24741,7 +25142,9 @@ const t = [
     mark: "ㄏㄨˇ",
     tradition: "唬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "hu",
+    explain: "虚张声势、夸大事实来吓人或蒙混人：～人。差一点儿叫他～住了。"
   },
   {
     char: "售",
@@ -24754,7 +25157,9 @@ const t = [
     mark: "ㄕㄡˋ",
     tradition: "售",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shou",
+    explain: "卖：零～。销～。达到（目的）；施展（奸计）：其计不～。以～其奸。"
   },
   {
     char: "唯",
@@ -24767,7 +25172,9 @@ const t = [
     mark: "ㄨㄟˊ",
     tradition: "唯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wei",
+    explain: "副词。单单；只：～有。～恐落后。叹词。表示答应：～～诺诺。～～否否。"
   },
   {
     char: "唱",
@@ -24780,33 +25187,9 @@ const t = [
     mark: "ㄔㄤˋ",
     tradition: "唱",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "唾",
-    spell: "tuò",
-    stroke: "11",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄊㄨㄛˋ",
-    tradition: "唾",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "啃",
-    spell: "kěn",
-    stroke: "11",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄎㄣˇ",
-    tradition: "啃",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "chang",
+    explain: "口中发出（乐音）；依照乐律发出声音：独～。合～。演～。～京戏。～一支歌。大声叫：～名。鸡～三遍。歌曲；唱词：地方小～。《穆柯寨》这出戏里，杨宗保的～儿不多。姓。"
   },
   {
     char: "啄",
@@ -24819,7 +25202,9 @@ const t = [
     mark: "ㄓㄨㄛˊ",
     tradition: "啄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "鸟类用嘴取食物：鸡～米。书法用语。指汉字笔画的短撇。参见〔永字八法〕"
   },
   {
     char: "商",
@@ -24832,7 +25217,9 @@ const t = [
     mark: "ㄕㄤ",
     tradition: "商",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shang",
+    explain: "商量：协～。商业：经～。商人：行～。除法所得的结果：八除以二的～是四。朝代名（约前1600—前1046）。汤灭夏后建立。建都亳（bó，今河南商丘），国号商。以后多次迁都，至盘庚迁都殷（今河南安阳小屯一带），故商朝又称殷朝，也称殷商。传到纣，为周所灭。古代五音（宫、商、角、徵、羽）之一。相当于简谱的“2”。"
   },
   {
     char: "啊",
@@ -24845,7 +25232,9 @@ const t = [
     mark: "ㄚˊ",
     tradition: "啊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "a",
+    explain: "助词。置于语尾，无义。  【组词】：不错啊！"
   },
   {
     char: "啡",
@@ -24858,7 +25247,9 @@ const t = [
     mark: "ㄈㄟ",
     tradition: "啡",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fei",
+    explain: "音译用字。例：吗～。咖～。"
   },
   {
     char: "啤",
@@ -24871,7 +25262,9 @@ const t = [
     mark: "ㄆㄧˊ",
     tradition: "啤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pi",
+    explain: "〔啤酒〕一种低浓度酒精饮料。以大麦芽、大米为原料，并加少量酒花，经糖化、低温发酵制得。含糖、蛋白质和二氧化碳。"
   },
   {
     char: "啥",
@@ -24884,7 +25277,9 @@ const t = [
     mark: "ㄕㄚˊ",
     tradition: "啥",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "sha",
+    explain: "〈方〉疑问代词。什么：你姓～？。他是～地方人？"
   },
   {
     char: "啦",
@@ -24897,7 +25292,9 @@ const t = [
     mark: "ㄌㄚ",
     tradition: "啦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "la",
+    explain: "拟声词，呼啦形容旗帜飘动、物体突然倒塌等的声音，哇啦、叽哩呱啦形容大声说话或吵闹声。"
   },
   {
     char: "啰",
@@ -24910,20 +25307,9 @@ const t = [
     mark: "ㄌㄩo",
     tradition: "囉",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "啸",
-    spell: "xiào",
-    stroke: "11",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄒㄧㄠˋ",
-    tradition: "嘯",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "luo",
+    explain: "见“啰唆”。"
   },
   {
     char: "啼",
@@ -24936,7 +25322,9 @@ const t = [
     mark: "ㄊㄧˊ",
     tradition: "啼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ti",
+    explain: "啼哭：～笑皆非。哭哭～～。（某些鸟兽）叫：鸡～。月落乌～。虎啸猿～。姓。"
   },
   {
     char: "喂",
@@ -24949,7 +25337,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "喂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "招呼的声音：～，你上哪儿去?。～，你的围巾掉了。给动物东西吃；饲养：～牲口。家里～着几只鸡。把食物送到人嘴里：～奶。给病人～饭。"
   },
   {
     char: "善",
@@ -24962,20 +25352,9 @@ const t = [
     mark: "ㄕㄢˋ",
     tradition: "善",
     sex: "男",
-    tone: 4
-  },
-  {
-    char: "喇",
-    spell: "lā",
-    stroke: "12",
-    radical: "口",
-    struct: "左中右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄚˊ",
-    tradition: "喇",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "shan",
+    explain: "善良；慈善（跟“恶”相对）：～举。～事。心怀不～。善行；善事（跟“恶”相对）：行～。劝～规过。良好：～策。～本。友好；和好：友～。相～。亲～。熟悉：面～。办好；弄好：～后。～始～终。工欲～其事，必先利其器。擅长；长于：～战。多谋～断。好好地：～自保重。～为说辞。容易；易于：～变。～忘。姓。"
   },
   {
     char: "喉",
@@ -24988,7 +25367,9 @@ const t = [
     mark: "ㄏㄡˊ",
     tradition: "喉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hou",
+    explain: "介于咽和气管之间的部分，由甲状软骨、环状软骨和会厌软骨等构成。喉是呼吸器官的一部分，喉内有声带，又是发音器官。"
   },
   {
     char: "喊",
@@ -25001,20 +25382,9 @@ const t = [
     mark: "ㄏㄢˇ",
     tradition: "喊",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "喘",
-    spell: "chuǎn",
-    stroke: "12",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄔㄨㄢˇ",
-    tradition: "喘",
-    sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "han",
+    explain: "大声叫：～口号。叫（人）：你去～他一声。称呼：论辈分他要～我姨妈。"
   },
   {
     char: "喜",
@@ -25027,7 +25397,9 @@ const t = [
     mark: "ㄒㄧˇ",
     tradition: "喜",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xi",
+    explain: "快乐；高兴：狂～。～出望外。笑在脸上，～在心里。可庆贺的；可庆贺的事：～事。贺～。报～。称怀孕为“有喜”。爱好：好大～功。～新厌旧。某种生物适宜于什么环境；某种东西适宜于配合什么东西：～光植物。海带～荤，最好跟肉一起炖。姓。"
   },
   {
     char: "喝",
@@ -25040,46 +25412,9 @@ const t = [
     mark: "ㄏㄜˋ",
     tradition: "喝",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "喧",
-    spell: "xuān",
-    stroke: "12",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄒㄩㄢ",
-    tradition: "喧",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "喳",
-    spell: "zhā",
-    stroke: "12",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄔㄚ",
-    tradition: "喳",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "喷",
-    spell: "pēn",
-    stroke: "12",
-    radical: "口",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄆㄣˋ",
-    tradition: "噴",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "he",
+    explain: "把液体或流食咽下去：喝水、喝茶、喝酒；”“2、特指喝酒：爱喝、喝醉了"
   },
   {
     char: "喻",
@@ -25092,33 +25427,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "喻",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "嗅",
-    spell: "xiù",
-    stroke: "13",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄒㄧㄡˋ",
-    tradition: "嗅",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "嗓",
-    spell: "sǎng",
-    stroke: "13",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄙㄤˇ",
-    tradition: "嗓",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "yu",
+    explain: "说明；告知：晓～。～之以理。不可理～。明白；了解：家～户晓。不言而～。比方：比～。姓。"
   },
   {
     char: "嗜",
@@ -25131,7 +25442,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "嗜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "特别爱好：～好。～酒。"
   },
   {
     char: "嗡",
@@ -25144,7 +25457,9 @@ const t = [
     mark: "ㄨㄥ",
     tradition: "嗡",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "weng",
+    explain: "拟声词。蜜蜂、苍蝇等飞动的声音：蜜蜂～～地飞。"
   },
   {
     char: "嗤",
@@ -25157,59 +25472,9 @@ const t = [
     mark: "ㄔ",
     tradition: "嗤",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "嗦",
-    spell: "suō",
-    stroke: "13",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "",
-    tradition: "嗦",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "嗽",
-    spell: "sòu",
-    stroke: "14",
-    radical: "口",
-    struct: "左中右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙㄡˋ",
-    tradition: "嗽",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "嘀",
-    spell: "dí",
-    stroke: "14",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄉㄧˊ",
-    tradition: "嘀",
-    sex: "",
-    tone: 2
-  },
-  {
-    char: "嘁",
-    spell: "qī",
-    stroke: "14",
-    radical: "口",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄑㄧ",
-    tradition: "嘁",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chi",
+    explain: "嗤笑：～之以鼻。"
   },
   {
     char: "嘉",
@@ -25222,20 +25487,9 @@ const t = [
     mark: "ㄐㄧㄚ",
     tradition: "嘉",
     sex: "男",
-    tone: 1
-  },
-  {
-    char: "嘱",
-    spell: "zhǔ",
-    stroke: "15",
-    radical: "口",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄓㄨˇ",
-    tradition: "囑",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "jia",
+    explain: "美好：～宾。～礼（婚礼）。夸奖；赞许：～奖。～纳（赞许并采纳）。其志可～。姓。"
   },
   {
     char: "嘲",
@@ -25248,7 +25502,9 @@ const t = [
     mark: "ㄔㄠˊ",
     tradition: "嘲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chao",
+    explain: "讥笑，用话来取笑他人。  【组词】：嘲弄、嘲笑、冷嘲热讽"
   },
   {
     char: "嘴",
@@ -25261,33 +25517,9 @@ const t = [
     mark: "ㄗㄨㄟˇ",
     tradition: "嘴",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "嘶",
-    spell: "sī",
-    stroke: "15",
-    radical: "口",
-    struct: "左中右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙ",
-    tradition: "嘶",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "嘹",
-    spell: "liáo",
-    stroke: "15",
-    radical: "口",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄧㄠˊ",
-    tradition: "嘹",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "zui",
+    explain: "口的通称：张～。闭～。（～儿）形状或作用像嘴的东西：瓶～儿。茶壶～儿。烟～儿。指说的话：～甜。别多～。"
   },
   {
     char: "嘿",
@@ -25296,11 +25528,13 @@ const t = [
     radical: "口",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄏㄟ",
     tradition: "嘿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hei",
+    explain: "叹词：表示惊叹、得意的语气。  【组词】：嘿！几年不见，你的孩子已经长得这么大了。　表示打招呼或引起注意。  【组词】：嘿！你最近好吗？状声词。形容笑声。  【组词】：那个小女孩被搔痒时就嘿嘿的笑个不停。"
   },
   {
     char: "器",
@@ -25313,7 +25547,9 @@ const t = [
     mark: "ㄑㄧˋ",
     tradition: "器",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "器具：瓷～。木～。铁～。～物。器官：消化～。生殖～。度量：～量。才能；人才：大～晚成。器重。"
   },
   {
     char: "噩",
@@ -25322,11 +25558,13 @@ const t = [
     radical: "王",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄜˋ",
     tradition: "噩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "e",
+    explain: "可惊的；凶恶的：～梦。"
   },
   {
     char: "噪",
@@ -25339,46 +25577,9 @@ const t = [
     mark: "ㄗㄠˋ",
     tradition: "噪",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "嚎",
-    spell: "háo",
-    stroke: "17",
-    radical: "口",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄠˊ",
-    tradition: "嚎",
-    sex: "",
-    tone: 2
-  },
-  {
-    char: "嚣",
-    spell: "áo",
-    stroke: "18",
-    radical: "口",
-    struct: "上中下结构",
-    five: "木",
-    method: "会意",
-    mark: "ㄠˊ",
-    tradition: "囂",
-    sex: "",
-    tone: 2
-  },
-  {
-    char: "嚷",
-    spell: "rǎng",
-    stroke: "20",
-    radical: "口",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄖㄤˇ",
-    tradition: "嚷",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "zao",
+    explain: "虫或鸟叫：蝉～。鹊～。群鸦乱～。大声叫嚷：聒～。（名声）广为传扬：名～一时。声名大～。"
   },
   {
     char: "嚼",
@@ -25391,7 +25592,9 @@ const t = [
     mark: "ㄐㄧㄠˊ",
     tradition: "嚼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jiao",
+    explain: "上下牙齿磨碎食物：细～慢咽。肉没有烧熟，～不烂。咬文～字。"
   },
   {
     char: "囊",
@@ -25404,7 +25607,9 @@ const t = [
     mark: "ㄋㄤˊ",
     tradition: "囊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nang",
+    explain: "1.袋子：布～。2.像袋子的东西：胆～。3.用袋子装：～沙。"
   },
   {
     char: "囚",
@@ -25417,7 +25622,9 @@ const t = [
     mark: "ㄑㄧㄡˊ",
     tradition: "囚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiu",
+    explain: "拘禁：～禁。被拘禁的人：～犯。"
   },
   {
     char: "四",
@@ -25430,7 +25637,9 @@ const t = [
     mark: "ㄙˋ",
     tradition: "四",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "si",
+    explain: "三加一后所得的数目。见〖数字〗。姓。我国民族音乐音阶上的一级，乐谱上用作记音符号，相当于简谱的“”。见〖工尺〗。"
   },
   {
     char: "回",
@@ -25439,11 +25648,13 @@ const t = [
     radical: "囗",
     struct: "全包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄟˊ",
     tradition: "迴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hui",
+    explain: "曲折环绕：～旋。巡～。迂～。～形针。峰～路转。从别处到原来的地方；还：～家。～乡。送～原处。掉转：～头。～过身来。答复；回报：～信。～敬。回禀。谢绝（邀请）；退掉（预定的酒席等）；辞去（伙计、佣工）：送来的礼物都～了。指事情、动作的次数：来了一～。听过两～。那是另一～事。说书的一个段落，章回小说的一章：一百二十～抄本《红楼梦》。回族：～民。姓。趋向动词。用在动词后面，表示人或事物随动作从别处到原处：从邮局取～一个包裹。书报阅后，请放～原处。"
   },
   {
     char: "因",
@@ -25456,7 +25667,9 @@ const t = [
     mark: "ㄧㄣ",
     tradition: "因",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yin",
+    explain: "1.原故，原由，事物发生前已具备的条件：原～。～素。～果。病～。2.理由：～为（wéi）。～而。3.依，顺着，沿袭：～此。～之。～循（ａ．沿袭；ｂ．迟延拖拉）。陈陈相～。"
   },
   {
     char: "团",
@@ -25465,11 +25678,13 @@ const t = [
     radical: "囗",
     struct: "全包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄨㄢˊ",
     tradition: "團、糰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tuan",
+    explain: "圆形的：～扇。～脐。团子：汤～。把东西揉弄成球形：～泥球。～纸团儿。～饭团子。成球形的东西：纸～儿。棉花～儿。会合在一起：～聚。～结。工作或活动的集体：主席～。文工～。代表～。参观～。军队的编制单位，一般隶属于师，下辖若干营。青少年的政治性组织，如儿童团、青年团等，在我国特指中国共产主义青年团。旧时某些地区相当于乡一级的政权机关。姓。"
   },
   {
     char: "囤",
@@ -25482,7 +25697,9 @@ const t = [
     mark: "ㄉㄨㄣˋ",
     tradition: "囤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tun",
+    explain: "用竹篾、荆条、稻草编成的或用席箔等围成的盛粮食的器具：粮食～。大～满，小～流。（Dùn）姓。"
   },
   {
     char: "园",
@@ -25495,20 +25712,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "園",
     sex: "女",
-    tone: 2
-  },
-  {
-    char: "困",
-    spell: "kùn",
-    stroke: "7",
-    radical: "囗",
-    struct: "全包围结构",
-    five: "木",
-    method: "会意",
-    mark: "ㄎㄨㄣˋ",
-    tradition: "睏",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "yuan",
+    explain: "（～儿）种蔬菜、花果、树木的地方：花～儿。果～。～艺。供人游览娱乐的地方：公～。动物～。～中游人很多。（Yuán）姓。"
   },
   {
     char: "囱",
@@ -25521,7 +25727,9 @@ const t = [
     mark: "ㄘㄨㄥ",
     tradition: "囱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cong",
+    explain: "炉灶出烟的通道：烟～。"
   },
   {
     char: "围",
@@ -25534,7 +25742,9 @@ const t = [
     mark: "ㄨㄟˊ",
     tradition: "圍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wei",
+    explain: "环绕；包围：～绕。～城。四周：周～。外～。围子，圈起来作拦阻或遮挡的东西：床～。某些物体的周长：腰～。胸～。量词。两只手的拇指和食指合拢起来的长度，或两只胳膊合拢起来的长度为一围：腰大十～。树大十～。"
   },
   {
     char: "固",
@@ -25547,7 +25757,9 @@ const t = [
     mark: "ㄍㄨˋ",
     tradition: "固",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "gu",
+    explain: "结实；牢固：稳～。加～。本～枝荣。坚硬：～体。凝～。坚决地；坚定地：～辞。～请。～守阵地。使坚固：～本。～防。鄙陋：～陋。同“痼”：～疾。～习。姓。本来；原来：～有。～当如此。～所愿也。固然：坐车～可，坐船亦无不可。"
   },
   {
     char: "国",
@@ -25560,7 +25772,9 @@ const t = [
     mark: "ㄍㄨㄛˊ",
     tradition: "國",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "guo",
+    explain: "国家：～内。祖～。外～。保家卫～。代表或象征国家的：～徽。～旗。～花。在一国内最好的：～手。～色。指本国的，特指我国的：～产。～术。～画。～药。姓。"
   },
   {
     char: "图",
@@ -25569,11 +25783,13 @@ const t = [
     radical: "囗",
     struct: "全包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄨˊ",
     tradition: "圖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tu",
+    explain: "用绘画表现出来的形象；图画：地～。蓝～。绘～。插～。制～。看～识字。谋划；谋求：～谋。力～。贪图：唯利是～。不能只～省事，不顾质量。意图；计划：良～。宏～。绘；画：绘影～形。姓。"
   },
   {
     char: "圃",
@@ -25586,7 +25802,9 @@ const t = [
     mark: "ㄆㄨˇ",
     tradition: "圃",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pu",
+    explain: "种植蔬菜、瓜果、花草等的园地：园～。花～。苗～。古称从事园艺工作的人：老～。"
   },
   {
     char: "圆",
@@ -25599,7 +25817,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "圓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "圆周所围成的平面。圆周的简称。形状像圆圈或球的：～桌。滚～。滴溜～。圈画得很～。圆满；周全：这话说得不～。这人做事很～，各方面都能照顾到。使圆满；使周全：～场。～谎。自～其说。我国的本位货币单位，一圆等于十角或一百分。也作元。圆形的货币：银～。铜～。也作元。姓。"
   },
   {
     char: "圈",
@@ -25612,7 +25832,9 @@ const t = [
     mark: "ㄐㄩㄢˋ",
     tradition: "圈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "quan",
+    explain: "环形，环形的东西：圆～。花～。～套。画～。周，周遭：跑了一～儿。范围：势力～。画环形：～阅。～点。～定。划界，围住：～地。～闭。"
   },
   {
     char: "土",
@@ -25621,11 +25843,13 @@ const t = [
     radical: "土",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄊㄨˇ",
     tradition: "土",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tu",
+    explain: "土壤；泥土：黄～。黏～。～山。～坡。～堆。土地：国～。领～。本地的；地方性的：～产。～话。这个字眼太～，外地人不好懂。民间的；民间沿用的；非现代化的（区别于“洋”）：～法。～专家。～洋并举。不合潮流；不开通：～里～气。～头～脑。未熬制的鸦片：烟～。姓。"
   },
   {
     char: "圣",
@@ -25634,11 +25858,13 @@ const t = [
     radical: "又",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄕㄥˋ",
     tradition: "聖",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "sheng",
+    explain: "最崇高的：～地。神～。称学识或技能有极高成就的：～手。诗～。指圣人：～贤。封建社会尊称帝王：～上。～旨。宗教徒对所崇拜的事物的尊称：～经。～灵。姓。"
   },
   {
     char: "在",
@@ -25651,7 +25877,9 @@ const t = [
     mark: "ㄗㄞˋ",
     tradition: "在",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zai",
+    explain: "存在；生存：精神永～。留得青山～，不怕没柴烧。父母都～。表示人或事物的位置：我今天晚上不～厂里。你的钢笔～桌子上呢。留在：～职。～位。参加（某团体）；属于（某团体）：～党。～组织。在于；决定于：事～人为。学习好，主要～自己努力。“在”和“所”连用，表示强调，下面多连“不”：～所不辞。～所不惜。～所不计。～所难免。表示时间、处所、范围、条件等：事情发生～去年。～礼堂开会。这件事～方式上还可以研究。～他的帮助下，我取得了较好的成绩。正在：风～刮，雨～下。姐姐～做功课。"
   },
   {
     char: "地",
@@ -25664,7 +25892,9 @@ const t = [
     mark: "ㄉㄧˋ",
     tradition: "地",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "人类生长活动的所在：～球（太阳系八大行星之一）。～心说。地球或地球的某部分：～质。～壳。地球表面除去海洋、江河、湖泊的部分：陆～。～下。地球表面的土壤：土～。田～。～政。～主。地球上的一个区域：～区。此～。建筑材料铺成的平面：～板。～毯。所在空间或区域的部位：～点。目的～。人在社会关系中所处的位置：易～以处。表示思想或行动的某种活动领域：见～。境～。心～。底子：质～。"
   },
   {
     char: "场",
@@ -25677,7 +25907,9 @@ const t = [
     mark: "ㄔㄤˊ",
     tradition: "場",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chang",
+    explain: "适应某种需要的比较大的地方：会～。操～。市～。剧～。广～。舞台：上～。下～。指某种活动范围：官～。名利～。逢～作戏。事情发生的地点：现～。当～。在～。指表演或比赛的全场：开～。终～。戏剧中较小的段落，每场表演故事的一个片段。用于有场次或有场地的文娱体育活动：三～球赛。跳一～舞。电视接收机中，电子束对一幅画面的奇数行或偶数行完成一次隔行扫描，叫做一场。奇数场和偶数场合为一帧完整画面。物质存在的一种基本形态，具有能量、动量和质量。实物之间的相互作用依靠有关的场来实现。如电场、磁场、引力场等。"
   },
   {
     char: "圾",
@@ -25690,7 +25922,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "圾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "见〖垃圾〗。"
   },
   {
     char: "址",
@@ -25703,7 +25937,9 @@ const t = [
     mark: "ㄓˇ",
     tradition: "址",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhi",
+    explain: "建筑物的位置；地基：地～。住～。校～。厂～。新～。遗～。"
   },
   {
     char: "均",
@@ -25716,7 +25952,9 @@ const t = [
     mark: "ㄐㄩㄣ",
     tradition: "均",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jun",
+    explain: "平；匀；相等：平～。势～力敌。副词。都：～好。～已完成。古又同“韵（yùn）”。"
   },
   {
     char: "坊",
@@ -25729,7 +25967,9 @@ const t = [
     mark: "ㄈㄤˊ",
     tradition: "坊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fang",
+    explain: "1.里巷。多用于地名，如锦什坊（在北京）。2.牌坊：贞节～。"
   },
   {
     char: "坎",
@@ -25742,7 +25982,9 @@ const t = [
     mark: "ㄎㄢˇ",
     tradition: "坎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kan",
+    explain: "八卦之一，卦形是“☵”，代表水。见〖八卦〗。田野中自然形成的或人工修筑的像台阶形状的东西：土～儿。田～儿。前面有道～儿，当心别绊着。低洼的地方；坑。姓。坎德拉的简称。一个光源发出频率为540×1012赫的单色辐射，并且在这个方向上的辐射强度为1/683瓦每球面度时的发光强度就是1坎。"
   },
   {
     char: "坏",
@@ -25755,7 +25997,9 @@ const t = [
     mark: "ㄏㄨㄞˋ",
     tradition: "壞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huai",
+    explain: "不良、恶劣的。与「好」相对。  【组词】：腐坏、坏人、坏心眼儿　◎损毁。  【组词】：破坏、毁坏变成不好的。  【组词】：菜坏了。坏主意。  【组词】：他使坏，别理他！非常。表程度深。  【组词】：忙了一整天，真把我累坏了。"
   },
   {
     char: "坐",
@@ -25768,7 +26012,9 @@ const t = [
     mark: "ㄗㄨㄛˋ",
     tradition: "坐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zuo",
+    explain: "把臀部放在椅子、凳子或其他物体上，支持身体重量：请～。咱们～下来谈。他～在河边钓鱼。稳～江山。乘；搭：～船。～火车。（房屋）背对着某一方向：这座大楼是～北朝南的。把锅、壶等放在炉火上：～一壶水。火旺了，快把锅～上。（～儿）同“座”因……犯罪，触犯法律枪炮由于反作用而向后移动；建筑物由于基础不稳固而下沉：步枪的～劲儿不小。这房子向后～了。瓜果等植物结实：～果。～瓜。指定罪：连～。反～。形成（疾病）：打那次受伤之后，就～下了腰疼的病根儿。表示无缘无故：孤蓬自振，惊砂～飞。"
   },
   {
     char: "坑",
@@ -25781,7 +26027,9 @@ const t = [
     mark: "ㄎㄥ",
     tradition: "坑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "keng",
+    explain: "洼下去的地方：泥～。弹～。刨个～儿。一个萝卜一个～。地洞；地道：～道。矿～。古时指活埋人：～杀。焚书～儒。坑害：～人。她被人～了。姓。"
   },
   {
     char: "块",
@@ -25794,7 +26042,9 @@ const t = [
     mark: "ㄎㄨㄞˋ",
     tradition: "塊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuai",
+    explain: "成疙瘩或成团儿的东西：糖～儿。把肉切成～儿。用于块状或某些片状的东西：两～香皂。三～手表。一～桌布。一～试验田。用于银币或纸币，等于“圆”：三～钱。"
   },
   {
     char: "坚",
@@ -25807,7 +26057,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "堅",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "硬；坚固：～冰。～城。～不可破。～如磐石。坚固的东西或阵地：攻～。披～执锐。无～不摧。坚定；坚决：～信。～守阵地。姓。"
   },
   {
     char: "坛",
@@ -25820,7 +26072,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "壇、罎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tan",
+    explain: "古代举行祭祀、誓师等大典用的台，多用土石等建成：天～。登～拜将。讲学或发表言论的场所：讲～。论～。用土堆成的台，多在上面种花：花～。某些会道门设立的拜神集会的组织。指文艺界或体育界：文～。诗～。影～。体～。坛子：酒～。一～醋。"
   },
   {
     char: "坝",
@@ -25833,7 +26087,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "垻、壩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ba",
+    explain: "拦水的建筑物：拦河～。大～。坝子，西南地区称平地或平原。用于地名时多单说，如沙坪坝（在重庆）。"
   },
   {
     char: "坞",
@@ -25846,7 +26102,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "塢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "防卫用的小堡。地势四周高而中间凹的地方：村～。山～。在水边建筑的停船或修建船只的处所：船～。"
   },
   {
     char: "坟",
@@ -25859,7 +26117,9 @@ const t = [
     mark: "ㄈㄣˊ",
     tradition: "坟",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fen",
+    explain: "坟墓：祖～。上～。一座～。"
   },
   {
     char: "坠",
@@ -25872,7 +26132,9 @@ const t = [
     mark: "ㄓㄨㄟˋ",
     tradition: "墜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhui",
+    explain: "落：～马。～楼。摇摇欲～。（沉重的东西）往下垂；垂在下面：石榴把树枝～得弯弯的。他的心里像～上了千斤的石头。垂在下面的东西：扇～儿。耳～儿。"
   },
   {
     char: "坡",
@@ -25885,7 +26147,9 @@ const t = [
     mark: "ㄆㄛ",
     tradition: "坡",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "po",
+    explain: "地形倾斜的地方：山～。高～。爬～。倾斜：～度。板子～着放。"
   },
   {
     char: "坤",
@@ -25898,7 +26162,9 @@ const t = [
     mark: "ㄎㄨㄣ",
     tradition: "坤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kun",
+    explain: "八卦之一。代表地。参见〔八卦〕例：乾～（天地）。指女性的：～表。～车。～角儿。"
   },
   {
     char: "坦",
@@ -25911,7 +26177,9 @@ const t = [
     mark: "ㄊㄢˇ",
     tradition: "坦",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tan",
+    explain: "平而宽广：～途。心里安定：～然。直率；没有隐讳：～率。～白。"
   },
   {
     char: "坪",
@@ -25924,7 +26192,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "坪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "平地（原指山区或黄土高原上的，多用于地名）：草～。停机～。杨家～（在陕西）。土地或房屋面积单位，1坪约合3.3平方米。"
   },
   {
     char: "坯",
@@ -25937,7 +26207,9 @@ const t = [
     mark: "ㄆㄧ",
     tradition: "坯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pi",
+    explain: "砖瓦、陶瓷、景泰蓝等制造过程中，用原料做成器物的形状，还没有放在窑里或炉里烧的，叫做坯：砖～。特指土坯：打～。脱～。指半成品：面～（已煮好而未加作料的面条）。酱～儿。钢～。～布。“坏”"
   },
   {
     char: "坷",
@@ -25950,7 +26222,9 @@ const t = [
     mark: "ㄎㄜˇ",
     tradition: "坷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "〔坷垃〕〈方〉土块。"
   },
   {
     char: "垂",
@@ -25963,7 +26237,9 @@ const t = [
     mark: "ㄔㄨㄟˊ",
     tradition: "垂",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chui",
+    explain: "耷（dā）拉下来：～柳。留传：永～不朽！将；快要：～老。功败～成。敬辞。称长辈、上级对自己的行动：～念。～询。"
   },
   {
     char: "垃",
@@ -25976,7 +26252,9 @@ const t = [
     mark: "ㄌㄚ",
     tradition: "垃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "la",
+    explain: "〔～圾〕尘土和扔掉的脏东西。"
   },
   {
     char: "垄",
@@ -25989,7 +26267,9 @@ const t = [
     mark: "ㄌㄨㄥˇ",
     tradition: "壟",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "long",
+    explain: "在耕地上培成的一行一行的土埂，在上面种植农作物：～沟。田地分界的稍稍高起的小路；田埂。形状像“垄”的东西：瓦～。姓。"
   },
   {
     char: "型",
@@ -26002,7 +26282,9 @@ const t = [
     mark: "ㄒㄧㄥˊ",
     tradition: "型",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xing",
+    explain: "模型：砂～。类型：脸～。血～。小～。新～。流线～。"
   },
   {
     char: "垒",
@@ -26011,11 +26293,13 @@ const t = [
     radical: "土",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄌㄟˇ",
     tradition: "壘",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lei",
+    explain: "用砖、石、土块等砌或筑：～猪圈。～一道墙。把井口～高点儿。军营的墙壁或工事：壁～。堡～。深沟高～。两军对～。棒球、垒球运动的守方据点：跑～。"
   },
   {
     char: "垛",
@@ -26028,7 +26312,9 @@ const t = [
     mark: "ㄉㄨㄛˇ",
     tradition: "垛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duo",
+    explain: "墙体向外或向上突出的部分：门～子︱城～口。"
   },
   {
     char: "垢",
@@ -26041,7 +26327,9 @@ const t = [
     mark: "ㄍㄡˋ",
     tradition: "垢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gou",
+    explain: "污秽；肮脏：蓬头～面。脏东西：油～。牙～。泥～。耻辱：含～忍辱。"
   },
   {
     char: "垦",
@@ -26054,7 +26342,9 @@ const t = [
     mark: "ㄎㄣˇ",
     tradition: "墾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ken",
+    explain: "翻土；开垦（荒地）：～地。～荒。～殖。"
   },
   {
     char: "垫",
@@ -26067,7 +26357,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "墊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "用东西支、铺或衬，使加高、加厚或平正，或起隔离作用：～猪圈。把桌子～高些。熨衣服最好在上面～一块布。填补空缺：正戏还没开演，先～一出小戏。暂时替人付钱：我先给你～上，等你取了款再还我。垫子：靠～。鞋～儿。凳子上铺了一个用花布缝的～儿。"
   },
   {
     char: "垮",
@@ -26080,7 +26372,9 @@ const t = [
     mark: "ㄎㄨㄚˇ",
     tradition: "垮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kua",
+    explain: "倒塌；坍下来：洪水再大也冲不～坚固的堤坝。别把身体累～了。崩溃；溃败：～台。打～了敌人。"
   },
   {
     char: "埂",
@@ -26093,7 +26387,9 @@ const t = [
     mark: "ㄍㄥˇ",
     tradition: "埂",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "geng",
+    explain: "地势高起的长条地方：再往前走，就是一道小山～。用泥土筑成的堤防：～堰。堤～。"
   },
   {
     char: "埃",
@@ -26106,7 +26402,9 @@ const t = [
     mark: "ㄞ",
     tradition: "埃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ai",
+    explain: "灰尘；尘土：尘～。黄～蔽天。长度的非法定计量单位，符号Å。1埃等于10-10（一百亿分之一）米。主要用来计量微小长度。这个单位名称是为纪念瑞典物理学家埃斯特朗（AndersJonasÅngström）而定的。"
   },
   {
     char: "埋",
@@ -26119,7 +26417,9 @@ const t = [
     mark: "ㄇㄞˊ",
     tradition: "埋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mai",
+    explain: "（用土、沙、雪、落叶等）盖住：～藏。～地雷。隐藏：～伏。隐姓～名。"
   },
   {
     char: "城",
@@ -26132,7 +26432,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "城",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "城墙：～外。万里长～。城墙以内的地方：～区。东～。城市（跟“乡”相对）：山～。进～。满～风雨。连下数～。～乡物资交流。"
   },
   {
     char: "域",
@@ -26145,7 +26447,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "域",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "在一定疆界内的地方；疆域：区～。异～。～外。绝～。泛指某种范围：境～。音～。"
   },
   {
     char: "埠",
@@ -26158,7 +26462,9 @@ const t = [
     mark: "ㄅㄨˋ",
     tradition: "埠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bu",
+    explain: "码头，多指有码头的城镇：船～。本～。外～。商埠：开～。"
   },
   {
     char: "培",
@@ -26171,7 +26477,9 @@ const t = [
     mark: "ㄆㄟˊ",
     tradition: "培",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pei",
+    explain: "为了保护植物或墙、堤等，在根基部分堆上土：玉米根部要多～点儿土。将堤坝加高～厚。培养（人）：～训。姓。"
   },
   {
     char: "基",
@@ -26184,7 +26492,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "基",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "基础：房～。根～。最低层的；基本的：～层。化合物的分子中所含的一部分原子，被看作是一个单位时就叫基：羟～（—OH）。氨～（—ＮＨ2）。根据：～于上述原因。"
   },
   {
     char: "堂",
@@ -26197,7 +26507,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "堂",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tang",
+    explain: "正房：～屋。专为某种活动用的房屋：礼～。课～。食～。旧时官府中举行仪式、审讯案件的地方：大～。过～。用于厅堂名称，旧时也指某一家、某一房或某一家族：三槐～。用于商店牌号：同仁～（北京的一家药店）。堂房：～兄。～弟。～姊妹。a）用于成套的家具：一～家具。b）用于分节的课程，一节叫一堂：两～课。c）旧时审案一次叫一堂：过了两～。d）用于场景、壁画等：三～内景。一～壁画。姓。"
   },
   {
     char: "堆",
@@ -26210,7 +26522,9 @@ const t = [
     mark: "ㄉㄨㄟ",
     tradition: "堆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dui",
+    explain: "堆积：粮食～满仓，果子～成山。用手或工具把东西堆积起来：场上的人在～麦秸。把书～在桌子上。堆积成的东西：柴火～。土～。小山（多用于地名）：滟滪～（长江瞿塘峡口的巨石，1958年整治航道时已炸平）。双～集（在安徽）。用于成堆的物或成群的人：一～黄土。一～人。"
   },
   {
     char: "堕",
@@ -26223,7 +26537,9 @@ const t = [
     mark: "ㄉㄨㄛˇ",
     tradition: "墮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duo",
+    explain: "落、掉。  【组词】：堕落、堕入海中"
   },
   {
     char: "堡",
@@ -26236,7 +26552,9 @@ const t = [
     mark: "ㄅㄠˇ",
     tradition: "堡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bao",
+    explain: "用于地名。有的地区把“铺”写作堡，如十里堡。"
   },
   {
     char: "堤",
@@ -26249,7 +26567,9 @@ const t = [
     mark: "ㄉㄧ",
     tradition: "堤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "di",
+    explain: "沿河、沿湖或沿海的防水构筑物，多用土石等筑成：河～。海～。修～筑坝。"
   },
   {
     char: "堪",
@@ -26262,7 +26582,9 @@ const t = [
     mark: "ㄎㄢ",
     tradition: "堪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kan",
+    explain: "可；能：～当重任。～称楷模。能忍受；能承受：难～。不～凌辱。姓。"
   },
   {
     char: "堰",
@@ -26275,7 +26597,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "堰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "较低的挡水构筑物，作用是提高上游水位，便利灌溉和航运。"
   },
   {
     char: "堵",
@@ -26288,7 +26612,9 @@ const t = [
     mark: "ㄉㄨˇ",
     tradition: "堵",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "du",
+    explain: "堵塞：把窟窿～上。你～着门，叫别人怎么走哇?闷；憋气：我要不跟他说说，心里～得慌。墙：观者如～。用于墙：一～墙。姓。"
   },
   {
     char: "塌",
@@ -26301,7 +26627,9 @@ const t = [
     mark: "ㄊㄚ",
     tradition: "塌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ta",
+    explain: "倒下；陷下：墙～了。～方。因缺乏水分植物枝叶卷缩：～秧儿。凹下：～鼻梁。稳定；镇定：～心。～实。"
   },
   {
     char: "塑",
@@ -26314,7 +26642,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "塑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "用石膏或泥土等做成人物等形象：～像。泥～木雕。指塑料：全～家具。"
   },
   {
     char: "塔",
@@ -26327,7 +26657,9 @@ const t = [
     mark: "ㄊㄚˇ",
     tradition: "塔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ta",
+    explain: "佛教建筑。源于印度，汉代随佛教传入中国。通常有塔座、塔身、塔刹三部分组成。像塔形的建筑物：水～。灯～。革命烈士纪念～。"
   },
   {
     char: "塘",
@@ -26340,7 +26672,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "塘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tang",
+    explain: "堤岸；堤防：河～。海～。水池：池～。鱼～。这个～不太深。浴池：澡～。室内生火取暖用的坑：火～。姓。"
   },
   {
     char: "塞",
@@ -26349,11 +26683,13 @@ const t = [
     radical: "宀",
     struct: "上中下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄞˋ",
     tradition: "塞",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sai",
+    explain: "堵；填：～住漏洞。箱子～满了。堵住瓶口或其他器物口的东西：瓶～儿。软木～儿。"
   },
   {
     char: "填",
@@ -26366,7 +26702,9 @@ const t = [
     mark: "ㄊㄧㄢˊ",
     tradition: "填",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tian",
+    explain: "塞入、充满。  【组词】：填充、填补、义愤填膺　◎按照格式写入。  【组词】：填表、填词"
   },
   {
     char: "境",
@@ -26379,7 +26717,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "境",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "疆界；边界：国～。入～。地方；区域：渐入佳～。如入无人之～。境况；境地：家～。处～。事过～迁。"
   },
   {
     char: "墅",
@@ -26392,7 +26732,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "墅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "别墅。"
   },
   {
     char: "墓",
@@ -26405,7 +26747,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "墓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "坟墓：公～。烈士～。扫～。（Mù）姓。"
   },
   {
     char: "墙",
@@ -26418,7 +26762,9 @@ const t = [
     mark: "ㄑㄧㄤˊ",
     tradition: "墻",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiang",
+    explain: "用砖、石或土等筑成的屏障或外围：砖～。城～。"
   },
   {
     char: "增",
@@ -26431,7 +26777,9 @@ const t = [
     mark: "ㄗㄥ",
     tradition: "增",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zeng",
+    explain: "增加：～高。～强。～兵。有～无减。产量猛～。姓。"
   },
   {
     char: "墨",
@@ -26440,11 +26788,13 @@ const t = [
     radical: "土",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄛˋ",
     tradition: "墨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "写字绘画的用品，是用煤烟或松烟等制成的黑色块状物，间或有用其他材料制成别种颜色的，也指用墨和水研出来的汁：一块～。一锭～。研～。笔～纸砚。～太稠了。泛指写字、绘画或印刷用的某种颜料：～水。油～。借指写的字和画的画：～宝。遗～。比喻学问或读书识字的能力：胸无点～。木工打直线用的墨线，借指规矩、准则：绳～。矩～。黑或近于黑的：～菊。～镜。贪污：贪～。～吏。古代的一种刑罚，刺面或额，染上黑色，作为标记。也叫黥。（Mò）指墨家。姓。指墨西哥：～洋（墨西哥银圆）。"
   },
   {
     char: "墩",
@@ -26457,7 +26807,9 @@ const t = [
     mark: "ㄉㄨㄣ",
     tradition: "墩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dun",
+    explain: "土堆：土～。厚而粗的木头、石头等；座儿：桥～。菜～（切菜用的砧类器具）。树～。量词，用于丛生的或几棵合在一起的植物：一～谷子。柳～。古同“蹲”。"
   },
   {
     char: "壁",
@@ -26470,7 +26822,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "壁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "墙：～报。～灯。家徒四～。铜墙铁～。某些物体上作用像围墙的部分：井～。锅炉～。细胞～。像墙那样直立的山石：绝～。峭～。壁垒：坚～清野。二十八宿之一。"
   },
   {
     char: "壕",
@@ -26483,7 +26837,9 @@ const t = [
     mark: "ㄏㄠˊ",
     tradition: "壕",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hao",
+    explain: "护城河：城～。壕沟：战～。防空～。沟满～平。"
   },
   {
     char: "壤",
@@ -26496,7 +26852,9 @@ const t = [
     mark: "ㄖㄤˇ",
     tradition: "壤",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "rang",
+    explain: "泥土；松软的土：土～。沃～。地：天～之别。地区；地域：穷乡僻～。接～。"
   },
   {
     char: "士",
@@ -26509,7 +26867,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "士",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "古代指未婚的男子。古代介于大夫和庶民之间的阶层。士人：～农工商。军人：～兵。～气。某些国家军人的一级，在尉以下：上～。中～。下～。指某些技术人员：医～。护～。技～。助产～。对人的美称：烈～。勇～。女～。姓。"
   },
   {
     char: "壮",
@@ -26522,7 +26882,9 @@ const t = [
     mark: "ㄓㄨㄤˋ",
     tradition: "壯",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "zhuang",
+    explain: "强壮：健～。身体～。年轻力～。雄壮；大：～观。～志。理直气～。加强；使壮大：以～声势。～～胆子。中医艾灸，一灼叫一壮。姓。壮族。原作僮。"
   },
   {
     char: "声",
@@ -26535,7 +26897,9 @@ const t = [
     mark: "ㄕㄥ",
     tradition: "聲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sheng",
+    explain: "物体振动所发出的音响：锣～。大～。说话；语言：不～不响。呼～。宣布；陈述：～明。～讨。名誉：～望。名～。声母：～韵。双～。声调：第一～。去～。量词。用于声音发出的次数：连喊三～。"
   },
   {
     char: "壳",
@@ -26544,11 +26908,13 @@ const t = [
     radical: "士",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄎㄜˊ",
     tradition: "殼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ke",
+    explain: "义同“壳”（qiào）：贝～。脑～。鸡蛋～儿。子弹～儿。"
   },
   {
     char: "壶",
@@ -26557,11 +26923,13 @@ const t = [
     radical: "士",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄏㄨˊ",
     tradition: "壺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "陶瓷或金属等制成的容器，有嘴儿，有把儿或提梁，用来盛液体，从嘴儿往外倒：茶～。酒～。喷～。（Hú）姓。"
   },
   {
     char: "壹",
@@ -26574,7 +26942,9 @@ const t = [
     mark: "ㄧ",
     tradition: "壹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "数目“一”的大写。多用于票证、账目等。"
   },
   {
     char: "处",
@@ -26587,7 +26957,9 @@ const t = [
     mark: "ㄔㄨˊ",
     tradition: "處",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chu",
+    explain: "居住：穴居野～。跟别人一起生活；交往：～得来。～不来。他的脾气好，挺容易～。置身在（某地、某种情况等）：地～闹市。～变不惊。设身～地。我们工厂正～在发展、完善的阶段。处置；办理：论～。～理。处罚：～治。惩～。～以徒刑。姓。"
   },
   {
     char: "备",
@@ -26600,7 +26972,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "備",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "具备；具有：德才兼～。准备：～用。～足原料。～而不用。防备：防旱～荒。攻其不～。以～不时之需。设备（包括人力物力）：军～。装～。表示完全：艰苦～尝。关怀～至。～受欢迎。姓。"
   },
   {
     char: "复",
@@ -26613,7 +26987,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "復、複",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "重复：～写。～制。繁复：～姓。～叶。～音词。转过去或转回来：反～。往～。翻来～去。回答；答复：～信。敬～。电～。姓。恢复：光～。收～。～原。～婚。报复：～仇。再；又：～发。～苏。死灰～燃。无以～加。一去不～返。"
   },
   {
     char: "夏",
@@ -26626,7 +27002,9 @@ const t = [
     mark: "ㄒㄧㄚˋ",
     tradition: "夏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xia",
+    explain: "夏季，一年的第二季，大体是农历四月至六月。指中国：华～。朝代名。1.（约前2070—约前1600年）。中国历史上第一个奴隶制王朝。相传为夏后氏部落联盟首领禹所建立。曾建都安邑（今山西夏县西北）、阳翟（今河南禹县）等地。传到桀，为商汤所灭。十六国之一（407—431）。匈奴族赫连勃勃建立。建都统万城（今陕西靖边东北）。为吐谷浑所灭。（1032—1227）。北宋时党项族李元昊（hào）在中国西北地区建立。建都兴庆（今宁夏银川），史称西夏。为蒙古所灭。"
   },
   {
     char: "夕",
@@ -26635,11 +27013,13 @@ const t = [
     radical: "夕",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧ",
     tradition: "夕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "太阳落的时候；傍晚：～阳。～照。朝发～至。朝令～改。泛指晚上：前～。除～。风雨之～。姓。"
   },
   {
     char: "外",
@@ -26652,7 +27032,9 @@ const t = [
     mark: "ㄨㄞˋ",
     tradition: "外",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wai",
+    explain: "外边；外边的。与“内”“里”相对：门～。～表。关系疏远的；不是自己这方面的：～人。～乡。指外国：对～贸易。～侨。非原有的；非正式的：～加。～号。称母亲、姐妹、女儿的亲属：～祖母。～甥。～孙。"
   },
   {
     char: "多",
@@ -26665,7 +27047,9 @@ const t = [
     mark: "ㄉㄨㄛ",
     tradition: "多",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "duo",
+    explain: "数量大（跟“少、寡”相对）：～年。～种～样。～才～艺。～快好省。超出原有或应有的数目；比原来的数目有所增加（跟“少”相对）：这句话～了一个字。你的钱给～了，还你吧。过分的；不必要的：～心。～嘴。～疑。（用在数量词后）表示有零头：五十～岁。两丈～高。三年～。表示相差的程度大：他比我强～了。这样摆好看得～。姓。用在感叹句里，表示程度很高：你看他老人家～有精神!。这问题～不简单哪!指某种程度：无论山有～高，路有～陡，他总是走在前面。有～大劲使～大劲。"
   },
   {
     char: "夜",
@@ -26678,7 +27062,9 @@ const t = [
     mark: "ㄧㄝˋ",
     tradition: "夜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "从天黑到天亮的一段时间（跟“日”、“昼”相对）：～晚。～班。白天黑～。冬天昼短～长。用于计算夜：三天三～。每日每～。姓。"
   },
   {
     char: "够",
@@ -26691,7 +27077,9 @@ const t = [
     mark: "ㄍㄡˋ",
     tradition: "够",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gou",
+    explain: "数量上可以满足需要：钱～不～?。老觉得时间不～用。这首歌我听多少遍也听不～。达到某一标准或某种程度：～格。～条件。绳子～不～长?表示程度高：天气～冷的。这椅子～结实的。（用手等）伸向不易达到的地方去接触或拿来：～不着。～得着。"
   },
   {
     char: "大",
@@ -26700,11 +27088,13 @@ const t = [
     radical: "大",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄚ",
     tradition: "大",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "da",
+    explain: "本义是容量、体积、面积、数量、力量、年龄等方面超过一般或超过所比的对象，与“小”相对，后引申出“范围程度深广”、“年辈较长”、“再”等意义，又作为敬词来使用。"
   },
   {
     char: "天",
@@ -26713,11 +27103,13 @@ const t = [
     radical: "一",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄧㄢ",
     tradition: "天",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "tian",
+    explain: "天空：顶～立地。太阳一出满～红。位置在顶部的；凌空架设的：～棚。～窗。～桥。一昼夜二十四小时的时间，有时专指白天：今～。过了冬至，～越来越长了。用于计算天数：每～。第二～。三～三夜。忙了一～，晚上早点儿休息吧。一天里的某一段时间：五更～。～儿还早呢。季节：春～。冷～。三伏～。黄梅～。天气：阴～。～晴。～冷了。天然的；天生的：～性。～资。～足。自然界：～灾。人定胜～。姓。"
   },
   {
     char: "太",
@@ -26726,11 +27118,13 @@ const t = [
     radical: "大",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄞˋ",
     tradition: "太",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tai",
+    explain: "高；大：～空。～学。～湖。极；最：～古。身份最高或辈分更高的：～老伯。～老师（老师的父亲或父亲的老师）。～夫人（尊称别人的母亲）。a）表示程度过分（可用于肯定和否定）：水～热，烫手。人～多了，会客室里坐不开。他～不谦虚了。b）表示程度极高（用于赞叹，只限于肯定）：这办法～好了。这建筑～伟大了。c）很（用于否定，含委婉语气）：不～好。不～满意。姓。"
   },
   {
     char: "夫",
@@ -26739,11 +27133,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄨˊ",
     tradition: "夫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fu",
+    explain: "发语词。表提示作用，常用于文言文中。  【组词】：夫天无不覆，地无不载。（《庄子．德充符》）叹词。表感叹或疑问，常用于文言文中。  【组词】：逝者如斯夫，不舍昼夜。（《论语．子罕》）指示形容词。相当于「此」、「彼」，常用于文言文中。  【组词】：夫人不言，言必有中。（《论语．先进》）"
   },
   {
     char: "夭",
@@ -26752,11 +27148,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄠˇ",
     tradition: "夭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yao",
+    explain: "夭折：～亡。寿～（长寿与夭折；寿命长短）。形容草木茂盛：～桃秾李。"
   },
   {
     char: "央",
@@ -26769,7 +27167,9 @@ const t = [
     mark: "ㄧㄤ",
     tradition: "央",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yang",
+    explain: "恳求：～求。～人作保。中心：中～。姓。终止；完结：夜未～。长乐未～。"
   },
   {
     char: "夯",
@@ -26782,7 +27182,9 @@ const t = [
     mark: "ㄅㄣˋ",
     tradition: "夯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hang",
+    explain: "用来敲打地基，使其结实的工具。  【组词】：木夯、石夯用夯砸地。  【组词】：夯实、夯地北方方言。指用力以肩扛物。  【组词】：夯行李"
   },
   {
     char: "失",
@@ -26791,11 +27193,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕ",
     tradition: "失",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shi",
+    explain: "丢掉：遗～。丧～。找不着：迷～路径。违背：～信。～约。没有把握住：～手。～足。没有达到目的：～意。～望。改变常态：～色。～神。错误：过～。千虑一～。"
   },
   {
     char: "头",
@@ -26804,11 +27208,13 @@ const t = [
     radical: "大",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄡˊ",
     tradition: "頭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tou",
+    explain: "人身最上部或动物最前部长着口、鼻、眼等器官的部分。指头发或所留头发的样式：剃～。梳～。平～。分～。你的脸形留这种～不合适。物体的顶端或末梢：山～。笔～儿。中间粗，两～儿细。事情的起点或终点：话～儿。提个～儿。这种日子到什么时候才是个～儿啊!物品的残余部分：布～儿。蜡～儿。铅笔～儿。头目：李～儿。他是这一帮人的～儿。方面：他们是一～儿的。心挂两～。第一：～等。～号。领头的；次序居先的：～车。～马。～羊。姓。"
   },
   {
     char: "夷",
@@ -26817,11 +27223,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧˊ",
     tradition: "夷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "平坦；平安：化险为～。破坏建筑物（使成为平地）：烧～弹。～为平地。灭掉；杀尽：～灭。～族。我国古代称东方的民族，也泛称周边的民族：淮～。四～。旧时泛指外国或外国人：～情。华～杂处。姓。"
   },
   {
     char: "夸",
@@ -26834,7 +27242,9 @@ const t = [
     mark: "ㄎㄨㄚ",
     tradition: "誇",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kua",
+    explain: "奢侈。  【组词】：夸奢炫耀、说大话。通「夸」。  【组词】：夸夸其谈称赞、赞美。通「夸」。"
   },
   {
     char: "夹",
@@ -26843,11 +27253,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄚ",
     tradition: "夾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jia",
+    explain: "从两旁钳住：使劲儿～住。两旁有物限制住，在两者之间：两山～一水。～峙。搀杂：～生饭。～杂。夹东西的器具：竹～子。～剪。卷（juǎn）～。"
   },
   {
     char: "夺",
@@ -26860,7 +27272,9 @@ const t = [
     mark: "ㄉㄨㄛˊ",
     tradition: "奪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "duo",
+    explain: "强取；抢：掠～。巧取豪～。从歹徒手里～过凶器。强词～理。争先取到：～冠。～红旗。胜过；压倒：巧～天工。先声～人。使失去：剥～。褫～。失去：勿～农时。作决定：定～。裁～。（文字）脱漏：讹～。"
   },
   {
     char: "奄",
@@ -26873,7 +27287,9 @@ const t = [
     mark: "ㄧㄢˇ",
     tradition: "奄",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yan",
+    explain: "覆盖、涵盖。奄有四海急遽、匆促。奄忽经秋"
   },
   {
     char: "奇",
@@ -26886,7 +27302,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "奇",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "罕见的；特殊的；非常的：～事。～闻。～志。～勋。～耻大辱。商品～缺。山势～险。出人意料的；令人难测的：～兵。～袭。出～制胜。惊异：惊～。不足为～。姓。"
   },
   {
     char: "奈",
@@ -26899,7 +27317,9 @@ const t = [
     mark: "ㄋㄞˋ",
     tradition: "奈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nai",
+    explain: "奈何：无～。怎～。怎奈；无奈。姓。"
   },
   {
     char: "奉",
@@ -26912,7 +27332,9 @@ const t = [
     mark: "ㄈㄥˋ",
     tradition: "奉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "feng",
+    explain: "给；献给（多指对上级或长辈）：～献。～上新书一册。接受（多指上级或长辈的）：～旨。～上级命令。尊重：崇～。～为圭臬。信仰：信～。素～佛教。侍候：～养。侍～。敬辞，用于自己的举动涉及对方时：～托。～陪。～劝。～告。姓。"
   },
   {
     char: "奋",
@@ -26925,7 +27347,9 @@ const t = [
     mark: "ㄈㄣˋ",
     tradition: "奮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fen",
+    explain: "鼓起劲来；振作：振～。兴～。勤～。摇动；举起：～臂高呼。～笔疾书。姓。"
   },
   {
     char: "奏",
@@ -26938,7 +27362,9 @@ const t = [
     mark: "ㄗㄡˋ",
     tradition: "奏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zou",
+    explain: "演奏：独～。合～。伴～。～国歌。发生；取得（功效等）：～效。大～奇功。臣子对帝王陈述意见或说明事情：启～。～议。～上一本。姓。"
   },
   {
     char: "契",
@@ -26951,7 +27377,9 @@ const t = [
     mark: "ㄑㄧˋ",
     tradition: "契",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "用刀雕刻。刻的文字：书~、殷~。买卖房地产等的文书，也是所有权的凭证：地~、房~。投合：~友、默~、投~。"
   },
   {
     char: "奔",
@@ -26964,7 +27392,9 @@ const t = [
     mark: "ㄅㄣˋ",
     tradition: "奔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ben",
+    explain: "奔走；急跑：狂～。～驰。紧赶；赶忙或赶急事：～命。～丧。逃跑：～逃。东～西窜。姓。"
   },
   {
     char: "奕",
@@ -26977,7 +27407,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "奕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "盛大。姓。"
   },
   {
     char: "奖",
@@ -26990,7 +27422,9 @@ const t = [
     mark: "ㄐㄧㄤˇ",
     tradition: "奬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiang",
+    explain: "奖励；夸奖：褒～。嘉～。有功者～。为了鼓励或表扬而给予的荣誉或财物等：得～。发～。一等～。"
   },
   {
     char: "套",
@@ -27003,7 +27437,9 @@ const t = [
     mark: "ㄊㄠˋ",
     tradition: "套",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tao",
+    explain: "罩在外面的东西：褥～。手～。外～。加罩：～裤。～袖。重叠的：～版。～耕。～种（zhòng）。装在衣物里的棉絮：被～。同类事物合成的一组：一～制服。～路。～数。～曲。配～。模拟，照做：～用。～语。生搬硬～。用绳子等做成的环：牲口～。圈～（喻陷害人的布置）。栓系：～车。用谎骗取：～取。～购。～汇。河流或山势弯曲之处（大多用于地名）：河～。连环～。"
   },
   {
     char: "奠",
@@ -27012,11 +27448,13 @@ const t = [
     radical: "大",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄉㄧㄢˋ",
     tradition: "奠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "定；建立：～都。陈设祭品举行仪式向死者致祭：祭～。"
   },
   {
     char: "奢",
@@ -27029,7 +27467,9 @@ const t = [
     mark: "ㄕㄚˊ",
     tradition: "奢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "she",
+    explain: "奢侈。与“俭”相对：～华。穷～极欲。过分的：～望。～求。"
   },
   {
     char: "奥",
@@ -27042,7 +27482,9 @@ const t = [
     mark: "ㄠˋ",
     tradition: "奥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ao",
+    explain: "幽深、神秘。  【组词】：深奥奥地利的简称。  【组词】：他赴奥深造。"
   },
   {
     char: "女",
@@ -27051,11 +27493,13 @@ const t = [
     radical: "女",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ˇ",
     tradition: "女",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nü",
+    explain: "你。同「汝」。"
   },
   {
     char: "奴",
@@ -27068,7 +27512,9 @@ const t = [
     mark: "ㄋㄩˊ",
     tradition: "奴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nu",
+    explain: "旧社会中受压迫、剥削、役使而没有人身自由等政治权利的人（跟“主”相对）：～隶。农～。青年女子的自称（多见于早期白话）。像对待奴隶一样地（蹂躏、使用）：～役。"
   },
   {
     char: "奶",
@@ -27081,20 +27527,9 @@ const t = [
     mark: "ㄋㄞˇ",
     tradition: "奶",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "奸",
-    spell: "jiān",
-    stroke: "6",
-    radical: "女",
-    struct: "左右结构",
-    five: "木",
-    method: "会意",
-    mark: "ㄍㄢ",
-    tradition: "奸",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "nai",
+    explain: "乳房。乳汁的通称：牛～。～油。用自己的奶喂：～孩子。“妳”，另音nǐ，见“你”"
   },
   {
     char: "她",
@@ -27107,7 +27542,9 @@ const t = [
     mark: "ㄊㄚ",
     tradition: "她",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ta",
+    explain: "女性第三人称代词。  【组词】：她是一位职业妇女。"
   },
   {
     char: "好",
@@ -27120,7 +27557,9 @@ const t = [
     mark: "ㄏㄠˋ",
     tradition: "好",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "hao",
+    explain: "优点多的；使人满意的（跟“坏”相对）：~人、~东西、~事情、~脾气。合宜；妥当：初次见面，不知跟他说些什么~。用在动词前，表示使人满意的性质在哪方面：~看、~听、~吃。友爱；和睦：友~、~朋友。（身体）健康；（疾病）痊愈：体质~、身子比去年~多了、他的病~了。用于客套话：~睡、您~走。用在动词后，表示完成或达到完善的地步：计划订~了、功课准备~了。表示赞许、同意、结束或转换话题等：~，就这么办、~，今天的课就上到这儿。反话，表示不满意：~，这下课麻烦了。容易（限用于动词前）：那个歌儿~唱、这个问题很~回答。便于：地整平了~种庄稼、告诉我他在哪儿，我~去找他去。应该；可以：时间不早了，你~走了、我~进来吗？用在形容词、数量词等前面，表示多或久：~多、~久、~几个、~一会儿、~半天。用在形容词、动词前，表示程度深，并带有感叹语气：~冷、~香、~漂亮、~面熟。疑问代词。用在形容词前面问数量或程度，用法跟“多”相同：哈尔滨离北京~远？"
   },
   {
     char: "如",
@@ -27133,7 +27572,9 @@ const t = [
     mark: "ㄖㄨˊ",
     tradition: "如",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "ru",
+    explain: "适合；依照：～意。～愿。～期。～数。如同：爱厂～家。十年～一日。～临大敌。及；比得上（只用于否定式，比较得失或高下）：我不～他。百闻不～一见。与其那样，不～这样。用于比较，表示超过：光景一年强～一年。表示举例：唐朝有很多大诗人，～李白、杜甫、白居易等。到；往：～厕。姓。如果：～不及早准备，恐临时措手不及。古汉语形容词后缀，表示状态：空空～也。侃侃～也。"
   },
   {
     char: "妄",
@@ -27146,7 +27587,9 @@ const t = [
     mark: "ㄨㄤˋ",
     tradition: "妄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wang",
+    explain: "荒谬不合理：狂～。～人。非分地，出了常规地；胡乱：～动。～求。～加猜疑。～作主张。胆大～为。"
   },
   {
     char: "妆",
@@ -27159,7 +27602,9 @@ const t = [
     mark: "ㄓㄨㄤ",
     tradition: "妝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuang",
+    explain: "1.对容貌进行修饰；打扮：梳～。2.女子身上的装饰；演员的装饰：红～。卸～。3.指陪嫁物品：送～。"
   },
   {
     char: "妇",
@@ -27172,7 +27617,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "婦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "已婚的女子：少～。女子的通称：～科。妻子：夫～。古指儿媳。"
   },
   {
     char: "妈",
@@ -27185,20 +27632,9 @@ const t = [
     mark: "ㄇㄚ",
     tradition: "媽",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "妒",
-    spell: "dù",
-    stroke: "7",
-    radical: "女",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄉㄨˋ",
-    tradition: "妒",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "ma",
+    explain: "妈妈，称母亲。对长一辈或年长已婚妇女的尊称：姑～。大～。旧时对中老年女仆的称呼（放在姓之后）：鲁～。吴～。"
   },
   {
     char: "妓",
@@ -27211,7 +27647,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "妓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "古指以歌舞为业的女子。妓女。"
   },
   {
     char: "妖",
@@ -27224,7 +27662,9 @@ const t = [
     mark: "ㄧㄠ",
     tradition: "妖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yao",
+    explain: "妖怪：除～。～魔。～精。邪恶而迷惑人的：～言。～术。～道。～人。装束奇特，作风不正派（多指女性）：～里～气。艳丽；妩媚：～娆。～冶。"
   },
   {
     char: "妙",
@@ -27233,11 +27673,13 @@ const t = [
     radical: "女",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄧㄠˋ",
     tradition: "妙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "miao",
+    explain: "好；美妙：～品。～境。～不可言。这个办法真～。神奇；巧妙；奥妙：～计。～策。～用。～算。～诀。～手回春。莫名其～。姓。"
   },
   {
     char: "妥",
@@ -27250,7 +27692,9 @@ const t = [
     mark: "ㄊㄨㄛˇ",
     tradition: "妥",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tuo",
+    explain: "妥当：稳～。欠～。这样处理，恐怕不～。齐备；停当（多用在动词后）：货已购～。事情商量～了。姓。"
   },
   {
     char: "妨",
@@ -27263,7 +27707,9 @@ const t = [
     mark: "ㄈㄤˊ",
     tradition: "妨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fang",
+    explain: "妨害；阻碍：这样做于事无～。不～。何～。"
   },
   {
     char: "妹",
@@ -27272,24 +27718,13 @@ const t = [
     radical: "女",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄟˋ",
     tradition: "妹",
     sex: "女",
-    tone: 4
-  },
-  {
-    char: "妻",
-    spell: "qī",
-    stroke: "8",
-    radical: "女",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄑㄧˋ",
-    tradition: "妻",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "mei",
+    explain: "妹妹，称同父母比自己年纪小的女子：姐～。小～。称比自己年纪小的同辈女性：表～。年轻女子；女孩子：打工～。农家～。"
   },
   {
     char: "姆",
@@ -27302,7 +27737,9 @@ const t = [
     mark: "",
     tradition: "姆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mu",
+    explain: "〔保～〕a.受雇为人照管儿童或料理家务的妇女；b.保育员的旧称。"
   },
   {
     char: "姊",
@@ -27315,7 +27752,9 @@ const t = [
     mark: "ㄗˇ",
     tradition: "姊",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zi",
+    explain: "姐姐：～妹。"
   },
   {
     char: "始",
@@ -27328,7 +27767,9 @@ const t = [
     mark: "ㄕˇ",
     tradition: "始",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shi",
+    explain: "起头，最初，与“终”相对：开～。～终。～祖。～创。周而复～。才，刚才：方～。～悟（才觉悟到）。春蚕到死丝方尽，蜡炬成灰泪～干。"
   },
   {
     char: "姐",
@@ -27341,7 +27782,9 @@ const t = [
     mark: "ㄐㄧㄝˇ",
     tradition: "姐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jie",
+    explain: "姐姐：大～。二～。～妹。亲戚中同辈而年纪比自己大的女子（一般不包括可以称作嫂的人）：表～。称呼年轻的女子：杨三～。空～。（Jiě）姓。"
   },
   {
     char: "姑",
@@ -27354,7 +27797,9 @@ const t = [
     mark: "ㄍㄨ",
     tradition: "姑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gu",
+    explain: "姑母；称父亲的姐妹。丈夫的姐妹：～嫂。古称丈夫的母亲：翁～（公婆）。出家女子或从事迷信职业的妇女。例：尼～。三～六婆。副词。暂且：～置勿论（暂时放在一边不谈）。"
   },
   {
     char: "姓",
@@ -27363,11 +27808,13 @@ const t = [
     radical: "女",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄥˋ",
     tradition: "姓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xing",
+    explain: "1.表明家族的字：～名。贵～。2.姓是…；以…为姓：你～什么?。他～张，不～王。3.姓。"
   },
   {
     char: "委",
@@ -27380,7 +27827,9 @@ const t = [
     mark: "ㄨㄟˇ",
     tradition: "委",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wei",
+    explain: "把事情交给别人办：～托。～以重任。抛弃：～弃。～之于地。推卸：～罪于人。曲折：～婉。颓丧；不振作：～顿。确实：～实。水流汇聚的地方，水的下游；事情的结尾：穷源竟～。"
   },
   {
     char: "姚",
@@ -27393,7 +27842,9 @@ const t = [
     mark: "ㄧㄠˊ",
     tradition: "姚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yao",
+    explain: "姓。"
   },
   {
     char: "姜",
@@ -27406,7 +27857,9 @@ const t = [
     mark: "ㄐㄧㄤ",
     tradition: "薑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "多年生草本植物，叶子披针形，花冠黄绿色，通常不开花。根状茎黄褐色，有辣味，是常用的调味品，也可入药。这种植物的根状茎。姓。"
   },
   {
     char: "姥",
@@ -27419,7 +27872,9 @@ const t = [
     mark: "ㄌㄠˇ",
     tradition: "姥",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lao",
+    explain: "〔姥姥〕〈方〉也作老老。称外祖母。"
   },
   {
     char: "姨",
@@ -27432,7 +27887,9 @@ const t = [
     mark: "ㄧˊ",
     tradition: "姨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "姨母，称母亲的姐妹。也用来尊称母亲一辈的女子。妻子的姐妹：大～。小～。"
   },
   {
     char: "姻",
@@ -27445,7 +27902,9 @@ const t = [
     mark: "ㄧㄣ",
     tradition: "姻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yin",
+    explain: "婚姻：联～。由婚姻结成的、比较间接的亲戚关系，如称弟兄的岳父、姐妹的公公为“姻伯”，称姐妹的丈夫的弟兄、妻子的表兄弟为“姻兄、姻弟”等。"
   },
   {
     char: "姿",
@@ -27458,7 +27917,9 @@ const t = [
     mark: "ㄗ",
     tradition: "姿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zi",
+    explain: "样子；形态：～势。雄～。容貌：丰～。"
   },
   {
     char: "威",
@@ -27471,7 +27932,9 @@ const t = [
     mark: "ㄨㄟ",
     tradition: "威",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wei",
+    explain: "表现出来的能压服人的力量或使人敬畏的态度：～信。～严。示～。助～。狐假虎～。凭借威力（采取某种行动）：～逼。～吓。～胁。姓。"
   },
   {
     char: "娃",
@@ -27484,7 +27947,9 @@ const t = [
     mark: "ㄨㄚˊ",
     tradition: "娃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wa",
+    explain: "小孩儿：～～（wa）。女～。〈方〉指某些幼小的动物：猪～。"
   },
   {
     char: "娄",
@@ -27497,7 +27962,9 @@ const t = [
     mark: "ㄌㄡˊ",
     tradition: "婁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lou",
+    explain: "（身体）虚弱：他动不动就病，身子骨儿可～啦。（某些瓜类）过熟而变质：西瓜～了保换。二十八宿之一。姓。"
   },
   {
     char: "娇",
@@ -27510,20 +27977,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "嬌",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "娘",
-    spell: "niáng",
-    stroke: "10",
-    radical: "女",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄋㄧㄤˊ",
-    tradition: "娘",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "jiao",
+    explain: "（女子、小孩儿、花朵等）柔嫩、美丽可爱：～娆。嫩红～绿。娇气：才走几里地，就说腿酸，未免太～了。过度爱护：～生惯养。别把孩子～坏了。"
   },
   {
     char: "娜",
@@ -27536,7 +27992,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "娜",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "na",
+    explain: "音译用字。多用于女子姓名，如安娜·卡列尼娜。"
   },
   {
     char: "娩",
@@ -27549,7 +28007,9 @@ const t = [
     mark: "ㄇㄧㄢˇ",
     tradition: "娩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mian",
+    explain: "分娩（生孩子）。"
   },
   {
     char: "娱",
@@ -27562,7 +28022,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "娱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "快乐：欢～。耳目之～。使快乐：聊以自～。"
   },
   {
     char: "娶",
@@ -27575,7 +28037,9 @@ const t = [
     mark: "ㄑㄩˇ",
     tradition: "娶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qu",
+    explain: "把女子接过来成亲（跟“嫁”相对）：嫁～。～妻。～媳妇儿。"
   },
   {
     char: "婆",
@@ -27588,7 +28052,9 @@ const t = [
     mark: "ㄆㄛˊ",
     tradition: "婆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "po",
+    explain: "年老的妇女：老太～。丈夫的母亲：～媳。旧指从事某些职业的妇女：媒～。巫～。〈方〉祖母或与之同辈的妇女：～～。外～（外祖母）。"
   },
   {
     char: "婉",
@@ -27601,7 +28067,9 @@ const t = [
     mark: "ㄨㄢˇ",
     tradition: "婉",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "wan",
+    explain: "（说话）婉转：～谢。～言相劝。柔顺：～顺。美好：～丽。"
   },
   {
     char: "婚",
@@ -27614,7 +28082,9 @@ const t = [
     mark: "ㄏㄨㄣ",
     tradition: "婚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hun",
+    explain: "男女经过合法手续结为夫妻：未～。婚姻：结～。"
   },
   {
     char: "婴",
@@ -27627,7 +28097,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "嬰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "不满一岁的小孩儿：～儿。缠绕：～疾（得病）。触犯：～怒。"
   },
   {
     char: "婶",
@@ -27640,7 +28112,9 @@ const t = [
     mark: "ㄕㄣˇ",
     tradition: "嬸",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shen",
+    explain: "婶母，称叔父的妻子。也用来尊称跟母亲同辈而年纪较小的已婚女子：二～。李～。"
   },
   {
     char: "婿",
@@ -27653,7 +28127,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "婿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "女婿，女儿的丈夫：翁～。丈夫：夫～。妹～。"
   },
   {
     char: "媒",
@@ -27666,7 +28142,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "媒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "媒介：虫～。传～。说合婚姻的人：做～。～妁之言。"
   },
   {
     char: "媚",
@@ -27679,7 +28157,9 @@ const t = [
     mark: "ㄇㄟˋ",
     tradition: "媚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mei",
+    explain: "美好；可爱：妩～。春光明～。巴结；讨好：谄～。"
   },
   {
     char: "媳",
@@ -27692,7 +28172,9 @@ const t = [
     mark: "ㄒㄧˊ",
     tradition: "媳",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xi",
+    explain: "媳妇：婆～。"
   },
   {
     char: "嫁",
@@ -27705,7 +28187,9 @@ const t = [
     mark: "ㄐㄧㄚˋ",
     tradition: "嫁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jia",
+    explain: "女子结婚（跟“娶”相对）：出～。改～。～人。～女儿。转移（罪名、损失、负担等）：转～。～祸于人。姓。"
   },
   {
     char: "嫂",
@@ -27714,24 +28198,13 @@ const t = [
     radical: "女",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄠˇ",
     tradition: "嫂",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "嫉",
-    spell: "jí",
-    stroke: "13",
-    radical: "女",
-    struct: "左右结构",
-    five: "木",
-    method: "-",
-    mark: "ㄐㄧˊ",
-    tradition: "嫉",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "sao",
+    explain: "嫂子，哥哥的妻子。也用来尊称和自己年纪相仿佛的已婚女子：姑～。张大～。"
   },
   {
     char: "嫌",
@@ -27744,7 +28217,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "嫌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xian",
+    explain: "嫌疑：避～。涉～。嫌怨：前～。挟～。厌恶；不满意：讨人～。～贫爱富。大家都～他脾气太急。内容不错，文字略～啰唆。"
   },
   {
     char: "嫡",
@@ -27757,7 +28232,9 @@ const t = [
     mark: "ㄉㄧˊ",
     tradition: "嫡",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "di",
+    explain: "宗法制度下指家庭的正支（跟“庶”相对）：～出。～长子（妻子所生的长子）。家族中血统近的：～亲。～堂。正宗；正统：～派。～传。"
   },
   {
     char: "嫩",
@@ -27770,7 +28247,9 @@ const t = [
     mark: "ㄋㄣˋ",
     tradition: "嫩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nen",
+    explain: "初生而柔弱；娇嫩（跟“老”相对）：～叶。～芽。小孩儿肉皮儿～。小姑娘脸皮～，不肯表演。指某些食物烹调时间短，容易咀嚼（跟“老”相对）：这肉片炒得很～。（某些颜色）浅：～黄。～绿。阅历浅，不老练：他担任总指挥还嫌～了点儿。"
   },
   {
     char: "嬉",
@@ -27783,7 +28262,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "嬉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "游戏；玩耍：～闹。～戏。"
   },
   {
     char: "子",
@@ -27792,11 +28273,13 @@ const t = [
     radical: "子",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄗˋ",
     tradition: "子",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "zi",
+    explain: "1.古代指儿女，现专指儿子：～女。～孙。～嗣。～弟（后辈人，年轻人）。2.植物的果实、种子：菜～。瓜～儿。～实。3.动物的卵：鱼～。蚕～。4.幼小的，小的：～鸡。～畜。～城。5.小而硬的颗粒状的东西：～弹（dàn）。棋～儿。6.与“母”相对：～金（利息）。～母扣。～音（辅音）。7.对人的称呼：男～。妻～。士～（读书人）。舟～（船夫）。才～。8.古代对人的尊称；称老师或称有道德、有学问的人：孔～。先秦诸～。9.地支的第一位，属鼠：～丑寅卯（喻有条不紊的层次或事物的条理）。10.用于计时：～时（夜十一点至一点）。～夜（深夜）。11.封建制度五等爵位的第四等：～爵。12.附加在名词、动词、形容词后，具有名词性（读轻声）：旗～。乱～。胖～。13.个别量词后缀（读轻声）：敲了两下～门。14.姓。"
   },
   {
     char: "孔",
@@ -27809,7 +28292,9 @@ const t = [
     mark: "ㄎㄨㄥˇ",
     tradition: "孔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kong",
+    explain: "洞；窟窿：九～桥。鼻～。通达：～道。文言副词。很：～急。量词。用于窑洞：一～土窑。"
   },
   {
     char: "孕",
@@ -27822,7 +28307,9 @@ const t = [
     mark: "ㄩㄣˋ",
     tradition: "孕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yun",
+    explain: "怀胎：～育。～穗。身孕：有～。"
   },
   {
     char: "字",
@@ -27835,7 +28322,9 @@ const t = [
     mark: "ㄗˋ",
     tradition: "字",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zi",
+    explain: "文字：汉～。识～。～体。～义。常用～。（～儿）字音：咬～儿。～正腔圆。他说话～～清楚。字体：篆～。柳～。宋体～。美术～。书法作品：～画。一幅～。字眼；词：他说行，谁还敢说半个“不”～。字据：立～。收到款子，写个～儿给他。根据人名中的字义，另取的别名叫“字”：岳飞～鹏举。曾巩～子固。俗指电表、水表等指示的数量：这个月电表走了50个～，水表走了20个～。许配：待～。姓。"
   },
   {
     char: "存",
@@ -27848,20 +28337,9 @@ const t = [
     mark: "ㄘㄨㄣˊ",
     tradition: "存",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "孙",
-    spell: "sūn",
-    stroke: "6",
-    radical: "子",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙㄨㄣ",
-    tradition: "孫",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "cun",
+    explain: "1.存在；生存：残～。父母俱～。2.储存；保存：封～。～粮。3.蓄积；聚集：～食。新建的水库已经～满了水。4.储蓄：～款。～折。零～整取。把暂时不用的现款～在银行里。5.寄存：～车处。行李先～在这儿，回头再来取。6.保留：～疑。～而不论。去伪～真。7.结存；余留：库～。收支相抵，净～二百元。8.心里怀着（某种想法）：～心。心～侥幸。不～任何顾虑。9.姓。"
   },
   {
     char: "孝",
@@ -27874,7 +28352,9 @@ const t = [
     mark: "ㄒㄧㄠˋ",
     tradition: "孝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiao",
+    explain: "孝顺：～子。尽～。旧时尊长死后在一定时期内遵守的礼俗：守～。丧服：穿～。戴～。姓。"
   },
   {
     char: "孟",
@@ -27887,7 +28367,9 @@ const t = [
     mark: "ㄇㄥˋ",
     tradition: "孟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "meng",
+    explain: "指农历一季的第一个月。旧时在兄弟姐妹排行的次序里代表最大的。姓。"
   },
   {
     char: "季",
@@ -27900,7 +28382,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "季",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "古时兄弟排行，以伯、仲、叔、季作次序，季是最小的。最末的（指时间）：清～（清朝末年）。～春。一年的四分之一，三个月为一季：春～。第三～度。换～。一年中具有某些特点的一段时期：雨～。旺～。"
   },
   {
     char: "孤",
@@ -27913,7 +28397,9 @@ const t = [
     mark: "ㄍㄨ",
     tradition: "孤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gu",
+    explain: "死去父亲或父母双亡的孩子：～儿。单独：～立。～军深入。中国古代王侯的自称。"
   },
   {
     char: "学",
@@ -27922,11 +28408,13 @@ const t = [
     radical: "子",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄝˊ",
     tradition: "學",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "xue",
+    explain: "学习：～技术。勤工俭～。我跟着他～了许多知识。模仿：他～杜鹃叫，～得很像。学问：治～。才疏～浅。博～多能。指学科：数～。物理～。政治经济～。学校：小～。大～。上～。姓。"
   },
   {
     char: "孩",
@@ -27939,7 +28427,9 @@ const t = [
     mark: "ㄏㄞˊ",
     tradition: "孩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hai",
+    explain: "幼童。子女。"
   },
   {
     char: "孵",
@@ -27952,7 +28442,9 @@ const t = [
     mark: "ㄈㄨ",
     tradition: "孵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fu",
+    explain: "鸟类伏在卵上，用体温使卵内的胚胎发育成雏鸟，也指用人工的方法调节温度和湿度，使卵内的胚胎发育成雏鸟：～育。～了一窝小鸡。"
   },
   {
     char: "孽",
@@ -27965,7 +28457,9 @@ const t = [
     mark: "ㄋㄧㄝˋ",
     tradition: "孽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nie",
+    explain: "邪恶：妖～。罪恶：造～。罪～。不忠或不孝：～臣。～子。"
   },
   {
     char: "宁",
@@ -27974,11 +28468,13 @@ const t = [
     radical: "宀",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄋㄧㄥˊ",
     tradition: "寜",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "ning",
+    explain: "姓。"
   },
   {
     char: "它",
@@ -27987,11 +28483,13 @@ const t = [
     radical: "宀",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄚ",
     tradition: "它",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ta",
+    explain: "人称代词。称人以外的事物：这杯牛奶你喝了～。姓。"
   },
   {
     char: "宅",
@@ -28004,7 +28502,9 @@ const t = [
     mark: "ㄓㄞˊ",
     tradition: "宅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhai",
+    explain: "住所；住宅：家～。深～大院。"
   },
   {
     char: "宇",
@@ -28017,7 +28517,9 @@ const t = [
     mark: "ㄩˇ",
     tradition: "宇",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "房檐，泛指房屋：屋～。栋～。上下四方，所有的空间；世界：～宙。～内。寰～。地层系统分类单位的第一级，分为太古宇、元古宇和显生宇，宇以下为界。跟宇相应的地质年代分期叫做宙。风度；气质：眉～。神～。器～。姓。"
   },
   {
     char: "守",
@@ -28030,7 +28532,9 @@ const t = [
     mark: "ㄕㄡˇ",
     tradition: "守",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shou",
+    explain: "护卫；防守。与“攻”相对：～卫。坚～阵地。遵循；遵守：～约。～信。～法。看守；守候：～门。～着病人。挨着；靠近：～着水的地方可多种水稻。古又同“狩（shòu）”。"
   },
   {
     char: "安",
@@ -28043,7 +28547,9 @@ const t = [
     mark: "ㄢ",
     tradition: "安",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "an",
+    explain: "安定：心神不～。坐不～，立不稳。使安定：～民。～神。～邦定国。对生活、工作等感到满足合适：～于现状（满足于目前的状况，不求进步）。～之若素。平安；安全（跟“危”相对）：公～。治～。转危为～。使有合适的位置：～插。～顿。安装；设立：～门窗。～电灯。咱们村上～有线电视了。加上：～罪名。～个头衔。存着；怀着（某种念头，多指不好的）：你～的什么心?姓。疑问代词。问处所，跟“哪里”相同：而今～在?表示反问，跟“怎么、哪里”相同：不入虎穴，～得虎子?。～能若无其事?安培的简称。导体横截面每秒通过的电量是1库时，电流强度就是1安。"
   },
   {
     char: "宋",
@@ -28056,7 +28562,9 @@ const t = [
     mark: "ㄙㄨㄥˋ",
     tradition: "宋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "song",
+    explain: "周朝国名（前11世纪中叶—前286）。在今河南商丘一带。为齐所灭。朝代名。1.南朝之一（420—479）。刘裕灭东晋后建立。建都建康（今南京），国号宋，史称刘宋。为南齐所灭。（960—1279）赵匡胤灭五代后周建立。建都汴梁（今河南开封），国号宋，史称北宋。1127年4月为金所灭。5月赵构重建政权，建都临安（今浙江杭州），史称南宋。1279年为元所灭。北宋、南宋合称两宋。响度单位。一毫宋约相当于人耳刚能听到的声音响度。旧写作𠳼。"
   },
   {
     char: "完",
@@ -28069,7 +28577,9 @@ const t = [
     mark: "ㄨㄢˊ",
     tradition: "完",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wan",
+    explain: "全；完整：～好。体无～肤。覆巢无～卵。消耗尽；没有剩的：煤烧～了。信纸～了。完结：事情做～了。鱼离开水，生命就～了。完成：～工。～婚。这项工程什么时候才能～?交纳（赋税）：～粮。～税。姓。"
   },
   {
     char: "宏",
@@ -28082,7 +28592,9 @@ const t = [
     mark: "ㄏㄨㄥˊ",
     tradition: "宏",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "hong",
+    explain: "宏大：～伟。～图。～愿。宽～。姓。"
   },
   {
     char: "宗",
@@ -28095,7 +28607,9 @@ const t = [
     mark: "ㄗㄨㄥ",
     tradition: "宗",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zong",
+    explain: "祖宗：列祖列～。家族；同一家族的：同～。～兄。宗派；派别：正～。禅～。宗旨：开～明义。万变不离其～。在学术或文艺上效法：他的唱功～的是梅派。为众人所师法的人物：文～。一代词～。用于事情、货物、款项等：一～心事。大～款项。姓。西藏地区旧行政区划单位，大致相当于县。"
   },
   {
     char: "官",
@@ -28108,7 +28622,9 @@ const t = [
     mark: "ㄍㄨㄢ",
     tradition: "官",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guan",
+    explain: "政府机关或军队中经过任命的、一定等级以上的公职人员：～员。武～。做～。外交～。指属于政府的或公家的：～办。～费。公共的；公用的：～道。～厕所。姓。器官：五～。感～。"
   },
   {
     char: "宙",
@@ -28121,7 +28637,9 @@ const t = [
     mark: "ㄓㄡˋ",
     tradition: "宙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhou",
+    explain: "指古往今来的时间。见〖宇宙〗。地质年代分期的第一级，分为太古宙、元古宙和显生宙，宙以下为代。跟宙相应的地层系统分类单位叫做宇。姓。"
   },
   {
     char: "定",
@@ -28134,7 +28652,9 @@ const t = [
     mark: "ㄉㄧㄥˋ",
     tradition: "定",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ding",
+    explain: "平静；稳定：立～。坐～。心神不～。固定；使固定：～影。～睛。手表坏了，表针～住不动了。决定；使确定：商～。～计划。开会时间～在明天上午。已经确定的；不改变的：～理。～论。～局。规定的：～量。～时。～期。约定：～酒席。必定；一定：～可取得胜利。姓。"
   },
   {
     char: "宛",
@@ -28147,7 +28667,9 @@ const t = [
     mark: "ㄨㄢˇ",
     tradition: "宛",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "wan",
+    explain: "→大宛"
   },
   {
     char: "宜",
@@ -28160,7 +28682,9 @@ const t = [
     mark: "ㄧˊ",
     tradition: "宜",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "合适：相～。适～。权～之计。因地制～。应当（今多用于否定式）：事不～迟。当然；无怪：～其无往而不利。姓。"
   },
   {
     char: "宝",
@@ -28173,7 +28697,9 @@ const t = [
     mark: "ㄅㄠˇ",
     tradition: "寶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bao",
+    explain: "珍贵的东西：国～。献～。粮食是～中之～。珍贵的：～刀。～剑。～石。～物。旧时的一种赌具，方形，多用牛角制成，上有指示方向的记号。见〖压宝〗。敬辞，用于称对方的家眷、铺子等：～眷。～号。～刹。姓。"
   },
   {
     char: "实",
@@ -28186,7 +28712,9 @@ const t = [
     mark: "ㄕˊ",
     tradition: "實",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "内部完全填满，没有空隙：～心儿。把窟窿填～了。真实；实在（跟“虚”相对）：～话。～心眼儿。～事求是。实际；事实：失～。名～相副。果实；种子：芡～（鸡头米）。开花结～。姓。"
   },
   {
     char: "宠",
@@ -28199,7 +28727,9 @@ const t = [
     mark: "ㄔㄨㄥˇ",
     tradition: "寵",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chong",
+    explain: "宠爱；偏爱：得～。别把孩子～坏了。姓。"
   },
   {
     char: "审",
@@ -28208,11 +28738,13 @@ const t = [
     radical: "宀",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄣˇ",
     tradition: "審",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shen",
+    explain: "详细；周密：详～。～慎。审查：～稿。～核。审问；讯问处理案件：～讯。～判。知道：未～近况如何？文言副词。的确；果然：～如其言。"
   },
   {
     char: "客",
@@ -28225,7 +28757,9 @@ const t = [
     mark: "ㄎㄜˋ",
     tradition: "客",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ke",
+    explain: "客人（跟“主”相对）：宾～。请～。会～。家里来～了。旅客：～车。～店。寄居或迁居外地：～居。～籍。作～他乡。客商：珠宝～。顾客：乘～。～满。对某些奔走各地从事某种活动的人的称呼：说～。政～。侠～。非本地区或非本单位、非本行业的；外来的：～队。～座。～串。在人类意识外独立存在的：～观。～体。用于论份儿出售的食品、饮料：一～蛋炒饭。三～冰激凌。姓。"
   },
   {
     char: "宣",
@@ -28238,7 +28772,9 @@ const t = [
     mark: "ㄒㄩㄢ",
     tradition: "宣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xuan",
+    explain: "公开说出来；传播、散布出去：～传。～布。～誓。心照不～。宣召。疏导：～泄。（Xuān）指安徽宣城，云南宣威：～笔。～腿。指宣纸：玉版～（色白质坚的宣纸）。虎皮～（有浅色斑纹的红、黄、绿等色的宣纸）。姓。"
   },
   {
     char: "室",
@@ -28251,7 +28787,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "室",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "屋子：教～。～内。机关、工厂、学校等内部的办事部门：调研～。会计～。家；家族：十～九空。宗～。家属或妻子：家～。继～。星名。二十八宿之一。"
   },
   {
     char: "宦",
@@ -28264,7 +28802,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "宦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "官吏：～海。做官：仕～。～游。宦官。姓。"
   },
   {
     char: "宪",
@@ -28273,11 +28813,13 @@ const t = [
     radical: "宀",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄢˋ",
     tradition: "憲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "法令：～令。宪法：立～。违～。～章。姓。"
   },
   {
     char: "宫",
@@ -28286,11 +28828,13 @@ const t = [
     radical: "宀",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄥ",
     tradition: "宫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "帝后太子等居住的房屋：～殿。行～。故～。东～。神话中神仙居住的房屋：天～。龙～。月～。蟾～。庙宇的名称：碧霞～。雍和～。群众文化活动或娱乐用的房屋的名称：少年～。民族～。劳动人民文化～。指子宫：～颈。刮～。～外孕。姓。古代五音之一，相当于简谱的“1”。见〖五音〗。"
   },
   {
     char: "宰",
@@ -28303,7 +28847,9 @@ const t = [
     mark: "ㄗㄞˇ",
     tradition: "宰",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zai",
+    explain: "主管；主持：主～。古代官名：县～。邑～。姓。杀（牲畜、家禽等）：屠～。杀猪～羊。比喻向买东西或接受服务的人索取高价：挨～。～人。"
   },
   {
     char: "害",
@@ -28316,7 +28862,9 @@ const t = [
     mark: "ㄏㄞˋ",
     tradition: "害",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hai",
+    explain: "祸害；害处（跟“利、益”相对）：灾～。虫～。为民除～。吸烟对身体有～。有害的（跟“益”相对）：～虫。～鸟。使受损害：～人不浅。你把地址搞错了，～得我白跑了一趟。杀害：在数日前被～。发生（疾病）：～眼。～了一场大病。又同“曷”hé。"
   },
   {
     char: "宴",
@@ -28329,7 +28877,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "宴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "请人吃酒饭；聚会在一起吃酒饭：～客。欢～。酒席；宴会：设～。赴～。盛～。国～。安乐；安闲：～乐（安乐）。～安鸩毒。"
   },
   {
     char: "宵",
@@ -28342,7 +28892,9 @@ const t = [
     mark: "ㄒㄧㄠ",
     tradition: "宵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "夜：元～。春～。通～达旦。姓。"
   },
   {
     char: "家",
@@ -28355,7 +28907,9 @@ const t = [
     mark: "ㄍㄨ",
     tradition: "傢",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "jia",
+    explain: "亲人共同生活的场所。  【组词】：家庭家中的。  【组词】：家事、家产尊称有某种专门学识或专门技术的人。  【组词】：专家、文学家、科学家学术流派。  【组词】：儒家、道家、百家争鸣经营某种行业或具有某种身分的人。  【组词】：商家、店家、少东家自称或称别人。  【组词】：自家、咱家、妇道人家对人谦称自己的亲长。  【组词】：家父、家母、家兄量词。计算家庭、店铺、大型企业等的单位。  【组词】：只此一家，别无分号。"
   },
   {
     char: "容",
@@ -28364,11 +28918,13 @@ const t = [
     radical: "宀",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄖㄨㄥˊ",
     tradition: "容",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "容纳；包含：～量。无地自～。这个礼堂能～两千人。宽容；原谅：～忍。大度～人。情理难～。允许；让：～许。不～分说。～我再想想。或许；也许：～或。辗转传抄，～有异同。姓。脸上的神情和气色：笑～。愁～。怒～。～光。病～。相貌：～貌。～颜。仪～。整～。比喻事物所呈现的景象、状态：军～。市～。阵～。"
   },
   {
     char: "宽",
@@ -28381,7 +28937,9 @@ const t = [
     mark: "ㄎㄨㄢ",
     tradition: "寬",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kuan",
+    explain: "横的距离大；范围广（跟“窄”相对）：～银幕。这条马路很～。他为集体想得周到，管得～。宽度：我国国旗的～是长的三分之二。这条河有一里～。放宽；使松缓：～限。～心。听说孩子已经脱险，心就～了一半。宽大；不严厉；不苛求：～容。从～处理。对己严，待人～。宽裕；宽绰：他虽然手头比过去～多了，但仍很注意节约。姓。"
   },
   {
     char: "宾",
@@ -28394,7 +28952,9 @@ const t = [
     mark: "ㄅㄧㄣ",
     tradition: "賓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bin",
+    explain: "客人（跟“主”相对）：外～。～至如归。姓。"
   },
   {
     char: "宿",
@@ -28407,7 +28967,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "宿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "夜里睡觉；过夜：～舍。～营。露～。夜～荒野。姓。旧有的；一向有的：～疾。～志。年老的；长期从事某事的：耆～。～将（jiàng）。"
   },
   {
     char: "寂",
@@ -28420,7 +28982,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "寂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "寂静：沉～。～寥。～无一人。万籁俱～。寂寞：枯～。孤～。"
   },
   {
     char: "寄",
@@ -28433,7 +28997,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "寄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "原指托人递送，现在专指通过邮局递送：～信。～钱。包裹已经～走了。付托；寄托：～存。赋诗～怀。～希望于青年。依附别人；依附别的地方：～食。～居。～人篱下。认的（亲属）：～父。～母。～儿。～女。姓。"
   },
   {
     char: "密",
@@ -28446,7 +29012,9 @@ const t = [
     mark: "ㄇㄧˋ",
     tradition: "密",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mi",
+    explain: "事物之间距离近；事物的部分之间空隙小（跟“稀、疏”相对）：～植。稠～。紧～。严～。这一带的树长得太～了。关系近；感情好：～友。亲～。精致；细致：细～。精～。秘密：～电。～谈。～约。机～。保～。姓。"
   },
   {
     char: "寇",
@@ -28459,7 +29027,9 @@ const t = [
     mark: "ㄎㄡˋ",
     tradition: "寇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kou",
+    explain: "强盗或外来的侵略者（也指敌人）：～仇。海～。外～（入侵的敌寇）。敌人来侵略：入～。～边。姓。"
   },
   {
     char: "富",
@@ -28472,7 +29042,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "富",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "财产多（跟“贫、穷”相对）：～裕。～有。～户。农村～了。使变富：～国强兵。～民政策。资源；财产：～源。财～。丰富；多：～饶。～于养分。姓。"
   },
   {
     char: "寒",
@@ -28485,7 +29057,9 @@ const t = [
     mark: "ㄏㄢˊ",
     tradition: "寒",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "han",
+    explain: "冷（跟“暑”相对）：～冬。～风。天～地冻。受了一点～。害怕；畏惧：心～。胆～。穷困：贫～。姓。"
   },
   {
     char: "寓",
@@ -28498,7 +29072,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "寓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "居住：～居。～所。住的地方：客～。公～。赵～。寄托：～意。姓。"
   },
   {
     char: "寝",
@@ -28511,7 +29087,9 @@ const t = [
     mark: "ㄑㄧㄣˇ",
     tradition: "寢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qin",
+    explain: "睡：废～忘食。卧室：入～。就～。寿终正～。帝王的坟墓：陵～。停止；平息：其议遂～（那种议论于是平息）。"
   },
   {
     char: "寞",
@@ -28524,7 +29102,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "寞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "寂静；冷落：寂～。～然。"
   },
   {
     char: "察",
@@ -28537,20 +29117,9 @@ const t = [
     mark: "ㄔㄚˊ",
     tradition: "察",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "寡",
-    spell: "guǎ",
-    stroke: "14",
-    radical: "宀",
-    struct: "上下结构",
-    five: "水",
-    method: "会意",
-    mark: "ㄍㄨㄚˇ",
-    tradition: "寡",
-    sex: "",
-    tone: 3
+    tone: 2,
+    pinyin: "cha",
+    explain: "仔细看；调查：观~|考~|~其言，观其行。（Chá）姓。"
   },
   {
     char: "寥",
@@ -28563,7 +29132,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "寥",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "稀少：～落。～若晨星。静寂：寂～。空虚；空旷：～廓。～无人烟。姓。"
   },
   {
     char: "寨",
@@ -28576,7 +29147,9 @@ const t = [
     mark: "ㄓㄞˋ",
     tradition: "寨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhai",
+    explain: "防守用的栅栏。旧时驻兵的地方：安营扎～。村寨，四围有栅栏或围墙的村子。强盗聚居的地方：～主。"
   },
   {
     char: "寸",
@@ -28585,11 +29158,13 @@ const t = [
     radical: "寸",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄘㄨㄣˋ",
     tradition: "寸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cun",
+    explain: "长度单位，10分等于1寸，10寸等于1尺。1市寸合1/30米。形容极短或极小：～功。～进。～土。～步。鼠目～光。凑巧：你来得可真～。姓。"
   },
   {
     char: "对",
@@ -28602,7 +29177,9 @@ const t = [
     mark: "ㄉㄨㄟˋ",
     tradition: "對",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dui",
+    explain: "回答：～答如流。向着；朝着：枪口～准敌人。对抗；敌对：～手。针锋相～。对待。例：～事不～人。正确；正常；相合：这话很～。神色不～。数目不～，还差一些。把两个东西放在一起比较，看是否相符合：校～。～表。使两个东西接触或配合：把破镜片～到一起。～榫。投合；适合：俩人很～脾气。～心思。成双的：～联。搀入（多指液体）：～水。介词。1.与“对于”用法基本相同，表示动作行为的对象：～你的建议，他很重视。对待：小王～他有意见。朝；向：～人民负责。"
   },
   {
     char: "寺",
@@ -28615,7 +29192,9 @@ const t = [
     mark: "ㄙˋ",
     tradition: "寺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "si",
+    explain: "1.古代官署名：大理～。太常～。2.佛教的庙宇：碧云～。护国～。3.伊斯兰教徒礼拜、讲经的地方：清真～。4.姓。"
   },
   {
     char: "寻",
@@ -28624,11 +29203,13 @@ const t = [
     radical: "彐",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄣˊ",
     tradition: "尋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xun",
+    explain: "1.古代长度单位，八尺叫一寻。2.姓。3.找1：～求。～觅。～人。搜～。"
   },
   {
     char: "导",
@@ -28641,7 +29222,9 @@ const t = [
     mark: "ㄉㄠˇ",
     tradition: "導",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dao",
+    explain: "引导；疏导：～航。～游。先～。倡～。～淮入海。因势利～。传导：～热。～电。半～体。开导：教～。指～。训～。导演：～戏。执～。姓。"
   },
   {
     char: "寿",
@@ -28650,11 +29233,13 @@ const t = [
     radical: "寸",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄡˋ",
     tradition: "壽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shou",
+    explain: "活得岁数大；长命：福～。人～年丰。年岁；生命：长～。～命。寿辰：做～。～面。祝人寿辰。婉辞，生前预备的；装殓死人的：～材。～衣。姓。"
   },
   {
     char: "封",
@@ -28667,7 +29252,9 @@ const t = [
     mark: "ㄈㄥ",
     tradition: "封",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "古时帝王把爵位（有时连土地）或称号赐给臣子：～王。分～诸侯。姓。封闭：查～。～河。大雪～山。～住瓶口。把信～起来。（～儿）封起来的或用来封东西的纸包或纸袋：赏～。信～。用于封起来的东西：一～信。一～银子。"
   },
   {
     char: "射",
@@ -28680,7 +29267,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "射",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "泛指用压力、推力或弹力迅速送出枪炮子弹或某物体"
   },
   {
     char: "将",
@@ -28693,7 +29282,9 @@ const t = [
     mark: "ㄐㄧㄤˋ",
     tradition: "將",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "将要。  【组词】：将子无怒，秋以为期。（《诗经．卫风．氓》）"
   },
   {
     char: "尉",
@@ -28706,7 +29297,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "尉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "古代官名，一般是武官：县～。都～。卫～。太～。军衔的一级，在校以下：～官。少～。上～。〔～氏〕地名，在中国河南省。姓。"
   },
   {
     char: "尊",
@@ -28719,7 +29312,9 @@ const t = [
     mark: "ㄗㄨㄣ",
     tradition: "尊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zun",
+    explain: "地位或辈分高：～长。～卑。～亲。敬重；尊崇：～敬。自～。～师重教。敬辞，称跟对方有关的人或事物：～府。～驾。～姓大名。a）用于神佛塑像：一～佛像。b）用于炮：五十～大炮。同“樽”。"
   },
   {
     char: "小",
@@ -28728,11 +29323,13 @@ const t = [
     radical: "小",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄠˇ",
     tradition: "小",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xiao",
+    explain: "指面积、体积、容量、数量、强度、力量不及一般或不及所比较的对象，与“大”相对：～雨。矮～。短～精悍。范围窄，程度浅，性质不重要：～事。～节。～题大作。～打～闹。时间短：～坐。～住。年幼小，排行最末：～孩。谦辞：～弟。～可。～人（a.谦称自己，指地位低；b.指人格卑鄙的人；c.指子女；d.小孩儿）。妾：～房。"
   },
   {
     char: "少",
@@ -28745,7 +29342,9 @@ const t = [
     mark: "ㄕㄠˇ",
     tradition: "少",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shao",
+    explain: "数量小（跟“多”相对）：～量。～见多怪。不够原有或应有的数目；缺少（跟“多”相对）：账算错了，～一块钱。全体同学都来了，一个没～。丢；遗失：屋里～了东西。亏欠：～人家的钱都还清了。暂时；稍微：～候。～待。"
   },
   {
     char: "尔",
@@ -28754,11 +29353,13 @@ const t = [
     radical: "小",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄦˇ",
     tradition: "爾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "er",
+    explain: "文言人称代词。你。文言指示代词。1.如此；这样：果～。这；那：～日。～时。表示情态的后缀：偶～。莞～。文言助词。而已；罢了：无他，但手熟～。"
   },
   {
     char: "尖",
@@ -28771,7 +29372,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "尖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "末端细小；尖锐：把铅笔削～了。～下巴颏儿。声音高而细：～声～气。～嗓子。（耳、目、鼻子）灵敏：眼～。耳朵～。他鼻子～得很，有一点异味都闻得出。使嗓音高而细：她～着嗓子喊。物体锐利的末端或细小的头儿：笔～儿。针～儿。刀～儿。塔～。出类拔萃的人或物品：～儿货。姐妹三个里头就数她是个～儿。吝啬；抠门儿：这人可～了，一点儿亏也不吃。尖刻：他嘴～，说话不留情面。姓。"
   },
   {
     char: "尘",
@@ -28784,7 +29387,9 @@ const t = [
     mark: "ㄔㄣˊ",
     tradition: "塵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chen",
+    explain: "飞扬的或停附在物体上的灰土：～埃。佛教道教指现实世界：红～。～凡。行迹；踪迹：步人后～。"
   },
   {
     char: "尚",
@@ -28797,7 +29402,9 @@ const t = [
     mark: "ㄕㄤˋ",
     tradition: "尚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shang",
+    explain: "副词。还：年纪～幼。～待进一步研究。尊崇；注重：崇～。～武。风尚：时～。古又同“上”。古又同“掌（zhǎng）”。古代主管官叫尚，如尚书、尚衣等。"
   },
   {
     char: "尝",
@@ -28810,7 +29417,9 @@ const t = [
     mark: "ㄔㄤˊ",
     tradition: "嘗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chang",
+    explain: "吃一点儿试试；辨别滋味：～～咸淡。经历；体验：艰苦备～。～到了体育锻炼的甜头。曾经：未～。何～。姓。"
   },
   {
     char: "尤",
@@ -28823,7 +29432,9 @@ const t = [
     mark: "ㄧㄡˊ",
     tradition: "尤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "you",
+    explain: "特异的；突出的：择～。拔其～。无耻之～。更；尤其：～甚。～妙。此地盛产水果，～以梨桃著称。姓。过失：效～。怨恨；归咎：怨天～人。"
   },
   {
     char: "就",
@@ -28836,20 +29447,9 @@ const t = [
     mark: "ㄐㄧㄡˋ",
     tradition: "就",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "尸",
-    spell: "shī",
-    stroke: "3",
-    radical: "尸",
-    struct: "独体结构",
-    five: "金",
-    method: "-",
-    mark: "ㄕ",
-    tradition: "尸",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "jiu",
+    explain: "凑近；靠近：迁～。避难～易。到；开始从事：～位。～业。～寝。～学。～职。被；受：～歼。～擒。完成；确定：成～。功成名～。生铁铸～的，不容易拆掉。趁着（当前的便利）；借着（有时跟“着”字连用）：～便。～近。～手儿。～着灯光看书。一边儿是菜蔬、果品等，一边儿是主食或酒，两者搭着吃或喝：花生仁儿～酒。表示动作的对象或话题的范围：他们～这个问题进行了讨论。～工作经验来说，他比别人要丰富些。表示在很短的时间以内：我～来。您稍等一会儿，饭～好了。表示事情发生得早或结束得早：他十五岁～参加革命了。大风早晨～住了。表示前后事情紧接着：想起来～说。卸下了行李，我们～到车间去了。表示在某种条件或情况下自然怎么样（前面常用“只要、要是、既然”等或者含有这类意思）：只要用功，～能学好。他要是不来，我～去找他。谁愿意去，谁～去。表示对比起来数目大，次数多，能力强等：你们两个小组一共才十个人，我们一个小组～十个人。他三天才来一次，你一天～来三次。这块大石头两个人抬都没抬起来，他一个人～把它背走了。放在两个相同的成分之间，表示容忍：大点儿～大点儿吧，买下算了。仅仅；只：以前～他一个人知道，现在大家都知道了。表示加强肯定：我～知道他会来的，今天他果然来了。我～不信我学不会。那～是他的家。幼儿园～在这个胡同里。表示假设的让步，跟“就是”2相同：你～送来，我也不要。"
   },
   {
     char: "尺",
@@ -28862,7 +29462,9 @@ const t = [
     mark: "ㄔㄜˇ",
     tradition: "尺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chi",
+    explain: "市制长度单位。10寸为1尺，10尺为1丈。1尺约合33.33厘米。泛指量长度和画图用的器具：卷～。丁字～。像尺的东西：计算～。"
   },
   {
     char: "尼",
@@ -28875,7 +29477,9 @@ const t = [
     mark: "ㄋㄧˊ",
     tradition: "尼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ni",
+    explain: "尼姑：～庵。僧～。姓。"
   },
   {
     char: "尽",
@@ -28884,11 +29488,13 @@ const t = [
     radical: "尸",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄣˋ",
     tradition: "盡、儘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "所有的：～数。～人皆知。"
   },
   {
     char: "尾",
@@ -28897,11 +29503,13 @@ const t = [
     radical: "尸",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄨㄟˇ",
     tradition: "尾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wei",
+    explain: "尾巴。事物的末端：队～。～声。跟在后面：～随。主要部分以外的部分；尚未了结的事情：～数。扫～工作。量词。用于鱼：一～鱼。星名。二十八宿之一。"
   },
   {
     char: "尿",
@@ -28914,7 +29522,9 @@ const t = [
     mark: "ㄋㄧㄠˋ",
     tradition: "尿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "niao",
+    explain: "由人或动物肾脏产生，从尿道排泄出来的液体。排泄小便。"
   },
   {
     char: "局",
@@ -28927,7 +29537,9 @@ const t = [
     mark: "ㄐㄩˊ",
     tradition: "局",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ju",
+    explain: "棋盘：棋～。棋类等比赛：开～。对～。当～者迷。棋类等比赛的形势或结局：胜～。平～。和～。下棋或其他比赛一次叫一局：下了一～棋。形势；情况；处境：结～。战～。顾全大～。人的器量：～量。～度。称某些聚会：饭～。赌～。圈套：骗～。拘束：～促。～限。姓。某些商店的名称：书～。"
   },
   {
     char: "屁",
@@ -28940,7 +29552,9 @@ const t = [
     mark: "ㄆㄧˋ",
     tradition: "屁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pi",
+    explain: "由肛门排出的臭气：放～。比喻没用的或不足道的事物：～话。～大点事也值得大惊小怪。泛指任何事物，相当于“什么”（多用于否定或斥责）：你懂个～。别翻了，包里～都没有。"
   },
   {
     char: "层",
@@ -28953,7 +29567,9 @@ const t = [
     mark: "ㄘㄥˊ",
     tradition: "層",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ceng",
+    explain: "重叠；重复：～峦叠嶂。～出不穷。重叠事物的一个部分：外～。云～。a）用于重叠、积累的东西：五～大楼。两～玻璃窗。b）用于可以分项分步的东西：去了一～顾虑。还得进一～想。c）用于可以从物体表面揭开或抹去的东西：一～薄膜。擦掉一～灰。姓。"
   },
   {
     char: "居",
@@ -28962,11 +29578,13 @@ const t = [
     radical: "尸",
     struct: "半包围结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄩ",
     tradition: "居",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ju",
+    explain: "住：～民。分～。住的地方；住所：迁～。民～。故～。在（某种位置）：～左。～首。当；任：～功。以专家自～。积蓄；存：～积。奇货可～。停留；固定：变动不～。岁月不～。用于某些商店的名称（多为饭馆）：同和～。沙锅～。姓。"
   },
   {
     char: "屈",
@@ -28979,7 +29597,9 @@ const t = [
     mark: "ㄑㄩ",
     tradition: "屈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qu",
+    explain: "弯曲；使弯曲：～指。～膝。猫～着后腿，竖着尾巴。屈服；使屈服：宁死不～。威武不能～。理亏：～心。理～词穷。委屈；冤枉：受～。叫～。你可～死我了。姓。"
   },
   {
     char: "屉",
@@ -28992,7 +29612,9 @@ const t = [
     mark: "ㄊㄧˋ",
     tradition: "屉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ti",
+    explain: "桌、柜等器物上的抽斗：抽～。指蒸食物的笼屉。床上或椅子上活动的可以取下来像屉子的床板或椅子板。"
   },
   {
     char: "届",
@@ -29005,7 +29627,9 @@ const t = [
     mark: "ㄐㄧㄝˋ",
     tradition: "届",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "到（时候）：～时。～期。略同于“次”，用于定期的会议或毕业的班级等：历～。第二～全国人民代表大会。本～毕业生。姓。"
   },
   {
     char: "屋",
@@ -29018,7 +29642,9 @@ const t = [
     mark: "ㄨ",
     tradition: "屋",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wu",
+    explain: "房子：房～。～顶。茅草～。屋子：里～。外～。一间～住四个人。（Wū）姓。"
   },
   {
     char: "屎",
@@ -29031,7 +29657,9 @@ const t = [
     mark: "ㄕˇ",
     tradition: "屎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shi",
+    explain: "大便；粪：拉～。眼、耳等器官分泌出来的东西：眼～。耳～。"
   },
   {
     char: "屏",
@@ -29044,7 +29672,9 @@ const t = [
     mark: "ㄅㄧㄥˇ",
     tradition: "屏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "彷徨。惶恐的样子。"
   },
   {
     char: "屑",
@@ -29057,7 +29687,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "屑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "碎末：铁～。木～。冰～。琐碎：琐～。认为值得（做）：不～一顾。"
   },
   {
     char: "展",
@@ -29070,7 +29702,9 @@ const t = [
     mark: "ㄓㄢˇ",
     tradition: "展",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhan",
+    explain: "张开；放开：舒～。伸～。开～。愁眉不～。施展：一筹莫～。展缓：～期。～限。展览：～出。预～。画～。姓。"
   },
   {
     char: "属",
@@ -29083,7 +29717,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "屬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "类别：金～。生物学中把同一科的生物按照彼此相似的特征分为若干群，每一群叫一属，如猫科分为猫属、豹属等，禾本科分为稻属、小麦属、燕麦属等。属以下为种。隶属：直～。附～。湟中县～青海省。归属：胜利终～我们!家属；亲属：军～。烈～。系；是：查明～实。纯～虚构。用十二属相记生年：哥哥～马，弟弟～鸡。见〖生肖〗。"
   },
   {
     char: "屠",
@@ -29096,7 +29732,9 @@ const t = [
     mark: "ㄊㄨˊ",
     tradition: "屠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tu",
+    explain: "宰杀（牲畜）：～宰。屠杀：～城（攻破城池后屠杀城中的居民）。姓。"
   },
   {
     char: "屡",
@@ -29105,11 +29743,13 @@ const t = [
     radical: "尸",
     struct: "半包围结构",
     five: "",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "屢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "副词。屡次；多次：～战～胜。～教不改。"
   },
   {
     char: "履",
@@ -29118,11 +29758,13 @@ const t = [
     radical: "尸",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "履",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "鞋：衣～。革～。削足适～。踩；走：～险如夷。如～薄冰。脚步：步～。履行：～约。"
   },
   {
     char: "屯",
@@ -29135,7 +29777,9 @@ const t = [
     mark: "ㄊㄨㄣˊ",
     tradition: "屯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tun",
+    explain: "→屯留县"
   },
   {
     char: "山",
@@ -29144,11 +29788,13 @@ const t = [
     radical: "山",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄕㄢ",
     tradition: "山",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "shan",
+    explain: "地面上由土石构成的高耸的部分：高～。～顶。像山的东西：冰～。蚕蔟：蚕上～了。山墙：房～。"
   },
   {
     char: "屹",
@@ -29161,7 +29807,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "屹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "山峰高耸的样子：～立。"
   },
   {
     char: "屿",
@@ -29174,7 +29822,9 @@ const t = [
     mark: "ㄩˇ",
     tradition: "嶼",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "（旧读xù）小岛：岛～。"
   },
   {
     char: "岁",
@@ -29183,11 +29833,13 @@ const t = [
     radical: "山",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄨㄟˋ",
     tradition: "歲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "年：～月。～首。～末。～暮。辞旧～，迎新年。表示年龄的单位：孩子满了三～了。这匹马是六～口。指时间：～不我与（时间不等待我们）。年成：歉～。丰～。姓。"
   },
   {
     char: "岂",
@@ -29196,11 +29848,13 @@ const t = [
     radical: "山",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧˇ",
     tradition: "豈",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qi",
+    explain: "难道、怎么。表示反诘、疑问。  【组词】：岂敢、岂有此理"
   },
   {
     char: "岔",
@@ -29213,7 +29867,9 @@ const t = [
     mark: "ㄔㄚˋ",
     tradition: "岔",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cha",
+    explain: "山脉分歧的地方，亦指道路、河流分歧的地方：～道。～子。大沟小～。转移话题，未按原来的方向行进而偏到一边：打～。走～了。互相让开或调换：把这两个会的时间～开。方言，嗓音失常：～调（diào）。"
   },
   {
     char: "岖",
@@ -29222,11 +29878,13 @@ const t = [
     radical: "山",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄑㄩ",
     tradition: "嶇",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qu",
+    explain: "见〔崎岖〕"
   },
   {
     char: "岗",
@@ -29239,7 +29897,9 @@ const t = [
     mark: "ㄍㄤˋ",
     tradition: "崗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gang",
+    explain: "（—子、—儿）高起的土坡：黄土～儿。（—子、—儿）平面上凸起的一长道：肉～子。守卫的位置：站～｜门～｜布～。[岗位]守卫、值勤的地方。也指职位：工作～。"
   },
   {
     char: "岛",
@@ -29252,7 +29912,9 @@ const t = [
     mark: "ㄉㄠˇ",
     tradition: "島",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dao",
+    explain: "海洋里被水环绕、面积比大陆小的陆地。也指湖里、江河里被水环绕的陆地。（Dǎo）姓。"
   },
   {
     char: "岩",
@@ -29265,7 +29927,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "岩",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "岩石：～层。水成～。花岗～。岩石突起而成的山峰：嶂石～（在河北）。山中的洞穴：芦笛～（在广西）。姓。"
   },
   {
     char: "岭",
@@ -29278,7 +29942,9 @@ const t = [
     mark: "ㄌㄧㄥˇ",
     tradition: "嶺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ling",
+    explain: "顶上有路可通行的山：一道～。崇山峻～。翻山越～。高大的山脉：南～。秦～。大兴安～。专指大庾岭等五岭：～南。姓。"
   },
   {
     char: "岳",
@@ -29291,7 +29957,9 @@ const t = [
     mark: "ㄩㄝˋ",
     tradition: "岳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "高大的山：五～。称妻的父母及伯父、叔父：～父。～母。叔～。姓。"
   },
   {
     char: "岸",
@@ -29304,7 +29972,9 @@ const t = [
     mark: "ㄢˋ",
     tradition: "岸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "an",
+    explain: "江、河、湖、海等水边的陆地：江～。上～。两～绿柳成荫。（Àn）姓。高大：伟～。高傲：傲～。"
   },
   {
     char: "峡",
@@ -29317,7 +29987,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "峽",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "两山夹水的地方（多用于地名）：三门～（在河南）。青铜～（在宁夏）。长江三～。见〖海峡〗。"
   },
   {
     char: "峦",
@@ -29326,11 +29998,13 @@ const t = [
     radical: "山",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄌㄨㄢˊ",
     tradition: "巒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luan",
+    explain: "小而尖的山。也泛指山：岗～起伏。重～叠嶂。"
   },
   {
     char: "峭",
@@ -29343,7 +30017,9 @@ const t = [
     mark: "ㄑㄧㄠˋ",
     tradition: "峭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qiao",
+    explain: "山势高陡：～立。～壁。比喻严厉：～直（严峻刚直）。"
   },
   {
     char: "峰",
@@ -29356,7 +30032,9 @@ const t = [
     mark: "ㄈㄥ",
     tradition: "峰",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "山的突出的尖顶：～峦。高～。顶～。形状像山峰的事物：波～。驼～。单～骆驼。用于骆驼：一～骆驼。姓。"
   },
   {
     char: "峻",
@@ -29369,7 +30047,9 @@ const t = [
     mark: "ㄐㄩㄣˋ",
     tradition: "峻",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jun",
+    explain: "（山）高大：险～。高山～岭。严厉：严～。严刑～法。"
   },
   {
     char: "崇",
@@ -29382,7 +30062,9 @@ const t = [
     mark: "ㄔㄨㄥˊ",
     tradition: "崇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chong",
+    explain: "高：～山峻岭。尊敬；重视：～敬。推～。"
   },
   {
     char: "崎",
@@ -29395,7 +30077,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "崎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "倾斜；不平坦：～径。"
   },
   {
     char: "崔",
@@ -29408,7 +30092,9 @@ const t = [
     mark: "ㄘㄨㄟ",
     tradition: "崔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cui",
+    explain: "见〖崔巍〗、〖崔嵬〗。姓。"
   },
   {
     char: "崖",
@@ -29421,7 +30107,9 @@ const t = [
     mark: "ㄧㄚˊ",
     tradition: "崖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ya",
+    explain: "（旧又读ái）山石或高地的陡立的侧面：山～。悬～。摩～。边际：～略。"
   },
   {
     char: "崩",
@@ -29434,7 +30122,9 @@ const t = [
     mark: "ㄅㄥ",
     tradition: "崩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "beng",
+    explain: "倒塌：土～瓦解。破裂：豆荚～开了。两人谈～了。被弹（tán）射的物体击中：注意，别～了眼睛。旧指帝王死亡。"
   },
   {
     char: "崭",
@@ -29447,7 +30137,9 @@ const t = [
     mark: "ㄓㄢˇ",
     tradition: "嶄",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhan",
+    explain: "高而突出。  【组词】：崭立、崭绝、崭露锋芒特别、很。  【组词】：崭新"
   },
   {
     char: "嵌",
@@ -29460,7 +30152,9 @@ const t = [
     mark: "ㄑㄧㄢˋ",
     tradition: "嵌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qian",
+    explain: "把较小的东西卡进较大东西上面的凹处（多指美术品的装饰）：镶～。～石。～银。戒指上～着钻石。"
   },
   {
     char: "巍",
@@ -29473,7 +30167,9 @@ const t = [
     mark: "ㄨㄟ",
     tradition: "巍",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wei",
+    explain: "形容高大：～然。～峨。"
   },
   {
     char: "川",
@@ -29482,11 +30178,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄨㄢ",
     tradition: "川",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chuan",
+    explain: "河流：河～。高山大～。百～归海。平地；平野：米粮～。一马平～。八百里秦～。指四川：～马。～菜。"
   },
   {
     char: "州",
@@ -29499,7 +30197,9 @@ const t = [
     mark: "ㄓㄡ",
     tradition: "州",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhou",
+    explain: "旧时行政区划单位。现在有的地方还保留这样的名称，如杭州、苏州。指少数民族的自治州。在省或自治区之下，县之上。"
   },
   {
     char: "巡",
@@ -29512,7 +30212,9 @@ const t = [
     mark: "ㄒㄩㄣˊ",
     tradition: "巡",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xun",
+    explain: "往来查看：～视。～哨。量词。用于给全座斟酒的次数：酒过三～。"
   },
   {
     char: "巢",
@@ -29521,11 +30223,13 @@ const t = [
     radical: "巛",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄠˊ",
     tradition: "巢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chao",
+    explain: "鸟的窝，也称蜂、蚁等的窝：鸟～。蜂～。比喻盗匪等盘踞的地方：匪～。倾～出动。姓。"
   },
   {
     char: "工",
@@ -29534,11 +30238,13 @@ const t = [
     radical: "工",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄥ",
     tradition: "工",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "工人和工人阶级：矿～。钳～。瓦～。技～。女～。～农联盟。工作；生产劳动：做～。上～。加～。勤～俭学。省料又省～。工程：动～。竣～。工业：化～（化学工业）。～交系统。指工程师：高～（高级工程师）。王～。一个工人或农民一个劳动日的工作：砌这道墙要六个～。（～儿）技术和技术修养：唱～。做～。长于；善于：～诗善画。精巧；精致：～巧。～稳。姓。我国民族音乐音阶上的一级，乐谱上用作记音符号，相当于简谱的“3”。参看〖工尺〗。"
   },
   {
     char: "左",
@@ -29551,7 +30257,9 @@ const t = [
     mark: "ㄗㄨㄛˇ",
     tradition: "左",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zuo",
+    explain: "方位词。面向南时靠东的一边（跟“右”相对，下同）：～方。～手。向～转。方位词。东：山～（太行山以东的地方，过去也专指山东省）。偏；邪；不正常：～脾气。～道旁门。错；不对头：想～了。说～了。相反：意见相～。进步的；革命的：～派。～翼作家。同“佐”姓。"
   },
   {
     char: "巧",
@@ -29564,7 +30272,9 @@ const t = [
     mark: "ㄑㄧㄠˇ",
     tradition: "巧",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "qiao",
+    explain: "心思灵敏，技术高明：～干。能工～匠。他的手艺很～。（手、口）灵巧：心灵手～。他嘴～，学谁像谁。恰好；正遇在某种机会上：恰～。偏～。凑～。～遇。来得真～。我一出大门就碰到他，真～极了。虚浮不实的（话）：花言～语。姓。"
   },
   {
     char: "巨",
@@ -29573,11 +30283,13 @@ const t = [
     radical: "匚",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄩˋ",
     tradition: "巨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "大；很大：～款。～轮。～幅画像。为数甚～。姓。"
   },
   {
     char: "巩",
@@ -29590,7 +30302,9 @@ const t = [
     mark: "ㄍㄨㄥˇ",
     tradition: "鞏",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gong",
+    explain: "巩固。姓。"
   },
   {
     char: "巫",
@@ -29599,24 +30313,13 @@ const t = [
     radical: "工",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄨ",
     tradition: "巫",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "差",
-    spell: "chā",
-    stroke: "9",
-    radical: "⺶",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄘ",
-    tradition: "差",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "wu",
+    explain: "古代所谓能以舞降神的人。主管奉祀天帝鬼神、为人祈福禳灾，并兼事占卜、星历之术。后演变成为专门以装神弄鬼骗取财物为职业的人：～术。～婆。"
   },
   {
     char: "己",
@@ -29625,11 +30328,13 @@ const t = [
     radical: "己",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄐㄧˇ",
     tradition: "己",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ji",
+    explain: "自己：知～知彼。舍～为人。严于律～。天干的第六位。见〖干支〗。姓。"
   },
   {
     char: "已",
@@ -29638,11 +30343,13 @@ const t = [
     radical: "已",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄧˇ",
     tradition: "已",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yi",
+    explain: "停止：争论不～。副词。已经：早～知道。文言副词。太：不为～甚。吾得仲父～难矣。后来；不多时：其母…见长蛇数丈入榻下，～忽不见。古又同“以”。"
   },
   {
     char: "巴",
@@ -29651,11 +30358,13 @@ const t = [
     radical: "巳",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄚ",
     tradition: "巴",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "盼望：～不得。朝（zhāo）～夜望。紧贴：爬山虎～在墙上。粘住：粥～了锅了。粘在别的东西上的东西：锅～。挨着：前不～村，后不～店。张开：～着眼瞧。天气干燥，桌子都～缝儿啦。周朝国名，在今四川东部和重庆一带。指四川东部和重庆一带。姓。压强的非法定计量单位，符号bar。1平方厘米的面积上受到100万达因作用力，压强就是1巴，合100000帕。从前气象学上多用毫巴，现已改用百帕。巴士：大～。中～。小～。"
   },
   {
     char: "巷",
@@ -29668,7 +30377,9 @@ const t = [
     mark: "ㄏㄤˋ",
     tradition: "巷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiang",
+    explain: "较窄的街道：深～。陋～。一条小～。街头～尾。街谈～议。（Xiàng）姓。"
   },
   {
     char: "巾",
@@ -29677,11 +30388,13 @@ const t = [
     radical: "巾",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄣ",
     tradition: "巾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jin",
+    explain: "擦东西或包裹、覆盖东西的小块的纺织品：手～。毛～。头～。围～。领～。枕～。"
   },
   {
     char: "币",
@@ -29695,7 +30408,9 @@ const t = [
     mark: "",
     tradition: "幣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "货币：硬～。银～。纸～。人民～。"
   },
   {
     char: "市",
@@ -29708,7 +30423,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "市",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "做买卖的地方：开～。上～。城市：～区。～容。行政区划单位。在中国有中央直辖市、省（或自治区）辖市等。属于市制的（度量衡单位）：～尺。买：～贱鬻贵。"
   },
   {
     char: "布",
@@ -29721,7 +30438,9 @@ const t = [
     mark: "ㄅㄨˋ",
     tradition: "布",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bu",
+    explain: "用棉、麻等织成的，可以做衣服或其他物件的材料：棉～。麻～。花～。粗～。～鞋。买一块～。古代的一种钱币。姓。宣告；宣布：发～。公～。～告。开诚～公。散布；分布：阴云密～。铁路公路遍～全国。布置：～局。～防。～下天罗地网。"
   },
   {
     char: "帅",
@@ -29734,7 +30453,9 @@ const t = [
     mark: "ㄕㄨㄞˋ",
     tradition: "帥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shuai",
+    explain: "军队中最高的指挥员：元～。将～。～旗。～印。姓。英俊；潇洒；漂亮：这个武打动作干净利落，～极了。字写得真～。"
   },
   {
     char: "帆",
@@ -29747,7 +30468,9 @@ const t = [
     mark: "ㄈㄢ",
     tradition: "帆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fan",
+    explain: "挂在桅杆上的布篷，利用风力使船前进：～樯。一～风顺。扬～远航。指帆船：征～。千～竞发。"
   },
   {
     char: "师",
@@ -29760,7 +30483,9 @@ const t = [
     mark: "ㄕ",
     tradition: "師",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shi",
+    explain: "传授知识、技术的人：教～。掌握某种专门知识、技术的人：工程～。理发～。效法：～法。榜样：前事不忘，后事之～。军队：出～。劳～动众。军队编制单位。在军之下，团之上。由师徒关系或师生关系产生的：～母。～兄。对和尚、尼姑的尊称：禅～。～太。"
   },
   {
     char: "希",
@@ -29773,7 +30498,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "希",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "少：～罕。物以～为贵。希望：～准时出席。"
   },
   {
     char: "帐",
@@ -29786,7 +30513,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "帳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "床帐帐幕旧同“{账}”"
   },
   {
     char: "帕",
@@ -29799,7 +30528,9 @@ const t = [
     mark: "ㄆㄚˋ",
     tradition: "帕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pa",
+    explain: "用来擦手擦脸的纺织品，多为方形：手～。帕斯卡的简称。物体每平方米的面积上受到的压力为1牛时，压强就是1帕。"
   },
   {
     char: "帖",
@@ -29812,7 +30543,9 @@ const t = [
     mark: "ㄊㄧㄝˋ",
     tradition: "帖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tie",
+    explain: "服从；顺从：服～。妥当；稳当：妥～。姓。"
   },
   {
     char: "帘",
@@ -29825,7 +30558,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "簾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "（～儿）用布做成的望子：酒～。用布、竹子、苇子等做的有遮蔽作用的器物：竹～。窗～儿。门～儿。"
   },
   {
     char: "帚",
@@ -29834,11 +30569,13 @@ const t = [
     radical: "彐",
     struct: "上中下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄡˇ",
     tradition: "帚",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhou",
+    explain: "清除垃圾、尘土或油垢等的用具：笤～。扫～。炊～。"
   },
   {
     char: "帜",
@@ -29851,7 +30588,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "幟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "旗子：独树一～。记号：标～。"
   },
   {
     char: "帝",
@@ -29860,11 +30599,13 @@ const t = [
     radical: "巾",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧˋ",
     tradition: "帝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "宗教徒或神话中称宇宙的创造者和主宰者：上～。天～。玉皇大～。君主；皇帝：称～。三皇五～。指帝国主义：反～斗争。姓。"
   },
   {
     char: "带",
@@ -29873,11 +30614,13 @@ const t = [
     radical: "巾",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄞˋ",
     tradition: "帶",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "带子或像带子的长条物：皮～。鞋～儿。传送～。轮胎：车～。汽车外～。地带；区域：温～。黄河一～。白带：～下。姓。随身拿着；携带：～行李。～干粮。捎带着做某事：上街～包茶叶来（捎带着买）。你出去请把门～上（随手关上）。呈现；显出：面～笑容。含有：这瓜～点儿苦味。说话～刺儿。连着；附带：～叶的橘子。连说～笑。放牛～割草。引导；领：～队。～徒弟。带动：以点～面。他这样一来～得大家都勤快了。照看（孩子）：孙子是奶奶～大的。"
   },
   {
     char: "席",
@@ -29890,7 +30633,9 @@ const t = [
     mark: "ㄒㄧˊ",
     tradition: "席",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xi",
+    explain: "用苇篾、竹篾、草等编成的片状物，用来铺炕、床、地或搭棚子等：草～。凉～。炕～。一领～。座位；席位：出～。入～。缺～。退～。硬～。软～。来宾～。特指议会中的席位，表示当选的人数。成桌的饭菜；酒席：摆了两桌～。用于所说的话语或成桌的酒菜：一～话。一～酒。姓。"
   },
   {
     char: "帮",
@@ -29903,7 +30648,9 @@ const t = [
     mark: "ㄅㄤ",
     tradition: "幫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bang",
+    explain: "帮助：他～我学外语。物体旁边或周围的部分：鞋～。船～。桶～。白菜等蔬菜外层较老、较厚的叶子：菜～。群，伙；为了一定的目的而结成的集团：搭～。匪～。量词。用于成群、成伙的人：一～学生。一～无赖。"
   },
   {
     char: "常",
@@ -29916,7 +30663,9 @@ const t = [
     mark: "ㄔㄤˊ",
     tradition: "常",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chang",
+    explain: "一般；普通；平常：～人。～识。～态。不变的；固定的：～数。冬夏～青。时常；常常：～来～往。我们～见面。指伦常：三纲五～。姓。"
   },
   {
     char: "帽",
@@ -29929,7 +30678,9 @@ const t = [
     mark: "ㄇㄠˋ",
     tradition: "帽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mao",
+    explain: "帽子：呢～。草～。衣～整齐。（～儿）罩或套在器物上头，作用或形状像帽子的东西：笔～儿。螺丝～儿。笼屉～儿。"
   },
   {
     char: "幅",
@@ -29942,7 +30693,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "幅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "布帛、呢绒等的宽度：～面。单～。双～。宽～的白布。泛指宽度：～度。～员。振～。用于布帛、呢绒、图画等：一～画。用两～布做一个床单儿。"
   },
   {
     char: "幌",
@@ -29955,7 +30708,9 @@ const t = [
     mark: "ㄏㄨㄤˇ",
     tradition: "幌",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "huang",
+    explain: "帐幔；帘帷（wéi）。"
   },
   {
     char: "幔",
@@ -29968,7 +30723,9 @@ const t = [
     mark: "ㄇㄢˋ",
     tradition: "幔",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "man",
+    explain: "为遮挡而悬挂起来的布、绸子、丝绒等：布～。窗～。"
   },
   {
     char: "幕",
@@ -29981,7 +30738,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "幕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "覆盖在上面的大块的布、绸、毡子等；帐篷：帐～。夜～。挂着的大块的布、绸、丝绒等（演戏或放映电影、幻灯所用的）：开～。闭～。银～。古代战争时将帅的帐篷；古代将帅或行政长官办公的地方：～府。～僚。戏剧较完整的段落，每幕可以分若干场：第二～第一场。看了这幅画，我不禁回忆起儿时生活的一～来。姓。"
   },
   {
     char: "幢",
@@ -29994,20 +30753,9 @@ const t = [
     mark: "ㄔㄨㄤˊ",
     tradition: "幢",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "干",
-    spell: "gàn",
-    stroke: "3",
-    radical: "干",
-    struct: "独体结构",
-    five: "木",
-    method: "-",
-    mark: "ㄍㄢˋ",
-    tradition: "乾、幹",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "zhuang",
+    explain: "〈方〉量词。用于房子：一～楼房。"
   },
   {
     char: "平",
@@ -30020,7 +30768,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "平",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "表面没有高低凹凸，不倾斜：～坦。马路很～。把纸铺～了。使平：～了三亩地。把沟～了种庄稼。两相比较没有高低、先后；不相上下：～辈。～列。～局。～起～坐。这场球赛双方打～了。达到相同的高度：～槽。～了世界记录。平均；公平：～分。持～之论。安定：风～浪静。心～气和。用武力镇压；平定：～叛。～乱。抑止（怒气）：你先把气～下去再说。经常的；普通的：～时。～淡。姓。"
   },
   {
     char: "年",
@@ -30033,7 +30783,9 @@ const t = [
     mark: "ㄋㄧㄢˊ",
     tradition: "年",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nian",
+    explain: "时间的单位，公历1年是地球绕太阳一周的时间，平年365日，闰年366日，每4年有1个闰年：今～。去～。用于计算年数：三～五载。在广州住了两～。每年的：～会。～鉴。～产量。岁数：～纪。～龄。忘～交。益寿延～。一生中按年龄划分的阶段：童～。幼～。少～。青～。中～。老～。时期；时代：近～。明朝末～。一年中庄稼的收成：～成。～景。丰～。歉～。年节：新～。过～。给大家拜～。有关年节的（用品）：～糕。～货。～画。姓。"
   },
   {
     char: "并",
@@ -30042,11 +30794,13 @@ const t = [
     radical: "丷",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄧㄥˋ",
     tradition: "并",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bing",
+    explain: "合在一起：归～。合～。把三个组～成两个。两种或两种以上的事物平排着：～蒂莲。我们手挽着手，肩～着肩。表示不同的事物同时存在，不同的事情同时进行：两说～存。相提～论。用在否定词前面加强否定的语气，略带反驳的意味：你以为他糊涂，其实他～不糊涂。所谓团结～非一团和气。并且：我完全同意～拥护领导的决定。用法跟“连”相同（常跟“而”、“亦”呼应）：～此而不知。～此浅近原理亦不能明。"
   },
   {
     char: "幸",
@@ -30059,7 +30813,9 @@ const t = [
     mark: "ㄒㄧㄥˋ",
     tradition: "幸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xing",
+    explain: "幸福。高兴：欣～。希望：～勿推辞。意外地得到成功或免去灾害：～存。～免。古指得到封建帝王的宠爱：得～。～臣。指封建帝王到某地去：辛卯，帝（汉文帝）～太原。"
   },
   {
     char: "幻",
@@ -30072,7 +30828,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "幻",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "没有现实根据的；不真实的：虚～。梦～。～想。奇异地变化：～术。变～。"
   },
   {
     char: "幼",
@@ -30085,7 +30843,9 @@ const t = [
     mark: "ㄧㄡˋ",
     tradition: "幼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "you",
+    explain: "（年纪）小；未长成（跟“老”相对）：～年。～儿。～苗。～虫。小孩儿：扶老携～。姓。"
   },
   {
     char: "幽",
@@ -30094,11 +30854,13 @@ const t = [
     radical: "山",
     struct: "半包围结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄡ",
     tradition: "幽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "you",
+    explain: "僻静；深远；昏暗：～静。～谷。隐蔽的；不公开的：～居。沉静；深微：～思。囚禁：～禁。迷信指阴间：～冥。幽州，古地名。在今河北北部、辽宁南部。"
   },
   {
     char: "广",
@@ -30107,11 +30869,13 @@ const t = [
     radical: "广",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄢ",
     tradition: "廣",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "guang",
+    explain: "宽大、宽阔。与「狭」相对。  【组词】：广大、广阔、地广人稀扩大、增加。  【组词】：推广、增广见闻众多。  【组词】：大庭广众广东、广西两省与广州的简称。  【组词】：两广、京广铁路、湖广总督"
   },
   {
     char: "庄",
@@ -30120,11 +30884,13 @@ const t = [
     radical: "广",
     struct: "半包围结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄨㄤ",
     tradition: "莊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuang",
+    explain: "村庄：～户。农～。王家～。封建社会里君主、贵族等所占有的成片土地：皇～。～田。～园。规模较大或做批发生意的商店：钱～。布～。茶～。饭～。庄家：做～。是谁的～?姓。庄重：～严。端～。亦～亦谐。"
   },
   {
     char: "庆",
@@ -30133,11 +30899,13 @@ const t = [
     radical: "广",
     struct: "半包围结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄥˋ",
     tradition: "慶",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "qing",
+    explain: "庆祝；庆贺：～寿。～丰收。～功大会。值得庆祝的周年纪念日：国～。校～。姓。"
   },
   {
     char: "庇",
@@ -30150,7 +30918,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "庇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "遮蔽；掩护：包～。～护。"
   },
   {
     char: "床",
@@ -30163,7 +30933,9 @@ const t = [
     mark: "ㄔㄨㄤˊ",
     tradition: "床",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chuang",
+    explain: "供睡觉用的家具。像床的东西：冰～。机～。某些东西中起托架、支撑作用的部分：牙～。琴～。某些像床的地面、地貌：河～。量词。用于被褥等：一～被子。"
   },
   {
     char: "序",
@@ -30176,7 +30948,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "序",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "次序：顺～。秩～。工～。程～。井然有～。排次序：～次。～齿。开头的；在正式内容以前的：～幕。～曲。序文：写了一篇～。古代指厢房：东～。西～。古代由地方举办的学校：庠～。"
   },
   {
     char: "庐",
@@ -30189,7 +30963,9 @@ const t = [
     mark: "ㄌㄩˊ",
     tradition: "廬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lu",
+    explain: "简陋的房屋：茅～。～舍。指庐州（旧府名，府治在今安徽合肥）：～剧。姓。"
   },
   {
     char: "库",
@@ -30202,7 +30978,9 @@ const t = [
     mark: "ㄎㄨˋ",
     tradition: "庫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ku",
+    explain: "储存大量东西的建筑物：水～。材料～。入～。（Kù）姓。库仑的简称。电流强度为1安时，1秒钟内通过导体横截面的电量为1库。"
   },
   {
     char: "应",
@@ -30211,11 +30989,13 @@ const t = [
     radical: "广",
     struct: "半包围结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄥˋ",
     tradition: "應",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ying",
+    explain: "回答或随声相和：～答。呼～。～对（答对）。～和（hè）。答～。喊他不～。～承。反～（ａ．化学上指物质发生化学变化，产生性质和成分与原来不同的新物质；ｂ．人和动物受到刺激而发生的活动和变化；ｃ．回响，反响）。接受，允许，答应要求：～邀。～聘。～考。顺合，适合：顺～。适～。～机。～景。～时。～用文。对待：～付。～变。～酬。"
   },
   {
     char: "底",
@@ -30224,11 +31004,13 @@ const t = [
     radical: "广",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧˇ",
     tradition: "底",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "di",
+    explain: "器物或物体的最下部分。鞋底、碗底、海底根源、内情。谜底、揭底、追根究底末了、尽头。年底、月底、巷底草稿、原本。存底、底稿、底本基本组成部分。班底、根底剩下来的部分。债底、菜底图案的衬托部分。她穿了一件蓝底白花的洋装。"
   },
   {
     char: "店",
@@ -30241,7 +31023,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "店",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "商店：商～。书～。零售～。旅店：客～。住～。"
   },
   {
     char: "庙",
@@ -30254,7 +31038,9 @@ const t = [
     mark: "ㄇㄧㄠˋ",
     tradition: "廟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "miao",
+    explain: "旧时供祖宗神位的处所：宗～。家～。供神佛或历史上有名人物的处所：寺～。土地～。文～。岳～。山顶上有一座～。指朝廷：～堂。廊～。已死皇帝的代称：～号。～讳。庙会：赶～。"
   },
   {
     char: "府",
@@ -30267,7 +31053,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "府",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "旧时指官吏办理公事的地方，现在指国家政权机关：官～。政～。旧时官府收藏文书、财物的地方：～库。旧时指大官、贵族的住宅，现在也指某些国家元首办公或居住的地方：王～。元首～。总统～。敬辞，称对方的家：贵～。唐朝至清朝的行政区划，比县高一级：开封～。济南～。又同“腑”。"
   },
   {
     char: "庞",
@@ -30280,7 +31068,9 @@ const t = [
     mark: "ㄆㄤˊ",
     tradition: "龐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pang",
+    explain: "庞大：～然大物。多而杂乱：～杂。姓。（～儿）脸盘：脸～。面～。"
   },
   {
     char: "废",
@@ -30293,7 +31083,9 @@ const t = [
     mark: "ㄈㄟˋ",
     tradition: "廢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fei",
+    explain: "不再使用；不再继续：～除。半途而～。这个煤窑～了。荒芜；衰败：～园。～墟。没有用的或失去了原来的作用的：～话。～报纸。～钢铁。肢体伤残：残～。～疾（残疾）。废黜。"
   },
   {
     char: "度",
@@ -30306,7 +31098,9 @@ const t = [
     mark: "ㄉㄨˋ",
     tradition: "度",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "du",
+    explain: "计量长短：～量衡。表明物质的有关性质所达到的程度，如硬度、热度、浓度、湿度等。计量单位名称。a）弧或角，把圆周分为360等份所成的弧叫1度弧。1度弧所对的圆心角叫1度角。1度等于60分。b）经度或纬度，如北纬38度。c）电量，1度即1千瓦小时。d）眼镜焦度的单位，1度等于0.01米-1。程度：极～。知名～。透明～。高～的责任感。限度：劳累过～。以能熔化为～。章程；行为准则：法～。制～。哲学上指一定事物保持自己质的数量界限。在这个界限内，量的增减不改变事物的质，超过这个界限，就要引起质变。对人对事宽容的程度：～量。气～。人的气质或姿态：风～。态～。姓。"
   },
   {
     char: "座",
@@ -30319,7 +31113,9 @@ const t = [
     mark: "ㄗㄨㄛˋ",
     tradition: "座",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zuo",
+    explain: "座位：～次。满～。这个剧场有五千个～儿。放在器物底下垫着的东西：茶碗～儿。石碑～儿。星座：大熊～。天琴～。敬辞，旧时称高级长官：军～（称军长）。多用于较大或固定的物体：一～山。一～水库。一～高楼。姓。"
   },
   {
     char: "庭",
@@ -30332,7 +31128,9 @@ const t = [
     mark: "ㄊㄧㄥˊ",
     tradition: "庭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ting",
+    explain: "院子；院落：前～。厅堂：大～广众。司法机关审判案件的地方：法～。开～。"
   },
   {
     char: "庵",
@@ -30341,11 +31139,13 @@ const t = [
     radical: "广",
     struct: "半包围结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄢ",
     tradition: "庵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "an",
+    explain: "小草屋：茅～。佛寺（多指尼姑住的）：～堂。尼姑～。姓。"
   },
   {
     char: "庶",
@@ -30358,7 +31158,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "庶",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "众多：～务。富～。平民；百姓：～民。姓。宗法制度下指家庭的旁支（跟“嫡”相对）：～出。庶几：～免误会。～不致误。"
   },
   {
     char: "康",
@@ -30367,11 +31169,13 @@ const t = [
     radical: "广",
     struct: "半包围结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄎㄤ",
     tradition: "康",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "kang",
+    explain: "健康：安～。～宁。～乐。～复。富足；丰盛：～年（丰年）。小～。姓。同“糠”。"
   },
   {
     char: "庸",
@@ -30384,7 +31188,9 @@ const t = [
     mark: "ㄩㄥ",
     tradition: "庸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yong",
+    explain: "平凡；平庸：～言～行（平平常常的言行）。不高明；没有作为：～人。～医。～～碌碌。姓。用（多用于否定式）：无～细述。毋～讳言。表示反问；岂：～有济乎?。～可弃乎?"
   },
   {
     char: "廉",
@@ -30397,7 +31203,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "廉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "廉洁：清～。～耻。（价钱）低；便宜：低～。价～物美。姓。"
   },
   {
     char: "廊",
@@ -30410,7 +31218,9 @@ const t = [
     mark: "ㄌㄤˊ",
     tradition: "廊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lang",
+    explain: "廊子，屋檐下的过道或有顶的过道：走～。长～。廊檐，房屋前檐伸出的部分。"
   },
   {
     char: "廓",
@@ -30423,7 +31233,9 @@ const t = [
     mark: "ㄎㄨㄛˋ",
     tradition: "廓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuo",
+    explain: "空阔：寥～。～落（空阔寂静的样子）。清除：～清。物体的周围：轮～。"
   },
   {
     char: "延",
@@ -30436,7 +31248,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "延",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "延长：蔓～。绵～。～年益寿。苟～残喘。（时间）向后推迟：迟～。～期。开学日期～至10月份。聘请；邀请：～聘。～师。～医。～至其家。姓。"
   },
   {
     char: "廷",
@@ -30449,7 +31263,9 @@ const t = [
     mark: "ㄊㄧㄥˊ",
     tradition: "廷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ting",
+    explain: "古时帝王接受朝见和办理政事的地方：朝～。"
   },
   {
     char: "建",
@@ -30462,7 +31278,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "建",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "建筑：扩～。～造。～体育馆。成立；创立：～国。～军。提出；首倡：～议。指福建：～漆。"
   },
   {
     char: "开",
@@ -30475,7 +31293,9 @@ const t = [
     mark: "ㄎㄞ",
     tradition: "開",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kai",
+    explain: "使关闭着的东西不再关闭；打开：～门。～锁。～箱子。不～口。打通；开辟：～路。～矿。墙上～了个窗口。～了三千亩水田。（合拢或连接的东西）展开；分离：桃树～花了。扣儿～了。两块木板没粘好，又～了。（河流）解冻：河～了。解除（封锁、禁令、限制等）：～戒。～禁。～斋。～释。发动或操纵（枪、炮、车、船、飞机、机器等）：～枪。～汽车。～拖拉机。火车～了。（队伍）开拔：昨天～来两团人，今天又～走了。开办：～工厂。～医院。开始：～工。～学。～演。姓。开金中含纯金量的计算单位（二十四开为纯金）：这条金项链是十八～的。[英karat]开尔文的简称。1开是水的三相点热力学温度的1/273.16。趋向动词。用在动词或形容词后。a）表示分开或离开：拉～。躲～。把门推～。窗户关得紧，打不～。b）表示容下：屋子小，人多了坐不～。这张大床，三个孩子也睡～了。c）表示扩大或扩展：喜讯传～了。d）表示开始并继续下去：下了两天雨，天就冷～了。天还没亮，大家就干～了。"
   },
   {
     char: "异",
@@ -30488,7 +31308,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "异",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "有分别；不相同：～口同声。大同小～。日新月～。求同存～。奇异；特别：～香。～闻。惊奇；奇怪：惊～。深以为～。另外的；别的：～日。～地。分开：离～。～爨（亲属分家）。姓。"
   },
   {
     char: "弃",
@@ -30497,11 +31319,13 @@ const t = [
     radical: "廾",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧˋ",
     tradition: "弃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "放弃；扔掉：抛～。舍～。遗～。～权。～之可惜。姓。"
   },
   {
     char: "弄",
@@ -30514,7 +31338,9 @@ const t = [
     mark: "ㄌㄨㄥˋ",
     tradition: "弄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nong",
+    explain: "手拿着、摆弄着或逗引着玩儿：他又～鸽子去了。小孩儿爱～沙土。做；干；办；搞：～饭。这活儿我做不好，请你帮我～～。把书～坏了。这件事总得～出个结果来才成。设法取得：～点水来。耍；玩弄：～手段。舞文～墨。"
   },
   {
     char: "弊",
@@ -30527,7 +31353,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "弊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "欺诈蒙骗、图占便宜的行为：作～。营私舞～。害处；毛病（跟“利”相对）：兴利除～。切中时～。"
   },
   {
     char: "式",
@@ -30540,7 +31368,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "式",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "样子：新～。中～。格式：程～。法～。仪式；典礼：开幕～。阅兵～。自然科学中表明某种关系或规律的一组符号：算～。分子～。方程～。一种语法范畴。通过一定的语法形式，表示说话者对所说事情的主观态度。如叙述式、命令式等。"
   },
   {
     char: "弓",
@@ -30549,11 +31379,13 @@ const t = [
     radical: "弓",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄥ",
     tradition: "弓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "射箭或发弹丸的器械，在近似弧形的有弹性的木条两端之间系着坚韧的弦，拉开弦后，猛然放手，借弦和弓背的弹力把箭或弹丸射出：～箭。弹～。左右开～。一张～。（～儿）弓子：弹棉花的绷～儿。丈量地亩的器具，用木头制成，形状略像弓，两端的距离是5尺。也叫步弓。旧时丈量地亩的计算单位，1弓等于5尺。使弯曲：～背。～着腰。～着腿坐着。姓。"
   },
   {
     char: "引",
@@ -30562,11 +31394,13 @@ const t = [
     radical: "弓",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄣˇ",
     tradition: "引",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yin",
+    explain: "拉，伸：～力。～颈。～而不发。～吭高歌。领，招来：～见。～子。～言。～导。～荐。抛砖～玉。拿来做证据、凭据或理由：～文。～用。援～。退却：～退。～避。旧时长度单位，一引等于十丈。古代柩车的绳索：发～（出殡）。"
   },
   {
     char: "弛",
@@ -30579,7 +31413,9 @@ const t = [
     mark: "ㄔˊ",
     tradition: "弛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chi",
+    explain: "松懈；放松：松～。"
   },
   {
     char: "弟",
@@ -30588,11 +31424,13 @@ const t = [
     radical: "丷",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧˋ",
     tradition: "弟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "同「悌」。"
   },
   {
     char: "张",
@@ -30605,7 +31443,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "張",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhang",
+    explain: "使合拢的东西分开或使紧缩的东西放开：～嘴。～翅膀儿。～弓射箭。一～一弛。陈设；铺排：～灯结彩。大～筵席。扩大；夸张：虚～声势。看；望：东～西望。商店开业：新～。开～。a）用于纸、皮子等：一～纸。两～画。十～皮子。三～铁板。b）用于床、桌子等：一～床。四～桌子。七～犁。c）用于嘴、脸：两～嘴。一～脸。d）用于弓：一～弓。二十八宿之一。姓。"
   },
   {
     char: "弥",
@@ -30618,7 +31458,9 @@ const t = [
     mark: "ㄇㄧˊ",
     tradition: "彌、瀰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mi",
+    explain: "填补。  【组词】：弥补更加。  【组词】：日久弥新遍、满。  【组词】：烟雾弥漫"
   },
   {
     char: "弦",
@@ -30631,7 +31473,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "弦",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xian",
+    explain: "弓背两端之间的绳状物，用其弹性以发箭：弓～。乐器上经过摩擦、振动发声的线。钟表等的发条。连接圆周上两点的线段。中国古代称不等腰直角三角形中对着直角的斜边。"
   },
   {
     char: "弧",
@@ -30644,7 +31488,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "弧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "古代指弓：弦木为～（用弦绷在树枝上做成弓）。"
   },
   {
     char: "弯",
@@ -30657,7 +31503,9 @@ const t = [
     mark: "ㄨㄢ",
     tradition: "彎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wan",
+    explain: "不直。与“直”相对：～路。使弯曲：～腰。弯曲的地方或弯曲的部分：转～抹角。拐个～就到。开弓：～弓。"
   },
   {
     char: "弱",
@@ -30670,7 +31518,9 @@ const t = [
     mark: "ㄖㄨㄛˋ",
     tradition: "弱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ruo",
+    explain: "气力小；势力差（跟“强”相对）：软～。衰～。他年纪虽老，干活并不～。年幼：老～。差；不如：他的本领不～于那些人。丧失（指人死）：又～一个。用在分数或小数后面，表示略少于此数（跟“强”相对）：三分之二～。"
   },
   {
     char: "弹",
@@ -30683,7 +31533,9 @@ const t = [
     mark: "",
     tradition: "彈",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "dan",
+    explain: "弹子：～丸︱泥～。枪弹；炮弹；炸弹。"
   },
   {
     char: "强",
@@ -30696,7 +31548,9 @@ const t = [
     mark: "ㄐㄧㄤˋ",
     tradition: "强",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "qiang",
+    explain: "力量大（跟“弱”相对）：～国。富～。身～体壮。工作能力～。感情或意志所要求达到的程度高；坚强：要～。责任心～，工作就做得好。使用强力：～制。～渡。～占。～索财物。使强大或强壮：富国～兵。～身之道。优越；好（多用于比较）：今年的庄稼比去年更～。用在分数或小数后面，表示略多于此数（跟“弱”相对）：实际产量超过原定计划12%～。姓。"
   },
   {
     char: "归",
@@ -30705,11 +31559,13 @@ const t = [
     radical: "彐",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄟ",
     tradition: "歸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gui",
+    explain: "返回：～国华侨。无家可～。还给；归还：物～原主。趋向或集中于一个地方：殊途同～。千条河流～大海。把性质相同的问题～为一类。由（谁负责）：一切杂事都～这一组管。属于（谁所有）：功劳～大家。这些东西～你。用在相同的动词之间，表示动作并未引起相应的结果：批评～批评，奖金一分也没少给。珠算中一位除数的除法。姓。"
   },
   {
     char: "当",
@@ -30722,7 +31578,9 @@ const t = [
     mark: "ㄉㄤˋ",
     tradition: "當、噹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dang",
+    explain: "担任：他～组长。承担：敢作敢～。主持：～家。相称：旗鼓相～（比喻实力相等）。应该：理～如此。介词。1.组成时间短语，表示事件发生的时间：～我到家时，他已经走了。正～大家吃饭的时候，他回来了。组成处所短语，表示事件发生的处所：～众出丑。～着大家的面把话讲清楚。阻挡：人民军队，锐不可～。拟声词。撞击金属器物的声音：丁丁～～。抵得上；等于：一以～十。"
   },
   {
     char: "录",
@@ -30735,7 +31593,9 @@ const t = [
     mark: "ㄌㄩˋ",
     tradition: "録",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lu",
+    explain: "记载；抄写：记～。登～。抄～。摘～。过～。有闻必～。录制：～音。～像。～放。～了一首歌。原指为备用而登记，后转指采取或任用：收～。～用。用作记载物的名称：目～。语～。同学～。回忆～。姓。"
   },
   {
     char: "形",
@@ -30748,7 +31608,9 @@ const t = [
     mark: "ㄒㄧㄥˊ",
     tradition: "形",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xing",
+    explain: "形状：圆～。方～。图～。地～。形体；实体：有～。无～。～影不离。显露；表现：喜～于色。～诸笔墨。对照：相～见绌。姓。"
   },
   {
     char: "彤",
@@ -30761,7 +31623,9 @@ const t = [
     mark: "ㄊㄨㄥˊ",
     tradition: "彤",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "tong",
+    explain: "红色：～弓。姓。"
   },
   {
     char: "彩",
@@ -30774,7 +31638,9 @@ const t = [
     mark: "ㄘㄞˇ",
     tradition: "彩",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "cai",
+    explain: "颜色：五～。～云。彩色的丝绸：剪～。张灯结～。称赞夸奖的欢呼声：喝～。博得满堂～。花样；精彩的成分：丰富多～。赌博或某种游戏中给得胜者的东西：得～。中～。～票。戏曲里表示特殊情景时所用的技术；魔术里用的手法：火～。带～。～活。指负伤流的血：挂～。～号。姓。"
   },
   {
     char: "彪",
@@ -30787,7 +31653,9 @@ const t = [
     mark: "ㄅㄧㄠ",
     tradition: "彪",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "biao",
+    explain: "小老虎，比喻身材高大：～形大汉。虎身上的斑纹，借指文采：～炳。姓。"
   },
   {
     char: "彬",
@@ -30800,7 +31668,9 @@ const t = [
     mark: "ㄅㄧㄣ",
     tradition: "彬",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "bin",
+    explain: "文雅的样子：～有礼。文质～。姓。"
   },
   {
     char: "彭",
@@ -30809,11 +31679,13 @@ const t = [
     radical: "彡",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄆㄥˊ",
     tradition: "彭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "姓。"
   },
   {
     char: "彰",
@@ -30826,7 +31698,9 @@ const t = [
     mark: "ㄓㄤ",
     tradition: "彰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhang",
+    explain: "明显；显著：昭～。欲盖弥～。相得益～。表彰；显扬：～善瘅恶。姓。"
   },
   {
     char: "影",
@@ -30839,7 +31713,9 @@ const t = [
     mark: "ㄧㄥˇ",
     tradition: "影",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "ying",
+    explain: "物体挡住光线时所形成的四周有光中间无光的形象，亦指不真切的形象或印象：人～。花～。倒～。幻～。～壁。～响。～射（借甲指乙，或暗指某人其事）。无～无踪。～～绰绰（模模糊糊，不真切）。捕风捉～。含沙射～（喻暗地里诽谤中伤）。形象：摄～（照相）。留～。剪～。～印。～像。描摹：～写。～抄。～宋本。指“电影”：～评。～院。～片。～视（电影和电视）。～坛。"
   },
   {
     char: "役",
@@ -30852,7 +31728,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "役",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "需要为官方出劳力的事：劳～。徭～。强迫驱使；使唤：奴～。～使。旧指供使唤的人：仆～。战役：平型关之～。兵役：现～。"
   },
   {
     char: "彻",
@@ -30865,7 +31743,9 @@ const t = [
     mark: "ㄔㄜˋ",
     tradition: "徹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "che",
+    explain: "通；透：～夜。～骨。响～云霄。"
   },
   {
     char: "彼",
@@ -30878,7 +31758,9 @@ const t = [
     mark: "ㄅㄧˇ",
     tradition: "彼",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bi",
+    explain: "指示代词。那；那个（跟“此”相对）：～时。此起～伏。由此及～。人称代词。对方；他：知己知～。～退我进。"
   },
   {
     char: "往",
@@ -30891,7 +31773,9 @@ const t = [
     mark: "ㄨㄤˇ",
     tradition: "往",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wang",
+    explain: "去：徒步前～。向；朝：～东。～何处去？过去的：～日。"
   },
   {
     char: "征",
@@ -30904,7 +31788,9 @@ const t = [
     mark: "ㄓㄥ",
     tradition: "徵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "走远路（多指军队）：～途。长～。征讨：出～。南～北战。政府召集人民服务：～兵。应～入伍。征收：～税。征用：～地。征求：～稿。～文。证明；证验：文献足～。信而有～。有实物可～。表露出来的迹象；现象：～候。象～。特～。“徵”"
   },
   {
     char: "径",
@@ -30917,7 +31803,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "徑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "小路：曲～。山～。喻指达到目的的途径、方法：捷～。门～。副词。直接地：～行办理。直径：口～。半～。古又同“竟”。"
   },
   {
     char: "待",
@@ -30930,7 +31818,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "待",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "对待：优～。以礼相～。～人和气。招待：～客。等待：～业。严阵以～。有～改进。需要：自不～言。要；打算：～说不说。～要上前招呼，又怕认错了人。"
   },
   {
     char: "很",
@@ -30943,7 +31833,9 @@ const t = [
     mark: "ㄏㄣˇ",
     tradition: "很",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "hen",
+    explain: "表示程度相当高：～快。～不坏。～喜欢。～能办事。好得～。大家的意见～接近。我～知道他的脾气。"
   },
   {
     char: "徊",
@@ -30956,7 +31848,9 @@ const t = [
     mark: "ㄏㄨㄞˊ",
     tradition: "徊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huai",
+    explain: "见〔徘徊〕"
   },
   {
     char: "律",
@@ -30965,11 +31859,13 @@ const t = [
     radical: "彳",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˋ",
     tradition: "律",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "lü",
+    explain: "法律；规则：定～。规～。纪～。我国古代审定乐音高低的标准，把乐音分为六律和六吕，合称十二律。旧诗的一种体裁：五～。七～。排～。参看〖律诗〗。约束：～己。～人。自～。姓。"
   },
   {
     char: "徐",
@@ -30982,7 +31878,9 @@ const t = [
     mark: "ㄒㄩˊ",
     tradition: "徐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xu",
+    explain: "缓慢：～步。清风～来。不～不疾。姓。"
   },
   {
     char: "徒",
@@ -30995,7 +31893,9 @@ const t = [
     mark: "ㄊㄨˊ",
     tradition: "徒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tu",
+    explain: "步行：～步。～涉。空：～手。白白地：～然。～劳无益。只；仅仅：家～四壁。从事学习的人：～弟。～工。学～。师～。同一派系或信仰同一宗教的人：信～。教～。党～。人（多指坏人）：匪～。暴～。赌～。叛～。剥夺犯人自由的刑法：～刑。"
   },
   {
     char: "得",
@@ -31008,7 +31908,9 @@ const t = [
     mark: "ㄉㄜˊ",
     tradition: "得",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "de",
+    explain: "得到（跟“失”相对）：取～。～益。不入虎穴，焉～虎子。这件事办成了你也会～些好处。演算产生结果：二三～六。五减一～四。适合：～用。～体。得意：自～。完成：饭～了。衣服还没有做～。用于结束谈话的时候，表示同意或禁止：～，就这么办。～了，别说了。用于情况不如人意的时候，表示无可奈何：～，这一张又画坏了!助动词。用在别的动词前，表示许可（多见于法令和公文）：这笔钱非经批准不～擅自动用。用在别的动词前，表示可能这样（多用于否定式）：水渠昨天刚动手挖，没有三天不～完。"
   },
   {
     char: "徘",
@@ -31021,7 +31923,9 @@ const t = [
     mark: "ㄆㄞˊ",
     tradition: "徘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pai",
+    explain: "〔～徊〕ａ．来回地走，如“他在那里～徊了很久”；ｂ．犹疑不决，如“左右～徊”。"
   },
   {
     char: "徙",
@@ -31034,7 +31938,9 @@ const t = [
     mark: "ㄒㄧˇ",
     tradition: "徙",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xi",
+    explain: "迁移：迁～。～居（搬家）。调动官职。"
   },
   {
     char: "御",
@@ -31047,7 +31953,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "禦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "驾驭车马；赶车：～者。封建社会指上级对下级的管理或支配：～下。～众。封建社会指与皇帝有关的：～赐。～前。告～状。抵挡：防～。～寒。～敌。"
   },
   {
     char: "循",
@@ -31060,7 +31968,9 @@ const t = [
     mark: "ㄒㄩㄣˊ",
     tradition: "循",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xun",
+    explain: "遵守；依照；沿袭：遵～。因～。～例。～规蹈矩。"
   },
   {
     char: "微",
@@ -31073,7 +31983,9 @@ const t = [
     mark: "ㄨㄟ",
     tradition: "微",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "wei",
+    explain: "细小；轻微：细～。～风。谨小慎～。相差甚～。（某些计量单位的）百万分之一：～米。～安。～法。衰落：衰～。精深奥妙：～妙。～言大义。稍微；略微：～感不适。面色～红。"
   },
   {
     char: "德",
@@ -31086,7 +31998,9 @@ const t = [
     mark: "ㄉㄜˊ",
     tradition: "德",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "de",
+    explain: "道德，品行；特指好的品行：～育。美～。～才兼备。心意；志向：同心同～。离心离～。恩惠；好处：感恩戴～。德国的简称。"
   },
   {
     char: "徽",
@@ -31099,7 +32013,9 @@ const t = [
     mark: "ㄏㄨㄟ",
     tradition: "徽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hui",
+    explain: "表示某个集体的标志；符号：国～。团～。校～。～章。美好的：～号。指徽州（旧府名，府治在今安徽歙县）：～墨。～商。"
   },
   {
     char: "心",
@@ -31108,11 +32024,13 @@ const t = [
     radical: "心",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄣ",
     tradition: "心",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "人和高等动物身体内推动血液循环的器官。人的心在胸腔的中部，稍偏左方，呈圆锥形，大小约跟本人的拳头相等，内部有四个空腔，上部两个是心房，下部两个是心室。心房和心室的舒张和收缩推动血液循环全身。也叫心脏。通常也指思想的器官和思想、感情等：～思。～得。用～。谈～。一～一意。你～想到哪里去了?中心；中央的部分：江～。圆～。重～。二十八宿之一。姓。"
   },
   {
     char: "必",
@@ -31125,7 +32043,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "必",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "必定；必然：我明天三点钟～到。不战则已，战则～胜。必须；一定要：事～躬亲。事物的存在和发展，～有一定的条件。姓。"
   },
   {
     char: "忆",
@@ -31138,7 +32058,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "憶",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "回想：～苦思甜。记得：记～犹新。"
   },
   {
     char: "忌",
@@ -31151,7 +32073,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "忌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "忌妒：～刻。猜～。怕：顾～。～惮。认为不适宜而避免：～嘴。～生冷。戒除：～烟。～酒。"
   },
   {
     char: "忍",
@@ -31164,7 +32088,9 @@ const t = [
     mark: "ㄖㄣˇ",
     tradition: "忍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ren",
+    explain: "忍耐；忍受：～痛。狠心；硬着心肠：～心。残～。"
   },
   {
     char: "志",
@@ -31177,7 +32103,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "志",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "志向；志愿：立～。得～。～同道合。志气；意志：人穷～不短。姓。称轻重；量长短、多少：用秤～～。拿碗～一～。记：～喜。～哀。永～不忘。文字记录：杂～。县～。《三国～》。记号：标～。"
   },
   {
     char: "忘",
@@ -31190,7 +32118,9 @@ const t = [
     mark: "ㄨㄤˋ",
     tradition: "忘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wang",
+    explain: "忘记：喝水不～掘井人。这件事我一辈子也～不了。"
   },
   {
     char: "忙",
@@ -31203,7 +32133,9 @@ const t = [
     mark: "ㄇㄤˊ",
     tradition: "忙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mang",
+    explain: "事情多，不得空（跟“闲”相对）：繁～。这几天很～。～里偷闲。急迫不停地、加紧地做：你近来～些什么?。他一个人～不过来。"
   },
   {
     char: "忠",
@@ -31216,7 +32148,9 @@ const t = [
     mark: "ㄓㄨㄥ",
     tradition: "忠",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhong",
+    explain: "忠诚：～心。～言。效～。姓。"
   },
   {
     char: "忧",
@@ -31229,7 +32163,9 @@ const t = [
     mark: "ㄧㄡ",
     tradition: "憂",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "you",
+    explain: "忧愁：～闷。～伤。使人忧愁的事：～患。高枕无～。担心；忧虑：杞人～天。～国～民。指父母的丧事：丁～。姓。"
   },
   {
     char: "快",
@@ -31242,7 +32178,9 @@ const t = [
     mark: "ㄎㄨㄞˋ",
     tradition: "快",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuai",
+    explain: "速度高；走路、做事等费的时间短（跟“慢”相对）：～车。～步。又～又好。他进步很～。快慢的程度：这种汽车在柏油路上能跑多～?赶快：～来帮忙。～送医院抢救。快要；将要：你再等一会儿，他～回来了。他从事教育工作～四十年了。灵敏：脑子～。眼疾手～。（刀、剪、斧子等）锋利（跟“钝”相对）：菜刀不～了，你去磨一磨。爽快；痛快；直截了当：～人～语。愉快；高兴；舒服：～感。拍手称～。大～人心。旧时指专管缉捕的差役：捕～。马～。姓。"
   },
   {
     char: "忱",
@@ -31255,7 +32193,9 @@ const t = [
     mark: "ㄔㄣˊ",
     tradition: "忱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chen",
+    explain: "情意：热～。谢～。略表微～。姓。"
   },
   {
     char: "念",
@@ -31268,7 +32208,9 @@ const t = [
     mark: "ㄋㄧㄢˋ",
     tradition: "念",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nian",
+    explain: "惦记，常常想：惦～。怀～。～头（思想、想法）。悼～。～旧。～物。心中的打算，想法，看法：意～。杂～。信～。说，读，诵读：～白（戏剧道白）。～叨。～经。～书。“廿”的大写。姓。"
   },
   {
     char: "忽",
@@ -31281,7 +32223,9 @@ const t = [
     mark: "ㄏㄨ",
     tradition: "忽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hu",
+    explain: "不注意；不重视：～略。～视。疏～。姓。忽而：天气～冷～热。油灯被风吹得～明～暗。计量单位名称。a）长度，10忽等于1丝。b）质量或重量，10忽等于1丝。"
   },
   {
     char: "忿",
@@ -31294,7 +32238,9 @@ const t = [
     mark: "ㄈㄣˋ",
     tradition: "忿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fen",
+    explain: "同“愤”。见〖不忿〗、"
   },
   {
     char: "怀",
@@ -31307,7 +32253,9 @@ const t = [
     mark: "ㄏㄨㄞˊ",
     tradition: "懷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huai",
+    explain: "1.胸部或胸前：掩着～。小孩儿睡在妈妈～里。2.心怀；胸怀：壮～。襟～。3.思念；怀念：～乡。～友。～古。4.腹中有（胎）：～胎。～孕。5.心里存有：～恨。不～好意。少（shào）～大志。6.姓。"
   },
   {
     char: "态",
@@ -31320,7 +32268,9 @@ const t = [
     mark: "ㄊㄞˋ",
     tradition: "態",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tai",
+    explain: "人的姿容、体态：姿～。事物的情状、样子：变～。状～。事～。一种语法范畴。多指句子中动词所表示的动作跟主语所表示的事物之间的关系，如主动、被动等。"
   },
   {
     char: "怎",
@@ -31333,7 +32283,9 @@ const t = [
     mark: "ㄗㄣˇ",
     tradition: "怎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zen",
+    explain: "疑问代词。怎么：你～不早说呀?。任务完不成，我～能不着急呢?"
   },
   {
     char: "怒",
@@ -31346,7 +32298,9 @@ const t = [
     mark: "ㄋㄩˋ",
     tradition: "怒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nu",
+    explain: "生气；气愤：发～。恼～。盛大：～潮。狂风～号。山花～放。"
   },
   {
     char: "怔",
@@ -31359,7 +32313,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "怔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "[怔忡]中医指心悸，患者感到心脏跳动得很厉害。[怔忪]惊惧。"
   },
   {
     char: "怕",
@@ -31372,20 +32328,9 @@ const t = [
     mark: "ㄆㄚˋ",
     tradition: "怕",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "怖",
-    spell: "bù",
-    stroke: "8",
-    radical: "忄",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄨˋ",
-    tradition: "怖",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pa",
+    explain: "害怕；畏惧：老鼠～猫。任何困难都不～。禁受不住：瓷器～摔。担心：他～你不知道，要我告诉你一声。表示估计，有时还含有忧虑、担心的意思：这个瓜～有十几斤吧。如果不采取果断措施，～要出大问题。"
   },
   {
     char: "怜",
@@ -31398,7 +32343,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "憐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "怜悯：可～。～惜。同病相～。爱：～爱。爱～。"
   },
   {
     char: "思",
@@ -31407,11 +32354,13 @@ const t = [
     radical: "田",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄞ",
     tradition: "思",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "si",
+    explain: "→于思"
   },
   {
     char: "怠",
@@ -31424,7 +32373,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "怠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "懒散；松懈：～惰。懈～。轻慢；不恭敬：～慢。"
   },
   {
     char: "急",
@@ -31437,7 +32388,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "急",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "急躁；着急：～性子。～着赶路。使着急：眼看要开演了，小王还不来，真～人。匆促；迅速。与“缓”相对：～促。水流很～。迫切；情况严重：～事。情况紧～。紧急严重的事情：救～。当务之～。热心做；热心帮助：～公好义。～人之难。"
   },
   {
     char: "性",
@@ -31450,20 +32403,9 @@ const t = [
     mark: "ㄒㄧㄥˋ",
     tradition: "性",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "怨",
-    spell: "yuàn",
-    stroke: "9",
-    radical: "心",
-    struct: "上下结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄩㄢˋ",
-    tradition: "怨",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xing",
+    explain: "性格：个～。天～。耐～。物质所具有的性能；物质因含有某种成分而产生的性质：黏～。弹～。药～。碱～。油～。后缀，加在名词、动词或形容词之后构成抽象名词或属性词，表示事物的某种性质或性能：党～。纪律～。创造～。适应～。优越～。普遍～。先天～。流行～。有关生物的生殖或性欲的：～器官。～行为。～生活。～的知识。性别：男～。女～。雄～。雌～。表示名词（以及代词、形容词）的类别的语法范畴。语法上的性跟事物的自然性别有时有关，有时无关。如俄语名词有阳、阴、中三性。"
   },
   {
     char: "怪",
@@ -31476,7 +32418,9 @@ const t = [
     mark: "ㄍㄨㄞˋ",
     tradition: "怪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guai",
+    explain: "奇怪：～事。古～。埋怨；责备：这事不能～他。副词。非常；很：～好听的。神话传说或迷信中的怪物、妖魔。"
   },
   {
     char: "怯",
@@ -31489,7 +32433,9 @@ const t = [
     mark: "ㄑㄧㄝˋ",
     tradition: "怯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qie",
+    explain: "胆小；害怕：胆～。～场。北京人贬称外地方音（指北方各省）：他说话有点儿～。不大方，不合时；俗气：这两种颜色配起来显得～。缺乏知识；外行：露～。"
   },
   {
     char: "总",
@@ -31498,11 +32444,13 @@ const t = [
     radical: "心",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄗㄨㄥˇ",
     tradition: "總",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zong",
+    explain: "总括；汇集：～之。汇～。～其成。～起来说。把两笔账～到一块儿。全部的；全面的：～账。～动员。～攻击。～罢工。～的情况对我们非常有利。概括全部的；为首的；领导的：～纲。～则。～店。～工会。～路线。～司令。～书记。一直；一向：天～不放晴。晚饭后他～是到湖边散步。毕竟；总归：冬天～要过去，春天～会来临。小孩子～是小孩子，哪能像大人那样有力气。"
   },
   {
     char: "恃",
@@ -31515,7 +32463,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "恃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "依赖；凭仗：有～无恐。"
   },
   {
     char: "恋",
@@ -31528,7 +32478,9 @@ const t = [
     mark: "ㄌㄧㄢˋ",
     tradition: "戀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lian",
+    explain: "1.恋爱：初～。失～。～人。2.想念不忘；不忍分离：留～。～家。～～不舍。3.姓。"
   },
   {
     char: "恍",
@@ -31541,7 +32493,9 @@ const t = [
     mark: "ㄏㄨㄤˇ",
     tradition: "恍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "huang",
+    explain: "恍然：～悟。仿佛（与“如、若”等连用）：～如梦境。～如隔世。～若置身其间。"
   },
   {
     char: "恐",
@@ -31554,7 +32508,9 @@ const t = [
     mark: "ㄎㄨㄥˇ",
     tradition: "恐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kong",
+    explain: "害怕；畏惧：～慌。惊～。有恃无～。诚惶诚～。使害怕：～吓。恐怕：～难胜任。他不出席～有原因。"
   },
   {
     char: "恒",
@@ -31567,7 +32523,9 @@ const t = [
     mark: "ㄏㄥˊ",
     tradition: "恒",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "heng",
+    explain: "永久；持久：永～。～心。恒心：有～。持之以～。平常；经常：～态。～言。人之～情。姓。"
   },
   {
     char: "恕",
@@ -31580,7 +32538,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "恕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "以仁爱的心待人；用自己的心推想别人的心：忠～。～道。不计较（别人的）过错；原谅：宽～。饶～。～罪。客套话，请对方不要计较：～不招待。～难从命。"
   },
   {
     char: "恢",
@@ -31593,7 +32553,9 @@ const t = [
     mark: "ㄏㄨㄟ",
     tradition: "恢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hui",
+    explain: "广大；宽广：～弘。"
   },
   {
     char: "恤",
@@ -31606,20 +32568,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "恤",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "恨",
-    spell: "hèn",
-    stroke: "9",
-    radical: "忄",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄣˋ",
-    tradition: "恨",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "同情；怜悯：体～。救济：抚～。忧虑。"
   },
   {
     char: "恩",
@@ -31632,7 +32583,9 @@ const t = [
     mark: "ㄣ",
     tradition: "恩",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "en",
+    explain: "恩惠：～德。～深似海。他对我有～。（Ēn）姓。"
   },
   {
     char: "恬",
@@ -31645,7 +32598,9 @@ const t = [
     mark: "ㄊㄧㄢˊ",
     tradition: "恬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tian",
+    explain: "安静：～适。毫不动心；安然；不在乎：～不知耻。"
   },
   {
     char: "恭",
@@ -31658,7 +32613,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "恭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "恭敬：～候。～贺。洗耳～听。姓。"
   },
   {
     char: "息",
@@ -31667,11 +32624,13 @@ const t = [
     radical: "自",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧ",
     tradition: "息",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "呼吸时进出的气：喘～。鼻～。一～尚存，此志不懈。消息：信～。停止：～怒。～兵。自强不～。偃旗～鼓。生命不～，战斗不止。休息：歇～。作～时间表。滋生；繁殖：蕃～。生～。利钱；利息：年～。月～。还本付～。指子女：子～。姓。"
   },
   {
     char: "恰",
@@ -31684,7 +32643,9 @@ const t = [
     mark: "ㄑㄧㄚˋ",
     tradition: "恰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qia",
+    explain: "适当；合适：～当。副词。正；刚刚：～巧。～到好处。"
   },
   {
     char: "恳",
@@ -31697,20 +32658,9 @@ const t = [
     mark: "ㄎㄣˇ",
     tradition: "懇",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "恶",
-    spell: "è",
-    stroke: "10",
-    radical: "心",
-    struct: "上下结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄜˊ",
-    tradition: "惡、噁",
-    sex: "",
-    tone: 4
+    tone: 3,
+    pinyin: "ken",
+    explain: "真诚；诚恳：～求。～托。～谈。勤～。请求：转～。敬～。"
   },
   {
     char: "恼",
@@ -31723,7 +32673,9 @@ const t = [
     mark: "ㄋㄠˇ",
     tradition: "惱",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nao",
+    explain: "生气；忿恨：～怒。～恨。烦闷：苦～。"
   },
   {
     char: "悄",
@@ -31736,7 +32688,9 @@ const t = [
     mark: "ㄑㄧㄠˇ",
     tradition: "悄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiao",
+    explain: "〔悄悄〕没有声响或声音很低：静～。偷偷；（行动）不让人知道。"
   },
   {
     char: "悉",
@@ -31749,7 +32703,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "悉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "知道：熟～。知～。尽，全：～力。～数归公。"
   },
   {
     char: "悍",
@@ -31762,7 +32718,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "悍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "勇猛：强～。剽～。～将。凶狠；蛮横：凶～。"
   },
   {
     char: "悔",
@@ -31775,7 +32733,9 @@ const t = [
     mark: "ㄏㄨㄟˇ",
     tradition: "悔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "hui",
+    explain: "觉悟到自己过去做得不对：后～。～过。古指灾祸。"
   },
   {
     char: "悟",
@@ -31788,7 +32748,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "悟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "了解；领会；觉醒：觉～。若有所～。恍然大～。～出一个道理。"
   },
   {
     char: "悠",
@@ -31801,7 +32763,9 @@ const t = [
     mark: "ㄧㄡ",
     tradition: "悠",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "you",
+    explain: "久；远：～久。～扬。闲适；闲散：～闲。～然。悠荡：站在秋千上来回～。他抓住杠子，一～就上去了。"
   },
   {
     char: "患",
@@ -31814,7 +32778,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "患",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "祸害；灾难：～难。水～。防～未然。忧虑：忧～。～得～失。害（病）：～病。～者。"
   },
   {
     char: "悦",
@@ -31827,7 +32793,9 @@ const t = [
     mark: "ㄩㄝˋ",
     tradition: "悦",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "高兴；愉快：喜～。不～。和颜～色。使愉快：～耳。～目。姓。"
   },
   {
     char: "您",
@@ -31840,7 +32808,9 @@ const t = [
     mark: "ㄋㄧㄣˊ",
     tradition: "您",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nin",
+    explain: "人称代词。你；你们（含敬意）：老师，～早!。～二位想吃点儿什么?"
   },
   {
     char: "悬",
@@ -31853,7 +32823,9 @@ const t = [
     mark: "ㄒㄩㄢˊ",
     tradition: "懸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xuan",
+    explain: "吊、挂在空中：～空。没着落；没结果：～案。距离远：～殊。〈方〉危险：这件事真～。牵挂：～念。"
   },
   {
     char: "悯",
@@ -31866,20 +32838,9 @@ const t = [
     mark: "ㄇㄧㄣˇ",
     tradition: "憫",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "悲",
-    spell: "bēi",
-    stroke: "12",
-    radical: "非",
-    struct: "上下结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄟ",
-    tradition: "悲",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "min",
+    explain: "怜悯：其情可～。忧愁：～然涕下。"
   },
   {
     char: "悴",
@@ -31892,7 +32853,9 @@ const t = [
     mark: "ㄘㄨㄟˋ",
     tradition: "悴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cui",
+    explain: "忧。憔悴：前荣后～。"
   },
   {
     char: "悼",
@@ -31905,7 +32868,9 @@ const t = [
     mark: "ㄉㄠˋ",
     tradition: "悼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dao",
+    explain: "悼念：追～。哀～。～亡。～词。"
   },
   {
     char: "情",
@@ -31918,7 +32883,9 @@ const t = [
     mark: "ㄑㄧㄥˊ",
     tradition: "情",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qing",
+    explain: "感情：热～。有～。无～。温～。情面：人～。讲～。托～。求～。爱情：～书。～话。谈～。情欲；性欲：春～。催～。发～期。情形；情况：病～。军～。实～。灾～。情理；道理：合～合理。不～之请。"
   },
   {
     char: "惊",
@@ -31927,11 +32894,13 @@ const t = [
     radical: "忄",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄥ",
     tradition: "驚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "害怕；精神受到刺激，感到不安：～慌。吃～。惊动：打草～蛇。骡、马等受到突然刺激后狂奔起来：马～了。"
   },
   {
     char: "惋",
@@ -31944,7 +32913,9 @@ const t = [
     mark: "ㄨㄢˇ",
     tradition: "惋",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wan",
+    explain: "对不幸或意外的事情表示遗憾、同情、可惜：叹～。"
   },
   {
     char: "惑",
@@ -31957,7 +32928,9 @@ const t = [
     mark: "ㄏㄨㄛˋ",
     tradition: "惑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huo",
+    explain: "疑惑；迷惑：惶～。大～不解。智者不～。使迷惑：～乱。～人耳目。谣言～众。"
   },
   {
     char: "惕",
@@ -31970,7 +32943,9 @@ const t = [
     mark: "ㄊㄧˋ",
     tradition: "惕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ti",
+    explain: "小心：警～。害怕：怵（chù）～。"
   },
   {
     char: "惜",
@@ -31983,7 +32958,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "惜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "爱惜：珍～。～寸阴。～墨如金。可惜；惋惜：痛～。吝惜；舍不得：～别。～力。不～工本。"
   },
   {
     char: "惠",
@@ -31996,7 +32973,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "惠",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "1.给予的或受到的好处；恩惠：小恩小～。施～于人。受～无穷。2.给人好处：平等互～。3.敬辞，用于对方对待自己的行动：～临。～顾。～存。4.又同“慧”。"
   },
   {
     char: "惦",
@@ -32009,7 +32988,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "惦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "挂念：～记。老师傅虽然退休了，但心里总～着厂里的工作。"
   },
   {
     char: "惧",
@@ -32022,20 +33003,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "懼",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "惨",
-    spell: "cǎn",
-    stroke: "11",
-    radical: "忄",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄘㄢˇ",
-    tradition: "慘",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "ju",
+    explain: "害怕；恐惧：畏～。毫无所～。连我也～他三分。"
   },
   {
     char: "惩",
@@ -32048,7 +33018,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "懲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "处罚：～罚。～一儆百。～恶扬善。警戒：～前毖后。"
   },
   {
     char: "惫",
@@ -32061,7 +33033,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "惫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "（旧读bài）极端疲乏：疲～。"
   },
   {
     char: "惭",
@@ -32074,7 +33048,9 @@ const t = [
     mark: "ㄘㄢˊ",
     tradition: "慚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "can",
+    explain: "惭愧：羞～。大言不～。自～形秽。"
   },
   {
     char: "惯",
@@ -32087,20 +33063,9 @@ const t = [
     mark: "ㄍㄨㄢˋ",
     tradition: "慣",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "惰",
-    spell: "duò",
-    stroke: "12",
-    radical: "忄",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄉㄨㄛˋ",
-    tradition: "惰",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guan",
+    explain: "习以为常，积久成性；习惯：我劳动～了，不干活就不舒服。纵容（子女等）养成不良习惯或作风：娇生～养。不能～着孩子。"
   },
   {
     char: "想",
@@ -32113,7 +33078,9 @@ const t = [
     mark: "ㄒㄧㄤˇ",
     tradition: "想",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xiang",
+    explain: "思考；动脑筋：敢～敢做。回忆：放在什么地方，我一时～不起来啦。怀念；惦记：母亲～着远行的孩子。希望；打算：他～上北京。预料；推测：没～到情况这么复杂。"
   },
   {
     char: "惶",
@@ -32126,7 +33093,9 @@ const t = [
     mark: "ㄏㄨㄤˊ",
     tradition: "惶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "恐惧：～恐。惊～。"
   },
   {
     char: "惹",
@@ -32139,7 +33108,9 @@ const t = [
     mark: "ㄖㄜˇ",
     tradition: "惹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "re",
+    explain: "招引；引起（不好的事情）：～事。～祸。～麻烦。（言语、行动）触动对方：不要把他～翻了。这人脾气大，不好～。（人或事物的特点）引起爱憎等的反应：～人注意。～人讨厌。一句话把大家～得哈哈大笑。"
   },
   {
     char: "愁",
@@ -32152,7 +33123,9 @@ const t = [
     mark: "ㄔㄡˊ",
     tradition: "愁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chou",
+    explain: "忧虑：发～。不～吃，不～穿。忧伤的情绪：乡～。"
   },
   {
     char: "愈",
@@ -32165,7 +33138,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "愈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "（病）好：痊～。病～。较好；胜过：彼～于此。叠用，跟“越…越…”相同：山路～走～陡，而风景～来～奇。～是情况紧急，～是需要沉着冷静。姓。"
   },
   {
     char: "愉",
@@ -32178,7 +33153,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "愉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "快乐、高兴。  【组词】：愉快、欢愉"
   },
   {
     char: "意",
@@ -32191,7 +33168,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "意",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "意思：来～。愿望：满～。料想：出其不～。事物流露的情态：春～。意大利的简称。"
   },
   {
     char: "愕",
@@ -32204,20 +33183,9 @@ const t = [
     mark: "ㄜˇ",
     tradition: "愕",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "愚",
-    spell: "yú",
-    stroke: "13",
-    radical: "心",
-    struct: "上下结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄩˊ",
-    tradition: "愚",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "e",
+    explain: "惊讶；发愣：～然（吃惊的样子）。"
   },
   {
     char: "感",
@@ -32230,7 +33198,9 @@ const t = [
     mark: "ㄍㄢˇ",
     tradition: "感",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gan",
+    explain: "感动：～人肺腑。深有所～。对别人的好意怀着谢意：～谢。～恩。～激。中医指感受风寒：外～内伤。感觉；情感；感想：美～。好～。自豪～。亲切之～。观～。百～交集。（摄影胶片、晒图纸等）接触光线而发生变化：～光。"
   },
   {
     char: "愤",
@@ -32243,7 +33213,9 @@ const t = [
     mark: "ㄈㄣˋ",
     tradition: "憤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fen",
+    explain: "因为不满意而感情激动；发怒：气～。义～。公～。～世嫉俗。"
   },
   {
     char: "愧",
@@ -32256,7 +33228,9 @@ const t = [
     mark: "ㄎㄨㄟˋ",
     tradition: "愧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kui",
+    explain: "惭愧：羞～。问心无～。～不敢当（感到惭愧，承当不起）。"
   },
   {
     char: "愿",
@@ -32269,7 +33243,9 @@ const t = [
     mark: "ㄩㄢˋ",
     tradition: "願",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yuan",
+    explain: "意志；希望：心～。～望。肯；乐意：情～。自～。祈求神佛时许下的酬谢：许～。还～。谨慎老实：谨～。"
   },
   {
     char: "慈",
@@ -32282,7 +33258,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "慈",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "和善：～母。心～手软。（上对下）疼爱：敬老～幼。指母亲：家～。姓。"
   },
   {
     char: "慌",
@@ -32295,7 +33273,9 @@ const t = [
     mark: "ㄏㄨㄤˇ",
     tradition: "慌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "huang",
+    explain: "急；不沉着：～张。～忙。恐惧；不安：惊～。心～。表示难以忍受：闷得～。"
   },
   {
     char: "慎",
@@ -32308,7 +33288,9 @@ const t = [
     mark: "ㄕㄣˋ",
     tradition: "慎",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shen",
+    explain: "注意；小心：谨～。不～。～重。"
   },
   {
     char: "慕",
@@ -32321,7 +33303,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "慕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "钦佩；羡慕：～名。仰～。依恋；思恋：爱～。思～。"
   },
   {
     char: "慢",
@@ -32334,7 +33318,9 @@ const t = [
     mark: "ㄇㄢˋ",
     tradition: "慢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "man",
+    explain: "速度低；走路、做事等费的时间长（跟“快”相对）：～车。～走。～手～脚。你走～一点儿，等着他。从缓：且～。～点儿告诉他，等两天再说。莫；不要：～道。～说。姓。态度冷淡，没有礼貌：傲～。怠～。"
   },
   {
     char: "慧",
@@ -32347,7 +33333,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "慧",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "聪明：智～。聪～。～心。姓。"
   },
   {
     char: "慨",
@@ -32360,7 +33348,9 @@ const t = [
     mark: "ㄎㄞˇ",
     tradition: "慨",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kai",
+    explain: "气忿：愤～。感慨：～叹。慷慨；不吝惜：～允。"
   },
   {
     char: "慰",
@@ -32373,7 +33363,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "慰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "使人心情安适：～劳。～问。～唁。心安：欣～。得信甚～。"
   },
   {
     char: "慷",
@@ -32386,33 +33378,9 @@ const t = [
     mark: "ㄎㄤ",
     tradition: "慷",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "憋",
-    spell: "biē",
-    stroke: "15",
-    radical: "心",
-    struct: "上下结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄧㄝ",
-    tradition: "憋",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "憎",
-    spell: "zēng",
-    stroke: "15",
-    radical: "忄",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄗㄥ",
-    tradition: "憎",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kang",
+    explain: "〔～慨〕ａ．情绪激昂，如“～慨激昂”；ｂ．待人热诚，愿意用财物帮助人，如“为人～慨大方”。"
   },
   {
     char: "憔",
@@ -32425,7 +33393,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "憔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiao",
+    explain: "形容人瘦弱，面色不好看：她病了一场，显得～多了。"
   },
   {
     char: "憨",
@@ -32438,7 +33408,9 @@ const t = [
     mark: "ㄏㄢ",
     tradition: "憨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "han",
+    explain: "傻；痴呆：～痴。～笑。又～又傻。朴实；天真：～直。～厚。～态可掬。姓。"
   },
   {
     char: "憾",
@@ -32451,7 +33423,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "憾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "悔恨失望，心中感到不满意：遗～。引以为～。"
   },
   {
     char: "懂",
@@ -32464,7 +33438,9 @@ const t = [
     mark: "ㄉㄨㄥˇ",
     tradition: "懂",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dong",
+    explain: "知道；了解：～事。～行。～英语。他的话我听～了。"
   },
   {
     char: "懈",
@@ -32477,7 +33453,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "懈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "松懈：～怠。坚持不～。"
   },
   {
     char: "懊",
@@ -32490,33 +33468,9 @@ const t = [
     mark: "ㄠˋ",
     tradition: "懊",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "懒",
-    spell: "lǎn",
-    stroke: "16",
-    radical: "忄",
-    struct: "左中右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄢˇ",
-    tradition: "懶",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "懦",
-    spell: "nuò",
-    stroke: "17",
-    radical: "忄",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄋㄨㄛˋ",
-    tradition: "懦",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ao",
+    explain: "烦恼；悔恨：～恨。～恼。"
   },
   {
     char: "戈",
@@ -32525,11 +33479,13 @@ const t = [
     radical: "戈",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄍㄜ",
     tradition: "戈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "古代兵器，横刃，用青铜或铁制成，装有长柄。姓。"
   },
   {
     char: "戏",
@@ -32538,11 +33494,13 @@ const t = [
     radical: "又",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄏㄨ",
     tradition: "戲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xi",
+    explain: "玩耍、嬉游。嬉戏、游戏开玩笑、嘲弄。戏弄、戏言、戏谑一种利用言语、表情、歌舞等方式以传达情意的表演。演戏、唱戏、歌仔戏"
   },
   {
     char: "成",
@@ -32555,7 +33513,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "成",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "完成；成功（跟“败”相对）：大功告～。事情～了。成全：～人之美。玉～其事。成为；变为：百炼～钢。雪化～水。成果；成就：坐享其～。一事无～。生物生长到定形、成熟的阶段：～虫。～人。已定的；定形的；现成的：～规。～见。～例。～药。表示达到一个单位（强调数量多或时间长）：～批生产。～千～万。～年累月。水果～箱买便宜。表示答应、许可：～!就这么办吧。表示有能力：他可真～!什么都难不住他。姓。十分之一叫一成：九～金。村里今年收的庄稼比去年增加两～。"
   },
   {
     char: "我",
@@ -32568,7 +33528,9 @@ const t = [
     mark: "ㄨㄛˇ",
     tradition: "我",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wo",
+    explain: "自己：自～。忘～精神。"
   },
   {
     char: "戒",
@@ -32581,7 +33543,9 @@ const t = [
     mark: "ㄐㄧㄝˋ",
     tradition: "戒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "防备；警惕：～心。～备。～骄～躁。同“诫”。戒除：～烟。～毒。他把酒～了。指禁止做的事情：开～。杀～。佛教戒律：受～。戒指：钻～。姓。"
   },
   {
     char: "或",
@@ -32594,7 +33558,9 @@ const t = [
     mark: "ㄏㄨㄛˋ",
     tradition: "或",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huo",
+    explain: "也许，有时，表示不定的词：～许。～者（a.也许；b.连词，用在叙述句里，表示选择关系。均可单用“或”）。～然。～则。某人，有的人：～告之曰。稍微：不可～缓。不可～忽。不可～缺。"
   },
   {
     char: "战",
@@ -32607,7 +33573,9 @@ const t = [
     mark: "ㄓㄢˋ",
     tradition: "戰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhan",
+    explain: "战争；战斗：宣～。停～。持久～。商～。进行战争或战斗：～胜。百～百胜。愈～愈勇。姓。发抖：寒～。打～。胆～心惊。"
   },
   {
     char: "戚",
@@ -32620,7 +33588,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "戚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "亲戚：～谊（亲戚关系）。～友（亲戚朋友）。姓。忧愁；悲哀：哀～。休～相关。古代兵器，像斧。"
   },
   {
     char: "截",
@@ -32633,7 +33603,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "截",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "切断；割断（长条形的东西）：～头去尾。把木条～成两段。段：一～儿木头。话说了半～儿。阻拦：～留。快把马～住，别让它跑了。截止：～至。姓。"
   },
   {
     char: "戳",
@@ -32646,7 +33618,9 @@ const t = [
     mark: "ㄔㄨㄛ",
     tradition: "戳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chuo",
+    explain: "用力使长条形物体的顶端向前触动或穿过另一物体：一～就破。（长条形物体）因猛戳另一物体而本身受伤或损坏：打球～了手。钢笔尖儿～了。竖立；站：把棍子～起来。大伙儿都走了，他一个人还～在那儿。图章：～记。邮～。盖～。"
   },
   {
     char: "戴",
@@ -32659,7 +33633,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "戴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "把东西加在头、脸、颈、胸、臂、手等处：～帽子。～眼镜。～红领巾。～手套。头上顶着；承当着：披星～月。～罪立功。拥护；尊敬：爱～。感～。"
   },
   {
     char: "户",
@@ -32668,11 +33644,13 @@ const t = [
     radical: "户",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄨˋ",
     tradition: "户",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hu",
+    explain: "门：门～。夜不闭～。人家；住户：～籍。专业～。门第：门当～对。户头：存～。账～。开～。用于家庭：全村有好几百～人家。姓。"
   },
   {
     char: "房",
@@ -32685,7 +33663,9 @@ const t = [
     mark: "ㄈㄤˊ",
     tradition: "房",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fang",
+    explain: "房子：一所～。三间～。瓦～。楼～。平～。房间：卧～。客～。书～。厨～。结构和作用像房子的东西：蜂～。莲～（莲蓬）。指家族的分支：长～。堂～。远～。用于妻子、儿媳妇等：两～儿媳妇。二十八宿之一。姓。同“坊”（fáng）。"
   },
   {
     char: "所",
@@ -32698,7 +33678,9 @@ const t = [
     mark: "ㄙㄨㄛˇ",
     tradition: "所",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "suo",
+    explain: "处所：场～。住～。各得其～。明代驻兵的地点，大的叫千户所，小的叫百户所（后来只用于地名）：海阳～（在山东）。前～（在浙江）。后～（在山西）。沙后～（在辽宁）。用作机关或其他办事地方的名称：研究～。派出～。诊疗～。指挥～。招待～。a）用于房屋：这～房子。b）用于学校等：一～医院。两～学校。姓。跟“为”或“被”合用，表示被动：为人～笑。看问题片面，容易被表面现象～迷惑。用在做定语的主谓结构的动词前面，表示中心词是受事：我～认识的人。大家～提的意见。用在“是…的”中的名词、代词和动词之间，强调施事和动作的关系：全国的形势，是同志们～关心的。用在动词前面，跟动词构成体词结构：各尽～能。闻～未闻。"
   },
   {
     char: "扁",
@@ -32711,7 +33693,9 @@ const t = [
     mark: "ㄅㄧㄢˇ",
     tradition: "扁",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bian",
+    explain: "物体宽平而较薄：～平。～圆。"
   },
   {
     char: "扇",
@@ -32724,7 +33708,9 @@ const t = [
     mark: "ㄕㄢˋ",
     tradition: "扇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shan",
+    explain: "扇子。板状或片状的东西：门～。隔～。量词。用于门窗等：一～门。两～窗子。"
   },
   {
     char: "手",
@@ -32733,11 +33719,13 @@ const t = [
     radical: "手",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄡˇ",
     tradition: "手",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shou",
+    explain: "人体上肢前端能拿东西的部分。小巧而便于拿的：～册。～枪。拿着：人～一册。做某种工作或有某种技能的人：炮～。拖拉机～。能～。选～。亲手：～植。～书。指本领、手段等：妙～回春。眼高～低。心狠～辣。"
   },
   {
     char: "才",
@@ -32746,11 +33734,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄘㄞˊ",
     tradition: "纔",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "cai",
+    explain: "才能：德～兼备。多～多艺。这人很有～。有才能的人：干～。奇～。姓。表示以前不久：你怎么～来就要走?表示事情发生得晚或结束得晚：他说星期三动身，到星期五～走。大风到晚上～住了。表示只有在某种条件下然后怎样（前面常常用“只有、必须”或含有这类意思）：只有依靠群众，～能把工作做好。表示发生新情况，本来并不如此：经他解释之后，我～明白是怎么回事。表示数量小，次数少，能力差，程度低等等：这个工厂开办时～几十个工人。别人一天干的活儿他三天～干完。表示强调所说的事（句尾常用“呢”字）：麦子长得～好呢。我～不信呢!"
   },
   {
     char: "扎",
@@ -32763,7 +33753,9 @@ const t = [
     mark: "ㄗㄚ",
     tradition: "扎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zha",
+    explain: "刺：～针。～花。驻、扎：～营。钻：扎猛子。"
   },
   {
     char: "扑",
@@ -32776,7 +33768,9 @@ const t = [
     mark: "ㄆㄨ",
     tradition: "撲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pu",
+    explain: "用力向前冲，使全身突然伏在物体上：孩子高兴得一下～到我怀里来。和风～面。香气～鼻。把全部心力用到（工作、事业等上面）：他一心～在教育事业上。扑打；拍打：～蝇。海鸥～着翅膀，直冲海空。小孩的身上～了一层痱子粉。伏：～在桌上看地图。姓。"
   },
   {
     char: "扒",
@@ -32789,7 +33783,9 @@ const t = [
     mark: "ㄆㄚˊ",
     tradition: "扒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "抓着；用手指紧紧扣住：～着栏杆。刨；挖：～土。剥；脱掉：～羊皮。"
   },
   {
     char: "打",
@@ -32802,7 +33798,9 @@ const t = [
     mark: "ㄉㄚˊ",
     tradition: "打",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "da",
+    explain: "除去：～旁杈。舀取：～水。～粥。买：～油。～酒。～车票。捉（禽兽等）：～鱼。用割、砍等动作来收集：～柴。～草。定出；计算：～草稿。～主意。成本～二百块钱。（21）做；从事：～杂儿。～游击。～埋伏。～前站。（22）做某种游戏：～球。～扑克。～秋千。（23）表示身体上的某些动作：～手势。～哈欠。～嗝儿。～踉跄。～前失。～滚儿。～晃儿（huàngr）。（24）采取某种方式：～官腔。～比喻。～马虎眼。从：～这儿往西，再走三里地就到了。他～门缝里往外看。～今儿起，每天晚上学习一小时。"
   },
   {
     char: "扔",
@@ -32815,7 +33813,9 @@ const t = [
     mark: "ㄖㄥ",
     tradition: "扔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "reng",
+    explain: "挥动手臂，使拿着的东西离开手：～球。～手榴弹。抛弃；丢：这条鱼臭了，把它～了吧。这事他早就～在脖子后边了。"
   },
   {
     char: "托",
@@ -32828,7 +33828,9 @@ const t = [
     mark: "ㄊㄨㄛ",
     tradition: "托",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tuo",
+    explain: "用手掌或器物承举：～着茶盘。某些器物的座子和类似座子的东西：枪～。花～。衬；垫：烘云～月。～上一层纸。请人代办：委～。寄放：～儿所。借故推辞：～词。依赖：～福。压强的非法定计量单位。1托等于133.322帕。"
   },
   {
     char: "扛",
@@ -32841,7 +33843,9 @@ const t = [
     mark: "ㄍㄤ",
     tradition: "扛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "kang",
+    explain: "用肩膀承担物体：～枪。～着锄头。这个任务你一定要～起来。支撑；忍耐：冷得～不住了。"
   },
   {
     char: "扣",
@@ -32854,7 +33858,9 @@ const t = [
     mark: "ㄎㄡˋ",
     tradition: "扣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kou",
+    explain: "用圈、环等东西套住或拢住；把门～上。衣纽：衣～。绳结：绳～儿。把器物口朝下放或覆盖东西：把碗～在桌上。相符，符合：～题（符合题义）。强留：～押。从中减除：～除。～发（fā）。敲击：～人心弦。"
   },
   {
     char: "执",
@@ -32867,7 +33873,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "執",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "拿着；掌握：～笔。～政。坚持；固执：～意不肯。捉住：被～。凭证；单据：～照。回～。执行：～法施令。交谊深厚、志趣相同的朋友：～友。父～。"
   },
   {
     char: "扩",
@@ -32880,7 +33888,9 @@ const t = [
     mark: "ㄎㄨㄛˋ",
     tradition: "擴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuo",
+    explain: "放大；伸张；推广：～音器。～充。～散。"
   },
   {
     char: "扫",
@@ -32893,7 +33903,9 @@ const t = [
     mark: "ㄙㄠˋ",
     tradition: "掃",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "sao",
+    explain: "用笤帚或扫帚除去尘土、垃圾等：～地。～房。除去；消灭：～雷。～盲。很快地横掠过去：～射。～视。全部；所有的：～数归还。"
   },
   {
     char: "扬",
@@ -32906,7 +33918,9 @@ const t = [
     mark: "ㄧㄤˊ",
     tradition: "揚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yang",
+    explain: "高举；向上升：～手。～帆。在空中飘动：飘～。飞～。往上撒：～场。传播出去：宣～。称赞：颂～。表～。指江苏扬州：～剧。"
   },
   {
     char: "扭",
@@ -32919,7 +33933,9 @@ const t = [
     mark: "ㄋㄧㄡˇ",
     tradition: "扭",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "niu",
+    explain: "掉转：～头。拧（nǐng）；拧伤：～开。～了腰。揪住不放：～打。身体摆动：～捏。～秧歌。"
   },
   {
     char: "扮",
@@ -32932,7 +33948,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "扮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ban",
+    explain: "化装成（某种人物）：女～男装。《逼上梁山》里他～林冲。面部表情装成（某种样子）：～鬼脸。"
   },
   {
     char: "扯",
@@ -32945,7 +33963,9 @@ const t = [
     mark: "ㄔㄜˇ",
     tradition: "扯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "che",
+    explain: "拉：拉～。没等他说完～着他就走。～开嗓子喊。撕；撕下：～五尺布。把墙上的旧广告～下来。漫无边际地闲谈：闲～。东拉西～。"
   },
   {
     char: "扰",
@@ -32958,7 +33978,9 @@ const t = [
     mark: "ㄖㄠˇ",
     tradition: "擾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "rao",
+    explain: "扰乱；搅扰：干～。打～。混乱；紊乱：纷～。～攘。客套话，因受人款待而表示客气：叨～。我～了他一顿饭。"
   },
   {
     char: "扳",
@@ -32971,7 +33993,9 @@ const t = [
     mark: "ㄅㄢ",
     tradition: "扳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ban",
+    explain: "使一端固定的东西扭转方向。  【组词】：请将开关把手扳下来。扭转情势。  【组词】：球赛到了第二局，我们终于将失分扳回。"
   },
   {
     char: "扶",
@@ -32984,7 +34008,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "扶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "用手支持使人、物或自己不倒：～犁。～老携幼。～着栏杆。用手帮助躺着或倒下的人坐或立；用手使倒下的东西竖直：～苗。护士～起伤员，给他换药。扶助：～贫。～危济困。救死～伤。姓。"
   },
   {
     char: "批",
@@ -32997,7 +34023,9 @@ const t = [
     mark: "ㄆㄧ",
     tradition: "批",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pi",
+    explain: "用手掌打：～颊（打嘴巴）。刮；削。对下级文件表示意见或对文章予以批评（多指写在原件上）：～示。～改。审～。～公文。批判；批评：～驳。挨了一通～。大量或成批（买卖货物）：～发。～购。指批发或批购：～了点儿货。用于大宗的货物或多数的人：一～纸张。今年第一～到边疆去的同学已经出发。棉麻等未捻成线、绳时的细缕：线～儿。麻～儿。"
   },
   {
     char: "扼",
@@ -33010,7 +34038,9 @@ const t = [
     mark: "ㄜˇ",
     tradition: "扼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "e",
+    explain: "用力掐住；抓住：～死。～腕。把守；控制：～守。～制。"
   },
   {
     char: "找",
@@ -33023,7 +34053,9 @@ const t = [
     mark: "ㄓㄠˇ",
     tradition: "找",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhao",
+    explain: "为了要见到或得到所需求的人或事物而努力：～人。～材料。～出路。钢笔丢了，到处～不着。把超过应收的部分退还；把不足的部分补上：～钱。～齐。"
   },
   {
     char: "承",
@@ -33036,7 +34068,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "承",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "托着；接着：～尘。～重。承担：～印。～制中西服装。客套话，承蒙：昨～热情招待，不胜感激。继续；接续：继～。～上启下。～先启后。接受（命令或吩咐）：秉～。～命。姓。"
   },
   {
     char: "技",
@@ -33049,7 +34083,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "技",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "技能；本领：～术。～巧。绝～。一～之长。黔驴～穷。无所施其～。姓。"
   },
   {
     char: "抄",
@@ -33062,7 +34098,9 @@ const t = [
     mark: "ㄔㄠ",
     tradition: "抄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chao",
+    explain: "誊写：～文件。～稿子。照着别人的作品、作业等写下来当做自己的：～袭。这文章是～人家的。搜查并没收：查～。家产被～。从侧面或较近的小路过去：包～。～近道走。两手在胸前相互地插在袖筒里：～手。抓取；拿：～起一把铁锨就走。"
   },
   {
     char: "把",
@@ -33075,7 +34113,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "把",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ba",
+    explain: "用手握住：～舵。两手～着冲锋枪。从后面用手托起小孩儿两腿，让他大小便：～尿。把持；把揽：要信任群众，不要把一切工作都～着不放手。看守；把守：～大门。～住关口。紧靠：～墙角儿站着。～着胡同口儿有个小饭馆。约束住使不裂开：用铁叶子～住裂缝。给（gěi）车把：那辆车的～折（shé）了。把东西扎在一起的捆子：草～。秫秸～。姓。“把”的宾语都是确定的。b）用“把”的句子，动词后边有附加成分或补语，或前边有“一”等特种状语。但在诗歌戏曲里可以不带：扭转身来～话讲。c）用“把”的句子，动词后头一般不带宾语，但有时带：～衣服撕了个口子。～这两封信贴上邮票发出去。d）用“把”的句子，有时候后面不说出具体的动作，这种句子多半用在表示责怪或不满的场合：我～你个糊涂虫啊!e）近代汉语里“把”曾经有过“拿”的意思，现代方言里还有这种用法（“那个人不住地～眼睛看我”）。加在“百、千、万”和“里、丈、顷、斤、个”等量词后头，表示数量近于这个单位数（前头不能再加数词）：个～月。百～块钱。斤～重。指拜把子的关系：～兄。～嫂。"
   },
   {
     char: "抑",
@@ -33088,7 +34128,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "抑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "向下按；压制：～制。～郁。压～。～强扶弱。～恶扬善。姓。表示选择，相当于“或是”、“还是”：求之欤，～与之欤?表示转折，相当于“可是”、“但是”、“然而”：多则多矣，～君似鼠。表示递进，相当于“而且”：非惟天时，～亦人谋也。"
   },
   {
     char: "抒",
@@ -33101,7 +34143,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "抒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "表达；发表：各～己见。直～胸臆。同“纾”"
   },
   {
     char: "抓",
@@ -33114,7 +34158,9 @@ const t = [
     mark: "ㄓㄨㄚ",
     tradition: "抓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhua",
+    explain: "手指聚拢，使物体固定在手中：一把～住。他～起帽子就往外走。人用指甲或带齿的东西或动物用爪在物体上划过：～痒痒。他手上被猫～破一块皮。捉拿；捕捉：～土匪。老鹰～走了一只小鸡。加强领导，特别着重（某方面）：～重点。他分工～农业。抢着做：三～两～就把工作～完了。吸引（人注意）：这个演员一出场就～住了观众。"
   },
   {
     char: "投",
@@ -33127,7 +34173,9 @@ const t = [
     mark: "ㄊㄡˊ",
     tradition: "投",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tou",
+    explain: "抛，掷，扔（多指有目标的）：～篮。～弹（dàn）。跳进去：～河。自～罗网。放进去，送进去：～入。～资。～标。走向，进入：～宿（找地方住宿）。～奔。～靠。～降。～师（从师学习）。～诉。发向：～射。～影。寄，递送：～递。～稿。合：～合。意气相～。临，在…以前：～明。～暮（天黑以前）。"
   },
   {
     char: "抖",
@@ -33140,7 +34188,9 @@ const t = [
     mark: "ㄉㄡˇ",
     tradition: "抖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dou",
+    explain: "颤动；哆嗦：发～。浑身直～。振动；甩动：～一～马缰绳。～开被窝。（跟“出来”连用）全部倒出；彻底揭露：把他干的那些丑事都～出来。振作；鼓起（精神）：～起精神往前直赶。称人因为有钱有地位等而得意（多含讥讽意）：他如今当了官，～起来了。"
   },
   {
     char: "抗",
@@ -33153,7 +34203,9 @@ const t = [
     mark: "ㄎㄤˋ",
     tradition: "抗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kang",
+    explain: "抵抗；抵挡：顽～。～灾。～日战争。皮大衣旧点儿没关系，只要能挡风～冻就行。拒绝；抗拒：～命。～税。对等：～衡。分庭～礼。姓。"
   },
   {
     char: "折",
@@ -33166,7 +34218,9 @@ const t = [
     mark: "ㄕㄜˊ",
     tradition: "摺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhe",
+    explain: "断（多用于长条形的东西）：树枝～了。桌子腿撞～了。亏损：～本儿。～耗。姓。"
   },
   {
     char: "抚",
@@ -33179,7 +34233,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "撫",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "轻轻地按着：～摩。安慰；慰问：～问。～慰。保护：～育。同“拊”。"
   },
   {
     char: "抛",
@@ -33192,7 +34248,9 @@ const t = [
     mark: "ㄆㄠ",
     tradition: "抛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pao",
+    explain: "扔；投掷：～球。～物线。～砖引玉。丢下：～妻别子。跑到第三圈，他已经把别人远远地～在后面了。暴露：～头露面。抛售：～出股票。"
   },
   {
     char: "抠",
@@ -33205,7 +34263,9 @@ const t = [
     mark: "ㄎㄡ",
     tradition: "摳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kou",
+    explain: "用手指或细小的东西从里面往外挖：把掉在砖缝里的豆粒～出来。雕刻（花纹）：在镜框边上～出花儿来。不必要的深究；向一个狭窄的方面深求：～字眼儿。死～书本儿。吝啬：这个人～得很，一分钱都舍不得花。"
   },
   {
     char: "抡",
@@ -33218,7 +34278,9 @@ const t = [
     mark: "ㄌㄩㄣˊ",
     tradition: "掄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "lun",
+    explain: "挑选；选拔：～材。"
   },
   {
     char: "抢",
@@ -33231,7 +34293,9 @@ const t = [
     mark: "ㄑㄧㄤˇ",
     tradition: "搶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qiang",
+    explain: "夺取。抢劫、抢钱、抢亲　争先、赶紧。抢购、抢修、抢白"
   },
   {
     char: "护",
@@ -33244,7 +34308,9 @@ const t = [
     mark: "ㄏㄨˋ",
     tradition: "護",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hu",
+    explain: "保护；保卫：爱～。～路。～航。～林。袒护；包庇：～短。官官相～。爸爸总是～着弟弟。"
   },
   {
     char: "报",
@@ -33257,7 +34323,9 @@ const t = [
     mark: "ㄅㄠˋ",
     tradition: "報",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bao",
+    explain: "传达；告诉：～告。～名。传达新闻、消息的文字或信号：～纸。捷～。电～。某些刊物：周～。学～。报答；报复：～恩。～仇。～应。"
   },
   {
     char: "披",
@@ -33270,7 +34338,9 @@ const t = [
     mark: "ㄆㄧ",
     tradition: "披",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pi",
+    explain: "覆盖或搭在肩背上：～着斗篷。～星戴月。打开；散开：～卷。纷～。（竹木等）裂开：这根竹竿～了。"
   },
   {
     char: "抬",
@@ -33283,7 +34353,9 @@ const t = [
     mark: "ㄊㄞˊ",
     tradition: "抬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tai",
+    explain: "往上托；举：～手。～起头来。～价。共同用手或肩膀搬东西：～担架。把桌子～过来。指“抬杠”1：他们两人一谈到这个问题，～起来就没完。用于两人抬的东西：十～妆奁。"
   },
   {
     char: "抱",
@@ -33296,7 +34368,9 @@ const t = [
     mark: "ㄅㄠˋ",
     tradition: "抱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bao",
+    explain: "用手臂围住：母亲～着孩子。初次得到（儿子或孙子）：听说你～孙子了。抱养（孩子）：这孩子是～的，不是她生的。结合在一起：大家～成团，就会有力量。心里存着（想法、意见等）：青年人都～着远大的理想。对他的这种决定，许多人～有看法。表示两臂合围的量：一～草。两～粗的大树。孵（卵成雏）：～小鸡儿。～窝。"
   },
   {
     char: "抵",
@@ -33309,7 +34383,9 @@ const t = [
     mark: "ㄉㄧˇ",
     tradition: "抵",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "di",
+    explain: "支撑：～住门别让风刮开。他用手～着下巴颏儿。抵挡；抵抗：～制。抵偿：～命。抵押：用房屋做～。抵消：收支相～。相当；能代替：一个～两个。抵达；到：平安～京。"
   },
   {
     char: "抹",
@@ -33322,7 +34398,9 @@ const t = [
     mark: "ㄇㄚ",
     tradition: "抹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ma",
+    explain: "涂：涂～。～粉（喻美化或掩饰）。～黑（喻丑化）。～子（瓦工用来抹灰泥的器具。亦称“抹刀”）。揩，擦：～拭。哭天～泪。除去，勾掉，不计在内：～煞。轻微的痕迹：“林梢一～青如画”。一～余晖。"
   },
   {
     char: "押",
@@ -33335,20 +34413,9 @@ const t = [
     mark: "ㄧㄚ",
     tradition: "押",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "抽",
-    spell: "chōu",
-    stroke: "8",
-    radical: "扌",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄔㄡ",
-    tradition: "抽",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ya",
+    explain: "把财物交给对方作为保证：抵～。～租。～金。～了五百元钱。暂时把人关起来，不准自由行动：拘～。看～。关～。犯罪嫌疑人被～起来了。跟随着照料或看管：～车。～运。～送。姓。在公文、契约上签字或画符号，作为凭信：～尾。作为凭信而在公文、契约上所签的名字或所画的符号：花～。画～。"
   },
   {
     char: "拂",
@@ -33361,7 +34428,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "拂",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "抹拭。拂泪、拂拭桌椅轻轻掠过、擦过。和风拂过面颊，舒服极了。甩动、抖动。拂袖而去违拗、违逆。拂逆、行拂乱其所为"
   },
   {
     char: "拄",
@@ -33374,7 +34443,9 @@ const t = [
     mark: "ㄓㄨˇ",
     tradition: "拄",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhu",
+    explain: "为了支持身体用棍杖等顶住地面：～着拐棍儿走。"
   },
   {
     char: "担",
@@ -33387,7 +34458,9 @@ const t = [
     mark: "ㄉㄢˋ",
     tradition: "擔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dan",
+    explain: "用肩膀挑：~水、人家两个人抬一筐，他一个人~两筐。担负；承当：承~、分~、把任务~起来。"
   },
   {
     char: "拆",
@@ -33400,7 +34473,9 @@ const t = [
     mark: "ㄘㄚ",
     tradition: "拆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chai",
+    explain: "把组合在一起的东西分开。  【组词】：拆信、拆字、拆卸拆毁。  【组词】：拆墙、拆房子、拆违章建筑"
   },
   {
     char: "拇",
@@ -33413,7 +34488,9 @@ const t = [
     mark: "ㄇㄨˇ",
     tradition: "拇",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mu",
+    explain: "拇指，也叫大拇指。手、脚的大指：～战（喝酒时划拳）。"
   },
   {
     char: "拉",
@@ -33426,7 +34503,9 @@ const t = [
     mark: "ㄌㄚˊ",
     tradition: "拉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "la",
+    explain: "牵引。  【组词】：拉车、拉手、拉绳子　◎使延长。  【组词】：拉长招、邀、找。  【组词】：拉生意、拉广告、拉人开会演奏弦乐器。  【组词】：拉胡琴、拉小提琴攀交、笼络。  【组词】：拉交情、拉关系排泄。  【组词】：拉屎、拉肚子摧折。  【组词】：摧枯拉朽"
   },
   {
     char: "拌",
@@ -33439,7 +34518,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "拌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ban",
+    explain: "搅动使调和。  【组词】：拌匀、拌菜、搅拌争吵、斗嘴。  【组词】：拌嘴"
   },
   {
     char: "拍",
@@ -33452,7 +34533,9 @@ const t = [
     mark: "ㄆㄞ",
     tradition: "拍",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pai",
+    explain: "用手掌打：～击。～掌。～抚。～案叫绝。浪涛冲击：～岸。拍打东西的用具：～子（亦是计算乐音长短的单位）。乐曲的节奏：～节。摄影：～摄。～照。～片子。发出：～发。～电报。阿谀，巴结：～马屁。吹吹～～。"
   },
   {
     char: "拐",
@@ -33465,7 +34548,9 @@ const t = [
     mark: "ㄍㄨㄞˇ",
     tradition: "拐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "guai",
+    explain: "转变方向：那人～进胡同里去了。前面不能通行，～回来吧!弯曲处；角：墙～。门～。瘸：他一～一～地走了过来。说数字时在某些场合用来代替“7”。下肢患病或有残疾的人走路拄的棍子，上端有短横木便于放在腋下拄着走。拐骗：诱～。～款潜逃。"
   },
   {
     char: "拒",
@@ -33478,7 +34563,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "拒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "抵抗；抵挡：抗～。～敌。拒绝：来者不～。～不执行。～谏饰非。"
   },
   {
     char: "拓",
@@ -33487,11 +34574,13 @@ const t = [
     radical: "扌",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄚˋ",
     tradition: "拓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tuo",
+    explain: "开展、开辟。开拓、拓展、拓荒"
   },
   {
     char: "拔",
@@ -33504,7 +34593,9 @@ const t = [
     mark: "ㄅㄚˊ",
     tradition: "拔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ba",
+    explain: "把固定或隐藏在其他物体里的东西往外拉；抽出：～草。～剑。～刺。～了一颗牙。～了祸根。吸出（毒气等）：～毒。～火。～罐子。挑选（多指人才）：选～。向高提：～嗓子。超出；高出：海～。出类～萃。夺取；攻克（据点、城池等）：连～敌军三个据点。把东西放在凉水里使变凉：把西瓜放在冰水里～一～。姓。"
   },
   {
     char: "拖",
@@ -33517,7 +34608,9 @@ const t = [
     mark: "ㄊㄨㄛ",
     tradition: "拖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tuo",
+    explain: "拉着物体使挨着地面或另一物体的表面移动：～船。～地板。火车头～着十二个车皮。在身体后面耷拉着：～着辫子。～着个尾巴。拖延；延续：～时间。这件工作～得太久了。声音～得很长。牵制；牵累：～累。～住敌人。姓。"
   },
   {
     char: "拗",
@@ -33530,7 +34623,9 @@ const t = [
     mark: "ㄠˋ",
     tradition: "拗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ao",
+    explain: "固执；不随和；不驯顺：执～。脾气很～。"
   },
   {
     char: "拘",
@@ -33543,20 +34638,9 @@ const t = [
     mark: "ㄐㄩ",
     tradition: "拘",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "拙",
-    spell: "zhuō",
-    stroke: "8",
-    radical: "扌",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄓㄨㄛ",
-    tradition: "拙",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ju",
+    explain: "逮捕、扣押。  【组词】：拘捕、拘留、拘禁约束、顾忌。  【组词】：不拘小节、无拘无束限定、限制。  【组词】：不拘年龄、多寡不拘死板、固执。  【组词】：拘泥"
   },
   {
     char: "招",
@@ -33569,7 +34653,9 @@ const t = [
     mark: "ㄓㄠ",
     tradition: "招",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhao",
+    explain: "打手势叫人来：～唤。～呼。～手上车。用公开的方式使人来：～集。～收。～纳。～贤。～聘。～兵买马。应接：～待宾客。引来：～惹。～引。～揽。～致。承认自己的罪行：～供。～认。不打自～。同“着”。摇动：～摇（故意张大声势，引人注意）。"
   },
   {
     char: "拜",
@@ -33582,7 +34668,9 @@ const t = [
     mark: "ㄅㄞˋ",
     tradition: "拜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bai",
+    explain: "过去表示敬意的礼节：对～。叩～。跪～。引恭敬地：～托。～访。～望。～请。[礼拜]宗教徒对神敬礼或祷告。转周、星期的别称。行礼祝贺：～年。～寿。用一定的礼节授予某种名义或结成某种关系：～将。～师。"
   },
   {
     char: "拟",
@@ -33595,7 +34683,9 @@ const t = [
     mark: "ㄋㄧˇ",
     tradition: "擬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ni",
+    explain: "起草；设计：～稿。～方案。打算：～采纳。模仿：模～。"
   },
   {
     char: "拢",
@@ -33608,7 +34698,9 @@ const t = [
     mark: "ㄌㄨㄥˇ",
     tradition: "攏",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "long",
+    explain: "合上：他笑得嘴都合不～了。靠近；到达：～岸。靠～。总合：～共。～总。把账～一～。使不松散或不离开；收拢：～音。归～。用绳子把柴火～住。把孩子～在怀里。～住他的心。梳（头发）：她用梳子～了～头发。姓。"
   },
   {
     char: "拣",
@@ -33621,7 +34713,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "揀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "挑选：～选。～择。挑肥～瘦。时间有限，请～要紧的说。同“捡”。"
   },
   {
     char: "拥",
@@ -33634,7 +34728,9 @@ const t = [
     mark: "ㄩㄥ",
     tradition: "擁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yong",
+    explain: "抱：～抱。围着：前呼后～。一群青年工人～着一位老师傅走出来。（人群）挤着走：一～而入。大家都～到前边去了。拥护：～戴。～军优属。拥有：～兵百万。姓。"
   },
   {
     char: "拦",
@@ -33647,7 +34743,9 @@ const t = [
     mark: "ㄌㄢˊ",
     tradition: "攔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lan",
+    explain: "不让通过；阻挡：前面有一道河～住了去路。你愿意去就去吧，家里决不～你。他刚要说话，被他哥哥～回去了。当；正对着（某个部位）：～头一棍。～腰斩断。"
   },
   {
     char: "拧",
@@ -33660,7 +34758,9 @@ const t = [
     mark: "ㄋㄧㄥˊ",
     tradition: "擰",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ning",
+    explain: "控制住物体并向里转或向外转：～螺丝。墨水瓶盖儿太紧，～不开了。颠倒；错：他想说“狗嘴里长不出象牙”，说～了，说成“象嘴里长不出狗牙”，引得大家哄堂大笑。别扭；抵触：两个人越说越～。"
   },
   {
     char: "拨",
@@ -33673,7 +34773,9 @@ const t = [
     mark: "ㄅㄛ",
     tradition: "撥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "手脚或棍棒等横着用力，使东西移动：～门。～船。～开云雾。分出一部分发给；调配：～粮。～款。～两个人到锻工车间工作。掉转：～头便往回走。用于成批的人或物：工人们分成两～儿干活儿。大家轮～儿休息。"
   },
   {
     char: "择",
@@ -33686,7 +34788,9 @@ const t = [
     mark: "ㄗㄜˊ",
     tradition: "擇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ze",
+    explain: "挑选：选～。～善而从。饥不～食。两者任～其一。姓。"
   },
   {
     char: "括",
@@ -33699,7 +34803,9 @@ const t = [
     mark: "ㄎㄨㄛˋ",
     tradition: "括",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuo",
+    explain: "扎；束：～约肌。包括：总～。概～。对部分文字加上括号：把这几个字用括号～起来。姓。"
   },
   {
     char: "拭",
@@ -33712,7 +34818,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "拭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "擦；抹：～泪。"
   },
   {
     char: "拯",
@@ -33725,7 +34833,9 @@ const t = [
     mark: "ㄓㄥˇ",
     tradition: "拯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zheng",
+    explain: "救：～救。～民于水火之中。"
   },
   {
     char: "拱",
@@ -33738,7 +34848,9 @@ const t = [
     mark: "ㄍㄨㄥˇ",
     tradition: "拱",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gong",
+    explain: "两手相合，臂的前部上举：～手。环绕：～卫。众星～月。四山环～的大湖。肢体弯曲成弧形：～肩缩背。黑猫～了～腰。建筑物成弧形的：～门。连～坝。姓。用身体撞动别的东西或拨开土地等物体：用身子～开了大门。猪用嘴～地。一个小孩儿从人群里～出去了。植物生长，从土里向外钻或顶：苗儿～出土了。"
   },
   {
     char: "拳",
@@ -33751,7 +34863,9 @@ const t = [
     mark: "ㄑㄩㄢˊ",
     tradition: "拳",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "quan",
+    explain: "拳头：双手握～。～打脚踢。拳术：打～。练～。一套～。几手好～。太极～。拳曲：老大娘～着腿坐在炕上。"
   },
   {
     char: "拴",
@@ -33764,7 +34878,9 @@ const t = [
     mark: "ㄕㄨㄢ",
     tradition: "拴",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shuan",
+    explain: "用绳子等绕在物体上，再打上结：把马～在树上。比喻缠住而不能自由行动：被琐事～住了。这件事把大伙儿～在了一起。"
   },
   {
     char: "拷",
@@ -33777,7 +34893,9 @@ const t = [
     mark: "ㄎㄠˇ",
     tradition: "拷",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kao",
+    explain: "打：～打。～问。～掠（泛指刑讯）。三～六问。"
   },
   {
     char: "拼",
@@ -33790,7 +34908,9 @@ const t = [
     mark: "ㄆㄧㄣ",
     tradition: "拼",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pin",
+    explain: "合在一起；连合：～音。～版。把两块木板～起来。不顾一切地干；豁出去：～命。跟敌人～到底。“拚”"
   },
   {
     char: "拾",
@@ -33803,7 +34923,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "拾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "从地上捡起东西：～麦穗儿。整理：～掇。数目“十”的大写。多用于票证、账目等。"
   },
   {
     char: "拿",
@@ -33816,7 +34938,9 @@ const t = [
     mark: "ㄋㄚˊ",
     tradition: "拿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "na",
+    explain: "用手或用其他方式抓住、搬动（东西）：他手里～着一把扇子。把这些东西～走。用强力取；捉：～下敌人的碉堡。～住一个小偷。凭他多年的教学经验，这门课他～得下来。掌握：～权。～事。这事儿你～得稳吗?刁难；要挟：这件事谁都干得了，你～不住人。装出；故意做出：～架子。～腔作势。领取；得到：～工资。～一等奖。强烈的作用使物体变坏：这块木头让药水～白了。碱搁得太多，把馒头～黄了。引进所凭借的工具、材料、方法等，意思跟“用”相同：～尺量。～眼睛看。～事实证明。引进所处置或所关涉的对象：别～我开玩笑。"
   },
   {
     char: "持",
@@ -33829,7 +34953,9 @@ const t = [
     mark: "ㄔˊ",
     tradition: "持",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chi",
+    explain: "拿着；握着：～枪。保守住：维～。～久。掌握；料理：主～。勤俭～家。挟制：挟～。胁～。对抗：相～不下。"
   },
   {
     char: "挂",
@@ -33842,7 +34968,9 @@ const t = [
     mark: "ㄍㄨㄚˋ",
     tradition: "挂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gua",
+    explain: "借助于绳子、钩子、钉子等使物体附着于某处的一点或几点：～钟。把大衣～在衣架上。墙上～着一幅世界地图。一轮明月～在天上。（案件等）悬而未决；搁置：这个案子还～着呢。一时不好处理的问题先～起来。把话筒放回电话机上使电路断开：电话先不要～，等我查一下。指交换机接通电话，也指打电话：请你～总务科。给防汛指挥部～个电话。钩：钉子把衣服～住了。（内心）牵挂：他总是～着家里的事。（物体表面）蒙上；糊着：衣服上～了一层尘土。瓦器外面～一层釉子。脸上～着笑。登记：～失。～一个号。多用于成套或成串的东西：一～四轮大车。十多～鞭炮。"
   },
   {
     char: "指",
@@ -33855,7 +34983,9 @@ const t = [
     mark: "ㄓˇ",
     tradition: "指",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhi",
+    explain: "手指头：食～。五～。屈～。首屈一～。一个手指头的宽度叫“一指”，用来计算深浅宽窄等：下了三～雨。这双鞋大了一～。两～宽的纸条。（手指头、物体尖端）对着；向着：用手一～。时针正～十二点。（头发）直立：发～。指点：～导。～示。～出正确方向。有问题请您～出来。意思上指着：这不是～你说的，是～他的。指望；依靠：～靠。单～着一个人是不能把事情做好的。"
   },
   {
     char: "按",
@@ -33868,7 +34998,9 @@ const t = [
     mark: "ㄢˋ",
     tradition: "按",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "an",
+    explain: "用手或手指头压：～脉。～图钉。止住；搁下：～兵不动。～下不提。抑制：～捺。～不住满腔悲愤。介词。依照：～劳分配。（编者、作者等）加按语：编者～。"
   },
   {
     char: "挎",
@@ -33881,7 +35013,9 @@ const t = [
     mark: "ㄎㄨㄚˋ",
     tradition: "挎",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kua",
+    explain: "胳膊弯起来挂着东西：她～着篮子上街。把东西挂在肩上或挂在腰里：～包。～着照相机。"
   },
   {
     char: "挑",
@@ -33894,7 +35028,9 @@ const t = [
     mark: "ㄊㄧㄠˇ",
     tradition: "挑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tiao",
+    explain: "担：～水。选择：～选。挑剔：～毛病。扁担和它两端挂着的东西：货～儿。量词。用于成挑的东西：一～水果。"
   },
   {
     char: "挖",
@@ -33907,7 +35043,9 @@ const t = [
     mark: "ㄨㄚ",
     tradition: "挖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wa",
+    explain: "用工具或手从物体的表面向里用力，取出其一部分或其中包藏的东西：～洞。～土。～个槽儿。～潜力。用指甲抓。"
   },
   {
     char: "挚",
@@ -33920,7 +35058,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "摯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "诚恳；恳切：真～。恳～。"
   },
   {
     char: "挟",
@@ -33933,7 +35073,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "挾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xie",
+    explain: "同“夹”（jiā）"
   },
   {
     char: "挠",
@@ -33946,7 +35088,9 @@ const t = [
     mark: "ㄋㄠˊ",
     tradition: "撓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nao",
+    explain: "阻碍；搅扰：阻～。弯曲；屈服：不屈不～。搔；抓：～痒痒。"
   },
   {
     char: "挡",
@@ -33959,7 +35103,9 @@ const t = [
     mark: "ㄉㄤˋ",
     tradition: "擋",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dang",
+    explain: "拦住；抵挡：拦～。～住去路。兵来将～，水来土掩。一件单衣可～不了夜里的寒气。遮蔽：～风。～雨。山高～不住太阳。（～儿）挡子：火～。炉～儿。排挡的简称：二～。空～。挂～。倒～。某些仪器和测量装置用来表明光、电、热等量的等级。"
   },
   {
     char: "挣",
@@ -33972,7 +35118,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "挣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zheng",
+    explain: "用力摆脱束缚：～脱锁链。用劳动换取：～工资。"
   },
   {
     char: "挤",
@@ -33985,7 +35133,9 @@ const t = [
     mark: "ㄐㄧˇ",
     tradition: "擠",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ji",
+    explain: "（人、物）紧紧靠拢在一起；（事情）集中在同一时间内：～做一团。屋里～满了人。事情全～在一块儿了。地方相对地小而人或物等相对地多：车厢里特别～。在拥挤的环境中用身体排开人或物：人多～不进来。用压力使从孔隙中出来：～牛奶。～牙膏。～时间学习。排斥；排挤：我的名额被～掉了。"
   },
   {
     char: "挥",
@@ -33998,7 +35148,9 @@ const t = [
     mark: "ㄏㄨㄟ",
     tradition: "揮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hui",
+    explain: "摇动；舞动：～手。～舞。～刀。拂去；抹掉：～汗。抛出；散出：～金如土。～发。"
   },
   {
     char: "挨",
@@ -34011,7 +35163,9 @@ const t = [
     mark: "ㄞˊ",
     tradition: "挨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ai",
+    explain: "靠近；紧接着：他家～着工厂。学生一个～一个地走进教室。顺着（次序）：把书～着次序放好。～门～户地检查卫生。"
   },
   {
     char: "挪",
@@ -34024,7 +35178,9 @@ const t = [
     mark: "ㄋㄨㄛˊ",
     tradition: "挪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nuo",
+    explain: "移动：～动。～用。注：“挼”“捼”二字过去在“揉搓”的意义上与“挪”相通，并有nuó、ruó二读，故《第一批异体字整理表》将“挼”“捼”处理为“挪”的异体字。但今“揉搓”义一般不再使用“挪”字，一般字、词典在“挪”字下只注nuó音，并不注“揉搓”义；而“挼”“捼”并无“挪动”义，且1985年《普通话异读词审音表》又审定“挼”统读ruó，故不将“挼”“捼”作为“挪”的异体字。"
   },
   {
     char: "挫",
@@ -34037,7 +35193,9 @@ const t = [
     mark: "ㄘㄨㄛˋ",
     tradition: "挫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cuo",
+    explain: "挫折：受～。压下去；降低：抑扬顿～。～敌人的锐气，长自己的威风。"
   },
   {
     char: "振",
@@ -34050,7 +35208,9 @@ const t = [
     mark: "ㄓㄣˋ",
     tradition: "振",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "zhen",
+    explain: "摇动；挥动：～翅。～笔疾书。振动：共～。谐～。～幅。奋起；振作：～奋。～起精神来。听说比赛开始，观众精神一～。姓。"
   },
   {
     char: "挺",
@@ -34063,7 +35223,9 @@ const t = [
     mark: "ㄊㄧㄥˇ",
     tradition: "挺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ting",
+    explain: "硬而直：笔～。～立。～然屹立（坚强地直立着）。伸直或凸出（身体或身体的一部分）：～胸。～着脖子。勉强支撑：他有病还硬～着上班。特出；杰出：英～。～拔。很：这花～香。他学习～努力。心里～不痛快的。用于机枪。"
   },
   {
     char: "挽",
@@ -34076,7 +35238,9 @@ const t = [
     mark: "ㄨㄢˇ",
     tradition: "挽",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wan",
+    explain: "拉；牵：～弓。～手。～车。设法使好转或恢复：～救。～回。追悼死者：～歌。～联。向上卷起：～起裤脚儿。同“绾”。"
   },
   {
     char: "捂",
@@ -34089,7 +35253,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "捂",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "抵触。  【组词】：抵捂、遮挡、掩住。同「摀」。  【组词】：纵有千只手，难捂万人口。"
   },
   {
     char: "捅",
@@ -34102,7 +35268,9 @@ const t = [
     mark: "ㄊㄨㄥˇ",
     tradition: "捅",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tong",
+    explain: "戳；扎：～了一刀。他把窗户纸～了个大窟窿。碰；触动：我用胳膊肘～了他一下。戳穿；揭露：他是个直性人，把看到的事儿都～出来了。"
   },
   {
     char: "捆",
@@ -34111,11 +35279,13 @@ const t = [
     radical: "扌",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄎㄨㄣˇ",
     tradition: "捆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kun",
+    explain: "用绳子等把东西缠紧打结：～行李。把麦子～起来。捆成的东西：秫秸～儿。用于捆起来的东西：一～柴火。"
   },
   {
     char: "捉",
@@ -34128,7 +35298,9 @@ const t = [
     mark: "ㄓㄨㄛ",
     tradition: "捉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuo",
+    explain: "握；抓：～笔。～襟见肘。使人或动物落入自己的手中：捕～。活～。～拿。～贼。猫～老鼠。"
   },
   {
     char: "捌",
@@ -34141,7 +35313,9 @@ const t = [
     mark: "ㄅㄚ",
     tradition: "捌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "数目“八”的大写。多用于票证、账目等。"
   },
   {
     char: "捍",
@@ -34154,7 +35328,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "捍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "保卫；抵御：～卫。～御。"
   },
   {
     char: "捎",
@@ -34167,7 +35343,9 @@ const t = [
     mark: "ㄕㄠˋ",
     tradition: "捎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shao",
+    explain: "捎带；顺便给人带（东西）：～封信。～个口信儿。"
   },
   {
     char: "捏",
@@ -34180,7 +35358,9 @@ const t = [
     mark: "ㄋㄧㄝ",
     tradition: "捏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "nie",
+    explain: "用拇指和别的手指夹：～住。～出来。用手指把面、泥等软东西弄成一定的形状：～饺子。～泥人儿。凭空假造：～造。"
   },
   {
     char: "捐",
@@ -34193,7 +35373,9 @@ const t = [
     mark: "ㄐㄩㄢ",
     tradition: "捐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "juan",
+    explain: "舍弃；抛弃：～弃。～生（舍弃生命）。～躯。捐助：～献。～钱。募～。税收的一种名称：车～。上了一笔～。"
   },
   {
     char: "捕",
@@ -34206,7 +35388,9 @@ const t = [
     mark: "ㄅㄨˇ",
     tradition: "捕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bu",
+    explain: "捉；逮：～鱼。～猎。～捉。追～。～到了凶手。姓。"
   },
   {
     char: "捞",
@@ -34219,20 +35403,9 @@ const t = [
     mark: "ㄌㄠ",
     tradition: "撈",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "损",
-    spell: "sǔn",
-    stroke: "10",
-    radical: "扌",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙㄨㄣˇ",
-    tradition: "損",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "lao",
+    explain: "从水或其他液体里取东西：打～。～饭。～鱼。用不正当的手段取得：趁机～一把。顺手拿：披上衣服，～起铁锹就走。"
   },
   {
     char: "捡",
@@ -34245,7 +35418,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "撿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "拾取：～柴。～了芝麻，丢了西瓜（比喻因小失大）。"
   },
   {
     char: "换",
@@ -34258,7 +35433,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "换",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "给人东西同时从他那里取得别的东西：交～。调～。变换；更换：～车。～人。～衣服。兑换。"
   },
   {
     char: "捣",
@@ -34271,7 +35448,9 @@ const t = [
     mark: "ㄉㄠˇ",
     tradition: "搗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dao",
+    explain: "用棍子等的一端撞击：～蒜。～米。用胳膊肘～了他一下。直～敌营。捶打：～衣服。搅扰：～乱。～麻烦。"
   },
   {
     char: "捧",
@@ -34284,7 +35463,9 @@ const t = [
     mark: "ㄆㄥˇ",
     tradition: "捧",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "peng",
+    explain: "用双手托：～着花生米。双手～住孩子的脸。用于能捧的东西：一～枣儿。捧了两～米。奉承人或代人吹嘘：～场。你别再～我了。"
   },
   {
     char: "据",
@@ -34297,7 +35478,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "據",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "占据：～为己有。凭借；依靠：～点。～险固守。按照；依据：～理力争。～实报告。～民歌改编。可以用作证明的事物：凭～。证～。字～。论～。票～。实～。姓。"
   },
   {
     char: "捶",
@@ -34310,7 +35493,9 @@ const t = [
     mark: "ㄔㄨㄟˊ",
     tradition: "捶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chui",
+    explain: "用拳头或棒槌敲打：～背。～衣裳。"
   },
   {
     char: "捷",
@@ -34323,7 +35508,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "捷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "快：敏～。～足先登。姓。战胜：我军大～。连战连～。"
   },
   {
     char: "捺",
@@ -34336,7 +35523,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "捺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "na",
+    explain: "按；摁：～手印。忍耐；抑制：～着性子。勉强～住心头的怒火。汉字的笔画，向右斜下，近末端微有波折，形状是“㇏”。"
   },
   {
     char: "捻",
@@ -34349,7 +35538,9 @@ const t = [
     mark: "ㄋㄧㄢˇ",
     tradition: "捻",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nian",
+    explain: "用手指搓揉。  【组词】：捻绳、捻胡子　◎用手指搓揉成的条状物。  【组词】：灯捻、纸捻、药捻子"
   },
   {
     char: "掀",
@@ -34362,7 +35553,9 @@ const t = [
     mark: "ㄒㄧㄢ",
     tradition: "掀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xian",
+    explain: "揭起；撩起：～锅盖。由下向上涌：波浪～天。大规模地发动、兴起：生产建设～高潮。"
   },
   {
     char: "掂",
@@ -34375,7 +35568,9 @@ const t = [
     mark: "ㄉㄧㄢ",
     tradition: "掂",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dian",
+    explain: "用手托着东西上下晃动，估量其轻重：～量。～一～看有多重。"
   },
   {
     char: "授",
@@ -34388,7 +35583,9 @@ const t = [
     mark: "ㄕㄡˋ",
     tradition: "授",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shou",
+    explain: "交付；给予（多用于正式或隆重的场合）：～旗。～奖。～权。传授；教：讲～。～课。函～。"
   },
   {
     char: "掉",
@@ -34401,7 +35598,9 @@ const t = [
     mark: "ㄉㄧㄠˋ",
     tradition: "掉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "diao",
+    explain: "落下：～泪。减损，消失：～色。～价儿。遗失，遗漏：这一行～了两个字。回转（zhuǎn）：～头。～转。摇摆，引申为卖弄，耍：～文。～俏。～以轻心。～臂而去。对换：～包。～换。落在后面：～队。用在动词后表示动作完成：改～。戒～。"
   },
   {
     char: "掌",
@@ -34414,7 +35613,9 @@ const t = [
     mark: "ㄓㄤˇ",
     tradition: "掌",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhang",
+    explain: "手掌：鼓～。易如反～。摩拳擦～。用手掌打：～嘴。掌管；掌握：～舵。～印。～大权。某些动物的脚掌：熊～。鸭～。马蹄铁：这匹马该钉～了。钉或缝在鞋底前部、后部的皮子等：前～儿。后～儿。钉一块～儿。钉补鞋底：～鞋。加上（油盐等）：～点儿酱油。把：～门关上。姓。"
   },
   {
     char: "掏",
@@ -34427,7 +35628,9 @@ const t = [
     mark: "ㄊㄠ",
     tradition: "掏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tao",
+    explain: "用手或工具伸进物体的口，把东西弄出来：～钱。～耳朵。～口袋。从兜里～出钥匙。挖：在墙上～一个洞。"
   },
   {
     char: "掐",
@@ -34440,7 +35643,9 @@ const t = [
     mark: "ㄑㄧㄚ",
     tradition: "掐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qia",
+    explain: "用指甲按；用拇指和另一个指头使劲捏或截断：～两下也可以止痒。不要～公园里的花儿。把豆芽菜的须子～一～。用手的虎口紧紧按住：一把～住。拇指和另一手指尖相对握着的数量：一～儿韭菜。"
   },
   {
     char: "排",
@@ -34453,7 +35658,9 @@ const t = [
     mark: "ㄆㄞˊ",
     tradition: "排",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pai",
+    explain: "一个挨一个地按着次序摆：～队。～字。把椅子～成一行。排成的行列：他坐在后～。军队的编制单位，隶属于连，下辖若干班。指排球运动：～坛。中国女～。用于成行列的东西：一～子弹。一～椅子。上下两～牙齿。一种水上交通工具，用竹子或木头平排地连在一起做成。指扎（zā）成排的竹子或木头，便于放在水里运走。一种西式食品，用大而厚的肉片煎成：牛～。猪～。排演：彩～。这是一出新～的京剧。推；推开：～闼（tà）直入。～门而出。"
   },
   {
     char: "掖",
@@ -34466,7 +35673,9 @@ const t = [
     mark: "ㄧㄝˋ",
     tradition: "掖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "用手搀扶别人的胳膊，借指扶助或提拔：扶～。奖～。"
   },
   {
     char: "掘",
@@ -34479,7 +35688,9 @@ const t = [
     mark: "ㄐㄩㄝˊ",
     tradition: "掘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jue",
+    explain: "刨；挖：～地。临渴～井。"
   },
   {
     char: "掠",
@@ -34488,11 +35699,13 @@ const t = [
     radical: "扌",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩㄝˋ",
     tradition: "掠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lüe",
+    explain: "掠夺（多指财物）：抢～。～取。奸淫掳～。轻轻擦过或拂过：凉风～面。燕子～过水面。炮弹～过夜空。他用手～一下额前的头发。嘴角上～过一丝微笑。用棍子或鞭子打：拷～。笞～。"
   },
   {
     char: "探",
@@ -34505,7 +35718,9 @@ const t = [
     mark: "ㄊㄢˋ",
     tradition: "探",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tan",
+    explain: "试图发现（隐藏的事物或情况）：～矿。～路。～口气。试～。钻～。做侦察工作的人：密～。敌～。看望：～望。～亲。～病。向前伸出（头或上体）：～头～脑。行车时不要～身窗外。过问：～闲事。"
   },
   {
     char: "接",
@@ -34518,7 +35733,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "接",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jie",
+    explain: "靠近；接触：邻～。～近。交头～耳。连接；使连接：～电线。～纱头。这一句跟上一句～不上。托住；承受：～球。书掉下来了，赶快用手～住。接受：～见。～待。～电话。～到来信。迎接：到车站～人。接替：～任。谁～你的班?姓。"
   },
   {
     char: "控",
@@ -34531,7 +35748,9 @@ const t = [
     mark: "ㄎㄨㄥˋ",
     tradition: "控",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kong",
+    explain: "告发：～告。掌握；操纵：遥～。身体的一部分失去支撑或处于悬空状态：～着脑袋睡觉不好。腿都～肿了。使物体悬空或使容器的口朝下，让物体上或容器里的液体慢慢流出；使人的头朝下，吐出食物或水：菜洗完以后～～水再切。别浪费，把瓶里的油～干净。他肚里的水已经～得差不多了。"
   },
   {
     char: "推",
@@ -34544,7 +35763,9 @@ const t = [
     mark: "ㄊㄨㄟ",
     tradition: "推",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tui",
+    explain: "向外用力使物体或物体的某一部分顺着用力的方向移动：～车。～磨。～倒。我～了他一把。门没有闩上，一～就开了。（推磨）磨或（推碾子）碾（粮食）：～了两斗荞麦。用工具贴着物体的表面向前剪或削：～草机。～头。用刨子～光。使事情开展：～广。～销。～行。把水利建设～向高潮。根据已知的事实断定其他；从某方面的情况想到其他方面：类～。～算。～己及人。让给别人；辞让：～辞。～让。解衣～食。既然大家都选你，你就别～了。推诿；推托：～三阻四。推迟：开会日期往后～几天。推崇：～许。～重。推选；推举：大家～老张担任小组长。"
   },
   {
     char: "掩",
@@ -34557,7 +35778,9 @@ const t = [
     mark: "ㄧㄢˇ",
     tradition: "掩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yan",
+    explain: "遮盖；掩蔽：～口而笑。～人耳目。～着怀（上衣遮盖住胸膛而不扣纽扣）。关；合：～卷。虚～着房门。关门或合上箱盖等物时被夹住：手被门～了一下。乘人不备（袭击、捕捉）：～杀。～捕。"
   },
   {
     char: "措",
@@ -34570,7 +35793,9 @@ const t = [
     mark: "ㄘㄨㄛˋ",
     tradition: "措",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cuo",
+    explain: "安排；安放：～置。手足无～。计划办理：筹～。"
   },
   {
     char: "掰",
@@ -34583,7 +35808,9 @@ const t = [
     mark: "ㄅㄞ",
     tradition: "掰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bai",
+    explain: "用手把东西分开或折断：～玉米。～成两半儿。小弟弟～着手指头数数儿。“擘”"
   },
   {
     char: "掷",
@@ -34596,7 +35823,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "擲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "扔；投：投～。弃～。～铁饼。～铅球。手榴弹～远比赛。"
   },
   {
     char: "掸",
@@ -34609,7 +35838,9 @@ const t = [
     mark: "ㄉㄢˇ",
     tradition: "撣",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dan",
+    explain: "→掸人"
   },
   {
     char: "掺",
@@ -34622,7 +35853,9 @@ const t = [
     mark: "ㄘㄢˋ",
     tradition: "摻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "can",
+    explain: "混合、杂入。同「搀」。  【组词】：掺砂、掺水　◎"
   },
   {
     char: "揉",
@@ -34635,7 +35868,9 @@ const t = [
     mark: "ㄖㄡˊ",
     tradition: "揉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rou",
+    explain: "用手按着较软的东西反复搓动：～一～腿。团弄：把纸～成一团儿。把直的弄弯：～以为轮。"
   },
   {
     char: "揍",
@@ -34648,7 +35883,9 @@ const t = [
     mark: "ㄗㄡˋ",
     tradition: "揍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zou",
+    explain: "打（人）：挨～。～他一顿。打碎：小心别把玻璃～了。把碗给～了。"
   },
   {
     char: "描",
@@ -34661,7 +35898,9 @@ const t = [
     mark: "ㄇㄧㄠˊ",
     tradition: "描",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "miao",
+    explain: "照底样画（多指用薄纸蒙在底样上画）：～花。～图。～张花样子。在原来颜色淡或需要改正的地方重复地涂抹：～红。～眉打鬓。写毛笔字，一笔是一笔，不要～。"
   },
   {
     char: "提",
@@ -34674,20 +35913,9 @@ const t = [
     mark: "ㄉㄧ",
     tradition: "提",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "插",
-    spell: "chā",
-    stroke: "12",
-    radical: "扌",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄔㄚ",
-    tradition: "插",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "ti",
+    explain: "→朱提"
   },
   {
     char: "揖",
@@ -34700,7 +35928,9 @@ const t = [
     mark: "ㄧ",
     tradition: "揖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "拱手行礼。姓。"
   },
   {
     char: "握",
@@ -34713,7 +35943,9 @@ const t = [
     mark: "ㄨㄛˋ",
     tradition: "握",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wo",
+    explain: "用手攥（zuàn）住：～手。掌管：大权在～。"
   },
   {
     char: "揣",
@@ -34726,7 +35958,9 @@ const t = [
     mark: "ㄔㄨㄞˋ",
     tradition: "揣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chuai",
+    explain: "放在衣服里：～着手。～在怀里。"
   },
   {
     char: "揩",
@@ -34739,7 +35973,9 @@ const t = [
     mark: "ㄎㄞ",
     tradition: "揩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kai",
+    explain: "擦；抹：～汗。把桌子～干净。"
   },
   {
     char: "揪",
@@ -34752,7 +35988,9 @@ const t = [
     mark: "ㄐㄧㄡ",
     tradition: "揪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiu",
+    explain: "紧紧地抓；抓住并拉：～耳朵。～着绳子往上爬。把他～过来。"
   },
   {
     char: "揭",
@@ -34765,7 +36003,9 @@ const t = [
     mark: "ㄐㄧㄝ",
     tradition: "揭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jie",
+    explain: "举起、高举。  【组词】：高揭义旗、揭竿而起公开表露出来。  【组词】：揭短、揭底、揭晓掀起、拉开。  【组词】：揭盖、揭帘、揭幕姓。"
   },
   {
     char: "援",
@@ -34778,7 +36018,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "援",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "以手牵引：攀～。引用：～用。～例。援助：支～。增～。～军。孤立无～。"
   },
   {
     char: "揽",
@@ -34791,7 +36033,9 @@ const t = [
     mark: "ㄌㄢˇ",
     tradition: "攬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lan",
+    explain: "用胳膊围住别人，使靠近自己：母亲把孩子～在怀里。用绳子等把松散的东西聚拢到一起，使不散开：把车上的柴火～上点。拉到自己这方面或自己身上来：包～。～买卖。他把责任都～到自己身上了。把持：独～大权。"
   },
   {
     char: "搀",
@@ -34804,7 +36048,9 @@ const t = [
     mark: "ㄔㄢ",
     tradition: "攙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chan",
+    explain: "旧同“{掺}”用手架住对方的手或胳膊"
   },
   {
     char: "搁",
@@ -34817,7 +36063,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "擱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "放置：书包～在桌子上。加进去：盐～多了。暂放一边不处理、不进行：这个问题可以先～一～，以后再议。"
   },
   {
     char: "搂",
@@ -34830,7 +36078,9 @@ const t = [
     mark: "ㄌㄡˇ",
     tradition: "摟",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lou",
+    explain: "用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。搜刮（财物）；尽力赚（钱）：～钱。向自己的方向拨；扳：～扳机。核算：～算。把账～一～。"
   },
   {
     char: "搅",
@@ -34843,7 +36093,9 @@ const t = [
     mark: "ㄐㄧㄠˇ",
     tradition: "攪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "搅拌：茶汤～匀了。把粥～一～。扰乱；打扰：～扰。胡～。这宗生意让他～黄了。"
   },
   {
     char: "搏",
@@ -34856,7 +36108,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "搏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "对打：～斗。扑上去抓：～兔。跳动：～动。脉～。"
   },
   {
     char: "搓",
@@ -34869,20 +36123,9 @@ const t = [
     mark: "ㄘㄨㄛ",
     tradition: "搓",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "搔",
-    spell: "sāo",
-    stroke: "12",
-    radical: "扌",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙㄠ",
-    tradition: "搔",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cuo",
+    explain: "两个手掌反复摩擦，或把手掌放在别的东西上来回揉：急得他直～手。～一条麻绳儿。"
   },
   {
     char: "搜",
@@ -34895,7 +36138,9 @@ const t = [
     mark: "ㄙㄡ",
     tradition: "搜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sou",
+    explain: "寻找：～集。～罗。～求。搜查：～身。～腰。～捕。什么也没～着。"
   },
   {
     char: "搞",
@@ -34908,7 +36153,9 @@ const t = [
     mark: "ㄍㄠˇ",
     tradition: "搞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gao",
+    explain: "做；干；从事：～生产。～工作。～建设。设法获得；弄：～点儿水来。～材料。"
   },
   {
     char: "搪",
@@ -34921,7 +36168,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "搪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tang",
+    explain: "抵挡：～饥。～风。～上一块板子就塌不下来了。搪塞：～账。～差事。把泥土或涂料均匀地涂在炉灶或金属坯子等上面：～炉子。同“镗”（táng）。"
   },
   {
     char: "搬",
@@ -34934,7 +36183,9 @@ const t = [
     mark: "ㄅㄢ",
     tradition: "搬",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ban",
+    explain: "移动物体的位置（多指笨重的或较大的）：～运。～砖。把保险柜～走。把小说里的故事～到舞台上。迁移：～迁。～家。他家是从南城～来的。"
   },
   {
     char: "搭",
@@ -34947,7 +36198,9 @@ const t = [
     mark: "ㄉㄚ",
     tradition: "搭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "da",
+    explain: "支；架：～桥。～棚。喜鹊在树上～了个窝。把柔软的东西放在可以支架的东西上：把衣服～在竹竿上。肩膀上～着一条毛巾。连接在一起：两根电线～上了。前言不～后语。～伙。～街坊。凑上；加上：把这些钱～上就够了。这个工作不轻，还得～上个人帮他才成。差点儿连命也给～上。搭配；配合：粗粮和细粮～着吃。大的小的～着卖。共同抬起：把桌子～起来在下面垫上几块砖。书柜已经～走了。乘；坐（车、船、飞机等）：～轮船到上海。～下一班汽车。～国际航班。"
   },
   {
     char: "携",
@@ -34960,7 +36213,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "携",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xie",
+    explain: "携带：～酒。～杖。～眷。扶老～幼。拉着（手）：～手。"
   },
   {
     char: "摄",
@@ -34973,7 +36228,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "攝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "吸引、收纳。  【组词】：摄取、摄影、勾魂摄魄治理、管辖。  【组词】：统摄代理、兼理。  【组词】：摄政、摄理、摄行保养、维持。  【组词】：摄生"
   },
   {
     char: "摆",
@@ -34986,7 +36243,9 @@ const t = [
     mark: "ㄅㄞˇ",
     tradition: "擺、襬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bai",
+    explain: "安放；排列：把东西～好。河边一字儿～开十几条渔船。～事实，讲道理。显示；炫耀：～阔。～威风。摇动；摇摆：大摇大～。他向我直～手。悬挂在细线上的能做往复运动的重锤的装置。摆的长度不变且振幅不太大时，运动的周期恒等。钟表或精密仪器上用来控制摆动频率的机械装置。说；谈；陈述：咱们来～～，好吗?姓。长袍、上衣、衬衫等的最下端部分：衣～。下～。前～。～宽。傣族地区佛教仪式或庆祝丰收、物资交流、文艺会演等群众性活动的集会。[傣]"
   },
   {
     char: "摇",
@@ -34999,7 +36258,9 @@ const t = [
     mark: "ㄧㄠˊ",
     tradition: "摇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yao",
+    explain: "摇摆；使物体来回地动：动～。～晃。～手。～铃。～橹。～头晃脑。"
   },
   {
     char: "摊",
@@ -35012,7 +36273,9 @@ const t = [
     mark: "ㄊㄢ",
     tradition: "攤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tan",
+    explain: "摆开；铺平：～牌。～场。把凉席～在床上。许多事情一～到桌面上来，是非立时分明。设在路旁、广场上的售货处：地～儿。水果～儿。用于摊开的糊状物：一～血。一～稀泥。烹调方法，把糊状的食物原料倒在锅中摊开成为薄片：～鸡蛋。～煎饼。分担：分～。～派。一人平均～五元钱。碰到；落到（多指不如意的事情）：事情虽小，～在他身上就受不了。"
   },
   {
     char: "摔",
@@ -35025,7 +36288,9 @@ const t = [
     mark: "ㄕㄨㄞ",
     tradition: "摔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shuai",
+    explain: "（身体）失去平衡而倒下：～跤。～了一个跟头。很快地往下落：敌机冒着黑烟～下来。使落下而破损：不小心把个瓶子～了。扔：往空中～鞭炮。摔打"
   },
   {
     char: "摘",
@@ -35038,7 +36303,9 @@ const t = [
     mark: "ㄓㄞ",
     tradition: "摘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhai",
+    explain: "取（植物的花、果、叶或戴着、挂着的东西）：～梨。～一朵花。～帽子。把灯泡～下来。选取：～要。～录。从全文中～了一段。摘借：～了几个钱救急。"
   },
   {
     char: "摧",
@@ -35051,7 +36318,9 @@ const t = [
     mark: "ㄘㄨㄟ",
     tradition: "摧",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cui",
+    explain: "折断；破坏：～折。～毁。无坚不～。"
   },
   {
     char: "摩",
@@ -35064,7 +36333,9 @@ const t = [
     mark: "ㄇㄚ",
     tradition: "摩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "摩擦；接近：～拳擦掌。～天大厦。抚摸：～弄。研究；切磋：揣～。观～。摩尔的简称。"
   },
   {
     char: "摸",
@@ -35077,7 +36348,9 @@ const t = [
     mark: "ㄇㄛ",
     tradition: "摸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "mo",
+    explain: "用手接触一下（物体）或接触后轻轻移动：我～了～他的脸，觉得有点儿发烧。用手探取：～鱼。他在口袋里～了半天，～出一张纸条来。试着了解；试着做：～底。逐渐～出一套种水稻的经验来。在黑暗中行动；在认不清的道路上行走：～到床边开亮了灯。～了半夜才到家。"
   },
   {
     char: "摹",
@@ -35090,7 +36363,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "摹",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "照着样子写或画，特指用薄纸蒙在原字或原画上写或画：描～。临～。～写。～本。"
   },
   {
     char: "撇",
@@ -35103,7 +36378,9 @@ const t = [
     mark: "ㄆㄧㄝˇ",
     tradition: "撇",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pie",
+    explain: "平着扔出去：～砖头。～手榴弹。把早晨说的事～到脑后去了。倾斜：他是八字脚，走起路来向外～。用撇嘴的动作表示轻视、不以为然或不高兴等：她嘴一～，什么也没说，走开了。汉字的笔画，向左斜下，形状是“丿”。用于像撇儿的东西：他留着两～儿胡子。"
   },
   {
     char: "撑",
@@ -35116,7 +36393,9 @@ const t = [
     mark: "ㄔㄥ",
     tradition: "撑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cheng",
+    explain: "抵住：两手～着下巴沉思。用篙抵住河底使船行进：～船。支持：说得他自己也～不住，笑了。张开：～伞。把麻袋的口儿～开。充满到容不下的程度：少吃点，别～着。装得连口袋都～破了。"
   },
   {
     char: "撒",
@@ -35129,7 +36408,9 @@ const t = [
     mark: "ㄙㄚˇ",
     tradition: "撒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sa",
+    explain: "放开；张开：～手。～网。一～线，风筝就上去了。尽量使出来或施展出来（贬义）：～赖。～酒疯。"
   },
   {
     char: "撕",
@@ -35142,7 +36423,9 @@ const t = [
     mark: "ㄙ",
     tradition: "撕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "si",
+    explain: "用手使东西（多为薄片状的）裂开或离开附着处：把布～成两块。把书页～破了。把墙上的标语～下来。"
   },
   {
     char: "撞",
@@ -35155,7 +36438,9 @@ const t = [
     mark: "ㄓㄨㄤˋ",
     tradition: "撞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhuang",
+    explain: "两个物体猛然相碰：～钟。不小心～上电线杆。猛冲；闯：横冲直～。不期而遇；碰见：～见。试探着进行：我这也是瞎～一气，不料真把事儿干成了。"
   },
   {
     char: "撤",
@@ -35168,7 +36453,9 @@ const t = [
     mark: "ㄔㄜˋ",
     tradition: "撤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "che",
+    explain: "除去：～职。把障碍物～了。退：～退。～兵。二连已经～下来了。减轻（气味、分量等）：～味儿。～分量。姓。"
   },
   {
     char: "撩",
@@ -35181,7 +36468,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "撩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "撩拨：～逗。春色～人。一番话～得他动心了。"
   },
   {
     char: "撬",
@@ -35194,7 +36483,9 @@ const t = [
     mark: "ㄑㄧㄠˋ",
     tradition: "撬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qiao",
+    explain: "把棍棒或刀、锥等的一头插入缝中或孔中，用力扳（或压）另一头：～石头。～起箱子盖。钥匙丢了，只好把门～开。"
   },
   {
     char: "播",
@@ -35207,20 +36498,9 @@ const t = [
     mark: "ㄅㄛ",
     tradition: "播",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "撮",
-    spell: "cuō",
-    stroke: "15",
-    radical: "扌",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄘㄨㄛ",
-    tradition: "撮",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "传播；传扬：广～。～音。电台正在～重要新闻。播种：条～。点～。夏～。～了两亩地的麦子。迁移；流亡：～迁（迁徙）。"
   },
   {
     char: "撰",
@@ -35233,7 +36513,9 @@ const t = [
     mark: "ㄓㄨㄢˋ",
     tradition: "撰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhuan",
+    explain: "写（文章）；著（书）：～稿。"
   },
   {
     char: "撵",
@@ -35246,7 +36528,9 @@ const t = [
     mark: "ㄋㄧㄢˇ",
     tradition: "攆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nian",
+    explain: "驱逐；赶走：把他～出去。追赶：他走得快，我～不上他。"
   },
   {
     char: "撼",
@@ -35259,7 +36543,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "撼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "摇；摇动：摇～。震～天地。蚍蜉～大树，可笑不自量。"
   },
   {
     char: "擂",
@@ -35272,7 +36558,9 @@ const t = [
     mark: "ㄌㄟˊ",
     tradition: "擂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lei",
+    explain: "擂台：打～。"
   },
   {
     char: "擅",
@@ -35285,20 +36573,9 @@ const t = [
     mark: "ㄕㄢˋ",
     tradition: "擅",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "操",
-    spell: "cāo",
-    stroke: "16",
-    radical: "扌",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄘㄠ",
-    tradition: "操",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "shan",
+    explain: "专权；独断；自作主张：～断。～离职守。长于；善于：他～画人物。"
   },
   {
     char: "擎",
@@ -35311,7 +36588,9 @@ const t = [
     mark: "ㄑㄧㄥˊ",
     tradition: "擎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qing",
+    explain: "往上托；举：众～易举。高～着红旗。"
   },
   {
     char: "擒",
@@ -35324,7 +36603,9 @@ const t = [
     mark: "ㄑㄧㄣˊ",
     tradition: "擒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qin",
+    explain: "抓；捉拿：生～。欲～故纵。～贼先～王。"
   },
   {
     char: "擦",
@@ -35337,7 +36618,9 @@ const t = [
     mark: "ㄘㄚ",
     tradition: "擦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ca",
+    explain: "摩擦：～火柴。摩拳～掌。手～破了皮。用布、手巾等摩擦使干净：～汗。～桌子。～玻璃。～亮眼睛。涂抹：～油。～粉。～红药水。贴近；挨着：～黑儿。～肩而过。燕子～着水面飞。把瓜果等放在礤床儿上来回摩擦，使成细丝儿：把萝卜～成丝儿。"
   },
   {
     char: "攀",
@@ -35350,7 +36633,9 @@ const t = [
     mark: "ㄆㄢ",
     tradition: "攀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pan",
+    explain: "抓住东西向上爬：～登。～树。～着绳子往上爬。用手拉；抓住：～折。～缘。指跟地位高的人结亲戚或拉关系：高～。～龙附凤。～上了一门好亲戚。设法接触；牵扯：～谈。～扯。～供。你自己的事儿，别总～着别人。姓。"
   },
   {
     char: "攒",
@@ -35363,7 +36648,9 @@ const t = [
     mark: "ㄘㄨㄢˊ",
     tradition: "攢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zan",
+    explain: "积聚；储蓄：～粪。～钱。"
   },
   {
     char: "攘",
@@ -35376,7 +36663,9 @@ const t = [
     mark: "ㄖㄤˇ",
     tradition: "攘",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "rang",
+    explain: "抢夺；侵犯；窃取：～夺。排除：～除。～敌（抵御敌人）。捋起（衣袖）：～臂。"
   },
   {
     char: "支",
@@ -35385,11 +36674,13 @@ const t = [
     radical: "支",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓ",
     tradition: "支",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "撑：～帐篷。把苇帘子～起来。他用两手～着头正在想什么。伸出；竖起：两只虎牙朝两边～着。～着耳朵听。支持：～援。～应。体力不～。乐不可～。疼得实在～不住。调度；指使：～配。～使。把人～走。付出或领取（款项）：～出。～取。～了一笔钱。姓。分支；支派：～流。～队。～线。～店。a）用于队伍等：一～军队。一～文化队伍。b）用于歌曲或乐曲：两～新的乐曲。c）纱线粗细程度的英制单位，用单位质量（重量）的长度来表示，如1磅重的纱线长度中有几个840码，就叫几支（纱）。纱线越细，支数越大。d）用于杆状的东西：一～枪。三～钢笔。一～蜡烛。地支。见〖干支〗。"
   },
   {
     char: "收",
@@ -35402,7 +36693,9 @@ const t = [
     mark: "ㄕㄡ",
     tradition: "收",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shou",
+    explain: "把外面的事物拿到里面；把摊开的或分散的事物聚拢：～拾。～藏。～集。～篷。衣裳～进来了没有?取自己有权取的东西或原来属于自己的东西：～回。～复。～税。没～。～归国有。获得（经济利益）：～入。～益。～支。收获；收割：～成。秋～。麦～。今年早稻～得多。接；接受；容纳：～报。～留。～容。～礼物。～徒弟。约束；控制（感情或行动）：～心。我的心像断了线的风筝似的，简直～不住了。逮捕；拘禁：～监。结束；停止（工作）：～工。～操。～场。"
   },
   {
     char: "改",
@@ -35415,7 +36708,9 @@ const t = [
     mark: "ㄍㄞˇ",
     tradition: "改",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gai",
+    explain: "改变；更改：～口。～名。～朝换代。几年之间，家乡完全～了样子了。修改：～文章。这扇门太大，得往小里～一～。改正：～邪归正。有错误一定要～。姓。"
   },
   {
     char: "攻",
@@ -35428,7 +36723,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "攻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "攻打；进攻（跟“守”相对）：围～。～城。能～能守。～下敌人的桥头堡。对别人的过失、错误进行指责或对别人的议论进行驳斥：群起而～之。～其一点，不及其余。致力研究；学习：专～。一门心思～外语。姓。"
   },
   {
     char: "放",
@@ -35441,7 +36738,9 @@ const t = [
     mark: "ㄈㄤˋ",
     tradition: "放",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fang",
+    explain: "1.解除约束，使自由：释～。～虎归山。把俘虏～回去。2.在一定的时间停止（学习、工作）：～学。～工。3.放纵：～任。～声高歌。～言高论。4.让牛羊等在草地上吃草和活动：～牛。～羊。5.把人驱逐到边远的地方：～逐。流～。6.发出：～枪。～光。～冷箭。玉簪花～出阵阵的清香。7.点燃：～火。～爆竹。8.借钱给人，收取利息：～债。～款。9.扩展：～大。～宽。上衣的身长要～一寸。10.姓。"
   },
   {
     char: "政",
@@ -35454,7 +36753,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "政",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "zheng",
+    explain: "政治：～纲。～工人员。政府：党～军民。国家某一部门主管的业务：财～。邮～。指家庭或团体的事务：家～。校～。"
   },
   {
     char: "故",
@@ -35467,7 +36768,9 @@ const t = [
     mark: "ㄍㄨˋ",
     tradition: "故",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gu",
+    explain: "事情；事故：细～。变～。缘故；原因：无～缺勤。不知何～。故意；有意：～作镇静。明知～犯。所以；因此：因大雨，～未如期起程。姓。原来的；从前的；旧的：～址。～乡。依然～我。朋友；友情：亲～。沾亲带～。（人）死亡：病～。染病身～。父母早～。"
   },
   {
     char: "效",
@@ -35480,7 +36783,9 @@ const t = [
     mark: "ㄒㄧㄠˋ",
     tradition: "效",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiao",
+    explain: "效果；功用：功～。成～。无～。见～。姓。仿效：～法。上行下～。为别人或集团献出（力量或生命）：～力。～劳。～命。"
   },
   {
     char: "敌",
@@ -35493,7 +36798,9 @@ const t = [
     mark: "ㄉㄧˊ",
     tradition: "敵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "di",
+    explain: "有利害冲突不能相容的：～人。～军。敌人：仇～。残～。分清～我。对抗；抵挡：所向无～。寡不～众。（力量）相等的：匹～。势均力～。"
   },
   {
     char: "敏",
@@ -35506,7 +36813,9 @@ const t = [
     mark: "ㄇㄧㄣˇ",
     tradition: "敏",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "min",
+    explain: "疾速；敏捷：～感。灵～。聪明；机警：聪～。机～。姓。"
   },
   {
     char: "救",
@@ -35519,7 +36828,9 @@ const t = [
     mark: "ㄐㄧㄡˋ",
     tradition: "救",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiu",
+    explain: "援助使脱离灾难或危险：～命。挽～。营～。搭～。抢～。一定要把他～出来。援助人、物使免于（灾难、危险）：～亡。～荒。～灾。～急。"
   },
   {
     char: "教",
@@ -35532,7 +36843,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "教",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiao",
+    explain: "教导；教育：管～。请～。受～。因材施～。宗教：佛～。伊斯兰～。信～。在～。姓。使；令；让：～他无计可施。～我十分为难。"
   },
   {
     char: "敛",
@@ -35545,7 +36858,9 @@ const t = [
     mark: "ㄌㄧㄢˇ",
     tradition: "斂",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lian",
+    explain: "收起；收住：～容。～足。约束：～迹。收集；征收：～钱。横征暴～。把工具～起来。"
   },
   {
     char: "敞",
@@ -35558,7 +36873,9 @@ const t = [
     mark: "ㄔㄤˇ",
     tradition: "敞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chang",
+    explain: "（房屋、庭院等）宽绰；没有遮拦：宽～。这屋子太～。张开；打开：～胸露怀。～着门。～着口儿。"
   },
   {
     char: "敢",
@@ -35571,7 +36888,9 @@ const t = [
     mark: "ㄍㄢˇ",
     tradition: "敢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gan",
+    explain: "有勇气；有胆量。例：勇～。表示有勇气、有胆量做某事：～想～干。表示有根据地推断：我～说，他这件事准办不成。不～说有十成把握，八九成是肯定有的。副词。莫非；怕是。表示揣测又略带惊讶的语气：～是他来了。谦辞。表示冒昧地请求：～问。～请。"
   },
   {
     char: "散",
@@ -35584,7 +36903,9 @@ const t = [
     mark: "ㄙㄢˋ",
     tradition: "散",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "san",
+    explain: "由聚集而分离：解～。～会。烟消云～。分发；分给：～传单。排遣；排除：～心。～闷。"
   },
   {
     char: "敦",
@@ -35597,7 +36918,9 @@ const t = [
     mark: "ㄉㄨㄟˋ",
     tradition: "敦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dun",
+    explain: "质朴、笃厚。敦厚诚恳。敦聘、敦请"
   },
   {
     char: "敬",
@@ -35610,7 +36933,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "敬",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "尊敬：～重。～爱。～仰。致～。肃然起～。恭敬：～请指教。～谢不敏。有礼貌地送上（饮食或物品）：～烟。～酒。～茶。～你一杯。姓。"
   },
   {
     char: "数",
@@ -35623,7 +36948,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "數",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "1.数目：次～。～额。2.几；几个：～次。～日。3.天数；命运：气～。在～难逃。4.表示事物的量的基本数学概念。由于生产实践对计数和测量的需要，首先产生了自然数（正整数），后又逐渐产生了分数、零、无理数、负数、虚数等。5.一种语法范畴。表示名词、代词所指事物的数量。6.指数学：～理化。"
   },
   {
     char: "敲",
@@ -35636,7 +36963,9 @@ const t = [
     mark: "ㄑㄧㄠ",
     tradition: "敲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiao",
+    explain: "在物体上面打，使发出声音：～门。～锣打鼓。敲竹杠；敲诈：有的商人一听顾客是外乡口音，往往就要～一下子。"
   },
   {
     char: "整",
@@ -35645,11 +36974,13 @@ const t = [
     radical: "攵",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄥˇ",
     tradition: "整",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zheng",
+    explain: "全部在内，没有剩余或残缺；完整（跟“零”相对）：～天。～套。一年～。十二点～。化～为零。整齐：～洁。～然有序。仪容不～。整理；整顿：～风。～装待发。修理：～修。～旧如新。使吃苦头：他被～得好苦!搞；弄：绳子～断了。这东西我看见人～过，并不难。"
   },
   {
     char: "敷",
@@ -35662,7 +36993,9 @@ const t = [
     mark: "ㄈㄨ",
     tradition: "敷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fu",
+    explain: "涂上；搽上。例：外～药。展开；铺开：～陈。～设。够；足：入不～出。"
   },
   {
     char: "文",
@@ -35671,11 +37004,13 @@ const t = [
     radical: "文",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄨㄣˊ",
     tradition: "文",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "wen",
+    explain: "字；语言的书面形式：甲骨～。英～。文章：散～。议论～。文言：半～半白。指文科：～理分科。非军事的。与“武”相对：～职。～武双全。柔和；不猛烈：～弱。～火。旧指礼节、仪式等：繁～缛节。指自然界的某些现象：天～。水～。在身上、脸上刺画花纹或字：～身。～双颊。文饰；掩饰：～过饰非。量词。用于旧时的铜钱：一～不值。"
   },
   {
     char: "斋",
@@ -35688,7 +37023,9 @@ const t = [
     mark: "ㄓㄞ",
     tradition: "齋",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhai",
+    explain: "斋戒。信仰佛教、道教等宗教的人所吃的素食：吃～。舍饭给僧人、道人：～僧。姓。屋子，常用于书房、商店的名称，学校宿舍也有叫斋的：书～。新～。第三～。荣宝～。"
   },
   {
     char: "斑",
@@ -35701,7 +37038,9 @@ const t = [
     mark: "ㄅㄢ",
     tradition: "斑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ban",
+    explain: "在具有某种颜色的物体表面上夹有的另外颜色的点、条纹：红～。雀～。～竹。～马。"
   },
   {
     char: "斗",
@@ -35710,11 +37049,13 @@ const t = [
     radical: "斗",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄡˋ",
     tradition: "鬥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dou",
+    explain: "对打：～殴。战～。比赛胜负，争胜：～力。～劲。～智。～志昂扬。使动物之间互争高下：～牛。～蟋蟀。拼合，对准，凑近：～眼。古同“逗”，逗引。"
   },
   {
     char: "料",
@@ -35727,7 +37068,9 @@ const t = [
     mark: "ㄌㄧㄠˋ",
     tradition: "料",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liao",
+    explain: "照看；管理：照～。～理。材料；原料：木～。燃～。布～。加～。备～。资～。他就是这么块～。喂牲口用的谷物：草～。～豆儿。多给牲口加点～。用于中医配制丸药，处方规定剂量的全份为一料：配一～药。过去计算木材的单位，两端截面是一平方尺，长足七尺的木材叫一料。"
   },
   {
     char: "斜",
@@ -35740,7 +37083,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "斜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xie",
+    explain: "跟平面或直线既不平行也不垂直的：～线。～对面是学校。倾斜：～着身子坐下。姓。"
   },
   {
     char: "斟",
@@ -35753,7 +37098,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "斟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "往杯子或碗里倒（酒、茶）：自～自饮。～了满满一杯酒。"
   },
   {
     char: "斤",
@@ -35766,7 +37113,9 @@ const t = [
     mark: "ㄐㄧㄣ",
     tradition: "斤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "市制质量单位。10两为1斤，100斤为1担。1斤原为16两，后改为10两，合500克。古时砍伐树木的工具。"
   },
   {
     char: "斥",
@@ -35775,11 +37124,13 @@ const t = [
     radical: "斤",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔˋ",
     tradition: "斥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chi",
+    explain: "责备：申～。驳～。痛～。怒～。使离开：排～。～逐。拿出（钱）：～资。扩展：～地。侦察：～候。～骑（担任侦察的骑兵）。斥卤。"
   },
   {
     char: "斧",
@@ -35792,7 +37143,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "斧",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "斧子：板～。古代一种兵器：～钺。"
   },
   {
     char: "斩",
@@ -35805,7 +37158,9 @@ const t = [
     mark: "ㄓㄢˇ",
     tradition: "斬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhan",
+    explain: "砍：～草除根。披荆～棘。～断侵略者的魔爪。比喻敲竹杠；讹诈。姓。"
   },
   {
     char: "断",
@@ -35818,7 +37173,9 @@ const t = [
     mark: "ㄉㄨㄢˋ",
     tradition: "斷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duan",
+    explain: "（长形的东西）分成两段或几段：砍～。割～。绳子～了。断绝；隔绝：～水。～电。～奶。～了关系。音讯～了。间断：她每天都来给老人洗衣、做饭，从没有～过。拦截：把对方的球～了下来。戒除（烟酒）：～烟。～酒。姓。判断；决定：～语。诊～。独～专行。这个案子～得公道。绝对；一定（多用于否定式）：～无此理。～不能信。"
   },
   {
     char: "斯",
@@ -35831,7 +37188,9 @@ const t = [
     mark: "ㄙ",
     tradition: "斯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "si",
+    explain: "文言指示代词。这；这个；这里：～人。生于～。文言连词。于是；就。上古汉语指劈、砍：斧以～之。"
   },
   {
     char: "新",
@@ -35844,7 +37203,9 @@ const t = [
     mark: "ㄒㄧㄣ",
     tradition: "新",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "刚出现的或刚经验到的（跟“旧、老”相对）：～风气。～品种。～的工作岗位。性质上改变得更好的（跟“旧”相对）：～社会。～文艺。粉刷一～。使变成新的：改过自～。一～耳目。没有用过的（跟“旧”相对）：～笔。～锄头。这套衣服是全～的。指新的人或事物：尝～。以老带～。花样翻～。推陈出～。结婚的或结婚不久的：～女婿。～媳妇。新近；刚：我是～来的。这几本书是～买的。姓。"
   },
   {
     char: "方",
@@ -35853,11 +37214,13 @@ const t = [
     radical: "方",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄤ",
     tradition: "方",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fang",
+    explain: "正四边形或六个面都是正四边形的六面体。正直：品行～正。方向；方面：东～。双～。办法：千～百计。领导有～。地点；地区：前～。～言。治病的药单：药～。处～。工程上指土、石等堆积一立方米：土～。数学上指自乘的积：乘～。副词。正在；方才：～兴未艾。如梦～醒。年～十六。表示响度级的单位。将声音与一个1，000赫的纯音试听比较，当两者响度被判断为相同时，后者声压级的分贝数即被定为这个声音响度级的方数。旧写作㕫。量词。用于方形的东西：一～砚台。两～图章。"
   },
   {
     char: "施",
@@ -35870,7 +37233,9 @@ const t = [
     mark: "ㄕ",
     tradition: "施",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shi",
+    explain: "施行；施展：实～。措～。～工。无计可～。给予：～礼。～压力。施舍：～诊。～与。在物体上加某种东西：～粉（搽粉）。～化肥。姓。"
   },
   {
     char: "旁",
@@ -35883,7 +37248,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "旁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pang",
+    explain: "边侧。两旁、路旁、身旁别的、其他的。旁人歧出的。主干旁枝不正的、偏邪的。旁门左道从旁。旁徵博引、旁敲侧击"
   },
   {
     char: "旅",
@@ -35892,11 +37259,13 @@ const t = [
     radical: "方",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "旅",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "在外地做客；旅行：～客。～途。～日侨胞。～京同学会。旅行的人；离家在外的人：行～。商～。同“稆”。军队的编制单位，隶属于军或集团军，下辖若干营。指军队：劲～。军～之事。共同：～进～退。"
   },
   {
     char: "旋",
@@ -35909,7 +37278,9 @@ const t = [
     mark: "ㄒㄩㄢˊ",
     tradition: "鏇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xuan",
+    explain: "旋转：～绕。盘～。回～。天～地转。返回；归来：～里。凯～。圈儿：～涡。老鹰在空中一个～儿一个～儿地转了半天。毛发呈旋涡状的地方：头顶上有两个～儿。不久；很快地：～即。姓。"
   },
   {
     char: "族",
@@ -35922,7 +37293,9 @@ const t = [
     mark: "ㄗㄨˊ",
     tradition: "族",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zu",
+    explain: "家族：宗～。合～。同～。古代的一种残酷刑法，杀死犯罪者的整个家族，甚至他母亲、妻子等的家族。种族；民族：汉～。斯拉夫～。事物有某种共同属性的一大类：水～。语～。芳香～化合物。打工～。上班～。"
   },
   {
     char: "旗",
@@ -35935,7 +37308,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "旗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "旗子：国～。红～。挂～。指八旗：汉军～。属于八旗的，特指属于满族的：～人。～袍。八旗兵驻屯的地方，现在地名沿用：正黄～。内蒙古自治区的行政区划单位，相当于县。姓。"
   },
   {
     char: "无",
@@ -35948,7 +37323,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "無",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wu",
+    explain: "没有（跟“有”相对）：从～到有。～产阶级。有则改之，～则加勉。不：～论。～须。不论：事～大小，都有人负责。同“毋”。姓。"
   },
   {
     char: "既",
@@ -35961,7 +37338,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "既",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "已经：～成事实。～得利益。～往不咎。既然：～来之，则安之。～要做，就一定要做好。完了；尽：食～。跟“且、又、也”等副词呼应，表示两种情况兼而有之：～高且大。～聪明又用功。～要有周密的计划，也要有切实的措施。"
   },
   {
     char: "日",
@@ -35970,11 +37349,13 @@ const t = [
     radical: "日",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄖˋ",
     tradition: "日",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ri",
+    explain: "太阳：～出。～落。指日本：～圆。～语。从天亮到天黑的一段时间；白天（跟“夜”相对）：～班。～场。～～夜夜。夜以继～。地球自转一周的时间；一昼夜；天：今～。明～。改～再谈。用于计算天数：十～。多～不见。每天；一天天：～记。～产量。～新月异。生产～有增加。经济～趋繁荣。泛指一段时间：往～。来～。昔～。特指某一天：假～。生～。国庆～。姓。"
   },
   {
     char: "旦",
@@ -35983,11 +37364,13 @@ const t = [
     radical: "日",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄢˋ",
     tradition: "旦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dan",
+    explain: "天亮的时候；早晨：～暮。～夕。通宵达～。枕戈待～。（某一）天：一～。元～。姓。戏曲角色，扮演妇女，有青衣、花旦、老旦、武旦等区别。旦尼尔的简称。旧时的纤度单位，9000米长的天然丝或化学纤维重量为多少克，它的纤度就是多少旦，1旦=1/9特。旧称（dài）。"
   },
   {
     char: "旧",
@@ -35996,11 +37379,13 @@ const t = [
     radical: "丨",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄡˋ",
     tradition: "舊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiu",
+    explain: "过去的；过时的（跟“新”相对）：～时代。～经验。～社会。不要用～脑筋对待新事物。因经过长时间或经过使用而变色或变形的（跟“新”相对）：～书。～衣服。窗纱～了。曾经有过的；以前的：张家口是～察哈尔省省会。老交情；老朋友：怀～。念～。亲戚故～。姓。"
   },
   {
     char: "旨",
@@ -36013,7 +37398,9 @@ const t = [
     mark: "ㄓˇ",
     tradition: "旨",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhi",
+    explain: "滋味美：～酒。甘～。意义；用意；目的：主～。要～。宗～。会议通过了一系列～在进一步发展两国科学技术合作的决议。意旨，特指帝王的命令：圣～。"
   },
   {
     char: "早",
@@ -36026,7 +37413,9 @@ const t = [
     mark: "ㄗㄠˇ",
     tradition: "早",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zao",
+    explain: "早晨：清～。～饭。从～到晚。表示事情的发生离现在已有一段时间；早已：他～走了。这件事我们～商量好了。时间在先的：～期。～稻。比一定的时间靠前：～熟。～婚。你～点儿来。忙什么，离开演还～呢。问候的话，用于早晨见面时互相招呼：老师～!姓。"
   },
   {
     char: "旬",
@@ -36039,7 +37428,9 @@ const t = [
     mark: "ㄒㄩㄣˊ",
     tradition: "旬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xun",
+    explain: "十日为一旬，一个月分上中下三旬：上～。兼～（二十天）。十岁为一旬：八～老母。年过七～。"
   },
   {
     char: "旭",
@@ -36052,7 +37443,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "旭",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "初出的阳光：朝～。姓。"
   },
   {
     char: "旱",
@@ -36065,7 +37458,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "旱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "跟水无关的：～烟。～伞。～冰。非水田的；陆地上的：～地。～稻。～獭。～船。指陆地交通：～路。起～。"
   },
   {
     char: "时",
@@ -36074,11 +37469,13 @@ const t = [
     radical: "日",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕˊ",
     tradition: "時",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "时间（对空间而言）：～空观念。时代；时候：古～。唐～。战～。时间单位。旧指时辰，现指小时，即一日（一个昼夜）的二十四分之一。指规定的时间：按～上班。过～作废。季节：四～如春。现在的；当时的：～事。～兴。时俗；时尚：入～。副词。时常：～～。～有错误。有时候：～阴～晴。时机：不误农～。"
   },
   {
     char: "旷",
@@ -36091,7 +37488,9 @@ const t = [
     mark: "ㄎㄨㄤˋ",
     tradition: "曠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuang",
+    explain: "空而宽阔：～野。地～人稀。心境开阔：～达。心～神怡。耽误；荒废：～课。～工。～日废时。相互配合的两个零件（如轴和孔、键和键槽等）的间隙大于所要求的范围；衣着过于肥大，不合体：车轴～了。螺丝～了。这双鞋我穿着太～了。姓。"
   },
   {
     char: "旺",
@@ -36104,7 +37503,9 @@ const t = [
     mark: "ㄨㄤˋ",
     tradition: "旺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wang",
+    explain: "旺盛：兴～。火着得很～。花开得正～。庄稼长得真～。多；充足：奶水～。新打的井，水～极了。姓。"
   },
   {
     char: "昂",
@@ -36117,7 +37518,9 @@ const t = [
     mark: "ㄤˊ",
     tradition: "昂",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ang",
+    explain: "仰：～首。精神振奋：激～。气～～。（价钱）高：～贵。"
   },
   {
     char: "昆",
@@ -36130,7 +37533,9 @@ const t = [
     mark: "ㄎㄨㄣ",
     tradition: "昆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kun",
+    explain: "哥哥：～弟。后代；子孙：后～。众多：～虫。“昆仑”的“昆”。"
   },
   {
     char: "昌",
@@ -36143,7 +37548,9 @@ const t = [
     mark: "ㄔㄤ",
     tradition: "昌",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "chang",
+    explain: "兴旺；兴盛：～盛。～明。正当（dàng）；美好：～言。姓。"
   },
   {
     char: "明",
@@ -36156,7 +37563,9 @@ const t = [
     mark: "ㄇㄧㄥˊ",
     tradition: "明",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "ming",
+    explain: "明亮（跟“暗”相对）：～月。天～。灯火通～。明白；清楚：问～。讲～。分～。去向不～。公开；显露在外；不隐蔽（跟“暗”相对）：～说。～令。～沟。～枪易躲，暗箭难防。眼力好；眼光正确；对事物现象看得清：聪～。英～。精～强干。耳聪目～。眼～手快。光明：弃暗投～。～人不做暗事。视觉：双目失～。懂得；了解：深～大义。不～利害。表明；显示：开宗～义。赋诗～志。明明：你～知道他不会，干吗还要为难他呀?次于今年、今天的：～天。～晨。～年。～春。朝代，公元1368—1644，朱元璋所建。先定都南京，永乐年间迁都北京。姓。"
   },
   {
     char: "昏",
@@ -36169,7 +37578,9 @@ const t = [
     mark: "ㄏㄨㄣ",
     tradition: "昏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hun",
+    explain: "天刚黑的时候；黄昏：晨～。黑暗；模糊：～暗。～黄。～花。天～地暗。头脑迷糊；神志不清：～庸。～头～脑。又同“婚”。"
   },
   {
     char: "易",
@@ -36178,11 +37589,13 @@ const t = [
     radical: "日",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄧˋ",
     tradition: "易",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "做起来不费事的；容易（跟“难”相对）：简～。轻～。～如反掌。显而～见。得来不～。平和：平～近人。轻视。改变；变换：变～。～名。移风～俗。不～之论。交换：贸～。交～。～货协定。以物～物。姓。"
   },
   {
     char: "昔",
@@ -36195,7 +37608,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "昔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "从前；过去：今～对比。古又同“腊（xī）”。古又同“夕”。"
   },
   {
     char: "昙",
@@ -36208,7 +37623,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "曇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tan",
+    explain: "云彩密布；多云。姓。"
   },
   {
     char: "星",
@@ -36217,11 +37634,13 @@ const t = [
     radical: "日",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄥ",
     tradition: "星",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "xing",
+    explain: "天文学上指宇宙间能发光的或反射光的天体；一般指夜间天空中发光的天体：～球。恒～。行（xíng）～。卫～。披～戴月。细碎的小颗粒东西：火～儿。秤等衡器上记数的点：定盘～。军官衣领上的徽记：五～将军。形容夜间：～行。～奔。星名，二十八宿之一：～宿。像星一样排列，分散：～～点点。喻某一方面新出现的杰出人物：影～。歌～。古代妇女面上所饰的花点。以星象推算吉凶祸福的方术：～术。～相（xiàng）。原子核物理学上指高能粒子射入核乳胶或云室、气泡室时发现有许多径迹从一点发出的现象。国际通用的衡量宾馆、饭店的等级标准：～级。五～饭店。"
   },
   {
     char: "映",
@@ -36234,7 +37653,9 @@ const t = [
     mark: "ㄧㄥˋ",
     tradition: "映",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ying",
+    explain: "照：炉火把他的脸～得通红。～射。因光线照射而显出物体的形象：水面倒～着美丽的白塔。新片上～。"
   },
   {
     char: "春",
@@ -36247,7 +37668,9 @@ const t = [
     mark: "ㄔㄨㄣ",
     tradition: "春",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "chun",
+    explain: "春季：～景。温暖如～。指一年的时间：一卧东山三十～。指男女情欲：怀～。～心。比喻生机：妙手回～。姓。"
   },
   {
     char: "昧",
@@ -36256,11 +37679,13 @@ const t = [
     radical: "日",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄟˋ",
     tradition: "昧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mei",
+    explain: "糊涂；不明白：蒙～。愚～。素～平生（一向不认识）。隐藏：拾金不～。～良心。昏暗：幽～。冒犯；冒昧：～死。"
   },
   {
     char: "昨",
@@ -36273,7 +37698,9 @@ const t = [
     mark: "ㄗㄨㄛˊ",
     tradition: "昨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zuo",
+    explain: "昨天：～夜。泛指过去：觉今是而～非。"
   },
   {
     char: "昭",
@@ -36286,7 +37713,9 @@ const t = [
     mark: "ㄓㄠ",
     tradition: "昭",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhao",
+    explain: "明显；显著：～彰。～著。表明；显示：以～信守。姓。"
   },
   {
     char: "是",
@@ -36299,7 +37728,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "是",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "对；正确（跟“非”相对）：一无～处。自以为～。实事求～。你说得极～。应当早做准备才～。认为正确：～古非今。深～其言。表示答应的词：～，我知道。～，我就去。姓。指示代词。这；这个：如～。由～可知。～可忍，孰不可忍?。～日天气晴朗。联系两种事物，表明两者同一或后者说明前者的种类、属性：《阿Q正传》的作者～鲁迅。节约～不浪费的意思。与“的”字配合使用，有分类的作用：这张桌子～石头的。那瓶墨水～红的。我～来看他的。联系两种事物，表示陈述的对象属于“是”后面所说的情况：他～一片好心。咱们～好汉一言，快马一鞭。院子里～冬天，屋子里～春天。表示存在，主语通常是表处所的词语，“是”后面表示存在的事物：村子前面～一片水田。他跑得满身～汗。“是”前后用相同的名词或动词，连用两个这样的格式，表示所说的几桩事物互不相干，不能混淆：去年～去年，今年～今年，你当年年一个样哪!。说～说，做～做，有意见也不能耽误干活儿。在上半句里“是”前后用相同的名词、形容词或动词，表示让步，含有“虽然”的意思：诗～好诗，就是长了点。东西旧～旧，可是还能用。我去～去，可是不在那儿吃饭。用在句首，加重语气：～谁告诉你的?。～国防战士，日日夜夜保卫着祖国，咱们才能过幸福的日子。用在名词前面，含有“凡是”的意思：～有利于群众的事情他都肯干。用在名词前面，含有“适合”的意思：他想的很～路。这场雨下的～时候。东西放的都挺～地方。用在选择问句、是非问句或反问句里：你～吃米饭～吃面?。他不～走了吗?。你～累了不～?⑾（必须重读）表示坚决肯定，含有“的确、实在”的意思：我打听清楚了，他那天～没去。这本书～好，你可以看看。"
   },
   {
     char: "昵",
@@ -36312,7 +37743,9 @@ const t = [
     mark: "ㄋㄧˋ",
     tradition: "昵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ni",
+    explain: "亲近：亲～。"
   },
   {
     char: "昼",
@@ -36321,11 +37754,13 @@ const t = [
     radical: "一",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄡˋ",
     tradition: "晝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhou",
+    explain: "从天亮到天黑的一段时间；白天（跟“夜”相对）：～夜。白～。"
   },
   {
     char: "显",
@@ -36334,11 +37769,13 @@ const t = [
     radical: "日",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄢˇ",
     tradition: "顯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xian",
+    explain: "露在外面容易看出来；明显：～而易见。药刚吃了一剂，效果还不很～。表现；露出：各～其能。大～身手。有名声有权势地位的：～达。～赫。姓。"
   },
   {
     char: "晃",
@@ -36351,7 +37788,9 @@ const t = [
     mark: "ㄏㄨㄤˋ",
     tradition: "晃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huang",
+    explain: "1.摇动；摆动：摇头～脑。风刮得树枝直～。2.晃县，旧地名，在湖南，今改称新晃（Xīnhuǎng）侗族自治县。"
   },
   {
     char: "晋",
@@ -36364,7 +37803,9 @@ const t = [
     mark: "ㄐㄧㄣˋ",
     tradition: "晋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "周朝国名（前11世纪中叶—前4世纪中叶）。在今山西、河北南部一带。被韩、赵、魏三家所灭。朝代名。1.（265—316）。司马炎灭魏后建立。建都洛阳，国号晋，史称西晋。为匈奴人刘聪所灭。后司马睿在建康（今江苏南京）重建晋朝（317—420），史称东晋。为刘裕所灭。西晋、东晋合称两晋。五代之一（936—946）。石敬瑭勾结契丹灭后唐建立。建都汴（今河南开封），国号晋，史称后晋。为契丹所灭。山西的别称。进；升：～见。～级。"
   },
   {
     char: "晌",
@@ -36377,7 +37818,9 @@ const t = [
     mark: "ㄕㄤˇ",
     tradition: "晌",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shang",
+    explain: "一天里的一段时间：停了一～。前半～。〈方〉晌午；正午：歇～。"
   },
   {
     char: "晒",
@@ -36386,11 +37829,13 @@ const t = [
     radical: "日",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄕㄞˋ",
     tradition: "曬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shai",
+    explain: "太阳把光和热照射到物体上：烈日～得人头昏眼花。在阳光下吸收光和热：～粮食。让孩子们多～太阳。比喻置之不理；慢待：把他给～在那儿了。"
   },
   {
     char: "晓",
@@ -36403,7 +37848,9 @@ const t = [
     mark: "ㄒㄧㄠˇ",
     tradition: "曉",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "xiao",
+    explain: "天刚亮的时候：拂～。～雾。破～。鸡鸣报～。～行夜宿。知道：通～。家喻户～。使人知道：揭～。～以利害。姓。"
   },
   {
     char: "晕",
@@ -36416,7 +37863,9 @@ const t = [
     mark: "ㄩㄣˋ",
     tradition: "暈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yun",
+    explain: "义同“晕”（yùn）用于“头晕、晕头晕脑、晕头转向”等。昏迷：～倒。～厥。他～过去了。"
   },
   {
     char: "晚",
@@ -36429,7 +37878,9 @@ const t = [
     mark: "ㄨㄢˇ",
     tradition: "晚",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wan",
+    explain: "晚上：今～。～会。从早到～。时间靠后的：～稻。～秋。～年。～清（清朝末年）。比规定的或合适的时间靠后：八点再去就～了。今年的春天来得～。后来的：～辈。后辈对前辈的自称（用于书信）。靠后的一段时间，特指人的晚年：岁～。～节。～景。姓。"
   },
   {
     char: "晤",
@@ -36442,20 +37893,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "晤",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "晦",
-    spell: "huì",
-    stroke: "11",
-    radical: "日",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄨㄟˋ",
-    tradition: "晦",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "见面：会～。～谈。～面。"
   },
   {
     char: "晨",
@@ -36468,7 +37908,9 @@ const t = [
     mark: "ㄔㄣˊ",
     tradition: "晨",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "chen",
+    explain: "早晨，有时也泛指半夜以后到中午以前的一段时间：清～。凌～。～光。姓。"
   },
   {
     char: "普",
@@ -36477,11 +37919,13 @@ const t = [
     radical: "日",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄆㄨˇ",
     tradition: "普",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pu",
+    explain: "普遍；全面：～选。～查。～照。～天同庆。姓。"
   },
   {
     char: "景",
@@ -36494,7 +37938,9 @@ const t = [
     mark: "ㄐㄧㄥˇ",
     tradition: "景",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "jing",
+    explain: "物体的形影、阴影。同「影」。  【组词】：景印"
   },
   {
     char: "晰",
@@ -36507,7 +37953,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "晰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "清楚；明白：清～。明～。"
   },
   {
     char: "晴",
@@ -36520,7 +37968,9 @@ const t = [
     mark: "ㄑㄧㄥˊ",
     tradition: "晴",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "qing",
+    explain: "天空无云或云很少：～天。天～了。"
   },
   {
     char: "晶",
@@ -36533,7 +37983,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "晶",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "光亮：～莹。亮～～。水晶：茶～。墨～。指晶体：结～。"
   },
   {
     char: "智",
@@ -36542,11 +37994,13 @@ const t = [
     radical: "日",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓˋ",
     tradition: "智",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "有智慧；聪明：明～。～者千虑，必有一失。智慧；见识：足～多谋。～勇双全。吃一堑，长一～。姓。"
   },
   {
     char: "晾",
@@ -36559,7 +38013,9 @@ const t = [
     mark: "ㄌㄧㄤˋ",
     tradition: "晾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liang",
+    explain: "把东西放在通风或阴凉的地方，使干燥：～干菜。晒（东西）：～衣服。海滩上～着渔网。撇在一边不理睬；冷落：他俩说个没完，把我～在一边。同“凉”（liàng）。姓。"
   },
   {
     char: "暂",
@@ -36572,7 +38028,9 @@ const t = [
     mark: "ㄗㄢˋ",
     tradition: "暫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zan",
+    explain: "时间短（跟“久”相对）：短～。暂时：～停。～住。～行条例。～不答复。工作～告一段落。"
   },
   {
     char: "暇",
@@ -36585,7 +38043,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "暇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "没有事的时候；空闲：无～兼顾。自顾不～。"
   },
   {
     char: "暑",
@@ -36598,7 +38058,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "暑",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "热（跟“寒”相对）：～天。中（zhòng）～。受～。寒来～往。"
   },
   {
     char: "暖",
@@ -36611,7 +38073,9 @@ const t = [
     mark: "ㄋㄨㄢˇ",
     tradition: "暖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nuan",
+    explain: "暖和：风和日～。春～花开。天～了，不用穿大衣了。使变温暖：～酒。～一～手。“煖”"
   },
   {
     char: "暗",
@@ -36624,7 +38088,9 @@ const t = [
     mark: "ㄢˋ",
     tradition: "暗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "an",
+    explain: "光线不足；黑暗（跟“明”相对，下同）：太阳落山了，天色渐渐～下来。隐藏不露的；秘密的：～号。明人不做～事。糊涂；不明白：～昧。兼听则明，偏信则～。（颜色）浓重，不鲜明：～紫。～绿。"
   },
   {
     char: "暮",
@@ -36637,20 +38103,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "暮",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "暴",
-    spell: "bào",
-    stroke: "15",
-    radical: "日",
-    struct: "上下结构",
-    five: "水",
-    method: "会意",
-    mark: "ㄅㄠˋ",
-    tradition: "暴",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "傍晚：～色。朝三～四。（时间）将尽；晚：～春。～年。天寒岁～。姓。"
   },
   {
     char: "曙",
@@ -36663,7 +38118,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "曙",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "晓；天刚亮：～色。～光。"
   },
   {
     char: "曲",
@@ -36672,11 +38129,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄩˇ",
     tradition: "麯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qu",
+    explain: "一种韵文形式，出现于南宋和金代，盛行于元代，是受民间歌曲的影响而形成的，句法较词更为灵活，多用口语，用韵也更接近口语。一支曲可以单唱，几支曲可以合成一套，也可以用几套曲子写成戏曲。（～儿）歌曲：～调。戏～。小～儿。高歌一～。歌谱：《义勇军进行曲》是聂耳作的～。"
   },
   {
     char: "更",
@@ -36689,7 +38148,9 @@ const t = [
     mark: "ㄍㄥˋ",
     tradition: "更",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "geng",
+    explain: "改变；改换：～改。～换。经历：少（shào）不～事（年纪轻，没有经历过什么事）。旧时夜间计时的单位。一夜分为五更，每更约两小时：三～半夜。"
   },
   {
     char: "曹",
@@ -36702,7 +38163,9 @@ const t = [
     mark: "ㄘㄠˊ",
     tradition: "曹",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cao",
+    explain: "等，辈：尔～（你们）。吾～。古代分科办事的官署：部～（中国明、清两代各部司曹的通称，源于汉代曹史的简称，相当于郡守的总务长）。诉讼的原告、被告两方。姓。"
   },
   {
     char: "曼",
@@ -36715,7 +38178,9 @@ const t = [
     mark: "ㄇㄢˋ",
     tradition: "曼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "man",
+    explain: "柔美；细腻：～舞。长；远：～延。～声。姓。"
   },
   {
     char: "曾",
@@ -36728,7 +38193,9 @@ const t = [
     mark: "ㄘㄥˊ",
     tradition: "曾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ceng",
+    explain: "指中间隔两代的亲属：～祖（祖父的父亲）。～孙（孙子的儿子）。古又同“增”。"
   },
   {
     char: "替",
@@ -36741,7 +38208,9 @@ const t = [
     mark: "ㄊㄧˋ",
     tradition: "替",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ti",
+    explain: "代：～换。介词。为；给：～祖国争光。衰落；废：兴～。"
   },
   {
     char: "最",
@@ -36754,7 +38223,9 @@ const t = [
     mark: "ㄗㄨㄟˋ",
     tradition: "最",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zui",
+    explain: "副词。表示在程度上达到极点，超过一切同类的人或事物：～好。"
   },
   {
     char: "月",
@@ -36763,11 +38234,13 @@ const t = [
     radical: "月",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄩㄝˋ",
     tradition: "月",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "月球；月亮：～食。～光。赏～。计时的单位，公历1年分为12个月。每月的：～刊。～产量。形状像月亮的；圆的：～琴。～饼。姓。"
   },
   {
     char: "有",
@@ -36780,7 +38253,9 @@ const t = [
     mark: "ㄧㄡˋ",
     tradition: "有",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "you",
+    explain: "又、再。  【组词】：世衰道微，邪说暴行有作。（《孟子．滕文公下》）连词。用于整数与余数之间，表示数目的附加。  【组词】：吾十有五而志于学，三十而立。（《论语．为政》）"
   },
   {
     char: "朋",
@@ -36789,11 +38264,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄆㄥˊ",
     tradition: "朋",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "朋友：良～。宾～满座。结党：～比为奸。伦比：硕大无～。姓。"
   },
   {
     char: "服",
@@ -36806,7 +38283,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "服",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "衣服；衣裳：制～。便～。丧服：有～在身。穿（衣服）：～丧。吃（药）：～药。内～。每次～三片。担任（职务）；承当（义务或刑罚）：～刑。～兵役。承认；服从；信服：～输。心～口～。你有道理，我算～了你了。使信服：～众。以理～人。适应：不～水土。姓。"
   },
   {
     char: "朗",
@@ -36819,7 +38298,9 @@ const t = [
     mark: "ㄌㄤˇ",
     tradition: "朗",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "lang",
+    explain: "光线充足；明亮：明～。晴～。开～。天～气清。声音清晰响亮：～诵。～读。姓。"
   },
   {
     char: "望",
@@ -36832,7 +38313,9 @@ const t = [
     mark: "ㄨㄤˋ",
     tradition: "望",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wang",
+    explain: "看；向远处看：他～了一眼就走了。一～无际。拜访；问候：拜～。探～。盼望；希望：渴～。丰收在～。声誉。也指享有声誉的人：威～。一乡之～。怨：怨～。指望子：酒～。介词。向；朝：他～我们点头微笑。农历每月十五日（有时是十六或十七）：朔～（朔是初一）。"
   },
   {
     char: "朝",
@@ -36845,7 +38328,9 @@ const t = [
     mark: "ㄔㄠˊ",
     tradition: "朝",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chao",
+    explain: "朝廷（跟“野”相对）：上～。在～党（执政党）。朝代：唐～。改～换代。指一个君主的统治时期：康熙～。朝见；朝拜：～觐。～顶。面对着；向：脸～里。坐东～西。表示动作的方向：～南开门。～学校走去。姓。"
   },
   {
     char: "期",
@@ -36858,7 +38343,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "期",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "规定的时间或一段时间：如～完成。假～。希望；等待：以～发展。～待。约会：不～而遇。量词。用于分期的事物：《英语世界》第七～。补习班办了三～。"
   },
   {
     char: "朦",
@@ -36871,7 +38358,9 @@ const t = [
     mark: "ㄇㄥˊ",
     tradition: "朦",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "meng",
+    explain: "〔～胧〕ａ．月光不明；ｂ．不清楚，模糊。"
   },
   {
     char: "木",
@@ -36880,11 +38369,13 @@ const t = [
     radical: "木",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄇㄨˋ",
     tradition: "木",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "树木：伐～。果～。独～不成林。木头：枣～。榆～。檀香～。棺材：棺～。行将就～。质朴：～讷。反应迟钝：～然。～头～脑。他反应有点～。麻木：两脚冻～了。舌头～了，什么味道也尝不出来。姓。"
   },
   {
     char: "未",
@@ -36893,11 +38384,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄨㄟˋ",
     tradition: "未",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "1.副词。1.不：～便。～知可否。2.没；没有：～见此人。2.地支的第八位。3.未时，旧式记时法，相当于十三点到十五点。"
   },
   {
     char: "末",
@@ -36906,11 +38399,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄛˋ",
     tradition: "末",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "1.东西的梢；尽头：～梢。秋毫之～。2.不是根本的、主要的事物（跟“本”相对）：本～倒置。舍本逐～。3.最后；终了；末尾：春～。明～。～班车。上世纪～。4.末子：锯～。茶叶～儿。把药研成～儿。5.姓。6.戏曲角色行当，扮演中年男子，京剧归入老生一类。"
   },
   {
     char: "本",
@@ -36919,11 +38414,13 @@ const t = [
     radical: "木",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄅㄣˇ",
     tradition: "本",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "ben",
+    explain: "草木的根：～草（泛指中药）。无～之木。事物的根源，与“末”相对：～末（头尾；始终）。根～（根源；彻底；本质上）。草的茎，树的干：草～植物。中心的，主要的：～部。～体。原来：～来。～领。自己这方面的：～国。～身。～位。～分（fèn）。"
   },
   {
     char: "术",
@@ -36932,11 +38429,13 @@ const t = [
     radical: "木",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄕㄨˋ",
     tradition: "術",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "技艺。  【组词】：武术、美术、医术方法、策略。  【组词】：战术、权术、仁术"
   },
   {
     char: "朱",
@@ -36945,11 +38444,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄓㄨ",
     tradition: "硃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhu",
+    explain: "大红色。  【组词】：近朱者赤姓。"
   },
   {
     char: "朴",
@@ -36962,7 +38463,9 @@ const t = [
     mark: "ㄆㄧㄠˊ",
     tradition: "樸",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pu",
+    explain: "没有加工的木材，比喻不加修饰：～素。～实。"
   },
   {
     char: "朵",
@@ -36971,11 +38474,13 @@ const t = [
     radical: "几",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄉㄨㄛˇ",
     tradition: "朵",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "duo",
+    explain: "植物的花或苞：花～。量词。用于花和云彩等：一～玫瑰花。红霞万～。"
   },
   {
     char: "机",
@@ -36988,7 +38493,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "機",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "机器：缝纫～。打字～。插秧～。拖拉～。飞机：客～。运输～。～场。～群。事情变化的枢纽；有重要关系的环节：事～。生～。转～。机会；时机：乘～。随～应变。～不可失。生活机能：有～体。无～化学。重要的事务：日理万～。心思；念头：动～。心～。杀～。能迅速适应事物的变化的；灵活：～智。～警。姓。"
   },
   {
     char: "朽",
@@ -37001,7 +38508,9 @@ const t = [
     mark: "ㄒㄧㄡˇ",
     tradition: "朽",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xiu",
+    explain: "腐烂：腐～。衰老：老～。"
   },
   {
     char: "杀",
@@ -37014,7 +38523,9 @@ const t = [
     mark: "",
     tradition: "殺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sha",
+    explain: "使人或动物失去生命：～生。～敌。～鸡取卵。～一儆百。战斗，搏斗：～出重围。消减：～风景。药物等刺激身体感觉疼痛：肥皂水～了眼睛。收束：～价。～尾。用在动词后，表示程度深：笑～人。恨～。"
   },
   {
     char: "杂",
@@ -37023,11 +38534,13 @@ const t = [
     radical: "朩",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄗㄚˊ",
     tradition: "雜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "za",
+    explain: "多种多样的：复～。～色。～技。他看的书很～，哪方面的都有。正项以外的；正式的以外的：～费。～项。～牌儿。混合在一起；掺杂：夹～。他～在人群中混进了城。草丛中还～有粉红色的野花。"
   },
   {
     char: "权",
@@ -37036,11 +38549,13 @@ const t = [
     radical: "木",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄩㄢˊ",
     tradition: "權",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "quan",
+    explain: "秤锤。权衡：～其轻重。权力：当～。有职有～。掌握大～。生杀予夺之～。权利：人～。公民～。选举～。发言～。有利的形势：主动～。制空～。权变；权宜：～诈。～谋。通～达变。权且；姑且：～充。死马～当活马医。又同“颧”。"
   },
   {
     char: "杆",
@@ -37053,7 +38568,9 @@ const t = [
     mark: "ㄍㄢˇ",
     tradition: "杆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gan",
+    explain: "器物上较细长的棍状物。有的实心，有的中空：秤～儿。钢笔～儿。量词。用于有杆的器物：一～枪。"
   },
   {
     char: "杈",
@@ -37066,7 +38583,9 @@ const t = [
     mark: "ㄔㄚˋ",
     tradition: "杈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cha",
+    explain: "一种用来挑（tiǎo）秸秆、柴草等的农具。多为木制，一端一般有三个较长的弯齿，一端为长柄。"
   },
   {
     char: "杉",
@@ -37079,7 +38598,9 @@ const t = [
     mark: "ㄕㄚ",
     tradition: "杉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shan",
+    explain: "杉树，常绿乔木，高可达30米，树冠的形状像塔，叶子长披针形，花单性，果实球形。木材白色，质轻，有香气，供建筑和制造器具等用。（Shān）姓。"
   },
   {
     char: "李",
@@ -37092,7 +38613,9 @@ const t = [
     mark: "ㄌㄧˇ",
     tradition: "李",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "li",
+    explain: "1.李子树，落叶灌木或小乔木，叶子倒卵形，花白色，果实球形，黄色或紫红色，是常见水果。2.这种植物的果实。3.（Lǐ）姓。"
   },
   {
     char: "杏",
@@ -37101,11 +38624,13 @@ const t = [
     radical: "木",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄥˋ",
     tradition: "杏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xing",
+    explain: "杏树，落叶乔木，叶子宽卵形，花白色或粉红色，果实近球形，成熟时一般黄红色，味酸甜。（～儿）这种植物的果实。（Xìng）姓。"
   },
   {
     char: "材",
@@ -37118,7 +38643,9 @@ const t = [
     mark: "ㄘㄞˊ",
     tradition: "材",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cai",
+    explain: "木料：木～。树木已经成～。原材料；资料：钢～。教～。人的资质能力：因～施教。从资质能力的高低来衡量的某种人：人～。蠢～。棺材：一口～。"
   },
   {
     char: "村",
@@ -37131,7 +38658,9 @@ const t = [
     mark: "ㄘㄨㄣ",
     tradition: "村",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cun",
+    explain: "村庄，农民聚居的地方。也泛指小的居住区：乡～。工人新～。具有特定功能的住宿、娱乐与活动处所：度假～。亚运～。粗俗：～野。"
   },
   {
     char: "杖",
@@ -37144,7 +38673,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "杖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "拐杖；手杖：扶～而行。泛指棍棒：擀面～。拿刀动～。"
   },
   {
     char: "杜",
@@ -37157,7 +38688,9 @@ const t = [
     mark: "ㄉㄨˋ",
     tradition: "杜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "du",
+    explain: "杜梨树，落叶乔木。果实叫杜梨，也叫棠梨。苗木常作梨树的砧木。堵塞：以～流弊。防微～渐。"
   },
   {
     char: "束",
@@ -37170,7 +38703,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "束",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: '捆绑；系（jì）：～缚。腰～皮带。量词。用于捆起来的东西：一～鲜花。加以限制或受到限制：约～。拘～。～手～脚。捆扎成把或聚集成条状的东西：花～。光～。事情的结末：收～。结～。姓，作姓氏，仍然读作“shù”。山东汶上城东有"朿"姓，音同捆，与束不同。'
   },
   {
     char: "杠",
@@ -37183,7 +38718,9 @@ const t = [
     mark: "ㄍㄤˋ",
     tradition: "杠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gang",
+    explain: "较粗的棍子：顶门～。体操器械，有单杠、双杠、高低杠等。机床上的棍状零件：丝～。出殡时抬送灵柩的工具：～夫。粗的直线：他看过的书都打了不少红～。中尉军衔的标志是一～两星。把不通的文字或错字用直线划去或标出：他一面看，一面用红笔在稿子上～了许多杠子。比喻一定的标准。"
   },
   {
     char: "条",
@@ -37196,7 +38733,9 @@ const t = [
     mark: "ㄊㄧㄠˊ",
     tradition: "條",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tiao",
+    explain: "细长形的物体。  【组词】：线条、面条、枝条呈细长形状的。  【组词】：条纹、条膏次序、系统。  【组词】：有条不紊、井井有条分项举出的。  【组词】：条款、条文、条例量词：计算条状物的单位。  【组词】：一条鱼、两条线、三条香烟　计算文书分项的单位。  【组词】：民法共有一二二五条。"
   },
   {
     char: "来",
@@ -37205,11 +38744,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄞˊ",
     tradition: "來",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lai",
+    explain: "1.从别的地方到说话人所在的地方（跟“去”相对）：～往。～宾。～信。从县里～了几个干部。2.（问题、事情等）发生；来到：问题～了。开春以后，农忙～了。3.做某个动作（代替意义更具体的动词）：胡～。～一盘棋。～一场篮球比赛。你歇歇，让我～。何必～这一套?4.趋向动词。跟“得”或“不”连用，表示可能或不可能：他们俩很谈得～。这个歌我唱不～。5.用在另一动词前面，表示要做某件事：你～念一遍。大家～想办法。6.用在另一动词或动词结构后面，表示来做某件事：我们贺喜～了。他回家探亲～了。7.用在动词结构（或介词结构）与动词（或动词结构）之间，表示前者是方摘了一个荷叶～当雨伞。你又能用什么理由～说服他呢?8.来着：这话我多会儿说～?9.未来的：～年。～日方长。10.姓。11.诗歌、熟语、叫卖声里用作衬字：正月里～是新春。不愁吃～不愁穿。黑白桑葚～大樱桃。12.用在动词后，表示动作朝着说话人所在的地方：把锄头拿～。各条战线传～了振奋人心的消息。13.用在动词后，表示结果：信笔写～。一觉醒～。说～话长。看～今年超产没有问题。想～你是早有准备的了。"
   },
   {
     char: "杨",
@@ -37222,7 +38763,9 @@ const t = [
     mark: "ㄧㄤˊ",
     tradition: "楊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yang",
+    explain: "杨树，落叶乔木。种类很多，有山杨、毛白杨、小叶杨等多种，多为速生用材树。木材供建筑、造纸等用。"
   },
   {
     char: "杭",
@@ -37235,7 +38778,9 @@ const t = [
     mark: "ㄏㄤˊ",
     tradition: "杭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hang",
+    explain: "指浙江杭州：～纺（杭州出产的一种纺绸）。姓。"
   },
   {
     char: "杯",
@@ -37248,7 +38793,9 @@ const t = [
     mark: "ㄅㄟ",
     tradition: "杯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bei",
+    explain: "杯子：茶～。～盘狼藉。举～痛饮。杯状的锦标：银～。奖～。捧～。夺～。姓。"
   },
   {
     char: "杰",
@@ -37257,11 +38804,13 @@ const t = [
     radical: "木",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄝˊ",
     tradition: "杰",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "超乎寻常的：～作。才能出众的人：俊～。"
   },
   {
     char: "松",
@@ -37274,7 +38823,9 @@ const t = [
     mark: "ㄙㄨㄥ",
     tradition: "鬆",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "song",
+    explain: "常绿乔木。有多种，树皮多呈鳞状块片开裂，叶针形成束，球果有木质鳞片。是重要的用材及采松脂树种。不紧密；不坚实：捆得太～。～软。放开；使松：～手。～腰带。不紧张；不严格：～弛。～懈。用瘦肉、鱼等做成的茸毛状或碎末状食品：肉～。经济较宽裕：近两个月我手头儿～了一些。"
   },
   {
     char: "板",
@@ -37287,7 +38838,9 @@ const t = [
     mark: "ㄅㄢˇ",
     tradition: "闆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ban",
+    explain: "片状的较硬的物体：木～。钢～。玻璃～。专指店铺的门板：铺子都上～儿了。黑板：～报。～书。演奏民族音乐或戏曲时用来打拍子的乐器：檀～。（～儿）音乐和戏曲中的节拍：快～儿。慢～。走～。参看〖板眼〗。呆板：他们都那样活泼，显得我太～了。硬得像板子似的：地～了，锄不下去。露出严肃或不高兴的表情：他～着脸不睬人。见〖老板〗。"
   },
   {
     char: "极",
@@ -37300,7 +38853,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "極",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "顶点；尽头：登峰造～。无所不用其～。地球的南北两端；磁体的两端；电源或电器上电流进入或流出的一端：南～。北～。阴～。阳～。尽；达到顶点：～力。～目四望。物～必反。～一时之盛。最终的；最高的：～度。～端。～量。“极”也可做补语，但前头不能用“得”，后面一般带“了”，如“忙极了”。姓。"
   },
   {
     char: "构",
@@ -37313,7 +38868,9 @@ const t = [
     mark: "ㄍㄡˋ",
     tradition: "構",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gou",
+    explain: "构造；组合：～图。～词。结成（用于抽象事物）：虚～。～怨。指文艺作品：佳～。姓。构树，落叶乔木，叶子卵形，叶子和茎上有硬毛，花淡绿色，雌雄异株。树皮是制造桑皮纸和宣纸的原料。也叫楮或榖。"
   },
   {
     char: "枉",
@@ -37326,7 +38883,9 @@ const t = [
     mark: "ㄨㄤˇ",
     tradition: "枉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wang",
+    explain: "弯曲：矫～过正。使歪曲：贪赃～法。受屈：冤～。屈～。副词。徒然；白白地：～费心机。"
   },
   {
     char: "析",
@@ -37339,7 +38898,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "析",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "分开；散开：～居。条分缕～。分崩离～。分析：剖～。解～几何。奇文共欣赏，疑义相与～。姓。"
   },
   {
     char: "枕",
@@ -37352,7 +38913,9 @@ const t = [
     mark: "ㄓㄣˇ",
     tradition: "枕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhen",
+    explain: "枕头：～套。凉～。躺着的时候把头放在枕头上或其他东西上：～戈待旦。他～着胳膊睡着了。姓。"
   },
   {
     char: "林",
@@ -37365,7 +38928,9 @@ const t = [
     mark: "ㄌㄧㄣˊ",
     tradition: "林",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "成片的树木或竹子：森～。竹～。林业：农、～、牧、副、渔。聚集在一起的同类的人或事物：民族之～。碑～。"
   },
   {
     char: "枚",
@@ -37378,7 +38943,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "枚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "跟“个”相近，多用于形体小的东西：三～奖章。不胜～举（无法一个一个地全举出来）。姓。"
   },
   {
     char: "果",
@@ -37387,11 +38954,13 @@ const t = [
     radical: "丨、木",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄛˇ",
     tradition: "果",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "guo",
+    explain: "某些植物花落后含有种子的部分：～实。～品。～木。结～（ａ．结出果实；ｂ．事情的结局或成效）。结局，与“因”相对：因～。成～。坚决：～决。～断。确实，真的：～真。如～。充实，饱足：～腹。姓。"
   },
   {
     char: "枝",
@@ -37404,7 +38973,9 @@ const t = [
     mark: "ㄓ",
     tradition: "枝",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "树干旁生的茎条。树枝、枯枝、嫩枝零碎而不重要的。枝辞、枝节小事量词。计算细长物体的单位。一枝花、三枝毛笔"
   },
   {
     char: "枢",
@@ -37417,7 +38988,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "樞",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "门的轴：户～不蠹。中心的或关键的部分：中～。～纽。"
   },
   {
     char: "枣",
@@ -37430,7 +39003,9 @@ const t = [
     mark: "ㄗㄠˇ",
     tradition: "棗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zao",
+    explain: "枣树，落叶乔木，幼枝上有成对的刺，叶子卵形或椭圆形，花黄绿色。结核果，暗红色，卵形、椭圆形或球形，味甜，可以吃，也可入药。（～儿）这种植物的果实。（Zǎo）姓。"
   },
   {
     char: "枪",
@@ -37443,7 +39018,9 @@ const t = [
     mark: "",
     tradition: "槍",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiang",
+    explain: "长杆上装有金属尖头的冷兵器：红缨～。标～。通常指口径在20毫米以下，利用火药气体压力抛射弹头的武器。如手枪、步枪、冲锋枪、机关枪和具有特种用途的专用枪。形状像枪的器具：焊～。枪替，考试时替别人作文章或答题。"
   },
   {
     char: "枫",
@@ -37456,7 +39033,9 @@ const t = [
     mark: "ㄈㄥ",
     tradition: "楓",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "枫树，也叫枫香树。落叶大乔木。叶互生，掌状，秋季颜色变成艳红，故又名红叶。果球形。树干含供药用的树脂。槭属植物也俗称枫。"
   },
   {
     char: "枯",
@@ -37469,7 +39048,9 @@ const t = [
     mark: "ㄎㄨ",
     tradition: "枯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ku",
+    explain: "（植物等）失去水分：～萎。～槁。～草。～骨。（井、河流等）变得没有水：～井。海～石烂。肌肉干瘪：～瘦。没有生趣；枯燥：～坐。芝麻、大豆、油茶等榨油后的渣滓：菜～。茶～。麻～。姓。"
   },
   {
     char: "架",
@@ -37482,7 +39063,9 @@ const t = [
     mark: "ㄐㄧㄚˋ",
     tradition: "架",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jia",
+    explain: "用做支承的东西：书～。衣～。绞～。支承，搀扶：～桥。～不住。～空。互相殴打，争吵：打～。劝～。量词，多指有支柱或有机械的东西：五～飞机。捏造，虚构：～词诬控。古同“驾”，凌驾。"
   },
   {
     char: "枷",
@@ -37495,7 +39078,9 @@ const t = [
     mark: "ㄐㄧㄚ",
     tradition: "枷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jia",
+    explain: "旧时套在罪犯脖子上的刑具，用木板制成：披～带锁。"
   },
   {
     char: "柄",
@@ -37508,7 +39093,9 @@ const t = [
     mark: "ㄅㄧㄥˇ",
     tradition: "柄",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bing",
+    explain: "器物的把儿：刀～。勺～。植物的花、叶或果实跟茎或枝连着的部分：花～。叶～。比喻在言行上被人抓住的材料：话～。笑～。把～。执掌：～国。～政。权：国～。用于某些带把儿的东西：一～斧头。两～锄头。"
   },
   {
     char: "柏",
@@ -37521,7 +39108,9 @@ const t = [
     mark: "ㄅㄞˇ",
     tradition: "柏",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "bai",
+    explain: "柏树，常绿乔木，叶子鳞片状，果实为球果。木材质地坚硬，可用来做建筑材料等。（Bǎi）姓。"
   },
   {
     char: "某",
@@ -37530,11 +39119,13 @@ const t = [
     radical: "甘",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄡˇ",
     tradition: "某",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mou",
+    explain: "指示代词。指一定的人或事物（知道名称而不说出）：张～。解放军～部。指不定的人或事物：～人。～地。～年～月。～种线索。用来代替自己或自己的名字，如“某，张飞是也。”又如姓张的自称“张某”或“张某人”。有时叠用：～～人。～～学校。"
   },
   {
     char: "柑",
@@ -37547,7 +39138,9 @@ const t = [
     mark: "ㄍㄢ",
     tradition: "柑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gan",
+    explain: "常绿小乔木或灌木，开白色小花，果实球形稍扁，果肉多汁，味道甜酸，有的微苦，果皮粗糙，成熟后橙黄色，也有绿色的。种类很多，如芦柑、招柑、蜜柑等。果皮、叶子、种子可入药。这种植物的果实。‖有的地区叫柑子。"
   },
   {
     char: "柒",
@@ -37560,7 +39153,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "柒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "数目“七”的大写。多用于票证、账目等。"
   },
   {
     char: "染",
@@ -37573,7 +39168,9 @@ const t = [
     mark: "ㄖㄢˇ",
     tradition: "染",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ran",
+    explain: "用染料着色：～布。印～。感染；沾染（疾病、坏习惯、嗜好等）：传～。～病。中国画笔墨技法之一。"
   },
   {
     char: "柔",
@@ -37586,7 +39183,9 @@ const t = [
     mark: "ㄖㄡˊ",
     tradition: "柔",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "rou",
+    explain: "软（跟“刚”相对）：～软。～韧。～枝嫩叶。使变软：～麻。柔和（跟“刚”相对）：～情。温～。她的性子很～。姓。"
   },
   {
     char: "柜",
@@ -37599,7 +39198,9 @@ const t = [
     mark: "ㄍㄨㄟˋ",
     tradition: "櫃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gui",
+    explain: "柜子，存放东西的家具：衣～。书～。文件～。商店售货台。"
   },
   {
     char: "柠",
@@ -37612,7 +39213,9 @@ const t = [
     mark: "ㄋㄧㄥˊ",
     tradition: "檸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ning",
+    explain: "柠檬树，常绿小乔木，叶子长椭圆形，质厚，花单生，外面粉红色，里面白色。果实长椭圆形或卵形，果肉味极酸，可制饮料，果皮黄色，可提取柠檬油。这种植物的果实。"
   },
   {
     char: "查",
@@ -37625,7 +39228,9 @@ const t = [
     mark: "ㄔㄚˊ",
     tradition: "查",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cha",
+    explain: "见〖山楂〗（山查）。姓。"
   },
   {
     char: "柬",
@@ -37638,7 +39243,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "柬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "信件、名片、帖子等的统称：～札。～帖。请～。"
   },
   {
     char: "柱",
@@ -37651,7 +39258,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "柱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "柱子，建筑物中直立的起支撑作用的构件，用木、石或钢筋混凝土制成。像柱子的东西：冰～。水～。"
   },
   {
     char: "柳",
@@ -37664,7 +39273,9 @@ const t = [
     mark: "ㄌㄧㄡˇ",
     tradition: "柳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "liu",
+    explain: "落叶乔木或灌木。种类很多。有垂柳、旱柳、杞柳等。叶狭长，种子有毛。枝条柔韧，可供编织。星名。二十八宿之一。"
   },
   {
     char: "柴",
@@ -37677,7 +39288,9 @@ const t = [
     mark: "ㄔㄞˊ",
     tradition: "柴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chai",
+    explain: "柴火：木～。～草。上山打～。干瘦；不松软；纤维多，不易嚼烂：这芹菜显得～。酱肘子肥而不腻，瘦而不～。质量低或品质、能力差：这支笔刚用就坏，太～了。他棋下得特～。姓。"
   },
   {
     char: "柿",
@@ -37690,7 +39303,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "柿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "柿树，落叶乔木，品种很多，叶子椭圆形或倒卵形，花黄白色。结浆果，扁圆形或圆锥形，橙黄色或红色，可以吃。"
   },
   {
     char: "栅",
@@ -37703,7 +39318,9 @@ const t = [
     mark: "ㄕㄢ",
     tradition: "栅",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zha",
+    explain: "〔～极〕多极电子管靠阴极的一个电极。〔光～〕产生光的衍射图像的光学仪器。"
   },
   {
     char: "标",
@@ -37712,11 +39329,13 @@ const t = [
     radical: "木",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄅㄧㄠ",
     tradition: "標",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "biao",
+    explain: "树木的末梢。事物的枝节或表面：治～不如治本。标志；记号：路～。商～。～点。标准；指标：达～。超～。用文字或其他事物表明：～上记号。明码～价。给竞赛优胜者的奖品：锦～。夺～。用比价的方式承包工程或买卖货物时各竞争厂商所标出的价格：招～。投～。清末陆军编制之一，相当于后来的团。用于队伍，数词限用“一”：斜刺里（侧面）杀出一～人马。也作彪。姓。"
   },
   {
     char: "栈",
@@ -37729,7 +39348,9 @@ const t = [
     mark: "ㄓㄢˋ",
     tradition: "棧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhan",
+    explain: "储存货物或供旅客住宿的房屋：货～。客～。养牲畜的竹、木栅栏：马～。"
   },
   {
     char: "栋",
@@ -37742,7 +39363,9 @@ const t = [
     mark: "ㄉㄨㄥˋ",
     tradition: "棟",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "dong",
+    explain: "房屋的正梁。量词。用于房屋：一～房子。"
   },
   {
     char: "栏",
@@ -37755,7 +39378,9 @@ const t = [
     mark: "ㄌㄢˊ",
     tradition: "欄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lan",
+    explain: "栏杆：石～。桥～。凭～远望。养家畜的圈：牛～。用干土垫～。报刊书籍在每版或每页上用线条或空白隔开的部分，有时也指性质相同的一整页或若干页：左～。专～。广告～。书评～。表格中区分项目的大格儿：备注～。这一～的数字还没有核对。专供张贴布告、报纸等的装置：布告～。宣传～。"
   },
   {
     char: "树",
@@ -37768,7 +39393,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "樹",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "木本植物的通称：柳～。一棵～。种植；栽培：十年～木，百年～人。树立；建立：建～。独～一帜。～雄心，立壮志。姓。"
   },
   {
     char: "栓",
@@ -37781,7 +39408,9 @@ const t = [
     mark: "ㄕㄨㄢ",
     tradition: "栓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shuan",
+    explain: "器物上可以开关的机件：枪～。消火～。（瓶）塞子。形状或作用像塞子的东西：血～。～剂。"
   },
   {
     char: "栖",
@@ -37794,7 +39423,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "栖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "鸟在树枝或巢中停息。也泛指居住或停留：～止。两～。"
   },
   {
     char: "栗",
@@ -37803,11 +39434,13 @@ const t = [
     radical: "木",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄌㄧˋ",
     tradition: "栗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "栗子树，落叶乔木，叶子长圆形，花黄白色。果实为坚果，包在多刺的壳斗内，成熟时壳斗裂开而散出。果实可以吃。种类很多，通常指板栗。这种植物的果实。（Lì）姓。发抖；哆嗦：战～。不寒而～。"
   },
   {
     char: "校",
@@ -37820,7 +39453,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "校",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiao",
+    explain: "学校。军衔名。校官。在将之下，尉之上。"
   },
   {
     char: "株",
@@ -37833,7 +39468,9 @@ const t = [
     mark: "ㄓㄨ",
     tradition: "株",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhu",
+    explain: "植物露在地面上的茎和根：守～待兔。成长的植物体：幼～。～距。量词。用于某些植物：一～小草。"
   },
   {
     char: "样",
@@ -37846,7 +39483,9 @@ const t = [
     mark: "ㄧㄤˋ",
     tradition: "樣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yang",
+    explain: "形状：～子。模～。图～。同～。装模作～。种类：花～。各种各～。做标准的东西：～板。～本。～品。榜～。"
   },
   {
     char: "核",
@@ -37859,7 +39498,9 @@ const t = [
     mark: "ㄏㄜˊ",
     tradition: "核",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "果实中坚硬并包含果仁的部分。像核的东西：细胞～。原子核的简称：～武器。仔细地对照、考察：审～。"
   },
   {
     char: "根",
@@ -37872,7 +39513,9 @@ const t = [
     mark: "ㄍㄣ",
     tradition: "根",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gen",
+    explain: "高等植物的营养器官，能够把植物固定在土地上，吸收土壤里的水分和溶解在水中的养分，有的根还能贮藏养料。比喻子孙后代：这孩子是他们家的～。（～儿）物体的下部或某部分和其他东西连着的地方：耳～。舌～。墙～。～基。～底。事物的本原；人的出身底细：祸～。寻～。从～儿上解决问题。知～知底。根本地；彻底：～究。～治。～绝。依据；作为根本：～据。无～之谈。用于细长的东西：两～筷子。一～无缝钢管。方根的简称。一元方程的解。姓。"
   },
   {
     char: "格",
@@ -37885,7 +39528,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "格",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ge",
+    explain: "由线条组成的框。  【组词】：窗格、方格、空格标准、形制。  【组词】：资格、规格品貌、气质、风范。  【组词】：人格、品格、风格打斗、击杀。  【组词】：格斗、格杀穷究。  【组词】：格物致知体式。  【组词】：变格、譬喻格量词。计算容器刻度的单位。  【组词】：这感冒药水每次喝一格的量，三餐饭后服用。"
   },
   {
     char: "栽",
@@ -37898,7 +39543,9 @@ const t = [
     mark: "ㄗㄞ",
     tradition: "栽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zai",
+    explain: "栽种：～树。～花。插上：～绒。～刷子。硬给安上：～赃。～上了罪名。栽子：桃～儿。摔倒；跌倒：～了一跤。比喻失败或出丑。"
   },
   {
     char: "桂",
@@ -37911,7 +39558,9 @@ const t = [
     mark: "ㄍㄨㄟˋ",
     tradition: "桂",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "gui",
+    explain: "桂花树，木犀的通称。肉桂树，常绿乔木。树皮即桂皮或称肉桂，有香味，可供药用，又作调料。广西的别称。"
   },
   {
     char: "桃",
@@ -37924,7 +39573,9 @@ const t = [
     mark: "ㄊㄠˊ",
     tradition: "桃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tao",
+    explain: "桃树，落叶小乔木，小枝光滑，叶子长圆披针形，花单生，粉红色。果实略呈球形，表面多有短绒毛，味甜，是常见水果。核仁可入药。这种植物的果实。形状像桃儿的东西：棉～。棉花结～了。指核桃：～酥。姓。"
   },
   {
     char: "桅",
@@ -37937,7 +39588,9 @@ const t = [
     mark: "ㄨㄟˊ",
     tradition: "桅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wei",
+    explain: "桅杆：船～。～顶。"
   },
   {
     char: "框",
@@ -37950,7 +39603,9 @@ const t = [
     mark: "ㄎㄨㄤˋ",
     tradition: "框",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuang",
+    explain: "嵌在墙上为安装门窗用的架子。（～儿）镶在器物周围起约束、支撑或保护作用的东西：镜～儿。（旧读kuāng）框框：这条消息被人用红笔加了个～。在文字、图片的周围加上线条：把这几个字～起来。约束；限制：不能～得太死。"
   },
   {
     char: "案",
@@ -37963,7 +39618,9 @@ const t = [
     mark: "ㄢˋ",
     tradition: "案",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "an",
+    explain: "古代端食物用的木托盘：举～齐眉。长条的桌子：书～。架起来用作台面的长木板：～板。事件。特指涉及法律的事件：惨～。破～。公务中的书面材料：有～可查。书面的计划、建议或决定：草～。决议～。同“按”。"
   },
   {
     char: "桌",
@@ -37976,7 +39633,9 @@ const t = [
     mark: "ㄓㄨㄛ",
     tradition: "桌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuo",
+    explain: "桌子：书～。餐～。八仙～。～椅板凳。用于成桌摆放的饭菜或围着桌子坐的客人：一～菜。三～客人。姓。"
   },
   {
     char: "桐",
@@ -37989,7 +39648,9 @@ const t = [
     mark: "ㄊㄨㄥˊ",
     tradition: "桐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tong",
+    explain: "泡桐。油桐。梧桐。（Tóng）姓。"
   },
   {
     char: "桑",
@@ -37998,11 +39659,13 @@ const t = [
     radical: "又、木",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄙㄤ",
     tradition: "桑",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "sang",
+    explain: "桑树，落叶乔木，树皮有浅裂，叶子卵形，花黄绿色。叶子是蚕的饲料，嫩枝的韧皮纤维可造纸，果穗可以吃，嫩枝、根皮、叶和果实均可入药。（Sāng）姓。"
   },
   {
     char: "档",
@@ -38015,7 +39678,9 @@ const t = [
     mark: "ㄉㄤˋ",
     tradition: "檔",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dang",
+    explain: "带格子的架子或橱，多用来存放案卷：归～。档案：查～。调～。（器物上）起支撑固定作用的木条或细棍儿：床～。桌子的横～儿。（商品、产品的）等级：～次。低～货。高～。货摊；摊子：鱼～。排～。姓。"
   },
   {
     char: "桥",
@@ -38028,7 +39693,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "橋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiao",
+    explain: "架在水上或空中便于通行的建筑物：～梁。～墩。～涵。～头堡。吊～。栈～。引～。立交～。形状如桥梁的：心脏搭～手术。古同“乔”，高。古同“矫”，正，整。姓。"
   },
   {
     char: "桦",
@@ -38041,7 +39708,9 @@ const t = [
     mark: "ㄏㄨㄚˋ",
     tradition: "樺",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "hua",
+    explain: "落叶乔木或灌木，树皮白色、灰色、黄色或黑色，有的是片状或纸状分层剥落，叶子互生。在我国多生长在东北地区。有白桦、黑桦、红桦等。"
   },
   {
     char: "桨",
@@ -38054,7 +39723,9 @@ const t = [
     mark: "ㄐㄧㄤˇ",
     tradition: "槳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiang",
+    explain: "划船用具，多为木制，上半圆柱形，下半扁平而略宽。"
   },
   {
     char: "桩",
@@ -38067,7 +39738,9 @@ const t = [
     mark: "ㄓㄨㄤ",
     tradition: "樁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuang",
+    explain: "桩子，埋在土里的柱形物体，一般用作建筑或分界的标志：木～。桥～。量词。多用于事情：一～事。"
   },
   {
     char: "桶",
@@ -38080,7 +39753,9 @@ const t = [
     mark: "ㄊㄨㄥˇ",
     tradition: "桶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tong",
+    explain: "盛东西的器具，用木头、铁皮、塑料等制成，多为圆筒形，有的有提梁：水～。汽油～。"
   },
   {
     char: "梁",
@@ -38093,7 +39768,9 @@ const t = [
     mark: "ㄌㄧㄤˊ",
     tradition: "梁",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "liang",
+    explain: "架在墙上或柱子上支撑房顶的横木：房～。桥：桥～。物体中间隆起成长条的部分：鼻～。山～。朝代名。1.南朝之一（502—557）。萧衍灭南齐后建立。建都建康（今南京）。国号梁，也称萧梁。为陈所灭。五代之一（907—923）。朱温灭唐后建立。建都汴（今河南开封），国号梁，史称后梁。为后唐所灭。战国时魏国迁都大梁（今河南开封）后，改称梁。"
   },
   {
     char: "梅",
@@ -38106,7 +39783,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "梅",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "落叶乔木，品种很多，性耐寒，叶子卵形，早春开花，花瓣五片，有粉红、白、红等颜色，气味清香。果实球形，青色，成熟的黄色，都可以吃，味酸。这种植物的花。这种植物的果实。（Méi）姓。"
   },
   {
     char: "梆",
@@ -38115,11 +39794,13 @@ const t = [
     radical: "木",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄅㄤ",
     tradition: "梆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bang",
+    explain: "打更等用的梆子。用棍子等打；敲：奶奶拿起擀面杖要～他。～树上的红枣儿吃。敲打木头的声音：～～～地使劲敲门。"
   },
   {
     char: "梗",
@@ -38132,7 +39813,9 @@ const t = [
     mark: "ㄍㄥˇ",
     tradition: "梗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "geng",
+    explain: "植物的枝或茎：菜～。直；挺直：～着脖子。阻碍：从中作～。"
   },
   {
     char: "梢",
@@ -38145,7 +39828,9 @@ const t = [
     mark: "ㄕㄠ",
     tradition: "梢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shao",
+    explain: "树枝的末端。  【组词】：树梢、柳梢事物的末端。  【组词】：眉梢、发梢、船梢"
   },
   {
     char: "梦",
@@ -38158,7 +39843,9 @@ const t = [
     mark: "ㄇㄥˋ",
     tradition: "夢",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "meng",
+    explain: "睡眠时局部大脑皮质还没有完全停止活动而引起的脑中的表象活动。做梦：～见。比喻幻想：～想。姓。"
   },
   {
     char: "梧",
@@ -38171,7 +39858,9 @@ const t = [
     mark: "ㄨˊ",
     tradition: "梧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wu",
+    explain: "〔梧桐〕也叫青桐。落叶乔木。树干直，树皮绿色、平滑，叶大、柄长。常植于庭园及道路两旁。"
   },
   {
     char: "梨",
@@ -38184,7 +39873,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "梨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "梨树，落叶乔木或灌木，叶子卵形，花一般白色。果实是常见水果。品种很多。这种植物的果实。（Lí）姓。"
   },
   {
     char: "梭",
@@ -38197,7 +39888,9 @@ const t = [
     mark: "ㄙㄨㄛ",
     tradition: "梭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "suo",
+    explain: "也叫梭子。在织布机上用来引导纬纱，使纬纱与经纱交织的主要机件。多用硬质木料制成，中间粗，两头尖，形状像枣核。"
   },
   {
     char: "梯",
@@ -38210,7 +39903,9 @@ const t = [
     mark: "ㄊㄧ",
     tradition: "梯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ti",
+    explain: "便利人上下的用具或设备，常见的是梯子、楼梯。作用跟楼梯相似的设备：电～。形状像楼梯的：～田。"
   },
   {
     char: "械",
@@ -38223,7 +39918,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "械",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "器械：机～。武器：军～。缴～。～斗。枷和镣铐之类的刑具。"
   },
   {
     char: "梳",
@@ -38236,7 +39933,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "梳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "梳子，整理头发、胡须的用具。用梳子整理头发：～头。"
   },
   {
     char: "检",
@@ -38249,7 +39948,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "檢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "查：～验。～阅。体～。～字表。约束；检点：行为不～。言语失～。同“捡”。姓。"
   },
   {
     char: "棉",
@@ -38262,7 +39963,9 @@ const t = [
     mark: "ㄇㄧㄢˊ",
     tradition: "棉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mian",
+    explain: "一年生或多年生草本植物或灌木，栽培品种有陆地棉、海岛棉、树棉、草棉等，其中陆地棉栽培最广。果实中的棉纤维是重要的纺织原料，棉子可以榨油。通称棉花。棉花像棉花的絮状物：石～。腈纶～。膨松～。姓。"
   },
   {
     char: "棋",
@@ -38275,7 +39978,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "棋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "一类文体活动用品。如象棋、围棋、跳棋、军棋等。"
   },
   {
     char: "棍",
@@ -38288,7 +39993,9 @@ const t = [
     mark: "",
     tradition: "棍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gun",
+    explain: "棒子。  【组词】：木棍、铁棍、警棍无赖、不正派的人。  【组词】：恶棍、赌棍、神棍"
   },
   {
     char: "棒",
@@ -38301,7 +40008,9 @@ const t = [
     mark: "",
     tradition: "棒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bang",
+    explain: "棍子：木～。炭精～。（体力或能力）强；（水平）高；（成绩）好：～小伙子。字写得真～。功课～。"
   },
   {
     char: "棕",
@@ -38314,7 +40023,9 @@ const t = [
     mark: "ㄗㄨㄥ",
     tradition: "棕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zong",
+    explain: "棕榈。棕毛：～绳。"
   },
   {
     char: "棘",
@@ -38327,7 +40038,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "棘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "酸枣树，落叶灌木。有刺，果小味酸。种子供药用，治神经衰弱等。树可作嫁接大枣树的砧木。带刺草木的通称：荆～。刺；扎：～手。"
   },
   {
     char: "棚",
@@ -38340,7 +40053,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "棚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "遮蔽太阳或风雨的设备，用竹木等搭架子，上面覆盖草席等：天～。凉～。在园子里搭一个～。简陋的房屋：牲口～。工～。碾～。天花板：顶～。糊～。"
   },
   {
     char: "棠",
@@ -38353,7 +40068,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "棠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tang",
+    explain: "棠梨，通称杜树。落叶乔木。果小，味涩，无食用价值。可作嫁接各种梨树的砧木。"
   },
   {
     char: "森",
@@ -38366,7 +40083,9 @@ const t = [
     mark: "ㄙㄣ",
     tradition: "森",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sen",
+    explain: "形容树木多：～林。繁密；众多：～罗万象（纷然罗列的各种事物现象）。阴暗：阴～。姓。"
   },
   {
     char: "棱",
@@ -38379,7 +40098,9 @@ const t = [
     mark: "ㄌㄥ",
     tradition: "棱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "leng",
+    explain: "物体上不同方向的两个平面连接的部分：见～见角。桌子～儿。物体上条状的突起部分：瓦～。眉～。搓板的～儿。"
   },
   {
     char: "棵",
@@ -38392,7 +40113,9 @@ const t = [
     mark: "ㄎㄜ",
     tradition: "棵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "量词。用于植物：一～桃树。两～白菜。"
   },
   {
     char: "棺",
@@ -38405,7 +40128,9 @@ const t = [
     mark: "ㄍㄨㄢ",
     tradition: "棺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guan",
+    explain: "棺材。装殓尸体的器具，一般用木材制成。"
   },
   {
     char: "椅",
@@ -38418,7 +40143,9 @@ const t = [
     mark: "ㄧˇ",
     tradition: "椅",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yi",
+    explain: "椅子：藤～。躺～。桌～板凳。"
   },
   {
     char: "植",
@@ -38431,7 +40158,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "植",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "栽种：种～。培～。移～。～树。～皮。断肢再～。树立：～党营私（结党营私）。指植物：～被。～株。～保。姓。"
   },
   {
     char: "椎",
@@ -38444,7 +40173,9 @@ const t = [
     mark: "ㄔㄨㄟˊ",
     tradition: "椎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhui",
+    explain: "敲打东西的器具。  【组词】：铁椎"
   },
   {
     char: "椒",
@@ -38457,7 +40188,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "椒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "辣椒，一年生草本植物。果实含有丰富的维生素C及辣椒素，有辣味，供食用。胡椒，多年生藤本植物。果实球形，有辣味，可作调味品或供药用。花椒，落叶灌木。果实作调味品。"
   },
   {
     char: "椭",
@@ -38470,7 +40203,9 @@ const t = [
     mark: "ㄊㄨㄛˇ",
     tradition: "橢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tuo",
+    explain: "长圆形：～圆。"
   },
   {
     char: "椰",
@@ -38483,7 +40218,9 @@ const t = [
     mark: "ㄧㄝ",
     tradition: "椰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ye",
+    explain: "椰子，常绿乔木。果实里面的果汁可作饮料，也可酿酒，种子可榨油。"
   },
   {
     char: "椿",
@@ -38496,7 +40233,9 @@ const t = [
     mark: "ㄔㄨㄣ",
     tradition: "椿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chun",
+    explain: "香椿，也叫椿树。落叶乔木。嫩叶具香味，可食。臭椿，也叫樗树。落叶乔木。木材较优，用于建筑及制作家具等。"
   },
   {
     char: "楔",
@@ -38509,7 +40248,9 @@ const t = [
     mark: "ㄒㄧㄝ",
     tradition: "楔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xie",
+    explain: "填充器物的空隙使其牢固的木片、木钉等。"
   },
   {
     char: "楚",
@@ -38522,7 +40263,9 @@ const t = [
     mark: "ㄔㄨˇ",
     tradition: "楚",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chu",
+    explain: "古书上指牡荆。落叶灌木。开青色或紫色的穗状小花，鲜叶供药用。痛苦：苦～。清晰；整齐：清～。衣冠～～。周朝国名（？—前223）战国七雄之一。在今湖南、湖北一带。为秦所灭。朝代名。十国之一（907—951）。马殷建立。建都长沙，后为南唐所灭。"
   },
   {
     char: "楞",
@@ -38535,7 +40278,9 @@ const t = [
     mark: "ㄌㄥˊ",
     tradition: "楞",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "leng",
+    explain: "同“棱”（léng）。"
   },
   {
     char: "楣",
@@ -38548,7 +40293,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "楣",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "门框上边的横木：门～。"
   },
   {
     char: "楷",
@@ -38561,7 +40308,9 @@ const t = [
     mark: "ㄐㄧㄝ",
     tradition: "楷",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kai",
+    explain: "植物名。漆树科黄连木属，落叶乔木。叶为奇数羽状复叶，有香味。花雌雄异株，不具花瓣。核果为球形，熟时呈暗红色。材质密致，可制造镜台、花盆台等装饰性器物。　△黄连花典范、模范。  【组词】：楷模、楷式→楷书"
   },
   {
     char: "楼",
@@ -38574,7 +40323,9 @@ const t = [
     mark: "ㄌㄡˊ",
     tradition: "樓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lou",
+    explain: "楼房：大～。教学～。高～大厦。一座～。楼房的一层：一～（平地的一层）。一口气爬上十～。（～儿）房屋或其他建筑物上加盖的一层房子：城～。箭～。钟～。用于某些店铺的名称：茶～。酒～。银～。姓。"
   },
   {
     char: "概",
@@ -38587,7 +40338,9 @@ const t = [
     mark: "ㄍㄞˋ",
     tradition: "概",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gai",
+    explain: "大略：～况。大～。一律：不能一～而论。情况；景象：胜～（美好景象）。气度神态：气～。旧时量谷物时用来平斗斛的刮板。"
   },
   {
     char: "榄",
@@ -38600,7 +40353,9 @@ const t = [
     mark: "ㄌㄢˇ",
     tradition: "欖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lan",
+    explain: "见〔橄榄〕"
   },
   {
     char: "榆",
@@ -38613,7 +40368,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "榆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "榆树，落叶乔木，叶子卵形，花有短梗。翅果倒卵形，叫榆钱。木材可供建筑或制器具用。（Yú）姓。"
   },
   {
     char: "榔",
@@ -38626,7 +40383,9 @@ const t = [
     mark: "ㄌㄤˊ",
     tradition: "榔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lang",
+    explain: "〔～头〕锤子。〔～榆〕落叶乔木，木材坚硬致密。"
   },
   {
     char: "榕",
@@ -38639,7 +40398,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "榕",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "榕树，常绿大乔木，树干分枝多，有气根，树冠大，叶子椭圆形或卵形，花黄色或淡红色，果实倒卵形，黄色或赤褐色。生长在热带地区。木材可制器具，叶、气根、树皮可入药。（Róng）福建福州的别称。"
   },
   {
     char: "榛",
@@ -38652,7 +40413,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "榛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "落叶灌木或小乔木，叶子圆形或倒卵形，雄花黄褐色，雌花鲜红色，坚果球形。果仁可以吃，也可榨油。这种植物的果实。‖通称榛子。"
   },
   {
     char: "榜",
@@ -38665,7 +40428,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "榜",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bang",
+    explain: "鞭打、击打。  【组词】：榜笞船桨。使船前进。  【组词】：榜舟"
   },
   {
     char: "榨",
@@ -38678,7 +40443,9 @@ const t = [
     mark: "ㄓㄚˋ",
     tradition: "榨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zha",
+    explain: "压出物体里的汁液：～油。～甘蔗。压出物体里汁液的器具：油～。酒～。姓。"
   },
   {
     char: "榴",
@@ -38691,7 +40458,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "榴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "石榴。"
   },
   {
     char: "槐",
@@ -38704,7 +40473,9 @@ const t = [
     mark: "ㄏㄨㄞˊ",
     tradition: "槐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huai",
+    explain: "槐树，落叶乔木，羽状复叶，花淡黄色，结荚果，圆筒形。花可制黄色染料。花蕾和果实可入药。（Huái）姓。"
   },
   {
     char: "槽",
@@ -38717,7 +40488,9 @@ const t = [
     mark: "ㄘㄠˊ",
     tradition: "槽",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cao",
+    explain: "盛牲畜饲料的长条形器具：猪～。马～。盛饮料或其他液体的器具：酒～。水～。两边高起，中间凹下的物体，凹下的部分叫槽：河～。在木板上挖个～。门窗或屋内隔断的单位：两～隔扇。一～窗户。喂猪从买进小猪到喂大卖出叫一槽：今年他家喂了两～猪。"
   },
   {
     char: "樊",
@@ -38730,7 +40503,9 @@ const t = [
     mark: "ㄈㄢˊ",
     tradition: "樊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fan",
+    explain: "篱笆：～篱。姓。"
   },
   {
     char: "樟",
@@ -38743,7 +40518,9 @@ const t = [
     mark: "ㄓㄤ",
     tradition: "樟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhang",
+    explain: "樟树，常绿乔木，高可达30米，叶子椭圆形或卵形，花白色略带绿色，浆果暗紫色。全株有香气，可以防虫蛀。木材致密，适于制家具和手工艺品，枝叶可以提制樟脑。也叫香樟。"
   },
   {
     char: "模",
@@ -38756,7 +40533,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "模",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "法式；规范；标准：～型。～式。楷～。仿效：～仿。～拟。指模范：劳～。评～。姓。"
   },
   {
     char: "横",
@@ -38769,7 +40548,9 @@ const t = [
     mark: "ㄏㄥˊ",
     tradition: "横",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "heng",
+    explain: "跟地面平行的（跟“竖、直”相对）：～额。～梁。地理上东西向的（跟“纵1”相对）：黄河～贯本省。从左到右或从右到左（跟“竖、直、纵1”相对）：～队。墙上～着写着几个大字。跟物体的长的一边垂直的（跟“竖、直、纵1”相对）：～剖面。人行～道。～着切一刀。使物体成横向：把扁担～过来。纵横杂乱：～生。～流。血肉～飞。与“横”（hèng）义相近，但只用于成语或文言词中。汉字的笔画，平着由左向右，形状是“一”。横竖；反正：我～不那么办!。事情是你干的，我～没过问。姓。"
   },
   {
     char: "樱",
@@ -38782,7 +40563,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "櫻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "樱花，落叶乔木。春季开鲜艳的淡红色花。可供观赏。樱桃。"
   },
   {
     char: "橄",
@@ -38795,7 +40578,9 @@ const t = [
     mark: "ㄍㄢˇ",
     tradition: "橄",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gan",
+    explain: "〔～榄〕ａ．常绿乔木，种子可榨油，树脂供药用。果实绿色，长圆形，亦称“青果”，可食，亦可入药。ｂ．常绿小乔木，欧美用它的枝叶作为和平的象征。亦称“齐墩果”。"
   },
   {
     char: "橘",
@@ -38808,7 +40593,9 @@ const t = [
     mark: "ㄐㄩˊ",
     tradition: "橘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ju",
+    explain: "橘子树，常绿乔木，树枝细，通常有刺，叶子长卵圆形，果实球形稍扁，果皮红黄色，果肉多汁，味酸甜。果皮、种子、叶子等都可入药。这种植物的果实：蜜～。"
   },
   {
     char: "橙",
@@ -38821,7 +40608,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "橙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "常绿乔木。叶卵形，果实圆球形，果皮有香气，果瓤汁多味甜。主产于中国南方各省。另有一种酸橙，果汁味酸，虽不宜生食，但可加工成蜜饯或入药。像橙的果皮一样的颜色，即黄中呈红的颜色。"
   },
   {
     char: "橡",
@@ -38834,7 +40623,9 @@ const t = [
     mark: "ㄒㄧㄤˋ",
     tradition: "橡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiang",
+    explain: "橡树，栎树的通称。橡胶树。（Xiàng）姓。"
   },
   {
     char: "橱",
@@ -38847,7 +40638,9 @@ const t = [
     mark: "ㄔㄨˊ",
     tradition: "橱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chu",
+    explain: "放置衣服、物件的家具：衣～。书～。碗～。把碗放在～儿里。"
   },
   {
     char: "檀",
@@ -38860,7 +40653,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "檀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tan",
+    explain: "檀香，常绿小乔木。木材极香，可制器具，也可入药。紫檀，常绿乔木。产于亚洲热带。木材坚硬，紫红色，为优良的家具用材。"
   },
   {
     char: "檐",
@@ -38873,7 +40668,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "檐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "屋顶向旁伸出的边沿部分：房～。廊～。～下。～前。某些器物上形状像房檐的部分：帽～儿。"
   },
   {
     char: "檩",
@@ -38886,7 +40683,9 @@ const t = [
     mark: "ㄌㄧㄣˇ",
     tradition: "檩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lin",
+    explain: "架在屋架或山墙上面用来支持椽子或屋面板的长条形构件。也叫桁或檩条。"
   },
   {
     char: "檬",
@@ -38899,7 +40698,9 @@ const t = [
     mark: "ㄇㄥˊ",
     tradition: "檬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "meng",
+    explain: "见〔柠檬〕"
   },
   {
     char: "欠",
@@ -38908,11 +40709,13 @@ const t = [
     radical: "欠",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄢˋ",
     tradition: "欠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qian",
+    explain: "困倦时张口出气：～伸。身体一部分稍微向上移动：～脚儿。～了～身子。借别人的财物等没有还或应当给人的事物还没有给：赊～。～账。～债。～情。～着一笔钱没还。不够；缺乏：～佳。～妥。～火。～考虑。万事俱备，只～东风。"
   },
   {
     char: "次",
@@ -38925,7 +40728,9 @@ const t = [
     mark: "ㄘˋ",
     tradition: "次",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ci",
+    explain: "次序；等第：名～。座～。车～。依～前进。次序在第二的；副的：～子。～日。质量差；品质差：～品。这个人太～，一点也不讲究社会公德。酸根或化合物中少含两个氧原子或氢原子的：～氯酸。用于反复出现或可能反复出现的事情：第一～国内革命战争。我是初～来北京。试验了十八～才成功。出外远行时停留的处所：途～。旅～。舟～。中间：胸～。言～。姓。"
   },
   {
     char: "欢",
@@ -38938,7 +40743,9 @@ const t = [
     mark: "ㄏㄨㄢ",
     tradition: "歡",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "huan",
+    explain: "1.快乐；高兴：～喜。～乐。～迎。～送。～呼。2.指所喜爱的人（多指情人）：新～。3.起劲；活跃：火着得很～。雨越下越～。文娱活动搞得挺～。"
   },
   {
     char: "欣",
@@ -38951,7 +40758,9 @@ const t = [
     mark: "ㄒㄧㄣ",
     tradition: "欣",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "喜悦：欢～。～喜。～慰。～逢佳节。姓。"
   },
   {
     char: "欧",
@@ -38964,7 +40773,9 @@ const t = [
     mark: "ㄡ",
     tradition: "歐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ou",
+    explain: "姓。指欧洲：西～。～化。欧姆的简称。导体上的电压是1伏，通过的电流是1安时，电阻就是1欧。"
   },
   {
     char: "欲",
@@ -38977,7 +40788,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "欲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "欲望：食～。求知～。想要；希望：～言又止。从心所～。需要：胆～大而心～细。将要：摇摇～坠。山雨～来风满楼。"
   },
   {
     char: "欺",
@@ -38990,7 +40803,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "欺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "欺骗：自～～人。童叟无～。欺负：仗势～人。～人太甚。"
   },
   {
     char: "款",
@@ -39003,7 +40818,9 @@ const t = [
     mark: "ㄎㄨㄢˇ",
     tradition: "款",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kuan",
+    explain: "诚恳：～留。～曲（qū）（殷勤的心意）。～待。～洽（亲切融洽）。～诚。～语（恳切谈话）。器物上刻的字，书画、信件头尾上的名字：落～（题写名字）。题～。式样：～式。法规条文里分的项目：条～。第三条第一～。经费，钱财：～项。～额。公～。存～。汇～。敲打，叩：～门。～打。～塞。～关而入。至：“绕黄山而～牛首”。留，招待：～客。空：“～言不听，奸乃不生”。缓慢：～步。～～。"
   },
   {
     char: "歇",
@@ -39016,7 +40833,9 @@ const t = [
     mark: "ㄒㄧㄝ",
     tradition: "歇",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xie",
+    explain: "休息：～礼拜。干累了就～一会儿。停止：～工。～业。睡。很短的一段时间；一会儿：过了一～。"
   },
   {
     char: "歉",
@@ -39029,7 +40848,9 @@ const t = [
     mark: "ㄑㄧㄢˋ",
     tradition: "歉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qian",
+    explain: "收成不好：～年。以丰补～。对不住人的心情：抱～。道～。深致～意。"
   },
   {
     char: "歌",
@@ -39042,7 +40863,9 @@ const t = [
     mark: "ㄍㄜ",
     tradition: "歌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "能唱的文辞或歌曲：诗～。民～。歌唱：载～载舞。"
   },
   {
     char: "止",
@@ -39051,11 +40874,13 @@ const t = [
     radical: "止",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓˇ",
     tradition: "止",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhi",
+    explain: "停止：～步。～境。不～。拦阻；使停止：禁～。制～。～血。～痛。～得住。～不住。（到、至…）截止：展览从10月1日起至10月14日～。仅；只：这话你说过不～一次了。姓。"
   },
   {
     char: "正",
@@ -39064,11 +40889,13 @@ const t = [
     radical: "止",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄥˋ",
     tradition: "正",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "zheng",
+    explain: "垂直或符合标准方向（跟“歪”相对）：～南。～前方。前后对～。这幅画挂得不～。位置在中间（跟“侧、偏”相对）：～房。～院儿。用于时间，指正在那一点上或在那一段的正中：～午。正面（跟“反”相对）：这张纸～反都很光洁。正直：～派。公～。方～。心术不～。正当：～路。～理。钱的来路不～。（色、味）纯正：～红。～黄。颜色不～。味道不～。合乎法度；端正：～楷。～体。属性词。基本的；主要的（区别于“副”）：～文。～编。～本。～副主任。姓。"
   },
   {
     char: "此",
@@ -39081,7 +40908,9 @@ const t = [
     mark: "ㄘˇ",
     tradition: "此",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ci",
+    explain: "这；这个（跟“彼”相对）：～人。～时。由～及彼。～呼彼应。表示此时或此地：就～告别。谈话就～结束。从～病有起色。由～往西。这样：长～以往。当时听劝，何至于～。"
   },
   {
     char: "步",
@@ -39094,7 +40923,9 @@ const t = [
     mark: "ㄅㄨˋ",
     tradition: "步",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bu",
+    explain: "行走时两脚之间的距离；脚步：正～。跑～。寸～难移。走了一～棋。阶段：初～。事情一～比一～顺利。地步；境地：不幸落到这一～。旧制长度单位，1步等于5尺。用脚走：～入会场。亦～亦趋。踩；踏：～人后尘。用脚步等量地：～一～这块地够不够三亩。姓。同“埠”（多用于地名）：盐～。禄～。炭～（都在广东）。"
   },
   {
     char: "武",
@@ -39107,7 +40938,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "武",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "关于军事的（跟“文”相对）：～器。～装。～力。关于技击的：～术。～艺。勇猛；猛烈：英～。威～。～火。姓。半步，泛指脚步：继～。踵～。见〖步武〗。"
   },
   {
     char: "歧",
@@ -39120,7 +40953,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "歧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "岔（道）；大路分出的（路）：～途。不相同；不一致：～义。～视。"
   },
   {
     char: "歪",
@@ -39133,33 +40968,9 @@ const t = [
     mark: "ㄨㄞˇ",
     tradition: "歪",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "歹",
-    spell: "dǎi",
-    stroke: "4",
-    radical: "歹",
-    struct: "独体结构",
-    five: "水",
-    method: "-",
-    mark: "ㄉㄞˇ",
-    tradition: "歹",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "死",
-    spell: "sǐ",
-    stroke: "6",
-    radical: "歹",
-    struct: "独体结构",
-    five: "金",
-    method: "会意",
-    mark: "",
-    tradition: "死",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "wai",
+    explain: "不正；斜；偏（跟“正”相对）：～嘴。～戴着帽子。这堵墙～了。不正当的；不正派的：～理。～风。"
   },
   {
     char: "歼",
@@ -39172,7 +40983,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "殱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "歼灭：～匪。围～。～敌五千。聚而～之。"
   },
   {
     char: "殃",
@@ -39185,7 +40998,9 @@ const t = [
     mark: "ㄧㄤ",
     tradition: "殃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yang",
+    explain: "祸害：灾～。使受祸害：祸国～民。"
   },
   {
     char: "殉",
@@ -39198,7 +41013,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "殉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "为了追求某种理想或维护某种事物而牺牲自己的生命：以身～国。殉葬。"
   },
   {
     char: "殊",
@@ -39211,20 +41028,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "殊",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "残",
-    spell: "cán",
-    stroke: "9",
-    radical: "歹",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄘㄢˊ",
-    tradition: "殘",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "shu",
+    explain: "不同：～途同归。副词。很；极：～佳。～堪告慰。突出；特别：～勋。死。“殊死”二字常连用：～死战。"
   },
   {
     char: "殖",
@@ -39237,7 +41043,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "殖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "生育；孳生：生～。繁～。"
   },
   {
     char: "殴",
@@ -39250,7 +41058,9 @@ const t = [
     mark: "ㄡ",
     tradition: "毆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ou",
+    explain: "打（人）：～伤。斗～。"
   },
   {
     char: "段",
@@ -39263,7 +41073,9 @@ const t = [
     mark: "ㄉㄨㄢˋ",
     tradition: "段",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duan",
+    explain: "时间、事物划分出的部分：阶～。地～。量词。用于长条形的东西分成的若干部分：一～铁路。一～话。工矿企业中的一级行政单位：工～。机务～。段位，围棋棋手等级的名称：九～棋手。"
   },
   {
     char: "殷",
@@ -39276,7 +41088,9 @@ const t = [
     mark: "ㄧㄢ",
     tradition: "殷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yin",
+    explain: "丰盛、丰富。～富、～实。情意深厚、周到。～切、招待甚～地名。商朝盘庚迁都于殷（今河南安阳小屯村），所以商亦称为「殷」，世称为「殷商」。姓。"
   },
   {
     char: "殿",
@@ -39289,7 +41103,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "殿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "高大的房屋，特指供奉神佛或帝王受朝理事的房屋：佛～。大雄宝～。太和～。金銮～。（Diàn）姓。在最后：～后。～军。"
   },
   {
     char: "毁",
@@ -39302,7 +41118,9 @@ const t = [
     mark: "ㄏㄨㄟˇ",
     tradition: "毁",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "hui",
+    explain: "破坏；糟蹋：～灭。销～。好好儿的一本书，让你给～了。烧掉：烧～。焚～。说别人坏话；诽谤：～誉。诋～。把成件的旧东西改成别的东西（多指衣服）：用一件大褂给孩子～两条裤子。姓。"
   },
   {
     char: "毅",
@@ -39315,7 +41133,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "毅",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "果断；坚决：～然。～力。"
   },
   {
     char: "母",
@@ -39324,11 +41144,13 @@ const t = [
     radical: "母",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄨˇ",
     tradition: "母",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mu",
+    explain: "母亲：～女。老～。～校。家族或亲戚中的长辈女子：祖～。伯～。姑～。姨～。舅～。属性词。（禽兽）雌性的（跟“公”相对）：～鸡。～牛。这头驴是～的。指一凸一凹配套的两件东西里的凹的一件：这套螺丝的～儿毛了。有产生出其他事物的能力或作用的：工作～机。失败乃成功之～。姓。"
   },
   {
     char: "每",
@@ -39341,20 +41163,9 @@ const t = [
     mark: "ㄇㄟˇ",
     tradition: "每",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "毒",
-    spell: "dú",
-    stroke: "9",
-    radical: "母",
-    struct: "上下结构",
-    five: "金",
-    method: "",
-    mark: "",
-    tradition: "毒",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "mei",
+    explain: "指示代词。指全体中的任何一个或一组（偏重个体之间的共性）：把节省下来的～一分钱都用在生产上。～两个星期开一次小组会。～人做自己能做的事。表示同一动作行为有规律地反复出现：这个月刊～逢十五日出版。最简单的秧歌舞是～跨三步退一步。每每：春秋佳日，～作郊游。姓。"
   },
   {
     char: "比",
@@ -39367,7 +41178,9 @@ const t = [
     mark: "ㄅㄧˇ",
     tradition: "比",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bi",
+    explain: "比较；较量：～干劲。学先进，～先进。能够相比：近邻～亲。坚～金石。演讲不～自言自语。比画：连说带～。对着；向着：别拿枪～着人，小心走火。仿照：～着葫芦画瓢（比喻模仿着做事）。比方；比喻：人们常把聪明的人～做诸葛亮。两个同类量之间的倍数关系，叫做它们的比，其中一数是另一数的几倍或几分之几：这里的小麦年产量和水稻年产量约为一～四。表示比赛双方得分的对比：甲队以二～一胜乙队。a）“一”加量词在“比”的前后重复，可以表示程度的累进：人民的生活一年～一年富裕了。b）比较高下的时候用“比”，表示异同的时候一般用“跟”或“同”。姓。紧靠；挨着：～肩。鳞次栉～。依附；勾结：朋～为奸。近来：～来。等到：～及。"
   },
   {
     char: "毕",
@@ -39380,7 +41193,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "畢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "完结；完成：礼～。～其功于一役。全；完全：～生。～力。群贤～至。二十八宿之一。姓。"
   },
   {
     char: "毙",
@@ -39393,7 +41208,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "斃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "死（用于人时多含贬义）：～命。击～。牲畜倒～。枪毙：昨天～了一个抢劫杀人犯。仆倒：多行不义必自～。"
   },
   {
     char: "毛",
@@ -39402,11 +41219,13 @@ const t = [
     radical: "毛",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄠˊ",
     tradition: "毛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mao",
+    explain: "动植物的皮上所生的丝状物；鸟类的羽毛：羊～。鸡～。枇杷树叶子上有许多细～。东西上长的霉：馒头放久了就要长～。粗糙；还没有加工的：～坯。～铁。不纯净的：～利。～重。粗略：～估。～算。小：～孩子。～贼（小偷儿）。指货币贬值：钱～了。姓。做事粗心，不细致：～手～脚。～头～脑。惊慌：心里有点儿～。这下可把他吓～了。发怒；发火：把他惹～了，你要吃大亏。一圆的十分之一；角。"
   },
   {
     char: "毡",
@@ -39419,7 +41238,9 @@ const t = [
     mark: "ㄓㄢ",
     tradition: "氈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhan",
+    explain: "用羊毛等压制成的块状、片状物：～鞋。～垫。油毛～。"
   },
   {
     char: "毫",
@@ -39432,7 +41253,9 @@ const t = [
     mark: "ㄏㄠˊ",
     tradition: "毫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hao",
+    explain: "细长而尖的毛：狼～笔。羊～笔。指毛笔：挥～。秤或戥子上用手提的绳：头～。二～。一点儿（只用于否定式）：～不足怪。～无头绪。（某些计量单位的）千分之一：～米。～升。～克。计量单位名称。a）长度，10丝等于1毫，10毫等于1厘。b）质量或重量，10丝等于1毫，10毫等于1厘。货币单位，即角。"
   },
   {
     char: "毯",
@@ -39445,7 +41268,9 @@ const t = [
     mark: "ㄊㄢˇ",
     tradition: "毯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tan",
+    explain: "毯子，厚实的棉、毛织品：毛～。地～。"
   },
   {
     char: "氏",
@@ -39454,11 +41279,13 @@ const t = [
     radical: "氏",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕˋ",
     tradition: "氏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "姓（张氏是“姓张的”）：张～兄弟。旧时放在已婚妇女的姓后，通常在父姓前再加夫姓，作为称呼：赵王～（夫姓赵，父姓王）。对名人专家的称呼：顾～（顾炎武）《日知录》。摄～温度计。达尔文～。用在亲属关系字的后面称自己的亲属：舅～（母舅）。母～。姓。"
   },
   {
     char: "民",
@@ -39467,11 +41294,13 @@ const t = [
     radical: "乛",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄧㄣˊ",
     tradition: "民",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "min",
+    explain: "人民：国泰～安。为～除害。指某种人：藏～。回～。农～。渔～。牧～。居～。侨～。民间的：～歌。～谣。非军人；非军事的：拥军爱～。～航。～用。姓。"
   },
   {
     char: "氓",
@@ -39484,7 +41313,9 @@ const t = [
     mark: "ㄇㄤˊ",
     tradition: "氓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mang",
+    explain: "古代称百姓（多指外来的）。也作萌。"
   },
   {
     char: "气",
@@ -39493,11 +41324,13 @@ const t = [
     radical: "气",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧˋ",
     tradition: "氣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "没有一定的形状、体积，能自由散布的物体：～体。呼吸：没～了。～厥。～促。～息。一～呵成。自然界寒、暧、阴、晴等现象：～候。～温。～象。鼻子闻到的味：～味。臭～。人的精神状态：～概。～节。～魄。～派。～馁。怒，或使人发怒：不要～我了。～恼。～盛（shèng）。忍～吞声。欺压：受～。中医指能使人体器官发挥机能的动力：～功。～血。～虚。中医指某种症象：痰～。湿～。景象：和～。～氛。～韵（文章或书法绘画的意境或韵味）。"
   },
   {
     char: "氛",
@@ -39510,7 +41343,9 @@ const t = [
     mark: "ㄈㄣ",
     tradition: "氛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fen",
+    explain: "气；情景，情况：气～。战～。"
   },
   {
     char: "氢",
@@ -39523,7 +41358,9 @@ const t = [
     mark: "ㄑㄧㄥ",
     tradition: "氫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "气体元素，符号H，原子序数1。氢气是密度最小、无色、无臭、无味的气体，可燃，与氧混合后遇火能爆炸。可用作合成氨的原料。液体氢可作火箭中的高能燃料。"
   },
   {
     char: "氧",
@@ -39536,7 +41373,9 @@ const t = [
     mark: "ㄧㄤˇ",
     tradition: "氧",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yang",
+    explain: "气体元素，符号O（oxygenium）。无色无臭无味，能助燃，化学性质很活泼。氧在空气中约占1/5，是人和动植物呼吸所必需的气体，在工业上用途很广。指氧气：输～。高山缺～。"
   },
   {
     char: "氨",
@@ -39545,11 +41384,13 @@ const t = [
     radical: "气",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄢ",
     tradition: "氨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "an",
+    explain: "氮和氢的化合物，化学式NH3。无色气体，有刺激性臭味，易溶于水。用作制冷剂，也用来制硝酸和氮肥。通称氨气。[英ammonia]"
   },
   {
     char: "氮",
@@ -39562,7 +41403,9 @@ const t = [
     mark: "ㄉㄢˋ",
     tradition: "氮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dan",
+    explain: "气体元素，符号N（nitrogenium）。无色无臭，不能燃烧，也不能助燃，化学性质很不活泼。氮在空气中约占4/5，是植物营养的重要成分之一。用来制造氨、硝酸和氮肥，也用来填充灯泡。指氮气。"
   },
   {
     char: "氯",
@@ -39571,11 +41414,13 @@ const t = [
     radical: "气",
     struct: "半包围结构",
     five: "",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˋ",
     tradition: "氯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lü",
+    explain: "气体元素，符号Cl，原子序数17。是卤族元素之一。黄绿色，有刺激性臭味，有毒，易液化，化学性质很活泼。广泛用于制造漂白粉、染料、塑料、橡胶、医药、农药等。也用作毒气。"
   },
   {
     char: "水",
@@ -39584,11 +41429,13 @@ const t = [
     radical: "水",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄕㄨㄟˇ",
     tradition: "水",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shui",
+    explain: "最简单的氢氧化合物，化学式H2O。无色、无味、无臭的液体，在标准大气压（101325帕）下，冰点0℃，沸点100℃，4℃时密度最大，为1克/毫升。河流：汉～。淮～。指江、河、湖、海、洋：～陆交通。～旱码头。～上人家。（～儿）稀的汁：墨～。药～。甘蔗的～儿很甜。指附加的费用或额外的收入：贴～。汇～。外～。用于洗衣物等的次数：这衣裳洗几～也不变色。姓。"
   },
   {
     char: "永",
@@ -39597,11 +41444,13 @@ const t = [
     radical: "丶",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄩㄥˇ",
     tradition: "永",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "水长：江之～矣。副词。久远；永远：～不掉队。"
   },
   {
     char: "汁",
@@ -39614,7 +41463,9 @@ const t = [
     mark: "ㄓ",
     tradition: "汁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "含有某种物质的液体：乳～。胆～。牛肉～。橘子～。墨～儿。"
   },
   {
     char: "求",
@@ -39623,11 +41474,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄡˊ",
     tradition: "求",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiu",
+    explain: "请求：～救。～教。～您帮我做一件事。要求：力～改进。精益～精。生物都有～生存的本能。追求；探求；寻求：～学问。实事～是。刻舟～剑。不～名利。需求；需要：供～关系。供过于～。姓。"
   },
   {
     char: "汇",
@@ -39636,11 +41489,13 @@ const t = [
     radical: "氵",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄟˋ",
     tradition: "匯、彙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "河流会合：～为巨川。聚集：～总。通过银行或邮局把款项划拨到别处：～款。电～。指外汇：创～。套～。"
   },
   {
     char: "汉",
@@ -39649,11 +41504,13 @@ const t = [
     radical: "氵",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄢˋ",
     tradition: "漢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "汉水：江淮河～。汉族：～语。天河；银河：银～。成年男人：老～。好～。朝代名。1.（前202—220）。刘邦灭秦后建立。建都长安（今陕西西安）。公元8年王莽代汉称帝，国号新（8—23）。自刘邦称汉王起，包括“新”，史称前汉或西汉。公元25年刘秀重建汉朝，建都洛阳，史称后汉或东汉。为曹魏所灭。西汉、东汉合称两汉。三国之一（221—263）。刘备建立。在今川、云、贵、渝及陕西南部。建都成都，国号汉，史称蜀汉或蜀。为曹魏所灭。五代之一（947—950）。沙陀族刘知远建立。建都汴（今河南开封），史称后汉。为后周所灭。十国之一（917—971）。刘䶮（yǎn）建立。建都广州，国号大越，次年改“汉”，史称南汉。为北宋所灭。十国之一（951—979）。刘旻（mín）建立。建都太原，国号汉，史称北汉。为北宋所灭。"
   },
   {
     char: "汗",
@@ -39666,7 +41523,9 @@ const t = [
     mark: "ㄏㄢˊ",
     tradition: "汗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "人和高等动物从皮肤排泄出来的液体，是机体通过皮肤散热的主要方式。"
   },
   {
     char: "汛",
@@ -39679,7 +41538,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "汛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "江河定期的涨水：潮～。春～。旧时军队驻防的地方：～地。"
   },
   {
     char: "汞",
@@ -39692,7 +41553,9 @@ const t = [
     mark: "ㄍㄨㄥˇ",
     tradition: "汞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gong",
+    explain: "通称水银。金属元素，符号Hg，原子序数80。常温下是银白色液体，能溶解金、银等多种金属，形成的合金叫汞齐。汞和它的大多数化合物都有毒。用以制水银灯、温度计、气压计、控制器及雷汞等。"
   },
   {
     char: "江",
@@ -39705,7 +41568,9 @@ const t = [
     mark: "ㄐㄧㄤ",
     tradition: "江",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "大河：长～。珠～。黑龙～。（Jiāng）指长江：～汉。～淮。～南。～左。姓。"
   },
   {
     char: "池",
@@ -39718,20 +41583,9 @@ const t = [
     mark: "ㄔˊ",
     tradition: "池",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "污",
-    spell: "wū",
-    stroke: "6",
-    radical: "氵",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄨ",
-    tradition: "污",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "chi",
+    explain: "池塘：游泳～。养鱼～。盐～。旁边高中间洼的地方：花～。乐（yuè）～。旧时指剧场正厅的前部：～座。护城河：城～。姓。"
   },
   {
     char: "汤",
@@ -39744,7 +41598,9 @@ const t = [
     mark: "ㄕㄤ",
     tradition: "湯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tang",
+    explain: "食物加水煮熟后的汁液。也指烹调后以汁液为主的副食：米～。姜～。煲～。开水；热水：赴～蹈火。中药方剂。用水煎服：茵陈～。也叫成汤、唐、大乙。商朝第一个君主。夏桀残酷暴虐，人民反对，诸侯叛离。汤起兵灭夏，约于公元前1600年建立商朝，都亳（今河南商丘）。"
   },
   {
     char: "汪",
@@ -39757,7 +41613,9 @@ const t = [
     mark: "ㄨㄤ",
     tradition: "汪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wang",
+    explain: "水深而广：～洋。（液体）聚集：路上～了一些水。眼里～着泪水。小而浅的积水坑：水牛在泥水～里打滚。用于液体：一～血。两～眼泪。姓。形容狗叫的声音：狗～～叫。"
   },
   {
     char: "汰",
@@ -39770,7 +41628,9 @@ const t = [
     mark: "ㄊㄞˋ",
     tradition: "汰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tai",
+    explain: "清洗。采取措施，除去差的、不合要求的：淘～。优胜劣～。通“太”。过分：～侈。"
   },
   {
     char: "汹",
@@ -39783,7 +41643,9 @@ const t = [
     mark: "ㄒㄩㄥ",
     tradition: "汹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiong",
+    explain: "水向上翻腾：～涌。"
   },
   {
     char: "汽",
@@ -39796,7 +41658,9 @@ const t = [
     mark: "ㄑㄧˋ",
     tradition: "汽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "液体或某些固体受热而变成的气体，例如水变成的水蒸气。特指水蒸气：～机。～船。"
   },
   {
     char: "沃",
@@ -39809,7 +41673,9 @@ const t = [
     mark: "ㄨㄛˋ",
     tradition: "沃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wo",
+    explain: "灌溉；浇：～田。如汤～雪。（土地）肥：肥～。～土。～野。肥田～地。姓。"
   },
   {
     char: "沈",
@@ -39822,7 +41688,9 @@ const t = [
     mark: "ㄕㄣˇ",
     tradition: "瀋",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shen",
+    explain: "姓。"
   },
   {
     char: "沉",
@@ -39835,7 +41703,9 @@ const t = [
     mark: "ㄔㄣˊ",
     tradition: "沉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chen",
+    explain: "（在水里）往下落（跟“浮”相对）：石～大海。星～月落，旭日东升。物体往下陷：地基下～。使降落；向下放（多用于抽象事物）：～下心来。～得住气。把脸一～。（程度）深：～醉。～痛。睡得很～。分量重：箱子里装满了书，很～。感觉沉重（不舒服）：胳膊～。头～。“沈”"
   },
   {
     char: "沐",
@@ -39848,7 +41718,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "沐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "洗头发，也泛指洗涤：～浴。栉风～雨。借指蒙受：～恩。姓。"
   },
   {
     char: "沙",
@@ -39861,7 +41733,9 @@ const t = [
     mark: "ㄕㄚˋ",
     tradition: "沙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sha",
+    explain: "细小的石粒：风～。防～林。飞～走石。像沙的东西：豆～。姓。（嗓音）不清脆，不响亮：～哑。～音。沙皇：～俄。"
   },
   {
     char: "沛",
@@ -39874,7 +41748,9 @@ const t = [
     mark: "ㄆㄟˋ",
     tradition: "沛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pei",
+    explain: "盛大；旺盛：～然。充～。丰～。姓。"
   },
   {
     char: "沟",
@@ -39887,7 +41763,9 @@ const t = [
     mark: "ㄍㄡ",
     tradition: "溝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gou",
+    explain: "人工挖掘的水道或工事：暗～。交通～。（～儿）浅槽；和沟类似的洼处：地面上轧了一道～。瓦～里流下水来。（～儿）一般的水道：山～。小河～儿。"
   },
   {
     char: "没",
@@ -39900,7 +41778,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "没",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "无；没有：屋里～人。我～铅笔。副词。未；未曾：～红。～来过。"
   },
   {
     char: "沥",
@@ -39913,7 +41793,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "瀝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "液体一滴一滴地落下：～血。一滴一滴落下的液体：余～。"
   },
   {
     char: "沦",
@@ -39926,7 +41808,9 @@ const t = [
     mark: "ㄌㄩㄣˊ",
     tradition: "淪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lun",
+    explain: "沉没：沉～。～于海底。没落；陷入（不利的境地）：～落。～陷。～为奴隶。"
   },
   {
     char: "沧",
@@ -39939,7 +41823,9 @@ const t = [
     mark: "ㄘㄤ",
     tradition: "滄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cang",
+    explain: "暗绿色（指水）：～海。冷：～凉。"
   },
   {
     char: "沪",
@@ -39952,7 +41838,9 @@ const t = [
     mark: "ㄏㄨˋ",
     tradition: "滬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hu",
+    explain: "上海的别称：～剧。京～铁路。"
   },
   {
     char: "沫",
@@ -39965,7 +41853,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "沫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "沫子：泡～。肥皂～儿。马跑得满身是汗，口里流着白～。唾液：相濡以～。姓。"
   },
   {
     char: "沮",
@@ -39978,7 +41868,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "沮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ju",
+    explain: "阻止。（神色）败坏：～丧。"
   },
   {
     char: "河",
@@ -39991,7 +41883,9 @@ const t = [
     mark: "ㄏㄜˊ",
     tradition: "河",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "天然的或人工的大水道：江～。～流。内～。运～。护城～。一条～。指银河系：～外星系。（Hé）特指黄河：～西。～套。姓。"
   },
   {
     char: "沸",
@@ -40004,7 +41898,9 @@ const t = [
     mark: "ㄈㄟˋ",
     tradition: "沸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fei",
+    explain: "沸腾：～油。扬汤止～。水～后自动断电。～天震地（形容声音极响）。"
   },
   {
     char: "油",
@@ -40017,7 +41913,9 @@ const t = [
     mark: "ㄧㄡˊ",
     tradition: "油",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "you",
+    explain: "指动物的脂肪和从植物、矿物中提炼出来的脂质物：牛～。花生～。石～。一种液体食品：酱～。用桐油、油漆等涂抹：窗、门～饰一新。被油弄脏：衣服～了。圆滑；不诚恳：～腔滑调。这人太～了。"
   },
   {
     char: "治",
@@ -40030,7 +41928,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "治",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "治理：～家。～国。自～。～标。～本。～淮（淮河）。指安定或太平：～世。天下大～。旧称地方政府所在地：县～。府～。省～。医治：～病。我的病已经～好了。消灭（害虫）：～蝗。～蚜虫。惩办：～罪。惩～。处～。研究：～学。姓。"
   },
   {
     char: "沼",
@@ -40043,7 +41943,9 @@ const t = [
     mark: "ㄓㄠˇ",
     tradition: "沼",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhao",
+    explain: "天然的水池子：池～。～泽。"
   },
   {
     char: "沽",
@@ -40056,7 +41958,9 @@ const t = [
     mark: "ㄍㄨ",
     tradition: "沽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gu",
+    explain: "买：～酒。卖：待价而～。天津的别称。"
   },
   {
     char: "沾",
@@ -40069,7 +41973,9 @@ const t = [
     mark: "ㄓㄢ",
     tradition: "沾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhan",
+    explain: "浸湿：泪流～襟。因为接触而被东西附着上：～水。稍微碰上或挨上：～边儿。脚不～地。因发生关系而得到（好处）：～光。利益均～。行；好；可以：不～（不行，不成）。"
   },
   {
     char: "沿",
@@ -40082,7 +41988,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "沿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "顺着（江河、道路或物体的边）：～墙根儿种花。～着河边走。依照以往的方法、规矩、式样等：～袭。相～成习。顺着衣物的边再镶上一条边：～鞋口。边（多用在名词后）：边～。沟～。炕～儿。缸～儿。前～。"
   },
   {
     char: "泄",
@@ -40095,7 +42003,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "泄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "→泄泄"
   },
   {
     char: "泉",
@@ -40104,11 +42014,13 @@ const t = [
     radical: "白",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄑㄩㄢˊ",
     tradition: "泉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "quan",
+    explain: "泉水：温～。矿～。清～。甘～。泉眼。钱币的古称：～币。姓。"
   },
   {
     char: "泊",
@@ -40121,7 +42033,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "泊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "po",
+    explain: "船靠岸；停船：停～。船～港外。停留：漂～。停放（车辆）：～车。姓。恬静：淡～。"
   },
   {
     char: "泌",
@@ -40134,7 +42048,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "泌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mi",
+    explain: "分泌：～乳量。～尿器。"
   },
   {
     char: "法",
@@ -40147,7 +42063,9 @@ const t = [
     mark: "ㄈㄚˇ",
     tradition: "法",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fa",
+    explain: "体现统治阶级的意志，由国家制定或认可，受国家强制力保证执行的行为规则的总称，包括法律、法令、条例、命令、决定等：合～。犯～。变～。军～。婚姻～。绳之以～。依～治国。方法；方式：办～。用～。土～。加～。这件事没～儿办。标准；模范；可以仿效的：～帖。～书。取～乎上。仿效；效法：师～。～其遗志。佛教的道理：佛～。现身说～。法术：作～。斗（dòu）～。姓。指法国：～语。～文。法拉的简称。一个电容器，充以1库电量时，电势升高1伏，电容就是1法。"
   },
   {
     char: "泛",
@@ -40160,7 +42078,9 @@ const t = [
     mark: "ㄈㄢˋ",
     tradition: "泛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fan",
+    explain: "漂浮：～舟。～萍浮梗。沉渣～起。透出；冒出：脸上～红。～出香味儿。广泛；一般地：～论。～指。肤浅；不深入：浮～。空～。泛滥：黄～区（黄河泛滥过的地方）。“氾”"
   },
   {
     char: "泞",
@@ -40173,7 +42093,9 @@ const t = [
     mark: "ㄋㄧㄥˋ",
     tradition: "濘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ning",
+    explain: "烂泥：泥～。路～难行。"
   },
   {
     char: "泡",
@@ -40186,7 +42108,9 @@ const t = [
     mark: "ㄆㄠˋ",
     tradition: "泡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pao",
+    explain: "气体在液体内使液体鼓起来造成的球状或半球状体：水～。肥皂～儿。像泡一样的东西：灯～儿。手上起了～。较长时间地放在液体中：两手在水里～得发白。故意消磨（时间）：在茶馆～了俩钟头。"
   },
   {
     char: "波",
@@ -40199,7 +42123,9 @@ const t = [
     mark: "ㄅㄛ",
     tradition: "波",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "波浪：～纹。随～逐流。振动在介质中的传播过程。波是振动形式的传播，介质质点本身并不随波前进。最常见的有机械波和电磁波。通常也可分为横波和纵波。比喻事情的意外变化：风～。一～未平，一～又起。姓。"
   },
   {
     char: "泣",
@@ -40212,7 +42138,9 @@ const t = [
     mark: "ㄑㄧˋ",
     tradition: "泣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "小声哭：暗～。哭～。～不成声。眼泪：饮～。～下如雨。"
   },
   {
     char: "泥",
@@ -40225,7 +42153,9 @@ const t = [
     mark: "ㄋㄧˊ",
     tradition: "泥",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ni",
+    explain: "土和水混合成的东西。像泥的东西：印～。枣～。"
   },
   {
     char: "注",
@@ -40238,7 +42168,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "注",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "灌入：～入。～射。（精神、力量）集中：～视。～意。用文字解释字句：～解。批～。用来解释字句的文字：附～。脚～。记载；登记：～册。～销。旧时赌博所下的钱：赌～。孤～一掷。"
   },
   {
     char: "泪",
@@ -40247,11 +42179,13 @@ const t = [
     radical: "氵",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄌㄟˋ",
     tradition: "泪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lei",
+    explain: "眼泪；泪液：～痕。热～。～如雨下。烛～。"
   },
   {
     char: "泰",
@@ -40260,11 +42194,13 @@ const t = [
     radical: "氺",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄞˋ",
     tradition: "泰",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "tai",
+    explain: "平安；安宁：～然。国～民安。极；最：～西。太；过甚：简略～甚。富贵～盛。姓。"
   },
   {
     char: "泳",
@@ -40277,7 +42213,9 @@ const t = [
     mark: "ㄩㄥˇ",
     tradition: "泳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "游泳：仰～。蛙～。～装。"
   },
   {
     char: "泵",
@@ -40290,7 +42228,9 @@ const t = [
     mark: "ㄅㄥˋ",
     tradition: "泵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "beng",
+    explain: "吸入和排出流体的机械，能把流体抽出或压入容器，也能把液体提送到高处。通常按用途不同分为气泵、水泵、油泵。用泵压入或抽出：～入。～出。～油。[英pump]"
   },
   {
     char: "泻",
@@ -40303,7 +42243,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "瀉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "很快地流：流～。倾～。河水奔腾，一～千里。腹泻：～药。上吐下～。"
   },
   {
     char: "泼",
@@ -40316,7 +42258,9 @@ const t = [
     mark: "ㄆㄛ",
     tradition: "潑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "po",
+    explain: "用力把液体向外倒或向外洒，使散开：扫地时，～一点水，免得尘土飞扬。蛮横不讲理：撒～。有魄力；有生气；有活力：他做事很～。大伙儿干得真～。"
   },
   {
     char: "泽",
@@ -40329,7 +42273,9 @@ const t = [
     mark: "ㄗㄜˊ",
     tradition: "澤",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "ze",
+    explain: "水流汇聚的地方。  【组词】：沼泽、湖泽、深山大泽恩惠。  【组词】：恩泽、德泽遗留下来的痕迹。  【组词】：手泽滋润。  【组词】：若岁用旱，岳能泽之。（唐．皮日休〈霍山赋〉）光彩。  【组词】：光泽、色泽"
   },
   {
     char: "洁",
@@ -40342,7 +42288,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "潔",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "清洁：整～。纯～。～白。姓。"
   },
   {
     char: "洋",
@@ -40355,7 +42303,9 @@ const t = [
     mark: "ㄧㄤˊ",
     tradition: "洋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yang",
+    explain: "盛大；丰富：～溢。地球表面上被水覆盖的广大地方，约占地球面积的十分之七，分成四个部分，即太平洋、大西洋、印度洋、北冰洋。指外国；外国的：留～。～人。～货。现代化的（区别于“土”）：～办法。土～结合。打扮得挺～。洋钱；银圆：大～。小～。罚～一百元。姓。"
   },
   {
     char: "洒",
@@ -40368,7 +42318,9 @@ const t = [
     mark: "ㄙㄚˇ",
     tradition: "灑",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "sa",
+    explain: "泼撒、将水散布出去。  【组词】：洒水、喷洒　◎将东西散落。  【组词】：他不小心将豆子洒了一地。"
   },
   {
     char: "洗",
@@ -40381,7 +42333,9 @@ const t = [
     mark: "ㄒㄧˇ",
     tradition: "洗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xi",
+    explain: "用水或汽油等去掉物体上的泥污：～衣服。～零件。清除：清～。像用水洗净一样抢光或杀光：～劫。～城。印相的显影、定影：～相片儿。把磁带上的录音、录像去掉。"
   },
   {
     char: "洛",
@@ -40394,7 +42348,9 @@ const t = [
     mark: "ㄌㄨㄛˋ",
     tradition: "洛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "luo",
+    explain: "洛河，水名，在陕西。洛河，水名，发源于陕西，流入河南。古时作“雒”。姓。"
   },
   {
     char: "洞",
@@ -40407,7 +42363,9 @@ const t = [
     mark: "ㄉㄨㄥˋ",
     tradition: "洞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dong",
+    explain: "洞穴；窟窿。透彻；清楚：～晓。～若观火。数目“0”的另一种说法。"
   },
   {
     char: "津",
@@ -40420,7 +42378,9 @@ const t = [
     mark: "ㄐㄧㄣ",
     tradition: "津",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jin",
+    explain: "渡口：要～。唾液；汗：～液。遍体生～。滋润；补贴：～贴。天津的简称。"
   },
   {
     char: "洪",
@@ -40433,7 +42393,9 @@ const t = [
     mark: "ㄏㄨㄥˊ",
     tradition: "洪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hong",
+    explain: "大：～水。～钟。～炉。～量。指洪水：防～。蓄～。分～。山～。姓。"
   },
   {
     char: "洲",
@@ -40446,7 +42408,9 @@ const t = [
     mark: "ㄓㄡ",
     tradition: "洲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhou",
+    explain: "一块大陆和附近岛屿的总称。地球上有七大洲，即亚洲、欧洲、非洲、北美洲、南美洲、大洋洲、南极洲。河流中由泥沙淤积而成的陆地：沙～。三角～。（Zhōu）姓。"
   },
   {
     char: "活",
@@ -40459,7 +42423,9 @@ const t = [
     mark: "ㄏㄨㄛˊ",
     tradition: "活",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huo",
+    explain: "生存；有生命（跟“死”相对）：～人。～到老，学到老。鱼在水里才能～。在活的状态下：～捉。维持生命；救活：养家～口。～人一命。活动；灵活：～水。～结。～页。～塞。生动活泼；不死板：～气。～跃。这一段描写得很～。真正；简直：～现。这孩子说话～像个大人。工作（一般指体力劳动的，属于工农业生产或修理服务性质的）：细～。重～。庄稼～。干～儿。产品；制成品：出～儿。箱子上配着铜～。这一批～儿做得很好。"
   },
   {
     char: "洼",
@@ -40472,7 +42438,9 @@ const t = [
     mark: "ㄨㄚ",
     tradition: "窪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wa",
+    explain: "小水坑；低下的地方：水～。低凹：地很～。"
   },
   {
     char: "洽",
@@ -40485,7 +42453,9 @@ const t = [
     mark: "ㄑㄧㄚˋ",
     tradition: "洽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qia",
+    explain: "和睦；相互协调一致：融～。意见不～。商量；接洽：～借。～妥。面～。广博；周遍：博识～闻。"
   },
   {
     char: "派",
@@ -40498,7 +42468,9 @@ const t = [
     mark: "ㄆㄚ",
     tradition: "派",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pa",
+    explain: "指立场、见解或作风、习气相同的一些人：党～。学～。宗～。乐观～。作风或风度：气～。～头。有派头儿；有风度：小王穿上这身衣服真够～的。a）用于派别：两～学者对这个问题有两种不同的看法。b）用于景色、气象、声音、语言等（前面用“一”字）：好一～北国风光。一～新气象。一～胡言。江河的支流，泛指分支。分配；派遣；委派；安排：分～。调（diào）～。～人送去。～用场。摊派：～粮～款。指摘（别人过失）：～不是。一种带馅儿的西式点心：苹果～。巧克力～。[英pie]"
   },
   {
     char: "流",
@@ -40511,7 +42483,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "流",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "液体移动：～水。～汗。～血。～泪。～程。～泻。～质。～水不腐。汗～浃背。随波逐～（随着波浪起伏，跟着流水漂荡，喻没有主见，随着潮流走）。像水那样流动不定：～转（zhuǎn）。～通。～寇。～浪。～离。～散。～失。～沙。～露。～萤。传播：～言。～传。～芳。～弊。～毒。～行（xíng）。指江河的流水：河～。江～。溪～。激～。奔～。像水流的东西：气～。暖～。电～。向坏的方面转变：～于形式。旧时的刑罚，把犯人送到荒远的地方去：～放。～配。品类，等级：～辈。～派。指不正派：二～子。"
   },
   {
     char: "浅",
@@ -40524,7 +42498,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "淺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qian",
+    explain: "从上到下或从外到里的距离小（跟“深”相对，—同）：～滩。水～。屋子的进深～。浅显：～易。这些读物内容～，容易懂。浅薄：功夫～。（感情）不深厚：交情～。（颜色）淡：～红。～绿。（时间）短：年代～。相处的日子还～。"
   },
   {
     char: "浆",
@@ -40537,7 +42513,9 @@ const t = [
     mark: "ㄐㄧㄤ",
     tradition: "漿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "较浓的液体：豆～。泥～。纸～。粉～。用粉浆或米汤浸纱、布或衣服使干后发硬发挺：～洗。衬衫领子要～一下。"
   },
   {
     char: "浇",
@@ -40550,7 +42528,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "澆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "由上往下淋，洒：～花。灌溉：～地。把液汁倒入模型：～版。～筑。～铸。刻薄：～薄。～漓。"
   },
   {
     char: "浊",
@@ -40559,11 +42539,13 @@ const t = [
     radical: "氵",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄓㄨㄛˊ",
     tradition: "濁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "不清澈；不干净。与“清”相对：混～。污～。社会黑暗、混乱：～世。声音低沉粗重：～声～气。"
   },
   {
     char: "测",
@@ -40576,7 +42558,9 @@ const t = [
     mark: "ㄘㄜˋ",
     tradition: "測",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ce",
+    explain: "测量：～绘。推测；料想：变化莫～。"
   },
   {
     char: "济",
@@ -40589,7 +42573,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "濟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "过河；渡：同舟共～。救；救济：接～。缓不～急。（对事情）有益；成：无～于事。假公～私。"
   },
   {
     char: "浑",
@@ -40602,7 +42588,9 @@ const t = [
     mark: "ㄏㄨㄣˊ",
     tradition: "渾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hun",
+    explain: "水不清；污浊：～浊。糊涂，不明事理。全；完全：～身是劲。～似（完全像）。天然的：～厚。～朴。古又同“滚（gǔn）”：财货～～如泉源。"
   },
   {
     char: "浓",
@@ -40615,7 +42603,9 @@ const t = [
     mark: "ㄋㄨㄥˊ",
     tradition: "濃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nong",
+    explain: "液体或气体中所含的某种成分多；稠密（跟“淡”相对）：～墨。～云。～茶。～眉。程度深：兴趣很～。睡意正～。姓。"
   },
   {
     char: "浙",
@@ -40628,7 +42618,9 @@ const t = [
     mark: "ㄓㄜˋ",
     tradition: "浙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhe",
+    explain: "浙江，古水名，就是现在的钱塘江，在今浙江省。指浙江省。姓。"
   },
   {
     char: "浦",
@@ -40641,7 +42633,9 @@ const t = [
     mark: "ㄆㄨˇ",
     tradition: "浦",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pu",
+    explain: "水边或河流入海的地方（多用于地名）：乍～（在浙江）。～口（在江苏）。姓。"
   },
   {
     char: "浩",
@@ -40654,7 +42648,9 @@ const t = [
     mark: "ㄏㄠˋ",
     tradition: "浩",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "hao",
+    explain: "盛大；巨大：～大。～繁。多：～博。～如烟海。"
   },
   {
     char: "浪",
@@ -40667,7 +42663,9 @@ const t = [
     mark: "ㄌㄤˋ",
     tradition: "浪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lang",
+    explain: "波浪：风平～静。乘风破～。白～滔天。像波浪起伏的东西：麦～。声～。没有约束；放纵：放～。～费。逛：到街上～了一天。姓。"
   },
   {
     char: "浮",
@@ -40680,7 +42678,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "浮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "停留在液体表面上（跟“沉”相对）：～萍。油～在水上。～云。脸上～着微笑。在水里游：他能一口气～到对岸。在表面上的：～土。～雕。可移动的：～财。暂时的：～记。～支。轻浮；浮躁：他人太～，办事不踏实。空虚；不切实：～名。～夸。超过；多余：人～于事。～额。姓。"
   },
   {
     char: "浴",
@@ -40693,7 +42693,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "浴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "洗澡：沐～。淋～。～室。海水～。日光～。"
   },
   {
     char: "海",
@@ -40706,7 +42708,9 @@ const t = [
     mark: "ㄏㄞˇ",
     tradition: "海",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "hai",
+    explain: "大洋靠近陆地的部分，有的大湖也叫海，如青海、里海。比喻连成一大片的很多同类事物：人～。火～。大的（器皿或容量等）：～碗。～量。古代指从外国来的：～棠。～枣。极多（后面一般跟“了、啦”等）：街上的人可～啦!漫无目标地：～骂。她丢了支笔，～找。毫无节制地：～吃～喝。姓。"
   },
   {
     char: "浸",
@@ -40719,7 +42723,9 @@ const t = [
     mark: "ㄐㄧㄣˋ",
     tradition: "浸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "泡在液体里：～种。放在开水里～一～。液体渗入或渗出：衣服让汗～湿了。逐渐：友情～厚。"
   },
   {
     char: "涂",
@@ -40732,7 +42738,9 @@ const t = [
     mark: "ㄊㄨˊ",
     tradition: "塗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tu",
+    explain: "使油漆、颜色、脂粉、药物等附着在物体上：～抹。～饰。～脂抹粉。～上一层油。乱写或乱画；随意地写字或画画：～鸦。信手～上几笔。抹去：～改。把写错的字～掉。泥：～炭。海涂的简称：～田。滩～。同“途”。姓。"
   },
   {
     char: "消",
@@ -40745,7 +42753,9 @@ const t = [
     mark: "ㄒㄧㄠ",
     tradition: "消",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "消失：烟～云散。冰～瓦解。红肿已～。使消失；消除：～毒。～炎。打～。度过（时间）；消遣：～夜。～夏。需要（前面常带“不、只、何”等）：不～说。只～三天。姓。"
   },
   {
     char: "涉",
@@ -40758,7 +42768,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "涉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "从水里走过去。泛指从水上经过：跋山～水。远～重洋。经历：～险。牵连；相关：牵～。～及。"
   },
   {
     char: "涌",
@@ -40771,7 +42783,9 @@ const t = [
     mark: "ㄔㄨㄥ",
     tradition: "湧",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "水或云气冒出：泪如泉～。风起云～。从水或云气中冒出：雨过天晴，～出一轮明月。脸上～起了笑容。波峰呈半圆形，波长特别大、波速特别高的海浪。"
   },
   {
     char: "涎",
@@ -40784,7 +42798,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "涎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xian",
+    explain: "口水：垂～三尺。口角流～。"
   },
   {
     char: "涕",
@@ -40797,7 +42813,9 @@ const t = [
     mark: "ㄊㄧˋ",
     tradition: "涕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ti",
+    explain: "眼泪：痛哭流～。鼻涕：～泪交流。"
   },
   {
     char: "涛",
@@ -40810,7 +42828,9 @@ const t = [
     mark: "ㄊㄠ",
     tradition: "濤",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "tao",
+    explain: "大的波浪：波～。惊～骇浪。"
   },
   {
     char: "涝",
@@ -40823,7 +42843,9 @@ const t = [
     mark: "ㄌㄠˊ",
     tradition: "澇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lao",
+    explain: "庄稼因雨水过多而被淹（跟“旱”相对）：防旱防～。庄稼～了。因雨水过多而积在田地里的水：排～。"
   },
   {
     char: "涡",
@@ -40836,7 +42858,9 @@ const t = [
     mark: "ㄍㄨㄛ",
     tradition: "渦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wo",
+    explain: "旋涡，急流旋转形成中间低洼的地方：水～。样子像旋涡的：酒～。～轮。"
   },
   {
     char: "涣",
@@ -40849,7 +42873,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "涣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "消；散：～散。"
   },
   {
     char: "涤",
@@ -40862,7 +42888,9 @@ const t = [
     mark: "ㄉㄧˊ",
     tradition: "滌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "di",
+    explain: "洗：洗～。～除。"
   },
   {
     char: "润",
@@ -40875,7 +42903,9 @@ const t = [
     mark: "ㄖㄨㄣˋ",
     tradition: "潤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "run",
+    explain: "不干燥：湿～。加油或加水使不干燥：～肠。～～嗓子。细腻光滑；滋润：～泽。使有光泽；修饰：～色。利益；好处：利～。"
   },
   {
     char: "涧",
@@ -40888,7 +42918,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "澗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "山间流水的沟：溪～。山～。"
   },
   {
     char: "涨",
@@ -40901,7 +42933,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "漲",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhang",
+    explain: "（水位）升高；（物价）提高：水～船高。河水暴～。物价上～。"
   },
   {
     char: "涩",
@@ -40914,7 +42948,9 @@ const t = [
     mark: "ㄙㄜˋ",
     tradition: "澀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "se",
+    explain: "不润滑：滞～。轮轴发～，该上油了。使舌头感到麻木难受的滋味：柿子很～。文字不生动，难懂：晦～。文章艰～。"
   },
   {
     char: "涮",
@@ -40927,7 +42963,9 @@ const t = [
     mark: "ㄕㄨㄢˋ",
     tradition: "涮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shuan",
+    explain: "把手或东西放在水里摆动使干净：洗洗～～。～～手。把水放在器物里面摇动，把器物冲洗干净：～一下瓶子。把肉片等放在开水里烫一下就取出来蘸作料吃：～羊肉。耍弄；骗：你别～我啦。"
   },
   {
     char: "涯",
@@ -40940,7 +42978,9 @@ const t = [
     mark: "ㄧㄚˊ",
     tradition: "涯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ya",
+    explain: "水边，泛指边际：天～海角。一望无～。"
   },
   {
     char: "液",
@@ -40953,7 +42993,9 @@ const t = [
     mark: "ㄧㄝˋ",
     tradition: "液",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "液体：汁～。血～。溶～。～态。"
   },
   {
     char: "涵",
@@ -40966,7 +43008,9 @@ const t = [
     mark: "ㄏㄢˊ",
     tradition: "涵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "han",
+    explain: "包容；包含：～义。涵洞：桥～（桥和涵洞）。"
   },
   {
     char: "淀",
@@ -40979,7 +43023,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "澱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "较浅的湖泊。多用于湖名、地名，如白洋淀（湖名，在河北）、茶淀（地名，在天津）。液体里沉下的渣滓或粉末：沉～。"
   },
   {
     char: "淆",
@@ -40992,7 +43038,9 @@ const t = [
     mark: "ㄒㄧㄠˊ",
     tradition: "淆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xiao",
+    explain: "混杂：～惑。混～。"
   },
   {
     char: "淋",
@@ -41005,7 +43053,9 @@ const t = [
     mark: "ㄌㄧㄣˊ",
     tradition: "淋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "浇：日晒雨～。菜起锅后还得～上点儿香油。"
   },
   {
     char: "淌",
@@ -41018,7 +43068,9 @@ const t = [
     mark: "ㄊㄤˇ",
     tradition: "淌",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tang",
+    explain: "流下、流出。  【组词】：淌血、淌眼泪"
   },
   {
     char: "淑",
@@ -41031,7 +43083,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "淑",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "温和的；善良的。多指妇女的品德好。"
   },
   {
     char: "淘",
@@ -41044,7 +43098,9 @@ const t = [
     mark: "ㄊㄠˊ",
     tradition: "淘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tao",
+    explain: "用器物盛颗粒状的东西，加水搅动，或放在水里簸动，使除去杂质：～米。～金。到旧货市场寻觅购买：～旧书。从深的地方舀出污水、泥沙、粪便等：～井。～缸。～茅房。“掏”耗费：～神。顽皮：这孩子真～!"
   },
   {
     char: "淡",
@@ -41057,7 +43113,9 @@ const t = [
     mark: "ㄉㄢˋ",
     tradition: "淡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dan",
+    explain: "液体或气体中所含的某种成分少；稀薄（跟“浓”相对）：～墨。天高云～。（味道）不浓；不咸：一杯～酒。～而无味。菜太～，再放点盐。（颜色）浅：～青。～绿。颜色很～。轻描～写。冷淡；不热心：～然处之。～～地答应了一声。营业不旺盛：～季。～月。近来生意很～。没有意味的；无关紧要的：～话。～事。扯～。姓。"
   },
   {
     char: "淤",
@@ -41070,7 +43128,9 @@ const t = [
     mark: "ㄩ",
     tradition: "淤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yu",
+    explain: "淤积：大雨过后，院子里～了一层泥。淤积起来的：～泥。～地。淤积的泥沙；淤泥：河～。沟～。（血液）不流通：～血。液体沸腾溢出：米汤～了一锅台。"
   },
   {
     char: "淫",
@@ -41083,7 +43143,9 @@ const t = [
     mark: "",
     tradition: "淫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yin",
+    explain: "过多；过甚：～雨。～威。不正当的男女关系：奸～。放纵：骄奢～逸。心乱；迷惑：富贵不能～。"
   },
   {
     char: "淮",
@@ -41096,7 +43158,9 @@ const t = [
     mark: "ㄏㄨㄞˊ",
     tradition: "淮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huai",
+    explain: "淮河，水名，发源于河南，流经安徽，入江苏洪泽湖。姓。"
   },
   {
     char: "深",
@@ -41109,7 +43173,9 @@ const t = [
     mark: "ㄕㄣ",
     tradition: "深",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shen",
+    explain: "从上到下或从外到里的距离大（跟“浅”相对，—同）：～耕。～山。这院子很～。深度：这里的河水只有三尺～。这间屋子宽一丈，～一丈四。深奥：由浅入～。这本书很～，初学的人不容易看懂。深刻；深入：～谈。影响很～。（感情）厚；（关系）密切：～情。两人的关系很～。（颜色）浓：～红。～绿。颜色太～。距离开始的时间很久：～秋。夜已经很～了。很；十分：～知。～信。～恐。～表同情。～有此感。姓。"
   },
   {
     char: "淳",
@@ -41122,20 +43188,9 @@ const t = [
     mark: "ㄔㄨㄣˊ",
     tradition: "淳",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "混",
-    spell: "hùn",
-    stroke: "11",
-    radical: "氵",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄨㄣˊ",
-    tradition: "混",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "chun",
+    explain: "味道浓厚。  【组词】：温淳、清淳笃厚、朴实。  【组词】：淳厚、淳风、淳朴"
   },
   {
     char: "淹",
@@ -41148,7 +43203,9 @@ const t = [
     mark: "ㄧㄢ",
     tradition: "淹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yan",
+    explain: "淹没：～死。庄稼遭水～了。汗液等浸渍皮肤使感到痛或痒：夹肢窝被汗～得难受。广：～博。久；迟延：～留。"
   },
   {
     char: "添",
@@ -41161,7 +43218,9 @@ const t = [
     mark: "ㄊㄧㄢ",
     tradition: "添",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tian",
+    explain: "增添；增加：～人。～水。～枝加叶。如虎～翼。～了三十台机器。指生育（后代）：他家～了个女儿。姓。"
   },
   {
     char: "清",
@@ -41174,7 +43233,9 @@ const t = [
     mark: "ㄑㄧㄥ",
     tradition: "清",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "洁净；清澄。与“浊”相对：～波。清楚；明白：分～敌我。说～道理。查点：～仓。寂静：～幽。尽；完；一点不留：～除。不贪污：～廉。朝代名（1644—1911）。中国最后一个封建王朝。1616年（明万历四十四年）女真族努尔哈赤在中国东北部建立后金政权。1636年其子皇太极改国号为清。1644年明亡，清世祖爱新觉罗·福临入关，定都北京，逐步统一全国。1911年（清宣统三年）辛亥革命推翻清王朝，结束了两千年来的君主制度。"
   },
   {
     char: "渊",
@@ -41183,11 +43244,13 @@ const t = [
     radical: "氵",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄩㄢ",
     tradition: "淵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yuan",
+    explain: "深水；潭：深～。鱼跃于～。天～之别。深：～泉。～博。姓。"
   },
   {
     char: "渐",
@@ -41200,7 +43263,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "漸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "慢慢的、逐步的。  【组词】：渐渐、渐入佳境、循序渐进"
   },
   {
     char: "渔",
@@ -41213,7 +43278,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "漁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "捕鱼：～捞。～船。～翁。～业。竭泽而～。～人之利。谋取（不应得的东西）：～利。"
   },
   {
     char: "渗",
@@ -41226,7 +43293,9 @@ const t = [
     mark: "ㄕㄣˋ",
     tradition: "滲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shen",
+    explain: "液体慢慢地透过或漏出：～水。包扎伤口的绷带上～出了血。雨水都～到地里去了。"
   },
   {
     char: "渠",
@@ -41239,7 +43308,9 @@ const t = [
     mark: "ㄑㄩˊ",
     tradition: "渠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qu",
+    explain: "人工挖掘的水道。  【组词】：河渠、沟渠、水到渠成"
   },
   {
     char: "渡",
@@ -41252,7 +43323,9 @@ const t = [
     mark: "ㄉㄨˋ",
     tradition: "渡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "du",
+    explain: "由这一岸到那一岸；通过（江河等）：横～。远～重洋。飞～太平洋。红军强～大渡河。～过难关。载运过河：～船。请您把我们～过河去。渡口（多用于地名）：茅津～（黄河渡口，在山西）。深～（新安江渡口，在安徽）。姓。"
   },
   {
     char: "渣",
@@ -41265,7 +43338,9 @@ const t = [
     mark: "ㄓㄚ",
     tradition: "渣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zha",
+    explain: "提出精华或汁流后剩的东西：～子。～滓。豆腐～。碎屑：干粮～儿。"
   },
   {
     char: "渤",
@@ -41278,7 +43353,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "渤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "〔渤海〕中国的内海。外有辽东半岛和山东半岛环抱，西邻河北和天津，东以渤海海峡与黄海相通。面积约8万平方千米。平均水深20米。富渔盐之利。"
   },
   {
     char: "温",
@@ -41291,7 +43368,9 @@ const t = [
     mark: "ㄨㄣ",
     tradition: "温",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wen",
+    explain: "不冷不热；暖：～带。～泉。温度：体～。高～。低～。稍微加热：～一锅水。复习：～课。性情平和：～和。～柔。同“瘟”。"
   },
   {
     char: "港",
@@ -41304,7 +43383,9 @@ const t = [
     mark: "ㄍㄤˇ",
     tradition: "港",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gang",
+    explain: "河流或海湾深曲处，可以停泊船只、进出货物的口岸。  【组词】：海港、商港、军港香港的简称。  【组词】：港九、港澳"
   },
   {
     char: "渴",
@@ -41317,7 +43398,9 @@ const t = [
     mark: "ㄎㄜˇ",
     tradition: "渴",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ke",
+    explain: "口干想喝水：解～。又～又饿。临～掘井。迫切地：～望。～念。姓。"
   },
   {
     char: "游",
@@ -41330,7 +43413,9 @@ const t = [
     mark: "ㄧㄡˊ",
     tradition: "游",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "you",
+    explain: "人或动物在水里行动：～泳。鱼在水里～。各处从容地行走；闲逛：～览。～园。～玩。～人。～遍大江南北。交游；来往。不固定的；经常移动的：～牧。～民。～击。～资。江河的一段：上～。中～。下～。姓。"
   },
   {
     char: "渺",
@@ -41343,7 +43428,9 @@ const t = [
     mark: "ㄇㄧㄠˇ",
     tradition: "渺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "miao",
+    explain: "形容水大：浩～。渺茫：～若烟云。～无人迹。～无声息。渺小：～不足道。"
   },
   {
     char: "湃",
@@ -41356,7 +43443,9 @@ const t = [
     mark: "ㄆㄞˋ",
     tradition: "湃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pai",
+    explain: "见〖滂湃〗、"
   },
   {
     char: "湖",
@@ -41369,7 +43458,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "湖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "湖泊，四周为陆地的广阔水域：洞庭～。昆明～。指湖南、湖北：～广。指浙江湖州：～笔。"
   },
   {
     char: "湘",
@@ -41382,7 +43473,9 @@ const t = [
     mark: "ㄒㄧㄤ",
     tradition: "湘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "湘江，水名，发源于广西，流入湖南。湖南的别称：～绣。姓。"
   },
   {
     char: "湾",
@@ -41395,7 +43488,9 @@ const t = [
     mark: "ㄨㄢ",
     tradition: "灣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wan",
+    explain: "水流弯曲的地方：河～。海岸向陆地凹入的地方：港～。渤海～。停泊：把船～在避风的地方。"
   },
   {
     char: "湿",
@@ -41408,7 +43503,9 @@ const t = [
     mark: "ㄕ",
     tradition: "濕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shi",
+    explain: "沾了水的或显出含水分多的（跟“干”相对）：～度。潮～。地皮很～。衣服都给雨淋～了。"
   },
   {
     char: "溃",
@@ -41421,7 +43518,9 @@ const t = [
     mark: "ㄎㄨㄟˋ",
     tradition: "潰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kui",
+    explain: "（大水）冲破（堤坝）。也引申为突破：～决。～围（突破包围）。被打垮：～退。～不成军。腐烂：～烂。～疡。"
   },
   {
     char: "溅",
@@ -41434,7 +43533,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "濺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "液体受力而向四方飞射。  【组词】：水花四溅、溅了一身泥　◎"
   },
   {
     char: "溉",
@@ -41447,7 +43548,9 @@ const t = [
     mark: "ㄍㄞˋ",
     tradition: "溉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gai",
+    explain: "浇灌：灌～。"
   },
   {
     char: "源",
@@ -41460,7 +43563,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "源",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "水流起头的地方：河～。泉～。发～。～远流长。饮水思～。来源：货～。资～。病～。姓。"
   },
   {
     char: "溜",
@@ -41473,7 +43578,9 @@ const t = [
     mark: "ㄌㄧㄡˋ",
     tradition: "溜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "liu",
+    explain: "滑行；（往下）滑：～冰。从山坡上～下来。偷偷地走开或进入：一说打牌，他就～了。几个歹徒～进仓库里。光滑；平滑：～光。滑～。看：～一眼心里就有了数。顺着；沿：～边。～墙根儿走。很；非常（用在某些单音节形容词前）：～直。～齐。～满。同“熘”。"
   },
   {
     char: "溢",
@@ -41486,7 +43593,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "溢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "充满而流出来：河水四～。洋～。过分：～美之词（过分夸奖的话）。古又同“镒”。"
   },
   {
     char: "溪",
@@ -41499,7 +43608,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "溪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "山间的小河沟。也指一般的小河：～涧。～水。“谿”，另见"
   },
   {
     char: "溯",
@@ -41512,7 +43623,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "溯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "沿水逆流而上：～江而上。往上推求和回想：追～。回～。"
   },
   {
     char: "溶",
@@ -41525,7 +43638,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "溶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "溶化；溶解：～液。～剂。樟脑～于酒精而不～于水。"
   },
   {
     char: "溺",
@@ -41538,7 +43653,9 @@ const t = [
     mark: "ㄋㄧˋ",
     tradition: "溺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ni",
+    explain: "淹没：～死。沉迷不悟；过分：沉～。～爱。"
   },
   {
     char: "滋",
@@ -41551,20 +43668,9 @@ const t = [
     mark: "ㄗ",
     tradition: "滋",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "滑",
-    spell: "huá",
-    stroke: "12",
-    radical: "氵",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄨㄚˊ",
-    tradition: "滑",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "zi",
+    explain: "繁殖；生长：～生。～长。增添；加多：～益。～润。喷射：水管往外～水。"
   },
   {
     char: "滓",
@@ -41577,7 +43683,9 @@ const t = [
     mark: "ㄗˇ",
     tradition: "滓",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zi",
+    explain: "沉淀的杂质：渣～。泥～。污浊：垢～。～浊。"
   },
   {
     char: "滔",
@@ -41590,7 +43698,9 @@ const t = [
     mark: "ㄊㄠ",
     tradition: "滔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tao",
+    explain: "大水弥漫：波浪～天。"
   },
   {
     char: "滚",
@@ -41603,7 +43713,9 @@ const t = [
     mark: "ㄍㄨㄣˇ",
     tradition: "滚",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gun",
+    explain: "滚动；翻转：荷叶上～着亮晶晶的水珠儿。走开；离开（含斥责意）：～开。你给我～!（液体）翻腾，特指受热沸腾：～开的水。锅里水～了。使滚动；使在滚动中沾上（东西）：～元宵。～雪球。利～利。同“绲”姓。"
   },
   {
     char: "滞",
@@ -41616,7 +43728,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "滯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "停滞；不流通：～货。～销。～留。"
   },
   {
     char: "满",
@@ -41629,7 +43743,9 @@ const t = [
     mark: "ㄇㄢˇ",
     tradition: "滿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "man",
+    explain: "全部充实；达到容量的极点：会场里人都～了。装得太～了。使满：～上这一杯吧!达到一定期限：假期已～。不～一年。全；整个：～身油泥。～屋子的烟。完全：～不在乎。～有资格。满足：～意。心～意足。骄傲：自～。～招损，谦受益。姓。满族：～人。"
   },
   {
     char: "滤",
@@ -41638,11 +43754,13 @@ const t = [
     radical: "氵",
     struct: "左右结构",
     five: "",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˋ",
     tradition: "濾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lü",
+    explain: "使液体通过纱布、木炭或沙子等，除去杂质，变为纯净（间或用于气体）：过～。～器。～纸。～药。"
   },
   {
     char: "滥",
@@ -41655,7 +43773,9 @@ const t = [
     mark: "ㄌㄢˋ",
     tradition: "濫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lan",
+    explain: "泛滥。不加选择，不加节制：～用。宁缺勿～。"
   },
   {
     char: "滨",
@@ -41668,7 +43788,9 @@ const t = [
     mark: "ㄅㄧㄣ",
     tradition: "濱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bin",
+    explain: "水边；近水的地方：海～。湖～。湘江之～。靠近（水边）：～海。～江。姓。"
   },
   {
     char: "滩",
@@ -41681,7 +43803,9 @@ const t = [
     mark: "ㄊㄢ",
     tradition: "灘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tan",
+    explain: "河、海、湖边水深时淹没、水浅时露出的地方，泛指河、海、湖边比岸低的地方：河～。海～。～地。盐～。江河中水浅多石而水流很急的地方：险～。"
   },
   {
     char: "滴",
@@ -41694,7 +43818,9 @@ const t = [
     mark: "ㄉㄧ",
     tradition: "滴",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "di",
+    explain: "液体一点一点地向下落：～水穿石。汗往下直～。使液体一点一点地向下落：～眼药。～上几滴油。一点一点地向下落的液体：汗～。水～。用于滴下的液体的数量：一～汗。两～墨水。"
   },
   {
     char: "漂",
@@ -41707,7 +43833,9 @@ const t = [
     mark: "ㄆㄧㄠˋ",
     tradition: "漂",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "piao",
+    explain: "停留在液体表面不下沉：树叶在水面上～着。浮在液体表面顺着液体流动或风吹动的方向移动：远远～过来一只小船。"
   },
   {
     char: "漆",
@@ -41720,7 +43848,9 @@ const t = [
     mark: "ㄑㄧ",
     tradition: "漆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qi",
+    explain: "黏液状涂料的统称。涂在物体表面，干燥后形成坚韧的薄膜，有保护和装饰作用。分为天然漆和人造漆两类。把涂料涂在器物上：把大门～成红色的。姓。"
   },
   {
     char: "漏",
@@ -41733,7 +43863,9 @@ const t = [
     mark: "ㄌㄡˋ",
     tradition: "漏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lou",
+    explain: "东西从孔或缝中滴下、透出或掉出：壶里的水～光了。物体有孔或缝，东西能滴下、透出或掉出：～勺。锅～了。那间房子～雨。漏壶的简称，借指时刻：～尽更深。泄露：走～风声。说～了嘴。遗漏：挂一～万。这一行～了两个字。点名的时候，把他的名字给～了。"
   },
   {
     char: "漓",
@@ -41746,7 +43878,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "灕",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "见〖淋漓〗。漓江，水名，在广西。"
   },
   {
     char: "演",
@@ -41759,7 +43893,9 @@ const t = [
     mark: "ㄧㄢˇ",
     tradition: "演",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yan",
+    explain: "演变；演化：～进。发挥：～说。～绎。依照程式（练习或计算）：～算。～武。～兵场。表演技艺；扮演：～奏。她～过白毛女。姓。"
   },
   {
     char: "漠",
@@ -41772,7 +43908,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "漠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "沙漠：大～。～北。冷淡地；不经心地：～视。～不关心。"
   },
   {
     char: "漩",
@@ -41785,7 +43923,9 @@ const t = [
     mark: "ㄒㄩㄢˊ",
     tradition: "漩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xuan",
+    explain: "回旋的水流：水打着～儿向下流。"
   },
   {
     char: "漫",
@@ -41798,7 +43938,9 @@ const t = [
     mark: "ㄇㄢˋ",
     tradition: "漫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "man",
+    explain: "到处都是；遍：～山遍野。黄沙～天。～天大雾。广阔；长：～长。长夜～～。不受约束；随便：散～。～谈。～无限制。～无目的。莫；不要：～道。～说。"
   },
   {
     char: "漱",
@@ -41811,7 +43953,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "漱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "含水冲洗（口腔）：～口。用药水～～。嘴还没有～干净。"
   },
   {
     char: "漾",
@@ -41824,7 +43968,9 @@ const t = [
     mark: "ㄧㄤˋ",
     tradition: "漾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yang",
+    explain: "水面微微动荡：荡～。湖面～着微波。液体太满而向外流：～奶。这碗汤盛得太满，都～出来了。脸上～出了笑容。"
   },
   {
     char: "潘",
@@ -41837,7 +43983,9 @@ const t = [
     mark: "ㄆㄢ",
     tradition: "潘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pan",
+    explain: "姓。"
   },
   {
     char: "潜",
@@ -41850,7 +43998,9 @@ const t = [
     mark: "ㄑㄧㄢˊ",
     tradition: "潜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qian",
+    explain: "隐在水下：～泳。～到海底。隐藏；不露在表面：～伏。～流。～移默化。秘密地：～逃。指潜力：革新挖～。姓。"
   },
   {
     char: "潦",
@@ -41863,7 +44013,9 @@ const t = [
     mark: "ㄌㄠˊ",
     tradition: "潦",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "→潦倒、潦草"
   },
   {
     char: "潭",
@@ -41876,7 +44028,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "潭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tan",
+    explain: "深水池：龙～虎穴。〈方〉坑。"
   },
   {
     char: "潮",
@@ -41889,7 +44043,9 @@ const t = [
     mark: "ㄔㄠˊ",
     tradition: "潮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chao",
+    explain: "潮汐，也指潮水：早～。海～。涨～。退～。比喻像潮水那样有涨有落、有起有伏的事物：寒～。心～。思～。学～。热～。潮湿：受～。返～。背阴的房间有点儿～。成色低劣：～银。～金。技术不高：手艺～。指广东潮州：～剧。～绣。姓。"
   },
   {
     char: "澄",
@@ -41902,7 +44058,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "澄",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "（水）很清：～澈。使清明；使清楚：～清。"
   },
   {
     char: "澈",
@@ -41915,7 +44073,9 @@ const t = [
     mark: "ㄔㄜˋ",
     tradition: "澈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "che",
+    explain: "水清：清～见底。"
   },
   {
     char: "澎",
@@ -41928,7 +44088,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "澎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "→澎湖群岛"
   },
   {
     char: "澜",
@@ -41941,7 +44103,9 @@ const t = [
     mark: "ㄌㄢˊ",
     tradition: "瀾",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "lan",
+    explain: "大波浪；波浪：波～。微～。力挽狂～。推波助～。"
   },
   {
     char: "澡",
@@ -41954,7 +44118,9 @@ const t = [
     mark: "ㄗㄠˇ",
     tradition: "澡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zao",
+    explain: "洗（身体）：洗～。擦～。～盆。"
   },
   {
     char: "澳",
@@ -41967,7 +44133,9 @@ const t = [
     mark: "ㄠˋ",
     tradition: "澳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ao",
+    explain: "海边弯曲可以停船的地方（多用于地名）：三都～（在福建）。指澳门：港～同胞。姓。指澳洲（现称大洋洲）：～毛（澳洲出产的羊毛）。指澳大利亚。"
   },
   {
     char: "激",
@@ -41980,7 +44148,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "激",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "（水）因受到阻碍或震荡而向上涌：江水冲到礁石上，～起六七尺高。～起了一场风波。冷水突然刺激身体使得病：他被雨水～着了。用冷水冲或泡食物等使变凉：把西瓜放在冰水里～一～。使发作；使感情冲动：刺～。～怒。劝将不如～将。故意拿话～他。（感情）激动：感～。～于义愤。急剧；强烈：～战。～流。偏～。姓。"
   },
   {
     char: "濒",
@@ -41993,7 +44163,9 @@ const t = [
     mark: "ㄅㄧㄣ",
     tradition: "瀕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bin",
+    explain: "靠近（水边）：东～大海。临近；接近：～临。～死。"
   },
   {
     char: "瀑",
@@ -42006,7 +44178,9 @@ const t = [
     mark: "ㄅㄠˋ",
     tradition: "瀑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pu",
+    explain: "暴雨。"
   },
   {
     char: "灌",
@@ -42019,7 +44193,9 @@ const t = [
     mark: "ㄍㄨㄢˋ",
     tradition: "灌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guan",
+    explain: "浇；灌溉：引水～田。往麦地里～水。倒进去或装进去（多指液体、气体或颗粒状物体）：～了一瓶热水。风雪呼呼地～进门来。那响亮的声音直往他耳朵里～。指录音：～唱片。姓。"
   },
   {
     char: "火",
@@ -42028,11 +44204,13 @@ const t = [
     radical: "火",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄛˇ",
     tradition: "火",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "huo",
+    explain: "燃烧，物质燃烧时所发出的光和焰：～力。～烛。～源。～焰。烟～。～中取栗（喻为别人冒险出力，而自己吃亏上当，毫无所获）。紧急：～速。十万～急。指枪炮弹药等：～药。～炮。发怒，怒气：～暴。～性。中医指发炎、红肿、烦躁等的病因：肝～。毒～攻心。形容红色的：～红。～腿。古代军队组织，一火十个人。姓。"
   },
   {
     char: "灭",
@@ -42045,7 +44223,9 @@ const t = [
     mark: "ㄇㄧㄝˋ",
     tradition: "滅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mie",
+    explain: "熄灭（跟“着（zháo）”相对）：火～了。灯～了。使熄灭：～灯。～火。淹没：～顶。消灭；灭亡：自生自～。物质不～。使不存在；使消灭：～蝇。长自己的志气，～敌人的威风。"
   },
   {
     char: "灯",
@@ -42058,7 +44238,9 @@ const t = [
     mark: "ㄉㄥ",
     tradition: "燈",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "deng",
+    explain: "照明或做其他用途的发光的器具：一盏～。电～。红绿～。探照～。太阳～。燃烧液体或气体用来对别的东西加热的器具：酒精～。本生～。俗称收音机、电视机等的电子管：五～收音机。（Dēng）姓。"
   },
   {
     char: "灰",
@@ -42071,7 +44253,9 @@ const t = [
     mark: "ㄏㄨㄟ",
     tradition: "灰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hui",
+    explain: "物体燃烧后的剩余物：炉～。烟～。尘土：～尘。特指石灰：抹～。像木柴灰那样的颜色。消沉失望：～心。"
   },
   {
     char: "灵",
@@ -42084,7 +44268,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "靈",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "灵活；灵巧：～敏。～机。～便。心～手巧。机件失～。资金周转不～。精神；灵魂：心～。英～。神仙或关于神仙的：神～。～怪。灵验：～药。这个法子很～。灵柩或关于死人的：守～。移～。停～。～位。～前摆满了花圈。姓。"
   },
   {
     char: "灶",
@@ -42097,7 +44283,9 @@ const t = [
     mark: "ㄗㄠˋ",
     tradition: "竈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zao",
+    explain: "生火做饭的设备：～台。煤气～。指灶神：祭～。"
   },
   {
     char: "灸",
@@ -42110,7 +44298,9 @@ const t = [
     mark: "ㄐㄧㄡˇ",
     tradition: "灸",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiu",
+    explain: "灼；烧。中医治疗方法之一。以艾绒制品熏烤于穴位或患部：针～。"
   },
   {
     char: "灼",
@@ -42123,7 +44313,9 @@ const t = [
     mark: "ㄓㄨㄛˊ",
     tradition: "灼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "烧；烫：～伤。明白；透彻：～善恶之别。明亮：～然可见。"
   },
   {
     char: "灾",
@@ -42136,7 +44328,9 @@ const t = [
     mark: "ㄗㄞ",
     tradition: "灾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zai",
+    explain: "自然界造成的或人为的祸害：水～。兵～。个人遭遇的祸患：没病没～。“菑”，另音zī"
   },
   {
     char: "灿",
@@ -42149,7 +44343,9 @@ const t = [
     mark: "ㄘㄢˋ",
     tradition: "燦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "can",
+    explain: "光彩耀眼：～然。～若云锦。黄～～的菜花。"
   },
   {
     char: "炉",
@@ -42162,7 +44358,9 @@ const t = [
     mark: "ㄌㄩˊ",
     tradition: "爐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lu",
+    explain: "炉子：火～。锅～。电～。高～。围～取暖。姓。“鑪”"
   },
   {
     char: "炊",
@@ -42175,7 +44373,9 @@ const t = [
     mark: "ㄔㄨㄟ",
     tradition: "炊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chui",
+    explain: "烧火做饭：～具。～烟。姓。"
   },
   {
     char: "炎",
@@ -42188,7 +44388,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "炎",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "极热（指天气）：～热。～夏。炎症：发～。肠胃～。比喻权势：趋～附势。（Yán）指炎帝：～黄子孙。"
   },
   {
     char: "炒",
@@ -42201,7 +44403,9 @@ const t = [
     mark: "ㄔㄠˇ",
     tradition: "炒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chao",
+    explain: "一种烹饪方法。把食物放在锅里加热并不断翻动使熟：～菜。～花生。为了扩大影响或制造轰动效应而反复地进行报道和宣传；利用价格的升降不断地买进卖出，以从中获利：～作。～股。～汇。"
   },
   {
     char: "炕",
@@ -42214,7 +44418,9 @@ const t = [
     mark: "ㄏㄤ",
     tradition: "炕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kang",
+    explain: "北方人用土坯或砖砌成的睡觉用的长方台，上面铺席，下面有孔道，跟烟囱相通，可以烧火取暖。烤：白薯还在炉子边上～着呢。把湿褥子在热炕头上～一～。"
   },
   {
     char: "炫",
@@ -42227,7 +44433,9 @@ const t = [
     mark: "ㄒㄩㄢˋ",
     tradition: "炫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xuan",
+    explain: "（强烈的光线）晃人的眼睛：～目。夸耀：～弄。～示。自～其能。"
   },
   {
     char: "炬",
@@ -42240,7 +44448,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "炬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "火把。也指用火烧：火～。付之一～。烛：蜡～。"
   },
   {
     char: "炭",
@@ -42253,7 +44463,9 @@ const t = [
     mark: "ㄊㄢˋ",
     tradition: "炭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tan",
+    explain: "木炭。像炭的东西：山楂～。〈方〉煤：阳泉大～（山西阳泉出的一种煤）。"
   },
   {
     char: "炮",
@@ -42266,20 +44478,9 @@ const t = [
     mark: "",
     tradition: "炮",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "炸",
-    spell: "zhà",
-    stroke: "9",
-    radical: "火",
-    struct: "左右结构",
-    five: "火",
-    method: "",
-    mark: "",
-    tradition: "炸",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pao",
+    explain: "口径在2厘米以上，能发射炮弹的重型射击武器，火力强，射程远。种类很多，有迫击炮、榴弹炮、加农炮、高射炮等。也叫火炮。我国古代的炮最早是用机械发射石头的。火药发明后，改为用火药发射铁弹丸。爆竹：鞭～。花～。爆破土石等在凿眼里装上炸药后叫做炮。"
   },
   {
     char: "点",
@@ -42292,7 +44493,9 @@ const t = [
     mark: "ㄉㄧㄢˇ",
     tradition: "點",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dian",
+    explain: "液体的小滴：雨～儿。掉～儿了。小的痕迹：墨～儿。斑～。汉字的笔画，形状是“、”。几何学上指没有大小（即没有长、宽、高）而只有位置，不可分割的图形。如两直线的相交处、线段的两端都是点。小数点，如432.5读作四三二点儿五或四百三十二点儿五。表示少量：一～儿小事。吃～儿东西再走。用于事项：两～意见。一定的地点或程度的标志：起～。终～。冰～。沸～。据～。先突破一～。事物的方面或部分：优～。重～。特～。姓。铁制的响器，挂起来敲，用来报告时间或召集群众。旧时夜间计时用更点，一更分五点：五更三～。时间单位，一昼夜的二十四分之一。规定的钟点：误～。到～了。点心：茶～。早～。糕～。"
   },
   {
     char: "炼",
@@ -42305,7 +44508,9 @@ const t = [
     mark: "ㄌㄧㄢˋ",
     tradition: "煉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lian",
+    explain: "用加热等办法使物质纯净或坚韧：～铁。～钢。～乳。猪油～过了。烧：真金不怕火～。用心琢磨，使词句简洁优美：～字。～句。姓。"
   },
   {
     char: "烁",
@@ -42318,20 +44523,9 @@ const t = [
     mark: "ㄕㄨㄛˋ",
     tradition: "爍",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "烂",
-    spell: "làn",
-    stroke: "9",
-    radical: "火",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄢˋ",
-    tradition: "爛",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shuo",
+    explain: "光亮的样子：闪～。"
   },
   {
     char: "烈",
@@ -42344,7 +44538,9 @@ const t = [
     mark: "ㄌㄧㄝˋ",
     tradition: "烈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lie",
+    explain: "强烈；猛烈：～火。～日。～酒。性子～。轰轰～～。兴高采～。刚直；严正：刚～。为正义而死难的：～士。先～。功业：功～（功绩）。"
   },
   {
     char: "烘",
@@ -42357,7 +44553,9 @@ const t = [
     mark: "ㄏㄨㄥ",
     tradition: "烘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hong",
+    explain: "用火烤或烤火取暖：～干衣服。～手。衬托：～托。"
   },
   {
     char: "烙",
@@ -42370,7 +44568,9 @@ const t = [
     mark: "ㄌㄠˋ",
     tradition: "烙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lao",
+    explain: "用烧热了的器物烫，使衣服平整或在物体上印下标志：～衣服。～印。一种烹饪方法。把食物放在铛（chēng）或干锅上加热使熟：～饼。"
   },
   {
     char: "烛",
@@ -42383,7 +44583,9 @@ const t = [
     mark: "ㄓㄨˊ",
     tradition: "燭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhu",
+    explain: "蜡烛：火～。花～。照亮；照见：火光～天。洞～其奸。俗称灯泡的瓦数为烛数，如50烛的灯泡就是50瓦的灯泡。"
   },
   {
     char: "烟",
@@ -42396,7 +44598,9 @@ const t = [
     mark: "ㄧㄢ",
     tradition: "烟",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "yan",
+    explain: "物质燃烧时所产生的气状物：冒～。像烟的东西：～雾。烟气刺激：～了眼睛。烟草或烟草的制成品：～叶。吸～。"
   },
   {
     char: "烤",
@@ -42409,7 +44613,9 @@ const t = [
     mark: "ㄎㄠˇ",
     tradition: "烤",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kao",
+    explain: "将物体挨近火使熟或干燥：～肉。～白薯。把湿衣裳～干。将身体挨近火取暖：～火。"
   },
   {
     char: "烦",
@@ -42422,7 +44628,9 @@ const t = [
     mark: "ㄈㄢˊ",
     tradition: "煩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fan",
+    explain: "烦闷：～恼。心～意乱。心里有点儿～。厌烦：耐～。这些话都听～了。使厌烦：我正忙着呢，你别～我了。又多又乱：～杂。要言不～。烦劳：有事相～。～您给带个信儿。"
   },
   {
     char: "烧",
@@ -42435,7 +44643,9 @@ const t = [
     mark: "ㄕㄠ",
     tradition: "燒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shao",
+    explain: "使东西着火：燃～。～毁。～煤取暖。加热或接触某些化学药品、放射性物质等使物体起变化：～水。～饭。～砖。～炭。盐酸把衣服～坏了。烹调方法，先用油炸，再加汤汁来炒或炖，或先煮熟再用油炸：～茄子。红～鲤鱼。～羊肉。烹调方法，就是烤：叉～。～鸡。发烧：他现在～得厉害。比正常体温高的体温：～退了。退～了。过多的肥料使植物体枯萎或死亡。因财富多而忘乎所以：有两个钱就～得不知怎么好了!"
   },
   {
     char: "烫",
@@ -42448,7 +44658,9 @@ const t = [
     mark: "ㄊㄤˋ",
     tradition: "燙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tang",
+    explain: "温度高的物体与皮肤接触使感觉疼痛：～手。～嘴。别让开水～着。利用温度高的物体使另一物体温度升高或发生其他变化：～酒（用热水暖酒）。～衣裳（用热熨斗使衣服平整）。物体温度高：这水太～。指烫发：电～。把头发～一～。"
   },
   {
     char: "热",
@@ -42461,7 +44673,9 @@ const t = [
     mark: "ㄖㄜˋ",
     tradition: "熱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "re",
+    explain: "物体内部分子不规则运动放出的一种能量。物质燃烧都能产生热。温度高；感觉温度高（跟“冷”相对）：～水。趁～打铁。三伏天很～。使热；加热（多指食物）：～一～饭。把菜汤～一下。生病引起的高体温：发～。退～。情意深厚：亲～。～爱。～心肠儿。形容非常羡慕或急切想得到：眼～。～衷。受很多人欢迎的：～货。～门儿。现在对外汉语教学很～。加在名词、动词或词组后，表示形成的某种热潮：足球～。旅游～。自学～。放射性强：～原子。姓。"
   },
   {
     char: "烹",
@@ -42474,7 +44688,9 @@ const t = [
     mark: "ㄆㄥ",
     tradition: "烹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "peng",
+    explain: "煮（菜、茶）：～饪。～调。烹调方法，先用热油略炒，然后加酱油等作料搅拌，随即盛出：～对虾。"
   },
   {
     char: "焊",
@@ -42487,7 +44703,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "焊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "连接或修补金属（或非金属）器物的一种方法：电～。塑料～接。～铁壶。"
   },
   {
     char: "焕",
@@ -42500,7 +44718,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "焕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "光明；光亮：～发。姓。"
   },
   {
     char: "焙",
@@ -42513,7 +44733,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "焙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "用微火烘（药材、食品、烟叶、茶叶等）：～干研碎。～一点儿花椒。"
   },
   {
     char: "焚",
@@ -42526,7 +44748,9 @@ const t = [
     mark: "ㄈㄣˊ",
     tradition: "焚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fen",
+    explain: "烧：～香。玩火自～。忧心如～。"
   },
   {
     char: "焦",
@@ -42539,7 +44763,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "焦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "火候过大或火力过猛，使东西变硬变脆或烧成炭样：烤得又～又脆。衣服烧～了。由于缺少水分，变得干枯、干燥：～渴。唇～舌燥。着急：心～。～急。指焦炭：炼～。焦耳的简称。"
   },
   {
     char: "焰",
@@ -42552,7 +44778,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "焰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "火苗：火～。气～。"
   },
   {
     char: "然",
@@ -42565,7 +44793,9 @@ const t = [
     mark: "ㄖㄢˊ",
     tradition: "然",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ran",
+    explain: "对；不错：不以为～。指示代词。如此；这样；那样：不尽～。知其～，不知其所以～。然而：此事虽小，～亦不可忽视。副词或形容词后缀：忽～。突～。显～。欣～。飘飘～。又同“燃”。"
   },
   {
     char: "煌",
@@ -42578,7 +44808,9 @@ const t = [
     mark: "ㄏㄨㄤˊ",
     tradition: "煌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "光亮：灯火辉～。"
   },
   {
     char: "煎",
@@ -42591,7 +44823,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "煎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "烹调方法，锅里放少量油，加热后，把食物放进去使表面变黄：～鱼。～豆腐。把东西放在水里煮，使所含的成分进入水中：～茶。～药。煎中药的次数：头～。二～。这病吃一～药就好。"
   },
   {
     char: "煞",
@@ -42604,7 +44838,9 @@ const t = [
     mark: "ㄕㄚˋ",
     tradition: "煞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sha",
+    explain: "副词。极；很：～费苦心。迷信指凶神：凶神恶～。"
   },
   {
     char: "煤",
@@ -42617,7 +44853,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "煤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "一种可以燃烧的黑色固体，主要成分是碳、氢、氧和氮。是古代植物埋在地下，经历复杂的化学变化和高温高压而形成的。按形成阶段和煤化程度的不同，可分为泥炭、褐煤、烟煤和无烟煤。主要用作燃料和化工原料。也叫煤炭。"
   },
   {
     char: "照",
@@ -42630,7 +44868,9 @@ const t = [
     mark: "ㄓㄠˋ",
     tradition: "照",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhao",
+    explain: "照射：日～。阳光～在窗台上。用手电筒～一～。对着镜子或其他反光的东西看自己的影子；有反光作用的东西把人或物的形象反映出来：～镜子。湖面如镜，把岸上的树木～得清清楚楚。拍摄（相片、电影）：这张相片～得很好。相片：小～。玉～。执照；政府所发的凭证：车～。护～。牌～。取缔无～摊贩。照料：～管。～应。通知：关～。～会。比照：查～。对～。知晓；明白：心～不宣。姓。"
   },
   {
     char: "煮",
@@ -42643,7 +44883,9 @@ const t = [
     mark: "ㄓㄨˇ",
     tradition: "煮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhu",
+    explain: "一种烹饪方法。把食物放在有水的锅里烧熟或把其他东西放在开水锅里烧一段时间：～饺子。把病人的碗筷～一下。"
   },
   {
     char: "熄",
@@ -42656,7 +44898,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "熄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "火灭；灭火：炉火～了。～灯。"
   },
   {
     char: "熊",
@@ -42669,7 +44913,9 @@ const t = [
     mark: "ㄒㄩㄥˊ",
     tradition: "熊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xiong",
+    explain: "哺乳动物，头大，尾巴短，四肢短而粗，脚掌大，趾端有带钩的爪，能爬树。主要吃动物性食物，也吃水果、坚果等。种类很多，如棕熊、马来熊、黑熊。有的地区叫熊瞎子。（Xióng）姓。斥责：挨～。～了他一顿。怯懦；能力低下：你也真～，一上阵就败了下来。"
   },
   {
     char: "熏",
@@ -42682,7 +44928,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "熏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xun",
+    explain: "气味或烟气接触物体，使物体变颜色或染上气味：～蚊子。烟～黑了墙。熏制：～鱼。～鸡。～干儿。温和：～风。"
   },
   {
     char: "熔",
@@ -42695,7 +44943,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "熔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "固体受热到一定温度时变成液体：～点。～铁。“鎔”，另见“镕”"
   },
   {
     char: "熙",
@@ -42708,7 +44958,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "熙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "光明。欢喜；和乐：～～。兴旺。通“禧（xǐ）”。福。"
   },
   {
     char: "熟",
@@ -42721,7 +44973,9 @@ const t = [
     mark: "ㄕㄡˊ",
     tradition: "熟",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shu",
+    explain: "植物的果实等完全长成（跟“生2”相对，—同）：西瓜已经～了。（食物）加热到可以食用的程度：～菜。饭～了。加工制造或锻炼过的：～皮子。～铁。因常见或常用而知道得清楚：～人。～视无睹。这条路我常走，所以很～。熟练：～手。～能生巧。程度深：睡得很～。深思～虑。"
   },
   {
     char: "熬",
@@ -42734,7 +44988,9 @@ const t = [
     mark: "ㄠˊ",
     tradition: "熬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ao",
+    explain: "把粮食等放在水里，煮成糊状：～粥。为了提取有效成分或去掉所含水分、杂质，把东西放在容器里久煮：～盐。～药。忍受（疼痛或艰苦的生活等）：～夜。～苦日子。姓。"
   },
   {
     char: "燃",
@@ -42747,7 +45003,9 @@ const t = [
     mark: "ㄖㄢˊ",
     tradition: "燃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ran",
+    explain: "燃烧：自～。～料。篝火～起来了。引火点着：～灯。～香。～起火把。"
   },
   {
     char: "燎",
@@ -42760,7 +45018,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "燎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "延烧：烈火～原。"
   },
   {
     char: "燕",
@@ -42769,11 +45029,13 @@ const t = [
     radical: "灬",
     struct: "上中下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄢˋ",
     tradition: "燕",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "鸟类。体小，翅长，尾为剪刀状。在中国春向北来，秋返南方。捕食昆虫，是益鸟。安乐：～安。古又同“饮宴”的“宴”。"
   },
   {
     char: "燥",
@@ -42786,20 +45048,9 @@ const t = [
     mark: "ㄙㄠˋ",
     tradition: "燥",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "爆",
-    spell: "bào",
-    stroke: "19",
-    radical: "火",
-    struct: "左右结构",
-    five: "火",
-    method: "",
-    mark: "",
-    tradition: "爆",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sao",
+    explain: "干；缺少水分：～热（干燥炎热）。口干舌～。"
   },
   {
     char: "爪",
@@ -42808,11 +45059,13 @@ const t = [
     radical: "爪",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄠˇ",
     tradition: "爪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhua",
+    explain: "鸟兽的脚或趾甲：鹰～。虎～。张牙舞～。"
   },
   {
     char: "爬",
@@ -42825,7 +45078,9 @@ const t = [
     mark: "ㄆㄚˊ",
     tradition: "爬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pa",
+    explain: "昆虫、爬行动物等行动或人用手和脚一起着地向前移动：蝎子～进了墙缝。这孩子会～了。抓着东西往上去；攀登：～树。～绳。～山。墙上～满了藤蔓。由倒卧而坐起或站起（多指起床）：他病得已经～不起来了。在哪里跌倒，就在哪里～起来。"
   },
   {
     char: "爱",
@@ -42838,7 +45093,9 @@ const t = [
     mark: "ㄞˋ",
     tradition: "愛",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "ai",
+    explain: "对人或事物有很深的感情：～祖国。～人民。他～上了一个姑娘。喜欢：～游泳。～劳动。～看电影。爱惜；爱护：～公物。～集体荣誉。常常发生某种行为；容易发生某种变化：～哭。铁～生锈。姓。"
   },
   {
     char: "爵",
@@ -42851,7 +45108,9 @@ const t = [
     mark: "ㄐㄩㄝˊ",
     tradition: "爵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jue",
+    explain: "古代饮酒的器皿。爵位，君主国家对贵族所封的等级：封～。公～。"
   },
   {
     char: "父",
@@ -42860,11 +45119,13 @@ const t = [
     radical: "父",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄨˋ",
     tradition: "父",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "称谓：对爸爸的称呼。父亲、养父、家父　用以尊称亲族中男性的长辈。伯父、叔父、舅父　(3)对老年人的尊称。父老"
   },
   {
     char: "爷",
@@ -42873,11 +45134,13 @@ const t = [
     radical: "父",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄝˊ",
     tradition: "爺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ye",
+    explain: "旧时对官僚、财主等的称呼：老～。太～。迷信的人对神的称呼：土地～。阎王～。"
   },
   {
     char: "爸",
@@ -42890,7 +45153,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "爸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ba",
+    explain: "爸爸，称父亲。"
   },
   {
     char: "爹",
@@ -42903,7 +45168,9 @@ const t = [
     mark: "ㄉㄧㄝ",
     tradition: "爹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "die",
+    explain: "称父亲。〈方〉阿爹，称祖父。"
   },
   {
     char: "爽",
@@ -42916,7 +45183,9 @@ const t = [
     mark: "ㄕㄨㄤ",
     tradition: "爽",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "shuang",
+    explain: "明朗；清亮：秋高气～。神清目～。轻松；舒服：凉～。身体不～。直率；痛快：豪～。～直。差错；违背：～约。屡试不～。"
   },
   {
     char: "片",
@@ -42925,11 +45194,13 @@ const t = [
     radical: "片",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄆㄧㄢˋ",
     tradition: "片",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pian",
+    explain: "平而薄的物体：卡～。名～。切削成薄的形状：～肉片。少，零星：～段（整体当中的一段）。～刻。～面。～甲不存。指较大地区内划分的较小地区：分～儿开会。〔～假名〕日本文所用的楷书字母。量词，指面积、范围、景象、心意等或成片的东西：两～药。一～新气象。"
   },
   {
     char: "版",
@@ -42942,7 +45213,9 @@ const t = [
     mark: "ㄅㄢˇ",
     tradition: "版",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ban",
+    explain: "上面有文字或图形供印刷用的底版：排～。铜～。书籍每排印一次叫一版：初～。修订～。报纸的一面叫一版：头～头条。户籍：～图。筑墙时用的夹板。《考工记》：“版崇二尺，长六尺。”墙的尺寸多以版为基数进行计算：～筑。"
   },
   {
     char: "牌",
@@ -42955,7 +45228,9 @@ const t = [
     mark: "ㄆㄞˊ",
     tradition: "牌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pai",
+    explain: "用木板或其他材料做的标志：门～。路～。～子。～匾。～价。凭证：金～。银～。腰～。产品的商标：名～货。古代兵士在战争时或现代警察在驱散示威者时用来遮护身体的东西：盾～。挡箭～。娱乐或赌博用的东西：纸～。扑克～。麻将～。神主、灵位或题着名字作为祭祀对象的木牌：～位。词曲的调名：词～。曲～。～子曲。"
   },
   {
     char: "牍",
@@ -42968,7 +45243,9 @@ const t = [
     mark: "ㄉㄨˊ",
     tradition: "牘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "du",
+    explain: "古代写字用的木简。公文；书信：文～。尺～。"
   },
   {
     char: "牙",
@@ -42977,11 +45254,13 @@ const t = [
     radical: "牙",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄧㄚˊ",
     tradition: "牙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ya",
+    explain: "人和高等动物咬切、咀嚼食物的器官，由坚固的骨组织和釉质构成。人的牙按部位和形状的不同，分为切牙、尖牙、前磨牙、磨牙。通称牙齿，也叫齿。特指象牙：～筷。～章。～雕。形状像牙齿的东西：～子。姓。牙子2：～行。"
   },
   {
     char: "牛",
@@ -42990,11 +45269,13 @@ const t = [
     radical: "牛",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄋㄧㄡˊ",
     tradition: "牛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "niu",
+    explain: "哺乳动物。草食，反刍。家牛有黄牛、水牛和牦牛等。黄牛一般作役用和肉用；水牛是水田耕作的重要役畜；牦牛可作高山峻岭间的驮运役畜。中国黄牛有秦川牛、南阳牛、鲁西黄牛、延边黄牛等；水牛有温州水牛、滨湖水牛等良种。云南产的一种野牛是中国国家重点保护动物。比喻固执、倔强，也比喻威风、神气：～脾气。～哄哄。他的样子可真～。星名。二十八宿之一。牛顿的简称。"
   },
   {
     char: "牡",
@@ -43007,7 +45288,9 @@ const t = [
     mark: "ㄇㄨˇ",
     tradition: "牡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mu",
+    explain: "雄性的鸟兽类。与“牝（pìn）”相对：～牛。指植物的雄株：～麻。"
   },
   {
     char: "牢",
@@ -43020,7 +45303,9 @@ const t = [
     mark: "ㄌㄠˊ",
     tradition: "牢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lao",
+    explain: "养牲畜的圈（juàn）：虎～。亡羊补～（喻事后补救还不为迟）。～笼。古代称作祭品的牲畜：太～（古代帝王、诸侯祭祀社稷时，牛、羊、豕三牲全备之称）。少～（诸侯宗庙，用羊、豕之称）。监禁犯人的地方：监～。坐～。结实，坚固，固定：～固。～稳（a.稳妥可靠；b.物体稳定，不摇晃）。～记。～不可破。"
   },
   {
     char: "牧",
@@ -43033,7 +45318,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "牧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "放养牲口：～羊。畜～。古代官名：荆州～。"
   },
   {
     char: "物",
@@ -43046,20 +45333,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "物",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "牲",
-    spell: "shēng",
-    stroke: "9",
-    radical: "牜",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄕㄥ",
-    tradition: "牲",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "wu",
+    explain: "东西；事物：动～。货～。～质。～尽其用。指自己以外的人或跟自己相对的环境：～议。待人接～。内容；实质：言之有～。空洞无～。姓。"
   },
   {
     char: "牵",
@@ -43072,7 +45348,9 @@ const t = [
     mark: "ㄑㄧㄢ",
     tradition: "牽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qian",
+    explain: "拉着使行走或移动：～引。～着一头牛往地里走。牵涉：～连。～制。姓。"
   },
   {
     char: "特",
@@ -43085,7 +45363,9 @@ const t = [
     mark: "ㄊㄜˋ",
     tradition: "特",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "te",
+    explain: "不平常的，超出一般的：～殊。～色。～产。～权。～性。～征。～需。～技。～务。～区。～价。～例。～效。单，单一：～为（wèi）。～设。～地。～惠。～辑。～使。～赦。～约。只，但：不～如此。“相如度秦王～以诈佯为予赵城，实不可得”。三岁的兽，一说四岁的兽：“不狩不猎，胡瞻尔庭有悬～兮！”公牛，亦用以借指公马和雄性的牲畜。配偶，匹配：“不因旧姻，求尔新～”。"
   },
   {
     char: "牺",
@@ -43098,7 +45378,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "犧",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "古指作祭品用的牲畜：～牛。"
   },
   {
     char: "犀",
@@ -43111,7 +45393,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "犀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "哺乳动物，外形略像牛，颈短，四肢粗大，鼻子上有一个或两个角。皮粗而厚，微黑色，没有毛。生活于亚洲和非洲的热带森林里，吃植物。通称犀牛。"
   },
   {
     char: "犁",
@@ -43124,7 +45408,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "犁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "翻土用的农具，有许多种，用畜力或机器（如拖拉机）牵引：扶～。一张～。用犁耕地：～田。姓。"
   },
   {
     char: "犬",
@@ -43133,11 +45419,13 @@ const t = [
     radical: "犬",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄩㄢˇ",
     tradition: "犬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "quan",
+    explain: "狗：警～。猎～。牧～。军用～。丧家之～。鸡鸣～吠。"
   },
   {
     char: "犯",
@@ -43150,7 +45438,9 @@ const t = [
     mark: "ㄈㄢˋ",
     tradition: "犯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fan",
+    explain: "抵触；违犯：～法。～规。～忌讳。众怒难～。侵犯：进～。秋毫无～。人不～我，我不～人；人若～我，我必～人。井水不～河水。罪犯：主～。盗窃～。发作；发生（多指错误的或不好的事情）：～愁。～错误。～脾气。他的胃病又～了。姓。"
   },
   {
     char: "状",
@@ -43163,7 +45453,9 @@ const t = [
     mark: "ㄓㄨㄤˋ",
     tradition: "狀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhuang",
+    explain: "1.形状；样子：～态。奇形怪～。2.情况：～况。病～。罪～。3.陈述或描摹：～语。不可名～。4.陈述事件或记载事迹的文字：供～。行～。5.指诉状：～纸。告～。6.褒奖、委任等文件：奖～。委任～。"
   },
   {
     char: "犹",
@@ -43176,7 +45468,9 @@ const t = [
     mark: "ㄧㄡˊ",
     tradition: "猶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "you",
+    explain: "如同：虽死～生。过～不及。还；尚且：记忆～新。困兽～斗。姓。"
   },
   {
     char: "狂",
@@ -43189,7 +45483,9 @@ const t = [
     mark: "ㄎㄨㄤˊ",
     tradition: "狂",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "kuang",
+    explain: "精神失常；疯狂：发～。丧心病～。猛烈；声势大：～风。～奔。纵情地、无拘束地（多指欢乐）：～喜。～欢。狂妄：～言。你这话可说得有点儿～。"
   },
   {
     char: "狈",
@@ -43202,7 +45498,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "狽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "见〖狼狈〗、〖狼狈为奸〗。"
   },
   {
     char: "狐",
@@ -43215,7 +45513,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "狐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "哺乳动物，外形略像狼，面部较长，耳朵三角形，尾巴长，毛通常赤黄色。性狡猾多疑，昼伏夜出，吃野鼠、鸟类、家禽等。常见的有赤狐和沙狐。通称狐狸。（Hú）姓。"
   },
   {
     char: "狗",
@@ -43228,7 +45528,9 @@ const t = [
     mark: "ㄍㄡˇ",
     tradition: "狗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gou",
+    explain: "哺乳动物，种类很多，嗅觉和听觉都很灵敏，舌长而薄，可散热，毛有黄、白、黑等颜色。是人类最早驯化的家畜，有的可以训练成警犬，有的用来帮助打猎、牧羊等。也叫犬。"
   },
   {
     char: "狞",
@@ -43241,33 +45543,9 @@ const t = [
     mark: "ㄋㄧㄥˊ",
     tradition: "獰",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "狠",
-    spell: "hěn",
-    stroke: "9",
-    radical: "犭",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄣˇ",
-    tradition: "狠",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "狡",
-    spell: "jiǎo",
-    stroke: "9",
-    radical: "犭",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄧㄠˇ",
-    tradition: "狡",
-    sex: "",
-    tone: 3
+    tone: 2,
+    pinyin: "ning",
+    explain: "（面目）凶恶：～恶。～笑。"
   },
   {
     char: "独",
@@ -43280,7 +45558,9 @@ const t = [
     mark: "ㄉㄨˊ",
     tradition: "獨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "du",
+    explain: "一个：～子。～木桥。无～有偶。独自：～揽。～断专行。年老没有儿子的人：鳏寡孤～。唯独：大伙儿都齐了，～有他还没来。自私；容不得人：这个人真～，他的东西谁也碰不得。姓。"
   },
   {
     char: "狭",
@@ -43293,7 +45573,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "狹",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "窄（跟“广”相对）：～小。～路相逢。"
   },
   {
     char: "狮",
@@ -43306,7 +45588,9 @@ const t = [
     mark: "ㄕ",
     tradition: "狮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shi",
+    explain: "哺乳动物。体长约3米。毛黄褐色，尾长、末端有丛毛。雄的头、颈有鬣（liè），捕食羚羊、斑马等。多产于非洲和亚洲西部。"
   },
   {
     char: "狰",
@@ -43319,7 +45603,9 @@ const t = [
     mark: "ㄓㄥ",
     tradition: "狰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "〔狰狞〕面目凶恶的样子。"
   },
   {
     char: "狱",
@@ -43332,7 +45618,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "獄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "监禁犯人的地方：监～。官司；罪案：冤～。～讼。"
   },
   {
     char: "狸",
@@ -43345,7 +45633,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "狸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "狸子，即“豹猫”"
   },
   {
     char: "狼",
@@ -43358,7 +45648,9 @@ const t = [
     mark: "ㄌㄤˊ",
     tradition: "狼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lang",
+    explain: "哺乳动物，外形像狗，面部长，耳朵直立，毛黄色或灰褐色，尾巴向下垂。昼伏夜出，冬天常聚集成群，性凶暴，吃野生动物和家畜等，有时也伤害人。"
   },
   {
     char: "猎",
@@ -43371,7 +45663,9 @@ const t = [
     mark: "ㄌㄧㄝˋ",
     tradition: "獵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lie",
+    explain: "捕捉禽兽；打猎：狩～。渔～。～人。～户。～狗。～枪。搜寻；物色：～奇。"
   },
   {
     char: "猖",
@@ -43384,7 +45678,9 @@ const t = [
     mark: "ㄔㄤ",
     tradition: "猖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chang",
+    explain: "凶猛；狂妄：～獗。～狂。"
   },
   {
     char: "猛",
@@ -43397,7 +45693,9 @@ const t = [
     mark: "ㄇㄥˇ",
     tradition: "猛",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "meng",
+    explain: "猛烈：勇～。突飞～进。炮火很～。忽然；突然：他听到枪声，～地从屋里跳出来。把力气集中地使出来：～着劲儿干。姓。"
   },
   {
     char: "猜",
@@ -43410,7 +45708,9 @@ const t = [
     mark: "ㄘㄞ",
     tradition: "猜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cai",
+    explain: "推测：～谜。疑心：两小无～。"
   },
   {
     char: "猩",
@@ -43423,7 +45723,9 @@ const t = [
     mark: "ㄒㄧㄥ",
     tradition: "猩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xing",
+    explain: "猩猩，也叫褐猿。哺乳动物。比猴子大，身体构造同人类很接近，前肢长，无尾，全身有赤褐色长毛。树栖，有筑巢习性，昼间活动。主食果实。"
   },
   {
     char: "猪",
@@ -43436,7 +45738,9 @@ const t = [
     mark: "ㄓㄨ",
     tradition: "猪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhu",
+    explain: "哺乳动物。分家猪和野猪。家猪分肉用、脂用和兼用三类。头大，鼻和嘴都长，眼小，耳大，脚短，身肥。肉供食用，皮可制革，鬃可制刷子，并可做其他工业原料。"
   },
   {
     char: "猫",
@@ -43449,7 +45753,9 @@ const t = [
     mark: "ㄇㄠˊ",
     tradition: "猫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "mao",
+    explain: "哺乳动物，面部略圆，躯干长，耳壳短小，眼大，瞳孔随光线强弱而缩小放大，四肢较短，掌部有肉质的垫，行动敏捷，善跳跃，能捕鼠，毛柔软，有黑、白、黄、灰褐等色。种类很多。躲藏：～在家里不敢出来。"
   },
   {
     char: "猬",
@@ -43462,7 +45768,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "猬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "刺猬，哺乳动物。身体头部、背部和两侧生有短而密的刺，遇敌时全身蜷曲成球，以刺保护身体。食昆虫和小动物，是益兽。"
   },
   {
     char: "献",
@@ -43471,11 +45779,13 @@ const t = [
     radical: "犬",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄢˋ",
     tradition: "獻",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "把实物或意见等恭敬庄严地送给集体或尊敬的人：～花。～旗。贡～。把青春～给祖国。表现给人看：～技。～殷勤。姓。"
   },
   {
     char: "猴",
@@ -43488,7 +45798,9 @@ const t = [
     mark: "ㄏㄡˊ",
     tradition: "猴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hou",
+    explain: "哺乳动物，种类很多，外形略像人，身上有毛，多为灰色或褐色，有尾巴，行动灵活，好群居，口腔有储存食物的颊囊，吃果实、野菜、鸟卵和昆虫等。通称猴子。乖巧；机灵（多指孩子）：这孩子多～啊!像猴似的蹲着：他～在台阶上嗑瓜子儿。姓。"
   },
   {
     char: "猾",
@@ -43501,7 +45813,9 @@ const t = [
     mark: "ㄏㄨㄚˊ",
     tradition: "猾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hua",
+    explain: "狡猾：奸～。～吏。"
   },
   {
     char: "猿",
@@ -43514,7 +45828,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "猿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "哺乳动物，外形像猴而大，种类很多，没有颊囊和尾巴，有的特征跟人类很相似。生活在森林中。如猩猩和长臂猿。"
   },
   {
     char: "玄",
@@ -43523,11 +45839,13 @@ const t = [
     radical: "亠",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄢˊ",
     tradition: "玄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xuan",
+    explain: "黑色：～狐。深奥：～奥。不符合事实或距离事实太远：这话太～了。"
   },
   {
     char: "率",
@@ -43536,11 +45854,13 @@ const t = [
     radical: "亠",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ˋ",
     tradition: "率",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shuai",
+    explain: "两个相关的数在一定条件下的比值。如出勤率是某一单位或个人在某一时期内实际出勤日数和规定应出勤日数的比值。"
   },
   {
     char: "玉",
@@ -43549,11 +45869,13 @@ const t = [
     radical: "玉",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄩˋ",
     tradition: "玉",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "矿物，不透明和半透明的集合体。化学成分是硅酸铝钠。硬度大。如白玉、墨玉、青玉、碧玉、和田玉、岫岩玉等，主要用作雕刻工艺美术品。比喻洁白美丽：亭亭～立。敬辞。称对方的身体或行动：～体。～成。"
   },
   {
     char: "王",
@@ -43566,7 +45888,9 @@ const t = [
     mark: "ㄨㄤˊ",
     tradition: "王",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wang",
+    explain: "君主；最高统治者：君～。国～。女～。封建社会的最高爵位：～爵。亲～。～侯。首领；头目：占山为～。擒贼先擒～。同类中居首位的或特别大的：蜂～。蚁～。～蛇。花中之～。辈分高：～父（祖父）。～母（祖母）。最强的：～水。～牌。姓。"
   },
   {
     char: "玖",
@@ -43579,7 +45903,9 @@ const t = [
     mark: "ㄐㄧㄡˇ",
     tradition: "玖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiu",
+    explain: "像玉的浅黑色石头。数目“九”的大写。多用于票证、账目等。"
   },
   {
     char: "玛",
@@ -43592,7 +45918,9 @@ const t = [
     mark: "ㄇㄚˇ",
     tradition: "瑪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ma",
+    explain: "见下。"
   },
   {
     char: "玩",
@@ -43605,7 +45933,9 @@ const t = [
     mark: "ㄨㄢˊ",
     tradition: "玩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wan",
+    explain: "玩耍：不要～火。孩子们在公园里～得很起劲。做某种活动（多指文体活动）：～儿足球。～儿扑克。～儿电脑。～儿彩票。使用（不正当的方法、手段等）：～花招儿。用不严肃的态度来对待；轻视；戏弄：～弄。～世不恭。观赏：～月。游～。供观赏的东西：古～。"
   },
   {
     char: "玫",
@@ -43618,7 +45948,9 @@ const t = [
     mark: "ㄇㄟˊ",
     tradition: "玫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "一种玉石。"
   },
   {
     char: "环",
@@ -43631,7 +45963,9 @@ const t = [
     mark: "ㄏㄨㄢˊ",
     tradition: "環",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "huan",
+    explain: "圆圈形的东西：耳～。花～。铁～。指射击、射箭比赛中射中环靶的环数，射中靶心，一般以十环计，离靶心远的，所得环数依次递减：三枪打中了二十八～。环节：从事科学研究，搜集资料是最基本的一～。围绕：～绕。～球。～城铁路。姓。"
   },
   {
     char: "现",
@@ -43644,7 +45978,9 @@ const t = [
     mark: "ㄒㄧㄢˋ",
     tradition: "現",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "现在；此刻：～状。～任。～役。～行。临时；当时：～编～唱。～做的烧饼。当时可以拿出来的：～货。～金。～钱。现款：兑～。贴～。表露在外面，使人可以看见：～原形。～出本相。"
   },
   {
     char: "玲",
@@ -43657,7 +45993,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "玲",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "形容玉碰击的声音：～～作响。～～盈耳。～珑（a.金玉碰击声，如“和銮～～”；b.形容器物细致精巧，如“小巧～～”；c.形容人的灵活敏捷，如“八面～～”此词现多形容为人处世手腕圆滑，面面俱到）。～琅。～玎。"
   },
   {
     char: "玷",
@@ -43670,7 +46008,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "玷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "白玉上的斑点。使有污点：～污。"
   },
   {
     char: "玻",
@@ -43683,7 +46023,9 @@ const t = [
     mark: "ㄅㄛ",
     tradition: "玻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "〔～璃〕a.一种质地硬而脆的透明物品,一般用细纱、石灰石、碳酸钠等混合起来,加高温熔解,冷却后制成,主要成分是二氧化碳、氧化钠和氧化钙。b.俗称某些透明的像玻璃的质料,如“～璃丝袜”,“～璃雨衣”（“璃”读轻声）。"
   },
   {
     char: "珊",
@@ -43696,7 +46038,9 @@ const t = [
     mark: "ㄕㄢ",
     tradition: "珊",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "shan",
+    explain: "见下。"
   },
   {
     char: "珍",
@@ -43709,7 +46053,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "珍",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "宝贵的东西：奇～异宝。山～海味。如数家～。宝贵的；贵重的：～本。～品。～禽。看重：～视。～重。～惜。姓。"
   },
   {
     char: "珠",
@@ -43722,7 +46068,9 @@ const t = [
     mark: "ㄓㄨ",
     tradition: "珠",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhu",
+    explain: "珠子：～宝。夜明～。（～儿）小的球形的东西：眼～儿。泪～儿。水～儿。滚～儿。姓。"
   },
   {
     char: "班",
@@ -43735,7 +46083,9 @@ const t = [
     mark: "ㄅㄢ",
     tradition: "班",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ban",
+    explain: "为了工作或学习等目的而编成的组织：大～。作业～。进修～。指一天之内的一段工作时间：上～。晚～儿。值～。日夜三～。军队编制的基层单位，隶属于排。旧指戏班，也用于剧团的名称：～规。搭～。三庆～。a）用于人群：这～姑娘真有干劲。b）用于定时开行的交通运输工具：你搭下一～飞机走吧。公共汽车每隔四分钟就有一～。按排定的时间开行的：～车。～机。调回或调动（军队）：～师。姓。"
   },
   {
     char: "球",
@@ -43748,7 +46098,9 @@ const t = [
     mark: "ㄑㄧㄡˊ",
     tradition: "球",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiu",
+    explain: "数学上指圆形的立体。从中心到表面各点距离都相等。某些体育用品或球类运动：足～。～赛。球形的东西：煤～。特指地球或星体：全～。月～。"
   },
   {
     char: "琅",
@@ -43761,7 +46113,9 @@ const t = [
     mark: "ㄌㄤˊ",
     tradition: "琅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lang",
+    explain: "一种玉石。洁白。"
   },
   {
     char: "理",
@@ -43774,7 +46128,9 @@ const t = [
     mark: "ㄌㄧˇ",
     tradition: "理",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "li",
+    explain: "物质组织的条纹；纹理：木～。肌～。条～。道理；事理：合～。～屈。～当如此。自然科学，有时特指物理学：～科。数～化。管理；办理：处～。～财。当家～事。整理；使整齐：～发。～一～书籍。对别人的言语行动表示态度；表示意见（多用于否定式）：路上碰见了，谁也没～谁。置之不～。姓。"
   },
   {
     char: "琉",
@@ -43787,7 +46143,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "琉",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "见下。"
   },
   {
     char: "琐",
@@ -43800,7 +46158,9 @@ const t = [
     mark: "ㄙㄨㄛˇ",
     tradition: "瑣",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "suo",
+    explain: "细碎：繁～。～事。～闻。卑微：猥～。"
   },
   {
     char: "琢",
@@ -43813,7 +46173,9 @@ const t = [
     mark: "ㄗㄨㄛˊ",
     tradition: "琢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "雕刻玉器：精雕细～。"
   },
   {
     char: "琳",
@@ -43826,7 +46188,9 @@ const t = [
     mark: "ㄌㄧㄣˊ",
     tradition: "琳",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "美玉。"
   },
   {
     char: "琴",
@@ -43835,11 +46199,13 @@ const t = [
     radical: "王",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄣˊ",
     tradition: "琴",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "qin",
+    explain: "某些乐器的统称。如胡琴、提琴、钢琴等。古琴。拨弦乐器。周朝已有。琴身木制。琴面张弦七根，一边有十三徽。演奏时左手按弦，右手拨弹。发音清幽。多用于独奏或琴箫合奏。"
   },
   {
     char: "琼",
@@ -43852,7 +46218,9 @@ const t = [
     mark: "ㄑㄩㄥˊ",
     tradition: "瓊",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "qiong",
+    explain: "美玉，泛指精美的东西：～浆。～楼玉宇（华丽的房屋）。海南的别称。"
   },
   {
     char: "瑞",
@@ -43865,7 +46233,9 @@ const t = [
     mark: "ㄖㄨㄟˋ",
     tradition: "瑞",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "rui",
+    explain: "吉祥：祥～。～雪。姓。"
   },
   {
     char: "瑟",
@@ -43874,11 +46244,13 @@ const t = [
     radical: "王",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄙㄜˋ",
     tradition: "瑟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "se",
+    explain: "古代弦乐器，像琴。现在所用的瑟有两种，一种有二十五根弦，另一种有十六根弦。"
   },
   {
     char: "瑰",
@@ -43891,7 +46263,9 @@ const t = [
     mark: "ㄍㄨㄟ",
     tradition: "瑰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gui",
+    explain: "一种像玉的石头。珍奇：～丽。～异。"
   },
   {
     char: "璃",
@@ -43904,7 +46278,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "璃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "见〔琉璃〕、〔玻璃〕"
   },
   {
     char: "璧",
@@ -43917,7 +46293,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "璧",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "古代的一种玉器，扁平，圆形，中间有小孔：白～无瑕。"
   },
   {
     char: "瓜",
@@ -43926,11 +46304,13 @@ const t = [
     radical: "瓜",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄚ",
     tradition: "瓜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gua",
+    explain: "蔓生植物，叶子像手掌，花多是黄色；果实可以吃。种类很多，如西瓜、南瓜、冬瓜、黄瓜等。这种植物的果实。（Guā）姓。"
   },
   {
     char: "瓢",
@@ -43943,7 +46323,9 @@ const t = [
     mark: "ㄆㄧㄠˊ",
     tradition: "瓢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "piao",
+    explain: "用来舀（yǎo）水或撮取面粉等的器具，多用对半剖开的匏瓜做成，也有用木头挖成的。"
   },
   {
     char: "瓣",
@@ -43956,20 +46338,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "瓣",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "瓤",
-    spell: "ráng",
-    stroke: "22",
-    radical: "瓜",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄖㄤˊ",
-    tradition: "瓤",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "ban",
+    explain: "花瓣：梅花有五个～儿。植物的种子、果实或球茎可以分开的小块儿：豆～儿。橘子～儿。蒜～儿。物体自然地分成或破碎后分成的部分：四角八～儿。碗摔成几～儿。瓣膜的简称。用于花瓣、叶片或种子、果实、球茎分开的小块儿：两～儿蒜。把西瓜切成四～儿。"
   },
   {
     char: "瓦",
@@ -43978,11 +46349,13 @@ const t = [
     radical: "瓦",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄨㄚˋ",
     tradition: "瓦",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wa",
+    explain: "铺屋顶用的建筑材料，一般用泥土烧成，也有用水泥等材料制成的，形状有拱形的、平的或半个圆筒形的等。用泥土烧成的：～盆。～器。姓。瓦特的简称。1秒钟做1焦的功，功率就是1瓦。"
   },
   {
     char: "瓮",
@@ -43995,7 +46368,9 @@ const t = [
     mark: "ㄨㄥˋ",
     tradition: "瓮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "weng",
+    explain: "一种盛东西的陶器，腹部较大：水～。酒～。菜～。（Wèng）姓。"
   },
   {
     char: "瓶",
@@ -44008,7 +46383,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "瓶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "瓶子；瓶儿：油～。药～儿。"
   },
   {
     char: "瓷",
@@ -44021,7 +46398,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "瓷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "用高岭土等烧制成的一种材料。用它制成的器物比陶器细致、坚硬。"
   },
   {
     char: "甘",
@@ -44030,11 +46409,13 @@ const t = [
     radical: "甘",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄢ",
     tradition: "甘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gan",
+    explain: "甜。与“苦”相对：～泉。同～共苦。自愿；乐意：俯首～为孺子牛。不～落后。甘肃的简称。"
   },
   {
     char: "甚",
@@ -44047,7 +46428,9 @@ const t = [
     mark: "ㄕㄣˊ",
     tradition: "甚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shen",
+    explain: "副词。很；极：进步～快。言之～当。超过；过分：无～于此者。过～其辞。疑问代词。什么：要它作～？。姓～名谁？"
   },
   {
     char: "甜",
@@ -44060,7 +46443,9 @@ const t = [
     mark: "ㄊㄧㄢˊ",
     tradition: "甜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tian",
+    explain: "像糖和蜜的味道（跟“苦”相对）：这西瓜真～。话说得很～。形容舒适、愉快：他睡得真～。"
   },
   {
     char: "生",
@@ -44073,7 +46458,9 @@ const t = [
     mark: "ㄕㄥ",
     tradition: "生",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "sheng",
+    explain: "生育；出生：胎～。卵～。～孩子。优～优育。～于北京。生长：～根。～芽。生存；活（跟“死”相对）：舍～忘死。同～共死。生计：谋～。营～。生命：丧～。舍～取义。生平：一～一世。今～今世。具有生命力的；活的：～物。～龙活虎。产生；发生：～病。～效。惹是～非。使柴、煤等燃烧：～火。～炉子。姓。果实没有成熟（跟“熟”相对，下—同）：～柿子。这西瓜是～的。（食物）没有煮过或煮得不够的：夹～饭。～吃瓜果要洗净。没有进一步加工或炼过的：～石膏。～铁。生疏：～人。～字。认～。刚到这里，工作很～。生硬；勉强：～凑（勉强凑成）。～搬硬套。很（用在少数表示感情、感觉的词的前面）：～怕。～恐。～疼。某些指人的名词后缀：医～。某些副词的后缀，如“好生、怎生”等。"
   },
   {
     char: "甥",
@@ -44086,7 +46473,9 @@ const t = [
     mark: "ㄕㄥ",
     tradition: "甥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sheng",
+    explain: "外甥，姐姐或妹妹的儿子。"
   },
   {
     char: "用",
@@ -44095,11 +46484,13 @@ const t = [
     radical: "冂",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄩㄥˋ",
     tradition: "用",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yong",
+    explain: "使用：～力。～兵。公～。大材小～。费用：～项。家～。用处：功～。多少总会有点～。需要（多用于否定式）：天还很亮，不～开灯。东西都准备好了，您不～操心了。吃、喝（含恭敬意）：～饭。请～茶。引进动作、行为所凭借的工具、手段等：～笔写字。～老眼光看人。因此；因（多用于书信）：～特函达。姓。"
   },
   {
     char: "甩",
@@ -44112,7 +46503,9 @@ const t = [
     mark: "ㄕㄨㄞˇ",
     tradition: "甩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shuai",
+    explain: "挥动；抡（lūn）：～胳膊。～辫子。袖子一～就走了。用甩的动作往外扔：～手榴弹。抛开：我们等他一下吧，别把他一个人～在后面。"
   },
   {
     char: "甫",
@@ -44121,11 +46514,13 @@ const t = [
     radical: "一",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄨˇ",
     tradition: "甫",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "副词。刚；才：一言～毕。古代男子的美称。也指字。参见“字”例：台～（旧时询问对方的字的客气话）。"
   },
   {
     char: "田",
@@ -44134,11 +46529,13 @@ const t = [
     radical: "田",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄧㄢˊ",
     tradition: "田",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tian",
+    explain: "种植农作物的土地：麦～。棉～。蕴藏矿物可供开采的地带。专用于某些生产的土地：油～。盐～。同“佃（tián）”。同“畋”。"
   },
   {
     char: "由",
@@ -44147,11 +46544,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄡˊ",
     tradition: "由",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "you",
+    explain: "原因：原～。事～。理～。～于（介词，表示原因或理由）。自，从：～表及里。～衷（出于本心）。顺随，听从，归属：～不得。信马～缰。经过，经历：必～之路。～来已久。凭借：～此可知。古同“犹”，尚且，还。古同“犹”，犹如，好像。姓。"
   },
   {
     char: "甲",
@@ -44160,11 +46559,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄚˊ",
     tradition: "甲",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jia",
+    explain: "天干的第一位。现常用来表示顺序的第一。第一；居第一位：～级。桂林山水～天下。动物身上有保护功用的硬壳：～壳。指～。围在人体或物体外面起保护作用的装备。用金属、皮革等制成：盔～。装～车。旧时户籍的编制单位。若干户为一甲，若干甲为一保。"
   },
   {
     char: "申",
@@ -44173,11 +46574,13 @@ const t = [
     radical: "丨",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄣ",
     tradition: "申",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shen",
+    explain: "陈述；说明：～明。～请。三令五～。地支的第九位。申时，旧式记时法，相当于十五点到十七点。上海市的别称。"
   },
   {
     char: "电",
@@ -44190,7 +46593,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "電",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "物质的一种属性。物体是由原子组成的，在正常情况下，原子中正负电量相等，因而整个物体被认为是不带电的或中性的。当它们由于摩擦等原因失去一部分电子时，就带正电；获得电子时，就带负电。触电：～了我一下。电报；打电报：来～。～告。指闪电：雷～交加。"
   },
   {
     char: "男",
@@ -44203,7 +46608,9 @@ const t = [
     mark: "ㄋㄢˊ",
     tradition: "男",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nan",
+    explain: "男性。与“女”相对：～女平等。～演员。儿子：长（zhǎng）～。男爵，古代贵族五等爵位（公、侯、伯、子、男）中的最末一等。"
   },
   {
     char: "甸",
@@ -44216,7 +46623,9 @@ const t = [
     mark: "ㄉㄧㄢˋ",
     tradition: "甸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dian",
+    explain: "郊外。  【组词】：郊甸"
   },
   {
     char: "画",
@@ -44225,11 +46634,13 @@ const t = [
     radical: "一",
     struct: "半包围结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄚˋ",
     tradition: "畫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hua",
+    explain: "用笔或类似笔的东西做出图形：～山水。～人像。～画儿。画成的艺术品：年～。壁～。油～。风景～。一幅（张）～儿。用画儿装饰的：～屏。～堂。～栋雕梁。姓。用笔或类似笔的东西做出线或作为标记的文字：～线。～押。～到。～十字。汉字的一笔叫一画：笔～。“天”字四～。汉字的一横叫一画。"
   },
   {
     char: "畅",
@@ -44242,7 +46653,9 @@ const t = [
     mark: "ㄔㄤˋ",
     tradition: "暢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chang",
+    explain: "无阻碍；不停滞：～达。～行无阻。痛快；尽情：～谈。～所欲言。姓。"
   },
   {
     char: "界",
@@ -44255,7 +46668,9 @@ const t = [
     mark: "ㄐㄧㄝˋ",
     tradition: "界",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "界限：地～。边～。省～。国～。山西和陕西以黄河为～。一定的范围：眼～。管～。职业、工作或性别等相同的一些社会成员的总体：文艺～。科学～。妇女～。各～人士。生物分类系统中的最高一级，如动物界、植物界、真菌界。界以下是门。地层系统分类单位的第二级，界以上为宇，如显生宇分为古生界、中生界和新生界，界以下为系。跟界相应的地质年代分期叫做代。"
   },
   {
     char: "畏",
@@ -44268,7 +46683,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "畏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "怕：不～艰险。英勇无～。敬服：令人～服。后生可～。"
   },
   {
     char: "畔",
@@ -44281,7 +46698,9 @@ const t = [
     mark: "ㄆㄢˋ",
     tradition: "畔",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pan",
+    explain: "田地的界限；（江湖、道路等）旁边：田～。河～。古又通“叛”。"
   },
   {
     char: "留",
@@ -44294,20 +46713,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "留",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "畜",
-    spell: "chù",
-    stroke: "10",
-    radical: "田",
-    struct: "上下结构",
-    five: "火",
-    method: "会意",
-    mark: "ㄔㄨˋ",
-    tradition: "畜",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "liu",
+    explain: "停止在某一个处所或地位上不动；不离去：～校。～任。他～在农村工作了。留学：～洋。～英。使留；不使离去：挽～。拘～。～客人吃饭。注意力放在某方面：～心。～神。保留：自～地。～底稿。～胡子。鸡犬不～。接受；收下：礼物先～下来。书店送来的碑帖我～了三本。遗留：旅客～言簿。祖先～给了我们丰富的文化遗产。姓。"
   },
   {
     char: "略",
@@ -44320,7 +46728,9 @@ const t = [
     mark: "ㄌㄩㄝˋ",
     tradition: "略",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lüe",
+    explain: "简单（跟“详”相对）：大～。粗～。～图。～读。这个提纲写得太～了。简单扼要的叙述：史～。事～。节～。要～。省去；简化：从～。省～。中间的部分～去不说。略微：～知一二。～有所闻。他的成绩比我～好一些。计划；计谋：方～。策～。谋～。战～。雄才大～。夺取（多指土地）：侵～。攻城～地。"
   },
   {
     char: "畦",
@@ -44333,7 +46743,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "畦",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "有土埂围着的一块块排列整齐的田地，一般是长方形的：～田。菜～。种了一～韭菜。"
   },
   {
     char: "番",
@@ -44342,11 +46754,13 @@ const t = [
     radical: "釆",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄢ",
     tradition: "番",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fan",
+    explain: "指外国或外族：～邦。～茄。～薯。种；样：别有一～天地。回；次；遍：思考一～。几～周折。三～五次。翻了一～（数量加了一倍）。"
   },
   {
     char: "畴",
@@ -44359,7 +46773,9 @@ const t = [
     mark: "ㄔㄡˊ",
     tradition: "疇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chou",
+    explain: "田地：田～。平～千里。种类；类别：范～。物各有～。"
   },
   {
     char: "畸",
@@ -44372,7 +46788,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "畸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "不正常的：～形。偏：～轻～重。数的零头：～零。"
   },
   {
     char: "疆",
@@ -44385,7 +46803,9 @@ const t = [
     mark: "ㄐㄧㄤ",
     tradition: "疆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "国境、边界。  【组词】：疆界、疆域、边疆极限、止境。  【组词】：万寿无疆"
   },
   {
     char: "疏",
@@ -44398,7 +46818,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "疏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "1.清除阻塞使通畅；疏通：～导。～浚。2.事物之间距离远；事物的部分之间空隙大（跟“密”相对）：～林。～星。3.关系远；不亲近：～远。亲～。4.不熟悉；不熟练：生～。荒～。5.疏忽：～于防范。6.空虚：志大才～。7.分散；使从密变稀：～散。仗义～财。8.姓。9.封建时代臣下向君主分条陈述事情的文字；条陈：上～。奏～。10.古书的比“注”更详细的注解；“注”的注：《十三经注～》。"
   },
   {
     char: "疑",
@@ -44411,7 +46833,9 @@ const t = [
     mark: "ㄧˊ",
     tradition: "疑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "迷惑、不明白。  【组词】：疑惑、疑问、疑团猜忌、不相信。  【组词】：怀疑、半信半疑"
   },
   {
     char: "疗",
@@ -44424,7 +46848,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "療",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "医治：诊～。电～。比喻解除痛苦或困难：～饥。～贫。"
   },
   {
     char: "疙",
@@ -44437,7 +46863,9 @@ const t = [
     mark: "ㄍㄜ",
     tradition: "疙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "→疙瘩"
   },
   {
     char: "疚",
@@ -44450,7 +46878,9 @@ const t = [
     mark: "ㄐㄧㄡˋ",
     tradition: "疚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiu",
+    explain: "对自己的错误，心里感觉痛苦：负～。内～。长时间生病。"
   },
   {
     char: "疟",
@@ -44463,33 +46893,9 @@ const t = [
     mark: "ˋ",
     tradition: "瘧",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "疤",
-    spell: "bā",
-    stroke: "9",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄚ",
-    tradition: "疤",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "疫",
-    spell: "yì",
-    stroke: "9",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄧˋ",
-    tradition: "疫",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nüe",
+    explain: "疟疾，由疟原虫引起的传染病。流行于热带、亚热带地区。通过蚊子叮咬传染。症状为阵发性交替出现发冷和高热、出汗。长期多次发作会出现脾肿大、贫血等病状。"
   },
   {
     char: "疮",
@@ -44502,7 +46908,9 @@ const t = [
     mark: "ㄔㄨㄤ",
     tradition: "瘡",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chuang",
+    explain: "皮肤或黏膜发生溃疡的病。外伤：金～（旧指刀枪箭矢造成的伤）。"
   },
   {
     char: "疯",
@@ -44515,7 +46923,9 @@ const t = [
     mark: "ㄈㄥ",
     tradition: "瘋",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "神经错乱；精神失常：发～。轻狂；不稳重：那丫头可～了。指没有约束地玩耍：她跟孩子～了一会儿。指农作物生长旺盛，但是不结果实：～长。～枝。这些棉花～了。"
   },
   {
     char: "疲",
@@ -44528,7 +46938,9 @@ const t = [
     mark: "ㄆㄧˊ",
     tradition: "疲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pi",
+    explain: "身体劳累的感觉：～乏。～倦。～劳。～惫。～敝。精～力尽。懈怠，不起劲：～塌。～软。"
   },
   {
     char: "疹",
@@ -44541,20 +46953,9 @@ const t = [
     mark: "ㄓㄣˇ",
     tradition: "疹",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "疼",
-    spell: "téng",
-    stroke: "10",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄊㄥˊ",
-    tradition: "疼",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "zhen",
+    explain: "病人皮肤上起的很多的小疙瘩，通常是红色的，小的像针尖，大的像豆粒，如丘疹、疱疹等。"
   },
   {
     char: "疾",
@@ -44567,7 +46968,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "疾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "病：～病。痛苦；疼痛：关心群众的～苦。痛心～首。痛恨：～恶如仇。快；迅速；猛烈：～走。～风。"
   },
   {
     char: "病",
@@ -44580,7 +46983,9 @@ const t = [
     mark: "ㄅㄧㄥˋ",
     tradition: "病",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bing",
+    explain: "生理上或心理上发生的不正常的状态：疾～。心脏～。他的～已经好了。生理上或心理上发生不正常状态：他着了凉，～了三天。害处；私弊：弊～。缺点；错误：语～。通～。祸害；损害：祸国～民。责备；不满：诟～。为世所～。"
   },
   {
     char: "症",
@@ -44593,7 +46998,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "癥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zheng",
+    explain: "疾病：病～。急～。不治之～。对～下药。"
   },
   {
     char: "痊",
@@ -44606,7 +47013,9 @@ const t = [
     mark: "ㄑㄩㄢˊ",
     tradition: "痊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "quan",
+    explain: "病好了：～愈。"
   },
   {
     char: "痒",
@@ -44619,20 +47028,9 @@ const t = [
     mark: "ㄧㄤˇ",
     tradition: "癢",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "痕",
-    spell: "hén",
-    stroke: "11",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄣˊ",
-    tradition: "痕",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "yang",
+    explain: "皮肤或黏膜受到轻微刺激时引起的想挠的感觉。比喻想做某事的愿望强烈，难以抑制：技～。见人打球，他心里直发～。"
   },
   {
     char: "痘",
@@ -44645,7 +47043,9 @@ const t = [
     mark: "ㄉㄡˋ",
     tradition: "痘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dou",
+    explain: "一种接触性传染病。全身皮肤出现豆状脓疮。有牛痘、绵羊痘、猪痘、禽痘和天花等。人和禽畜均可感染。指牛痘苗：种～。"
   },
   {
     char: "痛",
@@ -44658,7 +47058,9 @@ const t = [
     mark: "ㄊㄨㄥˋ",
     tradition: "痛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tong",
+    explain: "疾病创伤等引起的难受的感觉：头～。肚子～。伤口很～。悲伤：悲～。哀～。尽情地；深切地；彻底地：～击。～骂。～歼。～饮。～下决心。"
   },
   {
     char: "痢",
@@ -44671,7 +47073,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "痢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "〔痢疾〕由痢疾杆菌或阿米巴原虫所引起的肠道传染病。常见的为细菌性痢疾，有发热、腹痛、腹泻、里急后重、排脓血样大便等症状。阿米巴痢疾起病较慢，粪便暗红色并有腐肉臭味。加强粪便管理及饮食卫生是主要预防措施。"
   },
   {
     char: "痪",
@@ -44684,7 +47088,9 @@ const t = [
     mark: "ㄏㄨㄢˋ",
     tradition: "痪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huan",
+    explain: "见〖瘫痪〗。"
   },
   {
     char: "痰",
@@ -44697,20 +47103,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "痰",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "痴",
-    spell: "chī",
-    stroke: "13",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄔ",
-    tradition: "痴",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "tan",
+    explain: "肺泡、支气管和气管分泌出来的黏液，当肺部或呼吸道发生病变时分泌量增多，并含有某些病原体，是传播疾病的媒介。"
   },
   {
     char: "痹",
@@ -44723,20 +47118,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "痹",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "瘟",
-    spell: "wēn",
-    stroke: "14",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄨㄣ",
-    tradition: "瘟",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "bi",
+    explain: "中医指由风、寒、湿等引起的肢体疼痛或麻木的病。"
   },
   {
     char: "瘤",
@@ -44749,7 +47133,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "瘤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "动物身体组织增殖生成的肉疙瘩。"
   },
   {
     char: "瘦",
@@ -44762,7 +47148,9 @@ const t = [
     mark: "ㄕㄡˋ",
     tradition: "瘦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shou",
+    explain: "（人体）脂肪少；肉少（跟“胖、肥”相对）：面黄肌～。他近来～了。（食用的肉）脂肪少（跟“肥”相对）：这块肉太肥，我要～点儿的。（衣服鞋袜等）窄小（跟“肥”相对）：裤子做得太～了，可以往肥里放一下。（地力）薄；不肥沃：～田。"
   },
   {
     char: "瘩",
@@ -44775,7 +47163,9 @@ const t = [
     mark: "ㄉㄚˊ",
     tradition: "瘩",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "da",
+    explain: "见〔疙瘩〕"
   },
   {
     char: "瘪",
@@ -44788,7 +47178,9 @@ const t = [
     mark: "ㄅㄧㄝˇ",
     tradition: "癟",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bie",
+    explain: "物体表面凹下去；不饱满：干～。～谷。没牙～嘴儿。车带～了。乒乓球～了。"
   },
   {
     char: "瘫",
@@ -44801,7 +47193,9 @@ const t = [
     mark: "ㄊㄢ",
     tradition: "癱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tan",
+    explain: "神经机能发生障碍，肢体不能活动：～痪。截～。偏～。面～。四肢～。"
   },
   {
     char: "瘸",
@@ -44814,7 +47208,9 @@ const t = [
     mark: "ㄑㄩㄝˊ",
     tradition: "瘸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "que",
+    explain: "行走时身体不稳；跛（bǒ）：～腿。～着走。摔～了腿。"
   },
   {
     char: "瘾",
@@ -44827,20 +47223,9 @@ const t = [
     mark: "ㄧㄣˇ",
     tradition: "癮",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "癌",
-    spell: "ái",
-    stroke: "17",
-    radical: "疒",
-    struct: "半包围结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄞˊ",
-    tradition: "癌",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "yin",
+    explain: "由于神经中枢经常接受某种外界刺激而形成的习惯性或依赖性：烟～。他喝酒的～真大。泛指浓厚的兴趣：戏～。他看《红楼梦》看上～了。"
   },
   {
     char: "癞",
@@ -44853,7 +47238,9 @@ const t = [
     mark: "ㄌㄚˋ",
     tradition: "癩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "la",
+    explain: "癞病，即麻风病。因生癣疮而毛发脱落的病。像生了癞的：～蛤蟆。"
   },
   {
     char: "癣",
@@ -44866,7 +47253,9 @@ const t = [
     mark: "ㄒㄩㄢˇ",
     tradition: "癬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xuan",
+    explain: "传染性皮肤病。由霉菌感染引起。侵入皮肤、毛发和指（趾）甲。患处常发痒。分白癣、黄癣等。有些症状与癣类似的皮肤病也称癣，如牛皮癣。"
   },
   {
     char: "登",
@@ -44879,7 +47268,9 @@ const t = [
     mark: "ㄉㄥ",
     tradition: "登",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "deng",
+    explain: "（人）由低处到高处（多指步行）：～山。～陆。～车。一步～天。刊登或记载：～报。～记。他的名字～上了光荣榜。（谷物）成熟：五谷丰～。姓。同“蹬”（dēng）。"
   },
   {
     char: "白",
@@ -44888,11 +47279,13 @@ const t = [
     radical: "白",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄞˊ",
     tradition: "白",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bai",
+    explain: "像霜或雪的颜色（跟“黑”相对）。光亮；明亮：东方发～。大天～日。清楚；明白；弄明白：真相大～。不～之冤。没有加上什么东西的；空白：～卷。～饭。～开水。一穷二～。没有效果；徒然：～跑一趟。～费力气。无代价；无报偿：～吃。～给。～看戏。象征反动：～军。～区。指丧事：～事。用白眼珠看人，表示轻视或不满：～了他一眼。姓。（字音或字形）错误：写～字。把字念～了。说明；告诉；陈述：表～。辩～。告～。戏曲或歌剧中在唱词之外用说话腔调说的语句：道～。独～。对～。指地方话：苏～。白话：文～杂糅。半文半～。"
   },
   {
     char: "百",
@@ -44905,7 +47298,9 @@ const t = [
     mark: "ㄅㄞˇ",
     tradition: "百",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bai",
+    explain: "表示很多：～草。～货。～科全书。～家争鸣。～花齐放。精神～倍。～闻不如一见。"
   },
   {
     char: "皂",
@@ -44918,7 +47313,9 @@ const t = [
     mark: "ㄗㄠˋ",
     tradition: "皂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zao",
+    explain: "黑色：青红～白。旧时衙门差役：～隶。肥皂：香～。"
   },
   {
     char: "的",
@@ -44931,7 +47328,9 @@ const t = [
     mark: "ㄉㄧˊ",
     tradition: "的",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "de",
+    explain: "用在定语的后面。a）定语和中心词之间是一般的修饰关系：铁～纪律。幸福～生活。b）定语和中心词之间是领属关系：我～母亲。无产阶级～党。大楼～出口。c）定语是人名或人称代词，中心词是表示职务或身份的名词，意思是这个人担任这个职务或取得这个身份：今天开会是你～主席。谁～介绍人?d）定语是指人的名词或人称代词，中心词和前边的动词合起来表示一种动作，意思是这个人是所说的动作的受事：开他～玩笑。找我～麻烦。用来构成没有中心词的“的”字结构。a）代替上文所说的人或物：这是我～，那才是你～。菊花开了，有红～，有黄～。b）指某一种人或物：男～。送报～。我爱吃辣～。c）表示某种情况、原因：大星期天～，你怎么不出去玩儿玩儿?。无缘无故～，你着什么急?d）用跟主语相同的人称代词加“的”字做宾语，表示别的事跟这个人无关或这事儿跟别人无关：这里用不着你，你只管睡你～去。e）“的”字前后用相同的动词、形容词等，连用这样的结构，表示有这样的，有那样的：推～推，拉～拉。说～说，笑～笑。大～大，小～小。这个用法限于过去的事情。用在陈述句的末尾，表示肯定的语气：这件事儿我知道～。用在两个同类的词或词组之后，表示“等等、之类”的意思：破铜烂铁～，他捡来一大筐。老乡们沏茶倒水～，待我们很亲热。用在两个数量词中间。a）表示相乘：这间屋子是五米～三米，合十五平方米。b）表示相加：两个～三个，一共五个。"
   },
   {
     char: "皆",
@@ -44944,7 +47343,9 @@ const t = [
     mark: "ㄐㄧㄝ",
     tradition: "皆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jie",
+    explain: "都；都是：比比～是。尽人～知。有口～碑。放之四海而～准。"
   },
   {
     char: "皇",
@@ -44953,11 +47354,13 @@ const t = [
     radical: "白",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄤˊ",
     tradition: "皇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "传说中的上古帝王：三～。皇帝；封建君主。大：～～巨著。古又同“遑”。古又同“惶”。"
   },
   {
     char: "皮",
@@ -44970,7 +47373,9 @@ const t = [
     mark: "ㄆㄧˊ",
     tradition: "皮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pi",
+    explain: "人或生物体表面的一层组织：牛～。荞麦～。碰掉了一块～。皮子：～箱。～鞋。～袄。包在或围在外面的一层东西：包袱～儿。新书最好包上～儿。（～儿）表面：地～。水～儿。（～儿）某些薄片状的东西：铅～。豆腐～儿。有韧性的：～糖。酥脆的东西受潮后变韧：花生放～了，吃起来不香了。顽皮：调～。这孩子真～。由于受申斥或责罚次数过多而感觉无所谓：老挨说，他早就～了。姓。"
   },
   {
     char: "皱",
@@ -44983,7 +47388,9 @@ const t = [
     mark: "ㄓㄡˋ",
     tradition: "皺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhou",
+    explain: "皱纹：上了年纪脸上就会起～。起皱纹：眉头一～，计上心来。衣裳～了。"
   },
   {
     char: "皿",
@@ -44992,11 +47399,13 @@ const t = [
     radical: "皿",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄧㄣˇ",
     tradition: "皿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "min",
+    explain: "碗碟杯盘一类用具的统称。"
   },
   {
     char: "盅",
@@ -45009,7 +47418,9 @@ const t = [
     mark: "ㄓㄨㄥ",
     tradition: "盅",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhong",
+    explain: "饮酒或喝茶用的没有把儿的杯子：酒～。小茶～。"
   },
   {
     char: "盆",
@@ -45022,7 +47433,9 @@ const t = [
     mark: "ㄆㄣˊ",
     tradition: "盆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pen",
+    explain: "盛东西或洗东西用的器具，口大，底小，多为圆形：花～儿。脸～。澡～。形状略像盆的东西：骨～。～地。姓。"
   },
   {
     char: "盈",
@@ -45035,7 +47448,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "盈",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "充满：充～。丰～。车马～门。恶贯满～。多出来；多余：～余。～利。姓。"
   },
   {
     char: "益",
@@ -45048,7 +47463,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "益",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "好处（跟“害”相对）：利～。公～。权～。受～不浅。有益的（跟“害”相对）：～友。～鸟。～虫。姓。增加：增～。延年～寿。更加：多多～善。精～求精。"
   },
   {
     char: "盏",
@@ -45061,7 +47478,9 @@ const t = [
     mark: "ㄓㄢˇ",
     tradition: "盞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhan",
+    explain: "小杯子：茶～。灯～。量词。用于灯：一～灯。"
   },
   {
     char: "盐",
@@ -45074,7 +47493,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "鹽",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "电离时生成金属阳离子（或其他阳离子）和酸根阴离子。通常是由金属阳离子和酸根阴离子结合的化合物。如硝酸钠（NaNO3）、硫酸铵［（NH4）2SO4］等。食盐的通称。"
   },
   {
     char: "监",
@@ -45087,7 +47508,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "監",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "从旁察看；监督：～工。～考。牢狱：收～。探～。"
   },
   {
     char: "盒",
@@ -45100,7 +47523,9 @@ const t = [
     mark: "ㄏㄜˊ",
     tradition: "盒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "底盖相合的盛东西的器物：～子。果～儿。铅笔～儿。～带（盒式磁带的简称）。～饭。"
   },
   {
     char: "盔",
@@ -45113,7 +47538,9 @@ const t = [
     mark: "ㄎㄨㄟ",
     tradition: "盔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kui",
+    explain: "军人、消防人员等用来保护头的金属帽子：～甲。钢～。铝～。（～儿）形状像盔或半个球形的帽子：白～。帽～儿。"
   },
   {
     char: "盖",
@@ -45126,7 +47553,9 @@ const t = [
     mark: "ㄍㄞˋ",
     tradition: "蓋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ge",
+    explain: "覆盖、遮蔽。  【组词】：遮盖、掩盖、盖被子有覆盖功能的东西。  【组词】：锅盖、瓶盖、冠盖相望加上去、加在上面。  【组词】：盖章、盖手印、盖邮戳搭建、建筑。  【组词】：盖房子、盖停车场超越。  【组词】：英雄盖世吹牛、胡扯。  【组词】：胡盖、乱盖"
   },
   {
     char: "盗",
@@ -45139,7 +47568,9 @@ const t = [
     mark: "ㄉㄠˋ",
     tradition: "盗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dao",
+    explain: "偷窃：～取。抢劫财物的人：强～。海～。"
   },
   {
     char: "盘",
@@ -45148,11 +47579,13 @@ const t = [
     radical: "皿",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄆㄢˊ",
     tradition: "盤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pan",
+    explain: "盛放物品的扁而浅的用具：茶～。菜～。托～。形状像盘或有盘的功用的东西：字～。棋～。算～。磨～。回旋，回绕，屈曲：～旋。～桓。～剥（辗转剥削）。～曲。～亘。～郁（曲折幽深）。～根错节。垒，砌：～灶。～炕。仔细查究：～问。～驳。～察。～查。～货。～算（细心打算）。指市场上成交的价格：开～。收～。转让（工商企业）：出～。招～。受～。搬运：～运。量词：一～磨。姓。"
   },
   {
     char: "盛",
@@ -45161,11 +47594,13 @@ const t = [
     radical: "皿",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄥˊ",
     tradition: "盛",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "sheng",
+    explain: "兴盛；繁盛：全～时期。桃花开得很～。强烈；旺盛：年轻气～。火势很～。盛大；隆重：～会。～宴。丰富；丰盛：～馔。深厚：～情。～意。普遍；广泛：～行。～传。用力大；程度深：～赞。姓。"
   },
   {
     char: "盟",
@@ -45178,7 +47613,9 @@ const t = [
     mark: "ㄇㄥˊ",
     tradition: "盟",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "meng",
+    explain: "宣誓缔约：会～。海誓山～。发（誓）：～一个誓。旧时结拜的（兄弟）：～兄。～弟。团体与团体、阶级与阶级、国与国之间的联合体：工农联～。军事同～。中国内蒙古自治区建立的相当于自治州一级的行政区划单位。"
   },
   {
     char: "目",
@@ -45187,11 +47624,13 @@ const t = [
     radical: "目",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄨˋ",
     tradition: "目",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "眼睛：有～共睹。历历在～。网眼；孔：八十～筛。一方寸的网上，竟有百～之多。看：～为奇迹。大项中再分的小项：项～。细～。生物学中把同一纲的生物按照彼此相似的特征分为若干群，每一群叫一目，如鸟纲分为雁形目、鸡形目、鹤形目等，松柏纲分为银杏目、松柏目等。目以下为科。目录：书～。药～。剧～。名称：题～。名～。下围棋时所围的空白交叉点，一个点为一目：中方棋手仅以一～半之优获胜。姓。"
   },
   {
     char: "盯",
@@ -45204,7 +47643,9 @@ const t = [
     mark: "ㄉㄧㄥ",
     tradition: "盯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ding",
+    explain: "把视线集中在一点上；注视：轮到她射击，大家的眼睛都～住了靶心。也作钉。"
   },
   {
     char: "盲",
@@ -45217,7 +47658,9 @@ const t = [
     mark: "ㄇㄤˊ",
     tradition: "盲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mang",
+    explain: "瞎；看不见东西：～人。比喻对某种事物不能辨别或不懂：文～。色～。舞～。电脑～。盲目地：～从。～动。"
   },
   {
     char: "直",
@@ -45230,7 +47673,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "直",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "成直线的（跟“曲”相对）：笔～。马路又平又～。你把铁丝拉～。跟地面垂直的（跟“横”相对）：～升机。把标杆立～。从上到下的；从前到后的（跟“横”相对）：～行的文字。屋子很大，～里有两丈，横里有四丈。挺直；使笔直：～起腰来。公正的；正义的：正～。理～气壮。直爽；直截：～性子。心～口快。～呼其名。他嘴～，藏不住话。汉字的笔画，即“竖1”一直；径直；直接：～达。～到。～哭了一天。～朝村口走去。一个劲儿；不断地：他看着我～笑。我冷得～哆嗦。姓。"
   },
   {
     char: "相",
@@ -45243,7 +47688,9 @@ const t = [
     mark: "ㄒㄧㄤˋ",
     tradition: "相",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "互相：～像。～识。～距太远。不～上下。表示一方对另一方的动作：实不～瞒。好言～劝。姓。亲自观看（是不是合心意）：～亲。～中。"
   },
   {
     char: "盹",
@@ -45256,7 +47703,9 @@ const t = [
     mark: "ㄉㄨㄣˇ",
     tradition: "盹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dun",
+    explain: "（～儿）很短时间的睡眠：看书看累了，趴在桌子上打个～儿。"
   },
   {
     char: "盼",
@@ -45269,7 +47718,9 @@ const t = [
     mark: "ㄆㄢˋ",
     tradition: "盼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pan",
+    explain: "盼望：～星星，～月亮，～来了救星共产党。看：左顾右～。"
   },
   {
     char: "盾",
@@ -45278,11 +47729,13 @@ const t = [
     radical: "⺁",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄨㄣˋ",
     tradition: "盾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dun",
+    explain: "盾牌，古代打仗时用来防护身体、遮挡刀箭等的牌形武器。盾形的东西：金～。银～。货币名。苏里南、印度尼西亚、越南等国的本位货币。"
   },
   {
     char: "省",
@@ -45295,7 +47748,9 @@ const t = [
     mark: "ㄕㄥˇ",
     tradition: "省",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "sheng",
+    explain: "行政区划单位。在中国是地方最大的一级行政区域，直属中央。省下设若干市、县。指省会：进～开会。减免；节约。与“费”相对：～一道工序。～钱。简略：～称。～写。古官署名：尚书～。中书～。"
   },
   {
     char: "眉",
@@ -45304,11 +47759,13 @@ const t = [
     radical: "目",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄟˊ",
     tradition: "眉",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "眉毛：浓～。～开眼笑。指书页上方空白的地方：书～。～批。姓。"
   },
   {
     char: "看",
@@ -45321,7 +47778,9 @@ const t = [
     mark: "ㄎㄢˋ",
     tradition: "看",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kan",
+    explain: "使视线接触人或物：～书。～电影。～了他一眼。观察并加以判断：我～他是个可靠的人。你～这个办法好不好。访问：～望。～朋友。对待：～待。另眼相～。别拿我当外人～。诊治：王大夫把我的病～好了。照料：照～。衣帽自～。用在表示动作或变化的词或词组前面，表示预见到某种变化趋势，或者提醒对方注意可能发生或将要发生的某种不好的事情或情况：行情～涨。别跑!～摔着!。～饭快凉了，快吃吧。用在动词或动词结构后面，表示试一试（前面的动词常用重叠式）：想想～。找找～。等一等～。评评理～。先做几天～。"
   },
   {
     char: "真",
@@ -45334,7 +47793,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "真",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "真实（跟“假、伪”相对）：～心诚意。千～万确。去伪存～。这幅宋人的水墨画是～的。的确；实在：时间过得～快!。“人勤地不懒”这话～不假。清楚确实：字音咬得～。黑板上的字你看得～吗?指真书：～草隶篆。人的肖像；事物的形象：写～。传～。本性；本原：返璞归～。姓。"
   },
   {
     char: "眠",
@@ -45347,7 +47808,9 @@ const t = [
     mark: "ㄇㄧㄢˊ",
     tradition: "眠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mian",
+    explain: "睡眠：失～。安～。长～（指死亡）。某些动物的一种生理现象，在一个较长时间内不动不吃：冬～。蚕三～了。"
   },
   {
     char: "眨",
@@ -45360,7 +47823,9 @@ const t = [
     mark: "ㄓㄚˇ",
     tradition: "眨",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zha",
+    explain: "（眼睛）闭上立刻又睁开：～眼。眼睛也不～一～。"
   },
   {
     char: "眯",
@@ -45373,7 +47838,9 @@ const t = [
     mark: "ㄇㄧˊ",
     tradition: "眯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "mi",
+    explain: "眼皮微微合上：～缝。～着眼睛笑。小睡：～一会儿。"
   },
   {
     char: "眶",
@@ -45386,7 +47853,9 @@ const t = [
     mark: "ㄎㄨㄤˋ",
     tradition: "眶",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuang",
+    explain: "眼的四周；眼眶子：热泪盈～。眼泪夺～而出。"
   },
   {
     char: "眷",
@@ -45399,7 +47868,9 @@ const t = [
     mark: "ㄐㄩㄢˋ",
     tradition: "眷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "juan",
+    explain: "亲属：～属。家～。亲～。女～。关心；怀念：～顾。～注。～恋。"
   },
   {
     char: "眼",
@@ -45412,7 +47883,9 @@ const t = [
     mark: "ㄧㄢˇ",
     tradition: "眼",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yan",
+    explain: "人和动物的视觉器官。通称眼睛。小洞；窟窿：泉～。炮～。拿针扎一个～儿。（～儿）指事物的关键所在：节骨～儿。围棋用语，由同色棋子围住的一个或两个空交叉点。戏曲中的拍子：二黄慢板，一板三～。用于井、窑洞：一～井。一～旧窑洞。"
   },
   {
     char: "着",
@@ -45425,7 +47898,9 @@ const t = [
     mark: "ㄓㄠˊ",
     tradition: "着",
     sex: "",
-    tone: 0
+    tone: 0,
+    pinyin: "zhe",
+    explain: "1.表示动作的持续：他打～红旗在前面走。他们正谈～话呢。2.表示状态的持续：大门敞～。茶几上放～一瓶花。3.用在动词或表示程度的形容词后面，加强命令或嘱咐的语气：你听～。步子大～点儿。快～点儿写。手可要轻～点儿。4.加在某些动词后面，使变成介词：顺～。沿～。朝～。照～。为～。"
   },
   {
     char: "睁",
@@ -45438,7 +47913,9 @@ const t = [
     mark: "ㄓㄥ",
     tradition: "睁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "张开（眼睛）：～眼。风沙打得眼睛～不开。"
   },
   {
     char: "睛",
@@ -45451,7 +47928,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "睛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "眼珠儿：目不转～。定～一看。画龙点～。"
   },
   {
     char: "睡",
@@ -45464,7 +47943,9 @@ const t = [
     mark: "ㄕㄨㄟˋ",
     tradition: "睡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shui",
+    explain: "睡觉：早～早起。～着了。"
   },
   {
     char: "督",
@@ -45477,7 +47958,9 @@ const t = [
     mark: "ㄉㄨ",
     tradition: "督",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "du",
+    explain: "监督指挥：～战。～办。～师。～率。姓。"
   },
   {
     char: "睦",
@@ -45490,7 +47973,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "睦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "和睦：～邻。婆媳不～。姓。"
   },
   {
     char: "睬",
@@ -45503,7 +47988,9 @@ const t = [
     mark: "ㄘㄞˇ",
     tradition: "睬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "cai",
+    explain: "答理；理会：理～。不要～他。人家对你说话，你怎么能～也不～?"
   },
   {
     char: "睹",
@@ -45516,7 +48003,9 @@ const t = [
     mark: "ㄉㄨˇ",
     tradition: "睹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "du",
+    explain: "看见：耳闻目～。有目共～。熟视无～。～物思人。"
   },
   {
     char: "瞄",
@@ -45529,33 +48018,9 @@ const t = [
     mark: "ㄇㄧㄠˊ",
     tradition: "瞄",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "瞎",
-    spell: "xiā",
-    stroke: "15",
-    radical: "目",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄒㄧㄚ",
-    tradition: "瞎",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "瞒",
-    spell: "mán",
-    stroke: "15",
-    radical: "目",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄇㄢˊ",
-    tradition: "瞞",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "miao",
+    explain: "把视力集中在一点上；注视：枪～得准。"
   },
   {
     char: "瞧",
@@ -45568,7 +48033,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "瞧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiao",
+    explain: "看：～见。～书。～病。～热闹。～一～。他～亲戚去了。"
   },
   {
     char: "瞪",
@@ -45577,11 +48044,13 @@ const t = [
     radical: "目",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄉㄥˋ",
     tradition: "瞪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "deng",
+    explain: "用力睁大（眼）：他把眼睛都～圆了。睁大眼睛注视，表示不满意：老秦～了她一眼，嫌她多嘴。"
   },
   {
     char: "瞬",
@@ -45594,7 +48063,9 @@ const t = [
     mark: "ㄕㄨㄣˋ",
     tradition: "瞬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shun",
+    explain: "眼珠儿一动；一眨眼：转～。～间。～将结束。一～即逝。"
   },
   {
     char: "瞭",
@@ -45603,11 +48074,13 @@ const t = [
     radical: "目",
     struct: "左右结构",
     five: "",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄠˋ",
     tradition: "",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liao",
+    explain: "见“了”，助词。用在句子中间，表示动作或变化已经完成（也可以表示预期或假设的动作）；用在句尾，表示确定的语气，强调出现某种情况或发生某种变化（这种情况可以是已经发生，也可以是即将发生，还可以是一种假设）；用在句尾或句中停顿的地方，表示劝阻或命令的语气；用在句尾或句中停顿的地方，表示感叹的语气"
   },
   {
     char: "瞳",
@@ -45620,7 +48093,9 @@ const t = [
     mark: "ㄊㄨㄥˊ",
     tradition: "瞳",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tong",
+    explain: "瞳孔。"
   },
   {
     char: "瞻",
@@ -45633,7 +48108,9 @@ const t = [
     mark: "ㄓㄢ",
     tradition: "瞻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhan",
+    explain: "往前或往上看：观～。高～远瞩。姓。"
   },
   {
     char: "矗",
@@ -45646,7 +48123,9 @@ const t = [
     mark: "ㄔㄨˋ",
     tradition: "矗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chu",
+    explain: "直立；高耸：～立。"
   },
   {
     char: "矛",
@@ -45655,11 +48134,13 @@ const t = [
     radical: "矛",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄠˊ",
     tradition: "矛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mao",
+    explain: "古代兵器，在长杆的一端装有青铜或铁制成的枪头：长～。～盾。姓。"
   },
   {
     char: "矢",
@@ -45668,11 +48149,13 @@ const t = [
     radical: "矢",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕˇ",
     tradition: "矢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shi",
+    explain: "箭：有的（dì）放～。古又同“誓”：～口抵赖。～志不移。古又同“屎”：遗～。"
   },
   {
     char: "知",
@@ -45685,7 +48168,9 @@ const t = [
     mark: "ㄓ",
     tradition: "知",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "智慧。通「智」。  【组词】：知能、知者乐水"
   },
   {
     char: "矩",
@@ -45698,7 +48183,9 @@ const t = [
     mark: "ㄐㄩˇ",
     tradition: "矩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ju",
+    explain: "画直角或方形用的曲尺：～尺。法则；规矩：循规蹈～。"
   },
   {
     char: "矫",
@@ -45711,7 +48198,9 @@ const t = [
     mark: "ㄐㄧㄠˊ",
     tradition: "矯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "把弯曲的弄直；纠正：～正。强壮；勇敢：～健。假托：～命。"
   },
   {
     char: "短",
@@ -45724,7 +48213,9 @@ const t = [
     mark: "ㄉㄨㄢˇ",
     tradition: "短",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "duan",
+    explain: "两端之间的距离小（跟“长”相对）。a）指空间：～刀。裤子裁～了。b）指时间：～期。夏季昼长夜～。缺少；欠：理～。缺斤～两。别人都来了，就～他一个人了。～你三块钱。缺点：取长补～。说长道～。揭～儿。护～。"
   },
   {
     char: "矮",
@@ -45737,7 +48228,9 @@ const t = [
     mark: "ㄞˇ",
     tradition: "矮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ai",
+    explain: "身材短：～个儿。个头儿不～。高度小的：～墙。～凳儿。（级别、地位）低：他在学校里比我～一级。"
   },
   {
     char: "石",
@@ -45746,11 +48239,13 @@ const t = [
     radical: "石",
     struct: "半包围结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄉㄢˋ",
     tradition: "石",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "构成地壳的坚硬物质，是由矿物集合而成的：花岗～。石灰～。～碑。～板。～器。见〖岩石〗。指石刻：金～。古代用来治病的石针：药～。姓。"
   },
   {
     char: "矾",
@@ -45763,7 +48258,9 @@ const t = [
     mark: "ㄈㄢˊ",
     tradition: "礬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fan",
+    explain: "某些金属的含水硫酸盐或由两种或两种以上的金属硫酸盐结合成的含水复盐，如明矾、胆矾、绿矾。"
   },
   {
     char: "矿",
@@ -45776,7 +48273,9 @@ const t = [
     mark: "ㄎㄨㄤˋ",
     tradition: "礦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuang",
+    explain: "矿床。指矿石：～车。精～。安全采～。拉来一车～。开采矿石的场所：露天～。（Kuàng）姓。"
   },
   {
     char: "码",
@@ -45789,7 +48288,9 @@ const t = [
     mark: "ㄇㄚˇ",
     tradition: "碼",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ma",
+    explain: "（～儿）表示数目的符号：数～。号～。页～。价～。表示数目的用具：筹～。砝～。用于事情：这是两～事。你说的跟他说的是一～事。堆叠：把这些砖～齐了。英美制长度单位，符号yd。1码等于3英尺，合0.9144米。"
   },
   {
     char: "砂",
@@ -45802,7 +48303,9 @@ const t = [
     mark: "ㄕㄚ",
     tradition: "砂",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sha",
+    explain: "同“沙（shā）”（多指颗粒较大的）：矿～。～糖。～纸。"
   },
   {
     char: "砌",
@@ -45815,7 +48318,9 @@ const t = [
     mark: "ㄑㄧˋ",
     tradition: "砌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "建筑时垒砖石，用泥灰等黏合：～墙。台阶：雕栏玉～。"
   },
   {
     char: "砍",
@@ -45828,7 +48333,9 @@ const t = [
     mark: "ㄎㄢˇ",
     tradition: "砍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kan",
+    explain: "用刀斧等猛力切入物体或将物体断开：～柴。把树枝～下来。肩膀被歹徒～了一刀。削减；取消：～价。从计划中～去一些项目。把东西扔出去打：拿砖头～狗。同“侃2”。"
   },
   {
     char: "研",
@@ -45841,7 +48348,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "研",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "磨细、碾碎。  【组词】：研墨、研磨咖啡深入探究。  【组词】：研究、钻研、研读"
   },
   {
     char: "砖",
@@ -45854,7 +48363,9 @@ const t = [
     mark: "ㄓㄨㄢ",
     tradition: "磚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuan",
+    explain: "用土坯烧成的（也有用其他材料制成的）建筑材料：～瓦。像砖的东西：茶～。冰～。"
   },
   {
     char: "砚",
@@ -45867,7 +48378,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "硯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "砚台：笔～。端～。旧时指有同学关系的（因同学常共笔砚，同学也称“同砚”）：～兄。～友。"
   },
   {
     char: "砰",
@@ -45880,7 +48393,9 @@ const t = [
     mark: "ㄆㄥ",
     tradition: "砰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "peng",
+    explain: "拟声词。撞击或重物落地的声音：～的一声，门关上了。"
   },
   {
     char: "破",
@@ -45893,20 +48408,9 @@ const t = [
     mark: "ㄆㄛˋ",
     tradition: "破",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "砸",
-    spell: "zá",
-    stroke: "10",
-    radical: "石",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄗㄚˊ",
-    tradition: "砸",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "po",
+    explain: "完整的东西受到损伤变得不完整：手～了。纸戳～了。袜子～了一个洞。使损坏；使分裂；劈开：～釜沉舟。势如～竹。～开西瓜。整的换成零的：一元的票子～成两张五角的。突破；破除（规定、习惯、思想等）：～格。～例。～记录。打败（敌人）；打下（据点）：攻～城池。大～敌军。花费：～钞。～费。～工夫。使真相露出；揭穿：说～。一语道～。案子已经～了。受过损伤的；破烂的：～衣服。房子很～了。讥讽东西或人不好（含厌恶意）：谁看那～戏!"
   },
   {
     char: "砾",
@@ -45919,7 +48423,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "礫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "小石块；碎石：沙～。瓦～。～石。～岩。"
   },
   {
     char: "础",
@@ -45932,7 +48438,9 @@ const t = [
     mark: "ㄔㄨˇ",
     tradition: "礎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chu",
+    explain: "垫在柱下的石礅：～石。事物的基底，根基：基～。"
   },
   {
     char: "硅",
@@ -45945,7 +48453,9 @@ const t = [
     mark: "ㄍㄨㄟ",
     tradition: "硅",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gui",
+    explain: "非金属元素，符号Si（silicium）。黑灰色晶体或粉末，自然界分布极广，普通的沙子就是不纯的二氧化硅。硅有单向导电性，是重要的半导体材料，也可用来制合金等。旧称矽。"
   },
   {
     char: "硕",
@@ -45958,7 +48468,9 @@ const t = [
     mark: "ㄕㄨㄛˋ",
     tradition: "碩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shuo",
+    explain: "大的。  【组词】：硕大、硕德、硕果形容学识渊博的。  【组词】：硕士、硕彦、硕儒"
   },
   {
     char: "硝",
@@ -45971,7 +48483,9 @@ const t = [
     mark: "",
     tradition: "硝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "泛称某些矿物盐，如硝石、芒硝等。用朴硝或芒硝加黄米面处理毛皮，使皮板儿柔软：～皮子。"
   },
   {
     char: "硫",
@@ -45984,7 +48498,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "硫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "非金属元素，符号S（sulphur）。有多种同素异形体，黄色，能与氧、氢、卤素（除碘外）和大多数金属化合。用来制造硫酸、火药、火柴、硫化橡胶、杀虫剂等，也用来治疗皮肤病。通称硫黄。"
   },
   {
     char: "硬",
@@ -45997,7 +48513,9 @@ const t = [
     mark: "ㄧㄥˋ",
     tradition: "硬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ying",
+    explain: "物体内部的组织紧密，受外力作用后不容易改变形状（跟“软”相对）：坚～。～木。～煤。（性格）刚强；（意志）坚定：强～。～汉子。话说得～。坚决或执拗地（做某事）：不让他去，他～要去。勉强地（做某事）：～撑。他一发狠，～爬上去了。（能力）强；（质量）好：～手。货色～。"
   },
   {
     char: "确",
@@ -46010,7 +48528,9 @@ const t = [
     mark: "ㄑㄩㄝˋ",
     tradition: "確",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "que",
+    explain: "副词。坚定地；的确：～信不疑。～有其事。真实：千真万～。"
   },
   {
     char: "硼",
@@ -46023,7 +48543,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "硼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "非金属元素，符号B，原子序数5。非结晶硼为暗棕色粉末状；结晶硼灰色透明，坚硬。可用作冶金除气剂，搀入塑料和铝合金中，可作为中子屏蔽材料。硼钢在反应堆中用作控制棒。也用于制备火箭燃料。"
   },
   {
     char: "碉",
@@ -46036,7 +48558,9 @@ const t = [
     mark: "ㄉㄧㄠ",
     tradition: "碉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "diao",
+    explain: "〔碉堡〕供观察、射击、驻兵用的突出于地面的多层工事。多为砖石或混凝土结构。"
   },
   {
     char: "碌",
@@ -46049,20 +48573,9 @@ const t = [
     mark: "ㄌㄧㄡˋ",
     tradition: "碌",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "碍",
-    spell: "ài",
-    stroke: "13",
-    radical: "石",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄞˋ",
-    tradition: "礙",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lu",
+    explain: "平庸：庸～。繁忙：忙～。"
   },
   {
     char: "碎",
@@ -46075,7 +48588,9 @@ const t = [
     mark: "ㄙㄨㄟˋ",
     tradition: "碎",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "完整的东西破成零片零块：碗摔～了。使碎：～石机。～尸万段。零星；不完整：～布。琐～。絮烦；唠叨：嘴太～。"
   },
   {
     char: "碑",
@@ -46088,7 +48603,9 @@ const t = [
     mark: "ㄅㄟ",
     tradition: "碑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bei",
+    explain: "刻着文字或图画，竖立起来作为纪念物或标记的石头：界～。墓～。里程～。纪念～。立了一块～。"
   },
   {
     char: "碗",
@@ -46101,7 +48618,9 @@ const t = [
     mark: "ㄨㄢˇ",
     tradition: "碗",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wan",
+    explain: "盛饮食的器具，口大底小，一般是圆形的：饭～。茶～。买了几个～。像碗的东西：轴～儿。姓。"
   },
   {
     char: "碘",
@@ -46114,7 +48633,9 @@ const t = [
     mark: "ㄉㄧㄢˇ",
     tradition: "碘",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dian",
+    explain: "非金属元素，符号I，原子序数53。卤族元素之一。紫灰色鳞片状结晶，有金属光泽，易升华而呈紫红色蒸气，易溶于酒精等有机溶剂。人体缺碘会造成智力缺陷或甲状腺肿大等。"
   },
   {
     char: "碟",
@@ -46127,7 +48648,9 @@ const t = [
     mark: "ㄉㄧㄝˊ",
     tradition: "碟",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "die",
+    explain: "盛食物的小盘子。"
   },
   {
     char: "碧",
@@ -46140,7 +48663,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "碧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "青绿色的玉石。青绿色：～草。澄～。姓。"
   },
   {
     char: "碰",
@@ -46153,7 +48678,9 @@ const t = [
     mark: "ㄆㄥˋ",
     tradition: "碰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "peng",
+    explain: "运动着的物体跟别的物体突然接触：～杯。不小心腿在门上～了一下。碰见；遇到：～面。在路上～到一位熟人。试探：～～机会。我去～一下看，说不定他在家。"
   },
   {
     char: "碱",
@@ -46166,7 +48693,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "碱",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "电解质电离时所生成的负离子全部是氢氧根离子的化合物。能跟酸中和生成盐和水，水溶液有涩味，可使石蕊试纸变蓝。如氢氧化钠、氢氧化钾等。含有10个分子结晶水的碳酸钠，无色晶体，用作洗涤剂，也用来中和发面中的酸味。被盐碱侵蚀：这间房子的墙都～了。"
   },
   {
     char: "碳",
@@ -46179,7 +48708,9 @@ const t = [
     mark: "ㄊㄢˋ",
     tradition: "碳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tan",
+    explain: "非金属元素，符号C（carbonium）。有金刚石、石墨、富勒烯和无定形碳等同素异形体。化学性质稳定，在空气中不起变化，是构成有机物的主要成分。在工业上和医药上用途很广。"
   },
   {
     char: "碴",
@@ -46192,7 +48723,9 @@ const t = [
     mark: "ㄔㄚˊ",
     tradition: "碴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cha",
+    explain: "小碎块：玻璃～儿。器物上的破口：碗边上有个新～儿。能引起争吵的事由：找～儿。谈话时提到的事情或对方刚说完的话：答～儿。"
   },
   {
     char: "碾",
@@ -46205,7 +48738,9 @@ const t = [
     mark: "ㄋㄧㄢˇ",
     tradition: "碾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nian",
+    explain: "把东西轧碎、轧平或使粮食去皮所用的工具：石～。滚动碾子等轧：～米。～药。〈方〉踩：这个人啊，走路～不死蚂蚁（指慢性子）。"
   },
   {
     char: "磁",
@@ -46218,7 +48753,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "磁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "某些物质能吸引铁、镍等金属的性能。同“瓷”。"
   },
   {
     char: "磅",
@@ -46231,7 +48768,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "磅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pang",
+    explain: "英制质量单位。1磅合0.4536千克。用磅秤量（liáng）：把东西～一～。"
   },
   {
     char: "磕",
@@ -46244,7 +48783,9 @@ const t = [
     mark: "ㄎㄜ",
     tradition: "磕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "碰在硬东西上：碗边儿～掉一块。脸上～破了块皮。磕打：～烟袋锅子。～掉鞋底的泥。"
   },
   {
     char: "磨",
@@ -46257,7 +48798,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "磨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "摩擦：脚上～了几个大泡。我劝了他半天，嘴唇都快～破了。用磨料磨物体使光滑、锋利或达到其他目的：～刀。～墨。～玻璃。铁杵～成针。折磨：他被这场病～得改了样子了。纠缠；磨烦（mò·fan）：这孩子可真～人。消灭；磨灭：百世不～。消耗时间；拖延：～洋工。～工夫。"
   },
   {
     char: "磷",
@@ -46270,7 +48813,9 @@ const t = [
     mark: "ㄌㄧㄣˊ",
     tradition: "磷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "非金属元素，符号P，原子序数15。是维持动植物生命的重要成分之一。用于制磷肥、农药。常见的有白磷（黄磷）和赤磷（红磷）。白磷有毒，在空气中能自燃，燃烧时发浓烟，可用于制烟幕剂。赤磷无毒，暗红色，在空气中稳定，用于制安全火柴等。"
   },
   {
     char: "磺",
@@ -46283,7 +48828,9 @@ const t = [
     mark: "ㄏㄨㄤˊ",
     tradition: "磺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "硫磺，旧同“硫黄”。硫的俗称。"
   },
   {
     char: "礁",
@@ -46296,7 +48843,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "礁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "海洋或大的江河中距水面较近的岩石：暗～。触～。由珊瑚虫的遗骸堆积成的岩石状物：珊瑚～。"
   },
   {
     char: "示",
@@ -46309,7 +48858,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "示",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "把事物摆出来或指出来使人知道；表示：告～。指～。显～。暗～。～意。～范。～威。～众。"
   },
   {
     char: "礼",
@@ -46322,7 +48873,9 @@ const t = [
     mark: "ㄌㄧˇ",
     tradition: "禮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "li",
+    explain: "社会生活中由于风俗习惯而形成的为大家共同遵守的仪式：婚～。丧～。表示尊敬的言语或动作：～节。敬个～。礼物：送～。献～。千里送鹅毛，～轻情意重。以礼相待：～贤下士。姓。"
   },
   {
     char: "社",
@@ -46335,7 +48888,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "社",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "某些集体组织：诗～。报～。通讯～。合作～。集会结～。某些服务性单位：茶～。旅～。旅行～。古代把土神和祭土神的地方、日子和祭礼都叫社：春～。秋～。～日。～稷。姓。"
   },
   {
     char: "祈",
@@ -46348,7 +48903,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "祈",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "祈祷：～福。请求；希望：～求。～望。敬～指导。姓。"
   },
   {
     char: "祖",
@@ -46361,7 +48918,9 @@ const t = [
     mark: "ㄗㄨˇ",
     tradition: "祖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zu",
+    explain: "祖父，称父亲的父亲，也用来称祖父一辈的亲属：～孙三代。外～。祖宗。泛指祖父以上的先代：高～。远～。事业或派别的创始人：鼻～。～师爷。"
   },
   {
     char: "祝",
@@ -46374,7 +48933,9 @@ const t = [
     mark: "ㄓㄡˋ",
     tradition: "祝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "祝愿：～你健康。～两国的友谊万古常青。姓。削；断绝：～发为僧（剃去头发当和尚）。"
   },
   {
     char: "神",
@@ -46387,7 +48948,9 @@ const t = [
     mark: "ㄕㄣˊ",
     tradition: "神",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shen",
+    explain: "宗教指天地万物的创造者和统治者，迷信的人指神仙或能力、德行高超的人物死后的精灵：～位。财～。无～论。多～教。神话中的人物，有超人的能力：料事如～。用兵如～。特别高超或出奇，令人惊异的；神妙：～速。～效。这事真是越说越～了。精神；精力：凝～。费～。聚精会～。双目炯炯有～。神气：～色。～情。瞧他那个～儿，准是有什么心事。聪明；机灵：瞧!这孩子真～。姓。"
   },
   {
     char: "祟",
@@ -46400,7 +48963,9 @@ const t = [
     mark: "ㄙㄨㄟˋ",
     tradition: "祟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "原指鬼怪或鬼怪害人（迷信），借指不正当的行动：鬼～。作～。姓。"
   },
   {
     char: "祠",
@@ -46413,7 +48978,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "祠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "祠堂：宗～。武侯～。"
   },
   {
     char: "祥",
@@ -46426,7 +48993,9 @@ const t = [
     mark: "ㄒㄧㄤˊ",
     tradition: "祥",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "xiang",
+    explain: "指吉利：吉～。不～。姓。"
   },
   {
     char: "票",
@@ -46439,7 +49008,9 @@ const t = [
     mark: "ㄆㄧㄠˋ",
     tradition: "票",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "piao",
+    explain: "纸币。  【组词】：钞票用来作为凭证的纸张。  【组词】：股票、车票、戏票称被绑架的人质。  【组词】：肉票、撕票非职业性质的演出。  【组词】：玩票、票戏量词：计算大批人或物的单位。  【组词】：一票人　计算交易次数的单位。  【组词】：一票买卖"
   },
   {
     char: "祭",
@@ -46452,7 +49023,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "祭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "对死者表示追悼的仪式：～奠。公～。古代杀牲供奉鬼神：～祀。～天。"
   },
   {
     char: "祷",
@@ -46465,20 +49038,9 @@ const t = [
     mark: "ㄉㄠˇ",
     tradition: "禱",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "祸",
-    spell: "huò",
-    stroke: "11",
-    radical: "礻",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄏㄨㄛˋ",
-    tradition: "禍",
-    sex: "",
-    tone: 4
+    tone: 3,
+    pinyin: "dao",
+    explain: "宗教徒或迷信的人求神保佑：祈～。～告。请求；盼望（旧时书信用的敬辞）：为～。至～。"
   },
   {
     char: "禀",
@@ -46491,7 +49053,9 @@ const t = [
     mark: "ㄅㄧㄥˇ",
     tradition: "禀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bing",
+    explain: "向长辈或上级报告：回～。～报。旧时下级向上级报告的一种文件：具～详告。领受：～承。"
   },
   {
     char: "禁",
@@ -46504,7 +49068,9 @@ const t = [
     mark: "ㄐㄧㄣˋ",
     tradition: "禁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "明令取消；制止：严～走私。拘押：监～。法律或习惯所不允许的事：犯～。违～物品。皇帝的住处：宫～。紫～城。"
   },
   {
     char: "福",
@@ -46517,7 +49083,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "福",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "幸福；福气（跟“祸”相对）：～利。享～。造～。旧时妇女行“万福”礼：～了一～。（Fú）指福建：～橘。姓。"
   },
   {
     char: "离",
@@ -46530,20 +49098,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "離",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "禽",
-    spell: "qín",
-    stroke: "12",
-    radical: "人",
-    struct: "上下结构",
-    five: "金",
-    method: "-",
-    mark: "ㄑㄧㄣˊ",
-    tradition: "禽",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "相距，隔开：距～。太阳是～地球最近的恒星。离开，分开：分～。～别。～家。～散（sàn）。～职。～异。～间（jiàn）。支～破碎。缺少：办好教育～不开教师。八卦之一，符号是“☲”，代表火。古同“罹”，遭受。古同“缡”，妇女的佩巾。〔～～〕形容草木茂盛，如“～～原上草，一岁一枯荣”。姓。"
   },
   {
     char: "禾",
@@ -46552,11 +49109,13 @@ const t = [
     radical: "禾",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄜˊ",
     tradition: "禾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "禾苗，特指水稻的植株。古书上指粟。姓。"
   },
   {
     char: "秀",
@@ -46569,7 +49128,9 @@ const t = [
     mark: "ㄒㄧㄡˋ",
     tradition: "秀",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "xiu",
+    explain: "植物抽穗开花（多指庄稼）：～穗。六月六，看谷（粟）～。姓。清秀：～丽。眉清目～。山清水～。～外慧中。聪明；灵巧：内～。心～。特别优异：优～。特别优异的人才：新～。后起之～。表演；演出：作～。时装～。泳装～。[英show]"
   },
   {
     char: "私",
@@ -46582,7 +49143,9 @@ const t = [
     mark: "ㄙ",
     tradition: "私",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "si",
+    explain: "属于个人的或为了个人的（跟“公”相对）：～事。～信。～有。自私（跟“公”相对）：～心。大公无～。暗地里；私下：～访。窃窃～语。秘密而不合法的：～货。～盐。～通。"
   },
   {
     char: "秃",
@@ -46591,11 +49154,13 @@ const t = [
     radical: "禾",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄊㄨ",
     tradition: "秃",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tu",
+    explain: "（人）没有头发；（鸟兽头或尾）没有毛：～尾巴。头顶有点～了。（树木）没有枝叶；（山）没有树木：～树。山是～的。物体失去尖端：～笔。笔尖～了。首尾结构不完整：这篇文章煞尾处显得有点～。"
   },
   {
     char: "秆",
@@ -46604,11 +49169,13 @@ const t = [
     radical: "禾",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄢˇ",
     tradition: "秆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gan",
+    explain: "某些植物的茎。例：麻～儿。高粱～儿。"
   },
   {
     char: "秉",
@@ -46617,11 +49184,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄧㄥˇ",
     tradition: "秉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bing",
+    explain: "拿着；握着：～笔。～烛。掌握；主持：～政。古代容量单位，合16斛。姓。"
   },
   {
     char: "秋",
@@ -46630,11 +49199,13 @@ const t = [
     radical: "禾",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄡ",
     tradition: "秋、鞦",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "qiu",
+    explain: "秋季：深～。～风。～雨。～高气爽。庄稼成熟或成熟时节：麦～。大～。指一年的时间：千～万岁。一日不见，如隔三～。指某个时期（多指不好的）：多事之～。危急存亡之～。姓。见〖秋千〗。"
   },
   {
     char: "种",
@@ -46643,11 +49214,13 @@ const t = [
     radical: "禾",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄨㄥˊ",
     tradition: "種",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhong",
+    explain: "物种的简称：小麦是单子叶植物禾本科小麦属的一～。虎是哺乳动物猫科豹属的一～。人种：黄～。黑～。白～。类别；种类：工～。兵～。语～。生物传代繁殖的物质：高粱～。麦～。传～。配～。指胆量或骨气（跟“有、没有”连用）。表示种类，用于人和任何事物：两～人。三～布。各～情况。菊花的颜色有好几～。姓。"
   },
   {
     char: "科",
@@ -46660,7 +49233,9 @@ const t = [
     mark: "ㄎㄜ",
     tradition: "科",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "学术或业务的类别：～目。文～。理～。专～。牙～。妇～。机关组织系统中按业务划分的单位（级别比处低，比股高）：秘书～。财务～。总务处下面分三个～。科举考试，也指科举考试的科目：～场。登～。开～取士。科班：坐～。出～。生物学中把同一目的生物按照彼此相似的特征分为若干群，每一群叫一科，如松柏目分为松科、杉科、柏科等，鸡形目分为雉科、松鸡科等。科以下为属。姓。法律条文：金～玉律。作奸犯～。判定（刑罚）：～刑。～罪。～以罚金。古典戏曲剧本中，指示角色表演动作时的用语，如笑科、饮酒科等。"
   },
   {
     char: "秒",
@@ -46673,7 +49248,9 @@ const t = [
     mark: "ㄇㄧㄠˇ",
     tradition: "秒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "miao",
+    explain: "谷物种子壳上的芒。计算时间、弧和角以及经纬度的最小单位。均为一分的六十分之一。是国际单位制中七个基本单位之一。"
   },
   {
     char: "秕",
@@ -46686,7 +49263,9 @@ const t = [
     mark: "ㄅㄧˇ",
     tradition: "秕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bi",
+    explain: "秕子：～糠。（子实）不饱满：～粒。～谷子。恶；坏：～政。"
   },
   {
     char: "秘",
@@ -46699,7 +49278,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "秘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mi",
+    explain: "秘密：～诀。～室。～事。保守秘密：～而不宣。～不示人。罕见；稀有：～宝。～籍。"
   },
   {
     char: "租",
@@ -46712,7 +49293,9 @@ const t = [
     mark: "ㄗㄨ",
     tradition: "租",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zu",
+    explain: "出代价借用：～照相机。把东西借给别人而收取一定的金钱或实物：把车子～给乘客。出租收取的金钱或实物：收～。房～。旧指田赋：～税。"
   },
   {
     char: "秤",
@@ -46721,11 +49304,13 @@ const t = [
     radical: "禾",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄔㄥˋ",
     tradition: "秤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cheng",
+    explain: "测定物体重量的器具，有杆秤、地秤、台秤、弹簧秤等多种。特指杆秤。见〖杆秤〗。"
   },
   {
     char: "秦",
@@ -46738,7 +49323,9 @@ const t = [
     mark: "ㄑㄧㄣˊ",
     tradition: "秦",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qin",
+    explain: "周朝国名（前770—前221）。战国七雄之一。公元前770年周封秦襄公为诸侯。在今甘肃、陕西一带。公元前221年统一六国建立秦朝。朝代名（前221—前206）。秦始皇嬴政建立。建都咸阳。是中国历史上第一个中央集权的封建王朝。公元前209年陈胜、吴广起义，公元前206年为刘邦领导的起义军所灭。指陕西和甘肃。特指陕西。"
   },
   {
     char: "秧",
@@ -46751,7 +49338,9 @@ const t = [
     mark: "ㄧㄤ",
     tradition: "秧",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yang",
+    explain: "植物的幼苗：树～儿。白菜～儿。黄瓜～儿。特指水稻的幼苗：～田。插～。某些植物的茎：瓜～。豆～。白薯～。某些饲养的幼小动物：鱼～。栽培；畜养：～几棵树。～了一池鱼。姓。"
   },
   {
     char: "秩",
@@ -46764,7 +49353,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "秩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "次序：～序。俸禄，也指官的品级：厚～。加官进～。姓。十年：七～大庆。"
   },
   {
     char: "秫",
@@ -46777,7 +49368,9 @@ const t = [
     mark: "ㄕㄨˊ",
     tradition: "秫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shu",
+    explain: "古指有黏性的谷物。蜀秫，即高粱：～米。～秸（高粱秆）。"
   },
   {
     char: "积",
@@ -46790,7 +49383,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "積",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "积累；聚集：～少成多。日～月累。～土成山。院子里～了不少水。长时间积累下来的：～习。～弊。中医指儿童消化不良的病：食～。奶～。捏～。这个孩子有～了。乘积的简称。"
   },
   {
     char: "称",
@@ -46799,11 +49394,13 @@ const t = [
     radical: "禾",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄣˋ",
     tradition: "稱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cheng",
+    explain: "叫；叫作：自称、他足智多谋，人称智多星。名称：简称、俗称。说：称快、称便、连声称好。赞扬：称叹、称赏、称许。姓。"
   },
   {
     char: "秸",
@@ -46816,7 +49413,9 @@ const t = [
     mark: "ㄐㄧㄝ",
     tradition: "秸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jie",
+    explain: "农作物脱粒后剩下的茎：麦～。秫～。豆～。"
   },
   {
     char: "移",
@@ -46829,20 +49428,9 @@ const t = [
     mark: "ㄧˊ",
     tradition: "移",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "秽",
-    spell: "huì",
-    stroke: "11",
-    radical: "禾",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄏㄨㄟˋ",
-    tradition: "穢",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "yi",
+    explain: "移动：转～。迁～。把菊花～到花盆里去。改变；变动：～风易俗。贫贱不能～。姓。"
   },
   {
     char: "稀",
@@ -46855,7 +49443,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "稀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "同“希”：～少。～见。事物之间不紧密，距离远，空隙大。与“密”相对：～疏。庄稼种得太密和太～都不好。含水分多，浓度小：～盐酸。～饭。"
   },
   {
     char: "程",
@@ -46868,7 +49458,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "程",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "规章；法式：章～。～式。道路；路段：登～。送了一～又一～。行进的距离：射～。里～。次序：议～。日～。度量；计量：计日～功。"
   },
   {
     char: "稍",
@@ -46881,7 +49473,9 @@ const t = [
     mark: "ㄕㄠˋ",
     tradition: "稍",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shao",
+    explain: "副词。略微：～有区别。"
   },
   {
     char: "税",
@@ -46894,7 +49488,9 @@ const t = [
     mark: "ㄕㄨㄟˋ",
     tradition: "税",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shui",
+    explain: "国家向征税对象按税率征收的货币或实物：关～。营业～。纳～。（Shuì）姓。"
   },
   {
     char: "稚",
@@ -46907,7 +49503,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "稚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "幼小：～子。幼～。庄稼种得晚些。"
   },
   {
     char: "稠",
@@ -46920,7 +49518,9 @@ const t = [
     mark: "ㄔㄡˊ",
     tradition: "稠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chou",
+    explain: "多而密：人～地窄。浓：～粥。"
   },
   {
     char: "稳",
@@ -46933,7 +49533,9 @@ const t = [
     mark: "ㄨㄣˇ",
     tradition: "穩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wen",
+    explain: "稳固；平稳：脚要站～。把桌子放～。时局不～。他的立场很～。稳重：～健。沉～。他做事很～。稳妥：十拿九～。～扎～打。使稳定：你先～住他，别让他跑了。"
   },
   {
     char: "稻",
@@ -46946,7 +49548,9 @@ const t = [
     mark: "ㄉㄠˋ",
     tradition: "稻",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dao",
+    explain: "1.一年生草本植物，叶子狭长，花白色或绿色。籽实叫稻谷，去壳后叫大米。是我国重要的粮食作物。主要分水稻和陆稻两大类。通常指水稻。2.这种植物的籽实。"
   },
   {
     char: "稼",
@@ -46959,7 +49563,9 @@ const t = [
     mark: "ㄐㄧㄚˋ",
     tradition: "稼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jia",
+    explain: "种植（谷物）：耕～。～穑。谷物：庄～。"
   },
   {
     char: "稽",
@@ -46972,7 +49578,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "稽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "停留：～留。～延。考核：～查。无～之谈。计较：反唇相～。"
   },
   {
     char: "稿",
@@ -46985,7 +49593,9 @@ const t = [
     mark: "ㄍㄠˇ",
     tradition: "稿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gao",
+    explain: "谷类植物的茎：～荐。（～儿）稿子：手～。定～。～纸。打个～儿。心里也没有个～儿（心中无数）。外发公文的草稿：拟～。核～。"
   },
   {
     char: "穆",
@@ -46998,7 +49608,9 @@ const t = [
     mark: "ㄇㄨˋ",
     tradition: "穆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mu",
+    explain: "恭敬：静～。肃～。温和。"
   },
   {
     char: "穗",
@@ -47011,7 +49623,9 @@ const t = [
     mark: "ㄙㄨㄟˋ",
     tradition: "穗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "稻麦等禾本科植物的花或果实聚生在茎的顶端，叫做穗：麦～儿。谷～儿。用丝线、布条或纸条等扎成的、挂起来往下垂的装饰品：黄～红罩的宫灯。广东广州的别称。姓。"
   },
   {
     char: "穴",
@@ -47020,11 +49634,13 @@ const t = [
     radical: "穴",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄝˊ",
     tradition: "穴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xue",
+    explain: "岩洞。泛指地上或某些建筑物上的坑或孔：洞～。孔～。～居。空～来风。动物的窝：巢～。虎～。蚁～。墓穴：土～。砖～。医学上指人体上可以进行针灸的部位，多为神经末梢密集或较粗的神经纤维经过的地方。也叫穴位、穴道。（Xué）姓。"
   },
   {
     char: "究",
@@ -47037,20 +49653,9 @@ const t = [
     mark: "ㄐㄧㄡ",
     tradition: "究",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "穷",
-    spell: "qióng",
-    stroke: "7",
-    radical: "穴",
-    struct: "上下结构",
-    five: "木",
-    method: "-",
-    mark: "ㄑㄩㄥˊ",
-    tradition: "窮",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "jiu",
+    explain: "仔细推求；追查：研～。深～。副词。到底；究竟：～属不妥。"
   },
   {
     char: "空",
@@ -47063,7 +49668,9 @@ const t = [
     mark: "ㄎㄨㄥˋ",
     tradition: "空",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kong",
+    explain: "不包含什么；里面没有东西或没有内容；不切实际的：~箱子、~想、~谈、~话。天空：晴~、高~、当~、领~。没有结果地；白白地：~忙、~欢喜、~跑一趟。姓。”校对来源：现代汉语词典"
   },
   {
     char: "穿",
@@ -47076,7 +49683,9 @@ const t = [
     mark: "ㄔㄨㄢ",
     tradition: "穿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chuan",
+    explain: "破；透：把纸～了个洞。水滴石～。用在某些动词后，表示破、透或彻底显露：射～。磨～。看～了他的心思。戳～阴谋诡计。通过（孔洞、缝隙、空地等）：～针。～过森林。从这个胡同～过去。用绳线等通过物体把物品连贯起来：～糖葫芦。用珠子～成珠帘。把衣服鞋袜等物套在身体上：～鞋。～衣服。"
   },
   {
     char: "突",
@@ -47089,20 +49698,9 @@ const t = [
     mark: "ㄊㄨ",
     tradition: "突",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "窃",
-    spell: "qiè",
-    stroke: "9",
-    radical: "穴",
-    struct: "上下结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄑㄧㄝˋ",
-    tradition: "竊",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "tu",
+    explain: "古代灶旁突起的出烟火口，相当于现在的烟筒：灶～。曲～徙薪。“突起”的简称：上关节～。下关节～。"
   },
   {
     char: "窄",
@@ -47115,7 +49713,9 @@ const t = [
     mark: "ㄓㄞˇ",
     tradition: "窄",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhai",
+    explain: "横的距离小（跟“宽”相对）：狭～。路～。～胡同。（心胸）不开朗；（气量）小：心眼儿～。（生活）不宽裕：他家的日子过得挺～。姓。"
   },
   {
     char: "窍",
@@ -47128,7 +49728,9 @@ const t = [
     mark: "ㄑㄧㄠˋ",
     tradition: "竅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qiao",
+    explain: "窟窿：七～。比喻事情的关键：诀～。～门儿。一～不通。"
   },
   {
     char: "窑",
@@ -47141,7 +49743,9 @@ const t = [
     mark: "ㄧㄠˊ",
     tradition: "窑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yao",
+    explain: "烧制砖瓦陶瓷等物的建筑物：砖～。土法采煤开凿的洞：煤～。窑洞，在坡上挖成的供人居住的洞。"
   },
   {
     char: "窒",
@@ -47154,7 +49758,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "窒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "阻塞不通：～碍。～息。"
   },
   {
     char: "窖",
@@ -47167,7 +49773,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "窖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiao",
+    explain: "收藏东西的地洞或坑：花儿～。白菜～。白薯都已经入了～。把东西收藏在窖里：把白薯～起来。"
   },
   {
     char: "窗",
@@ -47180,20 +49788,9 @@ const t = [
     mark: "ㄔㄨㄤ",
     tradition: "窗",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "窘",
-    spell: "jiǒng",
-    stroke: "12",
-    radical: "穴",
-    struct: "上下结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄩㄥˇ",
-    tradition: "窘",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "chuang",
+    explain: "窗户：纱～。玻璃～。～明几净。～外一片喧闹声。"
   },
   {
     char: "窜",
@@ -47206,7 +49803,9 @@ const t = [
     mark: "ㄘㄨㄢˋ",
     tradition: "竄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cuan",
+    explain: "逃跑；乱跑：流～。抱头鼠～。改易（文字）：～改。点～。"
   },
   {
     char: "窝",
@@ -47219,7 +49818,9 @@ const t = [
     mark: "ㄨㄛ",
     tradition: "窩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wo",
+    explain: "鸟兽、昆虫住的地方：鸟～。狗～。蚂蚁～。喜鹊搭～。比喻坏人聚居的地方：贼～。土匪～。比喻人体或物体所占的位置：他不动～儿。这炉子真碍事，给它挪个～儿。凹进去的地方：夹肢～。酒～儿。窝藏：～赃。～主。蜷缩或呆在某处不活动：把头～在衣领里。～在家里生闷气。郁积不得发作或发挥：～工。～火。使弯或曲折：把铁丝～个圆圈。用于一胎所生的或一次孵出的动物（猪、狗、鸡等）：一～下了五只猫。孵了几～小鸡。"
   },
   {
     char: "窟",
@@ -47232,7 +49833,9 @@ const t = [
     mark: "ㄎㄨ",
     tradition: "窟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ku",
+    explain: "洞穴：石～。山～。狡兔三～。某类人聚集或聚居的场所：匪～。盗～。赌～。贫民～。"
   },
   {
     char: "窥",
@@ -47245,7 +49848,9 @@ const t = [
     mark: "ㄎㄨㄟ",
     tradition: "窺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kui",
+    explain: "从小孔或缝隙里看：管中～豹。暗中察看：～探。～测。"
   },
   {
     char: "窿",
@@ -47258,7 +49863,9 @@ const t = [
     mark: "ㄌㄨㄥˊ",
     tradition: "窿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "long",
+    explain: "煤矿坑道：～工。清理废～。把煤桶堆在～门口。"
   },
   {
     char: "立",
@@ -47267,11 +49874,13 @@ const t = [
     radical: "立",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧˋ",
     tradition: "立",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "站1：～正。肃～。坐～不安。使竖立；使物件的上端向上：～竿见影。把梯子～起来。直立的：～柜。～轴。～领。建立；树立：～功。～志。制定；订立：～法。～约。～个字据。指君主即位。指确定继承地位；确立：～嗣。～皇太子。存在；生存：自～。独～。立刻：～奏奇效。～候回音。姓。"
   },
   {
     char: "竖",
@@ -47284,7 +49893,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "竪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "跟地面垂直的（跟“横”相对）：～井。～琴。从上到下的；从前到后的（跟“横”相对）：画一条～线。～着再挖一道沟。使物体跟地面垂直：～电线杆。把柱子～起来。汉字的笔画，从上一直向下，形状是“。”。年轻的仆人：～子。"
   },
   {
     char: "站",
@@ -47297,7 +49908,9 @@ const t = [
     mark: "ㄓㄢˋ",
     tradition: "站",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhan",
+    explain: "直着身体，两脚着地或踏在物体上：请大家坐着，不要～起来。交通警～在十字路口指挥来往车辆。～稳立场。姓。在行进中停下来；停留：不怕慢，只怕～。车还没～稳，请别着急下车。为乘客上下或货物装卸而设的停车的地方：火车～。汽车～。北京～。车到～了。为某种业务而设立的机构：粮～。供应～。保健～。气象～。"
   },
   {
     char: "竞",
@@ -47310,7 +49923,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "競",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "争着做某事：～相传告。比赛：～走。"
   },
   {
     char: "竟",
@@ -47323,7 +49938,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "竟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "完毕；终了：继承革命先烈未～的事业。从始至终；全：～夜。副词。1.终于：有志者事～成。表示出乎意料：没想到他～进步得这样快。"
   },
   {
     char: "章",
@@ -47336,7 +49953,9 @@ const t = [
     mark: "ㄓㄤ",
     tradition: "章",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhang",
+    explain: "诗、文、歌曲的段落：第一～。乐～。章程；条目：党～。招生简～。条理：杂乱无～。图章：印～。盖～。佩戴在身上的标志：徽～。领～。古又同“嫜（zhāng）”。"
   },
   {
     char: "竣",
@@ -47349,7 +49968,9 @@ const t = [
     mark: "ㄐㄩㄣˋ",
     tradition: "竣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jun",
+    explain: "完毕：完～。告～。～工。～事。"
   },
   {
     char: "童",
@@ -47362,7 +49983,9 @@ const t = [
     mark: "ㄊㄨㄥˊ",
     tradition: "童",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tong",
+    explain: "儿童；小孩子：牧～。顽～。～话。～谣。～年。指没结婚的：～男。～女。（～儿）旧时指未成年的仆人：书～儿。家～。秃：～山。姓。“僮”"
   },
   {
     char: "竭",
@@ -47375,7 +49998,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "竭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "尽：～力。力～声嘶。取之不尽，用之不～。干涸：枯～。山崩川～。姓。"
   },
   {
     char: "端",
@@ -47388,7 +50013,9 @@ const t = [
     mark: "ㄉㄨㄢ",
     tradition: "端",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "duan",
+    explain: "端正；正派：～坐。品行不～。东西的一头；事物的开头：两～。末～。开～。事情的起因。例：无～生事。项目；点：举其一～。用手平着拿东西：～茶。事情；道理；学说：事～。异～邪说。"
   },
   {
     char: "竹",
@@ -47397,11 +50024,13 @@ const t = [
     radical: "竹",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄓㄨˊ",
     tradition: "竹",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "zhu",
+    explain: "竹子，多年生常绿植物。茎圆柱形，有节，中空，可供建筑用，又可做造纸原料。嫩芽即竹笋，可食。"
   },
   {
     char: "竿",
@@ -47414,7 +50043,9 @@ const t = [
     mark: "ㄍㄢ",
     tradition: "竿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gan",
+    explain: "竿子：钓～。立～见影。百尺～头，更进一步。"
   },
   {
     char: "笆",
@@ -47427,7 +50058,9 @@ const t = [
     mark: "ㄅㄚ",
     tradition: "笆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "用竹片或树的枝条编成的片状器物：荆～。竹篾～。"
   },
   {
     char: "笋",
@@ -47440,7 +50073,9 @@ const t = [
     mark: "ㄙㄨㄣˇ",
     tradition: "笋",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "sun",
+    explain: "也叫竹笋。竹子的嫩芽，可做蔬菜。有冬笋、春笋等。"
   },
   {
     char: "笑",
@@ -47453,7 +50088,9 @@ const t = [
     mark: "ㄒㄧㄠˋ",
     tradition: "笑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiao",
+    explain: "露出愉快的表情，发出欢喜的声音：～容。微～。眉开眼～。哈哈大～。讥笑：耻～。见～。～他不懂事。姓。"
   },
   {
     char: "笔",
@@ -47466,7 +50103,9 @@ const t = [
     mark: "ㄅㄧˇ",
     tradition: "筆",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bi",
+    explain: "写字画图的用具：毛～。铅～。钢～。粉～。一支～。一管～。（写字、画画、作文的）笔法：伏～。工～。败～。曲～。用笔写出：代～。直～。亲～。手迹：遗～。绝～。笔画：～顺。～形。a）用于款项或跟款项有关的：一～钱。三～账。五～生意。b）用于字的笔画：“大”字有三～。c）用于书画艺术：写一～好字。他能画几～山水画。姓。"
   },
   {
     char: "笙",
@@ -47479,7 +50118,9 @@ const t = [
     mark: "ㄕㄥ",
     tradition: "笙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sheng",
+    explain: "簧管乐器。殷周时已流行。一般有十七根长短簧管（其中三根不发音）插于铜斗中，奏时手按指孔，利用吹吸气流振动簧片发音。能奏和音。现经改革，有二十二至三十二簧笙及加键笙等。多用于伴奏、合奏或独奏。"
   },
   {
     char: "笛",
@@ -47492,7 +50133,9 @@ const t = [
     mark: "ㄉㄧˊ",
     tradition: "笛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "di",
+    explain: "管乐器。单管横吹，用竹子或金属管制成，形制大小不一，上面有一排供吹气、蒙笛膜和调节发音的孔。发音清脆嘹亮。用于独奏、伴奏及合奏。响声尖锐的发音器：警～。汽～。"
   },
   {
     char: "笤",
@@ -47505,7 +50148,9 @@ const t = [
     mark: "ㄊㄧㄠˊ",
     tradition: "笤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tiao",
+    explain: "〔笤帚〕扫地、扫炕等的用具。用穄子杪、高粱杪等绑成。"
   },
   {
     char: "符",
@@ -47518,20 +50163,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "符",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "笨",
-    spell: "bèn",
-    stroke: "11",
-    radical: "竹",
-    struct: "上下结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄅㄣˋ",
-    tradition: "笨",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "fu",
+    explain: "符节：兵～。虎～（虎形的兵符）。代表事物的标记；记号：～号。音～。符合（多跟“相”或“不”合用）：两个数目相～。他所说的与事实不～。道士所画的一种图形或线条，声称能驱使鬼神、给人带来祸福：护身～。画了一张～。姓。"
   },
   {
     char: "第",
@@ -47540,11 +50174,13 @@ const t = [
     radical: "竹",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄉㄧˋ",
     tradition: "第",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "次序：次～。等～。前缀。表示次序：～一。～二。科第。科举时代称考中（zhòng）叫及第，没有考中叫落第。旧时官僚和贵族的大宅子：府～。宅～。文言连词。但是。"
   },
   {
     char: "笼",
@@ -47557,7 +50193,9 @@ const t = [
     mark: "ㄌㄨㄥˊ",
     tradition: "籠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "long",
+    explain: "笼子：竹～。兔～。鸡从～里跑出来了。旧时囚禁犯人的刑具：囚～。蒸笼：小～包子。馒头刚上～。把手放在袖筒里：～着手。"
   },
   {
     char: "等",
@@ -47570,7 +50208,9 @@ const t = [
     mark: "ㄉㄥˇ",
     tradition: "等",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "deng",
+    explain: "等级：同～。优～。种；类：这～事。此～人。用于等级：二～舱。共分三～。程度或数量上相同：相～。～于。大小不～。同“戥”（děng）。姓。等候；等待：～车。请稍～一会儿。等到：～我写完这封信你再走。表示列举未尽（可以叠用）：北京、天津～地。纸张文具～～。列举后煞尾：长江、黄河、黑龙江、珠江～四大河流。"
   },
   {
     char: "筋",
@@ -47583,7 +50223,9 @@ const t = [
     mark: "ㄐㄧㄣ",
     tradition: "筋",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jin",
+    explain: "肌腱或骨头上的韧带：～骨。口语称皮下的静脉管：青～。肌肉的旧称。像筋的东西：叶～。钢～。"
   },
   {
     char: "筏",
@@ -47596,7 +50238,9 @@ const t = [
     mark: "ㄈㄚˊ",
     tradition: "筏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fa",
+    explain: "筏子，用竹、木等编扎成的水上交通工具。如竹筏、木筏。有些地方有用牛羊皮制成的，叫皮筏。"
   },
   {
     char: "筐",
@@ -47609,7 +50253,9 @@ const t = [
     mark: "ㄎㄨㄤ",
     tradition: "筐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kuang",
+    explain: "用竹篾、柳条、荆条等编的容器：抬～。粪～。编竹～儿。两～土。"
   },
   {
     char: "筑",
@@ -47622,7 +50268,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "築",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "捣土的杵：“项王伐齐，身负板～，以为士卒先”。建造，修盖：修～。建～。构～。居室：“畏人成小～，褊性合幽栖”。古代弦乐器，形似琴，有十三弦。演奏时，左手按弦的一端，右手执竹尺击弦发音。"
   },
   {
     char: "筒",
@@ -47635,7 +50283,9 @@ const t = [
     mark: "ㄊㄨㄥˇ",
     tradition: "筒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tong",
+    explain: "粗大的竹管：竹～。较粗的管状器物：笔～。烟～。邮～。用铁皮卷个～。衣服等的筒状部分：袖～儿。袜～儿。长～靴。也作统。"
   },
   {
     char: "答",
@@ -47648,7 +50298,9 @@ const t = [
     mark: "ㄉㄚˊ",
     tradition: "答",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "da",
+    explain: "回答：对～。一问一～。～非所问。受了别人的好处，还报别人：～谢。报～。姓。"
   },
   {
     char: "策",
@@ -47661,7 +50313,9 @@ const t = [
     mark: "ㄘㄜˋ",
     tradition: "策",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "ce",
+    explain: "古代写字用的竹片或木片：简～。古代考试的一种文体，多就政治和经济问题发问，应试者对答：对～。～问。我国数学上曾经用过的一种计算工具，形状跟“筹”相似。清代初期把乘法的九九口诀写在上面以计算乘除和开平方。计谋；办法：上～。献～。束手无～。谋划；筹划：～反。～应。姓。古代赶马用的棍子，一端有尖刺，能刺马的身体，使它向前跑。用策赶马：鞭～。～马前进。拐杖：扶～而行。"
   },
   {
     char: "筛",
@@ -47674,7 +50328,9 @@ const t = [
     mark: "ㄕㄞ",
     tradition: "篩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shai",
+    explain: "筛子。把东西放在罗或筛子里，来回摇动，使细碎的漏下去，粗的留在上头：～沙子。把绿豆～净。比喻经挑选后淘汰：他担心考不好给～下来。使酒热：把酒～一～再喝。斟（酒或茶）。敲（锣）：～了三下锣。"
   },
   {
     char: "筝",
@@ -47687,7 +50343,9 @@ const t = [
     mark: "ㄓㄥ",
     tradition: "筝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "拨弦乐器。木制长形，战国时秦地已有。历代弦制不一，有十三弦、十六弦等。现经改革，已发展为二十一或二十五弦，并有转调筝，表现力更为丰富。用于独奏、伴奏及合奏。"
   },
   {
     char: "筷",
@@ -47700,7 +50358,9 @@ const t = [
     mark: "ㄎㄨㄞˋ",
     tradition: "筷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuai",
+    explain: "筷子，吃饭时夹食物的用具。"
   },
   {
     char: "筹",
@@ -47713,7 +50373,9 @@ const t = [
     mark: "ㄔㄡˊ",
     tradition: "籌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chou",
+    explain: "计数目或用作领取物品凭证的用具：竹～。谋划：统～兼顾。计策；办法：一～莫展。"
   },
   {
     char: "签",
@@ -47726,7 +50388,9 @@ const t = [
     mark: "ㄑㄧㄢ",
     tradition: "簽、籤",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qian",
+    explain: "为了表示负责而在文件、单据上亲自写上姓名或画上记号：～发。～押。请你～个字。用比较简单的文字提出要点或意见：～呈。领导在报告上～了意见。上面刻着文字符号用于占卜或赌博、比赛等的细长小竹片或小细棍：抽～儿。求～（迷信）。作为标志用的小条儿：标～儿。书～儿。在书套上贴一个浮～儿。竹子或木材削成的有尖儿的小细棍：牙～儿。粗粗地缝合：～上贴边。"
   },
   {
     char: "简",
@@ -47739,7 +50403,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "簡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "简单（跟“繁”相对）：～便。～体。言～意赅。删繁就～。使简单；简化：精～。精兵～政。姓。古代用来写字的竹片：～札。～册。竹～。信件：书～。小～。选择（人才）：～拔。～选。"
   },
   {
     char: "箍",
@@ -47752,7 +50418,9 @@ const t = [
     mark: "ㄍㄨ",
     tradition: "箍",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gu",
+    explain: "用竹篾或金属条捆紧；用带子之类勒住：用铁环～木桶。他头上～着条毛巾。紧紧套在东西外面的圈儿：柱子上围了六七道金～。左胳膊上带着红～儿。"
   },
   {
     char: "箕",
@@ -47765,7 +50433,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "箕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "簸箕：～踞。簸箕形的指纹：斗～。二十八宿之一。姓。"
   },
   {
     char: "算",
@@ -47778,7 +50448,9 @@ const t = [
     mark: "ㄙㄨㄢˋ",
     tradition: "算",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "suan",
+    explain: "计算数目：珠～。笔～。心～。预～。能写会～。～了一笔账。计算进去：明天赛球～我一个。谋划；计划：失～。打～。盘～。暗～。～计。推测：我～他今天该动身了。认做；当做：他可以～一个好学生。你们挑剩下的都～我的。算数；承认有效力：他说的不～，还得你说。作罢；不再计较（后面跟“了”）：～了，别说了。他不愿意就～了吧。表示比较起来最突出：我们班里，就～他年纪最小了。总算：最后～把这个问题弄懂了。姓。"
   },
   {
     char: "管",
@@ -47791,7 +50463,9 @@ const t = [
     mark: "ㄍㄨㄢˇ",
     tradition: "管",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "guan",
+    explain: "管子：钢～。竹～。水～。气～儿。吹奏的乐器：黑～。～弦乐。形状像管的电器件：电子～。晶体～。用于细长圆筒形的东西：一～毛笔。两～牙膏。姓。管理；看管：～账。～图书。谁～仓库?。她能同时～十台机器。管辖：这个省～着几十个县。管教：～孩子。担任（工作）：我～宣传，你～文体。过问：～闲事。这事我们不能不～。保证；负责供给：～保。不好～换。～吃～住。作用跟“把”相近，专跟“叫”配合：他长得又矮又胖，大家都～他叫小胖子。作用跟“向”相近：～他借钱。～我要东西。不管；无论：～他是谁，该批评就得批评。关涉；牵涉：他不愿来，～我什么事?"
   },
   {
     char: "箩",
@@ -47804,7 +50478,9 @@ const t = [
     mark: "ㄌㄨㄛˊ",
     tradition: "籮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luo",
+    explain: "用竹子编的器具，大多方底圆口，制作比较细致，用来盛粮食或淘米等：稻～。淘～。"
   },
   {
     char: "箫",
@@ -47817,7 +50493,9 @@ const t = [
     mark: "ㄒㄧㄠ",
     tradition: "簫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "也叫洞箫。管乐器。竹制，单管直吹，上有吹孔及六个音孔，发音清幽。常用于独奏及合奏。"
   },
   {
     char: "箭",
@@ -47830,7 +50508,9 @@ const t = [
     mark: "",
     tradition: "箭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "古代兵器，长约二三尺的细杆装上尖头，杆的末梢附有羽毛，搭在弓弩上发射。现代射箭运动用的箭一般用钢、铝合金、塑料等制成。指箭能射到的距离：一～之遥。半～多路。"
   },
   {
     char: "箱",
@@ -47843,7 +50523,9 @@ const t = [
     mark: "ㄒㄧㄤ",
     tradition: "箱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "箱子，收藏衣物的长方体器具。形状像箱子的东西：风～。信～。"
   },
   {
     char: "篇",
@@ -47856,7 +50538,9 @@ const t = [
     mark: "ㄆㄧㄢ",
     tradition: "篇",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pian",
+    explain: "首尾完整的文章；一部书可以分开的大段落：～章。《荀子·劝学～》。写着或印着文字的单张纸：歌～。量词。用于文章、纸张、书页等：一～论文。三～儿纸。"
   },
   {
     char: "篓",
@@ -47869,7 +50553,9 @@ const t = [
     mark: "ㄌㄡˇ",
     tradition: "簍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lou",
+    explain: "篓子，用竹、荆条、苇篾等编成的盛东西的器物：油～。纸～。"
   },
   {
     char: "篙",
@@ -47882,7 +50568,9 @@ const t = [
     mark: "ㄍㄠ",
     tradition: "篙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gao",
+    explain: "撑船的竹竿或木杆。（Gāo）姓。"
   },
   {
     char: "篡",
@@ -47895,7 +50583,9 @@ const t = [
     mark: "ㄘㄨㄢˋ",
     tradition: "篡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cuan",
+    explain: "原指臣子夺取君主的权位，现指用阴谋手段夺取权力和地位：～位。～夺。"
   },
   {
     char: "篮",
@@ -47908,7 +50598,9 @@ const t = [
     mark: "ㄌㄢˊ",
     tradition: "籃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lan",
+    explain: "篮子：菜～。竹～。篮球架上供投球用的篮筐：投～。指篮球运动：男～。女～。"
   },
   {
     char: "篱",
@@ -47921,7 +50613,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "籬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "〔篱笆〕房屋、场地等的围栏设施。一般用竹子、苇子、秫秸、荆条、树枝等编扎而成。"
   },
   {
     char: "篷",
@@ -47934,7 +50628,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "篷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "（～儿）遮蔽日光、风、雨的设备，用竹木、苇席或帆布等制成（多指车船上用的）：船～。～窗（帆船窗户）。敞～儿汽车。把～撑起来。船帆：扯起～来。"
   },
   {
     char: "簇",
@@ -47947,7 +50643,9 @@ const t = [
     mark: "ㄘㄨˋ",
     tradition: "簇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cu",
+    explain: "聚拢在一块儿；聚集成一团：～拥。花团锦～。量词。用于聚集成团的东西：一～鲜花。"
   },
   {
     char: "簸",
@@ -47960,7 +50658,9 @@ const t = [
     mark: "ㄅㄛˋ",
     tradition: "簸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bo",
+    explain: "〔簸箕〕用来簸粮食或撮垃圾等的一种器具。用竹篾、柳条、铁皮、塑料等制成。"
   },
   {
     char: "簿",
@@ -47973,7 +50673,9 @@ const t = [
     mark: "ㄅㄨˋ",
     tradition: "簿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bu",
+    explain: "用来书写、画图或登记事物的册子。  【组词】：帐簿、笔记簿、作文簿文状、状子。  【组词】：对簿公堂"
   },
   {
     char: "籍",
@@ -47986,7 +50688,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "籍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "书；书册：古～。经～。登记隶属关系的册簿。引申指隶属关系：国～。党～。户～。祖居或本人出生的地方：原～。祖～。"
   },
   {
     char: "米",
@@ -47995,11 +50699,13 @@ const t = [
     radical: "米",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄧˇ",
     tradition: "米",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mi",
+    explain: "谷类或其他植物去了皮或壳的种子。特指稻米：小～。花生～。～饭。长度单位。1米等于光在真空中1/299792458秒的时间间隔内所经路径的长度。是国际单位制中七个基本单位之一。"
   },
   {
     char: "类",
@@ -48012,7 +50718,9 @@ const t = [
     mark: "ㄌㄟˋ",
     tradition: "類",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lei",
+    explain: "许多相似或相同事物的综合：种～。分～。同～。用于性质或特征相同或相似的事物：分成几～。两～性质的问题。类似：～人猿。～新星。画虎不成反～狗。姓。"
   },
   {
     char: "籽",
@@ -48025,7 +50733,9 @@ const t = [
     mark: "ㄗˇ",
     tradition: "籽",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zi",
+    explain: "某些植物的种子：棉～儿。菜～儿。花～儿。～棉。"
   },
   {
     char: "粉",
@@ -48038,7 +50748,9 @@ const t = [
     mark: "ㄈㄣˇ",
     tradition: "粉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fen",
+    explain: "粉末：面～。藕～。花～。把绿豆磨成～。特指化妆用的粉末：香～。涂脂抹～。用淀粉制成的食品：凉～。～皮。特指粉条或粉丝：绿豆～。菠菜炒～。变成粉末：～碎。～身碎骨。石灰放得太久，已经～了。粉刷：墙刚～过。带着白粉的；白色的：～蝶。～连纸。粉红：～色。～牡丹。这块绸子是～的。"
   },
   {
     char: "粒",
@@ -48051,7 +50763,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "粒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "小圆珠形或小碎块形的东西：豆～儿。米～儿。盐～儿。颗～。微～。用于粒状的东西：一～米。三～子弹。"
   },
   {
     char: "粗",
@@ -48064,7 +50778,9 @@ const t = [
     mark: "ㄘㄨ",
     tradition: "粗",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cu",
+    explain: "1.（条状物）横剖面大（跟“细”相对，2.（长条形）两长边的距离不十分近：～线条。～眉大眼。3.颗粒大：～沙。4.声音大而低：嗓门儿～。～声～气。5.粗糙（跟“精”相对）：～瓷碗。去～取精。这个手工活儿太～了。6.疏忽；不周密：～疏。～心大意。7.鲁莽；粗野：～暴。～话。～人。8.略微：～知一二。～具规模。"
   },
   {
     char: "粘",
@@ -48077,7 +50793,9 @@ const t = [
     mark: "ㄋㄧㄢˊ",
     tradition: "粘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nian",
+    explain: "姓。"
   },
   {
     char: "粟",
@@ -48090,7 +50808,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "粟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "谷子。去壳后叫小米。一年生草本植物。耐旱，适应性强。是中国北方主要粮食作物。"
   },
   {
     char: "粤",
@@ -48099,11 +50819,13 @@ const t = [
     radical: "米",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄩㄝˋ",
     tradition: "粤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "指广东、广西：两～。广东的别称：～剧。"
   },
   {
     char: "粥",
@@ -48116,7 +50838,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "粥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhou",
+    explain: "用粮食或粮食加其他东西煮成的半流质食物：江米~，八宝~，盛一碗~。"
   },
   {
     char: "粪",
@@ -48129,7 +50853,9 @@ const t = [
     mark: "ㄈㄣˋ",
     tradition: "糞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fen",
+    explain: "从肛门排泄出来的经过消化的食物的渣滓；屎：牛～。拾～。上～。施肥：～地。～田。扫除：～除（扫除）。"
   },
   {
     char: "粮",
@@ -48142,7 +50868,9 @@ const t = [
     mark: "ㄌㄧㄤˊ",
     tradition: "糧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liang",
+    explain: "粮食：杂～。口～。～仓。作为农业税的粮食：钱～。公～。完～。姓。"
   },
   {
     char: "粱",
@@ -48155,7 +50883,9 @@ const t = [
     mark: "ㄌㄧㄤˊ",
     tradition: "粱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liang",
+    explain: "高粱。古指品种特别好的谷子。精美的主食：膏～。"
   },
   {
     char: "粹",
@@ -48168,7 +50898,9 @@ const t = [
     mark: "ㄘㄨㄟˋ",
     tradition: "粹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "纯；不杂：～白。精华：精～。"
   },
   {
     char: "精",
@@ -48181,7 +50913,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "精",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "经过提炼或挑选的：～盐。提炼出来的精华：酒～。鱼肝油～。完美；最好：～彩。～益求～。细（跟“粗”相对）：～密。～确。～巧。工艺～。机灵心细：～明。～干。这孩子比大人还～。精通：博而不～。～于针灸。精神；精力：聚～会神。～疲力竭。精液；精子：遗～。受～。妖精：修炼成～。用在某些形容词前面，表示“十分”、“非常”：～瘦。雨把衣服淋得～湿。"
   },
   {
     char: "糊",
@@ -48194,7 +50928,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "糊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "稠粥用粥充饥用有黏性的糊状物把东西黏合在一起有黏性的东西同“{煳}”"
   },
   {
     char: "糕",
@@ -48207,7 +50943,9 @@ const t = [
     mark: "ㄍㄠ",
     tradition: "糕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gao",
+    explain: "用米粉、面粉等制成的食品，种类很多，如年糕、蜂糕、蛋糕等。（Gāo）姓。"
   },
   {
     char: "糖",
@@ -48220,7 +50958,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "糖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tang",
+    explain: "有机化合物的一类，可分为单糖、双糖和多糖，是人体内产生热能的主要物质，如葡萄糖、蔗糖、乳糖、淀粉等。也叫碳水化合物。食糖的通称。糖果：奶～。水果～。"
   },
   {
     char: "糙",
@@ -48233,20 +50973,9 @@ const t = [
     mark: "ㄘㄠ",
     tradition: "糙",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "糜",
-    spell: "mí",
-    stroke: "17",
-    radical: "米",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄇㄟˊ",
-    tradition: "糜",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "cao",
+    explain: "没碾过或碾得不精的（米）：～米。粗糙；不细致：～纸。毛～。"
   },
   {
     char: "糟",
@@ -48259,7 +50988,9 @@ const t = [
     mark: "ㄗㄠ",
     tradition: "糟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zao",
+    explain: "做酒剩下的渣子。用酒或酒糟腌制食品：～鱼。朽烂；不结实：木头～了。（事情或情况）坏：事情搞～了。作践；浪费：～蹋。～践。"
   },
   {
     char: "糠",
@@ -48272,7 +51003,9 @@ const t = [
     mark: "ㄎㄤ",
     tradition: "糠",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "kang",
+    explain: "稻、谷子等作物子实的皮或壳（多指脱下来的）：米～。～菜半年粮（形容生活贫困）。发空，质地松而不实（多指萝卜因失掉水分而中空）：～心儿。萝卜～了。"
   },
   {
     char: "糯",
@@ -48285,7 +51018,9 @@ const t = [
     mark: "ㄋㄨㄛˋ",
     tradition: "糯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nuo",
+    explain: "糯稻，一年生草本植物。稻的一种。米称糯米，也叫江米，有黏性，可以酿酒或做糕点等食品。"
   },
   {
     char: "系",
@@ -48298,7 +51033,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "係、繋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xi",
+    explain: "有联属关系的：～统。～列。～数。水～。世～。高等学校中按学科分的教学单位：中文～。化学～。关联：干～。关～。联结，栓：～缚。～绊。～马。维～。名誉所～。牵挂：～恋。～念。是：确～实情。把人或东西捆住上提或向下送：从井下把土～上来。某些学科中分类的名称：汉藏（zàng）语～。寒武～（地质学名词）。词赋末尾结束全文之词，如“～曰”。"
   },
   {
     char: "紊",
@@ -48311,7 +51048,9 @@ const t = [
     mark: "ㄨㄣˇ",
     tradition: "紊",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wen",
+    explain: "（旧读wèn）乱：～乱。有条不～。"
   },
   {
     char: "素",
@@ -48324,7 +51063,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "素",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "白色；本色：～服。蔬菜类食品。与“荤”相对：～菜。～食。本来的；原始的：～质。～材。质朴；不华丽：朴～。～净。构成事物的基本成分：要～。因～。元～。副词。一向；向来；从来：～不相识。～有交往。古称洁白的生绢：尺～。"
   },
   {
     char: "索",
@@ -48337,7 +51078,9 @@ const t = [
     mark: "ㄙㄨㄛˇ",
     tradition: "索",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "suo",
+    explain: "大绳子或大链子：船～。绳～。麻～。绞～。铁～桥。姓。搜寻；寻找：搜～。遍～不得。要；取：～取。～还。～价。孤单：离群～居。寂寞；没有意味：～然。"
   },
   {
     char: "紧",
@@ -48350,7 +51093,9 @@ const t = [
     mark: "ㄐㄧㄣˇ",
     tradition: "緊",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jin",
+    explain: "物体受到几方面的拉力或压力以后所呈现的状态（跟“松2”相对，同）：绳子拉得很～。鼓面绷得非常～。物体因受外力作用变得固定或牢固：捏～笔杆。把螺丝钉往～里拧一拧。眼睛～盯住他。～记着别忘了。使紧：～了一下腰带。～～弦。～一～螺丝钉。非常接近，空隙极小：抽屉～，拉不开。这双鞋太～，穿着不舒服。他住在我的～隔壁。全国人民团结～。动作先后密切接连；事情急：～催。一个胜利～接着一个胜利。他～赶了几步，追上老张。风刮得～，雨下得急。任务很～。抓～时间。经济不宽裕；拮据：这个月用项多一些，手头显得～一点。"
   },
   {
     char: "紫",
@@ -48363,7 +51108,9 @@ const t = [
     mark: "ㄗˇ",
     tradition: "紫",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zi",
+    explain: "红和蓝合成的颜色：～红。青～。玫瑰～。姓。"
   },
   {
     char: "累",
@@ -48376,7 +51123,9 @@ const t = [
     mark: "ㄌㄟˊ",
     tradition: "纍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lei",
+    explain: "疲乏，过劳：劳～。～乏。使疲劳：病刚好，别再～着。"
   },
   {
     char: "絮",
@@ -48389,7 +51138,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "絮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "棉絮：被～。古代指粗的丝绵。像棉絮的东西：柳～。芦～。在衣服、被褥里铺棉花、丝绵等：～棉袄。～被子。絮叨。腻烦：这些话都听～了。"
   },
   {
     char: "繁",
@@ -48402,7 +51153,9 @@ const t = [
     mark: "ㄈㄢˊ",
     tradition: "繁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fan",
+    explain: "复杂；繁多：纷～。～星。"
   },
   {
     char: "纠",
@@ -48415,7 +51168,9 @@ const t = [
     mark: "ㄐㄧㄡ",
     tradition: "糾",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiu",
+    explain: "缠绕：～纷。～缠。姓。集合：～合。～集。纠正：～偏。有错必～。"
   },
   {
     char: "红",
@@ -48428,7 +51183,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "紅",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "hong",
+    explain: "像鲜血的颜色：～枣。～领巾。象征喜庆的红布：披～。挂～。象征顺利、成功或受人重视、欢迎：～运。开门～。满堂～。他唱戏唱～了。象征革命或政治觉悟高：～军。又～又专。红利：分～。姓。"
   },
   {
     char: "纤",
@@ -48441,7 +51198,9 @@ const t = [
     mark: "ㄑㄧㄢˋ",
     tradition: "縴、纖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xian",
+    explain: "细小：～尘。～微。"
   },
   {
     char: "约",
@@ -48454,7 +51213,9 @@ const t = [
     mark: "ㄧㄠ",
     tradition: "約",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yue",
+    explain: "提出或商量（须要共同遵守的事）：预～。～定。～期。～好五点钟见面。邀请：特～。～请。～他来。约定的事；共同订立、须要共同遵守的条文：践～。条～。和～。有～在先。限制使不越出范围；拘束：～束。制～。俭省：节～。俭～。简单；简要：由博返～。大概：大～。～计。～数。年～十七八。～有五十人。约分：5/10可以～成1/2。"
   },
   {
     char: "级",
@@ -48467,7 +51228,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "級",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "等级：高～。上～。县～。～差。年级：留～。同～不同班。台阶儿：石～。a）用于台阶、楼梯等：十多～台阶。b）用于等级：三～工。他的工资比我高一～。"
   },
   {
     char: "纪",
@@ -48480,7 +51243,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "紀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "纪律；法度：军～。政～。风～。违法乱～。义同“记”，主要用于“纪念、纪年、纪元、纪传”等，别的地方多用“记”。古时以十二年为一纪，今指更长的时间：世～。中世～。地质年代分期的第三级，纪以上为代，如中生代分为三叠纪、侏罗纪和白垩纪。跟纪相应的地层系统分类单位叫做系（xì）。"
   },
   {
     char: "纫",
@@ -48493,7 +51258,9 @@ const t = [
     mark: "ㄖㄣˋ",
     tradition: "紉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ren",
+    explain: "引线穿过针鼻儿：老太太眼花了，～不上针。用针缝：缝～。深深感激（多用于书信）：至～高谊。"
   },
   {
     char: "纬",
@@ -48506,7 +51273,9 @@ const t = [
     mark: "ㄨㄟˇ",
     tradition: "緯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wei",
+    explain: "织物上横的方向的纱或线（跟“经”相对）：经～。～纱。～线。纬度：南～。北～。纬书：谶（chèn）～。"
   },
   {
     char: "纯",
@@ -48519,7 +51288,9 @@ const t = [
     mark: "ㄔㄨㄣˊ",
     tradition: "純",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "chun",
+    explain: "纯净；不含杂质：～金。水质很～。纯粹；单纯：～白。动机不～。纯熟：功夫不～，还得练。姓。"
   },
   {
     char: "纱",
@@ -48532,7 +51303,9 @@ const t = [
     mark: "ㄕㄚ",
     tradition: "紗",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sha",
+    explain: "也叫细纱、单纱。用纺织纤维纺成的单根细缕。可以捻成线或织成布。经纬纱稀疏的织品，表面呈现小孔，细致、轻薄而又透明。如窗纱、纱布、乔其纱等。像窗纱一样的制品：铁～。塑料～。"
   },
   {
     char: "纲",
@@ -48545,7 +51318,9 @@ const t = [
     mark: "ㄍㄤ",
     tradition: "綱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gang",
+    explain: "提网的总绳。比喻事物的最主要部分：提～挈（qiè）领。～举目张。古指大批运输货物的组织：花石～。生物分类系统所用等级之一。在门之下，目之上：鸟～。哺乳～。"
   },
   {
     char: "纳",
@@ -48558,7 +51333,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "納",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "na",
+    explain: "收进来；放进来：出～。闭门不～。接受：～降。采～。享受：～凉。放进去：～入正轨。交付（捐税、公粮等）：～税。～粮。姓。缝纫方法，在鞋底、袜底等上面密密地缝，使它结实耐磨：～鞋底子。"
   },
   {
     char: "纵",
@@ -48571,7 +51348,9 @@ const t = [
     mark: "ㄗㄨㄥˋ",
     tradition: "縱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zong",
+    explain: "释放。纵虎归山、欲擒故纵放、点燃。纵火身体向上或猛力向前。纵身一跳、向前一纵放任、不加拘束。放纵、纵目远望即使。前程纵是千难万险，我依旧挺身向前走！"
   },
   {
     char: "纷",
@@ -48584,7 +51363,9 @@ const t = [
     mark: "ㄈㄣ",
     tradition: "紛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fen",
+    explain: "多；杂乱：～乱。～飞。纠纷：排难解～。"
   },
   {
     char: "纸",
@@ -48597,7 +51378,9 @@ const t = [
     mark: "ㄓˇ",
     tradition: "紙",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhi",
+    explain: "供写字、绘画、印刷、包装等用的片状的东西。多用植物纤维制成。量词。用于计算文件、书信等的张数：一～电文。"
   },
   {
     char: "纹",
@@ -48610,7 +51393,9 @@ const t = [
     mark: "ㄨㄣˊ",
     tradition: "紋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wen",
+    explain: "物体上所呈现如线条的皱痕。  【组词】：波纹、指纹、皱纹丝织品上的文采。  【组词】：罗纹、锦纹"
   },
   {
     char: "纺",
@@ -48623,7 +51408,9 @@ const t = [
     mark: "ㄈㄤˇ",
     tradition: "紡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fang",
+    explain: "把丝、麻、棉、毛等纤维拧成纱或线：～纱。～线。一种丝织品。比绸子稀而薄：杭～。"
   },
   {
     char: "纽",
@@ -48636,7 +51423,9 @@ const t = [
     mark: "ㄋㄧㄡˇ",
     tradition: "紐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "niu",
+    explain: "器物上可以抓住而提起来的部分：秤～。印～。纽扣：～襻。衣～。把～儿扣上，别着了凉。枢纽：～带。（～儿）瓜果等刚结的果实：南瓜～。姓。"
   },
   {
     char: "线",
@@ -48649,7 +51438,9 @@ const t = [
     mark: "ㄒㄧㄢˋ",
     tradition: "綫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "用丝、棉、麻、金属等制成的细长而可以任意曲折的东西：毛～。电～。一根～。一绺～。几何学上指一个点任意移动所构成的图形，有长，没有宽和厚。分为直线和曲线两种。细长像线的东西：～香。交通路线：航～。运输～。京广～。沿～各站。指思想上、政治上的路线：上纲上～。边缘交界的地方：前～。火～。防～。海岸～。国境～。比喻所接近的某种边际：生命～。死亡～。贫困～。线索：眼～。用于抽象事物，数词限用“一”，表示极少：一～光明。一～希望。一～生机。姓。"
   },
   {
     char: "练",
@@ -48662,7 +51453,9 @@ const t = [
     mark: "ㄌㄧㄢˋ",
     tradition: "練",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lian",
+    explain: "白绢：江平如～。把生丝煮熟，使它柔软洁白：～丝。练习；训练：～兵。～功夫。～毛笔字。经验多；纯熟：老～。干～。熟～。姓。"
   },
   {
     char: "组",
@@ -48675,7 +51468,9 @@ const t = [
     mark: "ㄗㄨˇ",
     tradition: "組",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zu",
+    explain: "组织；结合；构成：改～。～成。为工作、学习需要而结合成的较小的集体：语文～。学习小～。量词。用于由若干个体组成为一套的事物：一～电池。合成一组的（文艺作品）：～诗。～曲。～歌。"
   },
   {
     char: "绅",
@@ -48688,7 +51483,9 @@ const t = [
     mark: "ㄕㄣ",
     tradition: "紳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shen",
+    explain: "古代士大夫束在腰间的大带子，下垂部分叫绅。绅士：土豪劣～。乡～。"
   },
   {
     char: "细",
@@ -48701,7 +51498,9 @@ const t = [
     mark: "ㄒㄧˋ",
     tradition: "細",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xi",
+    explain: "（条状物）横剖面小（跟“粗”相对，—同）：～铅丝。她们纺的线又～又匀。（长条形）两边的距离近：画一条～线。曲折的小河～得像腰带。颗粒小：～沙。玉米面磨得很～。音量小：嗓音～。精细：江西～瓷。这几件玉石雕刻做得真～。仔细；详细；周密：～看。精打～算。深耕～作。这人心很～。细微；细小：～节。事无巨～。不要管得太～。年龄小：～妹。～娃子。姓。"
   },
   {
     char: "织",
@@ -48714,7 +51513,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "織",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "用丝、麻、棉、毛等物编制物品。  【组词】：编织、纺织、织布结合、组成。  【组词】：组织、爱恨交织"
   },
   {
     char: "终",
@@ -48727,7 +51528,9 @@ const t = [
     mark: "ㄓㄨㄥ",
     tradition: "終",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhong",
+    explain: "最后；末了（跟“始”相对）：～点。告～。自始至～。指人死：临～（人将要死）。终归；到底：～将见效。～必成功。自始至终的整段时间：～日。～年。～生。～身。姓。"
   },
   {
     char: "绊",
@@ -48740,7 +51543,9 @@ const t = [
     mark: "ㄅㄢˋ",
     tradition: "絆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ban",
+    explain: "挡住或缠住，使跌倒或使行走不方便：～手～脚。让石头～了一跤。"
   },
   {
     char: "绍",
@@ -48753,7 +51558,9 @@ const t = [
     mark: "ㄕㄠˋ",
     tradition: "紹",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "shao",
+    explain: "接续；继承。指浙江绍兴：～剧。"
   },
   {
     char: "绎",
@@ -48766,7 +51573,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "繹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "抽丝。理出头绪；寻究原因：寻～。"
   },
   {
     char: "经",
@@ -48779,7 +51588,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "經",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "（旧读jìng）织物上纵的方向的纱或线（跟“纬”相对）：～纱。～线。中医指人体内气血运行通路的主干：～脉。～络。经度：东～。西～。经营；治理：～商。整军～武。上吊：自～。历久不变的；正常：～常。不～之谈。经典：本草～。佛～。念～。十三～。月经：行～。～血不调。姓。经过：～年累月。几～周折。这件事是～我手办的。～他一说，我才知道。禁（jīn）受：～不起。～得起考验。"
   },
   {
     char: "绑",
@@ -48792,7 +51603,9 @@ const t = [
     mark: "ㄅㄤˇ",
     tradition: "綁",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bang",
+    explain: "用绳、带等缠绕或捆扎：～担架。把行李～在车架子上。"
   },
   {
     char: "绒",
@@ -48805,7 +51618,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "絨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "柔软细小的毛：鸭～。羽～。驼～。棉、丝或毛制成的上面有一层细毛的纺织品：～布。～毯。～衣。丝～。细布。刺绣用的细丝：红绿～儿。"
   },
   {
     char: "结",
@@ -48818,7 +51633,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "結",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "在条状物上打疙瘩或用这种方式制成物品：～绳。～网。～彩。条状物打成的疙瘩：打～。活～。死～。蝴蝶～。发生某种关系；结合：～仇。～社。～为夫妻。凝聚；凝结：～晶。湖面～了一层冰。结束；了结：～账。归根～底。你不理他不就～了吗?旧时保证负责的字据：保～。具～。姓。"
   },
   {
     char: "绕",
@@ -48831,7 +51648,9 @@ const t = [
     mark: "ㄖㄠˋ",
     tradition: "繞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "rao",
+    explain: "缠绕：～线。围着转动：运动员～场一周。不从正面通过，从侧面或后面迂回过去：～行。～远儿。把握船舵，～过暗礁。（问题、事情）纠缠：一些问题～在他的脑子里。我一时～住了，账目没算对。姓。"
   },
   {
     char: "绘",
@@ -48844,7 +51663,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "繪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "画：描～。～画。"
   },
   {
     char: "给",
@@ -48857,7 +51678,9 @@ const t = [
     mark: "ㄍㄟˇ",
     tradition: "給",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gei",
+    explain: "1.交付，送与：～以。送～。献～。2.把动作或态度加到对方：～他一顿批评。3.替，为：～大家帮忙。4.被，表示遭受：房子～火烧掉了。5.把，将：请你随手～门送上。"
   },
   {
     char: "络",
@@ -48870,20 +51693,9 @@ const t = [
     mark: "ㄌㄠˋ",
     tradition: "絡",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "绝",
-    spell: "jué",
-    stroke: "9",
-    radical: "纟",
-    struct: "左右结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄐㄩㄝˊ",
-    tradition: "絶",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "luo",
+    explain: "网状的东西：橘～。丝瓜～。网～。中医指人体内气血运行通路的旁支或小支：经～。用网状物兜住：头上～着一个发网。缠绕：～纱。～丝。～线。树身被藤蔓～住。姓。"
   },
   {
     char: "绞",
@@ -48896,7 +51708,9 @@ const t = [
     mark: "ㄐㄧㄠˇ",
     tradition: "絞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "把两股以上条状物扭在一起：钢丝绳是用许多钢丝～成的。好多问题～在一起，闹不清楚了。握住条状物的两端同时向相反方向转动，使受到挤压；拧：把毛巾～干。～尽脑汁。同“铰”勒死；吊死：～杀。～架。～索。把绳索一端系在轮上，转动轮轴，使系在另一端的物体移动：～车。～盘。～着辘轳打水。用于纱、毛线等：一～纱。"
   },
   {
     char: "统",
@@ -48909,7 +51723,9 @@ const t = [
     mark: "ㄊㄨㄥˇ",
     tradition: "統",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tong",
+    explain: "总起来；总括：～称。事物的连续关系：系～。传～。统领；管辖：～兵。对下属部门不要～得过死。呈筒状的衣物：长～靴。皮～子。地层系统分类的第四级。对应于地质年代中的“世”。"
   },
   {
     char: "绢",
@@ -48922,7 +51738,9 @@ const t = [
     mark: "ㄐㄩㄢˋ",
     tradition: "絹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "juan",
+    explain: "质地薄而坚韧的丝织品，也指用生丝织成的一种丝织品。"
   },
   {
     char: "绣",
@@ -48935,7 +51753,9 @@ const t = [
     mark: "ㄒㄧㄡˋ",
     tradition: "綉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiu",
+    explain: "用彩色的线在绸、布上织出花样、图案或文字等：刺～。～花。～被面儿。绣好的成品：湘～。"
   },
   {
     char: "继",
@@ -48948,7 +51768,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "繼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "继续；接续：～任。相～。中～线。前赴后～。继而：初感头晕，～又吐泻。姓。"
   },
   {
     char: "绩",
@@ -48961,7 +51783,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "績",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "把麻和棉搓（cuō）捻成线：纺～。～麻。功业；成果：成～。战～。"
   },
   {
     char: "绪",
@@ -48974,7 +51798,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "緒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "本指丝的头，比喻事情的开端：端～。头～。千头万～。残余：～余。～风。指心情、思想等：心～。情～。离情别～。事业；功业：续未竟之～。姓。"
   },
   {
     char: "续",
@@ -48987,7 +51813,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "續",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "接连不断：继～。连～。陆～。接在原有的后头：～编。～集。狗尾～貂。这条绳子太短，再～上一截儿吧。添；加：壶里的水是刚～的。炉子该～煤了。姓。"
   },
   {
     char: "绰",
@@ -48996,11 +51824,13 @@ const t = [
     radical: "纟",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄠ",
     tradition: "綽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chuo",
+    explain: "宽裕：～有余裕。体态轻盈柔美：柔情～态。"
   },
   {
     char: "绳",
@@ -49013,7 +51843,9 @@ const t = [
     mark: "ㄕㄥˊ",
     tradition: "繩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "sheng",
+    explain: "用各种纤维或金属丝拧成的条状物。特指木工用的墨线。引申指标准，再引申指按一定标准去制裁：～墨。～之以法。继续。"
   },
   {
     char: "维",
@@ -49026,7 +51858,9 @@ const t = [
     mark: "ㄨㄟˊ",
     tradition: "維",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "wei",
+    explain: "连接：～系。保持；保全：～持。～护。姓。思考；想：思～。几何学及空间理论的基本概念。构成空间的每一个因素（如长、宽、高）叫做一维，如直线是一维的，平面是二维的，普通空间是三维的。"
   },
   {
     char: "绵",
@@ -49039,7 +51873,9 @@ const t = [
     mark: "ㄇㄧㄢˊ",
     tradition: "綿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mian",
+    explain: "丝绵。柔软：～软。单薄：～力。～薄。连续不断：～延。"
   },
   {
     char: "绷",
@@ -49052,7 +51888,9 @@ const t = [
     mark: "ㄅㄥˋ",
     tradition: "綳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "beng",
+    explain: "张紧，拉紧：～紧。小褂紧～在身上。当中用藤皮、棕绳等物绷紧的竹木框：床～。棕～。绣～。～子。一种缝纫方法，粗粗缝上或用针别上：～被头。束，包扎：～带。（物体）猛然弹起：～簧。～弓子。勉强支持：～场面。方言，骗财物：坑～拐骗。"
   },
   {
     char: "绸",
@@ -49065,7 +51903,9 @@ const t = [
     mark: "ㄔㄡˊ",
     tradition: "綢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chou",
+    explain: "丝织物的一种。用蚕丝或化学纤维织成的平纹织物或平纹作地的提花织物。质地细密。如塔夫绸、双宫绸等。"
   },
   {
     char: "综",
@@ -49078,7 +51918,9 @@ const t = [
     mark: "ㄗㄥˋ",
     tradition: "綜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zong",
+    explain: "总起来；聚在一起：～合。错～。姓。"
   },
   {
     char: "绽",
@@ -49091,7 +51933,9 @@ const t = [
     mark: "ㄓㄢˋ",
     tradition: "綻",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhan",
+    explain: "裂开：破～。开～。皮开肉～。脸上～出了微笑。"
   },
   {
     char: "绿",
@@ -49104,7 +51948,9 @@ const t = [
     mark: "ㄌㄩˋ",
     tradition: "緑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lü",
+    explain: "像草和树叶茂盛时的颜色，由蓝和黄混合而成：嫩～。浓～。桃红柳～。青山～水。"
   },
   {
     char: "缀",
@@ -49117,7 +51963,9 @@ const t = [
     mark: "ㄓㄨㄟˋ",
     tradition: "綴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhui",
+    explain: "用针线缝：～扣子。补～。连结；组合：～字成文。"
   },
   {
     char: "缅",
@@ -49130,7 +51978,9 @@ const t = [
     mark: "ㄇㄧㄢˇ",
     tradition: "緬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mian",
+    explain: "遥远：～怀。～想。卷（juǎn）：～上袖子。把边儿～过去。"
   },
   {
     char: "缆",
@@ -49143,7 +51993,9 @@ const t = [
     mark: "ㄌㄢˇ",
     tradition: "纜",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lan",
+    explain: "拴船用的铁索或许多股拧成的粗绳：～绳。解～（开船）。许多股拧成或结成的像缆的东西：钢～。电～。光～。用绳索拴（船）：～舟。把船～住。"
   },
   {
     char: "缎",
@@ -49156,7 +52008,9 @@ const t = [
     mark: "ㄉㄨㄢˋ",
     tradition: "緞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duan",
+    explain: "丝织物的一种。用蚕丝、人造丝织或两者交织，以缎纹或缎纹作地提花织成。质地厚密，表面光滑而富有光泽。是中国特产。"
   },
   {
     char: "缓",
@@ -49169,7 +52023,9 @@ const t = [
     mark: "ㄏㄨㄢˇ",
     tradition: "緩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "huan",
+    explain: "迟；慢：迟～。～步。～不济急。延缓；推迟：～办。～期。这事～几天再说。缓和；不紧张：～冲。～急。恢复正常的生理状态：昏过去又～过来。蔫了的花，浇上水又～过来了。"
   },
   {
     char: "缔",
@@ -49182,7 +52038,9 @@ const t = [
     mark: "ㄉㄧˋ",
     tradition: "締",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "结合；订立：～交。～约。约束；限制：取～。"
   },
   {
     char: "缕",
@@ -49191,11 +52049,13 @@ const t = [
     radical: "纟",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "縷",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "线：细针密～。千丝万～。不绝如～。一条一条，详详细细：～述。条分～析。用于细的东西：一～麻。一～头发。一～炊烟。"
   },
   {
     char: "编",
@@ -49208,7 +52068,9 @@ const t = [
     mark: "ㄅㄧㄢ",
     tradition: "編",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bian",
+    explain: "用细条或带形的东西交叉组织起来：～结。～织。～扎。按一定的原则、规则或次序来组织或排列：～排。～目（编制目录或指已编成的目录）。～次。～年。～订。～配。～码。把材料加以适当的组织排列而成为书籍、报刊、广播电视节目等：～写。～译。～审。～修。～纂。～印。创作：～剧。～导。捏造：～瞎话。成本的书按内容划分的部分：正～。续～。简～。"
   },
   {
     char: "缘",
@@ -49221,7 +52083,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "緣",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "原因：无～无故。文言连词。因为：不识庐山真面目，只～身在此山中。缘分：有～。边：边～。介词。沿着：～木求鱼。关系：血～。"
   },
   {
     char: "缚",
@@ -49234,7 +52098,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "縛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "捆绑：束～。作茧自～。手无～鸡之力。姓。"
   },
   {
     char: "缝",
@@ -49247,7 +52113,9 @@ const t = [
     mark: "ㄈㄥˊ",
     tradition: "縫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "feng",
+    explain: "接合的地方：缭～儿。无～钢管。缝隙：裂～。门～儿。见～插针。床板有道～。"
   },
   {
     char: "缠",
@@ -49260,7 +52128,9 @@ const t = [
     mark: "ㄔㄢˊ",
     tradition: "纏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chan",
+    explain: "缠绕：～线。用铁丝～了几道。纠缠：琐事～身。胡搅蛮～。应付：这人真难～，好说歹说都不行。"
   },
   {
     char: "缤",
@@ -49273,7 +52143,9 @@ const t = [
     mark: "ㄅㄧㄣ",
     tradition: "繽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bin",
+    explain: "〔缤纷〕繁多；杂乱：五彩～。落英～。"
   },
   {
     char: "缨",
@@ -49286,7 +52158,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "纓",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "泛指用作装饰的穗子：帽～儿。红～枪。像缨的东西：萝卜～儿。绳子：长～。"
   },
   {
     char: "缩",
@@ -49299,7 +52173,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "縮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "suo",
+    explain: "由大变小或由长变短；收缩：紧～。～短。热胀冷～。这布下水也不～。没伸开或伸开了又收回去；不伸出：乌龟的头老～在里面。后退：退～。畏～。谁也不许往后～。"
   },
   {
     char: "缭",
@@ -49312,7 +52188,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "繚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "缠绕：～绕。一种缝纫方法。用针线斜着缝：～缝儿。～贴边儿。帮我～几针。"
   },
   {
     char: "缰",
@@ -49325,7 +52203,9 @@ const t = [
     mark: "ㄐㄧㄤ",
     tradition: "繮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiang",
+    explain: "缰绳，拴牲口的绳子：信马由～。"
   },
   {
     char: "缴",
@@ -49338,7 +52218,9 @@ const t = [
     mark: "ㄐㄧㄠˇ",
     tradition: "繳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "交纳；交出（指履行义务或被迫）：上～。～费。～枪不杀。迫使交出（多指武器）：～了敌人的枪。姓。"
   },
   {
     char: "缸",
@@ -49351,7 +52233,9 @@ const t = [
     mark: "ㄍㄤ",
     tradition: "缸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gang",
+    explain: "盛东西的器物，一般底小口大，有陶、瓷、搪瓷、玻璃等各种质料的：水～。一口～。小鱼～儿。缸瓦：～砖。～盆。形状像缸的器物：汽～。四个～的发动机。"
   },
   {
     char: "缺",
@@ -49364,7 +52248,9 @@ const t = [
     mark: "ㄑㄩㄝ",
     tradition: "缺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "que",
+    explain: "缺乏；短少：～人。～材料。庄稼～肥～水就长不好。残破；残缺：～口。完满无～。这本书～了两页。该到而未到：～勤。～课。～席。旧时指官职的空额，也泛指一般职务的空额：出～。肥～。补一个～。"
   },
   {
     char: "罐",
@@ -49377,7 +52263,9 @@ const t = [
     mark: "ㄍㄨㄢˋ",
     tradition: "罐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guan",
+    explain: "（～儿）罐子：瓦～。水～儿。煤气～。煤矿装煤用的斗车。"
   },
   {
     char: "网",
@@ -49386,11 +52274,13 @@ const t = [
     radical: "冂",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄨㄤˇ",
     tradition: "網",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wang",
+    explain: "用绳线等结成的捕鱼捉鸟的器具：一张～。渔～。结～。撒～。张～。像网的东西：发～。蜘蛛～。电～。像网一样纵横交错的组织或系统：上～。通信～。交通～。灌溉～。用网捕捉：～着了一条鱼。像网似的笼罩着：眼里～着红丝。"
   },
   {
     char: "罕",
@@ -49403,7 +52293,9 @@ const t = [
     mark: "ㄏㄢˇ",
     tradition: "罕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "han",
+    explain: "稀少：稀～。～见。～闻。～有。人迹～至。姓。"
   },
   {
     char: "罗",
@@ -49412,24 +52304,13 @@ const t = [
     radical: "罒",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄨㄛˊ",
     tradition: "羅",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "罚",
-    spell: "fá",
-    stroke: "9",
-    radical: "罒",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄈㄚˊ",
-    tradition: "罰",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luo",
+    explain: "捕鸟的网：～网。天～地网。张网捕（鸟）：门可～雀。招请；搜集：～致。网～。搜～。陈列：～列。星～棋布。一种器具，在木框或竹框上张网状物，用来使细的粉末或流质漏下去，留下粗的粉末或渣滓：绢～。铜丝～。把面过一次～。过罗：～面。把面再～一过儿。质地稀疏的丝织品：～衣。～扇。轻～。绫～绸缎。姓。用于商业，12打（144件）为1罗。[英gross]"
   },
   {
     char: "罢",
@@ -49442,7 +52323,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "罷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ba",
+    explain: "劳乏、困倦。通「疲」。"
   },
   {
     char: "罩",
@@ -49455,20 +52338,9 @@ const t = [
     mark: "ㄓㄠˋ",
     tradition: "罩",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "罪",
-    spell: "zuì",
-    stroke: "13",
-    radical: "罒",
-    struct: "上下结构",
-    five: "木",
-    method: "会意",
-    mark: "ㄗㄨㄟˋ",
-    tradition: "罪",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhao",
+    explain: "遮盖；扣住；套在外面：笼～。天空阴沉沉地～满了乌云。棉袄外面～着一件蓝布褂儿。罩子：灯～儿。口～儿。（～儿）外罩；罩衣：袍～儿。养鸡用的笼子。捕鱼用的竹器，圆筒形，上小下大，无顶无底。姓。"
   },
   {
     char: "置",
@@ -49481,7 +52353,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "置",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "搁；放：安～。搁～。漠然～之。～之不理。～诸脑后。设立；布置：装～。设～。购置：添～。～一些用具。"
   },
   {
     char: "署",
@@ -49494,7 +52368,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "署",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "办公的地方：公～。布置；安排：部～。签名；题字：签～。暂时代理：～理。"
   },
   {
     char: "羊",
@@ -49503,11 +52379,13 @@ const t = [
     radical: "羊",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄤˊ",
     tradition: "羊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yang",
+    explain: "泛称哺乳纲偶蹄目牛科部分动物。如绵羊、山羊、羚羊等。皮、毛、角、骨都具利用价值，肉、乳可供人食用。姓。"
   },
   {
     char: "美",
@@ -49520,7 +52398,9 @@ const t = [
     mark: "ㄇㄟˇ",
     tradition: "美",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "mei",
+    explain: "美丽；好看（跟“丑”相对）：这小姑娘长得真～。这里的风景多～呀!使美丽：～容。～发。令人满意的；好：～酒。价廉物～。日子过得挺～。美好的事物；好事：～不胜收。成人之～。得意：老师夸了他几句，他就～得了不得。姓。指美洲：南～。北～。指美国：～元。～籍华人。"
   },
   {
     char: "羔",
@@ -49533,7 +52413,9 @@ const t = [
     mark: "ㄍㄠ",
     tradition: "羔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gao",
+    explain: "（～儿）羔子：羊～。～皮。鹿～。"
   },
   {
     char: "羞",
@@ -49542,11 +52424,13 @@ const t = [
     radical: "⺶",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄡ",
     tradition: "羞",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiu",
+    explain: "害臊；难为情：害～。使难为情：你别～我了。耻辱：～耻。感到耻辱：～与为伍。同“馐”。"
   },
   {
     char: "羡",
@@ -49555,11 +52439,13 @@ const t = [
     radical: "羊",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄢˋ",
     tradition: "羡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "羡慕。多余：～余。"
   },
   {
     char: "群",
@@ -49572,7 +52458,9 @@ const t = [
     mark: "ㄑㄩㄣˊ",
     tradition: "群",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "qun",
+    explain: "聚在一起的人或物：人～。鸡～。建筑～。成～结队。众多的人：超～。～言堂。～策～力。成群的：～峰。～居。～集。用于成群的人或东西：一～孩子。一～马。姓。"
   },
   {
     char: "羹",
@@ -49585,7 +52473,9 @@ const t = [
     mark: "ㄍㄥ",
     tradition: "羹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "geng",
+    explain: "用蒸、煮等方法烹制的糊状或带浓汁的食品：鸡蛋～。"
   },
   {
     char: "羽",
@@ -49594,11 +52484,13 @@ const t = [
     radical: "羽",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄩˇ",
     tradition: "羽",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "羽毛，鸟的毛：～翼。鸟类或昆虫的翅膀：振～。古代五音（宫、商、角、徵、羽）之一。相当于简谱的“6”。"
   },
   {
     char: "翁",
@@ -49611,7 +52503,9 @@ const t = [
     mark: "ㄨㄥ",
     tradition: "翁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "weng",
+    explain: "年老的男子；老头儿：渔～。父亲。丈夫的父亲：～姑（公公和婆婆）。妻子的父亲：～婿（岳父和女婿）。姓。"
   },
   {
     char: "翅",
@@ -49624,7 +52518,9 @@ const t = [
     mark: "ㄔˋ",
     tradition: "翅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chi",
+    explain: "昆虫的飞行器官，一般是两对，呈膜状，上面有翅脉，有的前翅变成角质或革质。通常又指鸟类等动物的飞行器官。通称翅膀。翅果向外伸出呈翅状的果皮。鱼翅：～席。又同“啻”。"
   },
   {
     char: "翎",
@@ -49637,7 +52533,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "翎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "鸟翅膀或尾巴上的长羽毛：雁～。野鸡～。"
   },
   {
     char: "翔",
@@ -49650,7 +52548,9 @@ const t = [
     mark: "ㄒㄧㄤˊ",
     tradition: "翔",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "xiang",
+    explain: "1.盘旋地飞：飞～。2.通“详”3.：～实。"
   },
   {
     char: "翘",
@@ -49663,7 +52563,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "翹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qiao",
+    explain: "一头儿向上仰起：板凳没放稳，这头儿一压，那头儿就往上一～。"
   },
   {
     char: "翠",
@@ -49676,7 +52578,9 @@ const t = [
     mark: "ㄘㄨㄟˋ",
     tradition: "翠",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "cui",
+    explain: "绿色：～绿。苍～。～微（青绿的山色，亦泛指青山）。〔～鸟〕属鸣禽类，形似杜鹃，嘴长，头部深橄榄色，有青绿色斑纹，背青绿色，腹赤褐色，尾短，捕食小鱼。指“翡翠”（硬玉）：～玉。～镯。珠宝～钻。"
   },
   {
     char: "翩",
@@ -49689,7 +52593,9 @@ const t = [
     mark: "ㄆㄧㄢ",
     tradition: "翩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pian",
+    explain: "很快地飞，形容动作轻快：～然。～若惊鸿。"
   },
   {
     char: "翰",
@@ -49702,7 +52608,9 @@ const t = [
     mark: "ㄏㄢˋ",
     tradition: "翰",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "han",
+    explain: "长而硬的羽毛，古代用来写字。后来借指毛笔、文字、书信等：～墨。华～（对他人来信的美称）。"
   },
   {
     char: "翻",
@@ -49715,7 +52623,9 @@ const t = [
     mark: "ㄈㄢ",
     tradition: "翻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fan",
+    explain: "上下或内外交换位置；歪倒；反转：推～。～身。车～了。人仰马～。为了寻找而移动上下物体的位置：～箱倒柜。从箱子底下～出来一条旧围巾。推翻原来的：～供。这桩冤案终于～过来了。爬过；越过：～墙而过。～山越岭。（数量）成倍地增加：～番。～了几倍。翻译：把德文～成中文。翻脸：闹～了。把他惹～了。"
   },
   {
     char: "翼",
@@ -49728,7 +52638,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "翼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "鸟类的飞行器官，由前肢演化而成，上面生有羽毛。有的鸟翼退化，不能飞翔。通称翅膀。飞机或滑翔机等飞行器两侧伸出像鸟翼的部分，有支撑机身、产生升力等作用。侧：两～阵地。由左～进攻。二十八宿之一。帮助；辅佐：～助。扶～。同“翌”：～日。姓。"
   },
   {
     char: "耀",
@@ -49741,7 +52653,9 @@ const t = [
     mark: "ㄧㄠˋ",
     tradition: "耀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yao",
+    explain: "光线强烈地照射：～眼。张扬；显示出来：夸～。光荣：荣～。光芒：光～。"
   },
   {
     char: "老",
@@ -49750,11 +52664,13 @@ const t = [
     radical: "老",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄠˇ",
     tradition: "老",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lao",
+    explain: "1.年岁大（跟“少、幼”相对）：～人。～大爷。他六十多岁了，可是一点儿也不显～。2.老年人（多用作尊称）：徐～。敬～院。扶～携幼。3.婉辞，指人死（多指老人，必带“了”）：隔壁前天～了人了。4.对某些方面富有经验；老练：～手。～于世故。5.很久以前就存在的（跟“新”相对，下6.同）：～厂。～朋友。～根据地。这种纸烟牌子很～了。7.陈旧：～脑筋。～机器。这所房子太～了。8.原来的：～脾气。～地方。9.（蔬菜）长得过了适口的时期（跟“嫩”相对，下10.同）：油菜太～了。11.（食物）火候大：鸡蛋煮～了。青菜不要炒得太～。12.姓。"
   },
   {
     char: "考",
@@ -49767,7 +52683,9 @@ const t = [
     mark: "ㄎㄠˇ",
     tradition: "考",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "kao",
+    explain: "测验；考试：高～。大～。提出问题让对方回答：一下子被～住了。检查：～勤。研究：～古。指死去的父亲：先～。"
   },
   {
     char: "者",
@@ -49780,7 +52698,9 @@ const t = [
     mark: "ㄓㄜˇ",
     tradition: "者",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhe",
+    explain: "用在形容词、动词或形容词性词组、动词性词组后面，表示有此属性或做此动作的人或事物：强～。老～。作～。读～。胜利～。未渡～。卖柑～。符合标准～。用在某某工作、某某主义后面，表示从事某项工作或信仰某个主义的人：文艺工作～。共产主义～。用在“二、三”等数词和“前、后”等方位词后面，指上文所说的事物：前～。后～。二～必居其一。两～缺一不可。用在词、词组、分句后面表示停顿：风～，空气流动而成。用在句尾表示希望或命令的语气（多见于早期白话）：路上小心在意～!姓。指示代词。义同“这”（多见于早期白话）：～番。～边。"
   },
   {
     char: "而",
@@ -49789,11 +52709,13 @@ const t = [
     radical: "而",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄦˊ",
     tradition: "而",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "er",
+    explain: "连接动词、形容词或词组、分句等。a）连接语意相承的成分：伟大～艰巨的任务。战～胜之。取～代之。我们正从事一个伟大的事业，～伟大的事业必须有最广泛的群众的参加和支持。b）连接肯定和否定互相补充的成分：栀子花的香，浓～不烈，清～不淡。马克思主义叫我们看问题不要从抽象的定义出发，～要从客观存在的事实出发。c）连接语意相反的成分，表示转折：如果能集中生产～不集中，就会影响改进技术、提高生产。d）连接事理上前后相因的成分：因困难～畏惧～退却～消极的人，不会有任何成就。有“到”的意思：一～再，再～三。由秋～冬。由南～北。把表示时间、方式、目的、原因、依据等的成分连接到动词上面：匆匆～来。挺身～出。为正义～战。因公～死。视情况～定。插在主语谓语中间，有“如果”的意思：民族战争～不依靠人民大众，毫无疑义将不能取得胜利。姓。"
   },
   {
     char: "耍",
@@ -49806,7 +52728,9 @@ const t = [
     mark: "ㄕㄨㄚˇ",
     tradition: "耍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shua",
+    explain: "玩；玩耍：让孩子到院子里～去。全村的大事，可不是～的!表演：～刀。～把戏。施展；表现出来（多含贬义）：～笔杆。～脾气。～威风。～态度。耍弄：～人。咱们被人～了。姓。"
   },
   {
     char: "耐",
@@ -49819,7 +52743,9 @@ const t = [
     mark: "ㄋㄞˋ",
     tradition: "耐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nai",
+    explain: "受得住；禁得起：～烦。～用。～火砖。吃苦～劳。锦纶袜子～穿。"
   },
   {
     char: "耕",
@@ -49832,7 +52758,9 @@ const t = [
     mark: "ㄍㄥ",
     tradition: "耕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "geng",
+    explain: "用犁翻地松土：～田。机～。"
   },
   {
     char: "耗",
@@ -49845,7 +52773,9 @@ const t = [
     mark: "ㄏㄠˋ",
     tradition: "耗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hao",
+    explain: "减损，消耗：损～。油～。他们谈了一晚上，把灯里的油都～干了。拖延：～时间。音信（现多指坏的）：噩（è）～。"
   },
   {
     char: "耘",
@@ -49858,7 +52788,9 @@ const t = [
     mark: "ㄩㄣˊ",
     tradition: "耘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yun",
+    explain: "在田里除草：～田。春耕夏～，秋收冬藏。"
   },
   {
     char: "耙",
@@ -49871,7 +52803,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "耙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pa",
+    explain: "耙子：钉～。粪～。用耙子平整土地或聚拢、散开柴草、谷物等：地已～好了。把麦子～开晒晒。"
   },
   {
     char: "耳",
@@ -49880,11 +52814,13 @@ const t = [
     radical: "耳",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄦˇ",
     tradition: "耳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "er",
+    explain: "耳朵：～聋眼花。～闻目睹。形状像耳朵的东西：木～。银～。位置在两旁的：～房。～门。姓。而已；罢了：想当然～。技止此～。"
   },
   {
     char: "耸",
@@ -49897,7 +52833,9 @@ const t = [
     mark: "ㄙㄨㄥˇ",
     tradition: "聳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "song",
+    explain: "高起；直立：～峙。惊动：危言～听。"
   },
   {
     char: "耻",
@@ -49910,7 +52848,9 @@ const t = [
     mark: "ㄔˇ",
     tradition: "耻",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chi",
+    explain: "羞愧；羞愧的事：可～。奇～大辱。认为羞辱：不～下问。"
   },
   {
     char: "耽",
@@ -49923,7 +52863,9 @@ const t = [
     mark: "ㄉㄢ",
     tradition: "耽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dan",
+    explain: "迟延；延误：～搁︱～误。沉溺；喜好过度：～乐︱～酒。"
   },
   {
     char: "耿",
@@ -49936,7 +52878,9 @@ const t = [
     mark: "ㄍㄥˇ",
     tradition: "耿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "geng",
+    explain: "光明。正直：～直。"
   },
   {
     char: "聂",
@@ -49949,7 +52893,9 @@ const t = [
     mark: "ㄋㄧㄝˋ",
     tradition: "聶",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nie",
+    explain: "姓。"
   },
   {
     char: "聊",
@@ -49962,7 +52908,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "聊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "姑且：～以自慰。～备一格。略微：～表寸心。姓。依赖；凭借：～赖。民不～生。闲谈：闲～。～天儿。有空儿咱们～～。"
   },
   {
     char: "聋",
@@ -49975,7 +52923,9 @@ const t = [
     mark: "ㄌㄨㄥˊ",
     tradition: "聾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "long",
+    explain: "耳朵听不见声音，通常把听觉迟钝也叫聋：～哑。耳～眼花。"
   },
   {
     char: "职",
@@ -49988,7 +52938,9 @@ const t = [
     mark: "ㄓˊ",
     tradition: "職",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhi",
+    explain: "职务；责任：尽～。～分。天～。有～有权。职位：调～。在～。就～。兼～。撤～。辞～。旧时公文用语，下属对上司的自称：～等奉命。掌管：～掌。只；仅：～此而已。姓。"
   },
   {
     char: "联",
@@ -50001,7 +52953,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "聯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "联结；联合：～盟。～系。～络。～欢。～名。三～单。对联：春～。挽～。姓。"
   },
   {
     char: "聘",
@@ -50014,7 +52968,9 @@ const t = [
     mark: "ㄆㄧㄣˋ",
     tradition: "聘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pin",
+    explain: "请人担任某种职务：～请教员。古时国与国遣使访问：～使往来。定亲：～礼。嫁：～姑娘。出～。"
   },
   {
     char: "聚",
@@ -50027,7 +52983,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "聚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "聚集：～会。～沙成塔。大家～在一起商量商量。明天星期日，咱们找个地方～～。姓。"
   },
   {
     char: "聪",
@@ -50040,7 +52998,9 @@ const t = [
     mark: "ㄘㄨㄥ",
     tradition: "聰",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "cong",
+    explain: "听觉；听觉灵敏：失～。耳～目明。聪明：～慧。"
   },
   {
     char: "肃",
@@ -50053,7 +53013,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "肅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "恭敬：～立。～然。严正；认真：严～。清除：～清。～贪。"
   },
   {
     char: "肄",
@@ -50066,7 +53028,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "肄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "学习：～业。～习（学习）。"
   },
   {
     char: "肆",
@@ -50079,7 +53043,9 @@ const t = [
     mark: "ㄙˋ",
     tradition: "肆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "si",
+    explain: "任意而行，不顾一切：～无忌惮。～行无忌。铺子；商店：市～。酒～。数目“四”的大写。多用于票证、账目等。"
   },
   {
     char: "肉",
@@ -50088,11 +53054,13 @@ const t = [
     radical: "肉",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄖㄡˋ",
     tradition: "肉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "rou",
+    explain: "人和动物体内接近皮的部分的柔韧的物质。某些动物的肉可以吃。某些瓜果里可以吃的部分：枣～。冬瓜～厚。不脆；不酥：～瓤儿西瓜。性子慢，动作迟缓：～脾气。那个人太～，一点儿利索劲儿也没有。"
   },
   {
     char: "肋",
@@ -50105,7 +53073,9 @@ const t = [
     mark: "ㄌㄜ",
     tradition: "肋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lei",
+    explain: "胸部的两旁：两～。～骨。"
   },
   {
     char: "肌",
@@ -50118,7 +53088,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "肌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "肌肉，人体和动物体的一种组织。由许多肌纤维集合而成。分横纹肌、平滑肌和心肌三种。"
   },
   {
     char: "肖",
@@ -50131,7 +53103,9 @@ const t = [
     mark: "ㄒㄧㄠˋ",
     tradition: "肖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiao",
+    explain: "像；相似：惟妙惟～。"
   },
   {
     char: "肘",
@@ -50144,7 +53118,9 @@ const t = [
     mark: "ㄓㄡˇ",
     tradition: "肘",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhou",
+    explain: "上臂与前臂相接处向外凸起的部分：胳膊～儿。掣～（捉住其肘，喻阻挠别人做事）。～子（a.肘；b.指食品的猪腿上半部）。"
   },
   {
     char: "肚",
@@ -50157,7 +53133,9 @@ const t = [
     mark: "ㄉㄨˋ",
     tradition: "肚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "du",
+    explain: "腹部：～子。物体圆而突起像肚子的部分：腿～子。"
   },
   {
     char: "肛",
@@ -50170,7 +53148,9 @@ const t = [
     mark: "ㄍㄤ",
     tradition: "肛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gang",
+    explain: "肛门和肛管的统称。人和多数哺乳动物消化管的最末段：脱～。～裂。"
   },
   {
     char: "肝",
@@ -50183,7 +53163,9 @@ const t = [
     mark: "ㄍㄢ",
     tradition: "肝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gan",
+    explain: "人和高等动物的消化器官之一。人的肝在腹腔内右上部，分为两叶。主要功能是分泌胆汁，储藏糖原，调节蛋白质、脂肪和糖类的新陈代谢等，还有解毒和凝血作用。也叫肝脏。"
   },
   {
     char: "肠",
@@ -50196,7 +53178,9 @@ const t = [
     mark: "ㄔㄤˊ",
     tradition: "腸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chang",
+    explain: "消化器官的一部分，形状像管子，上端连胃，下端通肛门。分为小肠、大肠两部分，起消化和吸收作用。通称肠子。心思；情怀：愁～。衷～。在肠衣里塞进肉、淀粉等制成的食品：香～。鱼～。腊～。"
   },
   {
     char: "股",
@@ -50209,7 +53193,9 @@ const t = [
     mark: "ㄍㄨˇ",
     tradition: "股",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gu",
+    explain: "大腿。机关组织系统中按业务划分的单位（级别一般比科低）：总务～。人事～。绳线等的组成部分：三～儿绳。把线捻成～儿。集合资金的一份或一笔财物平均分配的一份：～份。分～。按～均分，每～五百元。指股票：炒～。绩优～。垃圾～。a）用于成条的东西：一～线。一～泉水。上山有两～道。b）用于气体、气味、力气等：一～热气。一～香味。一～劲。c）用于成批的人（多含贬义）：两～土匪。一～敌军。我国古代称不等腰直角三角形中较长的直角边。"
   },
   {
     char: "肢",
@@ -50222,7 +53208,9 @@ const t = [
     mark: "ㄓ",
     tradition: "肢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "人体手、脚、胳膊、腿的统称。也指某些动物的腿：四～。上～运动。后～直立。"
   },
   {
     char: "肤",
@@ -50235,7 +53223,9 @@ const t = [
     mark: "ㄈㄨ",
     tradition: "膚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fu",
+    explain: "皮肤：切～之痛。体无完～。表面的；浮浅：～浅。～泛。"
   },
   {
     char: "肥",
@@ -50248,7 +53238,9 @@ const t = [
     mark: "ㄈㄟˊ",
     tradition: "肥",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fei",
+    explain: "含脂肪多（跟“瘦”相对，除“肥胖、减肥”外，一般不用于人）：～猪。～肉。马不得夜草不～。肥沃：土地很～。使肥沃：～田粉。肥料：底～。绿～。化～。积～。收入多；油水多：～差。活儿～。指由不正当的收入而富裕：坑了集体，～了自己。利益；好处：分～。抄～（捞外快）。肥大（跟“瘦”相对）：棉袄的袖子太～了。姓。"
   },
   {
     char: "肩",
@@ -50261,7 +53253,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "肩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "1.肩膀：并～前进。2.担负；担任：身～重任。"
   },
   {
     char: "肪",
@@ -50270,24 +53264,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄤˊ",
     tradition: "肪",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "肮",
-    spell: "āng",
-    stroke: "8",
-    radical: "月",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄤ",
-    tradition: "骯",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "fang",
+    explain: "见〖脂肪〗。"
   },
   {
     char: "肯",
@@ -50300,7 +53283,9 @@ const t = [
     mark: "ㄎㄣˇ",
     tradition: "肯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ken",
+    explain: "附着在骨头上的肉：中～。～綮。表示同意：首～。我劝说了半天，他才～了。助动词。表示主观上乐意；表示接受要求：～虚心接受意见。我请他来，他怎么也不～来。"
   },
   {
     char: "育",
@@ -50313,7 +53298,9 @@ const t = [
     mark: "",
     tradition: "育",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "妇女生产。  【组词】：节育培养成长。  【组词】：化育、教育"
   },
   {
     char: "肴",
@@ -50322,11 +53309,13 @@ const t = [
     radical: "月",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄠˊ",
     tradition: "肴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yao",
+    explain: "鱼肉等荤菜：菜～。酒～。"
   },
   {
     char: "肺",
@@ -50339,7 +53328,9 @@ const t = [
     mark: "ㄈㄟˋ",
     tradition: "肺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fei",
+    explain: "人和高等动物的呼吸器官。人的肺在胸腔中，左右各一，和支气管相连。由心脏出来含有二氧化碳的血液经肺动脉到肺泡内进行气体交换，变成含有氧气的血液，经肺静脉流回心脏。也叫肺脏。"
   },
   {
     char: "肾",
@@ -50348,11 +53339,13 @@ const t = [
     radical: "月",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄣˋ",
     tradition: "腎",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shen",
+    explain: "人和高等动物的主要排泄器官，形如蚕豆，在脊柱的两侧，左右各一，表面有纤维组织构成的薄膜，有血管从内缘通入肾内。血液流过时，血内的水分和溶解在水里的代谢物质被肾吸收，分解后形成尿，经输尿管输出。也叫肾脏。中医指外肾，即男人的睾丸。"
   },
   {
     char: "肿",
@@ -50361,11 +53354,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄨㄥˇ",
     tradition: "腫",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhong",
+    explain: "皮肤、黏膜或肌肉等组织由于局部循环发生障碍、发炎、化脓、内出血等原因而浮胀或突起：浮～。红～。脓～。"
   },
   {
     char: "胀",
@@ -50374,11 +53369,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄤˋ",
     tradition: "脹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "膨胀：热～冷缩。身体内壁受到压迫而产生不舒服的感觉：肚子发～。"
   },
   {
     char: "胁",
@@ -50391,7 +53388,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "脅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xie",
+    explain: "从腋下到肋骨尽处的部分：～下。用威力恐吓人：威～。～迫。收拢；耸起：～肩谄笑。"
   },
   {
     char: "胃",
@@ -50400,37 +53399,13 @@ const t = [
     radical: "田",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄨㄟˋ",
     tradition: "胃",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "胆",
-    spell: "dǎn",
-    stroke: "9",
-    radical: "月",
-    struct: "左右结构",
-    five: "火",
-    method: "-",
-    mark: "ㄉㄢˇ",
-    tradition: "膽",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "背",
-    spell: "bèi",
-    stroke: "9",
-    radical: "",
-    struct: "上下结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄟˋ",
-    tradition: "背",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "人和高等动物消化器官之一。上连食管，下连十二指肠。成人胃半充满时，容量为1—3升。长度20—25厘米。能分泌胃液，消化食物。星名。二十八宿之一。"
   },
   {
     char: "胎",
@@ -50443,7 +53418,9 @@ const t = [
     mark: "ㄊㄞ",
     tradition: "胎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tai",
+    explain: "人或哺乳动物母体内的幼体：～儿。胚～。怀～。祸～。怀孕或生育的次数：头～。生过三～。这头母猪一～下了十二头小猪。衬在衣服、被褥等的面子和里子之间的东西：棉花～。这顶帽子是软～儿的。某些器物的坯：泥～儿。景泰蓝的～儿。轮胎：车～。[英tyre]"
   },
   {
     char: "胖",
@@ -50456,7 +53433,9 @@ const t = [
     mark: "ㄆㄢˊ",
     tradition: "胖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pang",
+    explain: "体态丰满、脂肪多。与「瘦」相对。肥胖、胖娃儿　"
   },
   {
     char: "胚",
@@ -50469,7 +53448,9 @@ const t = [
     mark: "ㄆㄟ",
     tradition: "胚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pei",
+    explain: "初期发育的生物体，由精子和卵子结合发展而成，也有由未受精的卵发育而成的。"
   },
   {
     char: "胜",
@@ -50482,7 +53463,9 @@ const t = [
     mark: "ㄕㄥˋ",
     tradition: "勝",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "sheng",
+    explain: "在战争或竞争中取得优势。与败相对。战胜、得胜、出奇制胜超越。略胜一筹、一个胜一个美好的、优越的。胜地、胜景"
   },
   {
     char: "胞",
@@ -50495,7 +53478,9 @@ const t = [
     mark: "ㄅㄠ",
     tradition: "胞",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bao",
+    explain: "胞衣。同父母所生的；嫡亲的：～兄。～妹。～叔（父亲的胞弟）。同一个国家或民族的人：侨～。台～。藏～。"
   },
   {
     char: "胡",
@@ -50508,7 +53493,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "鬍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "中国古代称北边的或西域的民族：～人。～服。～姬（西域出生的少女）。～越（“胡”在北方；“越”在南方，喻疏远、隔绝）。泛指外国或外族的：～椒。～瓜（黄瓜）。～琴。～笳（古代北方民族的一种管乐器）。乱，无道理：～来。～闹。～吹。～言乱语。文言疑问词，为什么，何故：～不归？“～取禾三百廛兮？”嘴周围和连着鬓角长的须毛：～须。古代指兽类颈下垂肉：“狼跋其～。”巷、小街道称“胡同（tòng）”（用作巷名时，“同”读轻声不儿化）。姓。"
   },
   {
     char: "胧",
@@ -50521,7 +53508,9 @@ const t = [
     mark: "ㄌㄨㄥˊ",
     tradition: "朧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "long",
+    explain: "见〔朦胧〕"
   },
   {
     char: "胯",
@@ -50534,7 +53523,9 @@ const t = [
     mark: "ㄎㄨㄚˋ",
     tradition: "胯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kua",
+    explain: "腰的两侧和大腿之间的部分：～下。～骨。"
   },
   {
     char: "胰",
@@ -50547,7 +53538,9 @@ const t = [
     mark: "ㄧˊ",
     tradition: "胰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "胰腺，人和高等动物体内的腺体。人的胰位于胃后方，灰红色，长约14—18厘米，带状。有内分泌和外分泌两种机能。外分泌部分分泌的胰液经胰管注入十二指肠，有消化蛋白、脂肪、糖的作用。内分泌部分分泌胰岛素，调节糖代谢。"
   },
   {
     char: "胳",
@@ -50560,7 +53553,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "胳",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "腋下。  【组词】：胳肢窝上肢，从肩膀到手的部分。  【组词】：胳膊、胳臂"
   },
   {
     char: "胶",
@@ -50569,24 +53564,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄠ",
     tradition: "膠",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "胸",
-    spell: "xiōng",
-    stroke: "10",
-    radical: "月",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄒㄩㄥ",
-    tradition: "胸",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "某些具有黏性的物质，用动物的皮、角等熬成或由植物分泌出来，也有人工合成的。通常用来黏合器物，如鳔胶、桃胶、万能胶，有的供食用或入药，如果胶、阿胶。用胶粘：～柱鼓瑟。镜框坏了，把它～上。不可～于成规。像胶一样黏的：～泥。指橡胶：～皮。～鞋。～布。姓。"
   },
   {
     char: "能",
@@ -50595,11 +53579,13 @@ const t = [
     radical: "厶",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄋㄥˊ",
     tradition: "能",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "neng",
+    explain: "能力、才干。  【组词】：智能、技能、逞能有才能的。  【组词】：能人、能者多劳有才能的人。  【组词】：选贤与能用途、功用。  【组词】：功能物质运动的能量。因运动形式不同而有电能、热能、机械能、化学能、原子能等。能量间可互相转换，以功率为计算单位。可以。  【组词】：能够擅长。  【组词】：能言善道、能歌善舞一种日本古典戏剧。由猿乐发展的歌舞剧，以动作、表情和音乐表现。  【组词】：梦幻能、修罗能"
   },
   {
     char: "脂",
@@ -50612,7 +53598,9 @@ const t = [
     mark: "ㄓ",
     tradition: "脂",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "动物体内或油料植物种子里面的油质：～肪。油～。松～。胭脂：～粉。"
   },
   {
     char: "脆",
@@ -50625,7 +53613,9 @@ const t = [
     mark: "ㄘㄨㄟˋ",
     tradition: "脆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cui",
+    explain: "容易折断破碎（跟“韧”相对）：这种纸不算薄，就是太～。（较硬的食物）容易弄碎弄裂：～枣。这瓜又甜又～。（声音）清脆：她的嗓音挺～。说话做事爽利痛快；干脆：这件事办得很～。"
   },
   {
     char: "脉",
@@ -50634,11 +53624,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄞˋ",
     tradition: "脉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mai",
+    explain: "血管：动～。静～。脉搏：切～。植物叶子上的筋络：平行～。网状～。连贯分布成为一个系统的东西：山～。矿～。"
   },
   {
     char: "脊",
@@ -50651,20 +53643,9 @@ const t = [
     mark: "ㄐㄧˇ",
     tradition: "脊",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "脏",
-    spell: "zāng",
-    stroke: "10",
-    radical: "月",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄗㄤˋ",
-    tradition: "臟、髒",
-    sex: "",
-    tone: 1
+    tone: 3,
+    pinyin: "ji",
+    explain: "人和动物背上中间的骨头；脊柱：～髓。～椎。物体上形状像脊柱的部分：山～。屋～。书～。姓。"
   },
   {
     char: "脐",
@@ -50673,11 +53654,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄑㄧˊ",
     tradition: "臍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "肚脐，在腹正中，人出生后脐带脱落结疤后的凹陷处。螃蟹肚子底下的甲壳：尖～。团～。"
   },
   {
     char: "脑",
@@ -50690,7 +53673,9 @@ const t = [
     mark: "ㄋㄠˇ",
     tradition: "腦",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "nao",
+    explain: "高等动物神经系统的主要部分，在颅腔里，主管感觉和运动。人脑又是思想记忆等心理活动的器官：～髓。～子（ａ．脑；ｂ．指思考、记忆等能力）。～筋。～海。～际。～壳。～颅。～神经。～下垂体。～积水。～溢血。电～。头：～袋。～壳。头昏～胀。～满肠肥。形状或颜色像脑的东西：豆腐～儿。指从物体中提炼出的精华部分：樟～。薄荷～。"
   },
   {
     char: "脓",
@@ -50699,11 +53684,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄋㄨㄥˊ",
     tradition: "膿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nong",
+    explain: "机体组织由于细菌等侵入，发炎后坏死分解而成的汁液。是死亡的白细胞、细菌及脂肪等的混合物。"
   },
   {
     char: "脖",
@@ -50716,7 +53703,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "脖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "脖颈，头和躯干相连接的部分。某些像脖颈一样的东西：脚～子。拐～儿。"
   },
   {
     char: "脚",
@@ -50729,7 +53718,9 @@ const t = [
     mark: "ㄐㄧㄠˇ",
     tradition: "腳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jue",
+    explain: "人或动物的肢体中，支撑身体接触地面的部分。  【组词】：赤脚、跺脚、马脚物体的基部、下端。  【组词】：墙脚、桌脚、山脚→脚色量词。计算用脚踢、踹、踩等动作的单位。  【组词】：连踢三脚、踹了两脚、踩了一脚"
   },
   {
     char: "脯",
@@ -50742,7 +53733,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "脯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "胸前的肉：胸～。"
   },
   {
     char: "脱",
@@ -50755,7 +53748,9 @@ const t = [
     mark: "ㄊㄨㄛ",
     tradition: "脱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tuo",
+    explain: "（皮肤、毛发等）脱落：～皮。～毛。爷爷的头发都～光了。取下；除去：～鞋。～脂。～色。脱离：逃～。摆～。～险。～缰之马。漏掉（文字）：～误。这一行里～了三个字。轻率；轻慢：轻～。～易（轻率，不讲究礼貌）。或许：～有不测。倘若：～有遗漏，必致误事。姓。"
   },
   {
     char: "脸",
@@ -50764,11 +53759,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄢˇ",
     tradition: "臉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lian",
+    explain: "头的前部，从额到下巴：圆～。洗～。（～儿）某些物体的前部：门～儿。鞋～儿。情面；面子：丢～。不要～。（～儿）脸上的表情：笑～儿。把～一变。"
   },
   {
     char: "脾",
@@ -50781,7 +53778,9 @@ const t = [
     mark: "ㄆㄧˊ",
     tradition: "脾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pi",
+    explain: "人和高等动物的内脏之一，椭圆形，赤褐色，质柔软，在胃的左侧。脾的作用是制造新的血细胞与破坏衰老的血细胞，产生淋巴细胞与抗体，贮藏铁质，调节脂肪、蛋白质的新陈代谢等。也叫脾脏。"
   },
   {
     char: "腊",
@@ -50794,7 +53793,9 @@ const t = [
     mark: "ㄌㄚˋ",
     tradition: "臘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "la",
+    explain: "古代在农历十二月里合祭众神叫做腊，因此农历十二月叫腊月。冬天（多在腊月）腌制后风干或熏干的（鱼、肉、鸡、鸭等）：～肉。～鱼。～味。姓。"
   },
   {
     char: "腋",
@@ -50807,7 +53808,9 @@ const t = [
     mark: "ㄧㄝˋ",
     tradition: "腋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "其他生物体上跟腋类似的部分：～芽。"
   },
   {
     char: "腌",
@@ -50820,7 +53823,9 @@ const t = [
     mark: "ㄚ",
     tradition: "腌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yan",
+    explain: "用盐等浸渍食品：～咸菜。"
   },
   {
     char: "腐",
@@ -50833,7 +53838,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "腐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "1.腐烂；变坏。例：流水不～。陈～。2.某些豆制品：～乳。～竹。"
   },
   {
     char: "腔",
@@ -50842,11 +53849,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄑㄧㄤ",
     tradition: "腔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiang",
+    explain: "动物身体内部空的部分：口～。鼻～。胸～。腹～。满～热血。（～儿）话：开～。答～。乐曲的调子：高～。花～。昆～。唱～儿。唱走了～儿。说话的腔调：京～。山东～。学生～。用于宰杀过的羊（多见于早期白话）：一～羊。"
   },
   {
     char: "腕",
@@ -50859,7 +53868,9 @@ const t = [
     mark: "ㄨㄢˋ",
     tradition: "腕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wan",
+    explain: "腕子：手～儿。"
   },
   {
     char: "腥",
@@ -50872,7 +53883,9 @@ const t = [
     mark: "ㄒㄧㄥ",
     tradition: "腥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xing",
+    explain: "本指生肉，现指肉类鱼类等食物：荤～。鱼虾等的难闻的气味：放些料酒去去～。有腥气：这鱼做得有点～。"
   },
   {
     char: "腮",
@@ -50885,7 +53898,9 @@ const t = [
     mark: "ㄙㄞ",
     tradition: "腮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sai",
+    explain: "也叫腮帮子。两颊的下半部。"
   },
   {
     char: "腰",
@@ -50898,7 +53913,9 @@ const t = [
     mark: "ㄧㄠ",
     tradition: "腰",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yao",
+    explain: "胯上胁下的部分，在身体的中部：弯～。两手叉～。裤腰：这裤子～太肥。指腰包或衣兜：我～里还有些钱，足够我们零用的。事物的中间部分：山～。树～。半中～。中间狭小，像腰部的地势：土～。海～。姓。"
   },
   {
     char: "腹",
@@ -50911,7 +53928,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "腹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "指内心：～案。～议。指鼎、瓶子等器物的中空而凸出的部分：壶～。瓶～。"
   },
   {
     char: "腺",
@@ -50924,7 +53943,9 @@ const t = [
     mark: "ㄒㄧㄢˋ",
     tradition: "腺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "生物体内能分泌某些化学物质的组织，由腺细胞组成，如人体内的汗腺和唾液腺，花的蜜腺。"
   },
   {
     char: "腻",
@@ -50933,11 +53954,13 @@ const t = [
     radical: "月",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄋㄧˋ",
     tradition: "膩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ni",
+    explain: "食物油脂过多，使人不想吃：油～。厌烦：越听越～。细致；光润：细～。积垢：尘～。"
   },
   {
     char: "腾",
@@ -50950,7 +53973,9 @@ const t = [
     mark: "ㄊㄥˊ",
     tradition: "騰",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "teng",
+    explain: "奔跑或跳跃：奔～。欢～。升（到空中）：升～。飞～。使空（kòng）：～地方。～出时间温功课。用在某些动词后面，表示动作反复、连续：翻～。折～。倒～。闹～。姓。"
   },
   {
     char: "腿",
@@ -50963,7 +53988,9 @@ const t = [
     mark: "ㄊㄨㄟˇ",
     tradition: "腿",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tui",
+    explain: "人和动物用来支持躯体和行走的部分。指器物上作用像腿的部分：桌子～儿。指火腿：云～。"
   },
   {
     char: "膀",
@@ -50976,7 +54003,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "膀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bang",
+    explain: "（—子）胳膊上部靠肩的部分：他的两～真有劲。（—儿）鸟类等的翅膀。"
   },
   {
     char: "膊",
@@ -50989,7 +54018,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "膊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "上肢近肩的部分。"
   },
   {
     char: "膏",
@@ -51002,7 +54033,9 @@ const t = [
     mark: "ㄍㄠˋ",
     tradition: "膏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gao",
+    explain: "脂肪，油；肥肉：焚～继晷（guǐ）。糊状的东西：牙～。药～。中成药剂型之一。在常温时为固体、半固体或半流体的制品。可分为内服膏、外贴膏、外敷膏：益母草～。狗皮～。紫草～。肥沃：～壤。"
   },
   {
     char: "膘",
@@ -51015,7 +54048,9 @@ const t = [
     mark: "ㄅㄧㄠ",
     tradition: "膘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "biao",
+    explain: "肥肉（多用于牲畜，用于人时含贬义或戏谑意）：长～。蹲～。跌～（变瘦）。这块肉～厚。"
   },
   {
     char: "膛",
@@ -51028,7 +54063,9 @@ const t = [
     mark: "ㄊㄤˊ",
     tradition: "膛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tang",
+    explain: "胸腔：胸～。开～。器物的中空的部分：炉～儿。枪～。子弹上了～。"
   },
   {
     char: "膜",
@@ -51041,7 +54078,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "膜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "人和动植物体内像薄皮的组织：鼓～。腹～。苇～儿。像膜的薄皮：橡皮～。纸浆表面结成薄～。"
   },
   {
     char: "膝",
@@ -51054,7 +54093,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "膝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "大腿和小腿相连的关节的前部。通称膝盖。（Xī）姓。"
   },
   {
     char: "膨",
@@ -51067,7 +54108,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "膨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "体积胀大：～胀。"
   },
   {
     char: "膳",
@@ -51080,7 +54123,9 @@ const t = [
     mark: "ㄕㄢˋ",
     tradition: "膳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shan",
+    explain: "饭食：早～。午～。晚～。用～。"
   },
   {
     char: "臀",
@@ -51089,11 +54134,13 @@ const t = [
     radical: "月",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄨㄣˊ",
     tradition: "臀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tun",
+    explain: "人体后面两股的上端和腰相连接的部分，也指高等动物后肢的上端和腰相连接的部分。"
   },
   {
     char: "臂",
@@ -51106,7 +54153,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "臂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "胳膊：左～。～力。振～高呼。"
   },
   {
     char: "臊",
@@ -51119,7 +54168,9 @@ const t = [
     mark: "ㄙㄠˋ",
     tradition: "臊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sao",
+    explain: "〔～气〕倒霉（“气”读轻声）。〔～子〕方言，肉末或肉丁，如“羊肉～子面”。害羞：害～。羞～。"
   },
   {
     char: "臣",
@@ -51128,11 +54179,13 @@ const t = [
     radical: "臣",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄣˊ",
     tradition: "臣",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chen",
+    explain: "君主时代的官吏，有时也包括百姓：忠～。君～。官吏对皇帝上书或说话时的自称。姓。"
   },
   {
     char: "自",
@@ -51141,24 +54194,13 @@ const t = [
     radical: "自",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄗˋ",
     tradition: "自",
     sex: "女",
-    tone: 4
-  },
-  {
-    char: "臭",
-    spell: "chòu",
-    stroke: "10",
-    radical: "自",
-    struct: "上下结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄔㄡˋ",
-    tradition: "臭",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zi",
+    explain: "自己：～动。～卫。～爱。～力更生。～言～语。～告奋勇。～顾不暇。不～量力。自然；当然：～不待言。公道～在人心。两人久别重逢，～有许多话说。姓。从；由：～小。～此。～古。～远而近。～北京出发。选～《人民日报》。来～各国的朋友。"
   },
   {
     char: "至",
@@ -51171,7 +54213,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "至",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "到：～今。自始～终。～死不屈。至于：甚～。极；最：～为感谢。你要早来，～迟下星期内一定赶到。"
   },
   {
     char: "致",
@@ -51184,7 +54228,9 @@ const t = [
     mark: "ㄓˋ",
     tradition: "緻",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "给予；向对方表示（礼节、情意等）：～函。～电。～欢迎词。向大会～热烈的祝贺。集中（力量、意志等）于某个方面：～力。专心～志。达到；实现：～富。学以～用。招致；引起：～病。～癌。～残。以致：～使。由于粗心大意，～将地址写错。姓。情趣：兴～。景～。别～。有～。毫无二～。精密；精细：细～。精～。工～。"
   },
   {
     char: "臼",
@@ -51193,11 +54239,13 @@ const t = [
     radical: "臼",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄡˋ",
     tradition: "臼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiu",
+    explain: "舂米的器具，用石头制成，样子像盆：石～。形状像臼的：～齿。"
   },
   {
     char: "舀",
@@ -51206,11 +54254,13 @@ const t = [
     radical: "爫",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄧㄠˇ",
     tradition: "舀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yao",
+    explain: "用瓢、勺等取东西（多指流质）：～水。～汤。舀子，舀东西的器具。"
   },
   {
     char: "舅",
@@ -51223,7 +54273,9 @@ const t = [
     mark: "ㄐㄧㄡˋ",
     tradition: "舅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiu",
+    explain: "舅父，称母亲的兄、弟。舅子，称妻子的兄、弟。古称丈夫的父亲：～姑（公婆）。"
   },
   {
     char: "舆",
@@ -51236,7 +54288,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "輿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "车：～马。舍～登舟。车上可以载人载物的部分。指轿：肩～。彩～。地：～地。～图。众多；众人的：～论。～情。"
   },
   {
     char: "舌",
@@ -51245,11 +54299,13 @@ const t = [
     radical: "舌",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄜˊ",
     tradition: "舌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "she",
+    explain: "像舌头的东西：帽～。火～。铃或铎中的锤。"
   },
   {
     char: "舍",
@@ -51258,11 +54314,13 @@ const t = [
     radical: "人",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄜˋ",
     tradition: "捨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "房屋：宿～。校～。舍间：敝～。寒～。养家畜的圈：猪～。牛～。谦辞，用于对别人称自己的辈分低的或同辈年纪小的亲属：～侄。～弟。姓。古代行军三十里为一舍：退避三～。"
   },
   {
     char: "舒",
@@ -51271,24 +54329,13 @@ const t = [
     radical: "人",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄨ",
     tradition: "舒",
     sex: "女",
-    tone: 1
-  },
-  {
-    char: "舔",
-    spell: "tiǎn",
-    stroke: "14",
-    radical: "舌",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄊㄧㄢˇ",
-    tradition: "舔",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "shu",
+    explain: "伸展；宽解（拘束或憋闷状态）：～眉展眼。～经活血。～了一口气。缓慢；从容：～徐（缓慢）。～缓。姓。"
   },
   {
     char: "舞",
@@ -51301,7 +54348,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "舞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "按一定的节奏转动身体表演各种姿势：～蹈。～技。～姿。～会。～剑。～女。～曲。～台。耍弄：～弊。～文弄墨。"
   },
   {
     char: "舟",
@@ -51310,11 +54359,13 @@ const t = [
     radical: "舟",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄓㄡ",
     tradition: "舟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhou",
+    explain: "船：轻～。小～。扁（piān）～。姓。"
   },
   {
     char: "航",
@@ -51327,7 +54378,9 @@ const t = [
     mark: "ㄏㄤˊ",
     tradition: "航",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "hang",
+    explain: "船。行船。也指飞机、宇宙飞船的飞行：～海。～空。～天。"
   },
   {
     char: "般",
@@ -51340,7 +54393,9 @@ const t = [
     mark: "ㄅㄢ",
     tradition: "般",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "种类。那般、万般无奈、兄弟般的友谊"
   },
   {
     char: "舰",
@@ -51353,7 +54408,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "艦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "大型军用船只；军舰：～队。巡洋～。驱逐～。航空母～。"
   },
   {
     char: "舱",
@@ -51366,7 +54423,9 @@ const t = [
     mark: "ㄘㄤ",
     tradition: "艙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cang",
+    explain: "船或飞机中分隔开来载人或装东西的部分：货～。客～。前～。头等～。"
   },
   {
     char: "舵",
@@ -51379,7 +54438,9 @@ const t = [
     mark: "ㄉㄨㄛˇ",
     tradition: "舵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duo",
+    explain: "船、飞机等控制方向的装置：掌～。升降～。方向～。“柁”"
   },
   {
     char: "舶",
@@ -51392,7 +54453,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "舶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "航海大船：船～。巨～。海～。"
   },
   {
     char: "舷",
@@ -51401,11 +54464,13 @@ const t = [
     radical: "舟",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄢˊ",
     tradition: "舷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xian",
+    explain: "船、飞机等两侧的边儿：左～。右～。～梯。"
   },
   {
     char: "船",
@@ -51418,7 +54483,9 @@ const t = [
     mark: "ㄔㄨㄢˊ",
     tradition: "船",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chuan",
+    explain: "水上的主要运输工具：～体。～身。拖～。帆～。一只小～。"
   },
   {
     char: "艇",
@@ -51431,7 +54498,9 @@ const t = [
     mark: "ㄊㄧㄥˇ",
     tradition: "艇",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ting",
+    explain: "轻快的小船：游～。小～。排水量在500吨以下的水面舰艇通常称为艇。潜艇，无论其吨位大小，习惯上均称为艇。"
   },
   {
     char: "艘",
@@ -51444,7 +54513,9 @@ const t = [
     mark: "ㄙㄡ",
     tradition: "艘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sou",
+    explain: "量词。用于船只：航空母舰一～。"
   },
   {
     char: "良",
@@ -51457,7 +54528,9 @@ const t = [
     mark: "ㄌㄧㄤˊ",
     tradition: "良",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "liang",
+    explain: "好：优～。～好。善～。～药。消化不～。善良的人：除暴安～。很：～久。用心～苦。获益～多。姓。"
   },
   {
     char: "艰",
@@ -51470,20 +54543,9 @@ const t = [
     mark: "ㄐㄧㄢ",
     tradition: "艱",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "色",
-    spell: "sè",
-    stroke: "6",
-    radical: "色",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄙㄜˋ",
-    tradition: "色",
-    sex: "",
-    tone: 4
+    tone: 1,
+    pinyin: "jian",
+    explain: "困难：～苦。～深。物力维～。"
   },
   {
     char: "艳",
@@ -51496,7 +54558,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "艷",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "色彩光泽鲜明好看：～丽。娇～。百花争～。这布的花色太～了，有没有素一点的?指关于爱情方面的；香艳：～情。～史。羡慕：～羡。姓。"
   },
   {
     char: "艺",
@@ -51509,7 +54573,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "藝",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "技能；技术：工～。手～。园～。～高人胆大。艺术：文～。曲～。～人。准则；限度：贪贿无～。姓。"
   },
   {
     char: "艾",
@@ -51522,7 +54588,9 @@ const t = [
     mark: "ㄞˋ",
     tradition: "艾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ai",
+    explain: "多年生草本植物，叶子有香气，可入药，内服可做止血剂，又供灸法上用。也叫艾蒿。（Ài）姓。年老的，也指老年人：耆～。停止：方兴未～。美好；漂亮：少～（年轻漂亮的人）。"
   },
   {
     char: "节",
@@ -51535,7 +54603,9 @@ const t = [
     mark: "ㄐㄧㄝˊ",
     tradition: "節",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jie",
+    explain: "1.物体段与段之间连接的地方：竹～。关～。2.段落：章～。3.量词。表示分段的物体：两～烟筒。4.节日；时令：国庆～。清明～。5.事项：礼～。细～。6.限制；俭省：～制。开源～流。7.删略：～本。～录。8.操守：～操。晚～。9.古代出使外国所持的凭证：持～。10.国际通用的航海速度单位。每小时航行1海里（约合1.852千米）称为1节。海水流速和鱼雷速度也多按节计算。"
   },
   {
     char: "芋",
@@ -51548,7 +54618,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "芋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "多年生草本植物，块茎椭圆形或卵形，叶子略呈卵形，有长柄，花黄绿色。块茎含淀粉多，供食用。这种植物的块茎。‖通称芋头，也叫芋艿。泛指马铃薯、甘薯等植物：洋～。山～。"
   },
   {
     char: "芍",
@@ -51561,7 +54633,9 @@ const t = [
     mark: "ㄑㄩㄝˋ",
     tradition: "芍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shao",
+    explain: "→芍药"
   },
   {
     char: "芒",
@@ -51574,7 +54648,9 @@ const t = [
     mark: "ㄇㄤˊ",
     tradition: "芒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mang",
+    explain: "多年生草本植物，生在山地和田野间，叶子条形，秋天茎顶生穗，黄褐色，果实多毛。某些禾本科植物（如大麦、小麦）子实的外壳上长的针状物。（Máng）姓。"
   },
   {
     char: "芙",
@@ -51587,7 +54663,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "芙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "〔～蓉〕ａ．落叶灌木，花有红、黄、白各色，别于荷花，亦称“木芙蓉”；ｂ．荷花的别称。〔～蕖〕荷花的别称。〔～蓉城〕中国四川省成都市的别称，简称“蓉城”或“蓉”。"
   },
   {
     char: "芜",
@@ -51600,7 +54678,9 @@ const t = [
     mark: "ㄨˊ",
     tradition: "蕪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wu",
+    explain: "草长得多而乱：荒～。乱草丛生的地方：平～（草木丛生的原野）。比喻杂乱（多指文辞）：繁～。"
   },
   {
     char: "芝",
@@ -51613,7 +54693,9 @@ const t = [
     mark: "ㄓ",
     tradition: "芝",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "古书上指灵芝。古书上指白芷。姓。"
   },
   {
     char: "芥",
@@ -51626,7 +54708,9 @@ const t = [
     mark: "ㄍㄞˋ",
     tradition: "芥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jie",
+    explain: "植物名。十字花科芸薹（ㄩㄣˊㄊㄞˊ）属，一年生草本。叶像芸薹，边缘有锯齿，四月开黄色花。茎叶可食用，味道辛辣。  【组词】：芥菜、芥末小草。  【组词】：土芥、草芥"
   },
   {
     char: "芦",
@@ -51639,7 +54723,9 @@ const t = [
     mark: "ㄌㄩˊ",
     tradition: "蘆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lu",
+    explain: "芦苇：～花。～根。～席。姓。"
   },
   {
     char: "芬",
@@ -51652,7 +54738,9 @@ const t = [
     mark: "ㄈㄣ",
     tradition: "芬",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "fen",
+    explain: "香气：～芳。清～。姓。"
   },
   {
     char: "芭",
@@ -51665,7 +54753,9 @@ const t = [
     mark: "ㄅㄚ",
     tradition: "芭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ba",
+    explain: "古书上说的一种香草。"
   },
   {
     char: "芯",
@@ -51678,7 +54768,9 @@ const t = [
     mark: "ㄒㄧㄣˋ",
     tradition: "芯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "草木的中心部分。泛指某些物体的中心部分：岩～。笔～。机～。"
   },
   {
     char: "花",
@@ -51691,7 +54783,9 @@ const t = [
     mark: "ㄏㄨㄚ",
     tradition: "花",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hua",
+    explain: "种子植物的有性繁殖器官，由花瓣、花萼、花托、花蕊组成，有各种颜色，有的长得很艳丽，有香味：一朵～儿。可供观赏的植物：～木。～盆儿。～儿匠。种～儿。（～儿）形状像花朵的东西：灯～儿。火～。雪～儿。烟火的一种，以黑色火药加其他化学物质制成，在夜间燃放，能喷出许多火花，供人观赏：～炮。礼～。放～。花纹：白地蓝～儿。这被面～儿太密。颜色或种类错杂的：～白。～猫。～～绿绿。（眼睛）模糊迷乱：眼～。昏～。衣服磨损或要破没破的样子：袖子都磨～了。用来迷惑人的；不真实或不真诚的：～招儿。～账。～言巧语。姓。用；耗费：～费。～钱。～时间。该～的～，该省的省。"
   },
   {
     char: "芳",
@@ -51704,7 +54798,9 @@ const t = [
     mark: "ㄈㄤ",
     tradition: "芳",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "fang",
+    explain: "香：芬～。～草。～香。花卉：群～。众～。美好的（德行、名声）：～名。流～百世。敬辞，用于对方或跟对方有关的事物：～邻。姓。"
   },
   {
     char: "芹",
@@ -51717,7 +54813,9 @@ const t = [
     mark: "ㄑㄧㄣˊ",
     tradition: "芹",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qin",
+    explain: "芹菜。一般专指旱芹，茎、叶可食，种子可制香料。"
   },
   {
     char: "芽",
@@ -51730,7 +54828,9 @@ const t = [
     mark: "ㄧㄚˊ",
     tradition: "芽",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ya",
+    explain: "植物刚长出来的可以发育成茎、叶或花的部分：麦子发～儿了。形状像芽的东西：肉～（伤口愈合后多长出的肉）。"
   },
   {
     char: "苇",
@@ -51743,7 +54843,9 @@ const t = [
     mark: "ㄨㄟˇ",
     tradition: "葦",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wei",
+    explain: "芦苇。"
   },
   {
     char: "苍",
@@ -51756,7 +54858,9 @@ const t = [
     mark: "ㄘㄤ",
     tradition: "蒼",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cang",
+    explain: "青色（包括蓝和绿）：～松翠柏。灰白色：～白。～髯。指天或天空：上～。～穹。姓。"
   },
   {
     char: "苏",
@@ -51765,11 +54869,13 @@ const t = [
     radical: "艹",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄙㄨ",
     tradition: "蘇、囌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "su",
+    explain: "→紫苏下垂的穗状装饰物。  【组词】：流苏江苏省的简称。  【组词】：苏、浙、湖、广苏州的简称。  【组词】：上有天堂，下有苏杭。更生、复活。通「苏」。  【组词】：万物复苏姓。"
   },
   {
     char: "苔",
@@ -51782,7 +54888,9 @@ const t = [
     mark: "ㄊㄞˊ",
     tradition: "苔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tai",
+    explain: "隐花植物的一类。根、茎、叶的区别不明显，常贴在阴湿的地方生长。"
   },
   {
     char: "苗",
@@ -51795,7 +54903,9 @@ const t = [
     mark: "ㄇㄧㄠˊ",
     tradition: "苗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "miao",
+    explain: "初生的种子植物，有时专指某些蔬菜的嫩茎或嫩叶：幼～。青～。麦～儿。豆～儿。蒜～。韭菜～。间～。补～。事物显露出来的迹象：～头。矿～。后代：～裔。他们家就这一根～儿。某些初生的饲养的动物：鱼～。猪～。疫苗：牛痘～。卡介～。（～儿）形状像苗的东西：火～儿。姓。"
   },
   {
     char: "苛",
@@ -51808,7 +54918,9 @@ const t = [
     mark: "ㄎㄜ",
     tradition: "苛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "严厉、暴虐。  【组词】：苛刻、苛政、苛责烦琐。  【组词】：苛细、苛捐杂税"
   },
   {
     char: "苞",
@@ -51821,7 +54933,9 @@ const t = [
     mark: "ㄅㄠ",
     tradition: "苞",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bao",
+    explain: "花没开时包着花骨朵的小叶片：花～。含～未放。丛生而茂密：竹～松茂。"
   },
   {
     char: "苟",
@@ -51834,7 +54948,9 @@ const t = [
     mark: "ㄍㄡˇ",
     tradition: "苟",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gou",
+    explain: "姑且；暂且：～安。草率；随便：一丝不～。文言连词。如果；假使：～不教，性乃迁。<名>姓"
   },
   {
     char: "若",
@@ -51843,24 +54959,13 @@ const t = [
     radical: "艹",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄖㄜˇ",
     tradition: "若",
     sex: "男",
-    tone: 4
-  },
-  {
-    char: "苦",
-    spell: "kǔ",
-    stroke: "8",
-    radical: "艹",
-    struct: "上下结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄍㄨˇ",
-    tradition: "苦",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "ruo",
+    explain: "如；好像：安之～素。欣喜～狂。～隐～现。旁～无人。～无其事。姓。如果：人不犯我，我不犯人；人～犯我，我必犯人。人称代词。你：～辈。"
   },
   {
     char: "苫",
@@ -51873,7 +54978,9 @@ const t = [
     mark: "ㄕㄢˋ",
     tradition: "苫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shan",
+    explain: "用草做成的盖东西或垫东西的器物：草～子。姓。"
   },
   {
     char: "英",
@@ -51886,7 +54993,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "英",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "花：落～缤纷。才能或智慧过人的人：～豪。科技群～。姓。指英国：～尺。～镑。离～回国。"
   },
   {
     char: "苹",
@@ -51899,7 +55008,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "蘋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "→苹果"
   },
   {
     char: "茁",
@@ -51912,7 +55023,9 @@ const t = [
     mark: "ㄓㄨㄛˊ",
     tradition: "茁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "（草木）发芽，也指植物旺盛生长：～壮。"
   },
   {
     char: "茂",
@@ -51925,7 +55038,9 @@ const t = [
     mark: "ㄇㄠˋ",
     tradition: "茂",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "mao",
+    explain: "草木繁盛：根深叶～。丰富美好：图文并～。化学名词。旧指一种环状对称的C5H5结构，如二茂铁。"
   },
   {
     char: "范",
@@ -51938,7 +55053,9 @@ const t = [
     mark: "ㄈㄢˋ",
     tradition: "範",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fan",
+    explain: "铸造器物的模子：钱～。铁～。模范；榜样：典～。示～。界限：～围。就～。不使其越过界限：防～。"
   },
   {
     char: "茄",
@@ -51951,7 +55068,9 @@ const t = [
     mark: "ㄐㄧㄚ",
     tradition: "茄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qie",
+    explain: "茄子，一年生草本植物。花紫色，果实球形或长圆形。在热带则为多年生灌木。也指这种植物的果实。"
   },
   {
     char: "茅",
@@ -51964,7 +55083,9 @@ const t = [
     mark: "ㄇㄠˊ",
     tradition: "茅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mao",
+    explain: "白茅。（Máo）姓。"
   },
   {
     char: "茉",
@@ -51977,7 +55098,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "茉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "〔～莉〕ａ．常绿灌木，叶卵形，花白色，很香，常用来熏制茶叶；ｂ．一年生或多年生草本植物，花有红、白、黄、紫各色，果实圆形，成熟时黑色。根和种子可入药。花供观赏，可制化妆品。亦称“草茉莉”、“紫茉莉”。"
   },
   {
     char: "茎",
@@ -51990,7 +55113,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "莖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "植物体的一部分，由胚芽发展而成，下部和根连接，上部一般都生有叶、花和果实。茎能输送水、无机盐和养料到植物体的各部分去，并有贮存养料和支持枝、叶、花、果实等生长的作用。常见的有直立茎、缠绕茎、攀缘茎、匍匐茎等。像茎的东西：阴～。用于长条形的东西：数～小草。数～白发。"
   },
   {
     char: "茧",
@@ -52003,7 +55128,9 @@ const t = [
     mark: "ㄐㄧㄢˇ",
     tradition: "繭",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jian",
+    explain: "某些昆虫的幼虫在变成蛹之前吐丝做成的壳，通常是白色或黄色的。蚕茧是缫丝的原料。同“趼”。"
   },
   {
     char: "茫",
@@ -52016,7 +55143,9 @@ const t = [
     mark: "ㄇㄤˊ",
     tradition: "茫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mang",
+    explain: "形容水或其他事物没有边际、看不清楚：渺～。～无头绪。无所知：～然。"
   },
   {
     char: "茬",
@@ -52029,7 +55158,9 @@ const t = [
     mark: "ㄔㄚˊ",
     tradition: "茬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cha",
+    explain: "（～儿）农作物收割后留在地里的茎和根：麦～儿。豆～儿。指在同一块地上，作物种植或生长的次数，一次叫一茬：换～。二～韭菜（割了一次以后又生长的韭菜）。这块菜地一年能种四五～。指提到的事情或人家刚说完的话：话～。搭～。接～。势头：那个～来得不善。"
   },
   {
     char: "茴",
@@ -52042,7 +55173,9 @@ const t = [
     mark: "ㄏㄨㄟˊ",
     tradition: "茴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hui",
+    explain: "〔茴香〕多年生草本植物。叶分裂成线形，花黄色。嫩茎、叶可食，果实可制香料，也可供药用。"
   },
   {
     char: "茵",
@@ -52055,7 +55188,9 @@ const t = [
     mark: "ㄧㄣ",
     tradition: "茵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yin",
+    explain: "古代车子上的垫子。泛指铺垫的东西：～褥。绿草如～（形容草绿茸茸，非常繁茂）。"
   },
   {
     char: "茶",
@@ -52068,7 +55203,9 @@ const t = [
     mark: "ㄔㄚˊ",
     tradition: "茶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cha",
+    explain: "常绿木本植物，叶子长椭圆形，花一般为白色，种子有硬壳。嫩叶加工后就是茶叶。是我国南方重要的经济作物。用茶叶做成的饮料：喝～。品～。旧时指聘礼（古时聘礼多用茶）：下～（下聘礼）。茶色：～镜。～晶。某些饮料的名称：奶～。果～。指油茶树：～油。指山茶：～花。姓。"
   },
   {
     char: "茸",
@@ -52081,7 +55218,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "茸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "草初生时细小柔软的样子：绿～～的一片草地。鹿茸：参～（人参和鹿茸）。"
   },
   {
     char: "荆",
@@ -52094,20 +55233,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "荆",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "草",
-    spell: "cǎo",
-    stroke: "9",
-    radical: "艹",
-    struct: "上下结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄘㄠˇ",
-    tradition: "草",
-    sex: "",
-    tone: 3
+    tone: 1,
+    pinyin: "jing",
+    explain: "灌木。种类很多。多丛生，枝条柔软，可编筐篓。古时用荆条做成的刑杖：负～请罪。春秋时楚国也称荆。"
   },
   {
     char: "荐",
@@ -52120,7 +55248,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "薦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "推举；介绍：举～。推～。献；祭。草。草垫子：草～。"
   },
   {
     char: "荒",
@@ -52133,7 +55263,9 @@ const t = [
     mark: "ㄏㄨㄤ",
     tradition: "荒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "huang",
+    explain: "本义指荒芜，引申指年成不好、凶年、歉收等。"
   },
   {
     char: "荔",
@@ -52146,7 +55278,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "荔",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "〔荔枝〕常绿乔木。果皮有瘤状突起，果实多汁，味甜。广东、福建栽培较多，是南方特产果树。"
   },
   {
     char: "荚",
@@ -52159,7 +55293,9 @@ const t = [
     mark: "ㄐㄧㄚˊ",
     tradition: "莢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jia",
+    explain: "通常指豆类植物的果实：豆～。皂～。槐树～。（Jiá）姓。"
   },
   {
     char: "荞",
@@ -52172,7 +55308,9 @@ const t = [
     mark: "ㄑㄧㄠˊ",
     tradition: "蕎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qiao",
+    explain: "一年生草本植物，茎略带红色，叶子三角状心脏形，有长柄，花白色或淡红色，瘦果三角形，有棱，子实磨成粉供食用。这种植物的子实。"
   },
   {
     char: "荠",
@@ -52185,7 +55323,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "薺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: ""
   },
   {
     char: "荡",
@@ -52198,7 +55338,9 @@ const t = [
     mark: "ㄉㄤˋ",
     tradition: "蕩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dang",
+    explain: "摇动；摆动：动～。飘～。～桨。～秋千。无事走来走去；闲逛：游～。闲～。洗：冲～。涤～。全部搞光；清除：扫～。倾家～产。广阔；平坦：浩～。坦～。姓。放纵，行为不检点：放～。浪～。淫～。浅水湖：黄天～。芦花～。同“凼”。"
   },
   {
     char: "荣",
@@ -52211,7 +55353,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "榮",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "草木茂盛：欣欣向～。本固枝～。兴盛：繁～。光荣（跟“辱”相对）：～誉。～耀。虚～。～获冠军。姓。"
   },
   {
     char: "荤",
@@ -52224,7 +55368,9 @@ const t = [
     mark: "ㄏㄨㄣ",
     tradition: "葷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xun",
+    explain: "有鸡、鸭、鱼、肉或有动物油的食物。与“素”相对：～菜。葱、蒜等带刺激性的蔬菜。"
   },
   {
     char: "荧",
@@ -52237,7 +55383,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "熒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "光亮微弱的样子：一灯～然。眼光迷乱；疑惑：～惑。"
   },
   {
     char: "药",
@@ -52250,7 +55398,9 @@ const t = [
     mark: "ㄧㄠˋ",
     tradition: "藥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yao",
+    explain: "1.一种可以治病的物品（多指能吃的、敷的或熏洗的）。2.某些有化学作用的物质：火～。杀虫～。3.医治：不可救～。4.毒杀：～老鼠。"
   },
   {
     char: "荷",
@@ -52263,7 +55413,9 @@ const t = [
     mark: "ㄏㄜˊ",
     tradition: "荷",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "he",
+    explain: "荷花。参见“莲”"
   },
   {
     char: "荸",
@@ -52276,7 +55428,9 @@ const t = [
     mark: "ㄅㄧˊ",
     tradition: "荸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bi",
+    explain: "〔荸荠〕多年生草本植物。通常栽培在水田里。地上茎丛生、直立，深绿色。地下球茎扁圆形，老熟后深栗色或枣红色，可供食用。也指这种植物的地下球茎。"
   },
   {
     char: "莉",
@@ -52289,7 +55443,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "莉",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "见〔茉莉〕"
   },
   {
     char: "莫",
@@ -52302,7 +55458,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "莫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "表示“没有谁”或“没有哪一种东西”：~不欣喜、~名其妙。不：~如、一筹~展、爱~能助、~衷一是。不要：~哭、我不懂这里的规矩，请~见怪。表示揣测或反问：~非、~不是。姓。"
   },
   {
     char: "莱",
@@ -52315,7 +55473,9 @@ const t = [
     mark: "ㄌㄞ",
     tradition: "萊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lai",
+    explain: "藜。古指荒废或轮休的田地。"
   },
   {
     char: "莲",
@@ -52328,7 +55488,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "蓮",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "多年生草本植物，生在浅水中，地下茎肥大而长，有节，叶子圆形，高出水面，花大，淡红色或白色，有香气。地下茎叫藕，种子叫莲子，都可以吃。也叫荷或芙蓉。指莲子：建～（福建产的莲子）。湘～（湖南产的莲子）。姓。"
   },
   {
     char: "获",
@@ -52337,11 +55499,13 @@ const t = [
     radical: "艹",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄛˋ",
     tradition: "獲、穫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huo",
+    explain: "捉住；擒住：捕～。俘～。得到；获得：～胜。～利。～奖。～罪。～救。不劳而～。收割：收～。"
   },
   {
     char: "莹",
@@ -52354,7 +55518,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "瑩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "光洁像玉的石头。光洁透明：晶～。"
   },
   {
     char: "莺",
@@ -52367,7 +55533,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "鶯",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "鸟，身体小，多为褐色或暗绿色，嘴短而尖。叫的声音清脆。吃昆虫，对农业和林业有益。种类很多。"
   },
   {
     char: "莽",
@@ -52380,7 +55548,9 @@ const t = [
     mark: "ㄇㄤˇ",
     tradition: "莽",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mang",
+    explain: "密生的草。也用作草的泛称：草～。丛～。粗鲁；冒失：鲁～。"
   },
   {
     char: "菇",
@@ -52393,7 +55563,9 @@ const t = [
     mark: "ㄍㄨ",
     tradition: "菇",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gu",
+    explain: "蘑菇：香～。冬～。姓。"
   },
   {
     char: "菊",
@@ -52406,20 +55578,9 @@ const t = [
     mark: "ㄐㄩˊ",
     tradition: "菊",
     sex: "女",
-    tone: 2
-  },
-  {
-    char: "菌",
-    spell: "jūn",
-    stroke: "11",
-    radical: "艹",
-    struct: "上下结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄩㄣˋ",
-    tradition: "菌",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "ju",
+    explain: "菊花，多年生草本植物。种类很多。原产于中国。可供观赏。白菊花可作饮料。又可供药用，主治外感风热、头痛、咳嗽等。"
   },
   {
     char: "菜",
@@ -52432,7 +55593,9 @@ const t = [
     mark: "ㄘㄞˋ",
     tradition: "菜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cai",
+    explain: "供作副食品的植物：～市。白～。菠～。野～。蔬～。面有～色。主食以外的食品：～牛。～畜。～肴。～谱。名～。"
   },
   {
     char: "菠",
@@ -52445,7 +55608,9 @@ const t = [
     mark: "ㄅㄛ",
     tradition: "菠",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bo",
+    explain: "〔～菜〕一年生或二年生草本植物，叶子略呈三角形，根红色，含甜味，根和茎、叶均可食。〔～萝〕ａ．多年生草本植物。果实密集在一起，外部呈麟片状，果肉甜酸，产于热带；ｂ．这种植物的果实，亦称“凤梨”。"
   },
   {
     char: "菩",
@@ -52458,7 +55623,9 @@ const t = [
     mark: "ㄆㄨˊ",
     tradition: "菩",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pu",
+    explain: "〔～提〕ａ．佛教指豁然开朗的彻悟境界，又指觉悟的智慧和途径；ｂ．常绿乔木，树上的汁液可制硬性橡胶。原产于印度。〔～萨〕ａ．佛教指释迦牟尼修行尚未成佛时的称号，后指修行到一定程度，地位仅次于佛的人；ｂ．泛指佛和某些神；ｃ．喻慈善的人。"
   },
   {
     char: "菱",
@@ -52471,7 +55638,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "菱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "一年生草本植物，生在池沼中，根生在泥里，浮在水面的叶子略呈三角形，花白色。果实的硬壳大都有角，绿色或褐色，果肉可以吃。这种植物的果实。‖通称菱角。"
   },
   {
     char: "菲",
@@ -52484,7 +55653,9 @@ const t = [
     mark: "ㄈㄟˇ",
     tradition: "菲",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "fei",
+    explain: "形容花草美、香味浓：芳～。有机化合物，化学式C14H10。无色晶体，有荧光，是蒽的同分异构体。用来制染料、药品等。[英phenanthrene]"
   },
   {
     char: "萄",
@@ -52497,7 +55668,9 @@ const t = [
     mark: "ㄊㄠˊ",
     tradition: "萄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tao",
+    explain: "葡萄：～糖。"
   },
   {
     char: "萌",
@@ -52510,7 +55683,9 @@ const t = [
     mark: "ㄇㄥˊ",
     tradition: "萌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "meng",
+    explain: "（植物）发芽：～芽。发生：故态复～。古又同“氓（méng）”。"
   },
   {
     char: "萍",
@@ -52523,7 +55698,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "萍",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "浮萍。红萍，水生蕨类植物。即满江红。浮生于水面，叶绿色，秋季转红色。全草可作鱼类及家畜的饲料，又可作绿肥。"
   },
   {
     char: "萎",
@@ -52536,7 +55713,9 @@ const t = [
     mark: "ㄨㄟˇ",
     tradition: "萎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wei",
+    explain: "（植物）干枯：枯～。～谢。衰落：买卖～了。价钱～下来了。"
   },
   {
     char: "萝",
@@ -52549,7 +55728,9 @@ const t = [
     mark: "ㄌㄨㄛˊ",
     tradition: "蘿",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luo",
+    explain: "通常指某些能爬蔓的植物：藤～。茑～。女～。松～。"
   },
   {
     char: "萤",
@@ -52562,7 +55743,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "螢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "昆虫，身体黄褐色，触角丝状，腹部末端有发光的器官，能发带绿色的光。白天伏在草丛里，夜晚飞出来。种类很多，通称萤火虫。"
   },
   {
     char: "营",
@@ -52575,7 +55758,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "營",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "谋求：～生。～救。经营；管理：～造。～业。国～。民～。姓。军队驻扎的地方：军～。安～。军队的编制单位，隶属于团，下辖若干连。"
   },
   {
     char: "萧",
@@ -52588,7 +55773,9 @@ const t = [
     mark: "ㄒㄧㄠ",
     tradition: "蕭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "草名。蒿子的一种。冷落、衰败、没有生气的样子：～条。～然。"
   },
   {
     char: "萨",
@@ -52601,7 +55788,9 @@ const t = [
     mark: "ㄙㄚˋ",
     tradition: "薩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sa",
+    explain: "姓。"
   },
   {
     char: "落",
@@ -52614,7 +55803,9 @@ const t = [
     mark: "ㄌㄚˋ",
     tradition: "落",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "luo",
+    explain: "遗漏：这里~了两个字，应该添上。把东西放在一个地方，忘记拿走：我忙着出来，把书~在家里了。因为跟不上而被丢在后面：大家都努力干，谁也不愿意~在后面。"
   },
   {
     char: "著",
@@ -52627,7 +55818,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "著",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "显明，显出（显–、昭–）：卓～|～名|颇～成效。写文章，写书：～书立说。著作，写出来的文章或书：名～|译～。"
   },
   {
     char: "葛",
@@ -52640,7 +55833,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "葛",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ge",
+    explain: "姓。"
   },
   {
     char: "葡",
@@ -52653,7 +55848,9 @@ const t = [
     mark: "ㄆㄨˊ",
     tradition: "葡",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pu",
+    explain: "〔～萄〕ａ．落叶藤本植物，果实圆形或椭圆形，味甜可食，亦可酿酒；ｂ．这种植物的果实或像其形者，如“～萄干”。“～萄酒”。“～萄球菌”。"
   },
   {
     char: "董",
@@ -52666,7 +55863,9 @@ const t = [
     mark: "ㄉㄨㄥˇ",
     tradition: "董",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dong",
+    explain: "监督管理：～督。～事。董事：商～。校～。"
   },
   {
     char: "葫",
@@ -52679,7 +55878,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "葫",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "〔～芦〕ａ．一年生草本植物，果实像大小两个球连在一起，可以盛酒或供观赏；ｂ．这种植物的果实。大蒜的别称。"
   },
   {
     char: "葬",
@@ -52692,7 +55893,9 @@ const t = [
     mark: "ㄗㄤˋ",
     tradition: "葬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zang",
+    explain: "泛指依照风俗习惯用其他方法处理死者遗体：火～。海～。"
   },
   {
     char: "葱",
@@ -52705,7 +55908,9 @@ const t = [
     mark: "ㄘㄨㄥ",
     tradition: "葱",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "cong",
+    explain: "多年生草本植物。有辛辣味。包括大葱、分葱、细香葱等。多作调味品。青色：～翠。"
   },
   {
     char: "葵",
@@ -52718,7 +55923,9 @@ const t = [
     mark: "ㄎㄨㄟˊ",
     tradition: "葵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "kui",
+    explain: "冬葵，一年生或二年生草本植物。叶圆形，稍皱缩，嫩时可食。向日葵，一种油料作物。种子可榨油。"
   },
   {
     char: "蒂",
@@ -52731,7 +55938,9 @@ const t = [
     mark: "ㄉㄧˋ",
     tradition: "蒂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "瓜、果等跟茎、枝相连的部分；把儿（bàr）：并～莲。瓜熟～落。根深～固。"
   },
   {
     char: "蒋",
@@ -52744,7 +55953,9 @@ const t = [
     mark: "ㄐㄧㄤˇ",
     tradition: "蔣",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiang",
+    explain: "姓。"
   },
   {
     char: "蒙",
@@ -52757,7 +55968,9 @@ const t = [
     mark: "ㄇㄥˊ",
     tradition: "濛、懞、矇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "meng",
+    explain: "蒙昧：启～。遮盖：～上头巾。承受；遭受：承～指教。～难。形容雨点细小：～～细雨。忠厚的样子。“蒙眬”的“蒙”。"
   },
   {
     char: "蒜",
@@ -52770,7 +55983,9 @@ const t = [
     mark: "ㄙㄨㄢˋ",
     tradition: "蒜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "suan",
+    explain: "多年生草本植物，花白色带紫，叶子和花轴嫩时可做蔬菜。地下鳞茎味道辣，有刺激性气味，可以做调味品，也可入药。这种植物的鳞茎。‖也叫大蒜。"
   },
   {
     char: "蒲",
@@ -52783,7 +55998,9 @@ const t = [
     mark: "ㄆㄨˊ",
     tradition: "蒲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pu",
+    explain: "香蒲，俗称蒲草。多年生草本植物。生于水边或池沼内。根状茎横生，花穗形状像蜡烛。叶片供编织，根状茎可提取淀粉。"
   },
   {
     char: "蒸",
@@ -52796,7 +56013,9 @@ const t = [
     mark: "ㄓㄥ",
     tradition: "蒸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zheng",
+    explain: "液体受热转化成气体上升：～发。水～气。一种烹饪方法。利用沸水的热气使物品变熟、变热：～馒头。把冷饭～一下儿。"
   },
   {
     char: "蒿",
@@ -52809,7 +56028,9 @@ const t = [
     mark: "ㄏㄠ",
     tradition: "蒿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hao",
+    explain: "多年生或二年生草本植物。如青蒿、茵陈蒿等。均可供药用。"
   },
   {
     char: "蓄",
@@ -52822,7 +56043,9 @@ const t = [
     mark: "ㄒㄩˋ",
     tradition: "蓄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xu",
+    explain: "积聚；储存起来：～洪。心里藏着：～意。"
   },
   {
     char: "蓉",
@@ -52835,7 +56058,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "蓉",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "用某些植物的果肉或种子制成的粉状物：豆～。椰～。见〖芙蓉〗、四川成都的别称。姓。"
   },
   {
     char: "蓖",
@@ -52848,7 +56073,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "蓖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "〔蓖麻〕一年生或多年生草本植物。种子椭圆形，有光泽，有黑、白、棕色斑纹，可榨油。叶可饲蓖麻蚕。"
   },
   {
     char: "蓝",
@@ -52861,7 +56088,9 @@ const t = [
     mark: "ㄌㄢˊ",
     tradition: "藍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lan",
+    explain: "像晴天天空那样的颜色。蓼蓝，一年生草本植物。叶子含蓝汁，可提制染料。"
   },
   {
     char: "蓬",
@@ -52874,7 +56103,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "蓬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "飞蓬，二年生草本植物。叶像柳叶，边缘有齿，瘦果上有白色刺毛。松散；杂乱：～头垢面。"
   },
   {
     char: "蔑",
@@ -52887,7 +56118,9 @@ const t = [
     mark: "ㄇㄧㄝˋ",
     tradition: "衊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mie",
+    explain: "无；没有：～以复加。无视；瞧不起：轻～。微小：视沧海而知滴水之～。血污。引申为造谣中伤：诬～。"
   },
   {
     char: "蔓",
@@ -52900,7 +56133,9 @@ const t = [
     mark: "ㄇㄢˊ",
     tradition: "蔓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "man",
+    explain: "义同“蔓（wàn）”。用于合成词“蔓延”“蔓草”等。"
   },
   {
     char: "蔗",
@@ -52913,7 +56148,9 @@ const t = [
     mark: "ㄓㄜˋ",
     tradition: "蔗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhe",
+    explain: "甘蔗：～糖。～田。～农。"
   },
   {
     char: "蔚",
@@ -52926,7 +56163,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "蔚",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "茂盛；盛大：～然成风。有文采的：云蒸霞～。"
   },
   {
     char: "蔫",
@@ -52939,7 +56178,9 @@ const t = [
     mark: "ㄋㄧㄢ",
     tradition: "蔫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "nian",
+    explain: "花木、水果等因失去所含的水分而萎缩：常浇水，别让花儿～了。苹果搁～了，皱皱巴巴的。精神不振：孩子有些～，像是生病了。（性子）慢；不爽利：～性子。别看他人～，却很有主见。"
   },
   {
     char: "蔬",
@@ -52952,7 +56193,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "蔬",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "蔬菜，可以做菜的植物：菜～。～食。"
   },
   {
     char: "蔼",
@@ -52965,7 +56208,9 @@ const t = [
     mark: "ㄞˇ",
     tradition: "藹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ai",
+    explain: "和气；态度好：和～。～然。姓。繁茂。"
   },
   {
     char: "蔽",
@@ -52978,7 +56223,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "蔽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "遮盖；挡住：遮～。掩～。概括：一言以～之。"
   },
   {
     char: "蕉",
@@ -52991,7 +56238,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "蕉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "芭蕉。香蕉。"
   },
   {
     char: "蕊",
@@ -53004,7 +56253,9 @@ const t = [
     mark: "ㄖㄨㄟˇ",
     tradition: "蕊",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "rui",
+    explain: "花蕊：雄～。雌～。“橤”，另见"
   },
   {
     char: "蕴",
@@ -53017,7 +56268,9 @@ const t = [
     mark: "ㄩㄣˋ",
     tradition: "蘊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yun",
+    explain: "藏蓄：～藏。聚积：～结。事理深奥的地方：底～。"
   },
   {
     char: "蕾",
@@ -53030,7 +56283,9 @@ const t = [
     mark: "ㄌㄟˇ",
     tradition: "蕾",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "lei",
+    explain: "花蕾：～铃。蓓～。护苗保～。"
   },
   {
     char: "薄",
@@ -53043,7 +56298,9 @@ const t = [
     mark: "ㄅㄠˊ",
     tradition: "薄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "扁平物体上下两面之间的距离小。与“厚”相对：～片。淡：酒味～。（感情）冷淡：待他不～。不肥沃：～田。"
   },
   {
     char: "薇",
@@ -53052,11 +56309,13 @@ const t = [
     radical: "艹",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄨㄟ",
     tradition: "薇",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "wei",
+    explain: "白薇，多年生草本植物。茎直立，叶椭圆形，对生。根供药用。大巢菜。可作饲料、绿肥。"
   },
   {
     char: "薛",
@@ -53069,7 +56328,9 @@ const t = [
     mark: "ㄒㄩㄝ",
     tradition: "薛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xue",
+    explain: "周朝国名。在今山东滕州一带。"
   },
   {
     char: "薪",
@@ -53082,7 +56343,9 @@ const t = [
     mark: "ㄒㄧㄣ",
     tradition: "薪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "柴火：釜底抽～。米珠～桂。薪水：加～。发～。月～。年～。姓。"
   },
   {
     char: "薯",
@@ -53095,7 +56358,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "薯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "薯类作物的统称。如甘薯、马铃薯等。"
   },
   {
     char: "藏",
@@ -53108,7 +56373,9 @@ const t = [
     mark: "ㄘㄤˊ",
     tradition: "藏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cang",
+    explain: "隐蔽：躲～。收存：～书。"
   },
   {
     char: "藐",
@@ -53121,7 +56388,9 @@ const t = [
     mark: "ㄇㄧㄠˇ",
     tradition: "藐",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "miao",
+    explain: "小：～小。轻视；小看：言者谆谆，听者～～（教诲的言辞恳切，而听的人却不以为然）。"
   },
   {
     char: "藕",
@@ -53134,7 +56403,9 @@ const t = [
     mark: "ㄡˇ",
     tradition: "藕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ou",
+    explain: "莲的地下茎，长形，肥大有节，白色，中间有许多管状的孔，折断后有丝。可以吃。也叫莲藕。（Ǒu）姓。"
   },
   {
     char: "藤",
@@ -53147,7 +56418,9 @@ const t = [
     mark: "ㄊㄥˊ",
     tradition: "藤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "teng",
+    explain: "蔓生植物名。如白藤、紫藤等。有的茎细长，柔软而坚韧，可编织。泛指匍匐茎或攀缘茎。如瓜藤、葡萄藤。"
   },
   {
     char: "藻",
@@ -53160,7 +56433,9 @@ const t = [
     mark: "ㄗㄠˇ",
     tradition: "藻",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zao",
+    explain: "藻类植物：水～。海～。泛指生长在水中的绿色植物，也包括某些水生的高等植物，如金鱼藻、狸藻等。华丽的文辞：辞～。姓。"
   },
   {
     char: "蘑",
@@ -53173,7 +56448,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "蘑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "蘑菇，食用伞菌类的通称：口～。松～。"
   },
   {
     char: "蘸",
@@ -53186,7 +56463,9 @@ const t = [
     mark: "",
     tradition: "蘸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhan",
+    explain: "在液体、粉末或糊状的东西里沾一下就拿出来：～水钢笔。～糖吃。大葱～酱。"
   },
   {
     char: "虎",
@@ -53195,11 +56474,13 @@ const t = [
     radical: "虎",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄨˋ",
     tradition: "虎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "hu",
+    explain: "哺乳动物，头大而圆，毛黄色，有黑色横纹。听觉和嗅觉都很敏锐，性凶猛，力气大，善游泳，不善爬树，夜里出来捕食鸟兽。通称老虎。比喻勇猛威武：～将。～～有生气。露出凶相：～起脸。姓。同“唬”。"
   },
   {
     char: "虏",
@@ -53212,20 +56493,9 @@ const t = [
     mark: "ㄌㄩˇ",
     tradition: "虜",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "虐",
-    spell: "nüè",
-    stroke: "9",
-    radical: "虍",
-    struct: "半包围结构",
-    five: "火",
-    method: "-",
-    mark: "ㄋㄩㄝˋ",
-    tradition: "虐",
-    sex: "",
-    tone: 4
+    tone: 3,
+    pinyin: "lu",
+    explain: "俘获：～获。俘～。（a.打仗时捉住敌人；b.打仗时捉住的敌人）。俘获的人。中国古代对北方外族的贬称。"
   },
   {
     char: "虑",
@@ -53234,24 +56504,13 @@ const t = [
     radical: "虍",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˋ",
     tradition: "慮",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "虚",
-    spell: "xū",
-    stroke: "11",
-    radical: "虍",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄒㄩ",
-    tradition: "虚",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "lü",
+    explain: "思考：考～。深谋远～。千～一得。担忧；发愁：忧～。疑～。顾～。过～。不足为～。"
   },
   {
     char: "虫",
@@ -53264,20 +56523,9 @@ const t = [
     mark: "ㄔㄨㄥˊ",
     tradition: "蟲",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "虱",
-    spell: "shī",
-    stroke: "8",
-    radical: "虫",
-    struct: "半包围结构",
-    five: "",
-    method: "会意",
-    mark: "ㄕ",
-    tradition: "虱",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "chong",
+    explain: "比喻具有某种特点的人（多含轻蔑意）：书～。网～。可怜～。应声～。糊涂～。"
   },
   {
     char: "虹",
@@ -53290,7 +56538,9 @@ const t = [
     mark: "ㄏㄨㄥˊ",
     tradition: "虹",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hong",
+    explain: "大气中一种光的现象，天空中的小水珠经日光照射发生折射和反射作用而形成的弧形彩带，由外圈至内圈呈红、橙、黄、绿、蓝、靛、紫七种颜色。出现在和太阳相对着的方向。也叫彩虹。"
   },
   {
     char: "虽",
@@ -53299,11 +56549,13 @@ const t = [
     radical: "口",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄙㄨㄟ",
     tradition: "雖",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "sui",
+    explain: "虽然：事情～小，意义却很大。三月天气，～没太阳，也不觉得冷了。房子旧～旧，倒还干净。即使：为人民而死，～死犹荣。"
   },
   {
     char: "虾",
@@ -53316,7 +56568,9 @@ const t = [
     mark: "ㄏㄚˊ",
     tradition: "蝦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xia",
+    explain: "动物名。节肢动物门甲壳纲十足目。分头、胸、腹三部。尾长，头部有长短两对触须，胸部有步脚五对；腹部狭长分为数个环节，每一环节有桡脚一对，供游泳之用。生活于水中，种类颇多，均可食。　△虾子　"
   },
   {
     char: "蚀",
@@ -53329,7 +56583,9 @@ const t = [
     mark: "ㄕˊ",
     tradition: "蝕",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "损伤；腐烂；亏耗：侵～。腐～。～本。同“食（shí）”。"
   },
   {
     char: "蚁",
@@ -53342,7 +56598,9 @@ const t = [
     mark: "ㄧˇ",
     tradition: "蟻",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yi",
+    explain: "昆虫，种类很多，一般体小，呈黑、褐、红等色，触角丝状或棒状，腹部球状，腰部细。营群居生活，分雌蚁、雄蚁、工蚁和兵蚁。雌蚁和雄蚁都有单眼，有翅。工蚁和兵蚁都没有翅，生殖器官不发达。工蚁担任筑巢、采集食物、抚养幼虫等工作。兵蚁负责守卫。（Yǐ）姓。"
   },
   {
     char: "蚂",
@@ -53355,7 +56613,9 @@ const t = [
     mark: "ㄇㄚˋ",
     tradition: "螞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ma",
+    explain: "→蚂蚱"
   },
   {
     char: "蚊",
@@ -53368,7 +56628,9 @@ const t = [
     mark: "ㄨㄣˊ",
     tradition: "蚊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wen",
+    explain: "蚊子，昆虫。一般指水生孑孓的成虫。雌虫吸人、畜的血液，能传染疟疾和流行性乙型脑炎等。也泛指一些双翅类小昆虫，如瘿蚊、摇蚊，有的是农业害虫。"
   },
   {
     char: "蚌",
@@ -53381,7 +56643,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "蚌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bang",
+    explain: "软体动物。用鳃呼吸，有两扇坚硬的石灰质的壳。生活在淡水中。肉可食，壳可制装饰品或供药用。有的蚌，壳内能产珍珠。"
   },
   {
     char: "蚓",
@@ -53394,7 +56658,9 @@ const t = [
     mark: "ㄧㄣˇ",
     tradition: "蚓",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yin",
+    explain: "见〔蚯蚓〕"
   },
   {
     char: "蚕",
@@ -53407,7 +56673,9 @@ const t = [
     mark: "ㄘㄢˊ",
     tradition: "蠶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "can",
+    explain: "通常指家蚕。泛指某些能吐丝结茧的昆虫：柞～。蓖麻～。"
   },
   {
     char: "蚜",
@@ -53420,7 +56688,9 @@ const t = [
     mark: "ㄧㄚˊ",
     tradition: "蚜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ya",
+    explain: "蚜虫：棉～。烟～。"
   },
   {
     char: "蚣",
@@ -53433,7 +56703,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "蚣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "→蜈蚣"
   },
   {
     char: "蚤",
@@ -53446,7 +56718,9 @@ const t = [
     mark: "ㄗㄠˇ",
     tradition: "蚤",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zao",
+    explain: "跳蚤，也叫虼蚤。昆虫。黑褐色，无翅，善跳跃。吸食人、畜血液，传染鼠疫等疾病。古又同“早”。"
   },
   {
     char: "蚪",
@@ -53459,7 +56733,9 @@ const t = [
     mark: "ㄉㄡˇ",
     tradition: "蚪",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dou",
+    explain: "见〔蝌蚪〕"
   },
   {
     char: "蚯",
@@ -53472,7 +56748,9 @@ const t = [
     mark: "ㄑㄧㄡ",
     tradition: "蚯",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiu",
+    explain: "〔蚯蚓〕俗称蛐蟮。环节动物。身体柔软，有环节，生活在土里。有改良土壤作用。"
   },
   {
     char: "蛀",
@@ -53485,20 +56763,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "蛀",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "蛆",
-    spell: "qū",
-    stroke: "11",
-    radical: "虫",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄩ",
-    tradition: "蛆",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "zhu",
+    explain: "蛀虫，咬树木、衣物、粮食、书籍等的小虫。被虫子咬坏：这衣服被虫～了。"
   },
   {
     char: "蛇",
@@ -53511,7 +56778,9 @@ const t = [
     mark: "ㄕㄜˊ",
     tradition: "蛇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "she",
+    explain: "爬行动物，身体圆而细长，有鳞，没有四肢。种类很多，有的有毒。吃青蛙等小动物，大蛇也能吞食大的兽类。"
   },
   {
     char: "蛉",
@@ -53520,24 +56789,13 @@ const t = [
     radical: "虫",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄥˊ",
     tradition: "蛉",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "蛋",
-    spell: "dàn",
-    stroke: "11",
-    radical: "疋",
-    struct: "上下结构",
-    five: "火",
-    method: "会意",
-    mark: "ㄉㄢˋ",
-    tradition: "蛋",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "ling",
+    explain: "见〔白蛉〕脉翅目昆虫。如草青蛉、粉蛉等。"
   },
   {
     char: "蛔",
@@ -53550,7 +56808,9 @@ const t = [
     mark: "ㄏㄨㄟˊ",
     tradition: "蛔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hui",
+    explain: "蛔虫，寄生虫。线形，白色或米黄色。成虫寄生在人或其他动物的肠子里。能引起多种疾病，损害健康。"
   },
   {
     char: "蛙",
@@ -53563,7 +56823,9 @@ const t = [
     mark: "ㄨㄚ",
     tradition: "蛙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wa",
+    explain: "两栖动物，无尾，后肢长，前肢短，趾有蹼，善于跳跃和游泳。捕食昆虫，对农业有益。种类很多，常见的有青蛙等。"
   },
   {
     char: "蛛",
@@ -53576,7 +56838,9 @@ const t = [
     mark: "ㄓㄨ",
     tradition: "蛛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhu",
+    explain: "指蜘蛛：～网。～丝马迹。"
   },
   {
     char: "蛤",
@@ -53589,20 +56853,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "蛤",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "蛮",
-    spell: "mán",
-    stroke: "12",
-    radical: "虫",
-    struct: "上下结构",
-    five: "水",
-    method: "-",
-    mark: "ㄇㄢˊ",
-    tradition: "蠻",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ha",
+    explain: "蛤蜊、文蛤等双壳类软体动物。见〖蛤蚧〗。"
   },
   {
     char: "蛹",
@@ -53615,7 +56868,9 @@ const t = [
     mark: "ㄩㄥˇ",
     tradition: "蛹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "完全变态的昆虫由幼虫变为成虫的过渡形态。幼虫生长到一定时期就不再吃东西，内部组织和外形发生变化，最后变成蛹，一般为枣核形。蛹在条件适合的情况下变为成虫。"
   },
   {
     char: "蛾",
@@ -53628,7 +56883,9 @@ const t = [
     mark: "ㄜˊ",
     tradition: "蛾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "e",
+    explain: "通「蚁」。"
   },
   {
     char: "蜀",
@@ -53641,7 +56898,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "蜀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "朝代名。1.三国之一。参见“汉”2.十国之一（903—925）。王建建立。建都成都，国号蜀，史称前蜀。为后唐所灭。十国之一（933—965）。孟知祥在成都建立。国号蜀，史称后蜀。为北宋所灭。四川的别称。"
   },
   {
     char: "蜂",
@@ -53654,7 +56913,9 @@ const t = [
     mark: "ㄈㄥ",
     tradition: "蜂",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "昆虫。种类很多。有的成群生活，有毒刺，如蜜蜂、胡蜂；有的单独或成对生活，捕食小虫，如蜾蠃（luǒ）；有的营寄生生活，如寄生蜂；有的危害植物，如叶蜂。比喻成群地：～聚。"
   },
   {
     char: "蜈",
@@ -53667,7 +56928,9 @@ const t = [
     mark: "ㄨˊ",
     tradition: "蜈",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wu",
+    explain: "〔蜈蚣〕节肢动物。躯干由多数体节构成，每节有足一对。头部的足像钩子，有毒腺，能分泌毒液。以小虫为食。可入药。"
   },
   {
     char: "蜒",
@@ -53680,7 +56943,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "蜒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "蛞蝓（kuòyú）。见〖海蜒〗、"
   },
   {
     char: "蜓",
@@ -53693,7 +56958,9 @@ const t = [
     mark: "ㄊㄧㄥˊ",
     tradition: "蜓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ting",
+    explain: "见〔蜻蜓〕、〔蝘蜓〕"
   },
   {
     char: "蜕",
@@ -53706,7 +56973,9 @@ const t = [
     mark: "ㄊㄨㄟˋ",
     tradition: "蜕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tui",
+    explain: "蛇、蝉等脱皮：～化。蛇、蝉等脱下的皮：蛇～。蝉～。鸟换毛（脱毛重长）：旧毛还没～完，就开始长新毛了。"
   },
   {
     char: "蜗",
@@ -53719,7 +56988,9 @@ const t = [
     mark: "ㄨㄛ",
     tradition: "蝸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wo",
+    explain: "蜗牛。"
   },
   {
     char: "蜘",
@@ -53732,7 +57003,9 @@ const t = [
     mark: "ㄓ",
     tradition: "蜘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhi",
+    explain: "〔蜘蛛〕节肢动物。体分头胸部和腹部，有四对足，腹部尖端的突起能分泌黏液，用来结网捕虫。"
   },
   {
     char: "蜜",
@@ -53745,7 +57018,9 @@ const t = [
     mark: "ㄇㄧˋ",
     tradition: "蜜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mi",
+    explain: "蜂蜜，蜜蜂采集花粉酿成的东西。营养价值很高，可供药用。甜美的：甜言～语。"
   },
   {
     char: "蜡",
@@ -53758,7 +57033,9 @@ const t = [
     mark: "ㄌㄚˋ",
     tradition: "蠟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zha",
+    explain: "动物、植物所产生的，或石油、煤、油页岩中所含的油质，常温下多为固体，具有可塑性，能燃烧，易熔化，不溶于水，如蜂蜡、白蜡、石蜡等。用作防水剂，也可做蜡烛。蜡烛：点上一支～。"
   },
   {
     char: "蜻",
@@ -53771,7 +57048,9 @@ const t = [
     mark: "ㄑㄧㄥ",
     tradition: "蜻",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "〔～蜓〕昆虫，捕食小飞虫，是益虫。幼虫称“水虿”，生活在水中（有的地区称“蚂螂”），如“～蜓点水”（喻做事肤浅不深入）。"
   },
   {
     char: "蝇",
@@ -53784,7 +57063,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "蠅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "一般指苍蝇。也泛指双翅目中身体粗壮的种类，如种蝇、麦秆蝇、潜叶蝇，其中有的是农业害虫。"
   },
   {
     char: "蝉",
@@ -53797,7 +57078,9 @@ const t = [
     mark: "ㄔㄢˊ",
     tradition: "蟬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chan",
+    explain: "昆虫，种类很多，雄的腹部有发音器，能连续不断发出尖锐的声音。幼虫生活在土里，吸食植物根的汁液。成虫刺吸植物的汁。"
   },
   {
     char: "蝌",
@@ -53810,7 +57093,9 @@ const t = [
     mark: "ㄎㄜ",
     tradition: "蝌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "〔蝌蚪〕蛙、蟾蜍等两栖动物的幼体。体呈椭圆形，有长尾。生活在溪流或静水中，能食孑孓。是有益的小动物。"
   },
   {
     char: "蝎",
@@ -53823,7 +57108,9 @@ const t = [
     mark: "ㄒㄧㄝ",
     tradition: "蝎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xie",
+    explain: "蝎子，节肢动物。尾部末端有毒钩，能蜇人。多夜间活动。干燥体供药用，主治抽搐、破伤风、半身不遂等。"
   },
   {
     char: "蝗",
@@ -53836,7 +57123,9 @@ const t = [
     mark: "ㄏㄨㄤˊ",
     tradition: "蝗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "蝗虫，俗称蚂蚱。昆虫。口器坚硬，前翅狭窄而坚韧，后翅宽大而柔软，后肢发达，善于跳跃。能成群远飞的叫飞蝗，不能远飞的叫土蝗。食庄稼，是害虫。"
   },
   {
     char: "蝙",
@@ -53849,7 +57138,9 @@ const t = [
     mark: "ㄅㄧㄢ",
     tradition: "蝙",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bian",
+    explain: "〔蝙蝠〕哺乳动物。头部和躯干像鼠。前后肢和尾部之间有翼膜。晨昏或夜间在空中飞翔。捕食蚊、蛾等。对人类有益。"
   },
   {
     char: "蝠",
@@ -53862,7 +57153,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "蝠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "见〔蝙蝠〕"
   },
   {
     char: "蝴",
@@ -53875,7 +57168,9 @@ const t = [
     mark: "ㄏㄨˊ",
     tradition: "蝴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hu",
+    explain: "〔～蝶〕见“蝶”。"
   },
   {
     char: "蝶",
@@ -53888,7 +57183,9 @@ const t = [
     mark: "ㄉㄧㄝˊ",
     tradition: "蝶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "die",
+    explain: "蝴蝶的简称。"
   },
   {
     char: "螃",
@@ -53901,7 +57198,9 @@ const t = [
     mark: "ㄆㄤˊ",
     tradition: "螃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pang",
+    explain: "〔螃蟹〕节肢动物。种类很多，如毛蟹、青蟹、梭子蟹等。有足5对，前一对钳状，横着爬行。肉鲜美，可食。"
   },
   {
     char: "融",
@@ -53914,7 +57213,9 @@ const t = [
     mark: "ㄖㄨㄥˊ",
     tradition: "融",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "rong",
+    explain: "融化：消～。春雪易～。融合；调和：～洽。水乳交～。流通：金～。姓。"
   },
   {
     char: "螟",
@@ -53923,11 +57224,13 @@ const t = [
     radical: "虫",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄧㄥˊ",
     tradition: "螟",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ming",
+    explain: "螟虫，昆虫。一般指水稻钻心虫，如二化螟、三化螟。广义指各种钻心的蛾类幼虫。"
   },
   {
     char: "螺",
@@ -53940,7 +57243,9 @@ const t = [
     mark: "ㄌㄨㄛˊ",
     tradition: "螺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luo",
+    explain: "软体动物，体外包着锥形、纺锤形或扁椭圆形的硬壳，上有旋纹，种类很多，如田螺、海螺、钉螺。螺旋形的指纹。"
   },
   {
     char: "蟀",
@@ -53953,7 +57258,9 @@ const t = [
     mark: "ㄕㄨㄞˋ",
     tradition: "蟀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shuai",
+    explain: "见〔蟋蟀〕"
   },
   {
     char: "蟆",
@@ -53966,7 +57273,9 @@ const t = [
     mark: "ㄇㄚˊ",
     tradition: "蟆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ma",
+    explain: "→虾蟆"
   },
   {
     char: "蟋",
@@ -53979,7 +57288,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "蟋",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "〔～蟀〕昆虫，身体黑褐色，触角长，善于跳跃。雄性好斗，两翅摩擦能发声，对农作物有害。亦称“促织”、“趋织”；俗称“蛐蛐儿”。"
   },
   {
     char: "蟹",
@@ -53992,7 +57303,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "蟹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "节肢动物。有螃蟹、石蟹、梭子蟹等。"
   },
   {
     char: "蠕",
@@ -54005,7 +57318,9 @@ const t = [
     mark: "ㄖㄨˊ",
     tradition: "蠕",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ru",
+    explain: "（旧读ruǎn）蠕动：～形动物。"
   },
   {
     char: "蠢",
@@ -54018,7 +57333,9 @@ const t = [
     mark: "ㄔㄨㄣˇ",
     tradition: "蠢",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chun",
+    explain: "愚笨；笨拙：～材。～货。虫类爬动的样子：～动。"
   },
   {
     char: "血",
@@ -54027,11 +57344,13 @@ const t = [
     radical: "血",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄝˇ",
     tradition: "血",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "人和高等动物体内循环系统中的液体组织，红色，有腥气，由血浆、红细胞、白细胞和血小板组成。作用是把养分和激素输送给体内各个组织，收集废物送到排泄器官，调节体温和抵御病菌等。也叫血液。有血统关系的：～亲。～缘。比喻刚强热烈：～性。～气。指月经。姓。"
   },
   {
     char: "衅",
@@ -54040,11 +57359,13 @@ const t = [
     radical: "血",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄣˋ",
     tradition: "釁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xin",
+    explain: "嫌隙；争端：寻～。挑～。古代用牲畜的血涂器物的缝隙：～钟。～鼓。"
   },
   {
     char: "行",
@@ -54057,7 +57378,9 @@ const t = [
     mark: "ㄏㄤˊ",
     tradition: "行",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "xing",
+    explain: "行列：双~、杨柳成~。排行：您~几？3、行业：内~、同~、在~、懂~。某些营业机构：商~、银~、车~。用于成行的东西：一~字、几~树、两~眼泪。"
   },
   {
     char: "衍",
@@ -54070,7 +57393,9 @@ const t = [
     mark: "ㄧㄢˇ",
     tradition: "衍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yan",
+    explain: "开展；发挥：推～。敷～。多出来的（指字句）：～文。姓。低而平坦的土地：广～沃野。沼泽。"
   },
   {
     char: "衔",
@@ -54083,7 +57408,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "銜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xian",
+    explain: "马嚼子。用嘴含：燕子～泥。怀在心里：～恨。接受：～命。职务和级别的名号：职～。军～。大使～。"
   },
   {
     char: "街",
@@ -54096,7 +57423,9 @@ const t = [
     mark: "ㄐㄧㄝ",
     tradition: "街",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jie",
+    explain: "街道，两旁有房屋的比较宽阔的道路：大～小巷。"
   },
   {
     char: "衙",
@@ -54109,7 +57438,9 @@ const t = [
     mark: "ㄧㄚˊ",
     tradition: "衙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ya",
+    explain: "衙门：～役。姓。"
   },
   {
     char: "衡",
@@ -54122,7 +57453,9 @@ const t = [
     mark: "ㄏㄥˊ",
     tradition: "衡",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "heng",
+    explain: "秤杆。泛指称重量的器具。称量（liáng）：～其轻重。衡量：～其得失。古又同“横（héng）”。"
   },
   {
     char: "衣",
@@ -54131,11 +57464,13 @@ const t = [
     radical: "衣",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧ",
     tradition: "衣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yi",
+    explain: "穿上。  【组词】：衣锦还乡、衣锦荣归"
   },
   {
     char: "补",
@@ -54148,7 +57483,9 @@ const t = [
     mark: "ㄅㄨˇ",
     tradition: "補",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bu",
+    explain: "添上材料，修理破损的东西；修补：缝～。～牙。～袜子。修桥～路。补充；补足；填补（缺额）：弥～。增～。～选。候～。缺什么～什么。补养：滋～。～品。身体虚，需要好好～一～。利益；用处：～益。不无小～。空言无～。姓。"
   },
   {
     char: "表",
@@ -54161,7 +57498,9 @@ const t = [
     mark: "ㄅㄧㄠˇ",
     tradition: "錶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "biao",
+    explain: "外面；外表：～面。地～。由～及里。中表（亲戚）：～哥。～叔。姨～。姑～。把思想感情显示出来；表示：～达。～态。～决心。深～同情。按下不～（说）。俗称用药物把感受的风寒发散出来：吃服（fù）药～一～，出身汗，病就好了。榜样；模范：～率。为人师～。古代文体奏章的一种，用于较重大的事件：诸葛亮《出师～》。用表格形式排列事项的书籍或文件：《史记》十～。统计～。一张～。古代测日影的标杆。见〖圭表〗。测量某种量（liàng）的器具：温度～。电～。水～。煤气～。姓。"
   },
   {
     char: "衩",
@@ -54174,7 +57513,9 @@ const t = [
     mark: "ㄔㄚˋ",
     tradition: "衩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cha",
+    explain: "衣服旁边开口的地方：这件旗袍开的～太大。"
   },
   {
     char: "衫",
@@ -54187,7 +57528,9 @@ const t = [
     mark: "ㄕㄢ",
     tradition: "衫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shan",
+    explain: "单上衣：衬～。汗～。棉毛～。泛指衣服：衣～。长～。"
   },
   {
     char: "衬",
@@ -54200,20 +57543,9 @@ const t = [
     mark: "ㄔㄣˋ",
     tradition: "襯",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "衰",
-    spell: "shuāi",
-    stroke: "10",
-    radical: "亠",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄕㄨㄞ",
-    tradition: "衰",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "chen",
+    explain: "在里面或下面托上一层：～上一层纸。衬在里面的：～布。～衫。～裤。附在衣裳、鞋、帽等某一部分的里面的布制品：帽～儿。袖～儿。陪衬；衬托：绿叶把红花～得更好看了。"
   },
   {
     char: "衷",
@@ -54226,7 +57558,9 @@ const t = [
     mark: "ㄓㄨㄥ",
     tradition: "衷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhong",
+    explain: "内心：无动于～。～心拥护。同“中（zhōng）”：折～。"
   },
   {
     char: "袁",
@@ -54239,7 +57573,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "袁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "姓。"
   },
   {
     char: "袄",
@@ -54252,7 +57588,9 @@ const t = [
     mark: "ㄠˇ",
     tradition: "襖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ao",
+    explain: "有里子的中式上衣：夹～。棉～。"
   },
   {
     char: "袋",
@@ -54265,7 +57603,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "袋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "口袋；兜子：面～。衣～。量词。用于装口袋或烟袋的东西：一～面。一～烟。"
   },
   {
     char: "袍",
@@ -54278,7 +57618,9 @@ const t = [
     mark: "ㄆㄠˊ",
     tradition: "袍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pao",
+    explain: "袍子：皮～。棉～儿。长～。旗～儿。"
   },
   {
     char: "袒",
@@ -54291,7 +57633,9 @@ const t = [
     mark: "ㄊㄢˇ",
     tradition: "袒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tan",
+    explain: "脱去或敞开上衣，露出（身体的一部分）：～露。～胸露臂。袒护：偏～。"
   },
   {
     char: "袖",
@@ -54304,7 +57648,9 @@ const t = [
     mark: "ㄒㄧㄡˋ",
     tradition: "袖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiu",
+    explain: "袖子：～口。短～儿。藏在袖子里：～着手。～手旁观。"
   },
   {
     char: "袜",
@@ -54317,7 +57663,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "襪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "袜子，用丝、棉、尼龙等为原料织成或用布做成的穿在脚上的东西。"
   },
   {
     char: "被",
@@ -54330,7 +57678,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "被",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "分散。通「披」。  【组词】：微管仲，吾其被发左衽矣！（《论语．宪问》）将衣物披搭在身上。通「披」。  【组词】：操吴戈兮被犀甲。（《楚辞．屈原．九歌．国殇》）"
   },
   {
     char: "袭",
@@ -54343,7 +57693,9 @@ const t = [
     mark: "ㄒㄧˊ",
     tradition: "襲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xi",
+    explain: "趁人不备，突然攻击：侵～。空～。照样做；继承：因～。世～。扑过来：寒气～人。花香～人。量词。用于成套的衣服：棉衣一～。"
   },
   {
     char: "袱",
@@ -54356,7 +57708,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "袱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "包裹或覆盖东西用的布单：包～。"
   },
   {
     char: "裁",
@@ -54369,7 +57723,9 @@ const t = [
     mark: "ㄘㄞˊ",
     tradition: "裁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cai",
+    explain: "安排取舍（多用于文学艺术）：别出心～。《唐诗别～》。文章的体制、格式：体～。衡量；判断：～判。～决。控制；抑止：～制。制～。独～。"
   },
   {
     char: "裂",
@@ -54382,7 +57738,9 @@ const t = [
     mark: "ㄌㄧㄝˇ",
     tradition: "裂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lie",
+    explain: "破而分开；破成两部分或几部分：分～。破～。决～。～纹。～开。四分五～。手冻～了。叶子或花冠的边缘上较大较深的缺口。"
   },
   {
     char: "装",
@@ -54395,7 +57753,9 @@ const t = [
     mark: "ㄓㄨㄤ",
     tradition: "裝",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhuang",
+    explain: "修饰；打扮；化装：～饰。～点。他～老头儿。服装：新～。冬～。军～。中山～。行装：轻～。整～待发。演员化装时穿戴涂抹的东西：卸～。假装：～模作样。不懂就是不懂，不要～懂。姓。把东西放进器物内；把物品放在运输工具上：～箱。～车。装配；安装：～订。～电灯。机器已经～好了。"
   },
   {
     char: "裆",
@@ -54408,7 +57768,9 @@ const t = [
     mark: "ㄉㄤ",
     tradition: "襠",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dang",
+    explain: "两条裤腿相连的部分：横～。直～。开～裤。这条裤子～太肥。两条腿的中间：腿～。胯～。从～下钻过去。"
   },
   {
     char: "裕",
@@ -54421,7 +57783,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "裕",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "丰富；宽绰：富～。宽～。充～。余～。使富足：富国～民。姓。"
   },
   {
     char: "裙",
@@ -54434,7 +57798,9 @@ const t = [
     mark: "ㄑㄩㄣˊ",
     tradition: "裙",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qun",
+    explain: "裙子：布～。短～。连衣～。百褶～。形状或作用像裙子的东西：围～。墙～。"
   },
   {
     char: "裤",
@@ -54447,7 +57813,9 @@ const t = [
     mark: "ㄎㄨˋ",
     tradition: "褲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ku",
+    explain: "裤子：短～。棉～。毛～。灯笼～。"
   },
   {
     char: "裳",
@@ -54460,7 +57828,9 @@ const t = [
     mark: "ㄔㄤˊ",
     tradition: "裳",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chang",
+    explain: "→衣裳"
   },
   {
     char: "裸",
@@ -54473,7 +57843,9 @@ const t = [
     mark: "ㄌㄨㄛˇ",
     tradition: "裸",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "luo",
+    explain: "露出，没有遮盖：～露。～体。半～。赤～～。～着身子。"
   },
   {
     char: "裹",
@@ -54486,7 +57858,9 @@ const t = [
     mark: "ㄍㄨㄛˇ",
     tradition: "裹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "guo",
+    explain: "（用纸、布或其他片状物）缠绕；包扎：包～。～腿。用绷带把伤口～好。为了不正当的目的把人或物夹杂在别的人或物里面：土匪逃跑时～走了村子里的几个人。吸（奶）：小孩儿一生下来就会～奶。姓。"
   },
   {
     char: "褂",
@@ -54499,7 +57873,9 @@ const t = [
     mark: "ㄍㄨㄚˋ",
     tradition: "褂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gua",
+    explain: "（～儿）褂子：短～儿。小～儿（短的）。大～儿（长的）。马～儿。"
   },
   {
     char: "褐",
@@ -54512,7 +57888,9 @@ const t = [
     mark: "ㄏㄜˋ",
     tradition: "褐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "he",
+    explain: "粗布或粗布衣服。黑黄色。"
   },
   {
     char: "褒",
@@ -54525,7 +57903,9 @@ const t = [
     mark: "ㄅㄠ",
     tradition: "褒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bao",
+    explain: "赞扬；夸奖（跟“贬”相对）：～奖。～扬。（衣服）肥大：～衣博带（宽袍大带）。"
   },
   {
     char: "褥",
@@ -54538,7 +57918,9 @@ const t = [
     mark: "ㄖㄨˋ",
     tradition: "褥",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ru",
+    explain: "用布、棉絮、兽皮等制成的床上铺垫物：被～。"
   },
   {
     char: "褪",
@@ -54551,7 +57933,9 @@ const t = [
     mark: "ㄊㄨㄟˋ",
     tradition: "褪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tui",
+    explain: "收缩或晃动身体某部分，使套在它上面的东西脱下来：把袖子～下来。向里移动：把手～在袖子里。"
   },
   {
     char: "襟",
@@ -54564,7 +57948,9 @@ const t = [
     mark: "ㄐㄧㄣ",
     tradition: "襟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jin",
+    explain: "上衣或袍子的胸前部分：大～。对～。有连襟关系的：～兄。胸怀；抱负：～怀。～抱。"
   },
   {
     char: "西",
@@ -54573,11 +57959,13 @@ const t = [
     radical: "覀",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧ",
     tradition: "西",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "方位词。四个主要方向之一，太阳落下去的一边：～面。河～。往～去。夕阳～下。（Xī）西洋；内容或形式属于西洋的：～餐。～医。～服。～式。学贯中～。姓。"
   },
   {
     char: "要",
@@ -54586,11 +57974,13 @@ const t = [
     radical: "覀",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄠˋ",
     tradition: "要",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yao",
+    explain: "重要：主～。紧～。险～。～事。～道。重要的内容：纲～。摘～。提～。择～记录。希望得到；希望保持：他～一台电脑。这本书我还～呢!因为希望得到或收回而有所表示；索取：～账。小弟弟跟姐姐～钢笔用。请求：她～我替她写信。助动词。表示做某件事的意志：他～学游泳。助动词。须要；应该：路很滑，大家～小心!。早点儿睡吧，明天还～起早呢!需要：我做件上衣～多少布?。由北京到天津坐汽车～两个小时。助动词。将要：我们～出国旅游了。～下雨了。助动词。表示估计，用于比较：夏天屋子里太热，树荫底下～凉快得多。如果：明天～下雨，我就不去了。要么：～就去打球，～就去溜冰，别再犹豫了。"
   },
   {
     char: "覆",
@@ -54603,7 +57993,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "覆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "盖住：～盖。被～。天～地载。底朝上翻过来；歪倒：颠～。前车之～，后车之鉴。同“复2”"
   },
   {
     char: "见",
@@ -54616,7 +58008,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "見",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "看到：看～。罕～。～微知著。～义勇为。～异思迁。接触，遇到：怕～风。～习。看得出，显得出：～效。相形～绌。（文字等）出现在某处，可参考：～上。～下。会晤：会～。接～。对事物观察、认识、理解：～解。～地（见解）。～仁～智（指对同一问题各人从不同角度持不同看法）。助词，表示被动或对我如何：～外。～教。～谅（原谅我）。～笑（被讥笑）。姓。"
   },
   {
     char: "观",
@@ -54629,7 +58023,9 @@ const t = [
     mark: "ㄍㄨㄢˋ",
     tradition: "觀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guan",
+    explain: "看：～看。走马～花。坐井～天。景象或样子：奇～。改～。对事物的认识或看法：乐～。悲～。世界～。"
   },
   {
     char: "规",
@@ -54642,7 +58038,9 @@ const t = [
     mark: "ㄍㄨㄟ",
     tradition: "規",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gui",
+    explain: "画圆形的工具：圆～。两脚～。规则；成例：校～。革除陋～。劝告：～劝。～勉。谋划；打主意：～划。～定。姓。"
   },
   {
     char: "觅",
@@ -54655,7 +58053,9 @@ const t = [
     mark: "ㄇㄧˋ",
     tradition: "覓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mi",
+    explain: "找。寻求：～食。～路。"
   },
   {
     char: "视",
@@ -54664,11 +58064,13 @@ const t = [
     radical: "礻",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕˋ",
     tradition: "視",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "看：～力。～线。近～。熟～无睹。看待：轻～。重～。藐～。一～同仁。考察：～察。巡～。监～。姓。"
   },
   {
     char: "览",
@@ -54681,7 +58083,9 @@ const t = [
     mark: "ㄌㄢˇ",
     tradition: "覽",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lan",
+    explain: "看：游～。展～。浏～。阅～。一～无余。"
   },
   {
     char: "觉",
@@ -54694,7 +58098,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "覺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jiao",
+    explain: "人或动物的器官受刺激后对事物的感受辨别：感～。知～。触～。视～。～察。醒悟：～悟。～醒。“～今是而昨非”。"
   },
   {
     char: "角",
@@ -54703,11 +58109,13 @@ const t = [
     radical: "角",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄠˇ",
     tradition: "角",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "牛、羊、鹿等头上长出的坚硬的东西：牛～。犀～。形状像角的；物体边缘相接的部分：菱～。桌子～。数学上指由一点发出的两条射线所组成的图形。中国辅币名。一元的十分之一。古时军中吹的乐器：号～。星名。二十八宿之一。"
   },
   {
     char: "解",
@@ -54720,7 +58128,9 @@ const t = [
     mark: "ㄐㄧㄝˋ",
     tradition: "解",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jie",
+    explain: "分开：～剖。瓦～。难～难分。把束缚着或系着的东西打开：～扣儿。～衣服。解除：～职。～渴。～乏。解释：～说。～答。注～。了解；明白：令人不～。通俗易～。解手：大～。小～。代数方程式中未知数的值，例如x+16=0，x=-16，-16就是x+16=0这个方程的解。演算方程式；求方程式中未知数的值：～方程。"
   },
   {
     char: "触",
@@ -54733,7 +58143,9 @@ const t = [
     mark: "ㄔㄨˋ",
     tradition: "觸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chu",
+    explain: "接触；碰；撞：～电。一～即发。感动；触动：感～。～发。"
   },
   {
     char: "言",
@@ -54742,11 +58154,13 @@ const t = [
     radical: "言",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄧㄢˊ",
     tradition: "言",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "话：～语。语～。格～。诺～。发～。有～在先。～外之意。说：～之有理。畅所欲～。知无不～，～无不尽。汉语的一个字叫一言：五～诗。万～书。全书近二十万～。姓。"
   },
   {
     char: "誉",
@@ -54759,7 +58173,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "譽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "名誉：荣～。～满全国。称赞：毁～。～不绝口。姓。"
   },
   {
     char: "誊",
@@ -54768,11 +58184,13 @@ const t = [
     radical: "言",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄊㄥˊ",
     tradition: "謄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "teng",
+    explain: "誊写：这稿子太乱，要～一遍。"
   },
   {
     char: "誓",
@@ -54785,7 +58203,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "誓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "表示决心依照说的话实行；发誓：～师。～不甘休。～为死难烈士报仇。表示决心的话：宣～。起～。发个～。"
   },
   {
     char: "警",
@@ -54798,7 +58218,9 @@ const t = [
     mark: "ㄐㄧㄥˇ",
     tradition: "警",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jing",
+    explain: "戒备：～惕。～戒。（感觉）敏锐：机～。～觉。使人注意（情况严重）；告诫：～报。～告。～世。惩一～百。危险紧急的情况或事情：火～。报～。警察的简称：民～。武～。交通～。姓。"
   },
   {
     char: "譬",
@@ -54811,7 +58233,9 @@ const t = [
     mark: "ㄆㄧˋ",
     tradition: "譬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pi",
+    explain: "比喻；比方：～喻。～如。设～。"
   },
   {
     char: "计",
@@ -54824,7 +58248,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "計",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "计算：核～。共～。不～其数。数以万～。测量或计算度数、时间等的仪器：体温～。血压～。晴雨～。主意；策略；计划：～策。巧～。缓兵之～。眉头一皱，～上心来。百年大～，质量第一。做计划；打算：设～。为加强安全～，制定了工厂保卫条例。计较；考虑：不～成败。无暇～及。姓。"
   },
   {
     char: "订",
@@ -54837,7 +58263,9 @@ const t = [
     mark: "ㄉㄧㄥˋ",
     tradition: "釘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ding",
+    explain: "经过研究商讨而立下（条约、契约、计划、章程等）：～婚。～合同。预先约定：预～。～报纸。改正（文字中的错误）：～正。修～。校～。装订：～书机。用纸～成一个本子。"
   },
   {
     char: "认",
@@ -54850,7 +58278,9 @@ const t = [
     mark: "ㄖㄣˋ",
     tradition: "認",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ren",
+    explain: "认识；分辨：～字。～清是非。自己的东西，自己来～。跟本来没有关系的人建立某种关系：～了一门亲。～老师。表示同意；承认：公～。否～。～可。～输。～错儿。认吃亏（后面要带“了”）：你不用管，这事我～了。"
   },
   {
     char: "讥",
@@ -54859,11 +58289,13 @@ const t = [
     radical: "讠",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧ",
     tradition: "譏",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "讥讽：～笑。～刺。反唇相～。"
   },
   {
     char: "讨",
@@ -54876,7 +58308,9 @@ const t = [
     mark: "ㄊㄠˇ",
     tradition: "討",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tao",
+    explain: "征伐：征～。探索；研究：研～。索取：向敌人～还血债。请求：～教。招惹：～厌。"
   },
   {
     char: "让",
@@ -54889,7 +58323,9 @@ const t = [
     mark: "ㄖㄤˋ",
     tradition: "讓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "rang",
+    explain: "把方便或好处给别人：弟弟小，哥哥～着他点儿。见困难就上，见荣誉就～。请人接受招待：～茶。把大家～进屋里。索取一定的代价，把财物的所有权转移给别人：出～。转～。那辆旧车～出去了。表示指使、容许或听任：谁～你来的?。～我仔细想想。要是～事态发展下去，后果会不堪设想。避开；躲闪：～路。请～开点儿。被3“被”字后面的施事有时可以省略，但“让”字后面的施事一般不能省略，如可说“行李被淋了”，不说“行李让淋了”。姓。"
   },
   {
     char: "训",
@@ -54898,11 +58334,13 @@ const t = [
     radical: "讠",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄒㄩㄣˋ",
     tradition: "訓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "教导；训诫：教～。～话。～词。～了他一顿。挨了一通～。教导或训诫的话：家～。遗～。训练：培～。轮～。军～。准则：不足为～。解释（词义）：～诂。姓。"
   },
   {
     char: "议",
@@ -54915,7 +58353,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "議",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "讨论；商量：自报公～。意见：建～。提～。评论：物～。无可非～。"
   },
   {
     char: "讯",
@@ -54928,7 +58368,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "訊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "询问：问～。审问：审～。消息；信息：通～。音～。新华社～。"
   },
   {
     char: "记",
@@ -54941,7 +58383,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "記",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "把印象保持在脑子里：～忆。～性。～得。～不清。好好～住。记录；记载；登记：～事。～账。摘～。～一大功。记载、描写事物的书或文章（常用于书名或篇名）：日～。笔～。游～。《岳阳楼～》。（～儿）标志；符号：标～。钤～。暗～儿。皮肤上的生下来就有的深色的斑：左边眉毛上有个黑～。多用于某些动作的次数：打一～耳光。一～劲射，球应声入网。姓。"
   },
   {
     char: "讲",
@@ -54954,7 +58398,9 @@ const t = [
     mark: "ㄐㄧㄤˇ",
     tradition: "講",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiang",
+    explain: "说：～故事。解释；论述：～明。～课。这是一本～语法的著作。商量；商谈：～价。～和。讲求；注重：～卫生。～政策。就某方面说：～念书他不行，～干活可是一把手。古又同“斠（）（jiào）”。"
   },
   {
     char: "讳",
@@ -54967,7 +58413,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "諱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "因有所顾忌而不敢说或不愿说；忌讳：隐～。直言不～。忌讳的事情：犯～。旧时不敢直称帝王或尊长的名字，叫讳。也指所讳的名字：名～。姓。"
   },
   {
     char: "讶",
@@ -54980,7 +58428,9 @@ const t = [
     mark: "ㄧㄚˋ",
     tradition: "訝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ya",
+    explain: "诧异；惊奇：惊～。"
   },
   {
     char: "许",
@@ -54993,7 +58443,9 @@ const t = [
     mark: "ㄒㄩˇ",
     tradition: "許",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xu",
+    explain: "答应、应允。  【组词】：许可、允许期待。  【组词】：期许、自许称赞。  【组词】：称许、赞许表示约略估计的数量。  【组词】：二里许、五万许人可能。  【组词】：或许、也许这么、如此。  【组词】：许多、许久允诺、给予。  【组词】：以身相许、以身许国处所。  【组词】：先生不知何许人也，亦不详其姓字。（晋．陶渊明〈五柳先生传〉）姓。"
   },
   {
     char: "讹",
@@ -55006,7 +58458,9 @@ const t = [
     mark: "ㄜˊ",
     tradition: "訛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "e",
+    explain: "错误。例：以～传～。讹诈：～人。"
   },
   {
     char: "论",
@@ -55019,7 +58473,9 @@ const t = [
     mark: "ㄌㄩㄣˊ",
     tradition: "論",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lun",
+    explain: "分析和说明道理：评～。议～。分析和说明道理的言论、文章或理论：舆～。社～。历史唯物～。评定；看待：～罪。相提并～。介词。按照：～堆卖。～件计工。"
   },
   {
     char: "讼",
@@ -55032,7 +58488,9 @@ const t = [
     mark: "ㄙㄨㄥˋ",
     tradition: "訟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "song",
+    explain: "在法庭上争辩是非曲直；打官司：诉～。争辩是非：争～。聚～纷纭。"
   },
   {
     char: "讽",
@@ -55045,7 +58503,9 @@ const t = [
     mark: "ㄈㄥˇ",
     tradition: "諷",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "feng",
+    explain: "用含蓄的话指责或劝告：讥～。嘲～。冷嘲热～。背诵；诵读：～诵。～读。～经。"
   },
   {
     char: "设",
@@ -55058,7 +58518,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "設",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "设立；布置：～防。～宴。总部～在北京。筹划：～计。想方～法。假设：～想。～x=1。～长方形的宽是x米。假如；倘若：～有困难，当助一臂之力。"
   },
   {
     char: "访",
@@ -55071,7 +58533,9 @@ const t = [
     mark: "ㄈㄤˇ",
     tradition: "訪",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "fang",
+    explain: "访问；探问：～友。来～。向人询问调查：～查。采～。"
   },
   {
     char: "诀",
@@ -55084,7 +58548,9 @@ const t = [
     mark: "ㄐㄩㄝˊ",
     tradition: "訣",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jue",
+    explain: "就事物的主要内容编成顺口押韵的容易记忆的词句：口～。歌～。方法；窍门：秘～。妙～。分别（多指不再相见）：～别。永～。"
   },
   {
     char: "证",
@@ -55097,7 +58563,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "證",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zheng",
+    explain: "证明：～人。～实。凭证；证据：工作～。人～。中医对病人若干症状和体征的总称。如表证（发热、恶寒等）、虚寒证（怕冷、出虚汗、手脚冰凉等）。"
   },
   {
     char: "评",
@@ -55110,7 +58578,9 @@ const t = [
     mark: "ㄆㄧㄥˊ",
     tradition: "評",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ping",
+    explain: "评论；批评：短～。书～。获得好～。～一部电影。评判：～分儿。～选。～一～谁写得好。姓。"
   },
   {
     char: "诅",
@@ -55123,7 +58593,9 @@ const t = [
     mark: "ㄗㄨˇ",
     tradition: "詛",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zu",
+    explain: "诅咒。盟誓；发誓。"
   },
   {
     char: "识",
@@ -55136,20 +58608,9 @@ const t = [
     mark: "ㄕˊ",
     tradition: "識",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "诈",
-    spell: "zhà",
-    stroke: "7",
-    radical: "讠",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄓㄚˋ",
-    tradition: "詐",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "shi",
+    explain: "认得：～字。相～。知识：常～。学～。见解；辨别力：很有见～。远见卓～。"
   },
   {
     char: "诉",
@@ -55162,7 +58623,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "訴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "控告：上～。"
   },
   {
     char: "诊",
@@ -55175,7 +58638,9 @@ const t = [
     mark: "ㄓㄣˇ",
     tradition: "診",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhen",
+    explain: "医生检查病情：门～。会～。"
   },
   {
     char: "词",
@@ -55188,7 +58653,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "詞",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "（～儿）说话或诗歌、文章、戏剧中的语句：戏～。义正～严。～不达意。他问得我没～儿回答。一种韵文形式，由五言诗、七言诗和民间歌谣发展而成，起于唐代，盛于宋代。原是配乐歌唱的一种诗体，句的长短随着歌调而改变，因此又叫做长短句。有小令和慢词两种，一般分上下两阕。语言里最小的、可以自由运用的单位。"
   },
   {
     char: "译",
@@ -55201,7 +58668,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "譯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "翻译：口～。笔～。直～。～文。～了一篇英文小说。姓。"
   },
   {
     char: "试",
@@ -55214,7 +58683,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "試",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "实验；尝试：～航。～制。考试：～题。口～。"
   },
   {
     char: "诗",
@@ -55227,7 +58698,9 @@ const t = [
     mark: "ㄕ",
     tradition: "詩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shi",
+    explain: "文学体裁的一种，通过有节奏、韵律的语言集中地反映生活、抒发情感。（Shī）姓。"
   },
   {
     char: "诚",
@@ -55240,7 +58713,9 @@ const t = [
     mark: "ㄔㄥˊ",
     tradition: "誠",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "cheng",
+    explain: "（心意）真实：～心～意。开～布公。她的心很～。实在；的确：此人～非等闲之辈。如果；果真：～如是，则相见之日可期。姓。"
   },
   {
     char: "话",
@@ -55253,7 +58728,9 @@ const t = [
     mark: "ㄏㄨㄚˋ",
     tradition: "話",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hua",
+    explain: "说出来的能够表达思想的声音，或者把这种声音记录下来的文字：讲～。会～。土～。这两句～说得不妥当。说；谈：～别。～家常。茶～会。"
   },
   {
     char: "诞",
@@ -55266,20 +58743,9 @@ const t = [
     mark: "ㄉㄢˋ",
     tradition: "誕",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "诡",
-    spell: "guǐ",
-    stroke: "8",
-    radical: "讠",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄍㄨㄟˇ",
-    tradition: "詭",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "dan",
+    explain: "诞生：～辰。生日：华～。寿～。荒唐的；不实在的；不合情理的：虚～。荒～。怪～。"
   },
   {
     char: "询",
@@ -55292,7 +58758,9 @@ const t = [
     mark: "ㄒㄩㄣˊ",
     tradition: "詢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xun",
+    explain: "征求意见：～问。咨～。"
   },
   {
     char: "该",
@@ -55305,7 +58773,9 @@ const t = [
     mark: "ㄍㄞ",
     tradition: "該",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gai",
+    explain: "助动词。应当：应～。～说的一定要说。你累了，～休息一下了。～两天干的活儿，一天就干完了。有时带“着”（·zhe）：今天晚上～着你值班了。理应如此：活～。～!谁叫他淘气来着。用在感叹句中兼有加强语气的作用：我们的责任～有多重啊!。要是水泵今天就运到，～多么好哇!欠：～账。我～他两块钱。指示代词。指上文说过的人或事物（多用于公文）：～地交通便利。～生品学兼优。同“赅”。"
   },
   {
     char: "详",
@@ -55318,7 +58788,9 @@ const t = [
     mark: "ㄒㄧㄤˊ",
     tradition: "詳",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xiang",
+    explain: "完备、仔细。  【组词】：详细、周详明白、知道。  【组词】：不详细述、陈述。  【组词】：内详从容、庄重。  【组词】：安详"
   },
   {
     char: "诫",
@@ -55331,20 +58803,9 @@ const t = [
     mark: "ㄐㄧㄝˋ",
     tradition: "誡",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "诬",
-    spell: "wū",
-    stroke: "9",
-    radical: "讠",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄨ",
-    tradition: "誣",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "jie",
+    explain: "警告；劝告：告～。劝～。规～。"
   },
   {
     char: "语",
@@ -55357,7 +58818,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "語",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "告诉。  【组词】：居，吾语女。（《论语．阳货》）"
   },
   {
     char: "误",
@@ -55370,7 +58833,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "誤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "错：～解。笔～。耽误：～点。～事。使受害：～人不浅。不是故意的：～伤。"
   },
   {
     char: "诱",
@@ -55383,7 +58848,9 @@ const t = [
     mark: "ㄧㄡˋ",
     tradition: "誘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "you",
+    explain: "劝导；教导：循循善～。用某种手段引人或动物上当：～敌深入。利～。～饵。"
   },
   {
     char: "诲",
@@ -55396,7 +58863,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "誨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "教导；诱导：教～。～人不倦。"
   },
   {
     char: "说",
@@ -55409,7 +58878,9 @@ const t = [
     mark: "ㄕㄨㄟˋ",
     tradition: "説",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shuo",
+    explain: "用话来表达意思：我不会唱歌，只~了个笑话。解释：一~就明白。言论；主张：学~、著书立~、有此一~。责备；批评：挨~了、爸爸~了他几句。指说合；介绍：~婆家。意思上指：他这番话是~谁呢？"
   },
   {
     char: "诵",
@@ -55422,7 +58893,9 @@ const t = [
     mark: "ㄙㄨㄥˋ",
     tradition: "誦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "song",
+    explain: "朗读；读出声音来：朗～。～诗。背诵：过目成～。述说：传～。称～。"
   },
   {
     char: "请",
@@ -55435,7 +58908,9 @@ const t = [
     mark: "ㄑㄧㄥˇ",
     tradition: "請",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qing",
+    explain: "请求：～教。～假。～人帮忙。你可以～老师给你开个书目。邀请；聘请：催～。～客。～医生。～人作报告。敬辞，用于希望对方做某事：您～坐。～准时出席。旧时指买香烛、纸马、佛龛等。姓。"
   },
   {
     char: "诸",
@@ -55448,7 +58923,9 @@ const t = [
     mark: "ㄓㄨ",
     tradition: "諸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhu",
+    explain: "众；许多：～位。～君。～侯。～子百家。姓。“之于（於）”或“之乎”的合音：付～实施（=之于）。数易其稿，而后公～社会（=之于）。有～（=之乎）?"
   },
   {
     char: "诺",
@@ -55461,7 +58938,9 @@ const t = [
     mark: "ㄋㄨㄛˋ",
     tradition: "諾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nuo",
+    explain: "答应；允许：～言。许～。答应的声音（表示同意）：唯唯～～。～～连声。姓。"
   },
   {
     char: "读",
@@ -55474,7 +58953,9 @@ const t = [
     mark: "ㄉㄡˋ",
     tradition: "讀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "du",
+    explain: "字的念法；读音：异～。“长”字有两～。"
   },
   {
     char: "诽",
@@ -55487,7 +58968,9 @@ const t = [
     mark: "ㄈㄟˇ",
     tradition: "誹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fei",
+    explain: "毁谤：～谤。"
   },
   {
     char: "课",
@@ -55500,7 +58983,9 @@ const t = [
     mark: "ㄎㄜˋ",
     tradition: "課",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ke",
+    explain: "有计划的分段教学：上～。下～。星期五下午没～。教学的科目：主～。语文～。这学期共有五门～。教学的时间单位：一节～。教材的段落：这本教科书共有二十五～。旧时某些机关、学校、工厂等按工作性质分设的行政单位：秘书～。会计～。旧指赋税：国～。完粮交～。征收（赋税）：～税。占卜的一种：起～。卜～。"
   },
   {
     char: "谁",
@@ -55513,7 +58998,9 @@ const t = [
     mark: "ㄕㄟˊ",
     tradition: "誰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shui",
+    explain: "“谁”shéi的又音。姓。"
   },
   {
     char: "调",
@@ -55526,7 +59013,9 @@ const t = [
     mark: "ㄉㄧㄠˋ",
     tradition: "調",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "diao",
+    explain: "调动；分派：对~、~职、~兵遣将。调查：函~、内查外~。互换：~换、~过儿、咱们俩~个座位。（~儿）腔调：南腔北~。（~儿）论调：两个人的意见是一个~。乐曲以什么音做do，就叫什么调。例如以C做do就叫作C调，以“上”做do就叫作“上”字调。（~儿）音乐上高低长短配合的成组的音：这个~很好听。指语音上的声调：~类、~号。"
   },
   {
     char: "谅",
@@ -55539,7 +59028,9 @@ const t = [
     mark: "ㄌㄧㄤˋ",
     tradition: "諒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liang",
+    explain: "原谅：～解。体～。料想：～他不能对我怎样。古指诚实。"
   },
   {
     char: "谆",
@@ -55552,7 +59043,9 @@ const t = [
     mark: "ㄓㄨㄣ",
     tradition: "諄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhun",
+    explain: "〔谆谆〕恳切而不厌倦：～教导。诲尔～。"
   },
   {
     char: "谈",
@@ -55565,7 +59058,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "談",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tan",
+    explain: "说话或讨论：漫～。面～。～思想。二人～得很投机。所说的话：奇～。美～。无稽之～。姓。"
   },
   {
     char: "谊",
@@ -55574,11 +59069,13 @@ const t = [
     radical: "讠",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄧˋ",
     tradition: "誼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "交情：友～。情～。深情厚～。"
   },
   {
     char: "谋",
@@ -55591,7 +59088,9 @@ const t = [
     mark: "ㄇㄡˊ",
     tradition: "謀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mou",
+    explain: "主意；计谋；计策：阴～。足智多～。图谋；谋求：～生。～害。为人类～福利。商议：不～而合。姓。"
   },
   {
     char: "谍",
@@ -55604,7 +59103,9 @@ const t = [
     mark: "ㄉㄧㄝˊ",
     tradition: "諜",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "die",
+    explain: "秘密探听军事、政治及经济等方面的消息：～报。进行谍报活动的人：间～。"
   },
   {
     char: "谎",
@@ -55617,7 +59118,9 @@ const t = [
     mark: "ㄏㄨㄤˇ",
     tradition: "謊",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "huang",
+    explain: "假话；不真实的话：弥天大～。假的；不真实的：～言。～报军情。"
   },
   {
     char: "谐",
@@ -55630,7 +59133,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "諧",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xie",
+    explain: "和谐：～音。～调。（事情）商量好；办妥（多指跟别人打交道的事情）：事～之后，即可动身。诙谐：～谑。～戏。亦庄亦～。"
   },
   {
     char: "谒",
@@ -55643,7 +59148,9 @@ const t = [
     mark: "ㄧㄝˋ",
     tradition: "謁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "进见：拜～。～见。到陵墓致敬：～中山陵。"
   },
   {
     char: "谓",
@@ -55656,7 +59163,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "謂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "说；告诉：勿～言之不预也。称呼；叫做：称～。何～宏观世界？"
   },
   {
     char: "谚",
@@ -55669,7 +59178,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "諺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "谚语：古～。农～。"
   },
   {
     char: "谜",
@@ -55682,7 +59193,9 @@ const t = [
     mark: "ㄇㄟˋ",
     tradition: "謎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mei",
+    explain: "影射事物或文字的隐语。  【组词】：猜谜、灯谜令人难以明白、理解的事理。  【组词】：宇宙的神秘奥妙，对人类来说尚有大部分仍是个谜。"
   },
   {
     char: "谢",
@@ -55695,7 +59208,9 @@ const t = [
     mark: "ㄒㄧㄝˋ",
     tradition: "謝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xie",
+    explain: "感谢：道～。酬～。这点儿小事不用～了。认错；道歉：～罪。～过。辞去；拒绝：～绝。敬～不敏。（花或叶子）脱落：凋～。桃花～了。姓。"
   },
   {
     char: "谣",
@@ -55708,7 +59223,9 @@ const t = [
     mark: "ㄧㄠˊ",
     tradition: "謠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yao",
+    explain: "歌谣：民～。童～。凭空捏造的话：造～。"
   },
   {
     char: "谤",
@@ -55721,7 +59238,9 @@ const t = [
     mark: "ㄅㄤˋ",
     tradition: "謗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bang",
+    explain: "攻击人，说人坏话：毁～。诽～。"
   },
   {
     char: "谦",
@@ -55734,7 +59253,9 @@ const t = [
     mark: "ㄑㄧㄢ",
     tradition: "謙",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "qian",
+    explain: "谦虚：～恭。～让。自～。满招损，～受益。"
   },
   {
     char: "谨",
@@ -55747,7 +59268,9 @@ const t = [
     mark: "ㄐㄧㄣˇ",
     tradition: "謹",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jin",
+    explain: "谨慎；小心：勤～。恭～。拘～。～记在心。～守规程。郑重地：～启。～领。～具。我们～向各位代表表示热烈的欢迎。"
   },
   {
     char: "谬",
@@ -55760,7 +59283,9 @@ const t = [
     mark: "ㄇㄧㄡˋ",
     tradition: "謬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "miu",
+    explain: "错误的；荒唐的：～论。差错：失之毫厘，～以千里。"
   },
   {
     char: "谭",
@@ -55773,7 +59298,9 @@ const t = [
     mark: "ㄊㄢˊ",
     tradition: "譚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tan",
+    explain: "同“{谈}”（Tán）姓"
   },
   {
     char: "谱",
@@ -55786,7 +59313,9 @@ const t = [
     mark: "ㄆㄨˇ",
     tradition: "譜",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pu",
+    explain: "按照对象的类别或系统，采取表格或其他比较整齐的形式，编辑起来供参考的书：年～。食～。可以用来指导练习的格式或图形：画～。棋～。曲谱：歌～。乐～。根据这首歌的～另外配了一段词。就歌词配曲：把这首诗～成歌曲。大致的标准；把握：他做事有～儿。心里没个～。显示出来的派头、排场等：摆～。"
   },
   {
     char: "谴",
@@ -55799,7 +59328,9 @@ const t = [
     mark: "ㄑㄧㄢˇ",
     tradition: "譴",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qian",
+    explain: "责备；申斥：～责。自～己过。官员获罪降职：～谪。"
   },
   {
     char: "谷",
@@ -55812,7 +59343,9 @@ const t = [
     mark: "ㄍㄨˇ",
     tradition: "穀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gu",
+    explain: "两山或两块高地中间的低洼地：峡～。万丈深～。谷类作物的总称。也特指粟：五～。～草。古代百谷的统称，即农作物的统称。〈方〉稻。也指稻的子实。"
   },
   {
     char: "豁",
@@ -55825,7 +59358,9 @@ const t = [
     mark: "ㄏㄨㄛˊ",
     tradition: "豁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "huo",
+    explain: "裂开：～了一个口子。纽襻儿～了。狠心付出很高的代价；舍弃：～出三天工夫也得把它做好。"
   },
   {
     char: "豆",
@@ -55834,11 +59369,13 @@ const t = [
     radical: "豆",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄡˋ",
     tradition: "豆",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dou",
+    explain: "双子叶植物的一科，木本、草本植物都有，如“紫檀”、“槐树”、“黄豆”、“绿豆”、“红豆”、“豌豆”、“落花生”等，日常统称豆类植物，亦指这些植物的种子：～科。～子。～荚（豆角儿）。～浆。～绿。煮～燃萁。目光如～。形状像豆粒的东西：土～儿。古代盛肉或其他食品的器皿，形状像高脚盘：俎～。姓。"
   },
   {
     char: "豌",
@@ -55851,7 +59388,9 @@ const t = [
     mark: "ㄨㄢ",
     tradition: "豌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "wan",
+    explain: "〔豌豆〕一年生或二年生草本植物。种子供食用，根上有根瘤，可肥田。"
   },
   {
     char: "象",
@@ -55860,11 +59399,13 @@ const t = [
     radical: "⺈",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄤˋ",
     tradition: "象",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiang",
+    explain: "哺乳动物，是陆地上现存最大的动物，耳朵大，鼻子长圆筒形，能蜷曲，多有一对长大的门牙伸出口外，全身的毛很稀疏，皮很厚，吃嫩叶和野菜等。生活于我国云南南部、印度、非洲等热带地方。有的可驯养来驮运货物。（Xiàng）姓。形状；样子：景～。天～。气～。印～。万～更新。仿效；模拟：～形。～声。"
   },
   {
     char: "豪",
@@ -55877,7 +59418,9 @@ const t = [
     mark: "ㄏㄠˊ",
     tradition: "豪",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "hao",
+    explain: "具有杰出才能的人：英～。文～。气魄大；直爽痛快，没有拘束的：～放。～爽。～迈。～言壮语。～雨。指有钱有势：～门。～富。强横：～强。巧取～夺。"
   },
   {
     char: "豫",
@@ -55890,7 +59433,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "豫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "欢喜；快乐：面有不～之色。安适：逸～亡身。同“预1”。河南的别称。"
   },
   {
     char: "豹",
@@ -55903,7 +59448,9 @@ const t = [
     mark: "ㄅㄠˋ",
     tradition: "豹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bao",
+    explain: "哺乳动物，像虎而较小，身上有很多斑点或花纹。性凶猛，能上树，捕食其他兽类，伤害人畜。常见的有金钱豹、云豹、雪豹、猎豹等。通称豹子。（Bào）姓。"
   },
   {
     char: "豺",
@@ -55916,7 +59463,9 @@ const t = [
     mark: "ㄔㄞˊ",
     tradition: "豺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chai",
+    explain: "哺乳动物，外形像狼而小，耳朵比狼的短而圆，毛大部棕红色。性凶猛，常成群围攻鹿、牛、羊等猎物。也叫豺狗。"
   },
   {
     char: "貌",
@@ -55925,11 +59474,13 @@ const t = [
     radical: "豸",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄠˋ",
     tradition: "貌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mao",
+    explain: "相貌：面～。容～。以～取人。外表的形象；样子：全～。～合神离。姓。"
   },
   {
     char: "贝",
@@ -55938,11 +59489,13 @@ const t = [
     radical: "贝",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄟˋ",
     tradition: "貝",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "有壳的软体动物的统称。如蛤蜊、蚌、鲍、田螺等。古代用贝壳做的货币。姓。贝尔的简称。"
   },
   {
     char: "贞",
@@ -55955,7 +59508,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "貞",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "忠于信仰和原则，坚定不变：坚～不屈。封建礼教所推崇的一种道德观念，指女子不失身、不改嫁：～节。占；卜：～卜。"
   },
   {
     char: "负",
@@ -55968,7 +59523,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "負",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "背（bēi）：～荆。～重。担负：～责任。身～重任。依仗；倚靠：～隅。～险固守。遭受：～伤。～屈。享有：久～盛名。亏欠；拖欠：～债。背弃；辜负：～约。忘恩～义。有～重托。失败（跟“胜”相对）：胜～。～于客队。属性词。小于零的（跟“正”相对）：～数。～号。姓。"
   },
   {
     char: "贡",
@@ -55981,7 +59538,9 @@ const t = [
     mark: "ㄍㄨㄥˋ",
     tradition: "貢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gong",
+    explain: "古代臣民或属国把物品献给朝廷：～奉。～米。贡品：进～。封建时代称选拔（人才），荐给朝廷：～生。～院。姓。"
   },
   {
     char: "财",
@@ -55994,7 +59553,9 @@ const t = [
     mark: "ㄘㄞˊ",
     tradition: "財",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "cai",
+    explain: "钱和物资的总称：～产。～物。理～。姓。"
   },
   {
     char: "责",
@@ -56007,7 +59568,9 @@ const t = [
     mark: "ㄗㄜˊ",
     tradition: "責",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ze",
+    explain: "分内应该做的事。  【组词】：负责、职责、责无旁贷要求、索取。  【组词】：责备、责善、责成诘问、怪罪。  【组词】：自责、指责、责让鞭打、处罚。  【组词】：笞责、杖责"
   },
   {
     char: "贤",
@@ -56020,20 +59583,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "賢",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "败",
-    spell: "bài",
-    stroke: "8",
-    radical: "贝",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄞˋ",
-    tradition: "敗",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "xian",
+    explain: "有德行的；有才能的：～明。～达。～良。有德行的人；有才能的人：圣～。选～举能。任人唯～。敬辞，用于平辈或晚辈：～弟。～侄。姓。"
   },
   {
     char: "账",
@@ -56042,11 +59594,13 @@ const t = [
     radical: "贝",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄤˋ",
     tradition: "賬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "财物出入的记录：记～。～目。账簿；记账的本子：一本～。债：欠～。还～。"
   },
   {
     char: "货",
@@ -56059,7 +59613,9 @@ const t = [
     mark: "ㄏㄨㄛˋ",
     tradition: "貨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huo",
+    explain: "货币；钱：通～。货物；商品：百～。南～。订～。销～。～真价实。奇～可居。商店来了一批～。指人（骂人的话）：笨～。蠢～。好吃懒做的～。出卖：～卖。姓。"
   },
   {
     char: "质",
@@ -56068,11 +59624,13 @@ const t = [
     radical: "⺁",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓˋ",
     tradition: "質",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhi",
+    explain: "事物的根本特性：本～。变～。哲学范畴。指一事物之所以是该事物并区别于他事物的规定性。质料，构成事物的材料：铁～。流～。产品或工作的优劣程度：优～钢。按～论价。保～保量。朴实：～朴。询问；责问：～疑。～问。抵押；抵押品：～押。人～。古又同“贽”。古又同“锧”。"
   },
   {
     char: "贩",
@@ -56085,46 +59643,9 @@ const t = [
     mark: "ㄈㄢˋ",
     tradition: "販",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "贪",
-    spell: "tān",
-    stroke: "8",
-    radical: "贝",
-    struct: "上下结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄊㄢ",
-    tradition: "貪",
-    sex: "",
-    tone: 1
-  },
-  {
-    char: "贫",
-    spell: "pín",
-    stroke: "8",
-    radical: "贝",
-    struct: "上下结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄆㄧㄣˊ",
-    tradition: "貧",
-    sex: "",
-    tone: 2
-  },
-  {
-    char: "贬",
-    spell: "biǎn",
-    stroke: "8",
-    radical: "贝",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄧㄢˇ",
-    tradition: "貶",
-    sex: "",
-    tone: 3
+    tone: 4,
+    pinyin: "fan",
+    explain: "商人卖货物：～粮食。～牲口。贩卖货物的小商人：小～。摊～。"
   },
   {
     char: "购",
@@ -56137,7 +59658,9 @@ const t = [
     mark: "ㄍㄡˋ",
     tradition: "購",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gou",
+    explain: "买：采～。认～公债。去书店～书。"
   },
   {
     char: "贮",
@@ -56150,7 +59673,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "貯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "储存；积存：～木场。～草五万斤。缸里～满了水。"
   },
   {
     char: "贯",
@@ -56163,7 +59688,9 @@ const t = [
     mark: "ㄍㄨㄢˋ",
     tradition: "貫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guan",
+    explain: "穿；贯通：如雷～耳。学～古今。连贯：鱼～而入。累累如～珠。旧时的制钱，用绳子穿上，每一千个叫一贯：万～家私。世代居住的地方：籍～。乡～。事例；成例：一仍旧～。姓。"
   },
   {
     char: "贰",
@@ -56176,20 +59703,9 @@ const t = [
     mark: "ㄦˋ",
     tradition: "貳",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "贱",
-    spell: "jiàn",
-    stroke: "9",
-    radical: "贝",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄧㄢˋ",
-    tradition: "賤",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "er",
+    explain: "数目“二”的大写。多用于票证、账目等。变节；背叛：～臣。"
   },
   {
     char: "贴",
@@ -56202,7 +59718,9 @@ const t = [
     mark: "ㄊㄧㄝ",
     tradition: "貼",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tie",
+    explain: "粘，把一种东西粘在另一种东西上：～金。粘～。剪～。靠近，紧挨：～近。～切（密合、恰当、确切）。～心。添补，补助：补～。津～。倒（dào）～。～息（用期票调换现款时付出利息）。同“帖”。传统戏剧角色名：～旦（次要的旦角。简称“贴”）。"
   },
   {
     char: "贵",
@@ -56215,7 +59733,9 @@ const t = [
     mark: "ㄍㄨㄟˋ",
     tradition: "貴",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "gui",
+    explain: "价格高；价值大（跟“贱”相对）：绸缎比棉布～。春雨～如油。评价高；值得珍视或重视：宝～。可～。以某种情况为可贵：人～有自知之明。锻炼身体，～在坚持。地位优越（跟“贱”相对）：～族。～妇人。达官～人。敬辞，称与对方有关的事物：～姓。～国。高抬～手。姓。"
   },
   {
     char: "贷",
@@ -56228,7 +59748,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "貸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dai",
+    explain: "借入或借出：～款。通过相关手续、按一定条件借出的钱：农～。信～。推卸：责无旁～。宽恕：严惩不～。"
   },
   {
     char: "贸",
@@ -56241,7 +59763,9 @@ const t = [
     mark: "ㄇㄠˋ",
     tradition: "貿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mao",
+    explain: "交易；买卖：～易。轻率；冒失：～然。"
   },
   {
     char: "费",
@@ -56254,7 +59778,9 @@ const t = [
     mark: "ㄈㄟˋ",
     tradition: "費",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fei",
+    explain: "费用：水电～。医药～。免～。收～。花费；耗费：～心。消～。～了半天工夫。用得多；消耗得多（跟“省”相对）：老式汽车～油。走山路～鞋。孩子穿衣裳真～。姓。"
   },
   {
     char: "贺",
@@ -56267,20 +59793,9 @@ const t = [
     mark: "ㄏㄜˋ",
     tradition: "賀",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "贼",
-    spell: "zéi",
-    stroke: "10",
-    radical: "贝",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄗㄟˊ",
-    tradition: "賊",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "he",
+    explain: "庆祝；庆贺：祝～。道～。～喜。～信。～词。～电。姓。"
   },
   {
     char: "贾",
@@ -56293,7 +59808,9 @@ const t = [
     mark: "ㄍㄨˇ",
     tradition: "賈",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jia",
+    explain: "姓。古又同“价（jià）”。"
   },
   {
     char: "贿",
@@ -56306,7 +59823,9 @@ const t = [
     mark: "ㄏㄨㄟˋ",
     tradition: "賄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hui",
+    explain: "贿赂：行～。受～。纳～。索～。"
   },
   {
     char: "赁",
@@ -56319,7 +59838,9 @@ const t = [
     mark: "ㄌㄧㄣˋ",
     tradition: "賃",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lin",
+    explain: "租用：租～。～了一辆车。出租：出～。～出两间房子。姓。"
   },
   {
     char: "赂",
@@ -56332,7 +59853,9 @@ const t = [
     mark: "ㄌㄩˋ",
     tradition: "賂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lu",
+    explain: "赠送财物；用财物买通别人：贿～。赠送的财物；买通别人的财物。"
   },
   {
     char: "赃",
@@ -56345,7 +59868,9 @@ const t = [
     mark: "ㄗㄤ",
     tradition: "贜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zang",
+    explain: "贪污受贿或偷盗所得的财物：追～。退～。"
   },
   {
     char: "资",
@@ -56358,7 +59883,9 @@ const t = [
     mark: "ㄗ",
     tradition: "資",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zi",
+    explain: "财物；钱：物～。投～。质地：～质。资格；资历：论～排辈儿。供给；提供：～助。以～参考。“貲”，另见“赀”"
   },
   {
     char: "赊",
@@ -56371,7 +59898,9 @@ const t = [
     mark: "ㄕㄜ",
     tradition: "賒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "she",
+    explain: "买卖货品时延期收款或付款：～账。～购。"
   },
   {
     char: "赋",
@@ -56384,7 +59913,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "賦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "（上对下）交给：～予。旧时指农业税：田～。～税。征收（赋税）：～以重税。我国古代文体，盛行于汉魏六朝，是韵文和散文的综合体，通常用来写景叙事，也有以较短的篇幅抒情说理的。做（诗、词）：～诗一首。"
   },
   {
     char: "赌",
@@ -56397,7 +59928,9 @@ const t = [
     mark: "",
     tradition: "賭",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "du",
+    explain: "赌博：～钱。～场。聚～。泛指争输赢：打～。～东道。"
   },
   {
     char: "赎",
@@ -56410,7 +59943,9 @@ const t = [
     mark: "ㄕㄨˊ",
     tradition: "贖",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shu",
+    explain: "用钱财换回抵押品：～回。用行动抵消、弥补罪过：将功～罪。"
   },
   {
     char: "赏",
@@ -56423,7 +59958,9 @@ const t = [
     mark: "ㄕㄤˇ",
     tradition: "賞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shang",
+    explain: "赏赐；奖赏：～罚分明。赏赐或奖赏的东西：领～。敬辞。用于请对方接受邀请或要求：～光。～脸。欣赏；观赏：鉴～。雅俗共～。对对方的才能或作品深感满意：赞～。～识。"
   },
   {
     char: "赐",
@@ -56436,7 +59973,9 @@ const t = [
     mark: "ㄘˋ",
     tradition: "賜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ci",
+    explain: "旧指地位高的人或长辈把财物送给地位低的人或晚辈：～予。敬辞，用于别人对自己的指示、光顾、答复等：～教。～顾。请即～复。敬辞，指别人给的东西或好处：厚～受之有愧。"
   },
   {
     char: "赔",
@@ -56449,7 +59988,9 @@ const t = [
     mark: "ㄆㄟˊ",
     tradition: "賠",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pei",
+    explain: "赔偿：～款。这块玻璃是我碰破的，由我来～。向受损害或受伤害的人道歉或认错：～礼。～罪。～不是。做买卖损失本钱（跟“赚”相对）：～本。～钱。年终结账，算算是～是赚。"
   },
   {
     char: "赖",
@@ -56462,7 +60003,9 @@ const t = [
     mark: "ㄌㄞˊ",
     tradition: "賴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lai",
+    explain: "1.依赖；依靠：仰～。完成任务，有～于大家的努力。2.指无赖：耍～。～皮。他说话不算数，太～了。3.留在某处不肯走开：孩子看到橱窗里的玩具，～着不肯走。4.不承认自己的错误或责任；抵赖：～债。～婚。事实俱在，～是～不掉的。5.硬说别人有错误；诬赖：自己做错了，不能～别人。6.责怪：大家都有责任，不能～哪一个人。7.姓。8.不好；坏：好～。今年庄稼长得真不～。不论好的～的我都能吃。"
   },
   {
     char: "赘",
@@ -56475,7 +60018,9 @@ const t = [
     mark: "ㄓㄨㄟˋ",
     tradition: "贅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhui",
+    explain: "多余的；无用的：累～。～疣。～言。入赘；招女婿：～婿。招～。使受累赘：孩子多了真～人。"
   },
   {
     char: "赚",
@@ -56488,7 +60033,9 @@ const t = [
     mark: "ㄗㄨㄢˋ",
     tradition: "賺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhuan",
+    explain: "获得利润：～钱。利润：做买卖总是有～有赔。〈方〉挣：干一天活～不了几个钱。"
   },
   {
     char: "赛",
@@ -56501,7 +60048,9 @@ const t = [
     mark: "ㄙㄞˋ",
     tradition: "賽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sai",
+    explain: "比赛高低、强弱：～跑。田径～。比得上；胜似：一个～一个。瓜甜～蜜。为酬报神明的恩赐而举行祭祀：～会。～神。"
   },
   {
     char: "赞",
@@ -56514,7 +60063,9 @@ const t = [
     mark: "ㄗㄢˋ",
     tradition: "贊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zan",
+    explain: "帮助：～助。称赞；夸奖：～不绝口。旧时称颂人物的一种文体。多用韵文写成：像～（画像上的题词）。"
   },
   {
     char: "赠",
@@ -56527,7 +60078,9 @@ const t = [
     mark: "ㄗㄥˋ",
     tradition: "贈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zeng",
+    explain: "赠送：捐～。～阅。～言。～款。互～纪念品。"
   },
   {
     char: "赡",
@@ -56540,7 +60093,9 @@ const t = [
     mark: "ㄕㄢˋ",
     tradition: "贍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shan",
+    explain: "供给人财物：～养亲属。丰富；充足：详～。力不～（力不足）。"
   },
   {
     char: "赢",
@@ -56553,7 +60108,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "贏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "获利：～余。胜。与“输”相对：～了一盘棋。通“盈”。充满。"
   },
   {
     char: "赤",
@@ -56566,7 +60123,9 @@ const t = [
     mark: "ㄔˋ",
     tradition: "赤",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chi",
+    explain: "比朱红稍浅的颜色。泛指红色：～小豆。面红耳～。象征革命，表示用鲜血争取自由：～卫队。忠诚：～胆。～诚。光着；露着（身体）：～脚。～膊。空：～手空拳。指赤金：金无足～。姓。"
   },
   {
     char: "赦",
@@ -56579,7 +60138,9 @@ const t = [
     mark: "ㄕㄜˋ",
     tradition: "赦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "she",
+    explain: "免除或减轻刑罚：大～。～罪。～免。"
   },
   {
     char: "赫",
@@ -56592,7 +60153,9 @@ const t = [
     mark: "ㄏㄜˋ",
     tradition: "赫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "he",
+    explain: "显著；盛大：显～。煊～。姓。赫兹的简称。1秒钟振动一次是1赫。"
   },
   {
     char: "走",
@@ -56605,7 +60168,9 @@ const t = [
     mark: "ㄗㄡˇ",
     tradition: "走",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zou",
+    explain: "人或鸟兽的脚交互向前移动：行～。～路。孩子会～了。马不～了。跑：奔～。（车、船等）运行；移动；挪动：钟不～了。这条船一个钟头能～三十里。你这步棋～坏了。趋向；呈现某种趋势：～红。～热。离开；去：车刚～。我明天要～了。请你～一趟吧。把箱子抬～。指人死（婉辞）：她还这么年轻就～了。（亲友之间）来往：～娘家。～亲戚。他们两家～得很近。通过：咱们～这个门出去吧。漏出；泄漏：～气。～风。说～了嘴。姓。"
   },
   {
     char: "赴",
@@ -56618,7 +60183,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "赴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "前往；到（某处）去：～宴。～京。投身进去：全力以～。古又同“讣”。"
   },
   {
     char: "赵",
@@ -56631,7 +60198,9 @@ const t = [
     mark: "ㄓㄠˋ",
     tradition: "趙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhao",
+    explain: "周朝国名（前403—前222）。战国七雄之一。在今河北南部、山西中部和北部。后为秦所灭。"
   },
   {
     char: "赶",
@@ -56644,7 +60213,9 @@ const t = [
     mark: "ㄍㄢˇ",
     tradition: "趕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gan",
+    explain: "追：你追我～。学先进，～先进。加快行动，使不误时间：～路。～任务。他骑着车飞快地往厂里～。去；到（某处）：～集。～考。～庙会。驾驭：～驴。～大车。驱逐：～苍蝇。遇到（某种情况）；碰上（某个时机）：～巧。～上一场雨。用在时间词前面表示等到某个时候：～明儿。～年下再回家。姓。"
   },
   {
     char: "起",
@@ -56657,7 +60228,9 @@ const t = [
     mark: "ㄑㄧˇ",
     tradition: "起",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qi",
+    explain: "由坐卧趴伏而站立或由躺而坐：～来。～立。～床。早睡早～。离开原来的位置：～身。～飞。物体由下往上升：皮球不～了。长出（疱、疙瘩、痱子）：夏天小孩儿身上爱～痱子。把收藏或嵌入的东西弄出来：～货。～钉子。发生：～风了。～疑心。～作用。发动；兴起：～兵。～事。拟写：～稿子。～草。建立：～伙。～会。白手～家。平地～高楼。姓。件；次：这样的案子每年总有几～。防止了一～事故。群；批：外面进来一～人。他们分六～往地里送肥料。用在动词后，表示事物随动作出现：乐队奏～迎宾曲。会场响～热烈掌声。用在动词后，表示动作涉及人或事：他多次问～过你。想～一件事。"
   },
   {
     char: "趁",
@@ -56670,7 +60243,9 @@ const t = [
     mark: "ㄔㄣˋ",
     tradition: "趁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chen",
+    explain: "利用（时间、机会）：～热打铁。～风起帆。～天还没黑，快点儿赶路吧。拥有：～钱。～几头牲口。富有：他们家特别～。追逐；赶。"
   },
   {
     char: "超",
@@ -56683,7 +60258,9 @@ const t = [
     mark: "ㄔㄠ",
     tradition: "超",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "chao",
+    explain: "超过：～额。～龄。～音速。一连～了两辆车。超出（一定的程度或范围）：～级。～高温。～一流。在某个范围以外；不受限制：～自然。～现实。～阶级。跳跃；跨过：挟泰山以～北海。姓。"
   },
   {
     char: "越",
@@ -56696,7 +60273,9 @@ const t = [
     mark: "ㄩㄝˋ",
     tradition: "越",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "跨过（阻碍）；跳过：～墙。翻山～岭。不按照一般的次序；超出（范围）：～级。～权。（声音、情感）昂扬：激～。声音清～。抢夺：杀人～货。“越来越…”表示程度随着时间发展：天气～来～热了。周朝国名，原来在今浙江东部，后来扩展到江苏、山东。指浙江东部。姓。"
   },
   {
     char: "趋",
@@ -56709,7 +60288,9 @@ const t = [
     mark: "ㄑㄩ",
     tradition: "趨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qu",
+    explain: "快步走、赶着向前走。  【组词】：趋前、疾趋而过朝向、走向。  【组词】：趋吉避凶、时势所趋、趋于一致"
   },
   {
     char: "趟",
@@ -56722,7 +60303,9 @@ const t = [
     mark: "ㄊㄤˋ",
     tradition: "趟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tang",
+    explain: "量词。1.用于来往的次数：我上天津去了一～。用于成行列的东西：沿堤栽了一～柳树。行（háng）列：跟不上～。"
   },
   {
     char: "趣",
@@ -56735,7 +60318,9 @@ const t = [
     mark: "ㄘㄨˋ",
     tradition: "趣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qu",
+    explain: "催促。通「促」。  【组词】：趣民收敛。（《礼记．月令》）"
   },
   {
     char: "足",
@@ -56748,7 +60333,9 @@ const t = [
     mark: "ㄗㄨˊ",
     tradition: "足",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zu",
+    explain: "脚；腿：～迹。～球。手舞～蹈。画蛇添～。器物下部形状像腿的支撑部分：鼎～。指足球运动：～坛。女～。姓。足以；值得（多用于否定式）：不～为凭。微不～道。"
   },
   {
     char: "趴",
@@ -56761,7 +60348,9 @@ const t = [
     mark: "ㄆㄚ",
     tradition: "趴",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pa",
+    explain: "胸腹朝下卧倒：～在地上射击。身体向前靠在物体上；伏：～在桌子上画图。"
   },
   {
     char: "趾",
@@ -56774,7 +60363,9 @@ const t = [
     mark: "ㄓˇ",
     tradition: "趾",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhi",
+    explain: "脚指头：～骨。古指脚：～高气扬。"
   },
   {
     char: "跃",
@@ -56787,7 +60378,9 @@ const t = [
     mark: "ㄩㄝˋ",
     tradition: "躍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "跳：跳～。飞～。一～而过。姓。"
   },
   {
     char: "跋",
@@ -56800,7 +60393,9 @@ const t = [
     mark: "ㄅㄚˊ",
     tradition: "跋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ba",
+    explain: "在山上行走：～山涉水。一般写在书籍、文章、金石拓片等后面的短文，内容大多属于评介、鉴定、考释之类：～语。题～。本书的～写得很精彩。"
   },
   {
     char: "跌",
@@ -56813,7 +60408,9 @@ const t = [
     mark: "ㄉㄧㄝ",
     tradition: "跌",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "die",
+    explain: "摔：～跤。～倒。下降，低落：～落。～销。水位下～。顿足，跺：～足大叹。疾行：～蹄而行千里。"
   },
   {
     char: "跑",
@@ -56826,7 +60423,9 @@ const t = [
     mark: "ㄆㄠˊ",
     tradition: "跑",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "pao",
+    explain: "为某种事务而奔走：～码头。～材料。～买卖。物体离开了应该在的位置：～电。～油。～气。信纸叫风给刮～了。液体因挥发而损耗：瓶子没盖严，汽油都～了。"
   },
   {
     char: "跛",
@@ -56839,7 +60438,9 @@ const t = [
     mark: "ㄅㄛˇ",
     tradition: "跛",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bo",
+    explain: "腿或脚有毛病，走起路来身体不平衡：～脚。～行。脚有点儿～。"
   },
   {
     char: "距",
@@ -56852,7 +60453,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "距",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "相隔的空间和时间：相～数里。～离。行（háng）～。株～。差（chā）～。雄鸡爪子后面突出像脚趾的部分。古同“拒”，抵抗。古同“巨”，大。古同“讵”，岂。"
   },
   {
     char: "跟",
@@ -56865,7 +60468,9 @@ const t = [
     mark: "ㄍㄣ",
     tradition: "跟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gen",
+    explain: "脚的后部或鞋袜的后部：脚后～。高～儿鞋。在后面紧接着向同一方向行动：他跑得再快，我也～得上。～上形势。指嫁给某人：他要是不好好工作，我就不～他。引进动作的对象。a）同：有事要～群众商量。b）向：你这主意好，快～大家说说。引进比较异同的对象；同：她待我～待亲儿子一样。高山上的气压～平地上不一样。他的脾气从小就～他爸爸非常相像。表示联合关系；和：车上装的是机器～材料。他的胳膊～大腿都受了伤。"
   },
   {
     char: "跨",
@@ -56878,7 +60483,9 @@ const t = [
     mark: "ㄎㄨㄚˋ",
     tradition: "跨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kua",
+    explain: "迈步越过：～进大门。骑：～上战马。越过界限：～地区。～年度。附在旁边的：～院儿。"
   },
   {
     char: "跪",
@@ -56891,7 +60498,9 @@ const t = [
     mark: "ㄍㄨㄟˋ",
     tradition: "跪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gui",
+    explain: "两膝弯曲，使一个或两个膝盖着地：下～。～拜。～在地上。"
   },
   {
     char: "路",
@@ -56904,7 +60513,9 @@ const t = [
     mark: "ㄌㄩˋ",
     tradition: "路",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lu",
+    explain: "道路：陆～。水～。大～。同～。路程：八千里～。～遥知马力。（～儿）途径；门路：生～。活～儿。条理：理～。思～。笔～。地区；方面：南～货。外～人。各～英雄。路线：三～进军。七～公共汽车。种类；等次：这一～人。哪一～病?。头～货。纸有好几～。二三～角色。用于队伍的行列，相当于“排”、“行”：四～纵队。姓。"
   },
   {
     char: "跳",
@@ -56917,7 +60528,9 @@ const t = [
     mark: "ㄊㄧㄠˋ",
     tradition: "跳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tiao",
+    explain: "以脚蹬地，使身体往上或向前的动作。  【组词】：跳跃、跳远、鸡飞狗跳　◎振动。  【组词】：心跳、眼跳、心惊肉跳越过。  【组词】：跳行、跳级、跳页脱离、逃出。  【组词】：跳出火坑"
   },
   {
     char: "践",
@@ -56930,7 +60543,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "踐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "踩；践踏。实行；履行：实～。～约。"
   },
   {
     char: "跷",
@@ -56943,7 +60558,9 @@ const t = [
     mark: "ㄑㄧㄠ",
     tradition: "蹺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiao",
+    explain: "抬起（腿）；竖起（指头）：把腿～起来。～着大拇指。脚后跟抬起，脚尖着地：～起脚看墙上的布告。高跷：登在二尺多高的～上扭秧歌。跛（bǒ）；瘸。"
   },
   {
     char: "跺",
@@ -56952,11 +60569,13 @@ const t = [
     radical: "⻊",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄨㄛˇ",
     tradition: "跺",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duo",
+    explain: "脚用力踏地：～脚。"
   },
   {
     char: "踊",
@@ -56969,7 +60588,9 @@ const t = [
     mark: "ㄩㄥˇ",
     tradition: "踴",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yong",
+    explain: "往上跳：～跃。"
   },
   {
     char: "踏",
@@ -56982,7 +60603,9 @@ const t = [
     mark: "ㄊㄚˋ",
     tradition: "踏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ta",
+    explain: "踩：不要～坏庄稼。脚～实地。到现场去：～看。～勘。"
   },
   {
     char: "踢",
@@ -56995,7 +60618,9 @@ const t = [
     mark: "ㄊㄧ",
     tradition: "踢",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ti",
+    explain: "抬起腿用脚撞击：～球。～毽子。小心牲口～人。"
   },
   {
     char: "踩",
@@ -57008,7 +60633,9 @@ const t = [
     mark: "ㄘㄞˇ",
     tradition: "踩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "cai",
+    explain: "脚底接触地面或物体：当心～坏了庄稼。妹妹～在凳子上贴窗花。"
   },
   {
     char: "踪",
@@ -57021,7 +60648,9 @@ const t = [
     mark: "ㄗㄨㄥ",
     tradition: "踪",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zong",
+    explain: "脚印；踪迹：～影。失～。跟～。无影无～。"
   },
   {
     char: "踱",
@@ -57034,20 +60663,9 @@ const t = [
     mark: "ㄉㄨㄛˊ",
     tradition: "踱",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "蹂",
-    spell: "róu",
-    stroke: "16",
-    radical: "⻊",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄖㄡˊ",
-    tradition: "蹂",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "duo",
+    explain: "慢步行走：～来～去。～方步。"
   },
   {
     char: "蹄",
@@ -57060,7 +60678,9 @@ const t = [
     mark: "ㄊㄧˊ",
     tradition: "蹄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ti",
+    explain: "牛、马等牲畜趾端的角质保护物。也指有蹄的脚：马不停～。"
   },
   {
     char: "蹈",
@@ -57073,7 +60693,9 @@ const t = [
     mark: "ㄉㄠˇ",
     tradition: "蹈",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dao",
+    explain: "践踏；踩：赴汤～火。重～覆辙。循规～矩。跳动：舞～。手舞足～。"
   },
   {
     char: "蹋",
@@ -57086,7 +60708,9 @@ const t = [
     mark: "ㄊㄚˋ",
     tradition: "蹋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ta",
+    explain: "踏；踩。踢。"
   },
   {
     char: "蹦",
@@ -57099,7 +60723,9 @@ const t = [
     mark: "ㄅㄥˋ",
     tradition: "蹦",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "beng",
+    explain: "跳：欢～乱跳。皮球一拍～得老高。他蹲下身子，用力一～，就～了两米多远。他嘴里不时～出一些新词儿来。"
   },
   {
     char: "蹬",
@@ -57112,7 +60738,9 @@ const t = [
     mark: "ㄉㄥˋ",
     tradition: "蹬",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "deng",
+    explain: "腿和脚向脚底的方向用力：～水车。～三轮儿。踩；踏：～在窗台上擦玻璃。穿（鞋、裤子等）：脚～长筒靴。～上裤子。"
   },
   {
     char: "蹭",
@@ -57125,7 +60753,9 @@ const t = [
     mark: "ㄘㄥˋ",
     tradition: "蹭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ceng",
+    explain: "摩；擦：～破了皮。留神～油。缓慢向前移动：一步一步往前～。"
   },
   {
     char: "蹲",
@@ -57138,7 +60768,9 @@ const t = [
     mark: "ㄘㄨㄣˊ",
     tradition: "蹲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dun",
+    explain: "弯曲两腿，臀部虚坐而不着地。  【组词】：蹲在地上　◎比喻呆着不做事。  【组词】：他老在家里蹲，不肯出去找工作。"
   },
   {
     char: "躁",
@@ -57151,20 +60783,9 @@ const t = [
     mark: "ㄗㄠˋ",
     tradition: "躁",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "躏",
-    spell: "lìn",
-    stroke: "21",
-    radical: "⻊",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄧㄣˋ",
-    tradition: "躪",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zao",
+    explain: "性急；不冷静：烦～。急～。不骄不～。性子～。"
   },
   {
     char: "身",
@@ -57173,11 +60794,13 @@ const t = [
     radical: "身",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄣ",
     tradition: "身",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shen",
+    explain: "身体：～上。转过～去。～高五尺。翻了一个～。指生命：奋不顾～。自己；本身：以～作则。～先士卒。～临其境。～为领导，当然应该走在群众的前面。人的品格和修养：修～。立～处世。物体的中部或主要部分：车～。河～。船～。机～。用于衣服：换了～衣裳。做两～儿制服。"
   },
   {
     char: "躬",
@@ -57190,7 +60813,9 @@ const t = [
     mark: "ㄍㄨㄥ",
     tradition: "躬",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gong",
+    explain: "自身；亲自：～逢。反～自问。～行实践。弯下（身子）：～身下拜。"
   },
   {
     char: "躯",
@@ -57203,7 +60828,9 @@ const t = [
     mark: "ㄑㄩ",
     tradition: "軀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qu",
+    explain: "身体：身～。七尺之～。为国捐～。"
   },
   {
     char: "躲",
@@ -57216,7 +60843,9 @@ const t = [
     mark: "ㄉㄨㄛˇ",
     tradition: "躲",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "duo",
+    explain: "躲避；躲藏：～雨。～车。～债。明枪易～，暗箭难防。"
   },
   {
     char: "躺",
@@ -57229,7 +60858,9 @@ const t = [
     mark: "ㄊㄤˇ",
     tradition: "躺",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tang",
+    explain: "身体倒在地上或其他物体上，也指车辆、器具等倒在地上：～在地头休息。一棵大树横～在路上。"
   },
   {
     char: "车",
@@ -57238,11 +60869,13 @@ const t = [
     radical: "车",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄔㄜ",
     tradition: "車",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "che",
+    explain: "陆地上有轮子的运输工具：火～。汽～。马～。一辆～。利用轮轴旋转的机具：纺～。滑～。水～。指机器：开～。～间。车削：～圆。～螺丝钉。用水车取水：～水。转动（多指身体）：～过身来。姓。"
   },
   {
     char: "轧",
@@ -57255,7 +60888,9 @@ const t = [
     mark: "ㄍㄚˊ",
     tradition: "軋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ya",
+    explain: "压（钢坯）：～钢。"
   },
   {
     char: "轨",
@@ -57268,7 +60903,9 @@ const t = [
     mark: "ㄍㄨㄟˇ",
     tradition: "軌",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gui",
+    explain: "原指车子两轮之间的距离，后指车轮碾过的痕迹。一定的运行路线：～迹。比喻事物正常的规则、法度、秩序：正～。越～。轨道。也指铺设轨道用的条形钢材：火车出～了。铺～工程。"
   },
   {
     char: "轩",
@@ -57281,7 +60918,9 @@ const t = [
     mark: "ㄒㄩㄢ",
     tradition: "軒",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "xuan",
+    explain: "高：～昂。～敞。～朗。姓。有窗的廊子或小屋子（旧时多用为书斋名或茶馆、饭馆等的字号）：来今雨～。古代一种有帷幕而前顶较高的车。窗户；门。"
   },
   {
     char: "转",
@@ -57294,7 +60933,9 @@ const t = [
     mark: "ㄓㄨㄞˊ",
     tradition: "轉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zhuan",
+    explain: "1.改换方向、位置、形势、情况等：～身。～脸。～换。～移。好～。向左～。向后～。～败为胜。由阴～晴。2.把一方的物品、信件、意见等传到另一方：～达。～交。～送。这封信由我～给他好了。3.姓。"
   },
   {
     char: "轮",
@@ -57307,7 +60948,9 @@ const t = [
     mark: "ㄌㄩㄣˊ",
     tradition: "輪",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "lun",
+    explain: "轮子：车～。齿～儿。三～摩托车。历史的巨～。形状像轮子的东西：日～。月～。年～。耳～。轮船：江～。油～。～渡。～埠。依照次序一个接替一个（做事）：～换。～班。～值。～训。一个人～一天。你快准备好，马上～到你了。a）多用于红日、明月等：一～红日。一～明月。b）（～儿）用于循环的事物或动作：头～影院。我大哥也属马，比我大一～（即大十二岁）。篮球冠军赛已经打了一～儿。"
   },
   {
     char: "软",
@@ -57320,7 +60963,9 @@ const t = [
     mark: "ㄖㄨㄢˇ",
     tradition: "軟",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ruan",
+    explain: "物体内部的组织疏松，受外力作用后，容易改变形状（跟“硬”相对）：柔～。～木。柳条很～。柔和：～风。～语。话说得很～。软弱：两腿发～。欺～怕硬。能力弱；质量差：功夫～。货色～。容易被感动或动摇：心～。耳朵～。姓。"
   },
   {
     char: "轰",
@@ -57333,7 +60978,9 @@ const t = [
     mark: "ㄏㄨㄥ",
     tradition: "轟",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hong",
+    explain: "形容打雷、放炮、爆炸等巨大的声音：突然～的一声，震得山鸣谷应。（雷）鸣；（炮）击；（火药）爆炸：～炸。～击。雷～电闪。～平了几个山头。赶；驱逐：～麻雀。他摇着鞭子～牲口。把他～出去。"
   },
   {
     char: "轴",
@@ -57346,7 +60993,9 @@ const t = [
     mark: "ㄓㄡˊ",
     tradition: "軸",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhou",
+    explain: "机械中主要零件之一。一般为金属圆杆，轮子和其他转动的机件绕着它或随着它转动：车～。转～。圆柱形的器物，可往上卷或绕上东西：线～儿。画～。量词。用于绕在轴上或卷在轴上的东西：两～线。一～山水画。"
   },
   {
     char: "轻",
@@ -57359,7 +61008,9 @@ const t = [
     mark: "ㄑㄧㄥ",
     tradition: "輕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "重量小；负载力小。与“重”相对：～如鸿毛。～装。数量少；程度浅：年～。～伤不下火线。不用猛力：～拿～放。不重要：责任～。不重视；不认真：～视。～率。不严肃：～薄。轻松：～音乐。"
   },
   {
     char: "载",
@@ -57372,7 +61023,9 @@ const t = [
     mark: "ㄗㄞˋ",
     tradition: "載",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zai",
+    explain: "年：一年半~，三年五~，千~难逢记载；刊登：登~，刊~，转~，~入史册"
   },
   {
     char: "轿",
@@ -57385,7 +61038,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "轎",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiao",
+    explain: "轿子，旧时一种交通工具。由人抬着走。"
   },
   {
     char: "较",
@@ -57398,7 +61053,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "較",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiao",
+    explain: "比较（高低大小等）：～量。～劲儿。用于比较性状、程度：产量～去年有显著增加。表示具有一定程度：用～少的钱，办～多的事。计较：锱铢必～。明显：彰明～著。二者～然不同。"
   },
   {
     char: "辅",
@@ -57411,7 +61068,9 @@ const t = [
     mark: "ㄈㄨˇ",
     tradition: "輔",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fu",
+    explain: "辅助：～币。相～而行。国都附近的地方：畿～。姓。"
   },
   {
     char: "辆",
@@ -57424,7 +61083,9 @@ const t = [
     mark: "ㄌㄧㄤˋ",
     tradition: "輛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liang",
+    explain: "用于车：一～汽车。一～三轮。一～坦克。"
   },
   {
     char: "辈",
@@ -57437,7 +61098,9 @@ const t = [
     mark: "ㄅㄟˋ",
     tradition: "輩",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bei",
+    explain: "行辈；辈分：长～。晚～。同～。老前～。小一～。等；类（指人）：我～。无能之～。辈子：后半～儿。"
   },
   {
     char: "辉",
@@ -57450,7 +61113,9 @@ const t = [
     mark: "ㄏㄨㄟ",
     tradition: "輝",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "hui",
+    explain: "闪耀的光：光～。余～。照耀：日月交～。"
   },
   {
     char: "辐",
@@ -57463,7 +61128,9 @@ const t = [
     mark: "ㄈㄨˊ",
     tradition: "輻",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fu",
+    explain: "车轮中连接车毂和轮辋的一条条直棍儿。"
   },
   {
     char: "辑",
@@ -57476,7 +61143,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "輯",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "编辑；辑录。整套书籍、资料等按内容或发表先后次序分成的各个部分：新闻简报第一～。这部丛书分为十～，每～五本。"
   },
   {
     char: "输",
@@ -57489,7 +61158,9 @@ const t = [
     mark: "ㄕㄨ",
     tradition: "輸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shu",
+    explain: "运输；运送：～出。～油管。～电网。～氧气。捐献（财物）：～财助学。在较量时失败；败（跟“赢”相对）：决不认～。～了两个球。"
   },
   {
     char: "辕",
@@ -57502,7 +61173,9 @@ const t = [
     mark: "ㄩㄢˊ",
     tradition: "轅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yuan",
+    explain: "车前驾牲畜的两根直木：一匹马驾～，一匹马拉套。指辕门，借指衙署：行～。姓。"
   },
   {
     char: "辖",
@@ -57515,7 +61188,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "轄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "大车轴头上穿着的小铁棍，可以管住轮子使不脱落。管辖；管理：直～。统～。省～市。北京市～十几个区县。"
   },
   {
     char: "辙",
@@ -57528,7 +61203,9 @@ const t = [
     mark: "ㄓㄜˊ",
     tradition: "轍",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhe",
+    explain: "车轮压出的痕迹；车辙：覆～。如出一～。前头有车，后头有～。行车规定的路线方向：上下～。顺～儿。戗（qiāng）～儿。杂曲、戏曲、歌词所押的韵：十三～。合～。办法；主意（多用在“有、没”后面）：想～。你来得正好，我正没～呢!"
   },
   {
     char: "辛",
@@ -57537,24 +61214,13 @@ const t = [
     radical: "辛",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄣ",
     tradition: "辛",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "辜",
-    spell: "gū",
-    stroke: "12",
-    radical: "辛",
-    struct: "上下结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄍㄨ",
-    tradition: "辜",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "辣：～辣。辛苦：～勤。艰～。痛苦：～酸。天干的第八位。现常用来表示顺序的第八。"
   },
   {
     char: "辞",
@@ -57567,7 +61233,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "辭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "中国古代的一种文学体裁。言语文词：～令。修～。告别：～行。不接受；请求离去：～谢。～职。解雇：～退。他被老板～了。躲避；推托：万死不～。不～辛苦。"
   },
   {
     char: "辟",
@@ -57580,7 +61248,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "闢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "君主：复～。姓。排除：～邪。同“避”。帝王召见并授予官职：～举（征召和荐举）。"
   },
   {
     char: "辣",
@@ -57593,7 +61263,9 @@ const t = [
     mark: "ㄌㄚˋ",
     tradition: "辣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "la",
+    explain: "像姜、蒜、辣椒等有刺激性的味道：酸甜苦～。辣味刺激（口、鼻或眼）：～眼睛。他吃到一口芥末，～得直缩脖子。狠毒：心狠手～。"
   },
   {
     char: "辨",
@@ -57606,7 +61278,9 @@ const t = [
     mark: "ㄅㄧㄢˋ",
     tradition: "辨",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bian",
+    explain: "区别；分析：明～是非。古又同“辩”。"
   },
   {
     char: "辩",
@@ -57619,7 +61293,9 @@ const t = [
     mark: "ㄅㄧㄢˋ",
     tradition: "辯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bian",
+    explain: "争论；说明是非、真假：能言善～。不容分～。"
   },
   {
     char: "辫",
@@ -57632,7 +61308,9 @@ const t = [
     mark: "ㄅㄧㄢˋ",
     tradition: "辮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bian",
+    explain: "把头发分股编成的带状物：发（fà）～。～子（ａ．发辫；ｂ．像辫子的东西；ｃ．喻把柄，如“抓～～”）。像辫子的东西：蒜～。"
   },
   {
     char: "辰",
@@ -57641,24 +61319,13 @@ const t = [
     radical: "辰",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄔㄣˊ",
     tradition: "辰",
     sex: "男",
-    tone: 2
-  },
-  {
-    char: "辱",
-    spell: "rǔ",
-    stroke: "10",
-    radical: "辰",
-    struct: "上下结构",
-    five: "金",
-    method: "会意",
-    mark: "ㄖㄨˇ",
-    tradition: "辱",
-    sex: "",
-    tone: 3
+    tone: 2,
+    pinyin: "chen",
+    explain: "地支的第五位。见〖干支〗。日、月、星的统称：星～。古代把一昼夜分作十二辰：时～。时光；日子：良～美景。诞～。指辰州（旧府名，府治在今湖南沅陵）：～砂。姓。"
   },
   {
     char: "边",
@@ -57667,11 +61334,13 @@ const t = [
     radical: "辶",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄅㄧㄢ",
     tradition: "邊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bian",
+    explain: "指两国或两地区的交界处或近交界处。  【组词】：边境、边界、垦边两旁。  【组词】：河边、路边、岸边指一个平面的周围或际限。  【组词】：桌边、天边、边缘方向。  【组词】：左边、前边、外边物体或衣裙边缘的装饰。  【组词】：滚边、镶边、花边头绪。  【组词】：说了半天，还摸不着边。几何学中夹成角或构成多角形的线段。  【组词】：等边三角形一面。加在动词前面，表示动作同时进行的副词。常用「边……边……」的语式表达。  【组词】：边做边学、边走边吃量词。计算物体边侧的单位。  【组词】：三边形、五边形姓。"
   },
   {
     char: "辽",
@@ -57684,7 +61353,9 @@ const t = [
     mark: "ㄌㄧㄠˊ",
     tradition: "遼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liao",
+    explain: "远：～阔。朝代名（907—1125）。契丹族耶律阿保机在中国北方建立。建都皇都（今内蒙古巴林左旗附近），国号契丹。公元947年改国号辽，改皇都为上京。为金所灭。辽宁的简称。"
   },
   {
     char: "达",
@@ -57697,7 +61368,9 @@ const t = [
     mark: "ㄉㄚˊ",
     tradition: "達",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "da",
+    explain: "通；到。例：四通八～。抵～。对事理认识得透彻：通～事理。达到；实现：目的已～。～成协议。告知；表达：转～。传～。指得到显要的地位：显～。"
   },
   {
     char: "迁",
@@ -57710,20 +61383,9 @@ const t = [
     mark: "ㄑㄧㄢ",
     tradition: "遷",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "迂",
-    spell: "yū",
-    stroke: "6",
-    radical: "辶",
-    struct: "半包围结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄩ",
-    tradition: "迂",
-    sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qian",
+    explain: "迁移：～居。～葬。拆～。他家～到外地去了。转变：变～。事过境～。调动官职：左～。"
   },
   {
     char: "迄",
@@ -57736,7 +61398,9 @@ const t = [
     mark: "ㄑㄧˋ",
     tradition: "迄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "qi",
+    explain: "到：～今。始终；一直（用于“未”或“无”前）：～未见效。～无音信。"
   },
   {
     char: "迅",
@@ -57749,7 +61413,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "迅",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "迅速：～跑。～捷。～猛。"
   },
   {
     char: "过",
@@ -57762,7 +61428,9 @@ const t = [
     mark: "ㄍㄨㄛˋ",
     tradition: "過",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guo",
+    explain: "表示经历、跨越、由甲至乙的过程。路过、过年、过客忍受、领受。难过、心里不好过太甚。过奖、过多、过度错误。过错、知过能改、勇于改过转移。过户、过帐助词。用于动词后，表示完毕或某种行为曾经发生。看过、听过助词。与「来」、「去」等连用，表示动作的趋向。走过来、跳过去"
   },
   {
     char: "迈",
@@ -57775,7 +61443,9 @@ const t = [
     mark: "ㄇㄞˋ",
     tradition: "邁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mai",
+    explain: "提脚向前走；跨：～步。～进。～过门槛。姓。老：老～。年～。英里。用于机动车行车的时速，每小时行驶多少英里就叫多少迈，也有把每小时行驶多少千米（公里）叫多少迈的：以80～的车速行驶。[英mile]"
   },
   {
     char: "迎",
@@ -57788,7 +61458,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "迎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ying",
+    explain: "迎接：欢～。～宾。～新会。对着；冲（chòng）着：～面。～风。～上去打招呼。"
   },
   {
     char: "运",
@@ -57801,7 +61473,9 @@ const t = [
     mark: "ㄩㄣˋ",
     tradition: "運",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yun",
+    explain: "循序移动：～行。～动。～转（zhuàn）。搬送：～输。～载。～营（交通工具的运行和营业）。～力。～销。空～。海～。使用：～用。～算。～笔。～筹（制定策略）。人的遭遇，亦特指迷信的人所说的遭遇：～气。命～。幸～。国～。南北距离：广～百里。姓。"
   },
   {
     char: "近",
@@ -57814,7 +61488,9 @@ const t = [
     mark: "ㄐㄧㄣˋ",
     tradition: "近",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "空间或时间距离短（跟“远”相对）：～郊。～日。～百年史。靠～。附～。歌声由远而～。现在离国庆节很～了。接近：平易～人。年～三十。两人年龄相～。～朱者赤，～墨者黑。亲密；关系密切：亲～。～亲。两家的关系很～。姓。"
   },
   {
     char: "返",
@@ -57827,7 +61503,9 @@ const t = [
     mark: "ㄈㄢˇ",
     tradition: "返",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "fan",
+    explain: "回：往～。遣～。流连忘～。一去不复～。我于13日～京。"
   },
   {
     char: "还",
@@ -57836,11 +61514,13 @@ const t = [
     radical: "辶",
     struct: "半包围结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄏㄞˊ",
     tradition: "還",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hai",
+    explain: "表示现象继续存在或动作继续进行；仍旧：十年没见了，她～那么年轻。半夜了，他～在工作。表示在某种程度之上有所增加或在某个范围之外有所补充：今天比昨天～冷。改完作业，～要备课。用在形容词前，表示程度上勉强过得去（一般是往好的方面说）：屋子不大，收拾得倒～干净。用在上半句话里，表示陪衬，下半句进而推论，多用反问的语气；尚且：你～搬不动，何况我呢?表示没想到如此，而居然如此（多含赞叹语气）：他～真有办法。表示早已如此：～在几年以前，我们就研究过这个方案。"
   },
   {
     char: "这",
@@ -57849,11 +61529,13 @@ const t = [
     radical: "辶",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄓㄜˋ",
     tradition: "這",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhe",
+    explain: "指示代词。指称比较近的人或事物：～个人。～本书。"
   },
   {
     char: "进",
@@ -57866,7 +61548,9 @@ const t = [
     mark: "ㄐㄧㄣˋ",
     tradition: "進",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "jin",
+    explain: "向前或向上移动、发展，与“退”相对：前～。上～。推～。跃～。～退。～取。～击。～驻。～行（xíng）。～而。入，往里去：～见。～谒。～谗。吃，喝：～食。～餐。滴水未～。收入或买入：～账。～货。日～斗金。奉上，呈上：～言。～奉。～献。旧式房院层次，这所宅子是两～院。"
   },
   {
     char: "远",
@@ -57879,7 +61563,9 @@ const t = [
     mark: "ㄩㄢˇ",
     tradition: "遠",
     sex: "男",
-    tone: 3
+    tone: 3,
+    pinyin: "yuan",
+    explain: "远离、避开。  【组词】：远小人、敬鬼神而远之"
   },
   {
     char: "违",
@@ -57892,7 +61578,9 @@ const t = [
     mark: "ㄨㄟˊ",
     tradition: "違",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wei",
+    explain: "不遵照；不依从：～背。～反。～法。～约。～章。阳奉阴～。离别：暌～。久～。"
   },
   {
     char: "连",
@@ -57905,7 +61593,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "連",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "连接：心～心。骨肉相～。天～水，水～天。藕断丝～。这两句话～不起来。连续；接续：～演一个多月。～打几枪。包括在内：～我三个人。～皮三十斤。～根拔。军队的编制单位，隶属于营，下辖若干排。姓。表示强调某一词或某一词组（下文多有“也、都”等跟它呼应），含有“甚而至于”的意思：～爷爷都笑了。她臊得～脖子都红了。你怎么～他也不认识?。～下棋也不会。～一天都没休息。"
   },
   {
     char: "迟",
@@ -57918,7 +61608,9 @@ const t = [
     mark: "ㄔˊ",
     tradition: "遲",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chi",
+    explain: "慢：～缓。事不宜～。比规定的时间或合适的时间靠后：～到。昨天睡得太～了。姓。"
   },
   {
     char: "迫",
@@ -57931,7 +61623,9 @@ const t = [
     mark: "ㄆㄞˇ",
     tradition: "迫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "po",
+    explain: "压制；硬逼：～使。接近：～近。急促：急～。从容不～。"
   },
   {
     char: "述",
@@ -57944,7 +61638,9 @@ const t = [
     mark: "ㄕㄨˋ",
     tradition: "述",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shu",
+    explain: "陈说；叙述：口～。重～一遍。略～经过。上～各项，务须遵照执行。"
   },
   {
     char: "迷",
@@ -57957,7 +61653,9 @@ const t = [
     mark: "ㄇㄧˊ",
     tradition: "迷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mi",
+    explain: "辨认不清：～路。～失方向。失去知觉：昏～。对某一事项过于喜爱，情不自主：入～。～恋。使沉醉；使昏乱：月色～人。财～心窍。沉醉于某种事物的人：球～。棋～。"
   },
   {
     char: "迹",
@@ -57970,7 +61668,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "迹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "留下的印子；痕迹：足～。血～。笔～。踪～。前人遗留的事物（主要指建筑或器物）：古～。陈～。事～。史～。形迹：～近违抗（行动近乎违背、抗拒上级指示）。"
   },
   {
     char: "追",
@@ -57983,7 +61683,9 @@ const t = [
     mark: "ㄓㄨㄟ",
     tradition: "追",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhui",
+    explain: "跟在后面或由后面赶上去。  【组词】：追随、追赶、急起直追　◎寻求、探究。  【组词】：追踪、追根究底催讨、索还。  【组词】：追赃、追债恋爱求偶。  【组词】：倒追、追女朋友回溯已往。  【组词】：追悼、追溯、追念"
   },
   {
     char: "退",
@@ -57996,7 +61698,9 @@ const t = [
     mark: "ㄊㄨㄟˋ",
     tradition: "退",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tui",
+    explain: "向后移动（跟“进”相对）：后～。倒～。进～两难。使向后移动：～兵。～敌。把子弹～出来。退出；离开：～席。～职。～伍。～伙。引～。减退；下降：～色。～烧。潮水已经～了。退还：～钱。～货。～票。把这份礼～了。把已定的事撤销：～聘。～婚。"
   },
   {
     char: "送",
@@ -58009,7 +61713,9 @@ const t = [
     mark: "ㄙㄨㄥˋ",
     tradition: "送",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "song",
+    explain: "把东西运去或拿去给人：～报。～信。～饭。赠送：奉～。老师～我两本书。陪着离去的人一起走：把客人～到大门外。～小孩儿上学。姓。"
   },
   {
     char: "适",
@@ -58018,11 +61724,13 @@ const t = [
     radical: "辶",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄕˋ",
     tradition: "適",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "往、至。  【组词】：仲尼适楚。（《庄子．达生》）舒服、自得。  【组词】：舒适、安适、闲适相合、相当。  【组词】：适时、适志、适宜正好、恰好。  【组词】：爱之适足以害之。"
   },
   {
     char: "逃",
@@ -58035,20 +61743,9 @@ const t = [
     mark: "ㄊㄠˊ",
     tradition: "逃",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "逆",
-    spell: "nì",
-    stroke: "9",
-    radical: "辶",
-    struct: "半包围结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄋㄧˋ",
-    tradition: "逆",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "tao",
+    explain: "逃跑：追歼～敌。躲避：～荒。～学。"
   },
   {
     char: "选",
@@ -58061,7 +61758,9 @@ const t = [
     mark: "ㄒㄩㄢˇ",
     tradition: "選",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xuan",
+    explain: "被选中了的（人或物）：入～。人～。挑选出来编在一起的作品：文～。诗～。民歌～。"
   },
   {
     char: "逊",
@@ -58074,7 +61773,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "遜",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "让出（帝王的位子）：～位。谦虚；谦恭：谦～。出言不～。差；比不上；不及：～色。稍～一筹。"
   },
   {
     char: "透",
@@ -58087,7 +61788,9 @@ const t = [
     mark: "ㄊㄡˋ",
     tradition: "透",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "tou",
+    explain: "（液体、光线等）渗透；穿透：～水。阳光～过玻璃窗照进来。～过事物的表面现象，找出它的本质。暗地里告诉：～消息。～个信儿。透彻：把道理说～了。我摸～了他的脾气。达到饱满的、充分的程度：雨下～了。我记得熟～了。显露：这花白里～红。"
   },
   {
     char: "逐",
@@ -58100,7 +61803,9 @@ const t = [
     mark: "ㄓㄨˊ",
     tradition: "逐",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhu",
+    explain: "追赶：追～。～鹿。随波～流。驱逐：～客令。～出门外。挨着（次序）：～年。～字～句。～条说明。姓。"
   },
   {
     char: "递",
@@ -58113,7 +61818,9 @@ const t = [
     mark: "ㄉㄧˋ",
     tradition: "遞",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "di",
+    explain: "传送；传递：～送。投～。请把钳子～给我。顺次：～补。～增。～减。"
   },
   {
     char: "途",
@@ -58126,7 +61833,9 @@ const t = [
     mark: "ㄊㄨˊ",
     tradition: "途",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tu",
+    explain: "道路：路～。旅～。长～。道听～说。半～而废。用～。姓。"
   },
   {
     char: "逗",
@@ -58139,7 +61848,9 @@ const t = [
     mark: "ㄉㄡˋ",
     tradition: "逗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dou",
+    explain: "引逗：他正拿着一枝红花～孩子玩。招引：这孩子两只灵活的大眼睛很～人喜欢。逗笑儿：她是一个爱说爱～的姑娘。有趣；可笑：这话真～。停留。同“读”（dòu）。"
   },
   {
     char: "通",
@@ -58152,7 +61863,9 @@ const t = [
     mark: "ㄊㄨㄥˋ",
     tradition: "通",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "tong",
+    explain: "没有堵塞，可以穿过：管子是～的。山洞快要打～了。这个主意行得～。用工具戳，使不堵塞：用通条～炉子。有路达到：四～八达。火车直～北京。连接；相来往：沟～。串～。私～。～商。互～有无。传达；使知道：～知。～报。～个电话。了解；懂得：～晓。精～业务。粗～文墨。不～人情。他～三国文字。指精通某一方面的人：日本～。万事～。通顺：文章写得不～。普通；一般：～常。～病。～例。～称。姓。"
   },
   {
     char: "逛",
@@ -58165,20 +61878,9 @@ const t = [
     mark: "ㄍㄨㄤˋ",
     tradition: "逛",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "逝",
-    spell: "shì",
-    stroke: "10",
-    radical: "辶",
-    struct: "半包围结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄕˋ",
-    tradition: "逝",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "guang",
+    explain: "外出散步；闲游；游览：闲～。～大街。～了一回颐和园。"
   },
   {
     char: "逞",
@@ -58191,7 +61893,9 @@ const t = [
     mark: "ㄔㄥˇ",
     tradition: "逞",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "cheng",
+    explain: "显示（自己的才能、威风等）；夸耀：～能。～威风。～英雄。实现意愿；达到目的（多指坏事）：得～。纵容；放任：～性子。"
   },
   {
     char: "速",
@@ -58204,7 +61908,9 @@ const t = [
     mark: "ㄙㄨˋ",
     tradition: "速",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "su",
+    explain: "迅速；快：火～。～战～决。速度：风～。光～。声～。车～。时～。姓。邀请：不～之客。"
   },
   {
     char: "造",
@@ -58217,7 +61923,9 @@ const t = [
     mark: "ㄗㄠˋ",
     tradition: "造",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zao",
+    explain: "做；制作：创～。建～。～船。～纸。～预算。～名册。假编；捏造：～谣。姓。指相对两方面的人，法院里专用于诉讼的两方：两～。甲～。农作物的收成：早～。晚～。农作物收成的次数：一年三～皆丰收。前往；到：～访。登峰～极。成就：～诣。深～。培养：可～之才。"
   },
   {
     char: "逢",
@@ -58230,7 +61938,9 @@ const t = [
     mark: "ㄈㄥˊ",
     tradition: "逢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "feng",
+    explain: "遇到；遇见：相～。～场作戏。千载难～。每～佳节倍思亲。姓。"
   },
   {
     char: "逮",
@@ -58243,7 +61953,9 @@ const t = [
     mark: "ㄉㄞˋ",
     tradition: "逮",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dai",
+    explain: "捉；捕。只限口语单用，不用于合成词：～老鼠。"
   },
   {
     char: "逸",
@@ -58256,7 +61968,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "逸",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "1.安乐；安闲：安～。以～待劳。一劳永～。2.逃跑：奔～。逃～。3.避世隐居：隐～。～民。4.散失；失传：～文。～书。～事。～闻。5.超过一般：超～。～群。"
   },
   {
     char: "逻",
@@ -58269,20 +61983,9 @@ const t = [
     mark: "ㄌㄨㄛˊ",
     tradition: "邏",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "逼",
-    spell: "bī",
-    stroke: "12",
-    radical: "辶",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄅㄧ",
-    tradition: "逼",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "luo",
+    explain: "巡察：巡～。～骑。～卒。"
   },
   {
     char: "逾",
@@ -58295,7 +61998,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "逾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "超过；越过：～期。～限。～额。年～六十。更加：～甚。"
   },
   {
     char: "遂",
@@ -58308,7 +62013,9 @@ const t = [
     mark: "ㄙㄨㄟˊ",
     tradition: "遂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "顺心；称意：～心。～愿。成功：百事乃～。阴谋未～。文言连词。于是：书既发，～举兵。"
   },
   {
     char: "遇",
@@ -58321,7 +62028,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "遇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "相逢；遭遇：相～。～雨。～险。不期而～。对待；款待：待～。优～。冷～。机会：机～。际～。姓。"
   },
   {
     char: "遍",
@@ -58334,7 +62043,9 @@ const t = [
     mark: "ㄅㄧㄢˋ",
     tradition: "遍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bian",
+    explain: "满；布满：我们的朋友～天下。满山～野。量词。一个动作从开始到结束的整个过程为一遍：看了三～。"
   },
   {
     char: "遏",
@@ -58347,7 +62058,9 @@ const t = [
     mark: "ㄜˇ",
     tradition: "遏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "e",
+    explain: "阻止；禁止：～止。响～行云。怒不可～。"
   },
   {
     char: "道",
@@ -58360,7 +62073,9 @@ const t = [
     mark: "ㄉㄠˋ",
     tradition: "道",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dao",
+    explain: "道路：铁～。大～。人行～。羊肠小～。水流通行的途径：河～。下水～。黄河故～。方向；方法；道理：志同～合。头头是～。以其人之～，还治其人之身。得～多助，失～寡助。道德：～义。技艺；技术：医～。茶～。花～。书～。学术或宗教的思想体系：尊师重～。传～。卫～士。属于道教的，也指道教徒：～院。～士。～姑。老～。一僧一～。指某些封建迷信组织：一贯～。线条；细长的痕迹：画了两条横～儿，一条斜～儿。姓。我国历史上行政区域的名称。在唐代相当于现在的省，清代和民国初年在省的下面设道。某些国家行政区域的名称。说：～白。能说会～。一语～破。用语言表示（情意）：～喜。～歉。～谢。说（跟文言“曰”相当，多见于早期白话）。以为；认为：我～是谁呢，原来是你。"
   },
   {
     char: "遗",
@@ -58373,7 +62088,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "遺",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yi",
+    explain: "遗失。遗失的东西：路不拾～。遗漏：～忘。补～。留下：～迹。～憾。不～余力。专指死人留下的：～容。～嘱。～著。排泄大小便或精液（多指不自主的）：～矢。～尿。～精。"
   },
   {
     char: "遣",
@@ -58386,7 +62103,9 @@ const t = [
     mark: "ㄑㄧㄢˇ",
     tradition: "遣",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qian",
+    explain: "派；打发：特～。～送。排解；发泄：～闷。消～。"
   },
   {
     char: "遥",
@@ -58399,7 +62118,9 @@ const t = [
     mark: "ㄧㄠˊ",
     tradition: "遥",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yao",
+    explain: "遥远：～望。千里之～。路～知马力。姓。"
   },
   {
     char: "遭",
@@ -58412,7 +62133,9 @@ const t = [
     mark: "ㄗㄠ",
     tradition: "遭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zao",
+    explain: "遇到（多指不幸或不利的事）：～难。～殃。～了毒手。回；次：一～生，两～熟。一个人出远门，我还是第一～。周；圈儿：用绳子绕两～。跑了一～儿。"
   },
   {
     char: "遮",
@@ -58425,7 +62148,9 @@ const t = [
     mark: "ㄓㄜ",
     tradition: "遮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhe",
+    explain: "一物体处在另一物体的某一方位，使后者不显露：山高～不住太阳。拦住：横～竖拦。掩盖：～丑。～人耳目。～不住内心的喜悦。"
   },
   {
     char: "遵",
@@ -58438,7 +62163,9 @@ const t = [
     mark: "ㄗㄨㄣ",
     tradition: "遵",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zun",
+    explain: "依照：～照。～循。～守。～命。姓。"
   },
   {
     char: "避",
@@ -58451,7 +62178,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "避",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "躲开；回避：退～。～而不谈。～一会儿雨。防止：～孕。～雷针。"
   },
   {
     char: "邀",
@@ -58464,7 +62193,9 @@ const t = [
     mark: "ㄧㄠ",
     tradition: "邀",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yao",
+    explain: "约请：特～代表。求取：求功～名。拦截：～击。"
   },
   {
     char: "邑",
@@ -58477,7 +62208,9 @@ const t = [
     mark: "ㄧˋ",
     tradition: "邑",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yi",
+    explain: "泛指城市：通都大～。县。"
   },
   {
     char: "邓",
@@ -58486,11 +62219,13 @@ const t = [
     radical: "又",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄥˋ",
     tradition: "鄧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "deng",
+    explain: "姓。"
   },
   {
     char: "邢",
@@ -58503,7 +62238,9 @@ const t = [
     mark: "ㄒㄧㄥˊ",
     tradition: "邢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xing",
+    explain: "姓。"
   },
   {
     char: "那",
@@ -58516,7 +62253,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "那",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "na",
+    explain: "代词，那样：就～办吧！。要不了～多。～个人。～个脾气。连词，跟前面“如果”、“若是”等相应，表示申说应有的结果或做出判断：如果敌人不投降，～就消灭他。"
   },
   {
     char: "邦",
@@ -58529,20 +62268,9 @@ const t = [
     mark: "ㄅㄤ",
     tradition: "邦",
     sex: "男",
-    tone: 1
-  },
-  {
-    char: "邪",
-    spell: "xié",
-    stroke: "6",
-    radical: "牙",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄒㄧㄝˊ",
-    tradition: "邪",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "bang",
+    explain: "国：～交。友～。邻～。姓。"
   },
   {
     char: "邮",
@@ -58555,7 +62283,9 @@ const t = [
     mark: "ㄧㄡˊ",
     tradition: "郵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "you",
+    explain: "邮寄；邮汇：～封信。上月给家里～去五百元。有关邮务的：～电。～局。～票。指邮品：集～。～展。姓。"
   },
   {
     char: "邻",
@@ -58568,7 +62298,9 @@ const t = [
     mark: "ㄌㄧㄣˊ",
     tradition: "鄰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "住处接近的人家：四～。东～。～人。远亲不如近～。邻接的；邻近的：～国。～县。～家。～座。古代五家为邻。"
   },
   {
     char: "郁",
@@ -58581,7 +62313,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "鬱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "香气浓厚：馥～。～烈。姓。（草木）茂盛：葱～。（忧愁、气愤等）在心里积聚：忧～。抑～。～闷。"
   },
   {
     char: "郊",
@@ -58594,7 +62328,9 @@ const t = [
     mark: "ㄐㄧㄠ",
     tradition: "郊",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiao",
+    explain: "城市周围的地区：四～。～外。～野。～游。姓。"
   },
   {
     char: "郎",
@@ -58603,11 +62339,13 @@ const t = [
     radical: "阝",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄤˊ",
     tradition: "郎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lang",
+    explain: "古代官名：侍～。员外～。对某种人的称呼：货～。放牛～。女～。女子称丈夫或情人：～君。情～。旧时称别人的儿子：大～。令～。姓。"
   },
   {
     char: "郑",
@@ -58620,7 +62358,9 @@ const t = [
     mark: "ㄓㄥˋ",
     tradition: "鄭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zheng",
+    explain: "周朝国名。在今河南新郑一带。后为韩所灭。"
   },
   {
     char: "部",
@@ -58633,7 +62373,9 @@ const t = [
     mark: "ㄅㄨˋ",
     tradition: "部",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bu",
+    explain: "部分；部位：内～。上～。胸～。局～。中央政府按业务划分的单位（级别比局、厅高）：外交～。商务～。一般机关企业按业务划分的单位：编辑～。门市～。军队（连以上）等的领导机构或其所在地：连～。司令～。指部队：率～突围。统辖；统率：所～。～领。a）用于书籍、影片等：两～字典。一～纪录片。三～电视剧。b）用于机器或车辆：一～机器。两～汽车。姓。"
   },
   {
     char: "郭",
@@ -58646,7 +62388,9 @@ const t = [
     mark: "ㄍㄨㄛ",
     tradition: "郭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guo",
+    explain: "古代在城的外围加筑的一道城墙：城～。东～。物体周围的边或框：耳～。姓。"
   },
   {
     char: "都",
@@ -58659,7 +62403,9 @@ const t = [
     mark: "ㄉㄡ",
     tradition: "都",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dou",
+    explain: "表示总括，除疑问句外，所总括的成分放在“都”前：全家～搞文艺工作。他无论干什么～很带劲儿。跟“是”字合用，说明理由：～是你磨蹭，要不我也不会迟到。～是昨天这场雨，害得我们耽误了一天工。表示“甚至”：你待我比亲姐姐～好。今天一点儿～不冷。一动～不动。表示“已经”：饭～凉了，快吃吧。"
   },
   {
     char: "鄙",
@@ -58672,7 +62418,9 @@ const t = [
     mark: "ㄅㄧˇ",
     tradition: "鄙",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bi",
+    explain: "（见闻）浅薄；（品质）恶劣：～陋。卑～。看不起：可～。～夷。边远的地方：边～。谦辞。用于自称：～人。～见。"
   },
   {
     char: "酌",
@@ -58685,7 +62433,9 @@ const t = [
     mark: "ㄓㄨㄛˊ",
     tradition: "酌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zhuo",
+    explain: "倒酒；喝酒：对～。自斟自～。酒饭：便～。考虑；商量：～加修改。"
   },
   {
     char: "配",
@@ -58698,33 +62448,9 @@ const t = [
     mark: "ㄆㄟˋ",
     tradition: "配",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "酒",
-    spell: "jiǔ",
-    stroke: "10",
-    radical: "氵",
-    struct: "左右结构",
-    five: "水",
-    method: "会意",
-    mark: "ㄐㄧㄡˇ",
-    tradition: "酒",
-    sex: "",
-    tone: 3
-  },
-  {
-    char: "酗",
-    spell: "xù",
-    stroke: "11",
-    radical: "酉",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄒㄩˋ",
-    tradition: "酗",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pei",
+    explain: "两性结合：婚～。～种。用适当的比例加以调和：～药。有计划地分派：分～。把缺少的补足：～零件。衬托；陪衬：～角。红花～绿叶。够格；相称：我的字不～用好纸。打扮要跟年龄、身份相～。古指流刑；充军：发～。"
   },
   {
     char: "酝",
@@ -58737,7 +62463,9 @@ const t = [
     mark: "ㄩㄣˋ",
     tradition: "醖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yun",
+    explain: "〔酝酿〕指造酒时的发酵过程。比喻事前讨论、磋商，交换意见，统一思想：在群众充分～的基础上选出了大会代表。酿（niàng）。"
   },
   {
     char: "酣",
@@ -58750,7 +62478,9 @@ const t = [
     mark: "ㄏㄢ",
     tradition: "酣",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "han",
+    explain: "饮酒尽兴：～饮。半～。酒～耳热。泛指尽兴、畅快：～歌。～睡。"
   },
   {
     char: "酥",
@@ -58763,7 +62493,9 @@ const t = [
     mark: "ㄙㄨ",
     tradition: "酥",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "su",
+    explain: "酪；用牛羊奶凝成的薄皮制造的食物。松脆（指食品）：～糖。含油多而松脆的点心：桃～。（肢体）软弱无力：～软。"
   },
   {
     char: "酪",
@@ -58776,7 +62508,9 @@ const t = [
     mark: "ㄌㄠˋ",
     tradition: "酪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lao",
+    explain: "用牛羊等动物的乳汁做成的半凝固或凝固的乳制品：奶～。用果实做成的糊状食品：山楂～。"
   },
   {
     char: "酬",
@@ -58789,7 +62523,9 @@ const t = [
     mark: "ㄔㄡˊ",
     tradition: "酬",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chou",
+    explain: "报酬：男女同工同～。交际往来：应～。用财物报答：～谢。～报。（愿望）实现：壮志未～。"
   },
   {
     char: "酱",
@@ -58802,7 +62538,9 @@ const t = [
     mark: "ㄐㄧㄤˋ",
     tradition: "醬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiang",
+    explain: "一种调味品。用发酵后的豆、麦等加盐制成：黄～。甜面～。像酱的糊状食物：果～。芝麻～。用酱或酱油腌制（菜蔬）：～了点黄瓜。用酱或酱油腌制的（菜蔬）：～萝卜。一种烹饪方法。和卤的做法相似，只是最后需把汤汁烧稠，使浓汁附盖在原料上。"
   },
   {
     char: "酵",
@@ -58815,20 +62553,9 @@ const t = [
     mark: "ㄐㄧㄠˋ",
     tradition: "酵",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "酷",
-    spell: "kù",
-    stroke: "14",
-    radical: "酉",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄎㄨˋ",
-    tradition: "酷",
-    sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiao",
+    explain: "发酵。"
   },
   {
     char: "酸",
@@ -58841,7 +62568,9 @@ const t = [
     mark: "ㄙㄨㄢ",
     tradition: "酸",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "suan",
+    explain: "电解质电离时所生成的正离子全部是氢离子的化合物。能跟碱中和生成盐和水，跟某些金属反应生成盐和氢气，水溶液有酸味，可使石蕊试纸变红。如盐酸、硫酸等。像醋的气味或味道：～菜。～枣。青梅很～。悲痛；伤心：辛～。悲～。心里一～，眼泪就淌了下来。迂腐（多用于讥讽文人）：穷～。～秀才。因疲劳或疾病引起的微痛而无力的感觉：腰～腿疼。腿站～了。"
   },
   {
     char: "酿",
@@ -58854,7 +62583,9 @@ const t = [
     mark: "ㄋㄧㄤˋ",
     tradition: "釀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "niang",
+    explain: "酿造：～酒。蜜蜂做蜜：～蜜。酝酿；渐渐形成。酒：佳～。"
   },
   {
     char: "醇",
@@ -58867,7 +62598,9 @@ const t = [
     mark: "ㄔㄨㄣˊ",
     tradition: "醇",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chun",
+    explain: "酒味浓纯：～酒。纯粹；纯正。有机化合物的一类。碳氢化合物分子中饱和碳原子上的氢被羟基（—OH）取代而形成的一类化合物。如医药上常用的酒精就是醇类中的乙醇。"
   },
   {
     char: "醉",
@@ -58880,7 +62613,9 @@ const t = [
     mark: "ㄗㄨㄟˋ",
     tradition: "醉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zui",
+    explain: "饮酒过量，神志不清：～汉。喝～了。～得不省人事。沉迷；过分爱好：～心。陶～。听着这美妙的音乐，我的心都～了。用酒泡制（食品）：～枣。～蟹。"
   },
   {
     char: "醋",
@@ -58893,7 +62628,9 @@ const t = [
     mark: "ㄘㄨˋ",
     tradition: "醋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cu",
+    explain: "含有醋酸的调味品。有酸味，一般用米、高粱作原料发酵制成。也可用酒或酒糟发酵制成。嫉妒（多指在男女关系上）：吃～。"
   },
   {
     char: "醒",
@@ -58902,11 +62639,13 @@ const t = [
     radical: "酉",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄒㄧㄥˇ",
     tradition: "醒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xing",
+    explain: "睡眠状态结束或还没入睡。酒醉、麻醉或昏迷后神志恢复常态：酒醉未～。他～过来了。觉悟：猛～。～悟。使看得清楚：～目。"
   },
   {
     char: "采",
@@ -58919,7 +62658,9 @@ const t = [
     mark: "ㄘㄞˋ",
     tradition: "采",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "cai",
+    explain: "摘取：～茶。选取；搜集：～用。～购。～风。挖取（矿藏）：～矿。～油。神态；精神：丰～。兴高～烈。"
   },
   {
     char: "释",
@@ -58932,7 +62673,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "釋",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "说明；解说：注～。解～。消除：～疑。冰～。放开；特指释放被拘押者或服刑者：～放。保～。放下：手不～卷。如～重负。指释迦牟尼。泛指佛教：～教。～典。"
   },
   {
     char: "里",
@@ -58945,7 +62688,9 @@ const t = [
     mark: "ㄌㄧˇ",
     tradition: "裏",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "li",
+    explain: "（～儿）衣服、被褥等东西不露在外面的那一层；纺织品的反面：被～儿。衣服～儿。这面是～儿，那面是面儿。方位词。里边（跟“外”相对）：～屋。～圈。往～走。街坊：邻～。～弄。家乡：故～。乡～。古代五家为邻，五邻为里。姓。长度单位，1市里等于150丈，合500米。"
   },
   {
     char: "重",
@@ -58954,11 +62699,13 @@ const t = [
     radical: "丿",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄨㄥˊ",
     tradition: "重",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhong",
+    explain: "重量；分量：举～。这条鱼有几斤～?重量大；比重大（跟“轻”相对）：体积相等时，铁比木头～。工作很～。脚步很～。话说得太～了。程度深：情意～。病势很～。～伤。重要：～地。～任。重视：敬～。尊～。看～。器～。为人所～。～男轻女是错误的。不轻率：自～。慎～。持～。姓。"
   },
   {
     char: "野",
@@ -58971,7 +62718,9 @@ const t = [
     mark: "ㄧㄝˇ",
     tradition: "野",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ye",
+    explain: "野外：旷～。～地。～火。～战。界限：视～。分～。指不当政的地位（跟“朝”相对）：下～。在～。属性词。不是人工饲养或培植的（跟“家”相对）：～兽。～兔。～菜。～花。～草。蛮横不讲理；粗鲁没礼貌：～蛮。粗～。撒～。这人说话太～。不受约束：～性。放了几天假，心都玩～了。姓。"
   },
   {
     char: "量",
@@ -58984,7 +62733,9 @@ const t = [
     mark: "ㄌㄧㄤˊ",
     tradition: "量",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liang",
+    explain: "测量东西体积多少的器物。如升、斗等。限度：胆～。力～。数量：降雨～。产～。估计；衡量：～力而行。哲学范畴。指事物存在和发展的规模、程度、速度等，即可以用数量表示的规定性，如多少、大小、高低、轻重、快慢等。"
   },
   {
     char: "金",
@@ -58997,7 +62748,9 @@ const t = [
     mark: "ㄐㄧㄣ",
     tradition: "金",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jin",
+    explain: "俗称金子。金属元素，符号Au，原子序数79。赤黄色，有光泽，质软，延展性最强，化学性质稳定，易传热和导电。常用作合金、硬币、装饰品等。通称黄金。金属：五～。钱：现～。助学～。古指用金属制的击乐器：鸣～收兵。～鼓齐鸣。比喻尊贵、珍贵：～口玉言。像金子一样的颜色：～发（fà）。～灿灿。朝代名（1115—1234）。北宋末女真族完颜部领袖阿骨打在中国东北部建立。建都会宁（今黑龙江阿城南），后迁都中都（今北京）、开封。1234年在南宋与蒙古军联合进攻下灭亡。"
   },
   {
     char: "鉴",
@@ -59010,7 +62763,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "鑒",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "镜子（古代用铜制成）。照：水清可～。仔细看；审察：～别。～定。可以作为警戒或引为教训的事：引以为～。前车之覆，后车之～。旧式书信套语，用在开头的称呼之后，表示请人看信：惠～。台～。钧～。"
   },
   {
     char: "针",
@@ -59023,7 +62778,9 @@ const t = [
     mark: "ㄓㄣ",
     tradition: "針",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhen",
+    explain: "缝衣物用的工具，细长而小，一头尖锐，一头有孔或钩，可以引线，多用金属制成：绣花～。缝纫机～。细长像针的东西：松～。指南～。表上有时～、分～和秒～。针剂：防疫～。打～。中医刺穴位用的特制的金属针：银～。毫～。中医用特制的金属针按穴位刺入体内医治疾病：～灸。姓。"
   },
   {
     char: "钉",
@@ -59036,7 +62793,9 @@ const t = [
     mark: "ㄉㄧㄥˋ",
     tradition: "釘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ding",
+    explain: "钉子：铁～。紧跟着：在他后面紧～着。督促；催问：～问。同“盯”。"
   },
   {
     char: "钓",
@@ -59049,7 +62808,9 @@ const t = [
     mark: "ㄉㄧㄠˋ",
     tradition: "釣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "diao",
+    explain: "用钓饵诱鱼或其他水生动物上钩：～鱼。～虾。比喻用手段取得（名利）：沽名～誉。"
   },
   {
     char: "钙",
@@ -59058,11 +62819,13 @@ const t = [
     radical: "钅",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄍㄞˋ",
     tradition: "鈣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gai",
+    explain: "金属元素，符号Ca，原子序数20。银白色，质轻。含钙的矿物很多，如方解石、石膏等。钙是生物体中的重要元素，人体血液和骨骼中都含钙，缺钙会引起佝偻病、手足抽搐等。"
   },
   {
     char: "钝",
@@ -59075,7 +62838,9 @@ const t = [
     mark: "ㄉㄨㄣˋ",
     tradition: "鈍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dun",
+    explain: "不锋利（跟“快、利、锐”相对）：刀～了，要磨一磨。成败利～。笨拙；不灵活：迟～。鲁～。姓。"
   },
   {
     char: "钞",
@@ -59088,7 +62853,9 @@ const t = [
     mark: "",
     tradition: "鈔",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "chao",
+    explain: "指钞票：现～。姓。同“抄1”"
   },
   {
     char: "钟",
@@ -59101,7 +62868,9 @@ const t = [
     mark: "ㄓㄨㄥ",
     tradition: "鍾、鐘",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhong",
+    explain: "响器，中空，用铜或铁制成。计时的器具，有挂在墙上的，也有放在桌上的：挂～。座～。闹～。指钟点、时间：六点～。由这儿到那儿只要十分～。（情感等）集中：～爱。～情。姓。同“盅”。"
   },
   {
     char: "钠",
@@ -59114,7 +62883,9 @@ const t = [
     mark: "ㄋㄚˋ",
     tradition: "鈉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "na",
+    explain: "金属元素，符号Na，原子序数11。银白色，质软，在空气中容易氧化，遇水猛烈反应而起火。平常保存在煤油中。用作有机合成的还原剂，熔融金属钠在增殖反应堆中可作热交换剂。"
   },
   {
     char: "钢",
@@ -59127,7 +62898,9 @@ const t = [
     mark: "ㄍㄤˋ",
     tradition: "鋼",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gang",
+    explain: "钢，是对含碳量质量百分比介于0.02%至2.11%之间的铁碳合金的统称。"
   },
   {
     char: "钥",
@@ -59136,11 +62909,13 @@ const t = [
     radical: "钅",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄧㄠˋ",
     tradition: "鑰",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yao",
+    explain: "钥匙。也喻指军事要地：北门锁～。"
   },
   {
     char: "钦",
@@ -59153,7 +62928,9 @@ const t = [
     mark: "ㄑㄧㄣ",
     tradition: "欽",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qin",
+    explain: "敬重：～佩。～仰。指皇帝亲自（做）：～定。～赐。姓。"
   },
   {
     char: "钧",
@@ -59166,7 +62943,9 @@ const t = [
     mark: "ㄐㄩㄣ",
     tradition: "鈞",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "jun",
+    explain: "古代的重量单位，三十斤是一钧：雷霆万～之势。千～一发。制陶器所用的转轮。敬辞，用于有关对方的事物或行为（对尊长或上级用）：～座。～鉴。～启。姓。"
   },
   {
     char: "钩",
@@ -59179,7 +62958,9 @@ const t = [
     mark: "ㄍㄡ",
     tradition: "鈎",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gou",
+    explain: "悬挂或探取东西用的器具，形状弯曲，头端尖锐：～子。秤～儿。火～子。形状像钩子的：蝎的～子。～针。汉字笔形之一（亅、乛、乚、、、乙等）。用钩形物搭、挂或探取：～住树枝爬上去。研究，探寻：～玄。～沉。～校（jiào）。牵连：～党（指相牵连的同党）。同“勾”。一种缝纫法，多指缝合衣边：～贴边。古代兵器：～戟。纯～（剑名）。吴～（刀名）。镰刀。古代称圆规。"
   },
   {
     char: "钮",
@@ -59192,7 +62973,9 @@ const t = [
     mark: "ㄋㄧㄡˇ",
     tradition: "鈕",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "niu",
+    explain: "同“纽”。器物上用手操作、转动的部分：电～。印章上端的雕饰物：虎～。"
   },
   {
     char: "钱",
@@ -59205,7 +62988,9 @@ const t = [
     mark: "",
     tradition: "錢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qian",
+    explain: "铜钱：一个～。～串儿。货币：银～。一块～。款子：饭～。车～。买书的～。一笔～。钱财：有～有势。（～儿）形状像铜钱的东西：纸～。榆～儿。姓。重量单位，10分等于1钱，10钱等于1两。1市钱合5克。"
   },
   {
     char: "钳",
@@ -59218,7 +63003,9 @@ const t = [
     mark: "ㄑㄧㄢˊ",
     tradition: "鉗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qian",
+    explain: "夹东西的用具：老虎～。夹住；约束：～制。"
   },
   {
     char: "钻",
@@ -59231,7 +63018,9 @@ const t = [
     mark: "ㄗㄨㄢˋ",
     tradition: "鑽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zuan",
+    explain: "打眼儿的工具：电～。～头。钻石：这表是十七～的。"
   },
   {
     char: "钾",
@@ -59244,7 +63033,9 @@ const t = [
     mark: "ㄐㄧㄚˇ",
     tradition: "鉀",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jia",
+    explain: "金属元素，符号K，原子序数19。银白色，质软，遇水猛烈反应而起火，平时保存在煤油中。是植物生长所必需的重要元素之一。钾的化合物可用作肥料，如碳酸钾、氯化钾、硝酸钾等。"
   },
   {
     char: "铁",
@@ -59257,7 +63048,9 @@ const t = [
     mark: "ㄊㄧㄝˇ",
     tradition: "鐡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "tie",
+    explain: "金属元素，符号Fe（ferrum）。银白色，质硬，延展性强，纯铁磁化和去磁都很快，含杂质的铁在湿空气中容易生锈。是炼钢的主要原料，用途很广。指刀枪等：手无寸～。动～为凶。形容坚硬；坚强；牢固：～拳。～汉子。～饭碗。他俩关系很～。形容强暴或精锐：～蹄。～骑。形容确定不移：～定。～的事实。～案。形容表情严肃：他～着个脸，没有一丝笑容。姓。"
   },
   {
     char: "铃",
@@ -59270,7 +63063,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "鈴",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "用金属制成的响器。最常见的是球形而下开一条口，里面放金属丸；也有钟形而里面悬着金属小锤的，振动时相击发声。此外有电铃、车铃等，形式不一。形状像铃的东西：哑～。杠～。棉～。蕾铃：落～。结～。姓。"
   },
   {
     char: "铅",
@@ -59283,7 +63078,9 @@ const t = [
     mark: "ㄑㄧㄢ",
     tradition: "鉛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qian",
+    explain: "化学元素。符号为Pb。色青，质软有延展性，置于空气中则氧化迅速。为电的不良导体，抗腐蚀性强。可与其他金属化合而制成蓄电池、电缆外皮、防辐射线的材料等，用途甚广。  【组词】：铅管、铅中毒"
   },
   {
     char: "铆",
@@ -59296,7 +63093,9 @@ const t = [
     mark: "ㄇㄠˇ",
     tradition: "鉚",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "mao",
+    explain: "铆接。指铆接时锤打铆钉。把力气集中地使出来：～劲儿。"
   },
   {
     char: "铐",
@@ -59305,11 +63104,13 @@ const t = [
     radical: "钅",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄎㄠˋ",
     tradition: "銬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kao",
+    explain: "手铐；锁住两个手腕的刑具。用手铐锁住：把犯人～起来。"
   },
   {
     char: "铛",
@@ -59322,7 +63123,9 @@ const t = [
     mark: "ㄔㄥ",
     tradition: "鐺",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dang",
+    explain: "烙饼用的平底锅：饼～。"
   },
   {
     char: "铜",
@@ -59335,7 +63138,9 @@ const t = [
     mark: "ㄊㄨㄥˊ",
     tradition: "銅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tong",
+    explain: "金属元素，符号Cu，原子序数29。紫红色，富延展性，是热和电的良导体。在湿空气中表面生成铜绿。铜可制多种合金（如黄铜、白铜）及电工器材等，也用于电镀。"
   },
   {
     char: "铝",
@@ -59344,11 +63149,13 @@ const t = [
     radical: "钅",
     struct: "左右结构",
     five: "",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˇ",
     tradition: "鋁",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lü",
+    explain: "金属元素，符号Al，原子序数13。银白色，易延展，质韧而轻，导电导热性能良好。铝用作电线、电缆，铝合金用以制飞机、火箭、门窗、日用器皿等。"
   },
   {
     char: "铡",
@@ -59361,7 +63168,9 @@ const t = [
     mark: "ㄓㄚˊ",
     tradition: "鍘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zha",
+    explain: "铡刀，一种切草的刀具。用铡刀切东西：～草。"
   },
   {
     char: "铣",
@@ -59374,7 +63183,9 @@ const t = [
     mark: "ㄒㄧˇ",
     tradition: "銑",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "xian",
+    explain: "用铣床进行加工。"
   },
   {
     char: "铭",
@@ -59387,7 +63198,9 @@ const t = [
     mark: "ㄇㄧㄥˊ",
     tradition: "銘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ming",
+    explain: "在器物、碑碣等上面记述事实、功德等的文字（大多铸成或刻成）；鞭策、勉励自己的文字（写出或刻出）：墓志～。砚～。座右～。在器物上刻字，表示纪念；比喻深刻记住：～功。～心。～肌镂骨（比喻感恩极深）。～诸肺腑（比喻永记不忘）。姓。"
   },
   {
     char: "铲",
@@ -59400,7 +63213,9 @@ const t = [
     mark: "ㄔㄢˇ",
     tradition: "鏟",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chan",
+    explain: "撮取或清除东西的用具，像簸箕或像平板，带长把儿（bàr），多用铁制：煤～。锅～。用锹或铲撮取或清除：～煤。～草。把地～平了。"
   },
   {
     char: "银",
@@ -59413,7 +63228,9 @@ const t = [
     mark: "ㄧㄣˊ",
     tradition: "銀",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yin",
+    explain: "金属元素，符号Ag（argentum）。白色，有光泽，质软，延展性强，导电、导热性能好，化学性质稳定。用途很广。通称银子或白银。跟货币有关的：～行。～根。像银子的颜色：～灰。红地～字的匾。姓。"
   },
   {
     char: "铸",
@@ -59426,7 +63243,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "鑄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "把金属熔化后倒进砂型或模子里，制成物件：～铁。～字。造成：～成大错。"
   },
   {
     char: "铺",
@@ -59439,7 +63258,9 @@ const t = [
     mark: "ㄆㄨˋ",
     tradition: "鋪",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "pu",
+    explain: "（～儿）铺子；商店：肉～。杂货～儿。用板子搭的床：床～。搭一个～。驿站（今多用于地名）：五里～（在湖北）。十里～（在浙江）。"
   },
   {
     char: "链",
@@ -59452,7 +63273,9 @@ const t = [
     mark: "ㄌㄧㄢˋ",
     tradition: "鏈",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lian",
+    explain: "链子：锁～。铁～儿。怀表的～儿断了。计量海洋上距离的长度单位，1链等于1/10海里，合185.2米。"
   },
   {
     char: "销",
@@ -59465,7 +63288,9 @@ const t = [
     mark: "ㄒㄧㄠ",
     tradition: "銷",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiao",
+    explain: "熔化金属：～金。除去；解除：撤～。～假。把那两笔账～了。销售：供～。畅～。脱～。兜～。一天～了不少货。消费：花～。开～。姓。销子。插上销子。"
   },
   {
     char: "锁",
@@ -59478,7 +63303,9 @@ const t = [
     mark: "ㄙㄨㄛˇ",
     tradition: "鎖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "suo",
+    explain: "安在门窗、器物等的开合处或连接处，使人不能随便打开的金属器具，要用钥匙、密码、磁卡等才能打开。用锁把门窗、器物等的开合处关住或拴住：～门。把箱子～上。双眉深～。愁眉～眼。形状像锁的东西：石～。锁链：枷～。缝纫方法，用于衣物边缘或扣眼儿上，针脚很密，线斜交或钩连：～边。～眼儿。姓。"
   },
   {
     char: "锄",
@@ -59491,7 +63318,9 @@ const t = [
     mark: "ㄔㄨˊ",
     tradition: "鋤",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chu",
+    explain: "锄头。用锄头松土除草：～地。铲除：～奸。“鉏”，另见“”"
   },
   {
     char: "锅",
@@ -59504,7 +63333,9 @@ const t = [
     mark: "ㄍㄨㄛ",
     tradition: "鍋",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "guo",
+    explain: "烹煮食物或烧水的器具：饭～。铁～。砂～。火～。～炉。～饼。～巴。～烟子。形状像锅的东西：烟袋～。"
   },
   {
     char: "锈",
@@ -59517,7 +63348,9 @@ const t = [
     mark: "ㄒㄧㄡˋ",
     tradition: "銹",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiu",
+    explain: "铜、铁等金属表面由于氧化而形成的物质。生锈：刀刃都～了。锁～住了，开不开。指锈病：查～灭～。"
   },
   {
     char: "锉",
@@ -59530,7 +63363,9 @@ const t = [
     mark: "ㄘㄨㄛˋ",
     tradition: "銼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cuo",
+    explain: "手工工具，条形，多刃，主要用来对金属、木料、皮革等表层做微量加工。按横剖面不同，可分为扁锉、圆锉、方锉、三角锉等。也叫锉刀。用锉进行切削：圆孔用圆锉～一～。"
   },
   {
     char: "锋",
@@ -59543,7 +63378,9 @@ const t = [
     mark: "ㄈㄥ",
     tradition: "鋒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "刀剑等兵器的锐利部分：刀～。枪～。带头在前列的人：先～。前～。比喻说话或文章的锋芒：谈～。笔～。气象学名词。性质不同的两种气团的接触界面，叫做锋面。锋面与地面的交线，称为锋线。有时将锋面和锋线统称为锋。"
   },
   {
     char: "锌",
@@ -59556,7 +63393,9 @@ const t = [
     mark: "ㄒㄧㄣ",
     tradition: "鋅",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xin",
+    explain: "金属元素，符号Zn，原子序数30。青白色，性脆。用于电镀，制黄铜、白铁及干电池等。"
   },
   {
     char: "锐",
@@ -59569,7 +63408,9 @@ const t = [
     mark: "ㄖㄨㄟˋ",
     tradition: "銳",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "rui",
+    explain: "锐利（跟“钝”相对）：尖～。敏～。～不可当。锐气：养精蓄～。急剧：～进。～减。"
   },
   {
     char: "错",
@@ -59582,7 +63423,9 @@ const t = [
     mark: "ㄘㄨㄛˋ",
     tradition: "錯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "cuo",
+    explain: "参差；错杂：交～。～落。这几块砖砌得不齐，～进去了一点儿。两个物体相对摩擦：上下牙～得很响。相对行动时避开而不碰上：～车。～过了机会。安排办事的时间使不冲突：这两个会不能同时开，得～一下。不正确：～字。这道题算～了。过错；错处：没～儿。出～儿。坏；差（用于否定式）：这幅画儿画得不～。今年的收成～不了。在凹下去的文字、花纹中镶上或涂上金、银等：～金。打磨玉石的石头。打磨玉石：攻～。"
   },
   {
     char: "锚",
@@ -59595,7 +63438,9 @@ const t = [
     mark: "ㄇㄠˊ",
     tradition: "錨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mao",
+    explain: "船停泊时所用的器具，用铁制成。一端有两个或两个以上带倒钩的爪儿，另一端用铁链连在船上，抛到水底或岸边，用来稳定船舶。"
   },
   {
     char: "锡",
@@ -59608,7 +63453,9 @@ const t = [
     mark: "ㄒㄧ",
     tradition: "錫",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xi",
+    explain: "金属元素，符号Sn（stannum）。常见的白锡为银白色，延展性强，在空气中不易起变化。多用来镀铁、焊接金属或制造合金。有的地区叫锡镴。（Xī）姓。赐给：天～良缘。"
   },
   {
     char: "锣",
@@ -59621,7 +63468,9 @@ const t = [
     mark: "ㄌㄨㄛˊ",
     tradition: "鑼",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luo",
+    explain: "击乐器。铜制，似盘。一般有提手，用槌击奏。形制多样，如大锣、小锣、堂锣、云锣等。常用于吹打乐及戏曲、歌舞伴奏。"
   },
   {
     char: "锤",
@@ -59634,7 +63483,9 @@ const t = [
     mark: "ㄔㄨㄟˊ",
     tradition: "錘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chui",
+    explain: "古代兵器，柄的上头有一个金属圆球。像锤的东西：秤～。锤子：铁～。钉～。用锤子敲打：千～百炼。姓。"
   },
   {
     char: "锥",
@@ -59647,7 +63498,9 @@ const t = [
     mark: "ㄓㄨㄟ",
     tradition: "錐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "zhui",
+    explain: "锥子，一头有尖用以钻孔的工具。像锥子形的东西：改～。用锥子一类工具钻：～个眼儿。"
   },
   {
     char: "锦",
@@ -59660,7 +63513,9 @@ const t = [
     mark: "ㄐㄧㄣˇ",
     tradition: "錦",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "jin",
+    explain: "丝织物的一种。在三色以上纬丝织成的缎纹地上织出的绚丽多彩、古雅精致的花纹织物。有库锦、蜀锦、宋锦、云锦等。形容鲜明华丽的色彩：～霞。～鸡。"
   },
   {
     char: "锨",
@@ -59673,7 +63528,9 @@ const t = [
     mark: "ㄒㄧㄢ",
     tradition: "鍁",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xian",
+    explain: "掘土或铲东西用的工具，有板状的头，用钢铁或木头制成，后面安把儿。"
   },
   {
     char: "锭",
@@ -59686,7 +63543,9 @@ const t = [
     mark: "ㄉㄧㄥˋ",
     tradition: "錠",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ding",
+    explain: "锭子，纺纱机上绕线的机件：纱～。二十万～的纱厂。做成块状的金属或药物等。量词：一～墨。"
   },
   {
     char: "键",
@@ -59699,7 +63558,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "鍵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jian",
+    explain: "使轴与齿轮、皮带轮等连接并固定在一起的零件，一般是用钢制的长方块，装在被连接的两个机件上预先制成的键槽中。插门的金属棍子。计算机、打字机、某些乐器或其他机器上，使用时按动的部分：琴～。～盘。在化学结构式中表示元素原子价的短横线。"
   },
   {
     char: "锯",
@@ -59712,7 +63573,9 @@ const t = [
     mark: "ㄐㄩˋ",
     tradition: "鋸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ju",
+    explain: "以薄金属片制成，边缘有高低尖齿，用来将固体材料截断的工具。  【组词】：电锯、锯子截断。  【组词】：锯断　◎"
   },
   {
     char: "锰",
@@ -59725,7 +63588,9 @@ const t = [
     mark: "ㄇㄥˇ",
     tradition: "錳",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "meng",
+    explain: "金属元素，符号Mn，原子序数25。银灰色，有光泽，质坚而脆。用于冶炼锰钢及制铜、铝等合金。也用作去氧、去硫剂。"
   },
   {
     char: "锹",
@@ -59738,7 +63603,9 @@ const t = [
     mark: "ㄑㄧㄠ",
     tradition: "鍬",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "qiao",
+    explain: "掘地或铲东西的工具：铁～。"
   },
   {
     char: "锻",
@@ -59751,7 +63618,9 @@ const t = [
     mark: "ㄉㄨㄢˋ",
     tradition: "鍛",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "duan",
+    explain: "把金属放在火里烧，然后用铁锤打：～件。～工。"
   },
   {
     char: "镀",
@@ -59764,7 +63633,9 @@ const t = [
     mark: "ㄉㄨˋ",
     tradition: "鍍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "du",
+    explain: "用电解或其他化学方法，使一种金属均匀地附着在别的金属或物体表面上，形成薄层：电～。～银。"
   },
   {
     char: "镇",
@@ -59777,7 +63648,9 @@ const t = [
     mark: "ㄓㄣˋ",
     tradition: "鎮",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhen",
+    explain: "压；抑制：～纸。～痛。他一说话，就把大家给～住了。安定：～静。～定。用武力维持安定：～守。坐～。镇守的地方：军事重～。行政区划单位，一般由县一级领导。较大的市集。把食物、饮料等同冰块放在一块儿或放在冷水里、冰箱里使凉：冰～汽水。把西瓜放在冷水里～一～。姓。表示整个的一段时间：～日（整天）。"
   },
   {
     char: "镊",
@@ -59790,7 +63663,9 @@ const t = [
     mark: "ㄋㄧㄝˋ",
     tradition: "鑷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nie",
+    explain: "镊子。（用镊子）夹：把瓶子里的酒精棉球～出来。"
   },
   {
     char: "镐",
@@ -59803,7 +63678,9 @@ const t = [
     mark: "ㄍㄠˇ",
     tradition: "鎬",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hao",
+    explain: "镐京，西周都城。在今陕西西安西南。公元前771年，镐京为犬戎攻破，周王朝迁都洛邑（今河南洛阳）。"
   },
   {
     char: "镜",
@@ -59816,7 +63693,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "鏡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "用来映照形象的器具：～子（亦指“眼镜”）。～台。～匣。～奁。铜～。穿衣～。利用光学原理制造的各种器具，上面的镜片一般用玻璃制成：～头。～片。眼～。胃～。凸～。凹～。三棱～。望远～。显微～。监察，借鉴：～戒。照耀：“荣～宇宙”。"
   },
   {
     char: "镣",
@@ -59829,7 +63708,9 @@ const t = [
     mark: "ㄌㄧㄠˋ",
     tradition: "鐐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liao",
+    explain: "脚镣：～铐。铁～。"
   },
   {
     char: "镰",
@@ -59842,7 +63723,9 @@ const t = [
     mark: "ㄌㄧㄢˊ",
     tradition: "鐮",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lian",
+    explain: "镰刀：钐～。开～。挂～。姓。"
   },
   {
     char: "镶",
@@ -59855,7 +63738,9 @@ const t = [
     mark: "ㄒㄧㄤ",
     tradition: "鑲",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "把物体嵌入另一物体内或围在另一物体的边缘：～牙。～边。金～玉嵌。塔顶上～着一颗闪闪发亮的红星。"
   },
   {
     char: "长",
@@ -59864,11 +63749,13 @@ const t = [
     radical: "长",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄤˊ",
     tradition: "長",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chang",
+    explain: "两点之间的距离大（跟“短”相对）。a）指空间：这条路很～。～～的柳条垂到地面。b）指时间：～寿。夏季昼～夜短。长度：南京长江大桥气势雄伟，铁路桥全～6772米。长处：特～。取～补短。一技之～。（对某事）做得特别好：他～于写作。（旧读zhàng）多余；剩余：～物。姓。"
   },
   {
     char: "门",
@@ -59877,11 +63764,13 @@ const t = [
     radical: "门",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄣˊ",
     tradition: "門",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "men",
+    explain: "房屋、车船或用围墙、篱笆围起来的地方的出入口：前～。屋～。送货上～。装置在上述出入口，能开关的障碍物，多用木料或金属材料做成：铁～。栅栏～儿。两扇红漆大～。器物可以开关的部分：柜～儿。炉～儿。形状或作用像门的东西：电～。闸～。球进～了。门径：窍～。打网球我也摸着点～儿了。旧时指封建家族或家族的一支，现在指一般的家庭：张～王氏。长～长子。满～。双喜临～。宗教、学术思想上的派别：儒～。佛～。左道旁～。传统指称跟师傅有关的：拜～。同～。～徒。一般事物的分类：分～别类。五花八～。姓。"
   },
   {
     char: "闪",
@@ -59894,7 +63783,9 @@ const t = [
     mark: "ㄕㄢˇ",
     tradition: "閃",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shan",
+    explain: "闪避：～开。～过去。～在树后。（身体）猛然晃动：他脚下一滑，～了～，差点跌倒。因动作过猛，使一部分筋肉受伤而疼痛：～了腰。闪电：打～。突然出现：～念。山后～出一条小路来。闪耀：～金光。电～雷鸣。眼里～着泪花。甩下；丢下：出发时一定来叫你，不会把你～下。姓。"
   },
   {
     char: "闭",
@@ -59907,7 +63798,9 @@ const t = [
     mark: "ㄅㄧˋ",
     tradition: "閉",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bi",
+    explain: "关；合：～门。～目养神。把嘴～上。堵塞不通：～气。～塞。结束；停止：～会。～经。姓。"
   },
   {
     char: "问",
@@ -59920,7 +63813,9 @@ const t = [
     mark: "ㄨㄣˋ",
     tradition: "問",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wen",
+    explain: "有不知道或不明白的事情或道理请人解答：询～。～事处。不懂就～。答非所～。为表示关切而询问；慰问：～好。～候。审讯；追究：审～。～案。首恶必办，胁从不～。管；干预：过～。不闻不～。向（某方面或某人要东西）：我～他借两本书。姓。"
   },
   {
     char: "闯",
@@ -59933,7 +63828,9 @@ const t = [
     mark: "ㄔㄨㄤˇ",
     tradition: "闖",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chuang",
+    explain: "猛冲；勇猛向前：～劲。～进去。横冲直～。闯练：他这几年～出来了。为一定目的而奔走活动：～关东。～江湖。走南～北。惹起：～祸。～乱子。姓。"
   },
   {
     char: "闰",
@@ -59946,7 +63843,9 @@ const t = [
     mark: "ㄖㄨㄣˋ",
     tradition: "閏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "run",
+    explain: "地球公转一周的时间为365天5时48分46秒。阳历把每年定为365天，所余的时间约每四年积累一天，加在二月里，叫闰日。农历把一年定为354天或355天，所余的时间约每三年积累成一个月加在某一年里，叫闰月。有闰日或闰月的那一年叫闰年。这样的办法在历法上叫做闰。"
   },
   {
     char: "闲",
@@ -59959,7 +63858,9 @@ const t = [
     mark: "ㄒㄧㄢˊ",
     tradition: "閑",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xian",
+    explain: "没有事情；没有活动；有空（跟“忙”相对）：游手好～。我没工夫，你找小杨吧，她～着呢。（房屋、器物等）不在使用中：～房。不让机器～着。闲空儿：农～。忙里偷～。与正事无关的：～谈。～话。姓。"
   },
   {
     char: "间",
@@ -59972,7 +63873,9 @@ const t = [
     mark: "ㄐㄧㄢˋ",
     tradition: "間",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jian",
+    explain: "方位词。中间：彼此～。同志之～。两国之～。方位词。一定的空间或时间里：田～。人～。晚～。一刹那～。一间屋子；房间：里～。车～。衣帽～。房屋的最小单位：一～卧室。三～门面。姓。“閒”"
   },
   {
     char: "闷",
@@ -59985,7 +63888,9 @@ const t = [
     mark: "ㄇㄣˋ",
     tradition: "悶",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "men",
+    explain: "密闭；不透气：～葫芦。～子车。"
   },
   {
     char: "闸",
@@ -59998,7 +63903,9 @@ const t = [
     mark: "ㄓㄚˊ",
     tradition: "閘",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "zha",
+    explain: "水闸，拦住水流的建筑物。可以随时开关。把水截住。安装在某些机械上能随时使机械停止运行或减速的设备：车～。"
   },
   {
     char: "闹",
@@ -60011,7 +63918,9 @@ const t = [
     mark: "ㄋㄠˋ",
     tradition: "鬧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "nao",
+    explain: "喧哗；不安静：热～。～哄哄。这里～得很，没法儿看书。吵；扰乱：又哭又～。两个人又～翻了。孙悟空大～天宫。发泄（感情）：～情绪。～脾气。害（病）；发生（灾害或不好的事）：～病。～肚子。～水灾。～矛盾。～笑话。干；弄；搞：～革命。～生产。把问题～清楚。开玩笑；逗：打～。～洞房。"
   },
   {
     char: "闺",
@@ -60024,7 +63933,9 @@ const t = [
     mark: "ㄍㄨㄟ",
     tradition: "閨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gui",
+    explain: "上圆下方的小门。旧指女子住的内室：～房。"
   },
   {
     char: "闻",
@@ -60037,7 +63948,9 @@ const t = [
     mark: "ㄨㄣˊ",
     tradition: "聞",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "wen",
+    explain: "听见：听而不～。耳～不如目见。听见的事情；消息：见～。新～。奇～。有名望的：～人。名声：令～。秽～。用鼻子嗅：你～～这是什么味儿?姓。"
   },
   {
     char: "闽",
@@ -60050,7 +63963,9 @@ const t = [
     mark: "ㄇㄧㄣˇ",
     tradition: "閩",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "min",
+    explain: "福建的别称。朝代名。十国之一（907—945）。王审知建立。建都长乐（今福州）。为南唐所灭。"
   },
   {
     char: "阀",
@@ -60063,7 +63978,9 @@ const t = [
     mark: "ㄈㄚˊ",
     tradition: "閥",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fa",
+    explain: "指在某一方面有支配势力的人物、家族或集团：军～。财～。管道或机器中调节和控制流体的流量、压力和流动方向的装置，种类很多，如气阀、水阀、油阀等。也叫阀门。[英valve]"
   },
   {
     char: "阁",
@@ -60076,7 +63993,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "閣",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ge",
+    explain: "旧时楼房的一种，一般两层，周围开窗，多建于高处，可凭高远望。女子卧室的旧称：闺～。出～（出嫁）。指内阁：组～。～员。存放东西的架子：束之高～。“閤”，另见“”；另音hé，见“合”"
   },
   {
     char: "阅",
@@ -60089,7 +64008,9 @@ const t = [
     mark: "ㄩㄝˋ",
     tradition: "閲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yue",
+    explain: "看（文字）：～览。～报栏。此件已～。检阅：～兵。经历；经过：～历。试行已～三月。姓。"
   },
   {
     char: "阎",
@@ -60102,7 +64023,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "閻",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "古代里巷的门。也指里巷。注：“阎”不能简化为“闫”。“阎”和“闫”今为两个不同的姓。"
   },
   {
     char: "阐",
@@ -60115,7 +64038,9 @@ const t = [
     mark: "ㄔㄢˇ",
     tradition: "闡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chan",
+    explain: "讲明；表明：～述。"
   },
   {
     char: "阔",
@@ -60128,7 +64053,9 @@ const t = [
     mark: "ㄎㄨㄛˋ",
     tradition: "闊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "kuo",
+    explain: "宽广：开～。海～天空。时间或距离久远：～别。富有；（吃穿用）讲究：～佬。不要摆～。不切实际：迂～。"
   },
   {
     char: "队",
@@ -60141,7 +64068,9 @@ const t = [
     mark: "ㄉㄨㄟˋ",
     tradition: "隊",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dui",
+    explain: "行列：站～。请排好～上车。具有某种性质的集体：球～。舰～。消防～。游击～。特指中国少年先锋队：～礼。～旗。入～。又同“坠”zhuì。"
   },
   {
     char: "阱",
@@ -60150,11 +64079,13 @@ const t = [
     radical: "阝",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄥˇ",
     tradition: "阱",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jing",
+    explain: "捕野兽用的陷坑：陷～。"
   },
   {
     char: "防",
@@ -60167,7 +64098,9 @@ const t = [
     mark: "ㄈㄤˊ",
     tradition: "防",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "fang",
+    explain: "防备：预～。～涝。以～万一。谨～假冒。对这种人可得～着点儿。防守；防御：国～。边～。海～。布～。堤；挡水的构筑物：堤～。姓。"
   },
   {
     char: "阳",
@@ -60176,24 +64109,13 @@ const t = [
     radical: "阝",
     struct: "左右结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄤˊ",
     tradition: "陽",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "阴",
-    spell: "yīn",
-    stroke: "6",
-    radical: "阝",
-    struct: "左右结构",
-    five: "土",
-    method: "形声",
-    mark: "ㄧㄣ",
-    tradition: "陰",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "yang",
+    explain: "我国古代哲学认为存在于宇宙间的一切事物中的两大对立面之一（跟“阴”相对）：阴～二气。太阳；日光：～光。～历。～坡。朝～。向～。山的南面；水的北面：衡～（在衡山之南）。洛～（在洛河之北）。凸出的：～文。外露的；表面的：～沟。～奉阴违。指属于活人和人世的（迷信）：～宅。～间。～寿。带正电的：～电。～极。指男性生殖器。姓。"
   },
   {
     char: "阵",
@@ -60206,7 +64128,9 @@ const t = [
     mark: "ㄓㄣˋ",
     tradition: "陣",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhen",
+    explain: "古代交战时布置的战斗队列。现也指作战时的兵力部署：背水为～。严～以待。泛指战场：上～杀敌。指一段时间：这一～他更忙。量词。用于事情或动作经过的段落：一～掌声。下了几～雨。"
   },
   {
     char: "阶",
@@ -60219,7 +64143,9 @@ const t = [
     mark: "ㄐㄧㄝ",
     tradition: "階",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jie",
+    explain: "台阶：～梯。区分高低的等级：官～。音～。"
   },
   {
     char: "阻",
@@ -60232,7 +64158,9 @@ const t = [
     mark: "ㄗㄨˇ",
     tradition: "阻",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "zu",
+    explain: "阻挡；阻碍：～止。拦～。劝～。畅行无～。"
   },
   {
     char: "阿",
@@ -60245,7 +64173,9 @@ const t = [
     mark: "ㄚˋ",
     tradition: "阿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "a",
+    explain: "用在排行、小名或姓的前面，有亲昵的意味：～大。～宝。～唐。用在某些亲属名称的前面：～婆。～爹。～哥。"
   },
   {
     char: "附",
@@ -60258,7 +64188,9 @@ const t = [
     mark: "ㄈㄨˋ",
     tradition: "附",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fu",
+    explain: "外加的；附带的：～录。～设。依靠：依～。～随。靠近；贴近：～近。～耳交谈。"
   },
   {
     char: "际",
@@ -60271,7 +64203,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "際",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "交界或靠边的地方：边～。天～。彼此之间：国～。时候：值此之～。适逢其时；正当：～此盛会。中间；里边：脑～。胸～。"
   },
   {
     char: "陆",
@@ -60284,7 +64218,9 @@ const t = [
     mark: "ㄌㄧㄡˋ",
     tradition: "陸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "liu",
+    explain: "陆地，高出水面的土地：大～。～路。"
   },
   {
     char: "陈",
@@ -60293,24 +64229,13 @@ const t = [
     radical: "阝",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄔㄣˊ",
     tradition: "陳",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "陋",
-    spell: "lòu",
-    stroke: "8",
-    radical: "阝",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄌㄡˋ",
-    tradition: "陋",
-    sex: "",
-    tone: 4
+    tone: 2,
+    pinyin: "chen",
+    explain: "安放；摆设；排列：～设。叙述；说明：条～。详～。时间久的；旧的：推～出新。周朝国名（？—前478）。在今河南东部和安徽亳州一带。为楚所灭。朝代名。南朝之一（557—589）。陈霸先灭萧梁后建立。建都建康（今南京）。为隋所灭。古又同“阵（zhèn）”。"
   },
   {
     char: "陌",
@@ -60323,7 +64248,9 @@ const t = [
     mark: "ㄅㄞˇ",
     tradition: "陌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "田间东西方向的小路。泛指道路：废井田，开阡～。形同～路。"
   },
   {
     char: "降",
@@ -60336,7 +64263,9 @@ const t = [
     mark: "ㄐㄧㄤˋ",
     tradition: "降",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jiang",
+    explain: "落下（跟“升”相对）：～落。～雨。温度～下来了。使落下；降低（跟“升”相对）：～价。～级。姓。"
   },
   {
     char: "限",
@@ -60349,7 +64278,9 @@ const t = [
     mark: "ㄒㄧㄢˋ",
     tradition: "限",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "指定的范围；限度：界～。期～。权～。以年底为～。指定范围，不许超过：～期完工。人数不～。门槛：门～。户～。"
   },
   {
     char: "陕",
@@ -60362,7 +64293,9 @@ const t = [
     mark: "ㄕㄢˇ",
     tradition: "陝",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shan",
+    explain: "指陕西。姓。"
   },
   {
     char: "陡",
@@ -60375,7 +64308,9 @@ const t = [
     mark: "ㄉㄡˇ",
     tradition: "陡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "dou",
+    explain: "坡度很大，近于垂直：山坡太～。副词。突然：天气～变。"
   },
   {
     char: "院",
@@ -60388,7 +64323,9 @@ const t = [
     mark: "ㄩㄢˋ",
     tradition: "院",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yuan",
+    explain: "（～儿）院子：场～。四合～儿。～里种了许多花。某些机关和公共场所的名称：法～。国务～。科学～。博物～。电影～。指学院：高等～校。指医院：住～。出～。（Yuàn）姓。"
   },
   {
     char: "除",
@@ -60401,7 +64338,9 @@ const t = [
     mark: "ㄔㄨˊ",
     tradition: "除",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chu",
+    explain: "去掉：根～。铲～。为民～害。表示不计算在内：这篇文章～附表外只有三千字。～一人因病请假以外，全体代表都已报到。进行除法运算，如2除6得3。授；拜（官职）。姓。台阶：庭～。阶～。"
   },
   {
     char: "陨",
@@ -60414,20 +64353,9 @@ const t = [
     mark: "ㄩㄣˇ",
     tradition: "隕",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "险",
-    spell: "xiǎn",
-    stroke: "9",
-    radical: "阝",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄒㄧㄢˇ",
-    tradition: "險",
-    sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yun",
+    explain: "坠落：～石。"
   },
   {
     char: "陪",
@@ -60440,7 +64368,9 @@ const t = [
     mark: "ㄆㄟˊ",
     tradition: "陪",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pei",
+    explain: "陪伴；伴同：作～。从旁协助：～审。古又同“赔”。"
   },
   {
     char: "陵",
@@ -60453,7 +64383,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "陵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "丘陵：～谷变迁（比喻世事发生极大的变迁）。陵墓：中山～。十三～。谒～。欺侮；侵犯：～压。姓。"
   },
   {
     char: "陶",
@@ -60466,7 +64398,9 @@ const t = [
     mark: "ㄊㄠˊ",
     tradition: "陶",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tao",
+    explain: "→皋陶"
   },
   {
     char: "陷",
@@ -60479,7 +64413,9 @@ const t = [
     mark: "ㄒㄧㄢˋ",
     tradition: "陷",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "陷阱。掉进；沉下：～进泥潭。地～。凹下去：两颊深～。设计害人：～人于罪。攻破：冲锋～阵。缺点：缺～。"
   },
   {
     char: "隅",
@@ -60492,7 +64428,9 @@ const t = [
     mark: "ㄩˊ",
     tradition: "隅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "角落：墙～。城～。向～。一～之地。靠边沿的地方：海～。"
   },
   {
     char: "隆",
@@ -60501,11 +64439,13 @@ const t = [
     radical: "阝",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄨㄥˊ",
     tradition: "隆",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "long",
+    explain: "1.盛大：～重。2.兴盛：兴～。3.深厚；程度深：～情厚谊。～冬。4.凸起：～起。"
   },
   {
     char: "随",
@@ -60518,7 +64458,9 @@ const t = [
     mark: "ㄙㄨㄟˊ",
     tradition: "隨",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "sui",
+    explain: "跟着：～从。～员。～葬。～即（立刻）。～行（xíng）。～身。～喜。～波逐流。～行（hāng）就市。顺从，任凭：～意。～口。～宜。～和。～俗。～笔。～遇而安。顺便，就着：～带。～手关门。像：他长得～他父亲。姓。"
   },
   {
     char: "隐",
@@ -60531,7 +64473,9 @@ const t = [
     mark: "ㄧㄣˇ",
     tradition: "隱",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yin",
+    explain: "藏匿。  【组词】：退隐、若隐若现遮瞒。  【组词】：直言不隐潜藏、不显露的。与「显」相对。  【组词】：隐情、隐疾、隐性秘密不为人知的事。  【组词】：难言之隐"
   },
   {
     char: "隔",
@@ -60544,7 +64488,9 @@ const t = [
     mark: "ㄍㄜˊ",
     tradition: "隔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ge",
+    explain: "遮断；隔开：～成两间房。两村中间～着一条河。间隔；距离：～两周再去。相～不远。"
   },
   {
     char: "隘",
@@ -60557,7 +64503,9 @@ const t = [
     mark: "ㄞˋ",
     tradition: "隘",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ai",
+    explain: "狭窄：狭～。林深路～。险要的地方：关～。要～。"
   },
   {
     char: "隙",
@@ -60570,7 +64518,9 @@ const t = [
     mark: "ㄒㄧˋ",
     tradition: "隙",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xi",
+    explain: "缝隙；裂缝：墙～。门～。云～。（地区、时间）空闲：～地。空～。农～（农闲）。漏洞；机会：无～可乘。（感情上的）裂痕：嫌～。有～。"
   },
   {
     char: "障",
@@ -60583,7 +64533,9 @@ const t = [
     mark: "ㄓㄤˋ",
     tradition: "障",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhang",
+    explain: "阻挡；遮掩：～碍。～蔽。用来遮挡、阻隔的东西：风～。屏～。"
   },
   {
     char: "隧",
@@ -60596,7 +64548,9 @@ const t = [
     mark: "ㄙㄨㄟˋ",
     tradition: "隧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sui",
+    explain: "地道：～道。"
   },
   {
     char: "隶",
@@ -60605,11 +64559,13 @@ const t = [
     radical: "隶",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧˋ",
     tradition: "隸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "附属：～属。旧社会里地位低下被奴役的人：奴～。仆～。衙役：皂～。～卒。汉字形体的一种：～书。汉～。"
   },
   {
     char: "难",
@@ -60618,11 +64574,13 @@ const t = [
     radical: "又",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄋㄢˊ",
     tradition: "難",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "nan",
+    explain: "做起来费事的；不容易（跟“易”相对）：难忍、难办。使感到困难：这一下子可把我难住了。用在动词前，表示使人不满意的性质在哪方面；不好：难听、难看。"
   },
   {
     char: "雀",
@@ -60635,7 +64593,9 @@ const t = [
     mark: "ㄑㄧㄠˇ",
     tradition: "雀",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "que",
+    explain: "鸟类的一科。体形较小，喙圆锥状。有的善鸣叫。泛指小鸟。也特指麻雀。"
   },
   {
     char: "雁",
@@ -60648,7 +64608,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "雁",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "鸟，外形略像鹅，颈和翼较长，足和尾较短，羽毛淡紫褐色。善于游泳和飞行。常见的有鸿雁、白额雁等。"
   },
   {
     char: "雄",
@@ -60661,7 +64623,9 @@ const t = [
     mark: "ㄒㄩㄥˊ",
     tradition: "雄",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "xiong",
+    explain: "生物中能产生精细胞的。也指植物中不结子的。与“雌”相对：～鸡。～蕊。强有力的：～师。～辩。强有力的人物或国家：称～。战国七～。宏伟的；充足的；有气魄的：～图。～厚。～心壮志。"
   },
   {
     char: "雅",
@@ -60674,7 +64638,9 @@ const t = [
     mark: "ㄧㄚˇ",
     tradition: "雅",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "ya",
+    explain: "《诗经》体裁之一。于天子诸侯朝会宴飨时歌诵。有大雅、小雅之分。  【组词】：风、雅、颂是《诗经》的三种体裁。合乎标准、规范的。  【组词】：雅言高尚的、不俗的。  【组词】：优雅、典雅、雅室"
   },
   {
     char: "集",
@@ -60687,7 +64653,9 @@ const t = [
     mark: "ㄐㄧˊ",
     tradition: "集",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "集合；聚集：汇～。齐～。～思广益。惊喜交～。集市：赶～。集子：诗～。文～。全～。地图～。某些篇幅较长的著作或作品中相对独立的部分：《康熙字典》分为子、丑、寅、卯等十二～。影片上下两～，一次放映。三十～电视连续剧。集合的简称。姓。"
   },
   {
     char: "雇",
@@ -60700,7 +64668,9 @@ const t = [
     mark: "ㄍㄨˋ",
     tradition: "雇",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hu",
+    explain: "出钱请人做事：～保姆。被人雇佣：～员。付一定的报酬让人驾车、船等给自己服务：～车。～船。"
   },
   {
     char: "雌",
@@ -60713,7 +64683,9 @@ const t = [
     mark: "ㄘˊ",
     tradition: "雌",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ci",
+    explain: "属性词。生物中能产生卵细胞的（跟“雄”相对）：～性。～花。～蕊。～兔。"
   },
   {
     char: "雏",
@@ -60726,7 +64698,9 @@ const t = [
     mark: "ㄔㄨˊ",
     tradition: "雛",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "chu",
+    explain: "（～儿）幼小的鸟：鸡～儿。鸭～儿。育～。幼小的（多指鸟类）：～鸡。～燕。～形。"
   },
   {
     char: "雕",
@@ -60739,7 +64713,9 @@ const t = [
     mark: "ㄉㄧㄠ",
     tradition: "雕",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "diao",
+    explain: "在竹木、玉石、金属等上面刻画：～版。～漆。～花。～塑。指雕刻艺术或雕刻作品：石～。玉～。浮～。有彩画装饰的：～梁画栋。姓。鸟，嘴呈钩状，视力很强，腿部有羽毛，是猛禽。种类较多，如金雕、海雕等。"
   },
   {
     char: "雨",
@@ -60748,11 +64724,13 @@ const t = [
     radical: "雨",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄩˋ",
     tradition: "雨",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "yu",
+    explain: "下雨。  【组词】：天不雨降落、落下。  【组词】：雨雪、雨雹润泽、滋润。  【组词】：夏雨雨人"
   },
   {
     char: "雪",
@@ -60765,7 +64743,9 @@ const t = [
     mark: "ㄒㄩㄝˇ",
     tradition: "雪",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "xue",
+    explain: "空气中降落的白色结晶，多为六角形，是气温降低到0℃以下时，空气层中的水蒸气凝结而成的。颜色或光彩像雪的：～白。～亮。姓。洗掉（耻辱、仇恨、冤枉）：～耻。～恨。昭～。洗～。"
   },
   {
     char: "雳",
@@ -60778,7 +64758,9 @@ const t = [
     mark: "ㄌㄧˋ",
     tradition: "靂",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "li",
+    explain: "见〔霹雳〕"
   },
   {
     char: "零",
@@ -60791,7 +64773,9 @@ const t = [
     mark: "ㄌㄧㄥˊ",
     tradition: "零",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "零碎；小数目的（跟“整”相对）：～用。～售。化整为～。零头；零数：挂～儿。年纪已经八十有～。放在两个数量中间，表示单位较高的量之下附有单位较低的量：一年～三天。八元～二分。数的空位，在数码中多作“○”：三～一号。二～～～年。表示没有数量：一减一等于～。这种药的效力等于～。某些量度的计算起点：～点。～下十摄氏度。姓。（草木花叶）枯萎而落下：～落。凋～。（雨、泪等）落下：涕～。"
   },
   {
     char: "雷",
@@ -60804,7 +64788,9 @@ const t = [
     mark: "ㄌㄟˊ",
     tradition: "雷",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lei",
+    explain: "带异性电的两块云相接近时放出闪电，闪电引起的高温使空气膨胀、水滴汽化而发生的强烈爆炸声。一种爆炸性的武器：水～。地～。"
   },
   {
     char: "雹",
@@ -60817,7 +64803,9 @@ const t = [
     mark: "ㄅㄠˊ",
     tradition: "雹",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bao",
+    explain: "冰雹的简称。"
   },
   {
     char: "雾",
@@ -60830,7 +64818,9 @@ const t = [
     mark: "ㄨˋ",
     tradition: "霧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wu",
+    explain: "气温下降时，空气中所含的水蒸气凝结成的小水点，飘浮在地面上。像雾的东西：喷～器。"
   },
   {
     char: "需",
@@ -60843,7 +64833,9 @@ const t = [
     mark: "ㄒㄩ",
     tradition: "需",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xu",
+    explain: "需要：～求。按～分配。需用的财物：军～。"
   },
   {
     char: "震",
@@ -60856,20 +64848,9 @@ const t = [
     mark: "ㄓㄣˋ",
     tradition: "震",
     sex: "男",
-    tone: 4
-  },
-  {
-    char: "霉",
-    spell: "méi",
-    stroke: "15",
-    radical: "雨",
-    struct: "上下结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄇㄟˊ",
-    tradition: "黴",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "zhen",
+    explain: "震动：地～。～耳欲聋。威～四方。特指地震：～源。防～棚。又连着～了几次。情绪过分激动：～惊。～怒。八卦之一，卦形是“☳”，代表雷。见〖八卦〗。姓。"
   },
   {
     char: "霍",
@@ -60882,7 +64863,9 @@ const t = [
     mark: "ㄏㄨㄛˋ",
     tradition: "霍",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "huo",
+    explain: "迅速；快：～然而愈。～地转身。"
   },
   {
     char: "霎",
@@ -60895,7 +64878,9 @@ const t = [
     mark: "ㄕㄚˋ",
     tradition: "霎",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sha",
+    explain: "小雨。短时间：一～。～时。"
   },
   {
     char: "霜",
@@ -60908,7 +64893,9 @@ const t = [
     mark: "ㄕㄨㄤ",
     tradition: "霜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "shuang",
+    explain: "接近地面的水汽遇冷在地面或物体上凝结成的白色细微颗粒。白色如霜的粉末：柿～。比喻白色：～鬓。"
   },
   {
     char: "霞",
@@ -60921,7 +64908,9 @@ const t = [
     mark: "ㄒㄧㄚˊ",
     tradition: "霞",
     sex: "女",
-    tone: 2
+    tone: 2,
+    pinyin: "xia",
+    explain: "日光斜射在天空中，由于空气的散射作用而使天空和云层呈现黄、橙、红等彩色的自然现象，多出现在日出或日落的时候。通常指这样出现的彩色的云。（Xiá）姓。"
   },
   {
     char: "露",
@@ -60934,7 +64923,9 @@ const t = [
     mark: "ㄌㄡˋ",
     tradition: "露",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "lu",
+    explain: "俗称露水。靠近地面的水蒸气夜间遇冷凝结成的小水珠。没有遮蔽或在屋外：～天。～宿。用花叶或果子蒸馏成的饮料：荷叶～。果子～。中成药剂型之一。将药剂与水，用蒸馏法制得的澄明液体药品。一般供内服：金银花～。显现出来：揭～。脸上～出了笑容。"
   },
   {
     char: "霸",
@@ -60947,7 +64938,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "霸",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ba",
+    explain: "依靠权势蛮横地欺压群众的坏人：恶～。霸占：军阀混战，各～一方。古代诸侯联盟的首领：春秋五～。指霸权主义：反帝反殖反～。"
   },
   {
     char: "霹",
@@ -60960,7 +64953,9 @@ const t = [
     mark: "ㄆㄧ",
     tradition: "霹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "pi",
+    explain: "〔～雳〕响声极大的雷。〔～雷〕即“霹雳”。"
   },
   {
     char: "青",
@@ -60973,7 +64968,9 @@ const t = [
     mark: "ㄑㄧㄥ",
     tradition: "青",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "qing",
+    explain: "黑色：～布。～线。绿色（多用于植物）或蓝色（用于天空）：～草。～天。青草或没成熟的庄稼：踏～。看～。青年：老中～。青海的简称。"
   },
   {
     char: "靖",
@@ -60986,7 +64983,9 @@ const t = [
     mark: "ㄐㄧㄥˋ",
     tradition: "靖",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "没有变故或动乱；平安：地方安～。使秩序安定；平定（变乱）：～边。～乱。姓。"
   },
   {
     char: "静",
@@ -60995,11 +64994,13 @@ const t = [
     radical: "青",
     struct: "左右结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄥˋ",
     tradition: "靜",
     sex: "女",
-    tone: 4
+    tone: 4,
+    pinyin: "jing",
+    explain: "安定不动（跟“动”相对）：～止。安～。风平浪～。～～的湖水。没有声响：寂～。清～。傍晚，公园里很～。使平静或安静：～下心来。请大家～一～。姓。"
   },
   {
     char: "非",
@@ -61008,11 +65009,13 @@ const t = [
     radical: "非",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄟ",
     tradition: "非",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fei",
+    explain: "错误（跟“是”相对）：是～。习～成是。痛改前～。不合于：～法。～礼。～分（fèn）。不以为然；反对；责备：～难。～议。无可厚～。不是：答～所问。此情此景～笔墨所能形容。前缀。用在一些名词性成分的前面，表示不属于某种范围：～金属。～晶体。～司机。不：～同小可。～同寻常。跟“不”呼应，表示必须：要想做出成绩，～下苦功不可。一定要；偏偏：不行，我～去!不好；糟：景况日～。指非洲。"
   },
   {
     char: "靠",
@@ -61025,20 +65028,9 @@ const t = [
     mark: "ㄎㄠˋ",
     tradition: "靠",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "靡",
-    spell: "mí",
-    stroke: "19",
-    radical: "麻",
-    struct: "半包围结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄇㄧˊ",
-    tradition: "靡",
-    sex: "",
-    tone: 2
+    tone: 4,
+    pinyin: "kao",
+    explain: "倚着；挨近：背～背。船～岸。依靠：～群众的智慧，解决了困难。信赖：可～。～得住。戏曲中某些角色所穿的铠甲：扎～。"
   },
   {
     char: "面",
@@ -61047,11 +65039,13 @@ const t = [
     radical: "面",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄇㄧㄢˋ",
     tradition: "麵",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mian",
+    explain: "头的前部；脸：～孔。～带微笑。向着；朝着：背山～水。这所房子～南坐北。物体的表面，有时特指某些物体的上部的一层：水～。地～。路～。圆桌～儿。～儿磨得很光。当面：～谈。～洽。～交。东西露在外面的那一层或纺织品的正面：鞋～儿。这块布做里儿，那块布做～儿。几何学上指一条线移动所构成的图形，有长有宽，没有厚。部位或方面：正～。反～。片～。全～。多～手。～～俱到。方位词后缀：上～。前～。外～。左～。西～。a）用于扁平的物件：一～镜子。两～旗子。b）用于会见的次数：见过一～。姓。粮食磨成的粉，特指小麦磨成的粉：白～。豆～。小米～。玉米～。高粱～。粉末：药～儿。胡椒～儿。面条：挂～。切～。汤～。一碗～。指某些食物纤维少而柔软：～倭瓜。煮的红薯很～。这个瓜是脆的，那个瓜是～的。"
   },
   {
     char: "革",
@@ -61060,11 +65054,13 @@ const t = [
     radical: "革",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄜˊ",
     tradition: "革",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ji",
+    explain: "危急。  【组词】：病革"
   },
   {
     char: "靴",
@@ -61077,7 +65073,9 @@ const t = [
     mark: "ㄒㄩㄝ",
     tradition: "靴",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xue",
+    explain: "靴子：马～。皮～。雨～。雪地～。"
   },
   {
     char: "靶",
@@ -61090,7 +65088,9 @@ const t = [
     mark: "ㄅㄚˋ",
     tradition: "靶",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ba",
+    explain: "靶子，练习、比赛射箭或射击用的目标：打～。"
   },
   {
     char: "鞋",
@@ -61103,7 +65103,9 @@ const t = [
     mark: "ㄒㄧㄝˊ",
     tradition: "鞋",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "xie",
+    explain: "穿在脚上，走路时着地的东西，没有高筒。有草制、布制、皮制、塑料制等多种。"
   },
   {
     char: "鞍",
@@ -61116,7 +65118,9 @@ const t = [
     mark: "ㄢ",
     tradition: "鞍",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "an",
+    explain: "放在骡马等牲口背上承受重量或供人骑坐的器具。"
   },
   {
     char: "鞠",
@@ -61129,7 +65133,9 @@ const t = [
     mark: "ㄐㄩ",
     tradition: "鞠",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ju",
+    explain: "抚育：～养。～育。古代的一种实心球。皮制，里面填毛：蹴～。弯曲：～躬。古又同“鞫”。古又同“菊（jú）”。"
   },
   {
     char: "鞭",
@@ -61142,7 +65148,9 @@ const t = [
     mark: "ㄅㄧㄢ",
     tradition: "鞭",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bian",
+    explain: "鞭子：扬～。快马加～。古代兵器，用铁做成，有节，没有锋刃：钢～。竹节～。形状细长类似鞭子的东西：教～。竹～。供食用或药用的某些雄兽的阴茎：鹿～。牛～。成串的小爆竹，放起来响声连续不断：一挂～。放～。鞭打：～马。掘墓～尸。"
   },
   {
     char: "韧",
@@ -61155,7 +65163,9 @@ const t = [
     mark: "ㄖㄣˋ",
     tradition: "韌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ren",
+    explain: "受外力作用时，虽然变形而不易折断；柔软而结实（跟“脆”相对）：坚～。柔～。～度。～性。"
   },
   {
     char: "韩",
@@ -61168,7 +65178,9 @@ const t = [
     mark: "ㄏㄢˊ",
     tradition: "韓",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "han",
+    explain: "周朝国名，在今河南中部和山西东南部。姓。"
   },
   {
     char: "韭",
@@ -61177,11 +65189,13 @@ const t = [
     radical: "韭",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄧㄡˇ",
     tradition: "韭",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiu",
+    explain: "韭菜，多年生草本植物。花白色，叶子长扁，供食用，叶、籽还可供药用。"
   },
   {
     char: "音",
@@ -61190,11 +65204,13 @@ const t = [
     radical: "音",
     struct: "上下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄧㄣ",
     tradition: "音",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yin",
+    explain: "声音；读音：～律。～乐。口～。乐～。杂～。把这个字的～读准。消息：佳～。～信。指音节：单～词。复～词。读（某音）：“区”字作姓时～欧。姓。"
   },
   {
     char: "韵",
@@ -61207,7 +65223,9 @@ const t = [
     mark: "ㄩㄣˋ",
     tradition: "韵",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "yun",
+    explain: "好听的声音：琴～悠扬。松声竹～。韵母：押～。叠～。～文。情趣：风～。～味。～致。姓。"
   },
   {
     char: "页",
@@ -61216,11 +65234,13 @@ const t = [
     radical: "页",
     struct: "独体结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄧㄝˋ",
     tradition: "頁",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ye",
+    explain: "张（指纸）：册～。活～。旧时指单面印刷的书本中的一张纸，现在一般指两面印刷的书本中一张纸的一面，但作为印刷术语时仍指一张。姓。"
   },
   {
     char: "顶",
@@ -61233,7 +65253,9 @@ const t = [
     mark: "ㄉㄧㄥˇ",
     tradition: "頂",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ding",
+    explain: "人体或物体上最高的部分：头～。屋～。山～。塔～儿。用头支承：～碗（杂技）。～天立地。他～着雨就走了。从下面拱起：种子的嫩芽把土～起来了。用头或角撞击：～球。这头牛时常～人。支撑；抵住：拿杠子～上门。列车在前，机车在后面～着走。对面迎着：～风。～头。顶撞：他听了姑母的话很不满意，就～了她几句。担当；支持：活儿重，两个人～不下来。相当；抵：他一个人～两个人。表示程度最高：～好。～喜欢唱歌。"
   },
   {
     char: "顷",
@@ -61246,7 +65268,9 @@ const t = [
     mark: "ㄑㄧㄥˇ",
     tradition: "頃",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "qing",
+    explain: "市制地积单位。100亩为1顷，1顷合6.6667公顷，等于66667米2。短时间：有～（过了一会儿）。～刻（一会儿）。文言副词。刚才：～接来信。古又同“倾（qīng）”。"
   },
   {
     char: "项",
@@ -61259,7 +65283,9 @@ const t = [
     mark: "ㄒㄧㄤˋ",
     tradition: "項",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xiang",
+    explain: "颈的后部。姓。用于分项目的事物：下列各～。三大纪律，八～注意。第五条第二款第一～。环境保护是一～重大任务。款项：用～。存～。代数中不用加、减号连接的单式，如3a2b，ax2，4ba等。"
   },
   {
     char: "顺",
@@ -61272,7 +65298,9 @@ const t = [
     mark: "ㄕㄨㄣˋ",
     tradition: "順",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "shun",
+    explain: "向着同一个方向（跟“逆”相对）：～风。～流而下。依着自然情势（移动）；沿（着）：～大道走。水～着山沟流。使方向一致；使有条理次序：把船～过来，一只一只地靠岸停下。这篇文章还得～一～。趁便；顺便：～手关门。～嘴说了出来。适合；如意：～心。～眼。不～他的意。顺利：～遂。这些年一直很～。依次：～延。顺从：归～。百依百～。姓。"
   },
   {
     char: "须",
@@ -61285,20 +65313,9 @@ const t = [
     mark: "ㄒㄩ",
     tradition: "須、鬚",
     sex: "",
-    tone: 1
-  },
-  {
-    char: "顽",
-    spell: "wán",
-    stroke: "10",
-    radical: "页",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄨㄢˊ",
-    tradition: "頑",
-    sex: "",
-    tone: 2
+    tone: 1,
+    pinyin: "xu",
+    explain: "助动词。须要：务～。必～。～知。事前～做好准备。姓。等待；等到。原来指长在下巴上的胡子，后来泛指胡须：～发。～眉。须子：触～。花～。"
   },
   {
     char: "顾",
@@ -61311,7 +65328,9 @@ const t = [
     mark: "ㄍㄨˋ",
     tradition: "顧",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "gu",
+    explain: "回头看；泛指看。例：回～。举目四～。拜访：三～茅庐。照管；注意：奋不～身。～大局。商店或服务行业称前来购买货物或要求服务：惠～。～客。文言副词。反而：足反居上，首～居下。文言连词。但是；只是：虽年高，～精神不减。"
   },
   {
     char: "顿",
@@ -61324,7 +65343,9 @@ const t = [
     mark: "ㄉㄨㄣˋ",
     tradition: "頓",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "dun",
+    explain: "稍停：他～了一下，又接着往下说。书法上指用力使笔着纸而暂不移动：一横的两头都要～一～。（头）叩地；（脚）跺地：～首。～足。处理；安置：整～。安～。立刻；忽然：～然。～悟。～生邪念。用于吃饭、斥责、劝说、打骂等行为的次数：一天三～饭。被他说了一～。姓。疲乏：困～。劳～。"
   },
   {
     char: "颁",
@@ -61337,7 +65358,9 @@ const t = [
     mark: "ㄅㄢ",
     tradition: "頒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ban",
+    explain: "发下；公布：～发。～布。"
   },
   {
     char: "颂",
@@ -61350,7 +65373,9 @@ const t = [
     mark: "ㄙㄨㄥˋ",
     tradition: "頌",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "song",
+    explain: "颂扬：歌～。祝颂（多用于书信问候）：敬～大安。周代祭祀时用的舞曲，配曲的歌词有些收在《诗经》里面。以颂扬为目的的诗文：《祖国～》。姓。"
   },
   {
     char: "预",
@@ -61363,7 +65388,9 @@ const t = [
     mark: "ㄩˋ",
     tradition: "預",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yu",
+    explain: "预先；事先：～测。～报。～祝。～付。姓。同“与”（yù）。"
   },
   {
     char: "颅",
@@ -61376,7 +65403,9 @@ const t = [
     mark: "ㄌㄩˊ",
     tradition: "顱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lu",
+    explain: "脑盖。也指头：～骨。头～。"
   },
   {
     char: "领",
@@ -61389,7 +65418,9 @@ const t = [
     mark: "ㄌㄧㄥˇ",
     tradition: "領",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ling",
+    explain: "颈，脖子：引～而望。衣服上围绕脖子的部分：衣～。～口。～结。～带。～章。事物的纲要：～袖。要～。提纲挈～。带，引，率（shuài）：带～。率（shuài）～。～头。～衔。治理的，管辖的：～海。～空。～土。～域。占～。接受，取得：～奖。～命。～款。～教（jiào）。招～。了解，明白：～悟。～略。心～神会。量词，用于衣服、席、箔等：一～席。古同“岭”，山岭。"
   },
   {
     char: "颇",
@@ -61402,7 +65433,9 @@ const t = [
     mark: "ㄆㄛ",
     tradition: "頗",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "po",
+    explain: "偏；不正：偏～。很；相当地：～佳。～为费解。～感兴趣。～不以为然。"
   },
   {
     char: "颈",
@@ -61415,7 +65448,9 @@ const t = [
     mark: "ㄍㄥˇ",
     tradition: "頸",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jing",
+    explain: "脖子前的一部分。也指脖子：刎～。延～伫望。"
   },
   {
     char: "颊",
@@ -61428,7 +65463,9 @@ const t = [
     mark: "ㄐㄧㄚˊ",
     tradition: "頰",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "jia",
+    explain: "脸的两侧从眼到下颌的部分：两～。"
   },
   {
     char: "频",
@@ -61441,20 +65478,9 @@ const t = [
     mark: "ㄆㄧㄣˊ",
     tradition: "頻",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "颓",
-    spell: "tuí",
-    stroke: "13",
-    radical: "页",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄊㄨㄟˊ",
-    tradition: "頹",
-    sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "pin",
+    explain: "屡次的、接连的。  【组词】：捷报频传、战乱频仍频率的简称。  【组词】：高频、超高频"
   },
   {
     char: "颖",
@@ -61467,7 +65493,9 @@ const t = [
     mark: "ㄧㄥˊ",
     tradition: "穎",
     sex: "女",
-    tone: 3
+    tone: 3,
+    pinyin: "ying",
+    explain: "稻、麦等禾谷子实带芒的外壳。锥子杆儿前端固定针的金属环。也指某些小而细长东西的尖端：脱～而出。短～羊毫。聪明：～悟。"
   },
   {
     char: "颗",
@@ -61480,7 +65508,9 @@ const t = [
     mark: "ㄎㄜ",
     tradition: "顆",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ke",
+    explain: "多用于颗粒状的东西：一～珠子。一～子弹。一～牙齿。一～～汗珠子往下掉。"
   },
   {
     char: "题",
@@ -61493,7 +65523,9 @@ const t = [
     mark: "ㄊㄧˊ",
     tradition: "題",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ti",
+    explain: "题目：命～。练习～。文不对～。出了五道～。写上；签上：～诗。～字。～名。姓。"
   },
   {
     char: "颜",
@@ -61506,7 +65538,9 @@ const t = [
     mark: "ㄧㄢˊ",
     tradition: "顏",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yan",
+    explain: "面容，脸色，脸面：容～。开～。～面。～色。笑逐～开。鹤发童～。色彩：～料。五～六色。姓。"
   },
   {
     char: "额",
@@ -61519,7 +65553,9 @@ const t = [
     mark: "ㄜˊ",
     tradition: "額",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "e",
+    explain: "人的眉毛以上头发以下的部分，也指某些动物头部大致与此相当的部位。通称额头。牌匾：匾～。横～。姓。规定的数目：名～。定～。总～。余～。空～。超～。～外。"
   },
   {
     char: "颠",
@@ -61532,7 +65568,9 @@ const t = [
     mark: "ㄉㄧㄢ",
     tradition: "顛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "dian",
+    explain: "高而直立的东西的顶：山～。塔～。颠簸：路不平，车～得厉害。跌落；倒下来：～覆。～扑不破。跳起来跑；跑：连跑带～。跑跑～～。同“癫”。"
   },
   {
     char: "颤",
@@ -61545,7 +65583,9 @@ const t = [
     mark: "ㄔㄢˋ",
     tradition: "顫",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "chan",
+    explain: "颤动；发抖：～抖。声音发～。两腿直～。"
   },
   {
     char: "风",
@@ -61558,7 +65598,9 @@ const t = [
     mark: "ㄈㄥˋ",
     tradition: "風",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "feng",
+    explain: "吹。  【组词】：春风风人、有寒疾不可以风"
   },
   {
     char: "飒",
@@ -61571,7 +65613,9 @@ const t = [
     mark: "ㄙㄚˋ",
     tradition: "颯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "sa",
+    explain: "拟声词。风声。"
   },
   {
     char: "飘",
@@ -61584,7 +65628,9 @@ const t = [
     mark: "ㄆㄧㄠ",
     tradition: "飄",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "piao",
+    explain: "随风摇动或飞扬：～动。～摇。～落。红旗～～。外面～着雪花。形容腿部发软，走路不稳：两腿发～。轻浮；不踏实：作风有点儿～。姓。"
   },
   {
     char: "飞",
@@ -61593,11 +65639,13 @@ const t = [
     radical: "飞",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄟ",
     tradition: "飛",
     sex: "男",
-    tone: 1
+    tone: 1,
+    pinyin: "fei",
+    explain: "（鸟、虫等）鼓动翅膀在空中活动：～蝗。鸟～了。利用动力机械在空中行动：～行。明天有飞机～上海。在空中飘浮游动：～云。～沙走石。～雪花了。形容极快：～奔。～跑。～涨。挥发：盖上瓶子吧，免得香味儿～了。樟脑放久了，都～净了。意外的；凭空而来的：～灾。～祸。流言～语。姓。"
   },
   {
     char: "食",
@@ -61610,7 +65658,9 @@ const t = [
     mark: "ㄙˋ",
     tradition: "食",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "shi",
+    explain: "吃：~肉、应多~蔬菜。专指吃饭：~堂、废寝忘~。人吃的东西：肉~、面~、主~、副~、消~、丰衣足~。（食儿）一般动物吃的东西；饲料：猪~、鸡没~儿了。供食用或调味用的：~物、~油、~盐。"
   },
   {
     char: "餐",
@@ -61623,7 +65673,9 @@ const t = [
     mark: "ㄘㄢ",
     tradition: "餐",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "can",
+    explain: "吃（饭）：聚～。野～。饭食：午～。西～。一顿饭叫一餐：一日三～。"
   },
   {
     char: "饥",
@@ -61636,7 +65688,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "飢、饑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "饿：～餐渴饮。如～似渴。农作物歉收或没有收成：连年大～。"
   },
   {
     char: "饭",
@@ -61645,11 +65699,13 @@ const t = [
     radical: "饣",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄈㄢˋ",
     tradition: "飯",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "fan",
+    explain: "煮熟的谷类食品。特指米饭。每天定时吃的食物：早～。晚～。"
   },
   {
     char: "饮",
@@ -61662,7 +65718,9 @@ const t = [
     mark: "ㄧㄣˋ",
     tradition: "飲",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "yin",
+    explain: "喝，有时特指喝酒：痛～。～料。～食。～水思源。可以喝的东西：冷～。饮子：香苏～。中医指稀痰。心里存着；含着：～恨。"
   },
   {
     char: "饰",
@@ -61675,7 +65733,9 @@ const t = [
     mark: "ㄕˋ",
     tradition: "飾",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "shi",
+    explain: "装饰；打扮：修～。粉～。装饰用品：首～。遮掩：掩～。文过～非。扮演角色：他在《逼上梁山》里～林冲。"
   },
   {
     char: "饱",
@@ -61688,7 +65748,9 @@ const t = [
     mark: "ㄅㄠˇ",
     tradition: "飽",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bao",
+    explain: "吃足了。与“饿”相对。足；充分：～经忧患。满足：以～眼福。"
   },
   {
     char: "饲",
@@ -61701,7 +65763,9 @@ const t = [
     mark: "ㄙˋ",
     tradition: "飼",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "si",
+    explain: "饲养：～料。饲料：打草储～。"
   },
   {
     char: "饵",
@@ -61714,7 +65778,9 @@ const t = [
     mark: "ㄦˇ",
     tradition: "餌",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "er",
+    explain: "糕饼。例：果～。钓鱼用的鱼食：鱼～。钓～。引诱：此所以～敌者也。"
   },
   {
     char: "饶",
@@ -61727,7 +65793,9 @@ const t = [
     mark: "ㄖㄠˊ",
     tradition: "饒",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "rao",
+    explain: "丰富；多：富～。丰～。～有风趣。没有代价地增添；另外添：～头。有两人去就行了，不要把他也～在里头。饶恕；宽容：～他这一回。表示让步，跟“虽然、尽管”意思相近：～这么让着他，他还不满意。姓。"
   },
   {
     char: "饺",
@@ -61740,7 +65808,9 @@ const t = [
     mark: "ㄐㄧㄠˇ",
     tradition: "餃",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "jiao",
+    explain: "饺子，一种半圆形包馅儿的面食。"
   },
   {
     char: "饼",
@@ -61753,33 +65823,9 @@ const t = [
     mark: "ㄅㄧㄥˇ",
     tradition: "餅",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "饿",
-    spell: "è",
-    stroke: "10",
-    radical: "饣",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄜˇ",
-    tradition: "餓",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "馁",
-    spell: "něi",
-    stroke: "10",
-    radical: "饣",
-    struct: "左右结构",
-    five: "火",
-    method: "形声",
-    mark: "ㄋㄟˇ",
-    tradition: "餒",
-    sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "bing",
+    explain: "扁圆形的面制食品：月～。烙～。泛指扁圆形像饼一样的东西：铁～。"
   },
   {
     char: "馅",
@@ -61792,7 +65838,9 @@ const t = [
     mark: "ㄒㄧㄢˋ",
     tradition: "餡",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xian",
+    explain: "包在面食、点心等食品里面的肉、菜、糖等：饺子～儿。点心～儿。"
   },
   {
     char: "馆",
@@ -61805,20 +65853,9 @@ const t = [
     mark: "ㄍㄨㄢˇ",
     tradition: "館",
     sex: "",
-    tone: 3
-  },
-  {
-    char: "馋",
-    spell: "chán",
-    stroke: "12",
-    radical: "饣",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄔㄢˊ",
-    tradition: "饞",
-    sex: "",
-    tone: 2
+    tone: 3,
+    pinyin: "guan",
+    explain: "招待宾客居住的房屋：宾～。旅～。一个国家在另一国家办理外交的人员常驻的处所：使～。领事～。（～儿）某些服务性商店的名称：理发～。照相～。饭～儿。收藏、陈列文物或进行文体活动的场所：博物～。天文～。文化～。图书～。展览～。体育～。旧时指塾师教书的地方：坐～。家～。"
   },
   {
     char: "馍",
@@ -61831,7 +65868,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "饃",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "馒头：蒸～。白面～。也叫馍馍。"
   },
   {
     char: "馏",
@@ -61844,7 +65883,9 @@ const t = [
     mark: "ㄌㄧㄡˊ",
     tradition: "餾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "liu",
+    explain: "蒸馏。"
   },
   {
     char: "馒",
@@ -61857,7 +65898,9 @@ const t = [
     mark: "ㄇㄢˊ",
     tradition: "饅",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "man",
+    explain: "〔馒头〕一种用面粉发酵后蒸成的食品。圆形底平，无馅儿。"
   },
   {
     char: "首",
@@ -61866,11 +65909,13 @@ const t = [
     radical: "首",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄡˇ",
     tradition: "首",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shou",
+    explain: "头：昂～阔步。领袖；领导人：元～。～长。最先；开始：～创。第一；最高：～要。～席代表。告发：自～。出～。量词。用于诗歌、歌曲等：一～诗。民歌百～。"
   },
   {
     char: "香",
@@ -61883,7 +65928,9 @@ const t = [
     mark: "ㄒㄧㄤ",
     tradition: "香",
     sex: "女",
-    tone: 1
+    tone: 1,
+    pinyin: "xiang",
+    explain: "（气味）好闻（跟“臭”相对）：～水。～皂。这花真～。食物味道好：饭很～。吃东西胃口好：这两天吃饭不～。睡得踏实：睡得正～呢。受欢迎；被看重：吃～。这种货物在农村很～。香料：檀～。沉～。龙涎～。用木屑掺香料做成的细条，燃烧时，发出好闻的气味，在祭祀祖先或神佛时常用，有的加上药物，可以熏蚊子：线～。蚊～。烧一炷～。亲吻：～面孔。姓。"
   },
   {
     char: "马",
@@ -61892,11 +65939,13 @@ const t = [
     radical: "马",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄚˇ",
     tradition: "馬",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ma",
+    explain: "哺乳动物，头小，面部长，耳壳直立，颈部有鬣，四肢强健，每肢各有一蹄，善跑，尾生有长毛。是重要的力畜之一，可供拉车、耕地、乘骑等用。皮可制革。大：～蜂。～勺。姓。"
   },
   {
     char: "驮",
@@ -61909,7 +65958,9 @@ const t = [
     mark: "ㄉㄨㄛˇ",
     tradition: "馱",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tuo",
+    explain: "用背部承载人或物体：～运。这匹马能～四袋粮食。他～着我过了河。"
   },
   {
     char: "驯",
@@ -61922,7 +65973,9 @@ const t = [
     mark: "ㄒㄩㄣˋ",
     tradition: "馴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "xun",
+    explain: "顺服的：～良。～顺。使之顺从：～养。～马。"
   },
   {
     char: "驰",
@@ -61935,20 +65988,9 @@ const t = [
     mark: "ㄔˊ",
     tradition: "馳",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "驱",
-    spell: "qū",
-    stroke: "7",
-    radical: "马",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄑㄩ",
-    tradition: "驅",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "chi",
+    explain: "（车马等，使车马等）跑得很快：奔～。～逐。飞～。风～电掣。传播：～名。（心神）向往：神～。～想。"
   },
   {
     char: "驳",
@@ -61961,7 +66003,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "駁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bo",
+    explain: "指出对方的意见不合事实或没有道理；说出自己的意见，否定别人的意见：批～。反～。～价。这种论点不值一～。一种颜色夹杂着别种颜色；不纯净：斑～。驳运：起～。～卸。驳船：铁～。把岸或堤向外扩展：这条堤还不够宽，最好再～出去一米。"
   },
   {
     char: "驴",
@@ -61970,11 +66014,13 @@ const t = [
     radical: "马",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˊ",
     tradition: "驢",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lü",
+    explain: "哺乳动物。家驴耐粗饲、善驮载。中国关中驴是著名品种。中国野驴主要分布于内蒙古、甘肃、青海、新疆、西藏等地，是国家保护的珍稀动物。"
   },
   {
     char: "驶",
@@ -61987,7 +66033,9 @@ const t = [
     mark: "ㄕˇ",
     tradition: "駛",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shi",
+    explain: "（车马等）飞快地跑：急～而过。开动（车船等）：驾～。行～。～向远方。轮船因故停～。"
   },
   {
     char: "驹",
@@ -62000,7 +66048,9 @@ const t = [
     mark: "ㄐㄩ",
     tradition: "駒",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ju",
+    explain: "少壮的马：千里～。泛指小马、小驴等：马～儿。驴～儿。"
   },
   {
     char: "驻",
@@ -62013,7 +66063,9 @@ const t = [
     mark: "ㄓㄨˋ",
     tradition: "駐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhu",
+    explain: "停留：～足。（部队或工作人员）住在执行职务的地方；（机关）设在某地：～京办事处。部队～在村东的一个大院里。"
   },
   {
     char: "驼",
@@ -62026,7 +66078,9 @@ const t = [
     mark: "ㄊㄨㄛˊ",
     tradition: "駝",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tuo",
+    explain: "骆驼：～峰。～绒。脊背弯曲，直不起来：～背。"
   },
   {
     char: "驾",
@@ -62039,7 +66093,9 @@ const t = [
     mark: "ㄐㄧㄚˋ",
     tradition: "駕",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jia",
+    explain: "使牲口拉（车或农具）：两匹马～着车。～着牲口耕地。驾驶：～车。～飞机。腾云～雾。指车辆，借用为敬辞，称对方：车～。大～。劳～。挡～。特指帝王的车，借指帝王：晏～。～崩（帝王死去）。姓。"
   },
   {
     char: "骂",
@@ -62052,20 +66108,9 @@ const t = [
     mark: "ㄇㄚˋ",
     tradition: "駡",
     sex: "",
-    tone: 4
-  },
-  {
-    char: "骄",
-    spell: "jiāo",
-    stroke: "9",
-    radical: "马",
-    struct: "左右结构",
-    five: "木",
-    method: "形声",
-    mark: "ㄐㄧㄠ",
-    tradition: "驕",
-    sex: "",
-    tone: 1
+    tone: 4,
+    pinyin: "ma",
+    explain: "用粗野或恶意的话侮辱人：不打人不～人。斥责：他爸爸～他不争气。"
   },
   {
     char: "骆",
@@ -62078,7 +66123,9 @@ const t = [
     mark: "ㄌㄨㄛˋ",
     tradition: "駱",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "luo",
+    explain: "古书上指黑鬃的白马。姓。"
   },
   {
     char: "骇",
@@ -62091,7 +66138,9 @@ const t = [
     mark: "ㄏㄞˋ",
     tradition: "駭",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "hai",
+    explain: "惊吓；震惊：惊涛～浪。～人听闻。"
   },
   {
     char: "验",
@@ -62104,7 +66153,9 @@ const t = [
     mark: "ㄧㄢˋ",
     tradition: "驗",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "yan",
+    explain: "检查；察看：～血。～票。有效果：屡试屡～。证据；凭据：何以为～？"
   },
   {
     char: "骏",
@@ -62117,7 +66168,9 @@ const t = [
     mark: "ㄐㄩㄣˋ",
     tradition: "駿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "jun",
+    explain: "好马。"
   },
   {
     char: "骑",
@@ -62130,33 +66183,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "騎",
     sex: "",
-    tone: 2
-  },
-  {
-    char: "骗",
-    spell: "piàn",
-    stroke: "12",
-    radical: "马",
-    struct: "左右结构",
-    five: "水",
-    method: "形声",
-    mark: "ㄆㄧㄢˋ",
-    tradition: "騙",
-    sex: "",
-    tone: 4
-  },
-  {
-    char: "骚",
-    spell: "sāo",
-    stroke: "12",
-    radical: "马",
-    struct: "左右结构",
-    five: "金",
-    method: "形声",
-    mark: "ㄙㄠ",
-    tradition: "騷",
-    sex: "",
-    tone: 1
+    tone: 2,
+    pinyin: "qi",
+    explain: "跨坐：～马。～自行车。骑兵。也泛指骑马的人：铁～。轻～。车～。兼跨两边：～缝。"
   },
   {
     char: "骡",
@@ -62169,7 +66198,9 @@ const t = [
     mark: "ㄌㄨㄛˊ",
     tradition: "騾",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "luo",
+    explain: "驴、马交配的杂种后代。适应性强，役用年龄长，挽力大而持久，不能生殖。"
   },
   {
     char: "骤",
@@ -62182,7 +66213,9 @@ const t = [
     mark: "ㄓㄡˋ",
     tradition: "驟",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "zhou",
+    explain: "（马）奔跑：驰～。急速：暴风～雨。突然；忽然：狂风～起。脸色～变。"
   },
   {
     char: "骨",
@@ -62191,11 +66224,13 @@ const t = [
     radical: "骨",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨˇ",
     tradition: "骨",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gu",
+    explain: "人和脊椎动物体内支持身体、保护内脏的坚硬组织：～头。～骼（全身骨头的总称）。～节。～肉（ａ．指最亲近的有血统关系的人，亦称“骨血”；ｂ．喻紧密相连，不可分割的关系）。～干（gàn）。像骨的东西（指支撑物体的骨架）：伞～。扇～。指文学作品的理论和笔力：～力（ａ．雄健的笔力；ｂ．刚强不屈的气概）。风～（古典文艺理论术语，指文章的艺术风格，亦指作品的风神骨髓）。指人的品质、气概：侠～。～气。"
   },
   {
     char: "髓",
@@ -62208,7 +66243,9 @@ const t = [
     mark: "ㄙㄨㄟˇ",
     tradition: "髓",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "sui",
+    explain: "骨头里像脂肪的东西：骨～。敲骨吸～。像髓的东西：脑～。石～。事物的精华部分：精～。神～。植物茎的中心部分。"
   },
   {
     char: "高",
@@ -62217,11 +66254,13 @@ const t = [
     radical: "高",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄠ",
     tradition: "高",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gao",
+    explain: "从下向上距离大；离地面远（跟“低”相对，同）：～楼大厦。这里地势很～。高度：那棵树有五米～。书桌～八十厘米。三角形、平行四边形等从底部到顶部（顶点或平行线）的垂直距离。在一般标准或平均程度之上的：～速度。体温～。见解比别人～。等级在上的：～等。～年级。哥哥比我～一班。敬辞，称别人的事物：～见。～论。酸根或化合物中比标准酸根多含一个氧原子的：～锰酸钾。姓。"
   },
   {
     char: "鬓",
@@ -62234,7 +66273,9 @@ const t = [
     mark: "ㄅㄧㄣˋ",
     tradition: "鬢",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "bin",
+    explain: "鬓角，面颊两边靠近耳朵前面的地方；也指这个部位所长的头发：两～苍苍。"
   },
   {
     char: "鬼",
@@ -62243,11 +66284,13 @@ const t = [
     radical: "鬼",
     struct: "独体结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄟˇ",
     tradition: "鬼",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gui",
+    explain: "迷信的人认为人死后的灵魂叫鬼。不可告人的打算或勾当：捣～。～～祟祟。称有不良嗜好或行为的人（含轻蔑意）：酒～。烟～。指小孩机灵：这孩子真～！。小～。星名。二十八宿之一。"
   },
   {
     char: "魁",
@@ -62260,7 +66303,9 @@ const t = [
     mark: "ㄎㄨㄟˊ",
     tradition: "魁",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "kui",
+    explain: "为首的；居第一位的：～首。罪～。夺～。花～。（身体）高大：～梧。～伟。魁星姓。"
   },
   {
     char: "魂",
@@ -62273,7 +66318,9 @@ const t = [
     mark: "ㄏㄨㄣˊ",
     tradition: "魂",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "hun",
+    explain: "指精神或情绪：梦～萦绕。神～颠倒。特指崇高的精神：国～。民族～。泛指事物的人格化精神：花～。诗～。"
   },
   {
     char: "魄",
@@ -62286,7 +66333,9 @@ const t = [
     mark: "ㄅㄛˊ",
     tradition: "魄",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "po",
+    explain: "迷信的人指依附于人的身体而存在的精神：魂～。魄力或精力：气～。体～。"
   },
   {
     char: "魏",
@@ -62299,7 +66348,9 @@ const t = [
     mark: "ㄨㄟˋ",
     tradition: "魏",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "wei",
+    explain: "周朝国名（前403—前225）。战国七雄之一。在今河南北部、山西西南部，为秦所灭。朝代名。1.三国之一（220—265）。与吴、蜀并立。曹操子曹丕所建。占有黄河流域、淮河流域等地区，建都洛阳，国号魏，史称曹魏。为晋所灭。北朝之一（386—534）。鲜卑族拓跋珪所建。公元398年建都平城（今山西大同）。公元439年统一北方，公元494年迁都洛阳，史称北魏，又称后魏、拓跋魏、元魏。后分裂为东魏（534—550）、西魏（535—556）。东魏为北齐所灭，西魏为北周所灭。"
   },
   {
     char: "魔",
@@ -62312,7 +66363,9 @@ const t = [
     mark: "ㄇㄛˊ",
     tradition: "魔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "mo",
+    explain: "魔鬼：恶～。妖～。病～。旱～。神秘；奇异：～力。～术。[魔罗之省，梵māra]"
   },
   {
     char: "鱼",
@@ -62321,11 +66374,13 @@ const t = [
     radical: "鱼",
     struct: "上下结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄩˊ",
     tradition: "魚",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "yu",
+    explain: "脊椎动物的一大类，生活在水中，体温随外界温度而变化，一般身体侧扁，有鳞和鳍，用鳃呼吸。种类极多，包括软骨鱼和硬骨鱼两类。大部分可供食用。（Yú）姓。"
   },
   {
     char: "鲁",
@@ -62338,7 +66393,9 @@ const t = [
     mark: "ㄌㄩˇ",
     tradition: "魯",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "lu",
+    explain: "迟钝；笨：愚～。～钝。莽撞；粗野：粗～。～莽。这人办事挺～的。周朝国名，在今山东曲阜一带。山东的别称：～菜。姓。"
   },
   {
     char: "鲜",
@@ -62351,7 +66408,9 @@ const t = [
     mark: "ㄒㄧㄢˇ",
     tradition: "鮮",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "xian",
+    explain: "新鲜：～花。～肉。明丽的：～红。～艳。（味道）美好：味道很～。鲜美应时的食物：时～。尝～。古指生鱼：治大国，若烹小～。"
   },
   {
     char: "鲤",
@@ -62360,11 +66419,13 @@ const t = [
     radical: "鱼",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧˇ",
     tradition: "鯉",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "li",
+    explain: "鲤鱼，体侧扁而长，背部苍黑色，腹部黄白色，有的尾部或全身红色，口边有须两对。是我国重要的淡水鱼。"
   },
   {
     char: "鲫",
@@ -62377,7 +66438,9 @@ const t = [
     mark: "ㄐㄧˋ",
     tradition: "鯽",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "ji",
+    explain: "鱼类。体侧扁，背脊隆起，长可达20多厘米，头小、无须。可淡水养殖，是中国重要食用鱼。"
   },
   {
     char: "鲸",
@@ -62390,7 +66453,9 @@ const t = [
     mark: "ㄐㄧㄥ",
     tradition: "鯨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jing",
+    explain: "哺乳动物，种类很多，生活在海洋中，胎生，外形像鱼，体长可达30多米，是现在世界上最大的一类动物，头大，眼小，没有耳壳，前肢形成鳍，后肢完全退化，尾巴变成尾鳍，鼻孔在头的上部，用肺呼吸。俗称鲸鱼。"
   },
   {
     char: "鳄",
@@ -62403,7 +66468,9 @@ const t = [
     mark: "ㄜˇ",
     tradition: "鰐",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "e",
+    explain: "爬行动物，大的身体长3—6米，头扁平，四肢短，尾巴长，全身有灰褐色的硬皮。善于游泳，性凶恶，捕食鱼、蛙和鸟类等。种类较多，多产在热带和亚热带，其中扬子鳄是我国的特产。俗称鳄鱼。"
   },
   {
     char: "鳍",
@@ -62416,7 +66483,9 @@ const t = [
     mark: "ㄑㄧˊ",
     tradition: "鰭",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "鱼类的运动器官，由刺状的硬骨或软骨支撑薄膜构成。按所在的部位，可分为胸鳍、腹鳍、背鳍、臀鳍和尾鳍。有调节速度、变换方向等作用。"
   },
   {
     char: "鳖",
@@ -62429,7 +66498,9 @@ const t = [
     mark: "ㄅㄧㄝ",
     tradition: "鱉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "bie",
+    explain: "爬行动物，形状像龟，吻尖长，背甲椭圆形，上有软皮，生活在水中。也叫甲鱼或团鱼，俗称王八。"
   },
   {
     char: "鳞",
@@ -62442,7 +66513,9 @@ const t = [
     mark: "ㄌㄧㄣˊ",
     tradition: "鱗",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "lin",
+    explain: "鱼类、爬行动物和少数哺乳动物身体表面具有保护作用的薄片状组织，由角质、骨质等构成。像鱼鳞的：～茎。～波。遍体～伤。姓。"
   },
   {
     char: "鸟",
@@ -62451,11 +66524,13 @@ const t = [
     radical: "鸟",
     struct: "独体结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄉㄧㄠˇ",
     tradition: "鳥",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "niao",
+    explain: "脊椎动物亚门鸟纲动物的通称。卵生，体温恒定，全身被羽毛。前肢变化为翅膀，能飞行；后肢为脚，用以行走或站立。嘴内无齿，用肺呼吸。一般鸟类均会飞翔，但亦有双翼退化不能飞的，如鸡、鸭、鹅、驼鸟等。种类繁多，遍布世界各地。"
   },
   {
     char: "鸠",
@@ -62468,7 +66543,9 @@ const t = [
     mark: "ㄐㄧㄡ",
     tradition: "鳩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "jiu",
+    explain: "鸟类。外形像鸽子。常见的有斑鸠，身体灰褐色，颈后有白或黄褐斑点。常成群吃谷物。聚集：～合（纠合）。"
   },
   {
     char: "鸡",
@@ -62481,7 +66558,9 @@ const t = [
     mark: "ㄐㄧ",
     tradition: "鷄",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ji",
+    explain: "家禽，品种很多，嘴短，上嘴稍弯曲，头部有红色的肉冠。翅膀短，不能高飞。也叫家鸡。（Jī）姓。"
   },
   {
     char: "鸣",
@@ -62490,11 +66569,13 @@ const t = [
     radical: "口",
     struct: "左右结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄧㄥˊ",
     tradition: "鳴",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "ming",
+    explain: "（鸟兽或昆虫）叫：鸟～。蝉～。虫～。发出声音；使发出声音：耳～。雷～。自～钟。孤掌难～。礼炮齐～。～鼓。～锣开道。表达；发表（情感、意见、主张）：～谢。～冤。～不平。百家争～。姓。"
   },
   {
     char: "鸥",
@@ -62507,7 +66588,9 @@ const t = [
     mark: "ㄡ",
     tradition: "鷗",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ou",
+    explain: "鸟，头大，嘴扁平，前趾有蹼，翼长而尖，羽毛多为白色。多生活在海边，主要捕食鱼类，种类很多，如海鸥、黑尾鸥等。"
   },
   {
     char: "鸦",
@@ -62520,7 +66603,9 @@ const t = [
     mark: "ㄧㄚ",
     tradition: "鴉",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ya",
+    explain: "鸟类的一科。羽毛大多为黑色，喙及足强壮，多在高树上筑巢。中国常见的有乌鸦、寒鸦等。主食昆虫，有时挖食播种的种子。"
   },
   {
     char: "鸭",
@@ -62533,7 +66618,9 @@ const t = [
     mark: "ㄧㄚ",
     tradition: "鴨",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ya",
+    explain: "鸟，嘴扁腿短，趾间有蹼，善游泳，有家鸭、野鸭两种。（rǒng）毛可用来絮被子、羽绒服或填充枕头。通常指家鸭。通称鸭子。"
   },
   {
     char: "鸯",
@@ -62546,7 +66633,9 @@ const t = [
     mark: "ㄧㄤ",
     tradition: "鴦",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yang",
+    explain: "〔鸳鸯〕鸟类。雄的羽毛华丽，翅上有竖起的扇状直立羽。雌的较小，背苍褐色。雌雄常在一起。是中国珍禽。"
   },
   {
     char: "鸳",
@@ -62559,7 +66648,9 @@ const t = [
     mark: "ㄩㄢ",
     tradition: "鴛",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "yuan",
+    explain: "〔鸳鸯〕鸟类。雄的羽毛华丽，翅上有竖起的扇状直立羽。雌的较小，背苍褐色。雌雄常在一起。是中国珍禽。"
   },
   {
     char: "鸵",
@@ -62572,7 +66663,9 @@ const t = [
     mark: "ㄊㄨㄛˊ",
     tradition: "鸵",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "tuo",
+    explain: "〔鸵鸟〕鸟类。现代鸟类中最大的一种。头小，颈长，高可达2.7米，两翼退化，不能飞，善奔走。卵甚大，重500—1，000克。产于非洲沙漠地带。"
   },
   {
     char: "鸽",
@@ -62585,7 +66678,9 @@ const t = [
     mark: "ㄍㄜ",
     tradition: "鴿",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ge",
+    explain: "鸽子，鸟类。品种很多。翅膀小，善飞行，羽毛有白色、灰色、酱紫色等。分家鸽和野鸽。有的家鸽经训练可用来传递书信。野鸽有时伤害农作物。"
   },
   {
     char: "鸿",
@@ -62598,7 +66693,9 @@ const t = [
     mark: "ㄏㄨㄥˊ",
     tradition: "鴻",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "hong",
+    explain: "大雁：～雁。～毛。雪泥～爪（喻往事遗留的痕迹）。大：～博。～图。～沟。～儒。～福。～运。～烈。指书信：来～。姓。"
   },
   {
     char: "鹃",
@@ -62607,11 +66704,13 @@ const t = [
     radical: "鸟",
     struct: "左右结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄐㄩㄢ",
     tradition: "鵑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "juan",
+    explain: "见〔杜鹃〕"
   },
   {
     char: "鹅",
@@ -62624,7 +66723,9 @@ const t = [
     mark: "ㄜˊ",
     tradition: "鵝",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "e",
+    explain: "家禽，羽毛白色或灰色，额部有橙黄色或黑褐色肉质突起，雄的突起较大。颈长，嘴扁而阔，脚有蹼，能游泳，耐寒，吃青草、谷物、蔬菜、鱼虾等。"
   },
   {
     char: "鹉",
@@ -62637,7 +66738,9 @@ const t = [
     mark: "ㄨˇ",
     tradition: "鵡",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "wu",
+    explain: "见〔鹦鹉〕"
   },
   {
     char: "鹊",
@@ -62650,7 +66753,9 @@ const t = [
     mark: "ㄑㄩㄝˋ",
     tradition: "鵲",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "que",
+    explain: "也叫喜鹊。鸟类。喙尖，尾长，体羽大部为黑色，肩和腹白色。叫声响亮，主食昆虫，是益鸟。"
   },
   {
     char: "鹏",
@@ -62663,7 +66768,9 @@ const t = [
     mark: "ㄆㄥˊ",
     tradition: "鵬",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "peng",
+    explain: "古代传说中最大的鸟。"
   },
   {
     char: "鹤",
@@ -62676,7 +66783,9 @@ const t = [
     mark: "ㄏㄜˋ",
     tradition: "鶴",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "he",
+    explain: "鸟，头小颈长，嘴长而直，脚细长，后趾小，高于前三趾，羽毛白色或灰色，群居或双栖，常在河边或沼泽地带捕食鱼和昆虫。种类很多，常见的有丹顶鹤、白鹤、灰鹤等。"
   },
   {
     char: "鹦",
@@ -62689,7 +66798,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "鸚",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "见下。"
   },
   {
     char: "鹰",
@@ -62702,7 +66813,9 @@ const t = [
     mark: "ㄧㄥ",
     tradition: "鷹",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "ying",
+    explain: "鸟，上嘴呈钩形，颈短，脚部有长毛，足趾有长而锐利的爪。是猛禽，捕食小兽及其他鸟类。种类很多，如苍鹰、雀鹰、老鹰等。"
   },
   {
     char: "鹿",
@@ -62711,11 +66824,13 @@ const t = [
     radical: "鹿",
     struct: "半包围结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄩˋ",
     tradition: "鹿",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "lu",
+    explain: "哺乳动物，反刍类，种类很多，四肢细长，尾巴短，一般雄的头上有角，个别种类雌的也有角，毛多为褐色，有的有花斑或条纹，听觉和嗅觉都很灵敏。有梅花鹿、马鹿等。（Lù）姓。"
   },
   {
     char: "麦",
@@ -62724,11 +66839,13 @@ const t = [
     radical: "麦",
     struct: "独体结构",
     five: "水",
-    method: "-",
+    method: "",
     mark: "ㄇㄞˋ",
     tradition: "麥",
     sex: "男",
-    tone: 4
+    tone: 4,
+    pinyin: "mai",
+    explain: "一年生或二年生草本植物，子实用来磨面粉，也可以用来制糖或酿酒，是我国北方重要的粮食作物。有小麦、大麦、黑麦、燕麦等多种。专指小麦。‖通称麦子。（Mài）姓。"
   },
   {
     char: "麸",
@@ -62741,7 +66858,9 @@ const t = [
     mark: "ㄈㄨ",
     tradition: "麩",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "fu",
+    explain: "麸子，也叫麸皮。小麦磨面筛剩下的碎皮。"
   },
   {
     char: "麻",
@@ -62754,7 +66873,9 @@ const t = [
     mark: "ㄇㄚˊ",
     tradition: "麻",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ma",
+    explain: "草本植物，种类很多，有“大麻”、“苎麻”、“苘麻”、“亚麻”等。茎皮纤维通常亦称“麻”，可制绳索、织布：～布。～衣。～袋。～绳。～纺。指“芝麻”：～酱。～油。像腿、臂被压后的那种不舒服的感觉：脚～了。感觉不灵，或丧失感觉，引申为思想不敏锐：～痹。～醉。～木不仁。面部痘瘢，引申指物体表面粗糙：～子。带细碎斑点的：～雀。～蝇。喻纷乱：～乱。～沸。姓。"
   },
   {
     char: "黄",
@@ -62763,11 +66884,13 @@ const t = [
     radical: "黄",
     struct: "上中下结构",
     five: "土",
-    method: "-",
+    method: "",
     mark: "ㄏㄨㄤˊ",
     tradition: "黄",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "huang",
+    explain: "像丝瓜花或向日葵花的颜色。指黄金：～货。～白之物。指蛋黄：双～蛋。象征腐化堕落，特指色情：扫～。查禁～书。（Huáng）指黄河：治～。引～工程。（Huáng）指黄帝，我国古代传说中的帝王：炎～。姓。事情失败或计划不能实现：买卖～了。"
   },
   {
     char: "黍",
@@ -62780,7 +66903,9 @@ const t = [
     mark: "ㄕㄨˇ",
     tradition: "黍",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "黍子，一年生草本植物。碾成米叫黄米，性黏，可酿酒。"
   },
   {
     char: "黎",
@@ -62793,7 +66918,9 @@ const t = [
     mark: "ㄌㄧˊ",
     tradition: "黎",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "li",
+    explain: "众多：～庶。黑色：～黑。黎族。"
   },
   {
     char: "黑",
@@ -62806,7 +66933,9 @@ const t = [
     mark: "ㄏㄟ",
     tradition: "黑",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "hei",
+    explain: "像煤或墨的颜色（跟“白”相对）：～板。～白分明。白纸～字。脸都晒～了。黑暗：天～了。屋子里很～。夜晚；黑夜：摸～儿。起早贪～。秘密；非法的；不公开的：～市。～话。～户。～社会。坏；狠毒：～心肠。这种人心太～。姓。"
   },
   {
     char: "黔",
@@ -62819,7 +66948,9 @@ const t = [
     mark: "ㄑㄧㄢˊ",
     tradition: "黔",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qian",
+    explain: "黑色：～首（古代统治阶级称老百姓）。贵州的别称。"
   },
   {
     char: "默",
@@ -62832,7 +66963,9 @@ const t = [
     mark: "ㄇㄛˋ",
     tradition: "默",
     sex: "",
-    tone: 4
+    tone: 4,
+    pinyin: "mo",
+    explain: "不说话；不出声：沉～。～哀。离开书本凭记忆写出来：～书。～生字。"
   },
   {
     char: "鼎",
@@ -62841,11 +66974,13 @@ const t = [
     radical: "鼎",
     struct: "上下结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄉㄧㄥˇ",
     tradition: "鼎",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "ding",
+    explain: "古代煮东西用的器物，圆形，三足两耳，也有方形四足的。比喻王位、帝业：定～。问～。大：～力。～言。锅。姓。正当；正在：～盛。"
   },
   {
     char: "鼓",
@@ -62858,7 +66993,9 @@ const t = [
     mark: "ㄍㄨˇ",
     tradition: "鼓",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "gu",
+    explain: "打击乐器，多为圆筒形或扁圆形，中间空，一面或两面蒙着皮革：腰～。手～。花～。形状、声音、作用像鼓的：石～。蛙～。耳～。使某些乐器或东西发出声音；敲：～琴。～掌。用风箱等扇（风）：～风。发动；振奋：～动。～励。～舞。～起勇气。凸起；胀大：他～着嘴半天没出声。额上的青筋都～起来了。形容凸起的程度高：钱包很～。口袋装得～～的。姓。"
   },
   {
     char: "鼠",
@@ -62867,11 +67004,13 @@ const t = [
     radical: "鼠",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄕㄨˇ",
     tradition: "鼠",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "shu",
+    explain: "哺乳动物，种类很多，一般身体小，尾巴长，门齿很发达，没有犬齿，毛褐色或黑色，繁殖力很强，有的能传播鼠疫。通称老鼠，有的地区叫耗子。"
   },
   {
     char: "鼻",
@@ -62884,7 +67023,9 @@ const t = [
     mark: "ㄅㄧˊ",
     tradition: "鼻",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "bi",
+    explain: "鼻子，人和高等动物的嗅觉器官和呼吸器官：～子。鼻儿，器物突出带孔的部分：针～儿。门～儿。创始：～祖。"
   },
   {
     char: "齐",
@@ -62893,11 +67034,13 @@ const t = [
     radical: "齐",
     struct: "上下结构",
     five: "金",
-    method: "-",
+    method: "",
     mark: "ㄐㄧˋ",
     tradition: "齊",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "qi",
+    explain: "平整、划一。良莠不齐、参差不齐完备。齐全、齐备整治、料理。齐家使同等、一致。齐心共同、同时。齐唱、百花齐放、并驾齐驱达到同样高度或长度。齐腰、草与人齐声韵学上齐齿呼的简称。开齐合撮战国七雄之一。故址位于今山东省、河北省南部一带。朝代名：南齐（公元479～502）。南朝诸朝之一，萧道成篡宋称帝，国号齐，都建康，后为萧衍所篡　北齐（公元550～577）。北朝诸朝之一，国号齐，建都邺（ㄧㄝˋ），为北周所灭。姓。"
   },
   {
     char: "齿",
@@ -62910,7 +67053,9 @@ const t = [
     mark: "ㄔˇ",
     tradition: "齒",
     sex: "",
-    tone: 3
+    tone: 3,
+    pinyin: "chi",
+    explain: "牙1物体上齿形的部分：锯～儿。梳～儿。篦子缺了几个～儿。带齿儿的：～轮。并列；引为同类：～列。不～于人类。年龄：序～。～德俱尊。说到；提起：～及。不足～数（shǔ）。"
   },
   {
     char: "龄",
@@ -62919,11 +67064,13 @@ const t = [
     radical: "齿",
     struct: "左右结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄧㄥˊ",
     tradition: "齡",
     sex: "",
-    tone: 2
+    tone: 2,
+    pinyin: "ling",
+    explain: "岁数：年～。学～。高～。泛指年数：工～。党～。军～。舰～。炉～。某些生物体发育过程中不同的阶段。如昆虫的幼虫第一次蜕皮前叫一龄虫，水稻长到七个叶叫七叶龄。"
   },
   {
     char: "龙",
@@ -62932,11 +67079,13 @@ const t = [
     radical: "龙",
     struct: "独体结构",
     five: "火",
-    method: "-",
+    method: "",
     mark: "ㄌㄨㄥˊ",
     tradition: "龍",
     sex: "男",
-    tone: 2
+    tone: 2,
+    pinyin: "long",
+    explain: "我国古代传说中的神异动物，身体长，有鳞，有角，有脚，能走，能飞，能游泳，能兴云降雨。封建时代用龙作为帝王的象征，也用来指帝王使用的东西：～颜。～廷。～袍。～床。形状像龙的或装有龙的图案的：～舟。～灯。～车。～旗。古生物学上指古代某些爬行动物，如恐龙、翼手龙等。姓。"
   },
   {
     char: "龟",
@@ -62945,11 +67094,13 @@ const t = [
     radical: "龟",
     struct: "上下结构",
     five: "木",
-    method: "-",
+    method: "",
     mark: "ㄍㄨㄟ",
     tradition: "龜",
     sex: "",
-    tone: 1
+    tone: 1,
+    pinyin: "gui",
+    explain: "爬行动物。背腹有甲。有些种类的龟，头、尾和脚可缩入甲内。在水中或陆上都能生活，寿命很长。有的龟甲可供药用。"
   }
 ];
 const utilRandom = (arr) => {
@@ -62958,21 +67109,25 @@ const utilRandom = (arr) => {
   return arr[randomIndex];
 };
 const getCnChar = (info, nums = 50) => {
+  var _a2, _b;
   let results = [];
+  const surname = (_a2 = info == null ? void 0 : info.element5) == null ? void 0 : _a2.surname;
+  const supplyOf = (_b = info == null ? void 0 : info.element5) == null ? void 0 : _b.supplyOf;
+  const surConfig = i.find((item) => item.char === surname) ?? {};
   const getName = (info2) => {
     let result = [];
     const { sex } = info2;
     const firstConfig = utilRandom(
-      t.filter((item) => !item.sex || item.sex === sex)
+      i.filter((item) => (!item.sex || item.sex === sex) && (!item.five || item.pinyin !== surConfig.pinyin) && (!item.five || item.five === supplyOf))
     );
     result.push(firstConfig);
     const secondConfig = utilRandom(
-      t.filter((item) => !item.sex || item.sex === sex)
+      i.filter((item) => (!item.sex || item.sex === sex) && (!item.five || item.pinyin !== surConfig.pinyin) && item.radical !== firstConfig.radical && item.pinyin !== firstConfig.pinyin)
     );
     result.push(secondConfig);
     return result;
   };
-  for (let i = 0; i < nums; i++) {
+  for (let i2 = 0; i2 < nums; i2++) {
     const name = getName(info);
     results.push(name);
   }
