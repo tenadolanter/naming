@@ -12774,7 +12774,7 @@ const _hoisted_1$6 = ["onClick"];
 const _hoisted_2$4 = ["aria-label"];
 const _hoisted_3$3 = ["aria-label"];
 const _hoisted_4$2 = ["aria-label"];
-const _hoisted_5$1 = ["aria-label"];
+const _hoisted_5$2 = ["aria-label"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "panel-date-pick",
   props: panelDatePickProps,
@@ -13345,7 +13345,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_5$1)
+                ], 10, _hoisted_5$2)
               ], 2)
             ], 2), [
               [vShow, currentView.value !== "time"]
@@ -13530,7 +13530,7 @@ const _hoisted_1$5 = ["onClick"];
 const _hoisted_2$3 = ["aria-label"];
 const _hoisted_3$2 = ["aria-label"];
 const _hoisted_4$1 = ["disabled", "aria-label"];
-const _hoisted_5 = ["disabled", "aria-label"];
+const _hoisted_5$1 = ["disabled", "aria-label"];
 const _hoisted_6 = ["disabled", "aria-label"];
 const _hoisted_7 = ["disabled", "aria-label"];
 const _hoisted_8 = ["aria-label"];
@@ -14046,7 +14046,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_5)) : createCommentVNode("v-if", true),
+                ], 10, _hoisted_5$1)) : createCommentVNode("v-if", true),
                 createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
               ], 2),
               createVNode(DateTable, {
@@ -63061,11 +63061,13 @@ const _sfc_main$3 = {
       getElement5(info);
       getCnChar(info);
       this.formInfo = info;
-      console.log(info, this.formInfo);
+    },
+    handlerItemClick(index) {
+      console.log(this.formInfo, this.formInfo.names[index]);
     }
   }
 };
-const _withScopeId = (n) => (pushScopeId("data-v-61ab5a0d"), n = n(), popScopeId(), n);
+const _withScopeId = (n) => (pushScopeId("data-v-e45fbb6c"), n = n(), popScopeId(), n);
 const _hoisted_1$1 = { class: "content-wrap" };
 const _hoisted_2 = {
   key: 0,
@@ -63073,6 +63075,7 @@ const _hoisted_2 = {
 };
 const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", { class: "result-title" }, "生成结果", -1));
 const _hoisted_4 = { class: "result-names" };
+const _hoisted_5 = ["onClick"];
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_input = resolveComponent("el-input");
   const _component_el_form_item = resolveComponent("el-form-item");
@@ -63195,14 +63198,15 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         (openBlock(true), createElementBlock(Fragment, null, renderList($data.formInfo.names, (item, index) => {
           return openBlock(), createElementBlock("div", {
             class: "name-item",
-            key: index
-          }, toDisplayString($data.formInfo.surname + item.map((ele) => ele.char).join("")), 1);
+            key: index,
+            onClick: ($event) => $options.handlerItemClick(index)
+          }, toDisplayString($data.formInfo.surname + item.map((ele) => ele.char).join("")), 9, _hoisted_5);
         }), 128))
       ])
     ])) : createCommentVNode("", true)
   ]);
 }
-const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-61ab5a0d"]]);
+const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-e45fbb6c"]]);
 const _sfc_main$2 = {};
 function _sfc_render(_ctx, _cache) {
   return openBlock(), createElementBlock("div");
