@@ -63065,7 +63065,7 @@ const _sfc_main$3 = {
     }
   }
 };
-const _withScopeId = (n) => (pushScopeId("data-v-5aed213a"), n = n(), popScopeId(), n);
+const _withScopeId = (n) => (pushScopeId("data-v-61ab5a0d"), n = n(), popScopeId(), n);
 const _hoisted_1$1 = { class: "content-wrap" };
 const _hoisted_2 = {
   key: 0,
@@ -63101,7 +63101,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               modelValue: $data.formValue.surname,
               "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formValue.surname = $event),
               placeholder: "输入孩子的姓氏",
-              style: { "width": "500px" }
+              clearable: ""
             }, null, 8, ["modelValue"])
           ]),
           _: 1
@@ -63115,8 +63115,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               modelValue: $data.formValue.sex,
               "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.formValue.sex = $event),
               placeholder: "选择孩子的性别",
-              clearable: "",
-              style: { "width": "500px" }
+              clearable: ""
             }, {
               default: withCtx(() => [
                 createVNode(_component_el_option, {
@@ -63144,7 +63143,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               type: "date",
               "value-format": "YYYY-MM-DD",
               placeholder: "选择一个日期",
-              style: { "width": "500px" }
+              style: { "width": "100%" }
             }, null, 8, ["modelValue"])
           ]),
           _: 1
@@ -63159,7 +63158,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.formValue.time = $event),
               "value-format": "HH:mm",
               placeholder: "选择一个时间",
-              style: { "width": "500px" }
+              style: { "width": "100%" }
             }, null, 8, ["modelValue"])
           ]),
           _: 1
@@ -63203,7 +63202,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     ])) : createCommentVNode("", true)
   ]);
 }
-const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-5aed213a"]]);
+const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-61ab5a0d"]]);
 const _sfc_main$2 = {};
 function _sfc_render(_ctx, _cache) {
   return openBlock(), createElementBlock("div");
