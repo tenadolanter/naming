@@ -1,4 +1,4 @@
-import { h as ref, y as watch, a2 as getCurrentScope, a3 as onScopeDispose, p as unref, a4 as getCurrentInstance, l as onMounted, U as nextTick, a5 as isString$1, a6 as isArray$1, a7 as isObject$1, a8 as camelize, d as defineComponent, o as openBlock, c as createElementBlock, m as createBaseVNode, a9 as hasOwn, aa as warn, ab as NOOP, k as computed, O as inject, ac as isRef, ad as isFunction$1, H as shallowRef, ae as onBeforeUnmount, af as onBeforeMount, Y as provide, r as renderSlot, N as mergeProps, ag as toRef, A as onUnmounted, ah as reactive, ai as toRefs, n as normalizeClass, C as onUpdated, J as createVNode, F as Fragment, a1 as useSlots, w as withCtx, b as createBlock, K as resolveDynamicComponent, Q as normalizeStyle, a as createTextVNode, t as toDisplayString, e as createCommentVNode, aj as TransitionGroup, ak as useAttrs$1, a0 as withModifiers, al as withDirectives, am as vShow, T as Transition, an as cloneVNode, ao as Text, ap as Comment, aq as Teleport, W as readonly, ar as onDeactivated, as as isDate, G as renderList, Z as withKeys, at as toRaw, z as watchEffect, au as toRawType, E as resolveComponent, av as resolveDirective, aw as vModelText, _ as _export_sfc$1 } from "./chunks/framework.jFWLL5KV.js";
+import { h as ref, y as watch, a2 as getCurrentScope, a3 as onScopeDispose, p as unref, a4 as getCurrentInstance, l as onMounted, U as nextTick, a5 as isString$1, a6 as isArray$1, a7 as isObject$1, a8 as camelize, d as defineComponent, o as openBlock, c as createElementBlock, m as createBaseVNode, a9 as hasOwn, aa as warn, ab as NOOP, k as computed, O as inject, ac as isRef, ad as isFunction$1, H as shallowRef, ae as onBeforeUnmount, af as onBeforeMount, Y as provide, r as renderSlot, N as mergeProps, ag as toRef, A as onUnmounted, ah as reactive, ai as toRefs, n as normalizeClass, C as onUpdated, J as createVNode, F as Fragment, a1 as useSlots, w as withCtx, b as createBlock, K as resolveDynamicComponent, Q as normalizeStyle, a as createTextVNode, t as toDisplayString, e as createCommentVNode, aj as TransitionGroup, ak as useAttrs$1, a0 as withModifiers, al as withDirectives, am as vShow, T as Transition, an as cloneVNode, ao as Text, ap as Comment, aq as Teleport, W as readonly, ar as onDeactivated, as as isDate, G as renderList, Z as withKeys, at as toRaw, z as watchEffect, au as toRawType, E as resolveComponent, av as resolveDirective, aw as vModelText, _ as _export_sfc$1, q as pushScopeId, s as popScopeId } from "./chunks/framework.jFWLL5KV.js";
 const composeEventHandlers = (theirsHandler, oursHandler, { checkForDefaultPrevented = true } = {}) => {
   const handleEvent = (event) => {
     const shouldPrevent = theirsHandler == null ? void 0 : theirsHandler(event);
@@ -5728,8 +5728,8 @@ const inputEmits = {
   compositionend: (evt) => evt instanceof CompositionEvent
 };
 const _hoisted_1$e = ["role"];
-const _hoisted_2$a = ["id", "minlength", "maxlength", "type", "disabled", "readonly", "autocomplete", "tabindex", "aria-label", "placeholder", "form", "autofocus"];
-const _hoisted_3$6 = ["id", "minlength", "maxlength", "tabindex", "disabled", "readonly", "autocomplete", "aria-label", "placeholder", "form", "autofocus"];
+const _hoisted_2$b = ["id", "minlength", "maxlength", "type", "disabled", "readonly", "autocomplete", "tabindex", "aria-label", "placeholder", "form", "autofocus"];
+const _hoisted_3$7 = ["id", "minlength", "maxlength", "tabindex", "disabled", "readonly", "autocomplete", "aria-label", "placeholder", "form", "autofocus"];
 const __default__$e = defineComponent({
   name: "ElInput",
   inheritAttrs: false
@@ -6048,7 +6048,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
               onBlur: _cache[1] || (_cache[1] = (...args) => unref(handleBlur) && unref(handleBlur)(...args)),
               onChange: handleChange,
               onKeydown: handleKeydown
-            }), null, 16, _hoisted_2$a),
+            }), null, 16, _hoisted_2$b),
             createCommentVNode(" suffix slot "),
             unref(suffixVisible) ? (openBlock(), createElementBlock("span", {
               key: 1,
@@ -6148,7 +6148,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
             onBlur: _cache[3] || (_cache[3] = (...args) => unref(handleBlur) && unref(handleBlur)(...args)),
             onChange: handleChange,
             onKeydown: handleKeydown
-          }), null, 16, _hoisted_3$6),
+          }), null, 16, _hoisted_3$7),
           unref(isWordLimitVisible) ? (openBlock(), createElementBlock("span", {
             key: 0,
             style: normalizeStyle(countStyle.value),
@@ -7249,10 +7249,10 @@ const _sfc_main$p = defineComponent({
     };
   }
 });
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return renderSlot(_ctx.$slots, "default", { handleKeydown: _ctx.onKeydown });
 }
-var ElFocusTrap = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$5], ["__file", "focus-trap.vue"]]);
+var ElFocusTrap = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$6], ["__file", "focus-trap.vue"]]);
 const POSITIONING_STRATEGIES = ["fixed", "absolute"];
 const popperCoreConfigProps = buildProps({
   boundariesPadding: {
@@ -7964,7 +7964,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
 });
 var ElTooltipContent = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "content.vue"]]);
 const _hoisted_1$d = ["innerHTML"];
-const _hoisted_2$9 = { key: 1 };
+const _hoisted_2$a = { key: 1 };
 const __default__$6 = defineComponent({
   name: "ElTooltip"
 });
@@ -8106,7 +8106,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                 _ctx.rawContent ? (openBlock(), createElementBlock("span", {
                   key: 0,
                   innerHTML: _ctx.content
-                }, null, 8, _hoisted_1$d)) : (openBlock(), createElementBlock("span", _hoisted_2$9, toDisplayString(_ctx.content), 1))
+                }, null, 8, _hoisted_1$d)) : (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString(_ctx.content), 1))
               ]),
               _ctx.showArrow ? (openBlock(), createBlock(unref(ElPopperArrow), {
                 key: 0,
@@ -9891,7 +9891,7 @@ const timePickerDefaultProps = buildProps({
   unlinkPanels: Boolean
 });
 const _hoisted_1$c = ["id", "name", "placeholder", "value", "disabled", "readonly"];
-const _hoisted_2$8 = ["id", "name", "placeholder", "value", "disabled", "readonly"];
+const _hoisted_2$9 = ["id", "name", "placeholder", "value", "disabled", "readonly"];
 const __default__$3 = defineComponent({
   name: "Picker"
 });
@@ -10485,7 +10485,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
               onBlur: handleBlurInput,
               onInput: handleEndInput,
               onChange: handleEndChange
-            }, null, 42, _hoisted_2$8),
+            }, null, 42, _hoisted_2$9),
             _ctx.clearIcon ? (openBlock(), createBlock(unref(ElIcon), {
               key: 1,
               class: normalizeClass(unref(clearIconKls)),
@@ -10748,7 +10748,7 @@ const basicTimeSpinnerProps = buildProps({
   ...disabledTimeListsProps
 });
 const _hoisted_1$b = ["onClick"];
-const _hoisted_2$7 = ["onMouseenter"];
+const _hoisted_2$8 = ["onMouseenter"];
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "basic-time-spinner",
   props: basicTimeSpinnerProps,
@@ -11029,7 +11029,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                 ], 2);
               }), 128))
             ], 2)
-          ], 42, _hoisted_2$7);
+          ], 42, _hoisted_2$8);
         }), 128)) : createCommentVNode("v-if", true)
       ], 2);
     };
@@ -12365,12 +12365,12 @@ var ElDatePickerCell = defineComponent({
   }
 });
 const _hoisted_1$9 = ["aria-label"];
-const _hoisted_2$6 = {
+const _hoisted_2$7 = {
   key: 0,
   scope: "col"
 };
-const _hoisted_3$5 = ["aria-label"];
-const _hoisted_4$3 = ["aria-current", "aria-selected", "tabindex"];
+const _hoisted_3$6 = ["aria-label"];
+const _hoisted_4$4 = ["aria-current", "aria-selected", "tabindex"];
 const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "basic-date-table",
   props: basicDateTableProps,
@@ -12416,13 +12416,13 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
           ref: tbodyRef
         }, [
           createBaseVNode("tr", null, [
-            _ctx.showWeekNumber ? (openBlock(), createElementBlock("th", _hoisted_2$6, toDisplayString(unref(weekLabel)), 1)) : createCommentVNode("v-if", true),
+            _ctx.showWeekNumber ? (openBlock(), createElementBlock("th", _hoisted_2$7, toDisplayString(unref(weekLabel)), 1)) : createCommentVNode("v-if", true),
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(WEEKS), (week, key) => {
               return openBlock(), createElementBlock("th", {
                 key,
                 "aria-label": unref(t2)("el.datepicker.weeksFull." + week),
                 scope: "col"
-              }, toDisplayString(unref(t2)("el.datepicker.weeks." + week)), 9, _hoisted_3$5);
+              }, toDisplayString(unref(t2)("el.datepicker.weeks." + week)), 9, _hoisted_3$6);
             }), 128))
           ]),
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(rows), (row, rowKey) => {
@@ -12442,7 +12442,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
                   onFocus: _cache[0] || (_cache[0] = (...args) => unref(handleFocus) && unref(handleFocus)(...args))
                 }, [
                   createVNode(unref(ElDatePickerCell), { cell }, null, 8, ["cell"])
-                ], 42, _hoisted_4$3);
+                ], 42, _hoisted_4$4);
               }), 128))
             ], 2);
           }), 128))
@@ -12457,8 +12457,8 @@ const basicMonthTableProps = buildProps({
   selectionMode: selectionModeWithDefault("month")
 });
 const _hoisted_1$8 = ["aria-label"];
-const _hoisted_2$5 = ["aria-selected", "aria-label", "tabindex", "onKeydown"];
-const _hoisted_3$4 = { class: "cell" };
+const _hoisted_2$6 = ["aria-selected", "aria-label", "tabindex", "onKeydown"];
+const _hoisted_3$5 = { class: "cell" };
 const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "basic-month-table",
   props: basicMonthTableProps,
@@ -12641,9 +12641,9 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                   ]
                 }, [
                   createBaseVNode("div", null, [
-                    createBaseVNode("span", _hoisted_3$4, toDisplayString(unref(t2)("el.datepicker.months." + months.value[cell.text])), 1)
+                    createBaseVNode("span", _hoisted_3$5, toDisplayString(unref(t2)("el.datepicker.months." + months.value[cell.text])), 1)
                   ])
-                ], 42, _hoisted_2$5);
+                ], 42, _hoisted_2$6);
               }), 128))
             ]);
           }), 128))
@@ -12661,9 +12661,9 @@ const basicYearTableProps = buildProps({
   selectionMode: selectionModeWithDefault("year")
 });
 const _hoisted_1$7 = ["aria-label"];
-const _hoisted_2$4 = ["aria-selected", "tabindex", "onKeydown"];
-const _hoisted_3$3 = { class: "cell" };
-const _hoisted_4$2 = { key: 1 };
+const _hoisted_2$5 = ["aria-selected", "tabindex", "onKeydown"];
+const _hoisted_3$4 = { class: "cell" };
+const _hoisted_4$3 = { key: 1 };
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "basic-year-table",
   props: basicYearTableProps,
@@ -12757,9 +12757,9 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                     ]
                   }, [
                     createBaseVNode("div", null, [
-                      createBaseVNode("span", _hoisted_3$3, toDisplayString(unref(startYear) + i * 4 + j2), 1)
+                      createBaseVNode("span", _hoisted_3$4, toDisplayString(unref(startYear) + i * 4 + j2), 1)
                     ])
-                  ], 42, _hoisted_2$4)) : (openBlock(), createElementBlock("td", _hoisted_4$2))
+                  ], 42, _hoisted_2$5)) : (openBlock(), createElementBlock("td", _hoisted_4$3))
                 ], 64);
               }), 64))
             ]);
@@ -12771,9 +12771,9 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
 });
 var YearTable = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "basic-year-table.vue"]]);
 const _hoisted_1$6 = ["onClick"];
-const _hoisted_2$3 = ["aria-label"];
-const _hoisted_3$2 = ["aria-label"];
-const _hoisted_4$1 = ["aria-label"];
+const _hoisted_2$4 = ["aria-label"];
+const _hoisted_3$3 = ["aria-label"];
+const _hoisted_4$2 = ["aria-label"];
 const _hoisted_5$1 = ["aria-label"];
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "panel-date-pick",
@@ -13277,7 +13277,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_2$3),
+                ], 10, _hoisted_2$4),
                 withDirectives(createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t2)(`el.datepicker.prevMonth`),
@@ -13290,7 +13290,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_3$2), [
+                ], 10, _hoisted_3$3), [
                   [vShow, currentView.value === "date"]
                 ])
               ], 2),
@@ -13330,7 +13330,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_4$1), [
+                ], 10, _hoisted_4$2), [
                   [vShow, currentView.value === "date"]
                 ]),
                 createBaseVNode("button", {
@@ -13527,9 +13527,9 @@ const useRangePicker = (props, {
   };
 };
 const _hoisted_1$5 = ["onClick"];
-const _hoisted_2$2 = ["aria-label"];
-const _hoisted_3$1 = ["aria-label"];
-const _hoisted_4 = ["disabled", "aria-label"];
+const _hoisted_2$3 = ["aria-label"];
+const _hoisted_3$2 = ["aria-label"];
+const _hoisted_4$1 = ["disabled", "aria-label"];
 const _hoisted_5 = ["disabled", "aria-label"];
 const _hoisted_6 = ["disabled", "aria-label"];
 const _hoisted_7 = ["disabled", "aria-label"];
@@ -14000,7 +14000,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_2$2),
+                ], 10, _hoisted_2$3),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
@@ -14013,7 +14013,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_3$1),
+                ], 10, _hoisted_3$2),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 0,
                   type: "button",
@@ -14028,7 +14028,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_4)) : createCommentVNode("v-if", true),
+                ], 10, _hoisted_4$1)) : createCommentVNode("v-if", true),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 1,
                   type: "button",
@@ -14234,8 +14234,8 @@ const useMonthRangeHeader = ({
   };
 };
 const _hoisted_1$4 = ["onClick"];
-const _hoisted_2$1 = ["disabled"];
-const _hoisted_3 = ["disabled"];
+const _hoisted_2$2 = ["disabled"];
+const _hoisted_3$1 = ["disabled"];
 const unit = "year";
 const __default__$1 = defineComponent({
   name: "DatePickerMonthRange"
@@ -14379,7 +14379,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_2$1)) : createCommentVNode("v-if", true),
+                ], 10, _hoisted_2$2)) : createCommentVNode("v-if", true),
                 createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
               ], 2),
               createVNode(MonthTable, {
@@ -14413,7 +14413,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })
-                ], 10, _hoisted_3)) : createCommentVNode("v-if", true),
+                ], 10, _hoisted_3$1)) : createCommentVNode("v-if", true),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
@@ -14679,7 +14679,7 @@ const _sfc_main$7 = defineComponent({
   }
 });
 const _hoisted_1$3 = ["id", "aria-disabled", "aria-selected"];
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("li", {
     id: _ctx.id,
     class: normalizeClass(_ctx.containerKls),
@@ -14696,7 +14696,7 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     [vShow, _ctx.visible]
   ]);
 }
-var Option = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$4], ["__file", "option.vue"]]);
+var Option = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$5], ["__file", "option.vue"]]);
 const _sfc_main$6 = defineComponent({
   name: "ElSelectDropdown",
   componentName: "ElSelectDropdown",
@@ -14724,7 +14724,7 @@ const _sfc_main$6 = defineComponent({
     };
   }
 });
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass([_ctx.ns.b("dropdown"), _ctx.ns.is("multiple", _ctx.isMultiple), _ctx.popperClass]),
     style: normalizeStyle({ [_ctx.isFitInputWidth ? "width" : "minWidth"]: _ctx.minWidth })
@@ -14744,7 +14744,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)) : createCommentVNode("v-if", true)
   ], 6);
 }
-var ElSelectMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$3], ["__file", "select-dropdown.vue"]]);
+var ElSelectMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4], ["__file", "select-dropdown.vue"]]);
 function useInput(handleInput) {
   const isComposing = ref(false);
   const handleCompositionStart = () => {
@@ -15564,8 +15564,8 @@ const _sfc_main$5 = defineComponent({
   }
 });
 const _hoisted_1$2 = ["id", "disabled", "autocomplete", "readonly", "aria-activedescendant", "aria-controls", "aria-expanded", "aria-label"];
-const _hoisted_2 = ["textContent"];
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_2$1 = ["textContent"];
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_tag = resolveComponent("el-tag");
   const _component_el_tooltip = resolveComponent("el-tooltip");
   const _component_el_icon = resolveComponent("el-icon");
@@ -15760,7 +15760,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
                   "aria-hidden": "true",
                   class: normalizeClass(_ctx.nsSelect.e("input-calculator")),
                   textContent: toDisplayString(_ctx.states.inputValue)
-                }, null, 10, _hoisted_2)) : createCommentVNode("v-if", true)
+                }, null, 10, _hoisted_2$1)) : createCommentVNode("v-if", true)
               ], 2)) : createCommentVNode("v-if", true),
               _ctx.shouldShowPlaceholder ? (openBlock(), createElementBlock("div", {
                 key: 2,
@@ -15875,7 +15875,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     [_directive_click_outside, _ctx.handleClickOutside, _ctx.popperRef]
   ]);
 }
-var Select = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$2], ["__file", "select.vue"]]);
+var Select = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$3], ["__file", "select.vue"]]);
 const _sfc_main$4 = defineComponent({
   name: "ElOptionGroup",
   componentName: "ElOptionGroup",
@@ -15926,7 +15926,7 @@ const _sfc_main$4 = defineComponent({
     };
   }
 });
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("ul", {
     ref: "groupRef",
     class: normalizeClass(_ctx.ns.be("group", "wrap"))
@@ -15945,7 +15945,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     [vShow, _ctx.visible]
   ]);
 }
-var OptionGroup = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$1], ["__file", "option-group.vue"]]);
+var OptionGroup = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$2], ["__file", "option-group.vue"]]);
 const ElSelect = withInstall(Select, {
   Option,
   OptionGroup
@@ -63009,160 +63009,201 @@ const getYearMonthDay = (info) => {
   info.dateData = result;
   return result;
 };
-const _hoisted_1$1 = { class: "content-wrap" };
 const _sfc_main$3 = {
-  __name: "content",
-  setup(__props) {
-    const formRef = ref();
-    const formValue = reactive({
-      surname: "",
-      sex: "",
-      date: "",
-      time: ""
-    });
-    const formRules = reactive({
-      surname: [{ required: true, message: "请输入姓氏", trigger: "blur" }],
-      sex: [{ required: true, message: "请输入性别", trigger: "blur" }],
-      date: [{ required: true, message: "请输入日期", trigger: "blur" }],
-      time: [{ required: true, message: "请输入时间", trigger: "blur" }]
-    });
-    const handlerSumbit = async (formEl) => {
+  components: {
+    ElButton,
+    ElForm,
+    ElFormItem,
+    ElInput,
+    ElDatePicker,
+    ElTimePicker,
+    ElSelect,
+    ElOption
+  },
+  data() {
+    return {
+      formValue: {
+        surname: "",
+        sex: "",
+        date: "",
+        time: ""
+      },
+      formRules: {
+        surname: [{ required: true, message: "请输入姓氏", trigger: "blur" }],
+        sex: [{ required: true, message: "请输入性别", trigger: "blur" }],
+        date: [{ required: true, message: "请输入日期", trigger: "blur" }],
+        time: [{ required: true, message: "请输入时间", trigger: "blur" }]
+      },
+      formInfo: {}
+    };
+  },
+  methods: {
+    async handlerSumbit() {
+      const formEl = this.$refs.formRef;
       if (!formEl)
         return;
       const validate = await formEl.validate();
       if (validate) {
-        handlerData();
+        this.handlerData();
       }
-    };
-    const handlerReset = (formEl) => {
+    },
+    handlerReset() {
+      const formEl = this.$refs.formRef;
       if (!formEl)
         return;
       formEl.resetFields();
-    };
-    const handlerData = () => {
-      let info = { ...formValue };
+    },
+    handlerData() {
+      let info = { ...this.formValue };
       getYearMonthDay(info);
       getLunar(info);
       getChar8(info);
       getElement5(info);
       getCnChar(info);
-      console.log(info);
-    };
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$1, [
-        createVNode(unref(ElForm), {
-          model: formValue,
-          rules: formRules,
-          ref_key: "formRef",
-          ref: formRef,
-          "status-icon": "",
-          "label-width": "120px",
-          size: "large"
+      this.formInfo = info;
+      console.log(info, this.formInfo);
+    }
+  }
+};
+const _withScopeId = (n) => (pushScopeId("data-v-5aed213a"), n = n(), popScopeId(), n);
+const _hoisted_1$1 = { class: "content-wrap" };
+const _hoisted_2 = {
+  key: 0,
+  class: "result"
+};
+const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", { class: "result-title" }, "生成结果", -1));
+const _hoisted_4 = { class: "result-names" };
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_el_input = resolveComponent("el-input");
+  const _component_el_form_item = resolveComponent("el-form-item");
+  const _component_el_option = resolveComponent("el-option");
+  const _component_el_select = resolveComponent("el-select");
+  const _component_el_date_picker = resolveComponent("el-date-picker");
+  const _component_el_time_picker = resolveComponent("el-time-picker");
+  const _component_el_button = resolveComponent("el-button");
+  const _component_el_form = resolveComponent("el-form");
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createVNode(_component_el_form, {
+      model: $data.formValue,
+      rules: $data.formRules,
+      ref: "formRef",
+      "status-icon": "",
+      "label-width": "85px",
+      size: "large"
+    }, {
+      default: withCtx(() => [
+        createVNode(_component_el_form_item, {
+          label: "姓氏",
+          prop: "surname"
         }, {
           default: withCtx(() => [
-            createVNode(unref(ElFormItem), {
-              label: "姓氏",
-              prop: "surname"
+            createVNode(_component_el_input, {
+              modelValue: $data.formValue.surname,
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formValue.surname = $event),
+              placeholder: "输入孩子的姓氏",
+              style: { "width": "500px" }
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+        }),
+        createVNode(_component_el_form_item, {
+          label: "性别",
+          prop: "sex"
+        }, {
+          default: withCtx(() => [
+            createVNode(_component_el_select, {
+              modelValue: $data.formValue.sex,
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.formValue.sex = $event),
+              placeholder: "选择孩子的性别",
+              clearable: "",
+              style: { "width": "500px" }
             }, {
               default: withCtx(() => [
-                createVNode(unref(ElInput), {
-                  modelValue: formValue.surname,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => formValue.surname = $event),
-                  placeholder: "输入孩子的姓氏",
-                  style: { "width": "500px" }
-                }, null, 8, ["modelValue"])
-              ]),
-              _: 1
-            }),
-            createVNode(unref(ElFormItem), {
-              label: "性别",
-              prop: "sex"
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(ElSelect), {
-                  modelValue: formValue.sex,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => formValue.sex = $event),
-                  placeholder: "选择孩子的性别",
-                  clearable: "",
-                  style: { "width": "500px" }
-                }, {
-                  default: withCtx(() => [
-                    createVNode(unref(ElOption), {
-                      label: "男",
-                      value: "男"
-                    }),
-                    createVNode(unref(ElOption), {
-                      label: "女",
-                      value: "女"
-                    })
-                  ]),
-                  _: 1
-                }, 8, ["modelValue"])
-              ]),
-              _: 1
-            }),
-            createVNode(unref(ElFormItem), {
-              label: "阳历日期",
-              prop: "date"
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(ElDatePicker), {
-                  modelValue: formValue.date,
-                  "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => formValue.date = $event),
-                  type: "date",
-                  "value-format": "YYYY-MM-DD",
-                  placeholder: "选择一个日期",
-                  style: { "width": "500px" }
-                }, null, 8, ["modelValue"])
-              ]),
-              _: 1
-            }),
-            createVNode(unref(ElFormItem), {
-              label: "时间",
-              prop: "time"
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(ElTimePicker), {
-                  modelValue: formValue.time,
-                  "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => formValue.time = $event),
-                  "value-format": "HH:mm",
-                  placeholder: "选择一个时间",
-                  style: { "width": "500px" }
-                }, null, 8, ["modelValue"])
-              ]),
-              _: 1
-            }),
-            createVNode(unref(ElFormItem), null, {
-              default: withCtx(() => [
-                createVNode(unref(ElButton), {
-                  type: "primary",
-                  onClick: _cache[4] || (_cache[4] = ($event) => handlerSumbit(formRef.value))
-                }, {
-                  default: withCtx(() => [
-                    createTextVNode("起名")
-                  ]),
-                  _: 1
+                createVNode(_component_el_option, {
+                  label: "男",
+                  value: "男"
                 }),
-                createVNode(unref(ElButton), {
-                  type: "primary",
-                  onClick: _cache[5] || (_cache[5] = ($event) => handlerReset(formRef.value))
-                }, {
-                  default: withCtx(() => [
-                    createTextVNode("重置")
-                  ]),
-                  _: 1
+                createVNode(_component_el_option, {
+                  label: "女",
+                  value: "女"
                 })
               ]),
               _: 1
-            })
+            }, 8, ["modelValue"])
           ]),
           _: 1
-        }, 8, ["model", "rules"])
-      ]);
-    };
-  }
-};
-const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["__scopeId", "data-v-f9f4f584"]]);
+        }),
+        createVNode(_component_el_form_item, {
+          label: "阳历日期",
+          prop: "date"
+        }, {
+          default: withCtx(() => [
+            createVNode(_component_el_date_picker, {
+              modelValue: $data.formValue.date,
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.formValue.date = $event),
+              type: "date",
+              "value-format": "YYYY-MM-DD",
+              placeholder: "选择一个日期",
+              style: { "width": "500px" }
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+        }),
+        createVNode(_component_el_form_item, {
+          label: "时间",
+          prop: "time"
+        }, {
+          default: withCtx(() => [
+            createVNode(_component_el_time_picker, {
+              modelValue: $data.formValue.time,
+              "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.formValue.time = $event),
+              "value-format": "HH:mm",
+              placeholder: "选择一个时间",
+              style: { "width": "500px" }
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+        }),
+        createVNode(_component_el_form_item, null, {
+          default: withCtx(() => [
+            createVNode(_component_el_button, {
+              type: "primary",
+              onClick: $options.handlerSumbit
+            }, {
+              default: withCtx(() => [
+                createTextVNode("起名")
+              ]),
+              _: 1
+            }, 8, ["onClick"]),
+            createVNode(_component_el_button, {
+              type: "primary",
+              onClick: $options.handlerReset
+            }, {
+              default: withCtx(() => [
+                createTextVNode("重置")
+              ]),
+              _: 1
+            }, 8, ["onClick"])
+          ]),
+          _: 1
+        })
+      ]),
+      _: 1
+    }, 8, ["model", "rules"]),
+    $data.formInfo.names && Array.isArray($data.formInfo.names) && !!$data.formInfo.names.length ? (openBlock(), createElementBlock("div", _hoisted_2, [
+      _hoisted_3,
+      createBaseVNode("div", _hoisted_4, [
+        (openBlock(true), createElementBlock(Fragment, null, renderList($data.formInfo.names, (item, index) => {
+          return openBlock(), createElementBlock("div", {
+            class: "name-item",
+            key: index
+          }, toDisplayString($data.formInfo.surname + item.map((ele) => ele.char).join("")), 1);
+        }), 128))
+      ])
+    ])) : createCommentVNode("", true)
+  ]);
+}
+const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-5aed213a"]]);
 const _sfc_main$2 = {};
 function _sfc_render(_ctx, _cache) {
   return openBlock(), createElementBlock("div");
