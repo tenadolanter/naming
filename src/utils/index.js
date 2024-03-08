@@ -8,7 +8,7 @@ export const utilRandom = (arr) => {
   const length = arr.length;
   const randomIndex = Math.floor(Math.random() * length);
   return arr[randomIndex];
-}
+};
 
 export const getCnChar = (info, nums = 50) => {
   // 字的笔画不要太多
@@ -20,64 +20,84 @@ export const getCnChar = (info, nums = 50) => {
   const getName = (info) => {
     let result = [];
     const { sex } = info;
-    const firstConfig = utilRandom(cnchar.filter(item => !item.sex || item.sex === sex))
+    const firstConfig = utilRandom(
+      cnchar.filter((item) => !item.sex || item.sex === sex)
+    );
     result.push(firstConfig);
-    const secondConfig = utilRandom(cnchar.filter(item => !item.sex || item.sex === sex))
+    const secondConfig = utilRandom(
+      cnchar.filter((item) => (!item.sex || item.sex === sex))
+    );
     result.push(secondConfig);
     return result;
-  }
-  for(let i = 0; i < nums; i++) {
+  };
+  for (let i = 0; i < nums; i++) {
     const name = getName(info);
-    results.push(name)
+    results.push(name);
   }
   info.names = results;
-}
-
+};
 
 export const getElement5 = (info) => {
-  const { yearGan, yearZhi, monthGan, monthZhi, dayGan, dayZhi, timeGan, timeZhi  } = info.char8 ?? {};
-  const char8Arr = [yearGan, yearZhi, monthGan, monthZhi, dayGan, dayZhi, timeGan, timeZhi];
-  const element5Data = element5(char8Arr)
+  const {
+    yearGan,
+    yearZhi,
+    monthGan,
+    monthZhi,
+    dayGan,
+    dayZhi,
+    timeGan,
+    timeZhi,
+  } = info.char8 ?? {};
+  const char8Arr = [
+    yearGan,
+    yearZhi,
+    monthGan,
+    monthZhi,
+    dayGan,
+    dayZhi,
+    timeGan,
+    timeZhi,
+  ];
+  const element5Data = element5(char8Arr);
   info.element5 = element5Data;
-}
+};
 
 /**
  * 根据年月日时分秒，获取八字
  *
-*/
+ */
 export const getChar8 = (info) => {
   const dateData = info.dateData;
-  let char8Data =  char8(dateData.year, dateData.month, dateData.day);
+  let char8Data = char8(dateData.year, dateData.month, dateData.day);
   info.char8 = char8Data;
   return char8Data;
-}
+};
 
 /**
  * 根据年月日，获取阴历日期
  *
-*/
+ */
 export const getLunar = (info) => {
   const dateData = info.dateData;
   let lunarData = solar2lunar(dateData.year, dateData.month, dateData.day);
   info.lunar = lunarData;
   return lunarData;
-}
-
+};
 
 /**
  * 根据date日期，分别获取年、月、日
  *
-*/
+ */
 export const getYearMonthDay = (info) => {
-  const { date, time } = info
+  const { date, time } = info;
   let year, month, day, hour, minute, second;
   const dayjsDate = dayjs(`${date} ${time}`);
   year = dayjsDate.year();
   month = dayjsDate.month();
   day = dayjsDate.date();
-  hour = dayjsDate.hour()
-  minute = dayjsDate.minute()
-  second = dayjsDate.second()
+  hour = dayjsDate.hour();
+  minute = dayjsDate.minute();
+  second = dayjsDate.second();
   const result = {
     year,
     month: month + 1,
@@ -85,7 +105,7 @@ export const getYearMonthDay = (info) => {
     hour,
     minute,
     second,
-  }
-  info.dateData = result
-  return result
-}
+  };
+  info.dateData = result;
+  return result;
+};
