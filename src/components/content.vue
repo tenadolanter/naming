@@ -12,7 +12,7 @@
         <el-input
           v-model="formValue.surname"
           placeholder="输入孩子的姓氏"
-          style="width: 500px"
+          clearable
         ></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
@@ -20,7 +20,6 @@
           v-model="formValue.sex"
           placeholder="选择孩子的性别"
           clearable
-          style="width: 500px"
         >
           <el-option label="男" value="男"></el-option>
           <el-option label="女" value="女"></el-option>
@@ -32,7 +31,7 @@
           type="date"
           value-format="YYYY-MM-DD"
           placeholder="选择一个日期"
-          style="width: 500px"
+          style="width: 100%"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="时间" prop="time">
@@ -40,7 +39,7 @@
           v-model="formValue.time"
           value-format="HH:mm"
           placeholder="选择一个时间"
-          style="width: 500px"
+          style="width: 100%"
         ></el-time-picker>
       </el-form-item>
       <el-form-item>
