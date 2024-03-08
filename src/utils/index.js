@@ -17,15 +17,18 @@ export const getCnChar = (info, nums = 50) => {
   // 两个字读音相识
   // 前后鼻音如lian liang、yin ying、wen wei
   let results = [];
+  const surname = info?.element5?.surname;
+  const supplyOf = info?.element5?.supplyOf;
+  const surConfig = cnchar.find(item => item.char === surname) ?? {};
   const getName = (info) => {
     let result = [];
     const { sex } = info;
     const firstConfig = utilRandom(
-      cnchar.filter((item) => !item.sex || item.sex === sex)
+      cnchar.filter((item) => (!item.sex || item.sex === sex) && (!item.five || item.pinyin !== surConfig.pinyin) && (!item.five || item.five === supplyOf))
     );
     result.push(firstConfig);
     const secondConfig = utilRandom(
-      cnchar.filter((item) => (!item.sex || item.sex === sex))
+      cnchar.filter((item) => (!item.sex || item.sex === sex) && (!item.five || item.pinyin !== surConfig.pinyin) && (item.radical !== firstConfig.radical) && (item.pinyin !== firstConfig.pinyin))
     );
     result.push(secondConfig);
     return result;

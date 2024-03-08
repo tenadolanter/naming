@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "@tenado/char8": "^1.0.6",
-    "@tenado/cnchar": "^1.0.3",
-    "@tenado/element5": "^1.0.3",
+    "@tenado/cnchar": "^1.0.4",
+    "@tenado/element5": "^1.0.4",
     "@tenado/lunarjs": "^1.0.9",
     "dayjs": "^1.11.10",
     "element-plus": "^2.5.6",
