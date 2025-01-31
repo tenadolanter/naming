@@ -1,4 +1,4 @@
-import { ae as getCurrentInstance, L as inject, p as ref, h as computed, k as unref, af as isArray$1, ag as isObject$1, ah as isString$1, q as watch, D as shallowRef, s as watchEffect, S as readonly, v as onMounted, P as nextTick, ai as getCurrentScope, aj as onScopeDispose, ak as isRef, al as hasOwn, am as warn, an as isFunction$1, ao as camelize, ap as NOOP, d as defineComponent, o as openBlock, c as createElementBlock, r as renderSlot, K as mergeProps, j as createBaseVNode, aq as toRef, x as onUnmounted, ar as useAttrs$1, $ as useSlots, e as createCommentVNode, F as Fragment, n as normalizeClass, b as createBlock, w as withCtx, Z as withModifiers, t as toDisplayString, N as normalizeStyle, H as resolveDynamicComponent, G as createVNode, Y as onBeforeUnmount, as as withDirectives, at as vShow, T as Transition, V as provide, au as reactive, av as onActivated, z as onUpdated, aw as cloneVNode, ax as Text, ay as Comment, az as Teleport$1, aA as onBeforeMount, aB as onDeactivated, aC as isDate, C as renderList, a as createTextVNode, X as withKeys, aD as toRefs, aE as TransitionGroup, aF as toRaw, aG as isPlainObject, B as resolveComponent, aH as resolveDirective, aI as vModelText, aJ as toHandlerKey, _ as _export_sfc$1 } from "./chunks/framework.ByEDUqkj.js";
+import { ae as getCurrentInstance, L as inject, p as ref, h as computed, k as unref, af as isArray$1, ag as isObject$1, ah as isString$1, q as watch, D as shallowRef, s as watchEffect, S as readonly, v as onMounted, P as nextTick, ai as getCurrentScope, aj as onScopeDispose, ak as isRef, al as hasOwn, am as warn, an as isFunction$1, ao as camelize, ap as NOOP, d as defineComponent, o as openBlock, c as createElementBlock, r as renderSlot, K as mergeProps, j as createBaseVNode, aq as toRef, x as onUnmounted, ar as useAttrs$1, $ as useSlots, e as createCommentVNode, F as Fragment, n as normalizeClass, b as createBlock, w as withCtx, Z as withModifiers, t as toDisplayString, N as normalizeStyle, H as resolveDynamicComponent, G as createVNode, Y as onBeforeUnmount, as as withDirectives, at as vShow, T as Transition, V as provide, au as reactive, av as onActivated, z as onUpdated, aw as cloneVNode, ax as Text, ay as Comment, az as Teleport$1, aA as onBeforeMount, aB as onDeactivated, aC as isDate, aD as toRaw, aE as vModelCheckbox, a as createTextVNode, aF as toRefs, C as renderList, X as withKeys, aG as TransitionGroup, aH as isPlainObject$1, B as resolveComponent, aI as resolveDirective, aJ as vModelText, aK as toHandlerKey, aL as render, ad as h$1, _ as _export_sfc$1 } from "./chunks/framework.BTK-2vXN.js";
 const configProviderContextKey = Symbol();
 const defaultNamespace = "el";
 const statePrefix = "is-";
@@ -76,12 +76,12 @@ var freeGlobal = typeof global == "object" && global && global.Object === Object
 var freeSelf = typeof self == "object" && self && self.Object === Object && self;
 var root = freeGlobal || freeSelf || Function("return this")();
 var Symbol$1 = root.Symbol;
-var objectProto$e = Object.prototype;
-var hasOwnProperty$b = objectProto$e.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$e.toString;
+var objectProto$f = Object.prototype;
+var hasOwnProperty$c = objectProto$f.hasOwnProperty;
+var nativeObjectToString$1 = objectProto$f.toString;
 var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : void 0;
 function getRawTag(value) {
-  var isOwn = hasOwnProperty$b.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+  var isOwn = hasOwnProperty$c.call(value, symToStringTag$1), tag = value[symToStringTag$1];
   try {
     value[symToStringTag$1] = void 0;
     var unmasked = true;
@@ -97,8 +97,8 @@ function getRawTag(value) {
   }
   return result;
 }
-var objectProto$d = Object.prototype;
-var nativeObjectToString = objectProto$d.toString;
+var objectProto$e = Object.prototype;
+var nativeObjectToString = objectProto$e.toString;
 function objectToString(value) {
   return nativeObjectToString.call(value);
 }
@@ -196,12 +196,12 @@ var maskSrcKey = function() {
 function isMasked(func) {
   return !!maskSrcKey && maskSrcKey in func;
 }
-var funcProto$1 = Function.prototype;
-var funcToString$1 = funcProto$1.toString;
+var funcProto$2 = Function.prototype;
+var funcToString$2 = funcProto$2.toString;
 function toSource(func) {
   if (func != null) {
     try {
-      return funcToString$1.call(func);
+      return funcToString$2.call(func);
     } catch (e) {
     }
     try {
@@ -213,11 +213,11 @@ function toSource(func) {
 }
 var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto = Function.prototype, objectProto$c = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$a = objectProto$c.hasOwnProperty;
+var funcProto$1 = Function.prototype, objectProto$d = Object.prototype;
+var funcToString$1 = funcProto$1.toString;
+var hasOwnProperty$b = objectProto$d.hasOwnProperty;
 var reIsNative = RegExp(
-  "^" + funcToString.call(hasOwnProperty$a).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+  "^" + funcToString$1.call(hasOwnProperty$b).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
 function baseIsNative(value) {
   if (!isObject(value) || isMasked(value)) {
@@ -372,11 +372,11 @@ function baseAssignValue(object4, key, value) {
 function eq(value, other) {
   return value === other || value !== value && other !== other;
 }
-var objectProto$b = Object.prototype;
-var hasOwnProperty$9 = objectProto$b.hasOwnProperty;
+var objectProto$c = Object.prototype;
+var hasOwnProperty$a = objectProto$c.hasOwnProperty;
 function assignValue(object4, key, value) {
   var objValue = object4[key];
-  if (!(hasOwnProperty$9.call(object4, key) && eq(objValue, value)) || value === void 0 && !(key in object4)) {
+  if (!(hasOwnProperty$a.call(object4, key) && eq(objValue, value)) || value === void 0 && !(key in object4)) {
     baseAssignValue(object4, key, value);
   }
 }
@@ -425,9 +425,37 @@ function isLength(value) {
 function isArrayLike(value) {
   return value != null && isLength(value.length) && !isFunction(value);
 }
-var objectProto$a = Object.prototype;
+function isIterateeCall(value, index, object4) {
+  if (!isObject(object4)) {
+    return false;
+  }
+  var type4 = typeof index;
+  if (type4 == "number" ? isArrayLike(object4) && isIndex(index, object4.length) : type4 == "string" && index in object4) {
+    return eq(object4[index], value);
+  }
+  return false;
+}
+function createAssigner(assigner) {
+  return baseRest(function(object4, sources) {
+    var index = -1, length = sources.length, customizer = length > 1 ? sources[length - 1] : void 0, guard = length > 2 ? sources[2] : void 0;
+    customizer = assigner.length > 3 && typeof customizer == "function" ? (length--, customizer) : void 0;
+    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+      customizer = length < 3 ? void 0 : customizer;
+      length = 1;
+    }
+    object4 = Object(object4);
+    while (++index < length) {
+      var source = sources[index];
+      if (source) {
+        assigner(object4, source, index, customizer);
+      }
+    }
+    return object4;
+  });
+}
+var objectProto$b = Object.prototype;
 function isPrototype(value) {
-  var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto$a;
+  var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto$b;
   return value === proto;
 }
 function baseTimes(n, iteratee) {
@@ -441,13 +469,13 @@ var argsTag$3 = "[object Arguments]";
 function baseIsArguments(value) {
   return isObjectLike(value) && baseGetTag(value) == argsTag$3;
 }
-var objectProto$9 = Object.prototype;
-var hasOwnProperty$8 = objectProto$9.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$9.propertyIsEnumerable;
+var objectProto$a = Object.prototype;
+var hasOwnProperty$9 = objectProto$a.hasOwnProperty;
+var propertyIsEnumerable$1 = objectProto$a.propertyIsEnumerable;
 var isArguments = baseIsArguments(/* @__PURE__ */ function() {
   return arguments;
 }()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty$8.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+  return isObjectLike(value) && hasOwnProperty$9.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
 };
 function stubFalse() {
   return false;
@@ -458,11 +486,11 @@ var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
 var Buffer$1 = moduleExports$2 ? root.Buffer : void 0;
 var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
 var isBuffer = nativeIsBuffer || stubFalse;
-var argsTag$2 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", errorTag$2 = "[object Error]", funcTag$1 = "[object Function]", mapTag$5 = "[object Map]", numberTag$3 = "[object Number]", objectTag$3 = "[object Object]", regexpTag$3 = "[object RegExp]", setTag$5 = "[object Set]", stringTag$3 = "[object String]", weakMapTag$2 = "[object WeakMap]";
+var argsTag$2 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", errorTag$2 = "[object Error]", funcTag$1 = "[object Function]", mapTag$5 = "[object Map]", numberTag$3 = "[object Number]", objectTag$4 = "[object Object]", regexpTag$3 = "[object RegExp]", setTag$5 = "[object Set]", stringTag$3 = "[object String]", weakMapTag$2 = "[object WeakMap]";
 var arrayBufferTag$3 = "[object ArrayBuffer]", dataViewTag$4 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
 var typedArrayTags = {};
 typedArrayTags[float32Tag$2] = typedArrayTags[float64Tag$2] = typedArrayTags[int8Tag$2] = typedArrayTags[int16Tag$2] = typedArrayTags[int32Tag$2] = typedArrayTags[uint8Tag$2] = typedArrayTags[uint8ClampedTag$2] = typedArrayTags[uint16Tag$2] = typedArrayTags[uint32Tag$2] = true;
-typedArrayTags[argsTag$2] = typedArrayTags[arrayTag$2] = typedArrayTags[arrayBufferTag$3] = typedArrayTags[boolTag$3] = typedArrayTags[dataViewTag$4] = typedArrayTags[dateTag$3] = typedArrayTags[errorTag$2] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$5] = typedArrayTags[numberTag$3] = typedArrayTags[objectTag$3] = typedArrayTags[regexpTag$3] = typedArrayTags[setTag$5] = typedArrayTags[stringTag$3] = typedArrayTags[weakMapTag$2] = false;
+typedArrayTags[argsTag$2] = typedArrayTags[arrayTag$2] = typedArrayTags[arrayBufferTag$3] = typedArrayTags[boolTag$3] = typedArrayTags[dataViewTag$4] = typedArrayTags[dateTag$3] = typedArrayTags[errorTag$2] = typedArrayTags[funcTag$1] = typedArrayTags[mapTag$5] = typedArrayTags[numberTag$3] = typedArrayTags[objectTag$4] = typedArrayTags[regexpTag$3] = typedArrayTags[setTag$5] = typedArrayTags[stringTag$3] = typedArrayTags[weakMapTag$2] = false;
 function baseIsTypedArray(value) {
   return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
 }
@@ -487,12 +515,12 @@ var nodeUtil = function() {
 }();
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-var objectProto$8 = Object.prototype;
-var hasOwnProperty$7 = objectProto$8.hasOwnProperty;
+var objectProto$9 = Object.prototype;
+var hasOwnProperty$8 = objectProto$9.hasOwnProperty;
 function arrayLikeKeys(value, inherited) {
   var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
   for (var key in value) {
-    if ((inherited || hasOwnProperty$7.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
+    if ((inherited || hasOwnProperty$8.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
     (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
     isBuff && (key == "offset" || key == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
     isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index properties.
@@ -508,15 +536,15 @@ function overArg(func, transform) {
   };
 }
 var nativeKeys = overArg(Object.keys, Object);
-var objectProto$7 = Object.prototype;
-var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
+var objectProto$8 = Object.prototype;
+var hasOwnProperty$7 = objectProto$8.hasOwnProperty;
 function baseKeys(object4) {
   if (!isPrototype(object4)) {
     return nativeKeys(object4);
   }
   var result = [];
   for (var key in Object(object4)) {
-    if (hasOwnProperty$6.call(object4, key) && key != "constructor") {
+    if (hasOwnProperty$7.call(object4, key) && key != "constructor") {
       result.push(key);
     }
   }
@@ -534,15 +562,15 @@ function nativeKeysIn(object4) {
   }
   return result;
 }
-var objectProto$6 = Object.prototype;
-var hasOwnProperty$5 = objectProto$6.hasOwnProperty;
+var objectProto$7 = Object.prototype;
+var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
 function baseKeysIn(object4) {
   if (!isObject(object4)) {
     return nativeKeysIn(object4);
   }
   var isProto = isPrototype(object4), result = [];
   for (var key in object4) {
-    if (!(key == "constructor" && (isProto || !hasOwnProperty$5.call(object4, key)))) {
+    if (!(key == "constructor" && (isProto || !hasOwnProperty$6.call(object4, key)))) {
       result.push(key);
     }
   }
@@ -573,21 +601,21 @@ function hashDelete(key) {
   return result;
 }
 var HASH_UNDEFINED$2 = "__lodash_hash_undefined__";
-var objectProto$5 = Object.prototype;
-var hasOwnProperty$4 = objectProto$5.hasOwnProperty;
+var objectProto$6 = Object.prototype;
+var hasOwnProperty$5 = objectProto$6.hasOwnProperty;
 function hashGet(key) {
   var data = this.__data__;
   if (nativeCreate) {
     var result = data[key];
     return result === HASH_UNDEFINED$2 ? void 0 : result;
   }
-  return hasOwnProperty$4.call(data, key) ? data[key] : void 0;
+  return hasOwnProperty$5.call(data, key) ? data[key] : void 0;
 }
-var objectProto$4 = Object.prototype;
-var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
+var objectProto$5 = Object.prototype;
+var hasOwnProperty$4 = objectProto$5.hasOwnProperty;
 function hashHas(key) {
   var data = this.__data__;
-  return nativeCreate ? data[key] !== void 0 : hasOwnProperty$3.call(data, key);
+  return nativeCreate ? data[key] !== void 0 : hasOwnProperty$4.call(data, key);
 }
 var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
 function hashSet(key, value) {
@@ -681,8 +709,8 @@ function isKeyable(value) {
   var type4 = typeof value;
   return type4 == "string" || type4 == "number" || type4 == "symbol" || type4 == "boolean" ? value !== "__proto__" : value === null;
 }
-function getMapData(map, key) {
-  var data = map.__data__;
+function getMapData(map2, key) {
+  var data = map2.__data__;
   return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
 }
 function mapCacheDelete(key) {
@@ -819,6 +847,22 @@ function flatRest(func) {
   return setToString(overRest(func, void 0, flatten), func + "");
 }
 var getPrototype = overArg(Object.getPrototypeOf, Object);
+var objectTag$3 = "[object Object]";
+var funcProto = Function.prototype, objectProto$4 = Object.prototype;
+var funcToString = funcProto.toString;
+var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
+var objectCtorString = funcToString.call(Object);
+function isPlainObject(value) {
+  if (!isObjectLike(value) || baseGetTag(value) != objectTag$3) {
+    return false;
+  }
+  var proto = getPrototype(value);
+  if (proto === null) {
+    return true;
+  }
+  var Ctor = hasOwnProperty$3.call(proto, "constructor") && proto.constructor;
+  return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+}
 function castArray$1() {
   if (!arguments.length) {
     return [];
@@ -1185,9 +1229,9 @@ function equalArrays(array4, other, bitmask, customizer, equalFunc, stack) {
   stack["delete"](other);
   return result;
 }
-function mapToArray(map) {
-  var index = -1, result = Array(map.size);
-  map.forEach(function(value, key) {
+function mapToArray(map2) {
+  var index = -1, result = Array(map2.size);
+  map2.forEach(function(value, key) {
     result[++index] = [key, value];
   });
   return result;
@@ -1453,6 +1497,40 @@ function baseIteratee(value) {
   }
   return property(value);
 }
+function createBaseFor(fromRight) {
+  return function(object4, iteratee, keysFunc) {
+    var index = -1, iterable = Object(object4), props = keysFunc(object4), length = props.length;
+    while (length--) {
+      var key = props[++index];
+      if (iteratee(iterable[key], key, iterable) === false) {
+        break;
+      }
+    }
+    return object4;
+  };
+}
+var baseFor = createBaseFor();
+function baseForOwn(object4, iteratee) {
+  return object4 && baseFor(object4, iteratee, keys);
+}
+function createBaseEach(eachFunc, fromRight) {
+  return function(collection, iteratee) {
+    if (collection == null) {
+      return collection;
+    }
+    if (!isArrayLike(collection)) {
+      return eachFunc(collection, iteratee);
+    }
+    var length = collection.length, index = -1, iterable = Object(collection);
+    while (++index < length) {
+      if (iteratee(iterable[index], index, iterable) === false) {
+        break;
+      }
+    }
+    return collection;
+  };
+}
+var baseEach = createBaseEach(baseForOwn);
 var now = function() {
   return root.Date.now();
 };
@@ -1539,8 +1617,85 @@ function debounce(func, wait, options) {
   debounced.flush = flush;
   return debounced;
 }
+function assignMergeValue(object4, key, value) {
+  if (value !== void 0 && !eq(object4[key], value) || value === void 0 && !(key in object4)) {
+    baseAssignValue(object4, key, value);
+  }
+}
 function isArrayLikeObject(value) {
   return isObjectLike(value) && isArrayLike(value);
+}
+function safeGet(object4, key) {
+  if (key === "constructor" && typeof object4[key] === "function") {
+    return;
+  }
+  if (key == "__proto__") {
+    return;
+  }
+  return object4[key];
+}
+function toPlainObject(value) {
+  return copyObject(value, keysIn(value));
+}
+function baseMergeDeep(object4, source, key, srcIndex, mergeFunc, customizer, stack) {
+  var objValue = safeGet(object4, key), srcValue = safeGet(source, key), stacked = stack.get(srcValue);
+  if (stacked) {
+    assignMergeValue(object4, key, stacked);
+    return;
+  }
+  var newValue = customizer ? customizer(objValue, srcValue, key + "", object4, source, stack) : void 0;
+  var isCommon = newValue === void 0;
+  if (isCommon) {
+    var isArr = isArray(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray(srcValue);
+    newValue = srcValue;
+    if (isArr || isBuff || isTyped) {
+      if (isArray(objValue)) {
+        newValue = objValue;
+      } else if (isArrayLikeObject(objValue)) {
+        newValue = copyArray(objValue);
+      } else if (isBuff) {
+        isCommon = false;
+        newValue = cloneBuffer(srcValue, true);
+      } else if (isTyped) {
+        isCommon = false;
+        newValue = cloneTypedArray(srcValue, true);
+      } else {
+        newValue = [];
+      }
+    } else if (isPlainObject(srcValue) || isArguments(srcValue)) {
+      newValue = objValue;
+      if (isArguments(objValue)) {
+        newValue = toPlainObject(objValue);
+      } else if (!isObject(objValue) || isFunction(objValue)) {
+        newValue = initCloneObject(srcValue);
+      }
+    } else {
+      isCommon = false;
+    }
+  }
+  if (isCommon) {
+    stack.set(srcValue, newValue);
+    mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
+    stack["delete"](srcValue);
+  }
+  assignMergeValue(object4, key, newValue);
+}
+function baseMerge(object4, source, srcIndex, customizer, stack) {
+  if (object4 === source) {
+    return;
+  }
+  baseFor(source, function(srcValue, key) {
+    stack || (stack = new Stack());
+    if (isObject(srcValue)) {
+      baseMergeDeep(object4, source, key, srcIndex, baseMerge, customizer, stack);
+    } else {
+      var newValue = customizer ? customizer(safeGet(object4, key), srcValue, key + "", object4, source, stack) : void 0;
+      if (newValue === void 0) {
+        newValue = srcValue;
+      }
+      assignMergeValue(object4, key, newValue);
+    }
+  }, keysIn);
 }
 function findLastIndex(array4, predicate, fromIndex) {
   var length = array4 == null ? 0 : array4.length;
@@ -1549,6 +1704,20 @@ function findLastIndex(array4, predicate, fromIndex) {
   }
   var index = length - 1;
   return baseFindIndex(array4, baseIteratee(predicate), index, true);
+}
+function baseMap(collection, iteratee) {
+  var index = -1, result = isArrayLike(collection) ? Array(collection.length) : [];
+  baseEach(collection, function(value, key, collection2) {
+    result[++index] = iteratee(value, key, collection2);
+  });
+  return result;
+}
+function map(collection, iteratee) {
+  var func = isArray(collection) ? arrayMap : baseMap;
+  return func(collection, baseIteratee(iteratee));
+}
+function flatMap(collection, iteratee) {
+  return baseFlatten(map(collection, iteratee));
 }
 function fromPairs(pairs) {
   var index = -1, length = pairs == null ? 0 : pairs.length, result = {};
@@ -1564,9 +1733,15 @@ function isEqual(value, other) {
 function isNil(value) {
   return value == null;
 }
+function isNull(value) {
+  return value === null;
+}
 function isUndefined$1(value) {
   return value === void 0;
 }
+var merge = createAssigner(function(object4, source, srcIndex) {
+  baseMerge(object4, source, srcIndex);
+});
 function baseSet(object4, path, value, customizer) {
   if (!isObject(object4)) {
     return object4;
@@ -1662,6 +1837,7 @@ const isElement = (e) => {
     return false;
   return e instanceof Element;
 };
+const isPropAbsent = (prop) => isNil(prop);
 const isStringNumber = (val) => {
   if (!isString$1(val)) {
     return false;
@@ -1675,18 +1851,18 @@ var __getOwnPropSymbols$b = Object.getOwnPropertySymbols;
 var __hasOwnProp$b = Object.prototype.hasOwnProperty;
 var __propIsEnum$b = Object.prototype.propertyIsEnumerable;
 var __defNormalProp$9 = (obj, key, value) => key in obj ? __defProp$9(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues$9 = (a, b2) => {
+var __spreadValues$9 = (a2, b2) => {
   for (var prop in b2 || (b2 = {}))
     if (__hasOwnProp$b.call(b2, prop))
-      __defNormalProp$9(a, prop, b2[prop]);
+      __defNormalProp$9(a2, prop, b2[prop]);
   if (__getOwnPropSymbols$b)
     for (var prop of __getOwnPropSymbols$b(b2)) {
       if (__propIsEnum$b.call(b2, prop))
-        __defNormalProp$9(a, prop, b2[prop]);
+        __defNormalProp$9(a2, prop, b2[prop]);
     }
-  return a;
+  return a2;
 };
-var __spreadProps$6 = (a, b2) => __defProps$6(a, __getOwnPropDescs$6(b2));
+var __spreadProps$6 = (a2, b2) => __defProps$6(a2, __getOwnPropDescs$6(b2));
 function computedEager(fn2, options) {
   var _a2;
   const result = shallowRef();
@@ -1987,16 +2163,16 @@ var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b2) => {
+var __spreadValues = (a2, b2) => {
   for (var prop in b2)
     if (__hasOwnProp.call(b2, prop))
-      __defNormalProp(a, prop, b2[prop]);
+      __defNormalProp(a2, prop, b2[prop]);
   if (__getOwnPropSymbols)
     for (var prop of __getOwnPropSymbols(b2)) {
       if (__propIsEnum.call(b2, prop))
-        __defNormalProp(a, prop, b2[prop]);
+        __defNormalProp(a2, prop, b2[prop]);
     }
-  return a;
+  return a2;
 };
 const _TransitionPresets = {
   easeInSine: [0.12, 0, 0.39, 0],
@@ -2380,12 +2556,24 @@ var _export_sfc = (sfc, props) => {
   }
   return target;
 };
+const rAF = (fn2) => isClient ? window.requestAnimationFrame(fn2) : setTimeout(fn2, 16);
+const classNameToArray = (cls = "") => cls.split(" ").filter((item) => !!item.trim());
 const hasClass = (el, cls) => {
   if (!el || !cls)
     return false;
   if (cls.includes(" "))
     throw new Error("className should not contain space.");
   return el.classList.contains(cls);
+};
+const addClass = (el, cls) => {
+  if (!el || !cls.trim())
+    return;
+  el.classList.add(...classNameToArray(cls));
+};
+const removeClass = (el, cls) => {
+  if (!el || !cls.trim())
+    return;
+  el.classList.remove(...classNameToArray(cls));
 };
 const getStyle = (element, styleName) => {
   var _a2;
@@ -2461,12 +2649,12 @@ const iconProps = buildProps({
     type: String
   }
 });
-const __default__$j = defineComponent({
+const __default__$n = defineComponent({
   name: "ElIcon",
   inheritAttrs: false
 });
-const _sfc_main$C = /* @__PURE__ */ defineComponent({
-  ...__default__$j,
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
+  ...__default__$n,
   props: iconProps,
   setup(__props) {
     const props = __props;
@@ -2490,7 +2678,7 @@ const _sfc_main$C = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Icon = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__file", "icon.vue"]]);
+var Icon = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__file", "icon.vue"]]);
 const ElIcon = withInstall(Icon);
 /*! Element Plus Icons Vue v2.3.1 */
 var arrow_down_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
@@ -3155,12 +3343,12 @@ function useCursor(input) {
   }
   return [recordCursor, setCursor];
 }
-const __default__$i = defineComponent({
+const __default__$m = defineComponent({
   name: "ElInput",
   inheritAttrs: false
 });
-const _sfc_main$B = /* @__PURE__ */ defineComponent({
-  ...__default__$i,
+const _sfc_main$H = /* @__PURE__ */ defineComponent({
+  ...__default__$m,
   props: inputProps,
   emits: inputEmits,
   setup(__props, { expose, emit }) {
@@ -3565,7 +3753,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Input = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__file", "input.vue"]]);
+var Input = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["__file", "input.vue"]]);
 const ElInput = withInstall(Input);
 const GAP = 4;
 const BAR_MAP = {
@@ -3610,7 +3798,7 @@ const thumbProps = buildProps({
   always: Boolean
 });
 const COMPONENT_NAME$4 = "Thumb";
-const _sfc_main$A = /* @__PURE__ */ defineComponent({
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "thumb",
   props: thumbProps,
   setup(__props) {
@@ -3729,7 +3917,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Thumb = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__file", "thumb.vue"]]);
+var Thumb = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["__file", "thumb.vue"]]);
 const barProps = buildProps({
   always: {
     type: Boolean,
@@ -3740,7 +3928,7 @@ const barProps = buildProps({
     required: true
   }
 });
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
+const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "bar",
   props: barProps,
   setup(__props, { expose }) {
@@ -3798,7 +3986,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Bar = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "bar.vue"]]);
+var Bar = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__file", "bar.vue"]]);
 const scrollbarProps = buildProps({
   height: {
     type: [String, Number],
@@ -3853,11 +4041,11 @@ const scrollbarEmits = {
   }) => [scrollTop, scrollLeft].every(isNumber)
 };
 const COMPONENT_NAME$3 = "ElScrollbar";
-const __default__$h = defineComponent({
+const __default__$l = defineComponent({
   name: COMPONENT_NAME$3
 });
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
-  ...__default__$h,
+const _sfc_main$E = /* @__PURE__ */ defineComponent({
+  ...__default__$l,
   props: scrollbarProps,
   emits: scrollbarEmits,
   setup(__props, { expose, emit }) {
@@ -4009,7 +4197,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Scrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__file", "scrollbar.vue"]]);
+var Scrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["__file", "scrollbar.vue"]]);
 const ElScrollbar = withInstall(Scrollbar);
 const POPPER_INJECTION_KEY = Symbol("popper");
 const POPPER_CONTENT_INJECTION_KEY = Symbol("popperContent");
@@ -4030,12 +4218,12 @@ const popperProps = buildProps({
     default: "tooltip"
   }
 });
-const __default__$g = defineComponent({
+const __default__$k = defineComponent({
   name: "ElPopper",
   inheritAttrs: false
 });
-const _sfc_main$x = /* @__PURE__ */ defineComponent({
-  ...__default__$g,
+const _sfc_main$D = /* @__PURE__ */ defineComponent({
+  ...__default__$k,
   props: popperProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -4058,19 +4246,19 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Popper = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "popper.vue"]]);
+var Popper = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__file", "popper.vue"]]);
 const popperArrowProps = buildProps({
   arrowOffset: {
     type: Number,
     default: 5
   }
 });
-const __default__$f = defineComponent({
+const __default__$j = defineComponent({
   name: "ElPopperArrow",
   inheritAttrs: false
 });
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
-  ...__default__$f,
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
+  ...__default__$j,
   props: popperArrowProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -4096,7 +4284,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ElPopperArrow = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__file", "arrow.vue"]]);
+var ElPopperArrow = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__file", "arrow.vue"]]);
 const popperTriggerProps = buildProps({
   virtualRef: {
     type: definePropType(Object)
@@ -4220,18 +4408,18 @@ function findFirstLegitChild(node) {
   }
   return null;
 }
-function wrapTextContent(s) {
+function wrapTextContent(s2) {
   const ns = useNamespace("only-child");
   return createVNode("span", {
     "class": ns.e("content")
-  }, [s]);
+  }, [s2]);
 }
-const __default__$e = defineComponent({
+const __default__$i = defineComponent({
   name: "ElPopperTrigger",
   inheritAttrs: false
 });
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
-  ...__default__$e,
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
+  ...__default__$i,
   props: popperTriggerProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -4342,7 +4530,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ElPopperTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "trigger.vue"]]);
+var ElPopperTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__file", "trigger.vue"]]);
 const FOCUS_AFTER_TRAPPED = "focus-trap.focus-after-trapped";
 const FOCUS_AFTER_RELEASED = "focus-trap.focus-after-released";
 const FOCUSOUT_PREVENTED = "focus-trap.focusout-prevented";
@@ -4536,7 +4724,7 @@ const useEscapeKeydown = (handler) => {
     }
   });
 };
-const _sfc_main$u = defineComponent({
+const _sfc_main$A = defineComponent({
   name: "ElFocusTrap",
   inheritAttrs: false,
   props: {
@@ -4778,14 +4966,14 @@ const _sfc_main$u = defineComponent({
     };
   }
 });
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
   return renderSlot(_ctx.$slots, "default", { handleKeydown: _ctx.onKeydown });
 }
-var ElFocusTrap = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$6], ["__file", "focus-trap.vue"]]);
-var E$2 = "top", R$2 = "bottom", W$2 = "right", P$2 = "left", me = "auto", G$2 = [E$2, R$2, W$2, P$2], U$1 = "start", J$1 = "end", Xe = "clippingParents", je = "viewport", K$1 = "popper", Ye = "reference", De = G$2.reduce(function(t, e) {
-  return t.concat([e + "-" + U$1, e + "-" + J$1]);
+var ElFocusTrap = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$8], ["__file", "focus-trap.vue"]]);
+var E$3 = "top", R$2 = "bottom", W$2 = "right", P$3 = "left", me = "auto", G$2 = [E$3, R$2, W$2, P$3], U$2 = "start", J$1 = "end", Xe = "clippingParents", je = "viewport", K$1 = "popper", Ye = "reference", De = G$2.reduce(function(t, e) {
+  return t.concat([e + "-" + U$2, e + "-" + J$1]);
 }, []), Ee = [].concat(G$2, [me]).reduce(function(t, e) {
-  return t.concat([e, e + "-" + U$1, e + "-" + J$1]);
+  return t.concat([e, e + "-" + U$2, e + "-" + J$1]);
 }, []), Ge = "beforeRead", Je = "read", Ke = "afterRead", Qe = "beforeMain", Ze = "main", et$1 = "afterMain", tt$1 = "beforeWrite", nt$1 = "write", rt$1 = "afterWrite", ot$1 = [Ge, Je, Ke, Qe, Ze, et$1, tt$1, nt$1, rt$1];
 function C$2(t) {
   return t ? (t.nodeName || "").toLowerCase() : null;
@@ -4814,10 +5002,10 @@ function Pe(t) {
 function Mt(t) {
   var e = t.state;
   Object.keys(e.elements).forEach(function(n) {
-    var r2 = e.styles[n] || {}, o = e.attributes[n] || {}, i2 = e.elements[n];
-    !B$2(i2) || !C$2(i2) || (Object.assign(i2.style, r2), Object.keys(o).forEach(function(a) {
-      var s = o[a];
-      s === false ? i2.removeAttribute(a) : i2.setAttribute(a, s === true ? "" : s);
+    var r2 = e.styles[n] || {}, o2 = e.attributes[n] || {}, i2 = e.elements[n];
+    !B$2(i2) || !C$2(i2) || (Object.assign(i2.style, r2), Object.keys(o2).forEach(function(a2) {
+      var s2 = o2[a2];
+      s2 === false ? i2.removeAttribute(a2) : i2.setAttribute(a2, s2 === true ? "" : s2);
     }));
   });
 }
@@ -4825,11 +5013,11 @@ function Rt(t) {
   var e = t.state, n = { popper: { position: e.options.strategy, left: "0", top: "0", margin: "0" }, arrow: { position: "absolute" }, reference: {} };
   return Object.assign(e.elements.popper.style, n.popper), e.styles = n, e.elements.arrow && Object.assign(e.elements.arrow.style, n.arrow), function() {
     Object.keys(e.elements).forEach(function(r2) {
-      var o = e.elements[r2], i2 = e.attributes[r2] || {}, a = Object.keys(e.styles.hasOwnProperty(r2) ? e.styles[r2] : n[r2]), s = a.reduce(function(f, c2) {
-        return f[c2] = "", f;
+      var o2 = e.elements[r2], i2 = e.attributes[r2] || {}, a2 = Object.keys(e.styles.hasOwnProperty(r2) ? e.styles[r2] : n[r2]), s2 = a2.reduce(function(f2, c2) {
+        return f2[c2] = "", f2;
       }, {});
-      !B$2(o) || !C$2(o) || (Object.assign(o.style, s), Object.keys(i2).forEach(function(f) {
-        o.removeAttribute(f);
+      !B$2(o2) || !C$2(o2) || (Object.assign(o2.style, s2), Object.keys(i2).forEach(function(f2) {
+        o2.removeAttribute(f2);
       }));
     });
   };
@@ -4838,15 +5026,15 @@ var Ae = { name: "applyStyles", enabled: true, phase: "write", fn: Mt, effect: R
 function q$2(t) {
   return t.split("-")[0];
 }
-var X$2 = Math.max, ve = Math.min, Z$1 = Math.round;
+var X$3 = Math.max, ve = Math.min, Z$1 = Math.round;
 function ee(t, e) {
   e === void 0 && (e = false);
-  var n = t.getBoundingClientRect(), r2 = 1, o = 1;
+  var n = t.getBoundingClientRect(), r2 = 1, o2 = 1;
   if (B$2(t) && e) {
-    var i2 = t.offsetHeight, a = t.offsetWidth;
-    a > 0 && (r2 = Z$1(n.width) / a || 1), i2 > 0 && (o = Z$1(n.height) / i2 || 1);
+    var i2 = t.offsetHeight, a2 = t.offsetWidth;
+    a2 > 0 && (r2 = Z$1(n.width) / a2 || 1), i2 > 0 && (o2 = Z$1(n.height) / i2 || 1);
   }
-  return { width: n.width / r2, height: n.height / o, top: n.top / o, right: n.right / r2, bottom: n.bottom / o, left: n.left / r2, x: n.left / r2, y: n.top / o };
+  return { width: n.width / r2, height: n.height / o2, top: n.top / o2, right: n.right / r2, bottom: n.bottom / o2, left: n.left / r2, x: n.left / r2, y: n.top / o2 };
 }
 function ke(t) {
   var e = ee(t), n = t.offsetWidth, r2 = t.offsetHeight;
@@ -4864,44 +5052,44 @@ function it$1(t, e) {
   }
   return false;
 }
-function N$2(t) {
+function N$3(t) {
   return H$2(t).getComputedStyle(t);
 }
 function Wt(t) {
   return ["table", "td", "th"].indexOf(C$2(t)) >= 0;
 }
-function I(t) {
+function I$1(t) {
   return ((Q$2(t) ? t.ownerDocument : t.document) || window.document).documentElement;
 }
 function ge(t) {
-  return C$2(t) === "html" ? t : t.assignedSlot || t.parentNode || (Pe(t) ? t.host : null) || I(t);
+  return C$2(t) === "html" ? t : t.assignedSlot || t.parentNode || (Pe(t) ? t.host : null) || I$1(t);
 }
 function at$1(t) {
-  return !B$2(t) || N$2(t).position === "fixed" ? null : t.offsetParent;
+  return !B$2(t) || N$3(t).position === "fixed" ? null : t.offsetParent;
 }
 function Bt(t) {
   var e = navigator.userAgent.toLowerCase().indexOf("firefox") !== -1, n = navigator.userAgent.indexOf("Trident") !== -1;
   if (n && B$2(t)) {
-    var r2 = N$2(t);
+    var r2 = N$3(t);
     if (r2.position === "fixed") return null;
   }
-  var o = ge(t);
-  for (Pe(o) && (o = o.host); B$2(o) && ["html", "body"].indexOf(C$2(o)) < 0; ) {
-    var i2 = N$2(o);
-    if (i2.transform !== "none" || i2.perspective !== "none" || i2.contain === "paint" || ["transform", "perspective"].indexOf(i2.willChange) !== -1 || e && i2.willChange === "filter" || e && i2.filter && i2.filter !== "none") return o;
-    o = o.parentNode;
+  var o2 = ge(t);
+  for (Pe(o2) && (o2 = o2.host); B$2(o2) && ["html", "body"].indexOf(C$2(o2)) < 0; ) {
+    var i2 = N$3(o2);
+    if (i2.transform !== "none" || i2.perspective !== "none" || i2.contain === "paint" || ["transform", "perspective"].indexOf(i2.willChange) !== -1 || e && i2.willChange === "filter" || e && i2.filter && i2.filter !== "none") return o2;
+    o2 = o2.parentNode;
   }
   return null;
 }
 function se(t) {
-  for (var e = H$2(t), n = at$1(t); n && Wt(n) && N$2(n).position === "static"; ) n = at$1(n);
-  return n && (C$2(n) === "html" || C$2(n) === "body" && N$2(n).position === "static") ? e : n || Bt(t) || e;
+  for (var e = H$2(t), n = at$1(t); n && Wt(n) && N$3(n).position === "static"; ) n = at$1(n);
+  return n && (C$2(n) === "html" || C$2(n) === "body" && N$3(n).position === "static") ? e : n || Bt(t) || e;
 }
 function Le(t) {
   return ["top", "bottom"].indexOf(t) >= 0 ? "x" : "y";
 }
 function fe(t, e, n) {
-  return X$2(t, ve(e, n));
+  return X$3(t, ve(e, n));
 }
 function St(t, e, n) {
   var r2 = fe(t, e, n);
@@ -4922,15 +5110,15 @@ var Tt = function(t, e) {
   return t = typeof t == "function" ? t(Object.assign({}, e.rects, { placement: e.placement })) : t, ft(typeof t != "number" ? t : ct(t, G$2));
 };
 function Ht(t) {
-  var e, n = t.state, r2 = t.name, o = t.options, i2 = n.elements.arrow, a = n.modifiersData.popperOffsets, s = q$2(n.placement), f = Le(s), c2 = [P$2, W$2].indexOf(s) >= 0, u2 = c2 ? "height" : "width";
-  if (!(!i2 || !a)) {
-    var m2 = Tt(o.padding, n), v2 = ke(i2), l2 = f === "y" ? E$2 : P$2, h = f === "y" ? R$2 : W$2, p2 = n.rects.reference[u2] + n.rects.reference[f] - a[f] - n.rects.popper[u2], g = a[f] - n.rects.reference[f], x2 = se(i2), y = x2 ? f === "y" ? x2.clientHeight || 0 : x2.clientWidth || 0 : 0, $2 = p2 / 2 - g / 2, d2 = m2[l2], b2 = y - v2[u2] - m2[h], w2 = y / 2 - v2[u2] / 2 + $2, O2 = fe(d2, w2, b2), j2 = f;
+  var e, n = t.state, r2 = t.name, o2 = t.options, i2 = n.elements.arrow, a2 = n.modifiersData.popperOffsets, s2 = q$2(n.placement), f2 = Le(s2), c2 = [P$3, W$2].indexOf(s2) >= 0, u2 = c2 ? "height" : "width";
+  if (!(!i2 || !a2)) {
+    var m2 = Tt(o2.padding, n), v2 = ke(i2), l2 = f2 === "y" ? E$3 : P$3, h2 = f2 === "y" ? R$2 : W$2, p2 = n.rects.reference[u2] + n.rects.reference[f2] - a2[f2] - n.rects.popper[u2], g = a2[f2] - n.rects.reference[f2], x2 = se(i2), y = x2 ? f2 === "y" ? x2.clientHeight || 0 : x2.clientWidth || 0 : 0, $2 = p2 / 2 - g / 2, d2 = m2[l2], b2 = y - v2[u2] - m2[h2], w2 = y / 2 - v2[u2] / 2 + $2, O2 = fe(d2, w2, b2), j2 = f2;
     n.modifiersData[r2] = (e = {}, e[j2] = O2, e.centerOffset = O2 - w2, e);
   }
 }
 function Ct(t) {
-  var e = t.state, n = t.options, r2 = n.element, o = r2 === void 0 ? "[data-popper-arrow]" : r2;
-  o != null && (typeof o == "string" && (o = e.elements.popper.querySelector(o), !o) || !it$1(e.elements.popper, o) || (e.elements.arrow = o));
+  var e = t.state, n = t.options, r2 = n.element, o2 = r2 === void 0 ? "[data-popper-arrow]" : r2;
+  o2 != null && (typeof o2 == "string" && (o2 = e.elements.popper.querySelector(o2), !o2) || !it$1(e.elements.popper, o2) || (e.elements.arrow = o2));
 }
 var pt = { name: "arrow", enabled: true, phase: "main", fn: Ht, effect: Ct, requires: ["popperOffsets"], requiresIfExists: ["preventOverflow"] };
 function te(t) {
@@ -4938,46 +5126,46 @@ function te(t) {
 }
 var qt = { top: "auto", right: "auto", bottom: "auto", left: "auto" };
 function Vt(t) {
-  var e = t.x, n = t.y, r2 = window, o = r2.devicePixelRatio || 1;
-  return { x: Z$1(e * o) / o || 0, y: Z$1(n * o) / o || 0 };
+  var e = t.x, n = t.y, r2 = window, o2 = r2.devicePixelRatio || 1;
+  return { x: Z$1(e * o2) / o2 || 0, y: Z$1(n * o2) / o2 || 0 };
 }
 function ut(t) {
-  var e, n = t.popper, r2 = t.popperRect, o = t.placement, i2 = t.variation, a = t.offsets, s = t.position, f = t.gpuAcceleration, c2 = t.adaptive, u2 = t.roundOffsets, m2 = t.isFixed, v2 = a.x, l2 = v2 === void 0 ? 0 : v2, h = a.y, p2 = h === void 0 ? 0 : h, g = typeof u2 == "function" ? u2({ x: l2, y: p2 }) : { x: l2, y: p2 };
+  var e, n = t.popper, r2 = t.popperRect, o2 = t.placement, i2 = t.variation, a2 = t.offsets, s2 = t.position, f2 = t.gpuAcceleration, c2 = t.adaptive, u2 = t.roundOffsets, m2 = t.isFixed, v2 = a2.x, l2 = v2 === void 0 ? 0 : v2, h2 = a2.y, p2 = h2 === void 0 ? 0 : h2, g = typeof u2 == "function" ? u2({ x: l2, y: p2 }) : { x: l2, y: p2 };
   l2 = g.x, p2 = g.y;
-  var x2 = a.hasOwnProperty("x"), y = a.hasOwnProperty("y"), $2 = P$2, d2 = E$2, b2 = window;
+  var x2 = a2.hasOwnProperty("x"), y = a2.hasOwnProperty("y"), $2 = P$3, d2 = E$3, b2 = window;
   if (c2) {
     var w2 = se(n), O2 = "clientHeight", j2 = "clientWidth";
-    if (w2 === H$2(n) && (w2 = I(n), N$2(w2).position !== "static" && s === "absolute" && (O2 = "scrollHeight", j2 = "scrollWidth")), w2 = w2, o === E$2 || (o === P$2 || o === W$2) && i2 === J$1) {
+    if (w2 === H$2(n) && (w2 = I$1(n), N$3(w2).position !== "static" && s2 === "absolute" && (O2 = "scrollHeight", j2 = "scrollWidth")), w2 = w2, o2 === E$3 || (o2 === P$3 || o2 === W$2) && i2 === J$1) {
       d2 = R$2;
       var A2 = m2 && w2 === b2 && b2.visualViewport ? b2.visualViewport.height : w2[O2];
-      p2 -= A2 - r2.height, p2 *= f ? 1 : -1;
+      p2 -= A2 - r2.height, p2 *= f2 ? 1 : -1;
     }
-    if (o === P$2 || (o === E$2 || o === R$2) && i2 === J$1) {
+    if (o2 === P$3 || (o2 === E$3 || o2 === R$2) && i2 === J$1) {
       $2 = W$2;
       var k2 = m2 && w2 === b2 && b2.visualViewport ? b2.visualViewport.width : w2[j2];
-      l2 -= k2 - r2.width, l2 *= f ? 1 : -1;
+      l2 -= k2 - r2.width, l2 *= f2 ? 1 : -1;
     }
   }
-  var D = Object.assign({ position: s }, c2 && qt), S2 = u2 === true ? Vt({ x: l2, y: p2 }) : { x: l2, y: p2 };
-  if (l2 = S2.x, p2 = S2.y, f) {
+  var D2 = Object.assign({ position: s2 }, c2 && qt), S2 = u2 === true ? Vt({ x: l2, y: p2 }) : { x: l2, y: p2 };
+  if (l2 = S2.x, p2 = S2.y, f2) {
     var L2;
-    return Object.assign({}, D, (L2 = {}, L2[d2] = y ? "0" : "", L2[$2] = x2 ? "0" : "", L2.transform = (b2.devicePixelRatio || 1) <= 1 ? "translate(" + l2 + "px, " + p2 + "px)" : "translate3d(" + l2 + "px, " + p2 + "px, 0)", L2));
+    return Object.assign({}, D2, (L2 = {}, L2[d2] = y ? "0" : "", L2[$2] = x2 ? "0" : "", L2.transform = (b2.devicePixelRatio || 1) <= 1 ? "translate(" + l2 + "px, " + p2 + "px)" : "translate3d(" + l2 + "px, " + p2 + "px, 0)", L2));
   }
-  return Object.assign({}, D, (e = {}, e[d2] = y ? p2 + "px" : "", e[$2] = x2 ? l2 + "px" : "", e.transform = "", e));
+  return Object.assign({}, D2, (e = {}, e[d2] = y ? p2 + "px" : "", e[$2] = x2 ? l2 + "px" : "", e.transform = "", e));
 }
 function Nt(t) {
-  var e = t.state, n = t.options, r2 = n.gpuAcceleration, o = r2 === void 0 ? true : r2, i2 = n.adaptive, a = i2 === void 0 ? true : i2, s = n.roundOffsets, f = s === void 0 ? true : s, c2 = { placement: q$2(e.placement), variation: te(e.placement), popper: e.elements.popper, popperRect: e.rects.popper, gpuAcceleration: o, isFixed: e.options.strategy === "fixed" };
-  e.modifiersData.popperOffsets != null && (e.styles.popper = Object.assign({}, e.styles.popper, ut(Object.assign({}, c2, { offsets: e.modifiersData.popperOffsets, position: e.options.strategy, adaptive: a, roundOffsets: f })))), e.modifiersData.arrow != null && (e.styles.arrow = Object.assign({}, e.styles.arrow, ut(Object.assign({}, c2, { offsets: e.modifiersData.arrow, position: "absolute", adaptive: false, roundOffsets: f })))), e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-placement": e.placement });
+  var e = t.state, n = t.options, r2 = n.gpuAcceleration, o2 = r2 === void 0 ? true : r2, i2 = n.adaptive, a2 = i2 === void 0 ? true : i2, s2 = n.roundOffsets, f2 = s2 === void 0 ? true : s2, c2 = { placement: q$2(e.placement), variation: te(e.placement), popper: e.elements.popper, popperRect: e.rects.popper, gpuAcceleration: o2, isFixed: e.options.strategy === "fixed" };
+  e.modifiersData.popperOffsets != null && (e.styles.popper = Object.assign({}, e.styles.popper, ut(Object.assign({}, c2, { offsets: e.modifiersData.popperOffsets, position: e.options.strategy, adaptive: a2, roundOffsets: f2 })))), e.modifiersData.arrow != null && (e.styles.arrow = Object.assign({}, e.styles.arrow, ut(Object.assign({}, c2, { offsets: e.modifiersData.arrow, position: "absolute", adaptive: false, roundOffsets: f2 })))), e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-placement": e.placement });
 }
 var Me = { name: "computeStyles", enabled: true, phase: "beforeWrite", fn: Nt, data: {} }, ye = { passive: true };
 function It(t) {
-  var e = t.state, n = t.instance, r2 = t.options, o = r2.scroll, i2 = o === void 0 ? true : o, a = r2.resize, s = a === void 0 ? true : a, f = H$2(e.elements.popper), c2 = [].concat(e.scrollParents.reference, e.scrollParents.popper);
+  var e = t.state, n = t.instance, r2 = t.options, o2 = r2.scroll, i2 = o2 === void 0 ? true : o2, a2 = r2.resize, s2 = a2 === void 0 ? true : a2, f2 = H$2(e.elements.popper), c2 = [].concat(e.scrollParents.reference, e.scrollParents.popper);
   return i2 && c2.forEach(function(u2) {
     u2.addEventListener("scroll", n.update, ye);
-  }), s && f.addEventListener("resize", n.update, ye), function() {
+  }), s2 && f2.addEventListener("resize", n.update, ye), function() {
     i2 && c2.forEach(function(u2) {
       u2.removeEventListener("scroll", n.update, ye);
-    }), s && f.removeEventListener("resize", n.update, ye);
+    }), s2 && f2.removeEventListener("resize", n.update, ye);
   };
 }
 var Re = { name: "eventListeners", enabled: true, phase: "write", fn: function() {
@@ -4998,19 +5186,19 @@ function We(t) {
   return { scrollLeft: n, scrollTop: r2 };
 }
 function Be(t) {
-  return ee(I(t)).left + We(t).scrollLeft;
+  return ee(I$1(t)).left + We(t).scrollLeft;
 }
 function Ft(t) {
-  var e = H$2(t), n = I(t), r2 = e.visualViewport, o = n.clientWidth, i2 = n.clientHeight, a = 0, s = 0;
-  return r2 && (o = r2.width, i2 = r2.height, /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (a = r2.offsetLeft, s = r2.offsetTop)), { width: o, height: i2, x: a + Be(t), y: s };
+  var e = H$2(t), n = I$1(t), r2 = e.visualViewport, o2 = n.clientWidth, i2 = n.clientHeight, a2 = 0, s2 = 0;
+  return r2 && (o2 = r2.width, i2 = r2.height, /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (a2 = r2.offsetLeft, s2 = r2.offsetTop)), { width: o2, height: i2, x: a2 + Be(t), y: s2 };
 }
 function Ut(t) {
-  var e, n = I(t), r2 = We(t), o = (e = t.ownerDocument) == null ? void 0 : e.body, i2 = X$2(n.scrollWidth, n.clientWidth, o ? o.scrollWidth : 0, o ? o.clientWidth : 0), a = X$2(n.scrollHeight, n.clientHeight, o ? o.scrollHeight : 0, o ? o.clientHeight : 0), s = -r2.scrollLeft + Be(t), f = -r2.scrollTop;
-  return N$2(o || n).direction === "rtl" && (s += X$2(n.clientWidth, o ? o.clientWidth : 0) - i2), { width: i2, height: a, x: s, y: f };
+  var e, n = I$1(t), r2 = We(t), o2 = (e = t.ownerDocument) == null ? void 0 : e.body, i2 = X$3(n.scrollWidth, n.clientWidth, o2 ? o2.scrollWidth : 0, o2 ? o2.clientWidth : 0), a2 = X$3(n.scrollHeight, n.clientHeight, o2 ? o2.scrollHeight : 0, o2 ? o2.clientHeight : 0), s2 = -r2.scrollLeft + Be(t), f2 = -r2.scrollTop;
+  return N$3(o2 || n).direction === "rtl" && (s2 += X$3(n.clientWidth, o2 ? o2.clientWidth : 0) - i2), { width: i2, height: a2, x: s2, y: f2 };
 }
 function Se(t) {
-  var e = N$2(t), n = e.overflow, r2 = e.overflowX, o = e.overflowY;
-  return /auto|scroll|overlay|hidden/.test(n + o + r2);
+  var e = N$3(t), n = e.overflow, r2 = e.overflowX, o2 = e.overflowY;
+  return /auto|scroll|overlay|hidden/.test(n + o2 + r2);
 }
 function dt(t) {
   return ["html", "body", "#document"].indexOf(C$2(t)) >= 0 ? t.ownerDocument.body : B$2(t) && Se(t) ? t : dt(ge(t));
@@ -5018,8 +5206,8 @@ function dt(t) {
 function ce(t, e) {
   var n;
   e === void 0 && (e = []);
-  var r2 = dt(t), o = r2 === ((n = t.ownerDocument) == null ? void 0 : n.body), i2 = H$2(r2), a = o ? [i2].concat(i2.visualViewport || [], Se(r2) ? r2 : []) : r2, s = e.concat(a);
-  return o ? s : s.concat(ce(ge(a)));
+  var r2 = dt(t), o2 = r2 === ((n = t.ownerDocument) == null ? void 0 : n.body), i2 = H$2(r2), a2 = o2 ? [i2].concat(i2.visualViewport || [], Se(r2) ? r2 : []) : r2, s2 = e.concat(a2);
+  return o2 ? s2 : s2.concat(ce(ge(a2)));
 }
 function Te(t) {
   return Object.assign({}, t, { left: t.x, top: t.y, right: t.x + t.width, bottom: t.y + t.height });
@@ -5029,78 +5217,78 @@ function Xt(t) {
   return e.top = e.top + t.clientTop, e.left = e.left + t.clientLeft, e.bottom = e.top + t.clientHeight, e.right = e.left + t.clientWidth, e.width = t.clientWidth, e.height = t.clientHeight, e.x = e.left, e.y = e.top, e;
 }
 function ht$1(t, e) {
-  return e === je ? Te(Ft(t)) : Q$2(e) ? Xt(e) : Te(Ut(I(t)));
+  return e === je ? Te(Ft(t)) : Q$2(e) ? Xt(e) : Te(Ut(I$1(t)));
 }
 function Yt(t) {
-  var e = ce(ge(t)), n = ["absolute", "fixed"].indexOf(N$2(t).position) >= 0, r2 = n && B$2(t) ? se(t) : t;
-  return Q$2(r2) ? e.filter(function(o) {
-    return Q$2(o) && it$1(o, r2) && C$2(o) !== "body";
+  var e = ce(ge(t)), n = ["absolute", "fixed"].indexOf(N$3(t).position) >= 0, r2 = n && B$2(t) ? se(t) : t;
+  return Q$2(r2) ? e.filter(function(o2) {
+    return Q$2(o2) && it$1(o2, r2) && C$2(o2) !== "body";
   }) : [];
 }
 function Gt(t, e, n) {
-  var r2 = e === "clippingParents" ? Yt(t) : [].concat(e), o = [].concat(r2, [n]), i2 = o[0], a = o.reduce(function(s, f) {
-    var c2 = ht$1(t, f);
-    return s.top = X$2(c2.top, s.top), s.right = ve(c2.right, s.right), s.bottom = ve(c2.bottom, s.bottom), s.left = X$2(c2.left, s.left), s;
+  var r2 = e === "clippingParents" ? Yt(t) : [].concat(e), o2 = [].concat(r2, [n]), i2 = o2[0], a2 = o2.reduce(function(s2, f2) {
+    var c2 = ht$1(t, f2);
+    return s2.top = X$3(c2.top, s2.top), s2.right = ve(c2.right, s2.right), s2.bottom = ve(c2.bottom, s2.bottom), s2.left = X$3(c2.left, s2.left), s2;
   }, ht$1(t, i2));
-  return a.width = a.right - a.left, a.height = a.bottom - a.top, a.x = a.left, a.y = a.top, a;
+  return a2.width = a2.right - a2.left, a2.height = a2.bottom - a2.top, a2.x = a2.left, a2.y = a2.top, a2;
 }
 function mt(t) {
-  var e = t.reference, n = t.element, r2 = t.placement, o = r2 ? q$2(r2) : null, i2 = r2 ? te(r2) : null, a = e.x + e.width / 2 - n.width / 2, s = e.y + e.height / 2 - n.height / 2, f;
-  switch (o) {
-    case E$2:
-      f = { x: a, y: e.y - n.height };
+  var e = t.reference, n = t.element, r2 = t.placement, o2 = r2 ? q$2(r2) : null, i2 = r2 ? te(r2) : null, a2 = e.x + e.width / 2 - n.width / 2, s2 = e.y + e.height / 2 - n.height / 2, f2;
+  switch (o2) {
+    case E$3:
+      f2 = { x: a2, y: e.y - n.height };
       break;
     case R$2:
-      f = { x: a, y: e.y + e.height };
+      f2 = { x: a2, y: e.y + e.height };
       break;
     case W$2:
-      f = { x: e.x + e.width, y: s };
+      f2 = { x: e.x + e.width, y: s2 };
       break;
-    case P$2:
-      f = { x: e.x - n.width, y: s };
+    case P$3:
+      f2 = { x: e.x - n.width, y: s2 };
       break;
     default:
-      f = { x: e.x, y: e.y };
+      f2 = { x: e.x, y: e.y };
   }
-  var c2 = o ? Le(o) : null;
+  var c2 = o2 ? Le(o2) : null;
   if (c2 != null) {
     var u2 = c2 === "y" ? "height" : "width";
     switch (i2) {
-      case U$1:
-        f[c2] = f[c2] - (e[u2] / 2 - n[u2] / 2);
+      case U$2:
+        f2[c2] = f2[c2] - (e[u2] / 2 - n[u2] / 2);
         break;
       case J$1:
-        f[c2] = f[c2] + (e[u2] / 2 - n[u2] / 2);
+        f2[c2] = f2[c2] + (e[u2] / 2 - n[u2] / 2);
         break;
     }
   }
-  return f;
+  return f2;
 }
 function ne(t, e) {
   e === void 0 && (e = {});
-  var n = e, r2 = n.placement, o = r2 === void 0 ? t.placement : r2, i2 = n.boundary, a = i2 === void 0 ? Xe : i2, s = n.rootBoundary, f = s === void 0 ? je : s, c2 = n.elementContext, u2 = c2 === void 0 ? K$1 : c2, m2 = n.altBoundary, v2 = m2 === void 0 ? false : m2, l2 = n.padding, h = l2 === void 0 ? 0 : l2, p2 = ft(typeof h != "number" ? h : ct(h, G$2)), g = u2 === K$1 ? Ye : K$1, x2 = t.rects.popper, y = t.elements[v2 ? g : u2], $2 = Gt(Q$2(y) ? y : y.contextElement || I(t.elements.popper), a, f), d2 = ee(t.elements.reference), b2 = mt({ reference: d2, element: x2, strategy: "absolute", placement: o }), w2 = Te(Object.assign({}, x2, b2)), O2 = u2 === K$1 ? w2 : d2, j2 = { top: $2.top - O2.top + p2.top, bottom: O2.bottom - $2.bottom + p2.bottom, left: $2.left - O2.left + p2.left, right: O2.right - $2.right + p2.right }, A2 = t.modifiersData.offset;
+  var n = e, r2 = n.placement, o2 = r2 === void 0 ? t.placement : r2, i2 = n.boundary, a2 = i2 === void 0 ? Xe : i2, s2 = n.rootBoundary, f2 = s2 === void 0 ? je : s2, c2 = n.elementContext, u2 = c2 === void 0 ? K$1 : c2, m2 = n.altBoundary, v2 = m2 === void 0 ? false : m2, l2 = n.padding, h2 = l2 === void 0 ? 0 : l2, p2 = ft(typeof h2 != "number" ? h2 : ct(h2, G$2)), g = u2 === K$1 ? Ye : K$1, x2 = t.rects.popper, y = t.elements[v2 ? g : u2], $2 = Gt(Q$2(y) ? y : y.contextElement || I$1(t.elements.popper), a2, f2), d2 = ee(t.elements.reference), b2 = mt({ reference: d2, element: x2, strategy: "absolute", placement: o2 }), w2 = Te(Object.assign({}, x2, b2)), O2 = u2 === K$1 ? w2 : d2, j2 = { top: $2.top - O2.top + p2.top, bottom: O2.bottom - $2.bottom + p2.bottom, left: $2.left - O2.left + p2.left, right: O2.right - $2.right + p2.right }, A2 = t.modifiersData.offset;
   if (u2 === K$1 && A2) {
-    var k2 = A2[o];
-    Object.keys(j2).forEach(function(D) {
-      var S2 = [W$2, R$2].indexOf(D) >= 0 ? 1 : -1, L2 = [E$2, R$2].indexOf(D) >= 0 ? "y" : "x";
-      j2[D] += k2[L2] * S2;
+    var k2 = A2[o2];
+    Object.keys(j2).forEach(function(D2) {
+      var S2 = [W$2, R$2].indexOf(D2) >= 0 ? 1 : -1, L2 = [E$3, R$2].indexOf(D2) >= 0 ? "y" : "x";
+      j2[D2] += k2[L2] * S2;
     });
   }
   return j2;
 }
 function Jt(t, e) {
   e === void 0 && (e = {});
-  var n = e, r2 = n.placement, o = n.boundary, i2 = n.rootBoundary, a = n.padding, s = n.flipVariations, f = n.allowedAutoPlacements, c2 = f === void 0 ? Ee : f, u2 = te(r2), m2 = u2 ? s ? De : De.filter(function(h) {
-    return te(h) === u2;
-  }) : G$2, v2 = m2.filter(function(h) {
-    return c2.indexOf(h) >= 0;
+  var n = e, r2 = n.placement, o2 = n.boundary, i2 = n.rootBoundary, a2 = n.padding, s2 = n.flipVariations, f2 = n.allowedAutoPlacements, c2 = f2 === void 0 ? Ee : f2, u2 = te(r2), m2 = u2 ? s2 ? De : De.filter(function(h2) {
+    return te(h2) === u2;
+  }) : G$2, v2 = m2.filter(function(h2) {
+    return c2.indexOf(h2) >= 0;
   });
   v2.length === 0 && (v2 = m2);
-  var l2 = v2.reduce(function(h, p2) {
-    return h[p2] = ne(t, { placement: p2, boundary: o, rootBoundary: i2, padding: a })[q$2(p2)], h;
+  var l2 = v2.reduce(function(h2, p2) {
+    return h2[p2] = ne(t, { placement: p2, boundary: o2, rootBoundary: i2, padding: a2 })[q$2(p2)], h2;
   }, {});
-  return Object.keys(l2).sort(function(h, p2) {
-    return l2[h] - l2[p2];
+  return Object.keys(l2).sort(function(h2, p2) {
+    return l2[h2] - l2[p2];
   });
 }
 function Kt(t) {
@@ -5111,21 +5299,21 @@ function Kt(t) {
 function Qt(t) {
   var e = t.state, n = t.options, r2 = t.name;
   if (!e.modifiersData[r2]._skip) {
-    for (var o = n.mainAxis, i2 = o === void 0 ? true : o, a = n.altAxis, s = a === void 0 ? true : a, f = n.fallbackPlacements, c2 = n.padding, u2 = n.boundary, m2 = n.rootBoundary, v2 = n.altBoundary, l2 = n.flipVariations, h = l2 === void 0 ? true : l2, p2 = n.allowedAutoPlacements, g = e.options.placement, x2 = q$2(g), y = x2 === g, $2 = f || (y || !h ? [be(g)] : Kt(g)), d2 = [g].concat($2).reduce(function(z2, V2) {
-      return z2.concat(q$2(V2) === me ? Jt(e, { placement: V2, boundary: u2, rootBoundary: m2, padding: c2, flipVariations: h, allowedAutoPlacements: p2 }) : V2);
+    for (var o2 = n.mainAxis, i2 = o2 === void 0 ? true : o2, a2 = n.altAxis, s2 = a2 === void 0 ? true : a2, f2 = n.fallbackPlacements, c2 = n.padding, u2 = n.boundary, m2 = n.rootBoundary, v2 = n.altBoundary, l2 = n.flipVariations, h2 = l2 === void 0 ? true : l2, p2 = n.allowedAutoPlacements, g = e.options.placement, x2 = q$2(g), y = x2 === g, $2 = f2 || (y || !h2 ? [be(g)] : Kt(g)), d2 = [g].concat($2).reduce(function(z2, V2) {
+      return z2.concat(q$2(V2) === me ? Jt(e, { placement: V2, boundary: u2, rootBoundary: m2, padding: c2, flipVariations: h2, allowedAutoPlacements: p2 }) : V2);
     }, []), b2 = e.rects.reference, w2 = e.rects.popper, O2 = /* @__PURE__ */ new Map(), j2 = true, A2 = d2[0], k2 = 0; k2 < d2.length; k2++) {
-      var D = d2[k2], S2 = q$2(D), L2 = te(D) === U$1, re = [E$2, R$2].indexOf(S2) >= 0, oe = re ? "width" : "height", M2 = ne(e, { placement: D, boundary: u2, rootBoundary: m2, altBoundary: v2, padding: c2 }), T2 = re ? L2 ? W$2 : P$2 : L2 ? R$2 : E$2;
+      var D2 = d2[k2], S2 = q$2(D2), L2 = te(D2) === U$2, re = [E$3, R$2].indexOf(S2) >= 0, oe = re ? "width" : "height", M2 = ne(e, { placement: D2, boundary: u2, rootBoundary: m2, altBoundary: v2, padding: c2 }), T2 = re ? L2 ? W$2 : P$3 : L2 ? R$2 : E$3;
       b2[oe] > w2[oe] && (T2 = be(T2));
       var pe = be(T2), _2 = [];
-      if (i2 && _2.push(M2[S2] <= 0), s && _2.push(M2[T2] <= 0, M2[pe] <= 0), _2.every(function(z2) {
+      if (i2 && _2.push(M2[S2] <= 0), s2 && _2.push(M2[T2] <= 0, M2[pe] <= 0), _2.every(function(z2) {
         return z2;
       })) {
-        A2 = D, j2 = false;
+        A2 = D2, j2 = false;
         break;
       }
-      O2.set(D, _2);
+      O2.set(D2, _2);
     }
-    if (j2) for (var ue = h ? 3 : 1, xe = function(z2) {
+    if (j2) for (var ue = h2 ? 3 : 1, xe = function(z2) {
       var V2 = d2.find(function(de) {
         var ae = O2.get(de);
         if (ae) return ae.slice(0, z2).every(function(Y2) {
@@ -5145,24 +5333,24 @@ function gt(t, e, n) {
   return n === void 0 && (n = { x: 0, y: 0 }), { top: t.top - e.height - n.y, right: t.right - e.width + n.x, bottom: t.bottom - e.height + n.y, left: t.left - e.width - n.x };
 }
 function yt(t) {
-  return [E$2, W$2, R$2, P$2].some(function(e) {
+  return [E$3, W$2, R$2, P$3].some(function(e) {
     return t[e] >= 0;
   });
 }
 function Zt(t) {
-  var e = t.state, n = t.name, r2 = e.rects.reference, o = e.rects.popper, i2 = e.modifiersData.preventOverflow, a = ne(e, { elementContext: "reference" }), s = ne(e, { altBoundary: true }), f = gt(a, r2), c2 = gt(s, o, i2), u2 = yt(f), m2 = yt(c2);
-  e.modifiersData[n] = { referenceClippingOffsets: f, popperEscapeOffsets: c2, isReferenceHidden: u2, hasPopperEscaped: m2 }, e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-reference-hidden": u2, "data-popper-escaped": m2 });
+  var e = t.state, n = t.name, r2 = e.rects.reference, o2 = e.rects.popper, i2 = e.modifiersData.preventOverflow, a2 = ne(e, { elementContext: "reference" }), s2 = ne(e, { altBoundary: true }), f2 = gt(a2, r2), c2 = gt(s2, o2, i2), u2 = yt(f2), m2 = yt(c2);
+  e.modifiersData[n] = { referenceClippingOffsets: f2, popperEscapeOffsets: c2, isReferenceHidden: u2, hasPopperEscaped: m2 }, e.attributes.popper = Object.assign({}, e.attributes.popper, { "data-popper-reference-hidden": u2, "data-popper-escaped": m2 });
 }
 var bt = { name: "hide", enabled: true, phase: "main", requiresIfExists: ["preventOverflow"], fn: Zt };
 function en(t, e, n) {
-  var r2 = q$2(t), o = [P$2, E$2].indexOf(r2) >= 0 ? -1 : 1, i2 = typeof n == "function" ? n(Object.assign({}, e, { placement: t })) : n, a = i2[0], s = i2[1];
-  return a = a || 0, s = (s || 0) * o, [P$2, W$2].indexOf(r2) >= 0 ? { x: s, y: a } : { x: a, y: s };
+  var r2 = q$2(t), o2 = [P$3, E$3].indexOf(r2) >= 0 ? -1 : 1, i2 = typeof n == "function" ? n(Object.assign({}, e, { placement: t })) : n, a2 = i2[0], s2 = i2[1];
+  return a2 = a2 || 0, s2 = (s2 || 0) * o2, [P$3, W$2].indexOf(r2) >= 0 ? { x: s2, y: a2 } : { x: a2, y: s2 };
 }
 function tn(t) {
-  var e = t.state, n = t.options, r2 = t.name, o = n.offset, i2 = o === void 0 ? [0, 0] : o, a = Ee.reduce(function(u2, m2) {
+  var e = t.state, n = t.options, r2 = t.name, o2 = n.offset, i2 = o2 === void 0 ? [0, 0] : o2, a2 = Ee.reduce(function(u2, m2) {
     return u2[m2] = en(m2, e.rects, i2), u2;
-  }, {}), s = a[e.placement], f = s.x, c2 = s.y;
-  e.modifiersData.popperOffsets != null && (e.modifiersData.popperOffsets.x += f, e.modifiersData.popperOffsets.y += c2), e.modifiersData[r2] = a;
+  }, {}), s2 = a2[e.placement], f2 = s2.x, c2 = s2.y;
+  e.modifiersData.popperOffsets != null && (e.modifiersData.popperOffsets.x += f2, e.modifiersData.popperOffsets.y += c2), e.modifiersData[r2] = a2;
 }
 var wt = { name: "offset", enabled: true, phase: "main", requires: ["popperOffsets"], fn: tn };
 function nn(t) {
@@ -5174,14 +5362,14 @@ function rn(t) {
   return t === "x" ? "y" : "x";
 }
 function on(t) {
-  var e = t.state, n = t.options, r2 = t.name, o = n.mainAxis, i2 = o === void 0 ? true : o, a = n.altAxis, s = a === void 0 ? false : a, f = n.boundary, c2 = n.rootBoundary, u2 = n.altBoundary, m2 = n.padding, v2 = n.tether, l2 = v2 === void 0 ? true : v2, h = n.tetherOffset, p2 = h === void 0 ? 0 : h, g = ne(e, { boundary: f, rootBoundary: c2, padding: m2, altBoundary: u2 }), x2 = q$2(e.placement), y = te(e.placement), $2 = !y, d2 = Le(x2), b2 = rn(d2), w2 = e.modifiersData.popperOffsets, O2 = e.rects.reference, j2 = e.rects.popper, A2 = typeof p2 == "function" ? p2(Object.assign({}, e.rects, { placement: e.placement })) : p2, k2 = typeof A2 == "number" ? { mainAxis: A2, altAxis: A2 } : Object.assign({ mainAxis: 0, altAxis: 0 }, A2), D = e.modifiersData.offset ? e.modifiersData.offset[e.placement] : null, S2 = { x: 0, y: 0 };
+  var e = t.state, n = t.options, r2 = t.name, o2 = n.mainAxis, i2 = o2 === void 0 ? true : o2, a2 = n.altAxis, s2 = a2 === void 0 ? false : a2, f2 = n.boundary, c2 = n.rootBoundary, u2 = n.altBoundary, m2 = n.padding, v2 = n.tether, l2 = v2 === void 0 ? true : v2, h2 = n.tetherOffset, p2 = h2 === void 0 ? 0 : h2, g = ne(e, { boundary: f2, rootBoundary: c2, padding: m2, altBoundary: u2 }), x2 = q$2(e.placement), y = te(e.placement), $2 = !y, d2 = Le(x2), b2 = rn(d2), w2 = e.modifiersData.popperOffsets, O2 = e.rects.reference, j2 = e.rects.popper, A2 = typeof p2 == "function" ? p2(Object.assign({}, e.rects, { placement: e.placement })) : p2, k2 = typeof A2 == "number" ? { mainAxis: A2, altAxis: A2 } : Object.assign({ mainAxis: 0, altAxis: 0 }, A2), D2 = e.modifiersData.offset ? e.modifiersData.offset[e.placement] : null, S2 = { x: 0, y: 0 };
   if (w2) {
     if (i2) {
-      var L2, re = d2 === "y" ? E$2 : P$2, oe = d2 === "y" ? R$2 : W$2, M2 = d2 === "y" ? "height" : "width", T2 = w2[d2], pe = T2 + g[re], _2 = T2 - g[oe], ue = l2 ? -j2[M2] / 2 : 0, xe = y === U$1 ? O2[M2] : j2[M2], ie = y === U$1 ? -j2[M2] : -O2[M2], le = e.elements.arrow, z2 = l2 && le ? ke(le) : { width: 0, height: 0 }, V2 = e.modifiersData["arrow#persistent"] ? e.modifiersData["arrow#persistent"].padding : st$1(), de = V2[re], ae = V2[oe], Y2 = fe(0, O2[M2], z2[M2]), jt = $2 ? O2[M2] / 2 - ue - Y2 - de - k2.mainAxis : xe - Y2 - de - k2.mainAxis, Dt = $2 ? -O2[M2] / 2 + ue + Y2 + ae + k2.mainAxis : ie + Y2 + ae + k2.mainAxis, Oe = e.elements.arrow && se(e.elements.arrow), Et = Oe ? d2 === "y" ? Oe.clientTop || 0 : Oe.clientLeft || 0 : 0, Ce = (L2 = D == null ? void 0 : D[d2]) != null ? L2 : 0, Pt = T2 + jt - Ce - Et, At = T2 + Dt - Ce, qe = fe(l2 ? ve(pe, Pt) : pe, T2, l2 ? X$2(_2, At) : _2);
+      var L2, re = d2 === "y" ? E$3 : P$3, oe = d2 === "y" ? R$2 : W$2, M2 = d2 === "y" ? "height" : "width", T2 = w2[d2], pe = T2 + g[re], _2 = T2 - g[oe], ue = l2 ? -j2[M2] / 2 : 0, xe = y === U$2 ? O2[M2] : j2[M2], ie = y === U$2 ? -j2[M2] : -O2[M2], le = e.elements.arrow, z2 = l2 && le ? ke(le) : { width: 0, height: 0 }, V2 = e.modifiersData["arrow#persistent"] ? e.modifiersData["arrow#persistent"].padding : st$1(), de = V2[re], ae = V2[oe], Y2 = fe(0, O2[M2], z2[M2]), jt = $2 ? O2[M2] / 2 - ue - Y2 - de - k2.mainAxis : xe - Y2 - de - k2.mainAxis, Dt = $2 ? -O2[M2] / 2 + ue + Y2 + ae + k2.mainAxis : ie + Y2 + ae + k2.mainAxis, Oe = e.elements.arrow && se(e.elements.arrow), Et = Oe ? d2 === "y" ? Oe.clientTop || 0 : Oe.clientLeft || 0 : 0, Ce = (L2 = D2 == null ? void 0 : D2[d2]) != null ? L2 : 0, Pt = T2 + jt - Ce - Et, At = T2 + Dt - Ce, qe = fe(l2 ? ve(pe, Pt) : pe, T2, l2 ? X$3(_2, At) : _2);
       w2[d2] = qe, S2[d2] = qe - T2;
     }
-    if (s) {
-      var Ve, kt = d2 === "x" ? E$2 : P$2, Lt = d2 === "x" ? R$2 : W$2, F2 = w2[b2], he = b2 === "y" ? "height" : "width", Ne = F2 + g[kt], Ie = F2 - g[Lt], $e = [E$2, P$2].indexOf(x2) !== -1, _e = (Ve = D == null ? void 0 : D[b2]) != null ? Ve : 0, ze = $e ? Ne : F2 - O2[he] - j2[he] - _e + k2.altAxis, Fe = $e ? F2 + O2[he] + j2[he] - _e - k2.altAxis : Ie, Ue = l2 && $e ? St(ze, F2, Fe) : fe(l2 ? ze : Ne, F2, l2 ? Fe : Ie);
+    if (s2) {
+      var Ve, kt = d2 === "x" ? E$3 : P$3, Lt = d2 === "x" ? R$2 : W$2, F2 = w2[b2], he = b2 === "y" ? "height" : "width", Ne = F2 + g[kt], Ie = F2 - g[Lt], $e = [E$3, P$3].indexOf(x2) !== -1, _e = (Ve = D2 == null ? void 0 : D2[b2]) != null ? Ve : 0, ze = $e ? Ne : F2 - O2[he] - j2[he] - _e + k2.altAxis, Fe = $e ? F2 + O2[he] + j2[he] - _e - k2.altAxis : Ie, Ue = l2 && $e ? St(ze, F2, Fe) : fe(l2 ? ze : Ne, F2, l2 ? Fe : Ie);
       w2[b2] = Ue, S2[b2] = Ue - F2;
     }
     e.modifiersData[r2] = S2;
@@ -5200,33 +5388,33 @@ function fn(t) {
 }
 function cn(t, e, n) {
   n === void 0 && (n = false);
-  var r2 = B$2(e), o = B$2(e) && fn(e), i2 = I(e), a = ee(t, o), s = { scrollLeft: 0, scrollTop: 0 }, f = { x: 0, y: 0 };
-  return (r2 || !r2 && !n) && ((C$2(e) !== "body" || Se(i2)) && (s = sn(e)), B$2(e) ? (f = ee(e, true), f.x += e.clientLeft, f.y += e.clientTop) : i2 && (f.x = Be(i2))), { x: a.left + s.scrollLeft - f.x, y: a.top + s.scrollTop - f.y, width: a.width, height: a.height };
+  var r2 = B$2(e), o2 = B$2(e) && fn(e), i2 = I$1(e), a2 = ee(t, o2), s2 = { scrollLeft: 0, scrollTop: 0 }, f2 = { x: 0, y: 0 };
+  return (r2 || !r2 && !n) && ((C$2(e) !== "body" || Se(i2)) && (s2 = sn(e)), B$2(e) ? (f2 = ee(e, true), f2.x += e.clientLeft, f2.y += e.clientTop) : i2 && (f2.x = Be(i2))), { x: a2.left + s2.scrollLeft - f2.x, y: a2.top + s2.scrollTop - f2.y, width: a2.width, height: a2.height };
 }
 function pn(t) {
   var e = /* @__PURE__ */ new Map(), n = /* @__PURE__ */ new Set(), r2 = [];
   t.forEach(function(i2) {
     e.set(i2.name, i2);
   });
-  function o(i2) {
+  function o2(i2) {
     n.add(i2.name);
-    var a = [].concat(i2.requires || [], i2.requiresIfExists || []);
-    a.forEach(function(s) {
-      if (!n.has(s)) {
-        var f = e.get(s);
-        f && o(f);
+    var a2 = [].concat(i2.requires || [], i2.requiresIfExists || []);
+    a2.forEach(function(s2) {
+      if (!n.has(s2)) {
+        var f2 = e.get(s2);
+        f2 && o2(f2);
       }
     }), r2.push(i2);
   }
   return t.forEach(function(i2) {
-    n.has(i2.name) || o(i2);
+    n.has(i2.name) || o2(i2);
   }), r2;
 }
 function un(t) {
   var e = pn(t);
   return ot$1.reduce(function(n, r2) {
-    return n.concat(e.filter(function(o) {
-      return o.phase === r2;
+    return n.concat(e.filter(function(o2) {
+      return o2.phase === r2;
     }));
   }, []);
 }
@@ -5242,8 +5430,8 @@ function ln(t) {
 }
 function dn(t) {
   var e = t.reduce(function(n, r2) {
-    var o = n[r2.name];
-    return n[r2.name] = o ? Object.assign({}, o, r2, { options: Object.assign({}, o.options, r2.options), data: Object.assign({}, o.data, r2.data) }) : r2, n;
+    var o2 = n[r2.name];
+    return n[r2.name] = o2 ? Object.assign({}, o2, r2, { options: Object.assign({}, o2.options, r2.options), data: Object.assign({}, o2.data, r2.data) }) : r2, n;
   }, {});
   return Object.keys(e).map(function(n) {
     return e[n];
@@ -5258,12 +5446,12 @@ function $t() {
 }
 function we(t) {
   t === void 0 && (t = {});
-  var e = t, n = e.defaultModifiers, r2 = n === void 0 ? [] : n, o = e.defaultOptions, i2 = o === void 0 ? Ot : o;
-  return function(a, s, f) {
-    f === void 0 && (f = i2);
-    var c2 = { placement: "bottom", orderedModifiers: [], options: Object.assign({}, Ot, i2), modifiersData: {}, elements: { reference: a, popper: s }, attributes: {}, styles: {} }, u2 = [], m2 = false, v2 = { state: c2, setOptions: function(p2) {
+  var e = t, n = e.defaultModifiers, r2 = n === void 0 ? [] : n, o2 = e.defaultOptions, i2 = o2 === void 0 ? Ot : o2;
+  return function(a2, s2, f2) {
+    f2 === void 0 && (f2 = i2);
+    var c2 = { placement: "bottom", orderedModifiers: [], options: Object.assign({}, Ot, i2), modifiersData: {}, elements: { reference: a2, popper: s2 }, attributes: {}, styles: {} }, u2 = [], m2 = false, v2 = { state: c2, setOptions: function(p2) {
       var g = typeof p2 == "function" ? p2(c2.options) : p2;
-      h(), c2.options = Object.assign({}, i2, c2.options, g), c2.scrollParents = { reference: Q$2(a) ? ce(a) : a.contextElement ? ce(a.contextElement) : [], popper: ce(s) };
+      h2(), c2.options = Object.assign({}, i2, c2.options, g), c2.scrollParents = { reference: Q$2(a2) ? ce(a2) : a2.contextElement ? ce(a2.contextElement) : [], popper: ce(s2) };
       var x2 = un(dn([].concat(r2, c2.options.modifiers)));
       return c2.orderedModifiers = x2.filter(function(y) {
         return y.enabled;
@@ -5290,11 +5478,11 @@ function we(t) {
         v2.forceUpdate(), p2(c2);
       });
     }), destroy: function() {
-      h(), m2 = true;
+      h2(), m2 = true;
     } };
-    if (!$t(a, s)) return v2;
-    v2.setOptions(f).then(function(p2) {
-      !m2 && f.onFirstUpdate && f.onFirstUpdate(p2);
+    if (!$t(a2, s2)) return v2;
+    v2.setOptions(f2).then(function(p2) {
+      !m2 && f2.onFirstUpdate && f2.onFirstUpdate(p2);
     });
     function l2() {
       c2.orderedModifiers.forEach(function(p2) {
@@ -5306,7 +5494,7 @@ function we(t) {
         }
       });
     }
-    function h() {
+    function h2() {
       u2.forEach(function(p2) {
         return p2();
       }), u2 = [];
@@ -5687,11 +5875,11 @@ const usePopperContentDOM = (props, {
     updateZIndex
   };
 };
-const __default__$d = defineComponent({
+const __default__$h = defineComponent({
   name: "ElPopperContent"
 });
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
-  ...__default__$d,
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
+  ...__default__$h,
   props: popperContentProps,
   emits: popperContentEmits,
   setup(__props, { expose, emit }) {
@@ -5807,7 +5995,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ElPopperContent = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__file", "content.vue"]]);
+var ElPopperContent = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "content.vue"]]);
 const ElPopper = withInstall(Popper);
 const TOOLTIP_INJECTION_KEY = Symbol("elTooltip");
 function useTimeout() {
@@ -6074,11 +6262,11 @@ const composeEventHandlers = (theirsHandler, oursHandler, { checkForDefaultPreve
   };
   return handleEvent;
 };
-const __default__$c = defineComponent({
+const __default__$g = defineComponent({
   name: "ElTooltipTrigger"
 });
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
-  ...__default__$c,
+const _sfc_main$y = /* @__PURE__ */ defineComponent({
+  ...__default__$g,
   props: useTooltipTriggerProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -6137,7 +6325,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ElTooltipTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__file", "trigger.vue"]]);
+var ElTooltipTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__file", "trigger.vue"]]);
 const teleportProps = buildProps({
   to: {
     type: definePropType([String, Object]),
@@ -6145,7 +6333,7 @@ const teleportProps = buildProps({
   },
   disabled: Boolean
 });
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
   __name: "teleport",
   props: teleportProps,
   setup(__props) {
@@ -6159,7 +6347,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Teleport = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "teleport.vue"]]);
+var Teleport = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "teleport.vue"]]);
 const ElTeleport = withInstall(Teleport);
 const usePopperContainerId = () => {
   const namespace = useGetDerivedNamespace();
@@ -6193,12 +6381,12 @@ const usePopperContainer = () => {
     selector
   };
 };
-const __default__$b = defineComponent({
+const __default__$f = defineComponent({
   name: "ElTooltipContent",
   inheritAttrs: false
 });
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
-  ...__default__$b,
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
+  ...__default__$f,
   props: useTooltipContentProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -6369,12 +6557,12 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ElTooltipContent = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "content.vue"]]);
-const __default__$a = defineComponent({
+var ElTooltipContent = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__file", "content.vue"]]);
+const __default__$e = defineComponent({
   name: "ElTooltip"
 });
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
-  ...__default__$a,
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
+  ...__default__$e,
   props: useTooltipProps,
   emits: tooltipEmits,
   setup(__props, { expose, emit }) {
@@ -6524,7 +6712,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Tooltip = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__file", "tooltip.vue"]]);
+var Tooltip = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "tooltip.vue"]]);
 const ElTooltip = withInstall(Tooltip);
 const buttonGroupContextKey = Symbol("buttonGroupContextKey");
 const useDeprecated = ({ from, replacement, scope, version, ref: ref2, type: type4 = "API" }, condition) => {
@@ -6677,12 +6865,12 @@ function isOnePointZero(n) {
 function isPercentage(n) {
   return typeof n === "string" && n.indexOf("%") !== -1;
 }
-function boundAlpha(a) {
-  a = parseFloat(a);
-  if (isNaN(a) || a < 0 || a > 1) {
-    a = 1;
+function boundAlpha(a2) {
+  a2 = parseFloat(a2);
+  if (isNaN(a2) || a2 < 0 || a2 > 1) {
+    a2 = 1;
   }
-  return a;
+  return a2;
 }
 function convertToPercentage(n) {
   if (n <= 1) {
@@ -6706,29 +6894,29 @@ function rgbToHsl(r2, g, b2) {
   b2 = bound01(b2, 255);
   var max = Math.max(r2, g, b2);
   var min = Math.min(r2, g, b2);
-  var h = 0;
-  var s = 0;
+  var h2 = 0;
+  var s2 = 0;
   var l2 = (max + min) / 2;
   if (max === min) {
-    s = 0;
-    h = 0;
+    s2 = 0;
+    h2 = 0;
   } else {
     var d2 = max - min;
-    s = l2 > 0.5 ? d2 / (2 - max - min) : d2 / (max + min);
+    s2 = l2 > 0.5 ? d2 / (2 - max - min) : d2 / (max + min);
     switch (max) {
       case r2:
-        h = (g - b2) / d2 + (g < b2 ? 6 : 0);
+        h2 = (g - b2) / d2 + (g < b2 ? 6 : 0);
         break;
       case g:
-        h = (b2 - r2) / d2 + 2;
+        h2 = (b2 - r2) / d2 + 2;
         break;
       case b2:
-        h = (r2 - g) / d2 + 4;
+        h2 = (r2 - g) / d2 + 4;
         break;
     }
-    h /= 6;
+    h2 /= 6;
   }
-  return { h, s, l: l2 };
+  return { h: h2, s: s2, l: l2 };
 }
 function hue2rgb(p2, q2, t) {
   if (t < 0) {
@@ -6748,23 +6936,23 @@ function hue2rgb(p2, q2, t) {
   }
   return p2;
 }
-function hslToRgb(h, s, l2) {
+function hslToRgb(h2, s2, l2) {
   var r2;
   var g;
   var b2;
-  h = bound01(h, 360);
-  s = bound01(s, 100);
+  h2 = bound01(h2, 360);
+  s2 = bound01(s2, 100);
   l2 = bound01(l2, 100);
-  if (s === 0) {
+  if (s2 === 0) {
     g = l2;
     b2 = l2;
     r2 = l2;
   } else {
-    var q2 = l2 < 0.5 ? l2 * (1 + s) : l2 + s - l2 * s;
+    var q2 = l2 < 0.5 ? l2 * (1 + s2) : l2 + s2 - l2 * s2;
     var p2 = 2 * l2 - q2;
-    r2 = hue2rgb(p2, q2, h + 1 / 3);
-    g = hue2rgb(p2, q2, h);
-    b2 = hue2rgb(p2, q2, h - 1 / 3);
+    r2 = hue2rgb(p2, q2, h2 + 1 / 3);
+    g = hue2rgb(p2, q2, h2);
+    b2 = hue2rgb(p2, q2, h2 - 1 / 3);
   }
   return { r: r2 * 255, g: g * 255, b: b2 * 255 };
 }
@@ -6774,37 +6962,37 @@ function rgbToHsv(r2, g, b2) {
   b2 = bound01(b2, 255);
   var max = Math.max(r2, g, b2);
   var min = Math.min(r2, g, b2);
-  var h = 0;
+  var h2 = 0;
   var v2 = max;
   var d2 = max - min;
-  var s = max === 0 ? 0 : d2 / max;
+  var s2 = max === 0 ? 0 : d2 / max;
   if (max === min) {
-    h = 0;
+    h2 = 0;
   } else {
     switch (max) {
       case r2:
-        h = (g - b2) / d2 + (g < b2 ? 6 : 0);
+        h2 = (g - b2) / d2 + (g < b2 ? 6 : 0);
         break;
       case g:
-        h = (b2 - r2) / d2 + 2;
+        h2 = (b2 - r2) / d2 + 2;
         break;
       case b2:
-        h = (r2 - g) / d2 + 4;
+        h2 = (r2 - g) / d2 + 4;
         break;
     }
-    h /= 6;
+    h2 /= 6;
   }
-  return { h, s, v: v2 };
+  return { h: h2, s: s2, v: v2 };
 }
-function hsvToRgb(h, s, v2) {
-  h = bound01(h, 360) * 6;
-  s = bound01(s, 100);
+function hsvToRgb(h2, s2, v2) {
+  h2 = bound01(h2, 360) * 6;
+  s2 = bound01(s2, 100);
   v2 = bound01(v2, 100);
-  var i2 = Math.floor(h);
-  var f = h - i2;
-  var p2 = v2 * (1 - s);
-  var q2 = v2 * (1 - f * s);
-  var t = v2 * (1 - (1 - f) * s);
+  var i2 = Math.floor(h2);
+  var f2 = h2 - i2;
+  var p2 = v2 * (1 - s2);
+  var q2 = v2 * (1 - f2 * s2);
+  var t = v2 * (1 - (1 - f2) * s2);
   var mod = i2 % 6;
   var r2 = [v2, q2, p2, p2, t, v2][mod];
   var g = [t, v2, v2, q2, p2, p2][mod];
@@ -6822,12 +7010,12 @@ function rgbToHex(r2, g, b2, allow3Char) {
   }
   return hex2.join("");
 }
-function rgbaToHex(r2, g, b2, a, allow4Char) {
+function rgbaToHex(r2, g, b2, a2, allow4Char) {
   var hex2 = [
     pad2(Math.round(r2).toString(16)),
     pad2(Math.round(g).toString(16)),
     pad2(Math.round(b2).toString(16)),
-    pad2(convertDecimalToHex(a))
+    pad2(convertDecimalToHex(a2))
   ];
   if (allow4Char && hex2[0].startsWith(hex2[0].charAt(1)) && hex2[1].startsWith(hex2[1].charAt(1)) && hex2[2].startsWith(hex2[2].charAt(1)) && hex2[3].startsWith(hex2[3].charAt(1))) {
     return hex2[0].charAt(0) + hex2[1].charAt(0) + hex2[2].charAt(0) + hex2[3].charAt(0);
@@ -6837,8 +7025,8 @@ function rgbaToHex(r2, g, b2, a, allow4Char) {
 function convertDecimalToHex(d2) {
   return Math.round(parseFloat(d2) * 255).toString(16);
 }
-function convertHexToDecimal(h) {
-  return parseIntFromHex(h) / 255;
+function convertHexToDecimal(h2) {
+  return parseIntFromHex(h2) / 255;
 }
 function parseIntFromHex(val) {
   return parseInt(val, 16);
@@ -7002,8 +7190,8 @@ var names = {
 };
 function inputToRGB(color) {
   var rgb = { r: 0, g: 0, b: 0 };
-  var a = 1;
-  var s = null;
+  var a2 = 1;
+  var s2 = null;
   var v2 = null;
   var l2 = null;
   var ok = false;
@@ -7017,30 +7205,30 @@ function inputToRGB(color) {
       ok = true;
       format2 = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
     } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.v)) {
-      s = convertToPercentage(color.s);
+      s2 = convertToPercentage(color.s);
       v2 = convertToPercentage(color.v);
-      rgb = hsvToRgb(color.h, s, v2);
+      rgb = hsvToRgb(color.h, s2, v2);
       ok = true;
       format2 = "hsv";
     } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.l)) {
-      s = convertToPercentage(color.s);
+      s2 = convertToPercentage(color.s);
       l2 = convertToPercentage(color.l);
-      rgb = hslToRgb(color.h, s, l2);
+      rgb = hslToRgb(color.h, s2, l2);
       ok = true;
       format2 = "hsl";
     }
     if (Object.prototype.hasOwnProperty.call(color, "a")) {
-      a = color.a;
+      a2 = color.a;
     }
   }
-  a = boundAlpha(a);
+  a2 = boundAlpha(a2);
   return {
     ok,
     format: color.format || format2,
     r: Math.min(255, Math.max(rgb.r, 0)),
     g: Math.min(255, Math.max(rgb.g, 0)),
     b: Math.min(255, Math.max(rgb.b, 0)),
-    a
+    a: a2
   };
 }
 var CSS_INTEGER = "[-\\+]?\\d+%?";
@@ -7222,8 +7410,8 @@ var TinyColor = (
       return this;
     };
     TinyColor2.prototype.isMonochrome = function() {
-      var s = this.toHsl().s;
-      return s === 0;
+      var s2 = this.toHsl().s;
+      return s2 === 0;
     };
     TinyColor2.prototype.toHsv = function() {
       var hsv = rgbToHsv(this.r, this.g, this.b);
@@ -7231,10 +7419,10 @@ var TinyColor = (
     };
     TinyColor2.prototype.toHsvString = function() {
       var hsv = rgbToHsv(this.r, this.g, this.b);
-      var h = Math.round(hsv.h * 360);
-      var s = Math.round(hsv.s * 100);
+      var h2 = Math.round(hsv.h * 360);
+      var s2 = Math.round(hsv.s * 100);
       var v2 = Math.round(hsv.v * 100);
-      return this.a === 1 ? "hsv(".concat(h, ", ").concat(s, "%, ").concat(v2, "%)") : "hsva(".concat(h, ", ").concat(s, "%, ").concat(v2, "%, ").concat(this.roundA, ")");
+      return this.a === 1 ? "hsv(".concat(h2, ", ").concat(s2, "%, ").concat(v2, "%)") : "hsva(".concat(h2, ", ").concat(s2, "%, ").concat(v2, "%, ").concat(this.roundA, ")");
     };
     TinyColor2.prototype.toHsl = function() {
       var hsl = rgbToHsl(this.r, this.g, this.b);
@@ -7242,10 +7430,10 @@ var TinyColor = (
     };
     TinyColor2.prototype.toHslString = function() {
       var hsl = rgbToHsl(this.r, this.g, this.b);
-      var h = Math.round(hsl.h * 360);
-      var s = Math.round(hsl.s * 100);
+      var h2 = Math.round(hsl.h * 360);
+      var s2 = Math.round(hsl.s * 100);
       var l2 = Math.round(hsl.l * 100);
-      return this.a === 1 ? "hsl(".concat(h, ", ").concat(s, "%, ").concat(l2, "%)") : "hsla(".concat(h, ", ").concat(s, "%, ").concat(l2, "%, ").concat(this.roundA, ")");
+      return this.a === 1 ? "hsl(".concat(h2, ", ").concat(s2, "%, ").concat(l2, "%)") : "hsla(".concat(h2, ", ").concat(s2, "%, ").concat(l2, "%, ").concat(this.roundA, ")");
     };
     TinyColor2.prototype.toHex = function(allow3Char) {
       if (allow3Char === void 0) {
@@ -7479,24 +7667,24 @@ var TinyColor = (
         results = 6;
       }
       var hsv = this.toHsv();
-      var h = hsv.h;
-      var s = hsv.s;
+      var h2 = hsv.h;
+      var s2 = hsv.s;
       var v2 = hsv.v;
       var res = [];
       var modification = 1 / results;
       while (results--) {
-        res.push(new TinyColor2({ h, s, v: v2 }));
+        res.push(new TinyColor2({ h: h2, s: s2, v: v2 }));
         v2 = (v2 + modification) % 1;
       }
       return res;
     };
     TinyColor2.prototype.splitcomplement = function() {
       var hsl = this.toHsl();
-      var h = hsl.h;
+      var h2 = hsl.h;
       return [
         this,
-        new TinyColor2({ h: (h + 72) % 360, s: hsl.s, l: hsl.l }),
-        new TinyColor2({ h: (h + 216) % 360, s: hsl.s, l: hsl.l })
+        new TinyColor2({ h: (h2 + 72) % 360, s: hsl.s, l: hsl.l }),
+        new TinyColor2({ h: (h2 + 216) % 360, s: hsl.s, l: hsl.l })
       ];
     };
     TinyColor2.prototype.onBackground = function(background) {
@@ -7518,11 +7706,11 @@ var TinyColor = (
     };
     TinyColor2.prototype.polyad = function(n) {
       var hsl = this.toHsl();
-      var h = hsl.h;
+      var h2 = hsl.h;
       var result = [this];
       var increment = 360 / n;
       for (var i2 = 1; i2 < n; i2++) {
-        result.push(new TinyColor2({ h: (h + i2 * increment) % 360, s: hsl.s, l: hsl.l }));
+        result.push(new TinyColor2({ h: (h2 + i2 * increment) % 360, s: hsl.s, l: hsl.l }));
       }
       return result;
     };
@@ -7589,11 +7777,11 @@ function useButtonCustomStyle(props) {
     return styles;
   });
 }
-const __default__$9 = defineComponent({
+const __default__$d = defineComponent({
   name: "ElButton"
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
-  ...__default__$9,
+const _sfc_main$u = /* @__PURE__ */ defineComponent({
+  ...__default__$d,
   props: buttonProps,
   emits: buttonEmits,
   setup(__props, { expose, emit }) {
@@ -7659,16 +7847,16 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Button = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "button.vue"]]);
+var Button = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__file", "button.vue"]]);
 const buttonGroupProps = {
   size: buttonProps.size,
   type: buttonProps.type
 };
-const __default__$8 = defineComponent({
+const __default__$c = defineComponent({
   name: "ElButtonGroup"
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
-  ...__default__$8,
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
+  ...__default__$c,
   props: buttonGroupProps,
   setup(__props) {
     const props = __props;
@@ -7686,7 +7874,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ButtonGroup = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "button-group.vue"]]);
+var ButtonGroup = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__file", "button-group.vue"]]);
 const ElButton = withInstall(Button, {
   ButtonGroup
 });
@@ -7700,7 +7888,7 @@ var dayjs_min = { exports: {} };
   !function(t, e) {
     module2.exports = e();
   }(commonjsGlobal, function() {
-    var t = 1e3, e = 6e4, n = 36e5, r2 = "millisecond", i2 = "second", s = "minute", u2 = "hour", a = "day", o = "week", c2 = "month", f = "quarter", h = "year", d2 = "date", l2 = "Invalid Date", $2 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
+    var t = 1e3, e = 6e4, n = 36e5, r2 = "millisecond", i2 = "second", s2 = "minute", u2 = "hour", a2 = "day", o2 = "week", c2 = "month", f2 = "quarter", h2 = "year", d2 = "date", l2 = "Invalid Date", $2 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
       var e2 = ["th", "st", "nd", "rd"], n2 = t2 % 100;
       return "[" + t2 + (e2[(n2 - 20) % 10] || e2[n2] || e2[0]) + "]";
     } }, m2 = function(t2, e2, n2) {
@@ -7711,29 +7899,29 @@ var dayjs_min = { exports: {} };
       return (e2 <= 0 ? "+" : "-") + m2(r3, 2, "0") + ":" + m2(i3, 2, "0");
     }, m: function t2(e2, n2) {
       if (e2.date() < n2.date()) return -t2(n2, e2);
-      var r3 = 12 * (n2.year() - e2.year()) + (n2.month() - e2.month()), i3 = e2.clone().add(r3, c2), s2 = n2 - i3 < 0, u3 = e2.clone().add(r3 + (s2 ? -1 : 1), c2);
-      return +(-(r3 + (n2 - i3) / (s2 ? i3 - u3 : u3 - i3)) || 0);
+      var r3 = 12 * (n2.year() - e2.year()) + (n2.month() - e2.month()), i3 = e2.clone().add(r3, c2), s3 = n2 - i3 < 0, u3 = e2.clone().add(r3 + (s3 ? -1 : 1), c2);
+      return +(-(r3 + (n2 - i3) / (s3 ? i3 - u3 : u3 - i3)) || 0);
     }, a: function(t2) {
       return t2 < 0 ? Math.ceil(t2) || 0 : Math.floor(t2);
     }, p: function(t2) {
-      return { M: c2, y: h, w: o, d: a, D: d2, h: u2, m: s, s: i2, ms: r2, Q: f }[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
+      return { M: c2, y: h2, w: o2, d: a2, D: d2, h: u2, m: s2, s: i2, ms: r2, Q: f2 }[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
     }, u: function(t2) {
       return void 0 === t2;
-    } }, g = "en", D = {};
-    D[g] = M2;
+    } }, g = "en", D2 = {};
+    D2[g] = M2;
     var p2 = "$isDayjsObject", S2 = function(t2) {
       return t2 instanceof _2 || !(!t2 || !t2[p2]);
     }, w2 = function t2(e2, n2, r3) {
       var i3;
       if (!e2) return g;
       if ("string" == typeof e2) {
-        var s2 = e2.toLowerCase();
-        D[s2] && (i3 = s2), n2 && (D[s2] = n2, i3 = s2);
+        var s3 = e2.toLowerCase();
+        D2[s3] && (i3 = s3), n2 && (D2[s3] = n2, i3 = s3);
         var u3 = e2.split("-");
         if (!i3 && u3.length > 1) return t2(u3[0]);
       } else {
-        var a2 = e2.name;
-        D[a2] = e2, i3 = a2;
+        var a3 = e2.name;
+        D2[a3] = e2, i3 = a3;
       }
       return !r3 && i3 && (g = i3), i3 || !r3 && g;
     }, O2 = function(t2, e2) {
@@ -7758,8 +7946,8 @@ var dayjs_min = { exports: {} };
           if ("string" == typeof e2 && !/Z$/i.test(e2)) {
             var r3 = e2.match($2);
             if (r3) {
-              var i3 = r3[2] - 1 || 0, s2 = (r3[7] || "0").substring(0, 3);
-              return n2 ? new Date(Date.UTC(r3[1], i3, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s2)) : new Date(r3[1], i3, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s2);
+              var i3 = r3[2] - 1 || 0, s3 = (r3[7] || "0").substring(0, 3);
+              return n2 ? new Date(Date.UTC(r3[1], i3, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s3)) : new Date(r3[1], i3, r3[3] || 1, r3[4] || 0, r3[5] || 0, r3[6] || 0, s3);
             }
           }
           return new Date(e2);
@@ -7785,26 +7973,26 @@ var dayjs_min = { exports: {} };
       }, m3.valueOf = function() {
         return this.$d.getTime();
       }, m3.startOf = function(t2, e2) {
-        var n2 = this, r3 = !!b2.u(e2) || e2, f2 = b2.p(t2), l3 = function(t3, e3) {
+        var n2 = this, r3 = !!b2.u(e2) || e2, f3 = b2.p(t2), l3 = function(t3, e3) {
           var i3 = b2.w(n2.$u ? Date.UTC(n2.$y, e3, t3) : new Date(n2.$y, e3, t3), n2);
-          return r3 ? i3 : i3.endOf(a);
+          return r3 ? i3 : i3.endOf(a2);
         }, $3 = function(t3, e3) {
           return b2.w(n2.toDate()[t3].apply(n2.toDate("s"), (r3 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e3)), n2);
         }, y2 = this.$W, M4 = this.$M, m4 = this.$D, v3 = "set" + (this.$u ? "UTC" : "");
-        switch (f2) {
-          case h:
+        switch (f3) {
+          case h2:
             return r3 ? l3(1, 0) : l3(31, 11);
           case c2:
             return r3 ? l3(1, M4) : l3(0, M4 + 1);
-          case o:
-            var g2 = this.$locale().weekStart || 0, D2 = (y2 < g2 ? y2 + 7 : y2) - g2;
-            return l3(r3 ? m4 - D2 : m4 + (6 - D2), M4);
-          case a:
+          case o2:
+            var g2 = this.$locale().weekStart || 0, D3 = (y2 < g2 ? y2 + 7 : y2) - g2;
+            return l3(r3 ? m4 - D3 : m4 + (6 - D3), M4);
+          case a2:
           case d2:
             return $3(v3 + "Hours", 0);
           case u2:
             return $3(v3 + "Minutes", 1);
-          case s:
+          case s2:
             return $3(v3 + "Seconds", 2);
           case i2:
             return $3(v3 + "Milliseconds", 3);
@@ -7814,8 +8002,8 @@ var dayjs_min = { exports: {} };
       }, m3.endOf = function(t2) {
         return this.startOf(t2, false);
       }, m3.$set = function(t2, e2) {
-        var n2, o2 = b2.p(t2), f2 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a] = f2 + "Date", n2[d2] = f2 + "Date", n2[c2] = f2 + "Month", n2[h] = f2 + "FullYear", n2[u2] = f2 + "Hours", n2[s] = f2 + "Minutes", n2[i2] = f2 + "Seconds", n2[r2] = f2 + "Milliseconds", n2)[o2], $3 = o2 === a ? this.$D + (e2 - this.$W) : e2;
-        if (o2 === c2 || o2 === h) {
+        var n2, o3 = b2.p(t2), f3 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a2] = f3 + "Date", n2[d2] = f3 + "Date", n2[c2] = f3 + "Month", n2[h2] = f3 + "FullYear", n2[u2] = f3 + "Hours", n2[s2] = f3 + "Minutes", n2[i2] = f3 + "Seconds", n2[r2] = f3 + "Milliseconds", n2)[o3], $3 = o3 === a2 ? this.$D + (e2 - this.$W) : e2;
+        if (o3 === c2 || o3 === h2) {
           var y2 = this.clone().set(d2, 1);
           y2.$d[l3]($3), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
         } else l3 && this.$d[l3]($3);
@@ -7824,29 +8012,29 @@ var dayjs_min = { exports: {} };
         return this.clone().$set(t2, e2);
       }, m3.get = function(t2) {
         return this[b2.p(t2)]();
-      }, m3.add = function(r3, f2) {
+      }, m3.add = function(r3, f3) {
         var d3, l3 = this;
         r3 = Number(r3);
-        var $3 = b2.p(f2), y2 = function(t2) {
+        var $3 = b2.p(f3), y2 = function(t2) {
           var e2 = O2(l3);
           return b2.w(e2.date(e2.date() + Math.round(t2 * r3)), l3);
         };
         if ($3 === c2) return this.set(c2, this.$M + r3);
-        if ($3 === h) return this.set(h, this.$y + r3);
-        if ($3 === a) return y2(1);
-        if ($3 === o) return y2(7);
-        var M4 = (d3 = {}, d3[s] = e, d3[u2] = n, d3[i2] = t, d3)[$3] || 1, m4 = this.$d.getTime() + r3 * M4;
+        if ($3 === h2) return this.set(h2, this.$y + r3);
+        if ($3 === a2) return y2(1);
+        if ($3 === o2) return y2(7);
+        var M4 = (d3 = {}, d3[s2] = e, d3[u2] = n, d3[i2] = t, d3)[$3] || 1, m4 = this.$d.getTime() + r3 * M4;
         return b2.w(m4, this);
       }, m3.subtract = function(t2, e2) {
         return this.add(-1 * t2, e2);
       }, m3.format = function(t2) {
         var e2 = this, n2 = this.$locale();
         if (!this.isValid()) return n2.invalidDate || l2;
-        var r3 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i3 = b2.z(this), s2 = this.$H, u3 = this.$m, a2 = this.$M, o2 = n2.weekdays, c3 = n2.months, f2 = n2.meridiem, h2 = function(t3, n3, i4, s3) {
-          return t3 && (t3[n3] || t3(e2, r3)) || i4[n3].slice(0, s3);
+        var r3 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i3 = b2.z(this), s3 = this.$H, u3 = this.$m, a3 = this.$M, o3 = n2.weekdays, c3 = n2.months, f3 = n2.meridiem, h3 = function(t3, n3, i4, s4) {
+          return t3 && (t3[n3] || t3(e2, r3)) || i4[n3].slice(0, s4);
         }, d3 = function(t3) {
-          return b2.s(s2 % 12 || 12, t3, "0");
-        }, $3 = f2 || function(t3, e3, n3) {
+          return b2.s(s3 % 12 || 12, t3, "0");
+        }, $3 = f3 || function(t3, e3, n3) {
           var r4 = t3 < 12 ? "AM" : "PM";
           return n3 ? r4.toLowerCase() : r4;
         };
@@ -7858,13 +8046,13 @@ var dayjs_min = { exports: {} };
               case "YYYY":
                 return b2.s(e2.$y, 4, "0");
               case "M":
-                return a2 + 1;
+                return a3 + 1;
               case "MM":
-                return b2.s(a2 + 1, 2, "0");
+                return b2.s(a3 + 1, 2, "0");
               case "MMM":
-                return h2(n2.monthsShort, a2, c3, 3);
+                return h3(n2.monthsShort, a3, c3, 3);
               case "MMMM":
-                return h2(c3, a2);
+                return h3(c3, a3);
               case "D":
                 return e2.$D;
               case "DD":
@@ -7872,23 +8060,23 @@ var dayjs_min = { exports: {} };
               case "d":
                 return String(e2.$W);
               case "dd":
-                return h2(n2.weekdaysMin, e2.$W, o2, 2);
+                return h3(n2.weekdaysMin, e2.$W, o3, 2);
               case "ddd":
-                return h2(n2.weekdaysShort, e2.$W, o2, 3);
+                return h3(n2.weekdaysShort, e2.$W, o3, 3);
               case "dddd":
-                return o2[e2.$W];
+                return o3[e2.$W];
               case "H":
-                return String(s2);
+                return String(s3);
               case "HH":
-                return b2.s(s2, 2, "0");
+                return b2.s(s3, 2, "0");
               case "h":
                 return d3(1);
               case "hh":
                 return d3(2);
               case "a":
-                return $3(s2, u3, true);
+                return $3(s3, u3, true);
               case "A":
-                return $3(s2, u3, false);
+                return $3(s3, u3, false);
               case "m":
                 return String(u3);
               case "mm":
@@ -7908,29 +8096,29 @@ var dayjs_min = { exports: {} };
       }, m3.utcOffset = function() {
         return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
       }, m3.diff = function(r3, d3, l3) {
-        var $3, y2 = this, M4 = b2.p(d3), m4 = O2(r3), v3 = (m4.utcOffset() - this.utcOffset()) * e, g2 = this - m4, D2 = function() {
+        var $3, y2 = this, M4 = b2.p(d3), m4 = O2(r3), v3 = (m4.utcOffset() - this.utcOffset()) * e, g2 = this - m4, D3 = function() {
           return b2.m(y2, m4);
         };
         switch (M4) {
-          case h:
-            $3 = D2() / 12;
+          case h2:
+            $3 = D3() / 12;
             break;
           case c2:
-            $3 = D2();
+            $3 = D3();
             break;
-          case f:
-            $3 = D2() / 3;
+          case f2:
+            $3 = D3() / 3;
             break;
-          case o:
+          case o2:
             $3 = (g2 - v3) / 6048e5;
             break;
-          case a:
+          case a2:
             $3 = (g2 - v3) / 864e5;
             break;
           case u2:
             $3 = g2 / n;
             break;
-          case s:
+          case s2:
             $3 = g2 / e;
             break;
           case i2:
@@ -7943,7 +8131,7 @@ var dayjs_min = { exports: {} };
       }, m3.daysInMonth = function() {
         return this.endOf(c2).$D;
       }, m3.$locale = function() {
-        return D[this.$L];
+        return D2[this.$L];
       }, m3.locale = function(t2, e2) {
         if (!t2) return this.$L;
         var n2 = this.clone(), r3 = w2(t2, e2, true);
@@ -7960,7 +8148,7 @@ var dayjs_min = { exports: {} };
         return this.$d.toUTCString();
       }, M3;
     }(), k2 = _2.prototype;
-    return O2.prototype = k2, [["$ms", r2], ["$s", i2], ["$m", s], ["$H", u2], ["$W", a], ["$M", c2], ["$y", h], ["$D", d2]].forEach(function(t2) {
+    return O2.prototype = k2, [["$ms", r2], ["$s", i2], ["$m", s2], ["$H", u2], ["$W", a2], ["$M", c2], ["$y", h2], ["$D", d2]].forEach(function(t2) {
       k2[t2[1]] = function(e2) {
         return this.$g(e2, t2[0], t2[1]);
       };
@@ -7968,7 +8156,7 @@ var dayjs_min = { exports: {} };
       return t2.$i || (t2(e2, _2, O2), t2.$i = true), O2;
     }, O2.locale = w2, O2.isDayjs = S2, O2.unix = function(t2) {
       return O2(1e3 * t2);
-    }, O2.en = D[g], O2.Ls = D, O2.p = {}, O2;
+    }, O2.en = D2[g], O2.Ls = D2, O2.p = {}, O2;
   });
 })(dayjs_min);
 var dayjs_minExports = dayjs_min.exports;
@@ -7987,28 +8175,28 @@ const extractDateFormat = (format2) => {
 const extractTimeFormat = (format2) => {
   return format2.replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?Y{2,4}/g, "").trim();
 };
-const dateEquals = function(a, b2) {
-  const aIsDate = isDate(a);
+const dateEquals = function(a2, b2) {
+  const aIsDate = isDate(a2);
   const bIsDate = isDate(b2);
   if (aIsDate && bIsDate) {
-    return a.getTime() === b2.getTime();
+    return a2.getTime() === b2.getTime();
   }
   if (!aIsDate && !bIsDate) {
-    return a === b2;
+    return a2 === b2;
   }
   return false;
 };
-const valueEquals = function(a, b2) {
-  const aIsArray = isArray$1(a);
+const valueEquals = function(a2, b2) {
+  const aIsArray = isArray$1(a2);
   const bIsArray = isArray$1(b2);
   if (aIsArray && bIsArray) {
-    if (a.length !== b2.length) {
+    if (a2.length !== b2.length) {
       return false;
     }
-    return a.every((item, index) => dateEquals(item, b2[index]));
+    return a2.every((item, index) => dateEquals(item, b2[index]));
   }
   if (!aIsArray && !bIsArray) {
-    return dateEquals(a, b2);
+    return dateEquals(a2, b2);
   }
   return false;
 };
@@ -8041,26 +8229,26 @@ var localeData$1 = { exports: {} };
     module2.exports = e();
   }(commonjsGlobal, function() {
     return function(n, e, t) {
-      var r2 = e.prototype, o = function(n2) {
+      var r2 = e.prototype, o2 = function(n2) {
         return n2 && (n2.indexOf ? n2 : n2.s);
       }, u2 = function(n2, e2, t2, r3, u3) {
-        var i3 = n2.name ? n2 : n2.$locale(), a2 = o(i3[e2]), s2 = o(i3[t2]), f = a2 || s2.map(function(n3) {
+        var i3 = n2.name ? n2 : n2.$locale(), a3 = o2(i3[e2]), s3 = o2(i3[t2]), f2 = a3 || s3.map(function(n3) {
           return n3.slice(0, r3);
         });
-        if (!u3) return f;
+        if (!u3) return f2;
         var d2 = i3.weekStart;
-        return f.map(function(n3, e3) {
-          return f[(e3 + (d2 || 0)) % 7];
+        return f2.map(function(n3, e3) {
+          return f2[(e3 + (d2 || 0)) % 7];
         });
       }, i2 = function() {
         return t.Ls[t.locale()];
-      }, a = function(n2, e2) {
+      }, a2 = function(n2, e2) {
         return n2.formats[e2] || function(n3) {
           return n3.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(n4, e3, t2) {
             return e3 || t2.slice(1);
           });
         }(n2.formats[e2.toUpperCase()]);
-      }, s = function() {
+      }, s2 = function() {
         var n2 = this;
         return { months: function(e2) {
           return e2 ? e2.format("MMMM") : u2(n2, "months");
@@ -8075,11 +8263,11 @@ var localeData$1 = { exports: {} };
         }, weekdaysShort: function(e2) {
           return e2 ? e2.format("ddd") : u2(n2, "weekdaysShort", "weekdays", 3);
         }, longDateFormat: function(e2) {
-          return a(n2.$locale(), e2);
+          return a2(n2.$locale(), e2);
         }, meridiem: this.$locale().meridiem, ordinal: this.$locale().ordinal };
       };
       r2.localeData = function() {
-        return s.bind(this)();
+        return s2.bind(this)();
       }, t.localeData = function() {
         var n2 = i2();
         return { firstDayOfWeek: function() {
@@ -8095,7 +8283,7 @@ var localeData$1 = { exports: {} };
         }, monthsShort: function() {
           return t.monthsShort();
         }, longDateFormat: function(e2) {
-          return a(n2, e2);
+          return a2(n2, e2);
         }, meridiem: n2.meridiem, ordinal: n2.ordinal };
       }, t.months = function() {
         return u2(i2(), "months");
@@ -8127,6 +8315,571 @@ const datePickTypes = [
   "monthrange",
   "yearrange"
 ];
+const checkboxProps = {
+  modelValue: {
+    type: [Number, String, Boolean],
+    default: void 0
+  },
+  label: {
+    type: [String, Boolean, Number, Object],
+    default: void 0
+  },
+  value: {
+    type: [String, Boolean, Number, Object],
+    default: void 0
+  },
+  indeterminate: Boolean,
+  disabled: Boolean,
+  checked: Boolean,
+  name: {
+    type: String,
+    default: void 0
+  },
+  trueValue: {
+    type: [String, Number],
+    default: void 0
+  },
+  falseValue: {
+    type: [String, Number],
+    default: void 0
+  },
+  trueLabel: {
+    type: [String, Number],
+    default: void 0
+  },
+  falseLabel: {
+    type: [String, Number],
+    default: void 0
+  },
+  id: {
+    type: String,
+    default: void 0
+  },
+  border: Boolean,
+  size: useSizeProp,
+  tabindex: [String, Number],
+  validateEvent: {
+    type: Boolean,
+    default: true
+  },
+  ...useAriaProps(["ariaControls"])
+};
+const checkboxEmits = {
+  [UPDATE_MODEL_EVENT]: (val) => isString$1(val) || isNumber(val) || isBoolean(val),
+  change: (val) => isString$1(val) || isNumber(val) || isBoolean(val)
+};
+const checkboxGroupContextKey = Symbol("checkboxGroupContextKey");
+const useCheckboxDisabled = ({
+  model,
+  isChecked
+}) => {
+  const checkboxGroup = inject(checkboxGroupContextKey, void 0);
+  const isLimitDisabled = computed(() => {
+    var _a2, _b;
+    const max = (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a2.value;
+    const min = (_b = checkboxGroup == null ? void 0 : checkboxGroup.min) == null ? void 0 : _b.value;
+    return !isUndefined(max) && model.value.length >= max && !isChecked.value || !isUndefined(min) && model.value.length <= min && isChecked.value;
+  });
+  const isDisabled = useFormDisabled(computed(() => (checkboxGroup == null ? void 0 : checkboxGroup.disabled.value) || isLimitDisabled.value));
+  return {
+    isDisabled,
+    isLimitDisabled
+  };
+};
+const useCheckboxEvent = (props, {
+  model,
+  isLimitExceeded,
+  hasOwnLabel,
+  isDisabled,
+  isLabeledByFormItem
+}) => {
+  const checkboxGroup = inject(checkboxGroupContextKey, void 0);
+  const { formItem } = useFormItem();
+  const { emit } = getCurrentInstance();
+  function getLabeledValue(value) {
+    var _a2, _b, _c, _d;
+    return [true, props.trueValue, props.trueLabel].includes(value) ? (_b = (_a2 = props.trueValue) != null ? _a2 : props.trueLabel) != null ? _b : true : (_d = (_c = props.falseValue) != null ? _c : props.falseLabel) != null ? _d : false;
+  }
+  function emitChangeEvent(checked, e) {
+    emit("change", getLabeledValue(checked), e);
+  }
+  function handleChange(e) {
+    if (isLimitExceeded.value)
+      return;
+    const target = e.target;
+    emit("change", getLabeledValue(target.checked), e);
+  }
+  async function onClickRoot(e) {
+    if (isLimitExceeded.value)
+      return;
+    if (!hasOwnLabel.value && !isDisabled.value && isLabeledByFormItem.value) {
+      const eventTargets = e.composedPath();
+      const hasLabel = eventTargets.some((item) => item.tagName === "LABEL");
+      if (!hasLabel) {
+        model.value = getLabeledValue([false, props.falseValue, props.falseLabel].includes(model.value));
+        await nextTick();
+        emitChangeEvent(model.value, e);
+      }
+    }
+  }
+  const validateEvent = computed(() => (checkboxGroup == null ? void 0 : checkboxGroup.validateEvent) || props.validateEvent);
+  watch(() => props.modelValue, () => {
+    if (validateEvent.value) {
+      formItem == null ? void 0 : formItem.validate("change").catch((err) => debugWarn());
+    }
+  });
+  return {
+    handleChange,
+    onClickRoot
+  };
+};
+const useCheckboxModel = (props) => {
+  const selfModel = ref(false);
+  const { emit } = getCurrentInstance();
+  const checkboxGroup = inject(checkboxGroupContextKey, void 0);
+  const isGroup = computed(() => isUndefined(checkboxGroup) === false);
+  const isLimitExceeded = ref(false);
+  const model = computed({
+    get() {
+      var _a2, _b;
+      return isGroup.value ? (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.modelValue) == null ? void 0 : _a2.value : (_b = props.modelValue) != null ? _b : selfModel.value;
+    },
+    set(val) {
+      var _a2, _b;
+      if (isGroup.value && isArray$1(val)) {
+        isLimitExceeded.value = ((_a2 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a2.value) !== void 0 && val.length > (checkboxGroup == null ? void 0 : checkboxGroup.max.value) && val.length > model.value.length;
+        isLimitExceeded.value === false && ((_b = checkboxGroup == null ? void 0 : checkboxGroup.changeEvent) == null ? void 0 : _b.call(checkboxGroup, val));
+      } else {
+        emit(UPDATE_MODEL_EVENT, val);
+        selfModel.value = val;
+      }
+    }
+  });
+  return {
+    model,
+    isGroup,
+    isLimitExceeded
+  };
+};
+const useCheckboxStatus = (props, slots, { model }) => {
+  const checkboxGroup = inject(checkboxGroupContextKey, void 0);
+  const isFocused = ref(false);
+  const actualValue = computed(() => {
+    if (!isPropAbsent(props.value)) {
+      return props.value;
+    }
+    return props.label;
+  });
+  const isChecked = computed(() => {
+    const value = model.value;
+    if (isBoolean(value)) {
+      return value;
+    } else if (isArray$1(value)) {
+      if (isObject$1(actualValue.value)) {
+        return value.map(toRaw).some((o2) => isEqual(o2, actualValue.value));
+      } else {
+        return value.map(toRaw).includes(actualValue.value);
+      }
+    } else if (value !== null && value !== void 0) {
+      return value === props.trueValue || value === props.trueLabel;
+    } else {
+      return !!value;
+    }
+  });
+  const checkboxButtonSize = useFormSize(computed(() => {
+    var _a2;
+    return (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a2.value;
+  }), {
+    prop: true
+  });
+  const checkboxSize = useFormSize(computed(() => {
+    var _a2;
+    return (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a2.value;
+  }));
+  const hasOwnLabel = computed(() => {
+    return !!slots.default || !isPropAbsent(actualValue.value);
+  });
+  return {
+    checkboxButtonSize,
+    isChecked,
+    isFocused,
+    checkboxSize,
+    hasOwnLabel,
+    actualValue
+  };
+};
+const useCheckbox = (props, slots) => {
+  const { formItem: elFormItem } = useFormItem();
+  const { model, isGroup, isLimitExceeded } = useCheckboxModel(props);
+  const {
+    isFocused,
+    isChecked,
+    checkboxButtonSize,
+    checkboxSize,
+    hasOwnLabel,
+    actualValue
+  } = useCheckboxStatus(props, slots, { model });
+  const { isDisabled } = useCheckboxDisabled({ model, isChecked });
+  const { inputId, isLabeledByFormItem } = useFormItemInputId(props, {
+    formItemContext: elFormItem,
+    disableIdGeneration: hasOwnLabel,
+    disableIdManagement: isGroup
+  });
+  const { handleChange, onClickRoot } = useCheckboxEvent(props, {
+    model,
+    isLimitExceeded,
+    hasOwnLabel,
+    isDisabled,
+    isLabeledByFormItem
+  });
+  const setStoreValue = () => {
+    function addToStore() {
+      var _a2, _b;
+      if (isArray$1(model.value) && !model.value.includes(actualValue.value)) {
+        model.value.push(actualValue.value);
+      } else {
+        model.value = (_b = (_a2 = props.trueValue) != null ? _a2 : props.trueLabel) != null ? _b : true;
+      }
+    }
+    props.checked && addToStore();
+  };
+  setStoreValue();
+  useDeprecated({
+    from: "label act as value",
+    replacement: "value",
+    version: "3.0.0",
+    scope: "el-checkbox",
+    ref: "https://element-plus.org/en-US/component/checkbox.html"
+  }, computed(() => isGroup.value && isPropAbsent(props.value)));
+  useDeprecated({
+    from: "true-label",
+    replacement: "true-value",
+    version: "3.0.0",
+    scope: "el-checkbox",
+    ref: "https://element-plus.org/en-US/component/checkbox.html"
+  }, computed(() => !!props.trueLabel));
+  useDeprecated({
+    from: "false-label",
+    replacement: "false-value",
+    version: "3.0.0",
+    scope: "el-checkbox",
+    ref: "https://element-plus.org/en-US/component/checkbox.html"
+  }, computed(() => !!props.falseLabel));
+  return {
+    inputId,
+    isLabeledByFormItem,
+    isChecked,
+    isDisabled,
+    isFocused,
+    checkboxButtonSize,
+    checkboxSize,
+    hasOwnLabel,
+    model,
+    actualValue,
+    handleChange,
+    onClickRoot
+  };
+};
+const __default__$b = defineComponent({
+  name: "ElCheckbox"
+});
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
+  ...__default__$b,
+  props: checkboxProps,
+  emits: checkboxEmits,
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const {
+      inputId,
+      isLabeledByFormItem,
+      isChecked,
+      isDisabled,
+      isFocused,
+      checkboxSize,
+      hasOwnLabel,
+      model,
+      actualValue,
+      handleChange,
+      onClickRoot
+    } = useCheckbox(props, slots);
+    const ns = useNamespace("checkbox");
+    const compKls = computed(() => {
+      return [
+        ns.b(),
+        ns.m(checkboxSize.value),
+        ns.is("disabled", isDisabled.value),
+        ns.is("bordered", props.border),
+        ns.is("checked", isChecked.value)
+      ];
+    });
+    const spanKls = computed(() => {
+      return [
+        ns.e("input"),
+        ns.is("disabled", isDisabled.value),
+        ns.is("checked", isChecked.value),
+        ns.is("indeterminate", props.indeterminate),
+        ns.is("focus", isFocused.value)
+      ];
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(resolveDynamicComponent(!unref(hasOwnLabel) && unref(isLabeledByFormItem) ? "span" : "label"), {
+        class: normalizeClass(unref(compKls)),
+        "aria-controls": _ctx.indeterminate ? _ctx.ariaControls : null,
+        onClick: unref(onClickRoot)
+      }, {
+        default: withCtx(() => {
+          var _a2, _b, _c, _d;
+          return [
+            createBaseVNode("span", {
+              class: normalizeClass(unref(spanKls))
+            }, [
+              _ctx.trueValue || _ctx.falseValue || _ctx.trueLabel || _ctx.falseLabel ? withDirectives((openBlock(), createElementBlock("input", {
+                key: 0,
+                id: unref(inputId),
+                "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
+                class: normalizeClass(unref(ns).e("original")),
+                type: "checkbox",
+                indeterminate: _ctx.indeterminate,
+                name: _ctx.name,
+                tabindex: _ctx.tabindex,
+                disabled: unref(isDisabled),
+                "true-value": (_b = (_a2 = _ctx.trueValue) != null ? _a2 : _ctx.trueLabel) != null ? _b : true,
+                "false-value": (_d = (_c = _ctx.falseValue) != null ? _c : _ctx.falseLabel) != null ? _d : false,
+                onChange: unref(handleChange),
+                onFocus: ($event) => isFocused.value = true,
+                onBlur: ($event) => isFocused.value = false,
+                onClick: withModifiers(() => {
+                }, ["stop"])
+              }, null, 42, ["id", "onUpdate:modelValue", "indeterminate", "name", "tabindex", "disabled", "true-value", "false-value", "onChange", "onFocus", "onBlur", "onClick"])), [
+                [vModelCheckbox, unref(model)]
+              ]) : withDirectives((openBlock(), createElementBlock("input", {
+                key: 1,
+                id: unref(inputId),
+                "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
+                class: normalizeClass(unref(ns).e("original")),
+                type: "checkbox",
+                indeterminate: _ctx.indeterminate,
+                disabled: unref(isDisabled),
+                value: unref(actualValue),
+                name: _ctx.name,
+                tabindex: _ctx.tabindex,
+                onChange: unref(handleChange),
+                onFocus: ($event) => isFocused.value = true,
+                onBlur: ($event) => isFocused.value = false,
+                onClick: withModifiers(() => {
+                }, ["stop"])
+              }, null, 42, ["id", "onUpdate:modelValue", "indeterminate", "disabled", "value", "name", "tabindex", "onChange", "onFocus", "onBlur", "onClick"])), [
+                [vModelCheckbox, unref(model)]
+              ]),
+              createBaseVNode("span", {
+                class: normalizeClass(unref(ns).e("inner"))
+              }, null, 2)
+            ], 2),
+            unref(hasOwnLabel) ? (openBlock(), createElementBlock("span", {
+              key: 0,
+              class: normalizeClass(unref(ns).e("label"))
+            }, [
+              renderSlot(_ctx.$slots, "default"),
+              !_ctx.$slots.default ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                createTextVNode(toDisplayString(_ctx.label), 1)
+              ], 64)) : createCommentVNode("v-if", true)
+            ], 2)) : createCommentVNode("v-if", true)
+          ];
+        }),
+        _: 3
+      }, 8, ["class", "aria-controls", "onClick"]);
+    };
+  }
+});
+var Checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__file", "checkbox.vue"]]);
+const __default__$a = defineComponent({
+  name: "ElCheckboxButton"
+});
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
+  ...__default__$a,
+  props: checkboxProps,
+  emits: checkboxEmits,
+  setup(__props) {
+    const props = __props;
+    const slots = useSlots();
+    const {
+      isFocused,
+      isChecked,
+      isDisabled,
+      checkboxButtonSize,
+      model,
+      actualValue,
+      handleChange
+    } = useCheckbox(props, slots);
+    const checkboxGroup = inject(checkboxGroupContextKey, void 0);
+    const ns = useNamespace("checkbox");
+    const activeStyle = computed(() => {
+      var _a2, _b, _c, _d;
+      const fillValue = (_b = (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.fill) == null ? void 0 : _a2.value) != null ? _b : "";
+      return {
+        backgroundColor: fillValue,
+        borderColor: fillValue,
+        color: (_d = (_c = checkboxGroup == null ? void 0 : checkboxGroup.textColor) == null ? void 0 : _c.value) != null ? _d : "",
+        boxShadow: fillValue ? `-1px 0 0 0 ${fillValue}` : void 0
+      };
+    });
+    const labelKls = computed(() => {
+      return [
+        ns.b("button"),
+        ns.bm("button", checkboxButtonSize.value),
+        ns.is("disabled", isDisabled.value),
+        ns.is("checked", isChecked.value),
+        ns.is("focus", isFocused.value)
+      ];
+    });
+    return (_ctx, _cache) => {
+      var _a2, _b, _c, _d;
+      return openBlock(), createElementBlock("label", {
+        class: normalizeClass(unref(labelKls))
+      }, [
+        _ctx.trueValue || _ctx.falseValue || _ctx.trueLabel || _ctx.falseLabel ? withDirectives((openBlock(), createElementBlock("input", {
+          key: 0,
+          "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
+          class: normalizeClass(unref(ns).be("button", "original")),
+          type: "checkbox",
+          name: _ctx.name,
+          tabindex: _ctx.tabindex,
+          disabled: unref(isDisabled),
+          "true-value": (_b = (_a2 = _ctx.trueValue) != null ? _a2 : _ctx.trueLabel) != null ? _b : true,
+          "false-value": (_d = (_c = _ctx.falseValue) != null ? _c : _ctx.falseLabel) != null ? _d : false,
+          onChange: unref(handleChange),
+          onFocus: ($event) => isFocused.value = true,
+          onBlur: ($event) => isFocused.value = false,
+          onClick: withModifiers(() => {
+          }, ["stop"])
+        }, null, 42, ["onUpdate:modelValue", "name", "tabindex", "disabled", "true-value", "false-value", "onChange", "onFocus", "onBlur", "onClick"])), [
+          [vModelCheckbox, unref(model)]
+        ]) : withDirectives((openBlock(), createElementBlock("input", {
+          key: 1,
+          "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
+          class: normalizeClass(unref(ns).be("button", "original")),
+          type: "checkbox",
+          name: _ctx.name,
+          tabindex: _ctx.tabindex,
+          disabled: unref(isDisabled),
+          value: unref(actualValue),
+          onChange: unref(handleChange),
+          onFocus: ($event) => isFocused.value = true,
+          onBlur: ($event) => isFocused.value = false,
+          onClick: withModifiers(() => {
+          }, ["stop"])
+        }, null, 42, ["onUpdate:modelValue", "name", "tabindex", "disabled", "value", "onChange", "onFocus", "onBlur", "onClick"])), [
+          [vModelCheckbox, unref(model)]
+        ]),
+        _ctx.$slots.default || _ctx.label ? (openBlock(), createElementBlock("span", {
+          key: 2,
+          class: normalizeClass(unref(ns).be("button", "inner")),
+          style: normalizeStyle(unref(isChecked) ? unref(activeStyle) : void 0)
+        }, [
+          renderSlot(_ctx.$slots, "default", {}, () => [
+            createTextVNode(toDisplayString(_ctx.label), 1)
+          ])
+        ], 6)) : createCommentVNode("v-if", true)
+      ], 2);
+    };
+  }
+});
+var CheckboxButton = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "checkbox-button.vue"]]);
+const checkboxGroupProps = buildProps({
+  modelValue: {
+    type: definePropType(Array),
+    default: () => []
+  },
+  disabled: Boolean,
+  min: Number,
+  max: Number,
+  size: useSizeProp,
+  fill: String,
+  textColor: String,
+  tag: {
+    type: String,
+    default: "div"
+  },
+  validateEvent: {
+    type: Boolean,
+    default: true
+  },
+  ...useAriaProps(["ariaLabel"])
+});
+const checkboxGroupEmits = {
+  [UPDATE_MODEL_EVENT]: (val) => isArray$1(val),
+  change: (val) => isArray$1(val)
+};
+const __default__$9 = defineComponent({
+  name: "ElCheckboxGroup"
+});
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
+  ...__default__$9,
+  props: checkboxGroupProps,
+  emits: checkboxGroupEmits,
+  setup(__props, { emit }) {
+    const props = __props;
+    const ns = useNamespace("checkbox");
+    const { formItem } = useFormItem();
+    const { inputId: groupId, isLabeledByFormItem } = useFormItemInputId(props, {
+      formItemContext: formItem
+    });
+    const changeEvent = async (value) => {
+      emit(UPDATE_MODEL_EVENT, value);
+      await nextTick();
+      emit("change", value);
+    };
+    const modelValue = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(val) {
+        changeEvent(val);
+      }
+    });
+    provide(checkboxGroupContextKey, {
+      ...pick(toRefs(props), [
+        "size",
+        "min",
+        "max",
+        "disabled",
+        "validateEvent",
+        "fill",
+        "textColor"
+      ]),
+      modelValue,
+      changeEvent
+    });
+    watch(() => props.modelValue, () => {
+      if (props.validateEvent) {
+        formItem == null ? void 0 : formItem.validate("change").catch((err) => debugWarn());
+      }
+    });
+    return (_ctx, _cache) => {
+      var _a2;
+      return openBlock(), createBlock(resolveDynamicComponent(_ctx.tag), {
+        id: unref(groupId),
+        class: normalizeClass(unref(ns).b("group")),
+        role: "group",
+        "aria-label": !unref(isLabeledByFormItem) ? _ctx.ariaLabel || "checkbox-group" : void 0,
+        "aria-labelledby": unref(isLabeledByFormItem) ? (_a2 = unref(formItem)) == null ? void 0 : _a2.labelId : void 0
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["id", "class", "aria-label", "aria-labelledby"]);
+    };
+  }
+});
+var CheckboxGroup = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "checkbox-group.vue"]]);
+const ElCheckbox = withInstall(Checkbox, {
+  CheckboxButton,
+  CheckboxGroup
+});
+withNoopInstall(CheckboxButton);
+withNoopInstall(CheckboxGroup);
 const escapeStringRegexp = (string3 = "") => string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 const castArray = (arr) => {
   if (!arr && arr !== 0)
@@ -8158,11 +8911,11 @@ const tagEmits = {
   close: (evt) => evt instanceof MouseEvent,
   click: (evt) => evt instanceof MouseEvent
 };
-const __default__$7 = defineComponent({
+const __default__$8 = defineComponent({
   name: "ElTag"
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
-  ...__default__$7,
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
+  ...__default__$8,
   props: tagProps,
   emits: tagEmits,
   setup(__props, { emit }) {
@@ -8249,7 +9002,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Tag = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "tag.vue"]]);
+var Tag = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__file", "tag.vue"]]);
 const ElTag = withInstall(Tag);
 const nodeList = /* @__PURE__ */ new Map();
 if (isClient) {
@@ -8324,14 +9077,14 @@ var customParseFormat$1 = { exports: {} };
   !function(e, t) {
     module2.exports = t();
   }(commonjsGlobal, function() {
-    var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d/, r2 = /\d\d/, i2 = /\d\d?/, o = /\d*[^-_:/,()\s\d]+/, s = {}, a = function(e2) {
+    var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d/, r2 = /\d\d/, i2 = /\d\d?/, o2 = /\d*[^-_:/,()\s\d]+/, s2 = {}, a2 = function(e2) {
       return (e2 = +e2) + (e2 > 68 ? 1900 : 2e3);
     };
-    var f = function(e2) {
+    var f2 = function(e2) {
       return function(t2) {
         this[e2] = +t2;
       };
-    }, h = [/[+-]\d\d:?(\d\d)?|Z/, function(e2) {
+    }, h2 = [/[+-]\d\d:?(\d\d)?|Z/, function(e2) {
       (this.zone || (this.zone = {})).offset = function(e3) {
         if (!e3) return 0;
         if ("Z" === e3) return 0;
@@ -8339,10 +9092,10 @@ var customParseFormat$1 = { exports: {} };
         return 0 === n2 ? 0 : "+" === t2[0] ? -n2 : n2;
       }(e2);
     }], u2 = function(e2) {
-      var t2 = s[e2];
+      var t2 = s2[e2];
       return t2 && (t2.indexOf ? t2 : t2.s.concat(t2.f));
     }, d2 = function(e2, t2) {
-      var n2, r3 = s.meridiem;
+      var n2, r3 = s2.meridiem;
       if (r3) {
         for (var i3 = 1; i3 <= 24; i3 += 1) if (e2.indexOf(r3(i3, 0, t2)) > -1) {
           n2 = i3 > 12;
@@ -8350,9 +9103,9 @@ var customParseFormat$1 = { exports: {} };
         }
       } else n2 = e2 === (t2 ? "pm" : "PM");
       return n2;
-    }, c2 = { A: [o, function(e2) {
+    }, c2 = { A: [o2, function(e2) {
       this.afternoon = d2(e2, false);
-    }], a: [o, function(e2) {
+    }], a: [o2, function(e2) {
       this.afternoon = d2(e2, true);
     }], Q: [n, function(e2) {
       this.month = 3 * (e2 - 1) + 1;
@@ -8362,41 +9115,41 @@ var customParseFormat$1 = { exports: {} };
       this.milliseconds = 10 * +e2;
     }], SSS: [/\d{3}/, function(e2) {
       this.milliseconds = +e2;
-    }], s: [i2, f("seconds")], ss: [i2, f("seconds")], m: [i2, f("minutes")], mm: [i2, f("minutes")], H: [i2, f("hours")], h: [i2, f("hours")], HH: [i2, f("hours")], hh: [i2, f("hours")], D: [i2, f("day")], DD: [r2, f("day")], Do: [o, function(e2) {
-      var t2 = s.ordinal, n2 = e2.match(/\d+/);
+    }], s: [i2, f2("seconds")], ss: [i2, f2("seconds")], m: [i2, f2("minutes")], mm: [i2, f2("minutes")], H: [i2, f2("hours")], h: [i2, f2("hours")], HH: [i2, f2("hours")], hh: [i2, f2("hours")], D: [i2, f2("day")], DD: [r2, f2("day")], Do: [o2, function(e2) {
+      var t2 = s2.ordinal, n2 = e2.match(/\d+/);
       if (this.day = n2[0], t2) for (var r3 = 1; r3 <= 31; r3 += 1) t2(r3).replace(/\[|\]/g, "") === e2 && (this.day = r3);
-    }], w: [i2, f("week")], ww: [r2, f("week")], M: [i2, f("month")], MM: [r2, f("month")], MMM: [o, function(e2) {
+    }], w: [i2, f2("week")], ww: [r2, f2("week")], M: [i2, f2("month")], MM: [r2, f2("month")], MMM: [o2, function(e2) {
       var t2 = u2("months"), n2 = (u2("monthsShort") || t2.map(function(e3) {
         return e3.slice(0, 3);
       })).indexOf(e2) + 1;
       if (n2 < 1) throw new Error();
       this.month = n2 % 12 || n2;
-    }], MMMM: [o, function(e2) {
+    }], MMMM: [o2, function(e2) {
       var t2 = u2("months").indexOf(e2) + 1;
       if (t2 < 1) throw new Error();
       this.month = t2 % 12 || t2;
-    }], Y: [/[+-]?\d+/, f("year")], YY: [r2, function(e2) {
-      this.year = a(e2);
-    }], YYYY: [/\d{4}/, f("year")], Z: h, ZZ: h };
+    }], Y: [/[+-]?\d+/, f2("year")], YY: [r2, function(e2) {
+      this.year = a2(e2);
+    }], YYYY: [/\d{4}/, f2("year")], Z: h2, ZZ: h2 };
     function l2(n2) {
       var r3, i3;
-      r3 = n2, i3 = s && s.formats;
-      for (var o2 = (n2 = r3.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, function(t2, n3, r4) {
-        var o3 = r4 && r4.toUpperCase();
-        return n3 || i3[r4] || e[r4] || i3[o3].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(e2, t3, n4) {
+      r3 = n2, i3 = s2 && s2.formats;
+      for (var o3 = (n2 = r3.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, function(t2, n3, r4) {
+        var o4 = r4 && r4.toUpperCase();
+        return n3 || i3[r4] || e[r4] || i3[o4].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(e2, t3, n4) {
           return t3 || n4.slice(1);
         });
-      })).match(t), a2 = o2.length, f2 = 0; f2 < a2; f2 += 1) {
-        var h2 = o2[f2], u3 = c2[h2], d3 = u3 && u3[0], l3 = u3 && u3[1];
-        o2[f2] = l3 ? { regex: d3, parser: l3 } : h2.replace(/^\[|\]$/g, "");
+      })).match(t), a3 = o3.length, f3 = 0; f3 < a3; f3 += 1) {
+        var h3 = o3[f3], u3 = c2[h3], d3 = u3 && u3[0], l3 = u3 && u3[1];
+        o3[f3] = l3 ? { regex: d3, parser: l3 } : h3.replace(/^\[|\]$/g, "");
       }
       return function(e2) {
-        for (var t2 = {}, n3 = 0, r4 = 0; n3 < a2; n3 += 1) {
-          var i4 = o2[n3];
+        for (var t2 = {}, n3 = 0, r4 = 0; n3 < a3; n3 += 1) {
+          var i4 = o3[n3];
           if ("string" == typeof i4) r4 += i4.length;
           else {
-            var s2 = i4.regex, f3 = i4.parser, h3 = e2.slice(r4), u4 = s2.exec(h3)[0];
-            f3.call(t2, u4), e2 = e2.replace(u4, "");
+            var s3 = i4.regex, f4 = i4.parser, h4 = e2.slice(r4), u4 = s3.exec(h4)[0];
+            f4.call(t2, u4), e2 = e2.replace(u4, "");
           }
         }
         return function(e3) {
@@ -8409,28 +9162,28 @@ var customParseFormat$1 = { exports: {} };
       };
     }
     return function(e2, t2, n2) {
-      n2.p.customParseFormat = true, e2 && e2.parseTwoDigitYear && (a = e2.parseTwoDigitYear);
+      n2.p.customParseFormat = true, e2 && e2.parseTwoDigitYear && (a2 = e2.parseTwoDigitYear);
       var r3 = t2.prototype, i3 = r3.parse;
       r3.parse = function(e3) {
-        var t3 = e3.date, r4 = e3.utc, o2 = e3.args;
+        var t3 = e3.date, r4 = e3.utc, o3 = e3.args;
         this.$u = r4;
-        var a2 = o2[1];
-        if ("string" == typeof a2) {
-          var f2 = true === o2[2], h2 = true === o2[3], u3 = f2 || h2, d3 = o2[2];
-          h2 && (d3 = o2[2]), s = this.$locale(), !f2 && d3 && (s = n2.Ls[d3]), this.$d = function(e4, t4, n3, r5) {
+        var a3 = o3[1];
+        if ("string" == typeof a3) {
+          var f3 = true === o3[2], h3 = true === o3[3], u3 = f3 || h3, d3 = o3[2];
+          h3 && (d3 = o3[2]), s2 = this.$locale(), !f3 && d3 && (s2 = n2.Ls[d3]), this.$d = function(e4, t4, n3, r5) {
             try {
               if (["x", "X"].indexOf(t4) > -1) return new Date(("X" === t4 ? 1e3 : 1) * e4);
-              var i4 = l2(t4)(e4), o3 = i4.year, s2 = i4.month, a3 = i4.day, f3 = i4.hours, h3 = i4.minutes, u4 = i4.seconds, d4 = i4.milliseconds, c4 = i4.zone, m3 = i4.week, M3 = /* @__PURE__ */ new Date(), Y2 = a3 || (o3 || s2 ? 1 : M3.getDate()), p2 = o3 || M3.getFullYear(), v2 = 0;
-              o3 && !s2 || (v2 = s2 > 0 ? s2 - 1 : M3.getMonth());
-              var D, w2 = f3 || 0, g = h3 || 0, y = u4 || 0, L2 = d4 || 0;
-              return c4 ? new Date(Date.UTC(p2, v2, Y2, w2, g, y, L2 + 60 * c4.offset * 1e3)) : n3 ? new Date(Date.UTC(p2, v2, Y2, w2, g, y, L2)) : (D = new Date(p2, v2, Y2, w2, g, y, L2), m3 && (D = r5(D).week(m3).toDate()), D);
+              var i4 = l2(t4)(e4), o4 = i4.year, s3 = i4.month, a4 = i4.day, f4 = i4.hours, h4 = i4.minutes, u4 = i4.seconds, d4 = i4.milliseconds, c4 = i4.zone, m3 = i4.week, M3 = /* @__PURE__ */ new Date(), Y2 = a4 || (o4 || s3 ? 1 : M3.getDate()), p2 = o4 || M3.getFullYear(), v2 = 0;
+              o4 && !s3 || (v2 = s3 > 0 ? s3 - 1 : M3.getMonth());
+              var D2, w2 = f4 || 0, g = h4 || 0, y = u4 || 0, L2 = d4 || 0;
+              return c4 ? new Date(Date.UTC(p2, v2, Y2, w2, g, y, L2 + 60 * c4.offset * 1e3)) : n3 ? new Date(Date.UTC(p2, v2, Y2, w2, g, y, L2)) : (D2 = new Date(p2, v2, Y2, w2, g, y, L2), m3 && (D2 = r5(D2).week(m3).toDate()), D2);
             } catch (e5) {
               return /* @__PURE__ */ new Date("");
             }
-          }(t3, a2, r4, n2), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a2) && (this.$d = /* @__PURE__ */ new Date("")), s = {};
-        } else if (a2 instanceof Array) for (var c3 = a2.length, m2 = 1; m2 <= c3; m2 += 1) {
-          o2[1] = a2[m2 - 1];
-          var M2 = n2.apply(this, o2);
+          }(t3, a3, r4, n2), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a3) && (this.$d = /* @__PURE__ */ new Date("")), s2 = {};
+        } else if (a3 instanceof Array) for (var c3 = a3.length, m2 = 1; m2 <= c3; m2 += 1) {
+          o3[1] = a3[m2 - 1];
+          var M2 = n2.apply(this, o3);
           if (M2.isValid()) {
             this.$d = M2.$d, this.$L = M2.$L, this.init();
             break;
@@ -8454,7 +9207,7 @@ var advancedFormat$1 = { exports: {} };
       r2.format = function(e2) {
         var t2 = this, r3 = this.$locale();
         if (!this.isValid()) return n.bind(this)(e2);
-        var s = this.$utils(), a = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
+        var s2 = this.$utils(), a2 = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
           switch (e3) {
             case "Q":
               return Math.ceil((t2.$M + 1) / 3);
@@ -8468,13 +9221,13 @@ var advancedFormat$1 = { exports: {} };
               return r3.ordinal(t2.week(), "W");
             case "w":
             case "ww":
-              return s.s(t2.week(), "w" === e3 ? 1 : 2, "0");
+              return s2.s(t2.week(), "w" === e3 ? 1 : 2, "0");
             case "W":
             case "WW":
-              return s.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
+              return s2.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
             case "k":
             case "kk":
-              return s.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
+              return s2.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
             case "X":
               return Math.floor(t2.$d.getTime() / 1e3);
             case "x":
@@ -8487,7 +9240,7 @@ var advancedFormat$1 = { exports: {} };
               return e3;
           }
         });
-        return n.bind(this)(a);
+        return n.bind(this)(a2);
       };
     };
   });
@@ -8501,17 +9254,17 @@ var weekOfYear$1 = { exports: {} };
   }(commonjsGlobal, function() {
     var e = "week", t = "year";
     return function(i2, n, r2) {
-      var f = n.prototype;
-      f.week = function(i3) {
+      var f2 = n.prototype;
+      f2.week = function(i3) {
         if (void 0 === i3 && (i3 = null), null !== i3) return this.add(7 * (i3 - this.week()), "day");
         var n2 = this.$locale().yearStart || 1;
         if (11 === this.month() && this.date() > 25) {
-          var f2 = r2(this).startOf(t).add(1, t).date(n2), s = r2(this).endOf(e);
-          if (f2.isBefore(s)) return 1;
+          var f3 = r2(this).startOf(t).add(1, t).date(n2), s2 = r2(this).endOf(e);
+          if (f3.isBefore(s2)) return 1;
         }
-        var a = r2(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o = this.diff(a, e, true);
-        return o < 0 ? r2(this).startOf("week").week() : Math.ceil(o);
-      }, f.weeks = function(e2) {
+        var a2 = r2(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o2 = this.diff(a2, e, true);
+        return o2 < 0 ? r2(this).startOf("week").week() : Math.ceil(o2);
+      }, f2.weeks = function(e2) {
         return void 0 === e2 && (e2 = null), this.week(e2);
       };
     };
@@ -8729,12 +9482,12 @@ const timePickerRngeTriggerProps = buildProps({
   startPlaceholder: String,
   endPlaceholder: String
 });
-const __default__$6 = defineComponent({
+const __default__$7 = defineComponent({
   name: "PickerRangeTrigger",
   inheritAttrs: false
 });
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
-  ...__default__$6,
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
+  ...__default__$7,
   props: timePickerRngeTriggerProps,
   emits: [
     "mouseenter",
@@ -8832,12 +9585,12 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var PickerRangeTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "picker-range-trigger.vue"]]);
-const __default__$5 = defineComponent({
+var PickerRangeTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "picker-range-trigger.vue"]]);
+const __default__$6 = defineComponent({
   name: "Picker"
 });
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
-  ...__default__$5,
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
+  ...__default__$6,
   props: timePickerDefaultProps,
   emits: [
     "update:modelValue",
@@ -9434,7 +10187,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var CommonPicker = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "picker.vue"]]);
+var CommonPicker = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "picker.vue"]]);
 const panelTimePickerProps = buildProps({
   ...timePanelSharedProps,
   datetimeRole: String,
@@ -9592,7 +10345,7 @@ const vRepeatClick = {
     });
   }
 };
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
   __name: "basic-time-spinner",
   props: basicTimeSpinnerProps,
   emits: ["change", "select-range", "set-option"],
@@ -9885,8 +10638,8 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var TimeSpinner = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "basic-time-spinner.vue"]]);
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
+var TimeSpinner = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "basic-time-spinner.vue"]]);
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
   __name: "panel-time-pick",
   props: panelTimePickerProps,
   emits: ["pick", "select-range", "set-picker-option"],
@@ -10038,14 +10791,14 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var TimePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__file", "panel-time-pick.vue"]]);
+var TimePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "panel-time-pick.vue"]]);
 const panelTimeRangeProps = buildProps({
   ...timePanelSharedProps,
   parsedValue: {
     type: definePropType(Array)
   }
 });
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
   __name: "panel-time-range",
   props: panelTimeRangeProps,
   emits: ["pick", "select-range", "set-picker-option"],
@@ -10316,7 +11069,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var TimeRangePanel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "panel-time-range.vue"]]);
+var TimeRangePanel = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "panel-time-range.vue"]]);
 dayjs.extend(customParseFormat);
 var TimePicker = defineComponent({
   name: "ElTimePicker",
@@ -10925,7 +11678,7 @@ var ElDatePickerCell = defineComponent({
     };
   }
 });
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
   __name: "basic-date-table",
   props: basicDateTableProps,
   emits: basicDateTableEmits,
@@ -11008,12 +11761,12 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var DateTable = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "basic-date-table.vue"]]);
+var DateTable = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "basic-date-table.vue"]]);
 const basicMonthTableProps = buildProps({
   ...datePickerSharedProps,
   selectionMode: selectionModeWithDefault("month")
 });
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "basic-month-table",
   props: basicMonthTableProps,
   emits: ["changerange", "pick", "select"],
@@ -11212,12 +11965,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var MonthTable = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "basic-month-table.vue"]]);
+var MonthTable = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__file", "basic-month-table.vue"]]);
 const basicYearTableProps = buildProps({
   ...datePickerSharedProps,
   selectionMode: selectionModeWithDefault("year")
 });
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "basic-year-table",
   props: basicYearTableProps,
   emits: ["changerange", "pick", "select"],
@@ -11413,8 +12166,8 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var YearTable = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__file", "basic-year-table.vue"]]);
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+var YearTable = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "basic-year-table.vue"]]);
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
   __name: "panel-date-pick",
   props: panelDatePickProps,
   emits: ["pick", "set-picker-option", "panel-change"],
@@ -11788,10 +12541,10 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
       };
       const newDate = innerDate.value.toDate();
       while (Math.abs(innerDate.value.diff(newDate, "year", true)) < 1) {
-        const map = mapping[keyboardMode.value];
-        if (!map)
+        const map2 = mapping[keyboardMode.value];
+        if (!map2)
           return;
-        map.offset(newDate, isFunction$1(map[code]) ? map[code](newDate) : (_a2 = map[code]) != null ? _a2 : 0);
+        map2.offset(newDate, isFunction$1(map2[code]) ? map2[code](newDate) : (_a2 = map2[code]) != null ? _a2 : 0);
         if (disabledDate && disabledDate(newDate)) {
           break;
         }
@@ -12087,7 +12840,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var DatePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "panel-date-pick.vue"]]);
+var DatePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "panel-date-pick.vue"]]);
 const panelDateRangeProps = buildProps({
   ...panelSharedProps,
   ...panelRangeSharedProps,
@@ -12194,7 +12947,7 @@ const useRangePicker = (props, {
   };
 };
 const unit$2 = "month";
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
   __name: "panel-date-range",
   props: panelDateRangeProps,
   emits: [
@@ -12861,7 +13614,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var DateRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "panel-date-range.vue"]]);
+var DateRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "panel-date-range.vue"]]);
 const panelMonthRangeProps = buildProps({
   ...panelRangeSharedProps
 });
@@ -12918,11 +13671,11 @@ const useMonthRangeHeader = ({
   };
 };
 const unit$1 = "year";
-const __default__$4 = defineComponent({
+const __default__$5 = defineComponent({
   name: "DatePickerMonthRange"
 });
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
-  ...__default__$4,
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
+  ...__default__$5,
   props: panelMonthRangeProps,
   emits: panelMonthRangeEmits,
   setup(__props, { emit }) {
@@ -13151,7 +13904,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var MonthRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "panel-month-range.vue"]]);
+var MonthRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__file", "panel-month-range.vue"]]);
 const panelYearRangeProps = buildProps({
   ...panelRangeSharedProps
 });
@@ -13211,11 +13964,11 @@ const useYearRangeHeader = ({
   };
 };
 const unit = "year";
-const __default__$3 = defineComponent({
+const __default__$4 = defineComponent({
   name: "DatePickerYearRange"
 });
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
-  ...__default__$3,
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
+  ...__default__$4,
   props: panelYearRangeProps,
   emits: panelYearRangeEmits,
   setup(__props, { emit }) {
@@ -13507,7 +14260,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var YearRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "panel-year-range.vue"]]);
+var YearRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "panel-year-range.vue"]]);
 const getPanel = function(type4) {
   switch (type4) {
     case "daterange":
@@ -13683,11 +14436,11 @@ const filterFields = (fields, props) => {
   return normalized.length > 0 ? fields.filter((field) => field.prop && normalized.includes(field.prop)) : fields;
 };
 const COMPONENT_NAME$2 = "ElForm";
-const __default__$2 = defineComponent({
+const __default__$3 = defineComponent({
   name: COMPONENT_NAME$2
 });
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
-  ...__default__$2,
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
+  ...__default__$3,
   props: formProps,
   emits: formEmits,
   setup(__props, { expose, emit }) {
@@ -13822,7 +14575,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Form = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "form.vue"]]);
+var Form = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "form.vue"]]);
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function(target) {
     for (var i2 = 1; i2 < arguments.length; i2++) {
@@ -13842,18 +14595,18 @@ function _inheritsLoose(subClass, superClass) {
   subClass.prototype.constructor = subClass;
   _setPrototypeOf(subClass, superClass);
 }
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf2(o2) {
-    return o2.__proto__ || Object.getPrototypeOf(o2);
+function _getPrototypeOf(o2) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf2(o22) {
+    return o22.__proto__ || Object.getPrototypeOf(o22);
   };
-  return _getPrototypeOf(o);
+  return _getPrototypeOf(o2);
 }
-function _setPrototypeOf(o, p2) {
-  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p22) {
-    o2.__proto__ = p22;
-    return o2;
+function _setPrototypeOf(o2, p2) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o22, p22) {
+    o22.__proto__ = p22;
+    return o22;
   };
-  return _setPrototypeOf(o, p2);
+  return _setPrototypeOf(o2, p2);
 }
 function _isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
@@ -13872,9 +14625,9 @@ function _construct(Parent, args, Class) {
     _construct = Reflect.construct.bind();
   } else {
     _construct = function _construct2(Parent2, args2, Class2) {
-      var a = [null];
-      a.push.apply(a, args2);
-      var Constructor = Function.bind.apply(Parent2, a);
+      var a2 = [null];
+      a2.push.apply(a2, args2);
+      var Constructor = Function.bind.apply(Parent2, a2);
       var instance = new Constructor();
       if (Class2) _setPrototypeOf(instance, Class2.prototype);
       return instance;
@@ -13987,8 +14740,8 @@ function asyncParallelArray(arr, func, callback) {
       callback(results);
     }
   }
-  arr.forEach(function(a) {
-    func(a, count);
+  arr.forEach(function(a2) {
+    func(a2, count);
   });
 }
 function asyncSerialArray(arr, func, callback) {
@@ -14109,13 +14862,13 @@ function complementError(rule, source) {
 }
 function deepMerge(target, source) {
   if (source) {
-    for (var s in source) {
-      if (source.hasOwnProperty(s)) {
-        var value = source[s];
-        if (typeof value === "object" && typeof target[s] === "object") {
-          target[s] = _extends({}, target[s], value);
+    for (var s2 in source) {
+      if (source.hasOwnProperty(s2)) {
+        var value = source[s2];
+        if (typeof value === "object" && typeof target[s2] === "object") {
+          target[s2] = _extends({}, target[s2], value);
         } else {
-          target[s] = value;
+          target[s2] = value;
         }
       }
     }
@@ -14629,17 +15382,17 @@ var Schema = /* @__PURE__ */ function() {
     }
     return this._messages;
   };
-  _proto.validate = function validate(source_, o, oc) {
+  _proto.validate = function validate(source_, o2, oc) {
     var _this2 = this;
-    if (o === void 0) {
-      o = {};
+    if (o2 === void 0) {
+      o2 = {};
     }
     if (oc === void 0) {
       oc = function oc2() {
       };
     }
     var source = source_;
-    var options = o;
+    var options = o2;
     var callback = oc;
     if (typeof options === "function") {
       callback = options;
@@ -14990,11 +15743,11 @@ var FormLabelWrap = defineComponent({
     };
   }
 });
-const __default__$1 = defineComponent({
+const __default__$2 = defineComponent({
   name: "ElFormItem"
 });
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  ...__default__$1,
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
+  ...__default__$2,
   props: formItemProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -15294,7 +16047,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var FormItem = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "form-item.vue"]]);
+var FormItem = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "form-item.vue"]]);
 const ElForm = withInstall(Form, {
   FormItem
 });
@@ -15393,7 +16146,7 @@ function useOption(props, states) {
     updateOption
   };
 }
-const _sfc_main$7 = defineComponent({
+const _sfc_main$a = defineComponent({
   name: "ElOption",
   componentName: "ElOption",
   props: {
@@ -15466,7 +16219,7 @@ const _sfc_main$7 = defineComponent({
     };
   }
 });
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("li", {
     id: _ctx.id,
     class: normalizeClass(_ctx.containerKls),
@@ -15483,8 +16236,8 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     [vShow, _ctx.visible]
   ]);
 }
-var Option = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$5], ["__file", "option.vue"]]);
-const _sfc_main$6 = defineComponent({
+var Option = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$7], ["__file", "option.vue"]]);
+const _sfc_main$9 = defineComponent({
   name: "ElSelectDropdown",
   componentName: "ElSelectDropdown",
   setup() {
@@ -15511,7 +16264,7 @@ const _sfc_main$6 = defineComponent({
     };
   }
 });
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass([_ctx.ns.b("dropdown"), _ctx.ns.is("multiple", _ctx.isMultiple), _ctx.popperClass]),
     style: normalizeStyle({ [_ctx.isFitInputWidth ? "width" : "minWidth"]: _ctx.minWidth })
@@ -15531,7 +16284,7 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)) : createCommentVNode("v-if", true)
   ], 6);
 }
-var ElSelectMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4], ["__file", "select-dropdown.vue"]]);
+var ElSelectMenu = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$6], ["__file", "select-dropdown.vue"]]);
 const useSelect = (props, emit) => {
   const { t } = useLocale();
   const contentId = useId();
@@ -15774,7 +16527,7 @@ const useSelect = (props, emit) => {
   };
   const getOption = (value) => {
     let option;
-    const isObjectValue = isPlainObject(value);
+    const isObjectValue = isPlainObject$1(value);
     for (let i2 = states.cachedOptions.size - 1; i2 >= 0; i2--) {
       const cachedOption = cachedOptionsArray.value[i2];
       const isEqualValue = isObjectValue ? get(cachedOption.value, props.valueKey) === get(value, props.valueKey) : cachedOption.value === value;
@@ -16293,7 +17046,7 @@ const SelectProps = buildProps({
   ...useAriaProps(["ariaLabel"])
 });
 const COMPONENT_NAME = "ElSelect";
-const _sfc_main$5 = defineComponent({
+const _sfc_main$8 = defineComponent({
   name: COMPONENT_NAME,
   componentName: COMPONENT_NAME,
   components: {
@@ -16356,7 +17109,7 @@ const _sfc_main$5 = defineComponent({
     };
   }
 });
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_tag = resolveComponent("el-tag");
   const _component_el_tooltip = resolveComponent("el-tooltip");
   const _component_el_icon = resolveComponent("el-icon");
@@ -16703,8 +17456,8 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     [_directive_click_outside, _ctx.handleClickOutside, _ctx.popperRef]
   ]);
 }
-var Select = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$3], ["__file", "select.vue"]]);
-const _sfc_main$4 = defineComponent({
+var Select = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$5], ["__file", "select.vue"]]);
+const _sfc_main$7 = defineComponent({
   name: "ElOptionGroup",
   componentName: "ElOptionGroup",
   props: {
@@ -16757,7 +17510,7 @@ const _sfc_main$4 = defineComponent({
     };
   }
 });
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("ul", {
     ref: "groupRef",
     class: normalizeClass(_ctx.ns.be("group", "wrap"))
@@ -16776,13 +17529,4713 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     [vShow, _ctx.visible]
   ]);
 }
-var OptionGroup = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$2], ["__file", "option-group.vue"]]);
+var OptionGroup = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$4], ["__file", "option-group.vue"]]);
 const ElSelect = withInstall(Select, {
   Option,
   OptionGroup
 });
 const ElOption = withNoopInstall(Option);
 withNoopInstall(OptionGroup);
+const getCell = function(event) {
+  var _a2;
+  return (_a2 = event.target) == null ? void 0 : _a2.closest("td");
+};
+const orderBy = function(array4, sortKey, reverse, sortMethod, sortBy) {
+  if (!sortKey && !sortMethod && (!sortBy || isArray$1(sortBy) && !sortBy.length)) {
+    return array4;
+  }
+  if (isString$1(reverse)) {
+    reverse = reverse === "descending" ? -1 : 1;
+  } else {
+    reverse = reverse && reverse < 0 ? -1 : 1;
+  }
+  const getKey = sortMethod ? null : function(value, index) {
+    if (sortBy) {
+      if (!isArray$1(sortBy)) {
+        sortBy = [sortBy];
+      }
+      return sortBy.map((by) => {
+        if (isString$1(by)) {
+          return get(value, by);
+        } else {
+          return by(value, index, array4);
+        }
+      });
+    }
+    if (sortKey !== "$key") {
+      if (isObject$1(value) && "$value" in value)
+        value = value.$value;
+    }
+    return [isObject$1(value) ? get(value, sortKey) : value];
+  };
+  const compare = function(a2, b2) {
+    if (sortMethod) {
+      return sortMethod(a2.value, b2.value);
+    }
+    for (let i2 = 0, len = a2.key.length; i2 < len; i2++) {
+      if (a2.key[i2] < b2.key[i2]) {
+        return -1;
+      }
+      if (a2.key[i2] > b2.key[i2]) {
+        return 1;
+      }
+    }
+    return 0;
+  };
+  return array4.map((value, index) => {
+    return {
+      value,
+      index,
+      key: getKey ? getKey(value, index) : null
+    };
+  }).sort((a2, b2) => {
+    let order = compare(a2, b2);
+    if (!order) {
+      order = a2.index - b2.index;
+    }
+    return order * +reverse;
+  }).map((item) => item.value);
+};
+const getColumnById = function(table, columnId) {
+  let column = null;
+  table.columns.forEach((item) => {
+    if (item.id === columnId) {
+      column = item;
+    }
+  });
+  return column;
+};
+const getColumnByKey = function(table, columnKey) {
+  let column = null;
+  for (let i2 = 0; i2 < table.columns.length; i2++) {
+    const item = table.columns[i2];
+    if (item.columnKey === columnKey) {
+      column = item;
+      break;
+    }
+  }
+  if (!column)
+    throwError("ElTable", `No column matching with column-key: ${columnKey}`);
+  return column;
+};
+const getColumnByCell = function(table, cell, namespace) {
+  const matches = (cell.className || "").match(new RegExp(`${namespace}-table_[^\\s]+`, "gm"));
+  if (matches) {
+    return getColumnById(table, matches[0]);
+  }
+  return null;
+};
+const getRowIdentity = (row, rowKey) => {
+  if (!row)
+    throw new Error("Row is required when get row identity");
+  if (isString$1(rowKey)) {
+    if (!rowKey.includes(".")) {
+      return `${row[rowKey]}`;
+    }
+    const key = rowKey.split(".");
+    let current = row;
+    for (const element of key) {
+      current = current[element];
+    }
+    return `${current}`;
+  } else if (isFunction$1(rowKey)) {
+    return rowKey.call(null, row);
+  }
+};
+const getKeysMap = function(array4, rowKey) {
+  const arrayMap2 = {};
+  (array4 || []).forEach((row, index) => {
+    arrayMap2[getRowIdentity(row, rowKey)] = { row, index };
+  });
+  return arrayMap2;
+};
+function mergeOptions(defaults, config) {
+  const options = {};
+  let key;
+  for (key in defaults) {
+    options[key] = defaults[key];
+  }
+  for (key in config) {
+    if (hasOwn(config, key)) {
+      const value = config[key];
+      if (!isUndefined(value)) {
+        options[key] = value;
+      }
+    }
+  }
+  return options;
+}
+function parseWidth(width) {
+  if (width === "")
+    return width;
+  if (!isUndefined(width)) {
+    width = Number.parseInt(width, 10);
+    if (Number.isNaN(width)) {
+      width = "";
+    }
+  }
+  return width;
+}
+function parseMinWidth(minWidth) {
+  if (minWidth === "")
+    return minWidth;
+  if (!isUndefined(minWidth)) {
+    minWidth = parseWidth(minWidth);
+    if (Number.isNaN(minWidth)) {
+      minWidth = 80;
+    }
+  }
+  return minWidth;
+}
+function parseHeight(height) {
+  if (isNumber(height)) {
+    return height;
+  }
+  if (isString$1(height)) {
+    if (/^\d+(?:px)?$/.test(height)) {
+      return Number.parseInt(height, 10);
+    } else {
+      return height;
+    }
+  }
+  return null;
+}
+function compose(...funcs) {
+  if (funcs.length === 0) {
+    return (arg) => arg;
+  }
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+  return funcs.reduce((a2, b2) => (...args) => a2(b2(...args)));
+}
+function toggleRowStatus(statusArr, row, newVal, tableTreeProps, selectable, rowIndex) {
+  let _rowIndex = rowIndex != null ? rowIndex : 0;
+  let changed = false;
+  const index = statusArr.indexOf(row);
+  const included = index !== -1;
+  const isRowSelectable = selectable == null ? void 0 : selectable.call(null, row, rowIndex);
+  const toggleStatus = (type4) => {
+    if (type4 === "add") {
+      statusArr.push(row);
+    } else {
+      statusArr.splice(index, 1);
+    }
+    changed = true;
+  };
+  const getChildrenCount = (row2) => {
+    let count = 0;
+    const children = (tableTreeProps == null ? void 0 : tableTreeProps.children) && row2[tableTreeProps.children];
+    if (children && isArray$1(children)) {
+      count += children.length;
+      children.forEach((item) => {
+        count += getChildrenCount(item);
+      });
+    }
+    return count;
+  };
+  if (!selectable || isRowSelectable) {
+    if (isBoolean(newVal)) {
+      if (newVal && !included) {
+        toggleStatus("add");
+      } else if (!newVal && included) {
+        toggleStatus("remove");
+      }
+    } else {
+      included ? toggleStatus("remove") : toggleStatus("add");
+    }
+  }
+  if (!(tableTreeProps == null ? void 0 : tableTreeProps.checkStrictly) && (tableTreeProps == null ? void 0 : tableTreeProps.children) && isArray$1(row[tableTreeProps.children])) {
+    row[tableTreeProps.children].forEach((item) => {
+      toggleRowStatus(statusArr, item, newVal != null ? newVal : !included, tableTreeProps, selectable, _rowIndex + 1);
+      _rowIndex += getChildrenCount(item) + 1;
+    });
+  }
+  return changed;
+}
+function walkTreeNode(root2, cb, childrenKey = "children", lazyKey = "hasChildren") {
+  const isNil2 = (array4) => !(isArray$1(array4) && array4.length);
+  function _walker(parent, children, level) {
+    cb(parent, children, level);
+    children.forEach((item) => {
+      if (item[lazyKey]) {
+        cb(item, null, level + 1);
+        return;
+      }
+      const children2 = item[childrenKey];
+      if (!isNil2(children2)) {
+        _walker(item, children2, level + 1);
+      }
+    });
+  }
+  root2.forEach((item) => {
+    if (item[lazyKey]) {
+      cb(item, null, 0);
+      return;
+    }
+    const children = item[childrenKey];
+    if (!isNil2(children)) {
+      _walker(item, children, 0);
+    }
+  });
+}
+const getTableOverflowTooltipProps = (props, content) => {
+  return {
+    content,
+    ...props,
+    popperOptions: {
+      strategy: "fixed",
+      ...props.popperOptions
+    }
+  };
+};
+let removePopper = null;
+function createTablePopper(props, popperContent, trigger, table) {
+  if ((removePopper == null ? void 0 : removePopper.trigger) === trigger) {
+    merge(removePopper.vm.component.props, getTableOverflowTooltipProps(props, popperContent));
+    return;
+  }
+  removePopper == null ? void 0 : removePopper();
+  const parentNode = table == null ? void 0 : table.refs.tableWrapper;
+  const ns = parentNode == null ? void 0 : parentNode.dataset.prefix;
+  const vm = createVNode(ElTooltip, {
+    virtualTriggering: true,
+    virtualRef: trigger,
+    appendTo: parentNode,
+    placement: "top",
+    transition: "none",
+    offset: 0,
+    hideAfter: 0,
+    ...getTableOverflowTooltipProps(props, popperContent)
+  });
+  vm.appContext = { ...table.appContext, ...table };
+  const container = document.createElement("div");
+  render(vm, container);
+  vm.component.exposed.onOpen();
+  const scrollContainer = parentNode == null ? void 0 : parentNode.querySelector(`.${ns}-scrollbar__wrap`);
+  removePopper = () => {
+    render(null, container);
+    scrollContainer == null ? void 0 : scrollContainer.removeEventListener("scroll", removePopper);
+    removePopper = null;
+  };
+  removePopper.trigger = trigger;
+  removePopper.vm = vm;
+  scrollContainer == null ? void 0 : scrollContainer.addEventListener("scroll", removePopper);
+}
+function getCurrentColumns(column) {
+  if (column.children) {
+    return flatMap(column.children, getCurrentColumns);
+  } else {
+    return [column];
+  }
+}
+function getColSpan(colSpan, column) {
+  return colSpan + column.colSpan;
+}
+const isFixedColumn = (index, fixed, store, realColumns) => {
+  let start = 0;
+  let after = index;
+  const columns = store.states.columns.value;
+  if (realColumns) {
+    const curColumns = getCurrentColumns(realColumns[index]);
+    const preColumns = columns.slice(0, columns.indexOf(curColumns[0]));
+    start = preColumns.reduce(getColSpan, 0);
+    after = start + curColumns.reduce(getColSpan, 0) - 1;
+  } else {
+    start = index;
+  }
+  let fixedLayout;
+  switch (fixed) {
+    case "left":
+      if (after < store.states.fixedLeafColumnsLength.value) {
+        fixedLayout = "left";
+      }
+      break;
+    case "right":
+      if (start >= columns.length - store.states.rightFixedLeafColumnsLength.value) {
+        fixedLayout = "right";
+      }
+      break;
+    default:
+      if (after < store.states.fixedLeafColumnsLength.value) {
+        fixedLayout = "left";
+      } else if (start >= columns.length - store.states.rightFixedLeafColumnsLength.value) {
+        fixedLayout = "right";
+      }
+  }
+  return fixedLayout ? {
+    direction: fixedLayout,
+    start,
+    after
+  } : {};
+};
+const getFixedColumnsClass = (namespace, index, fixed, store, realColumns, offset = 0) => {
+  const classes = [];
+  const { direction, start, after } = isFixedColumn(index, fixed, store, realColumns);
+  if (direction) {
+    const isLeft = direction === "left";
+    classes.push(`${namespace}-fixed-column--${direction}`);
+    if (isLeft && after + offset === store.states.fixedLeafColumnsLength.value - 1) {
+      classes.push("is-last-column");
+    } else if (!isLeft && start - offset === store.states.columns.value.length - store.states.rightFixedLeafColumnsLength.value) {
+      classes.push("is-first-column");
+    }
+  }
+  return classes;
+};
+function getOffset(offset, column) {
+  return offset + (isNull(column.realWidth) || Number.isNaN(column.realWidth) ? Number(column.width) : column.realWidth);
+}
+const getFixedColumnOffset = (index, fixed, store, realColumns) => {
+  const {
+    direction,
+    start = 0,
+    after = 0
+  } = isFixedColumn(index, fixed, store, realColumns);
+  if (!direction) {
+    return;
+  }
+  const styles = {};
+  const isLeft = direction === "left";
+  const columns = store.states.columns.value;
+  if (isLeft) {
+    styles.left = columns.slice(0, start).reduce(getOffset, 0);
+  } else {
+    styles.right = columns.slice(after + 1).reverse().reduce(getOffset, 0);
+  }
+  return styles;
+};
+const ensurePosition = (style, key) => {
+  if (!style)
+    return;
+  if (!Number.isNaN(style[key])) {
+    style[key] = `${style[key]}px`;
+  }
+};
+function useExpand(watcherData) {
+  const instance = getCurrentInstance();
+  const defaultExpandAll = ref(false);
+  const expandRows = ref([]);
+  const updateExpandRows = () => {
+    const data = watcherData.data.value || [];
+    const rowKey = watcherData.rowKey.value;
+    if (defaultExpandAll.value) {
+      expandRows.value = data.slice();
+    } else if (rowKey) {
+      const expandRowsMap = getKeysMap(expandRows.value, rowKey);
+      expandRows.value = data.reduce((prev, row) => {
+        const rowId = getRowIdentity(row, rowKey);
+        const rowInfo = expandRowsMap[rowId];
+        if (rowInfo) {
+          prev.push(row);
+        }
+        return prev;
+      }, []);
+    } else {
+      expandRows.value = [];
+    }
+  };
+  const toggleRowExpansion = (row, expanded) => {
+    const changed = toggleRowStatus(expandRows.value, row, expanded);
+    if (changed) {
+      instance.emit("expand-change", row, expandRows.value.slice());
+    }
+  };
+  const setExpandRowKeys = (rowKeys) => {
+    instance.store.assertRowKey();
+    const data = watcherData.data.value || [];
+    const rowKey = watcherData.rowKey.value;
+    const keysMap = getKeysMap(data, rowKey);
+    expandRows.value = rowKeys.reduce((prev, cur) => {
+      const info = keysMap[cur];
+      if (info) {
+        prev.push(info.row);
+      }
+      return prev;
+    }, []);
+  };
+  const isRowExpanded = (row) => {
+    const rowKey = watcherData.rowKey.value;
+    if (rowKey) {
+      const expandMap = getKeysMap(expandRows.value, rowKey);
+      return !!expandMap[getRowIdentity(row, rowKey)];
+    }
+    return expandRows.value.includes(row);
+  };
+  return {
+    updateExpandRows,
+    toggleRowExpansion,
+    setExpandRowKeys,
+    isRowExpanded,
+    states: {
+      expandRows,
+      defaultExpandAll
+    }
+  };
+}
+function useCurrent(watcherData) {
+  const instance = getCurrentInstance();
+  const _currentRowKey = ref(null);
+  const currentRow = ref(null);
+  const setCurrentRowKey = (key) => {
+    instance.store.assertRowKey();
+    _currentRowKey.value = key;
+    setCurrentRowByKey(key);
+  };
+  const restoreCurrentRowKey = () => {
+    _currentRowKey.value = null;
+  };
+  const setCurrentRowByKey = (key) => {
+    const { data, rowKey } = watcherData;
+    let _currentRow = null;
+    if (rowKey.value) {
+      _currentRow = (unref(data) || []).find((item) => getRowIdentity(item, rowKey.value) === key);
+    }
+    currentRow.value = _currentRow;
+    instance.emit("current-change", currentRow.value, null);
+  };
+  const updateCurrentRow = (_currentRow) => {
+    const oldCurrentRow = currentRow.value;
+    if (_currentRow && _currentRow !== oldCurrentRow) {
+      currentRow.value = _currentRow;
+      instance.emit("current-change", currentRow.value, oldCurrentRow);
+      return;
+    }
+    if (!_currentRow && oldCurrentRow) {
+      currentRow.value = null;
+      instance.emit("current-change", null, oldCurrentRow);
+    }
+  };
+  const updateCurrentRowData = () => {
+    const rowKey = watcherData.rowKey.value;
+    const data = watcherData.data.value || [];
+    const oldCurrentRow = currentRow.value;
+    if (!data.includes(oldCurrentRow) && oldCurrentRow) {
+      if (rowKey) {
+        const currentRowKey = getRowIdentity(oldCurrentRow, rowKey);
+        setCurrentRowByKey(currentRowKey);
+      } else {
+        currentRow.value = null;
+      }
+      if (isNull(currentRow.value)) {
+        instance.emit("current-change", null, oldCurrentRow);
+      }
+    } else if (_currentRowKey.value) {
+      setCurrentRowByKey(_currentRowKey.value);
+      restoreCurrentRowKey();
+    }
+  };
+  return {
+    setCurrentRowKey,
+    restoreCurrentRowKey,
+    setCurrentRowByKey,
+    updateCurrentRow,
+    updateCurrentRowData,
+    states: {
+      _currentRowKey,
+      currentRow
+    }
+  };
+}
+function useTree(watcherData) {
+  const expandRowKeys = ref([]);
+  const treeData = ref({});
+  const indent = ref(16);
+  const lazy = ref(false);
+  const lazyTreeNodeMap = ref({});
+  const lazyColumnIdentifier = ref("hasChildren");
+  const childrenColumnName = ref("children");
+  const checkStrictly = ref(false);
+  const instance = getCurrentInstance();
+  const normalizedData = computed(() => {
+    if (!watcherData.rowKey.value)
+      return {};
+    const data = watcherData.data.value || [];
+    return normalize(data);
+  });
+  const normalizedLazyNode = computed(() => {
+    const rowKey = watcherData.rowKey.value;
+    const keys2 = Object.keys(lazyTreeNodeMap.value);
+    const res = {};
+    if (!keys2.length)
+      return res;
+    keys2.forEach((key) => {
+      if (lazyTreeNodeMap.value[key].length) {
+        const item = { children: [] };
+        lazyTreeNodeMap.value[key].forEach((row) => {
+          const currentRowKey = getRowIdentity(row, rowKey);
+          item.children.push(currentRowKey);
+          if (row[lazyColumnIdentifier.value] && !res[currentRowKey]) {
+            res[currentRowKey] = { children: [] };
+          }
+        });
+        res[key] = item;
+      }
+    });
+    return res;
+  });
+  const normalize = (data) => {
+    const rowKey = watcherData.rowKey.value;
+    const res = {};
+    walkTreeNode(data, (parent, children, level) => {
+      const parentId = getRowIdentity(parent, rowKey);
+      if (isArray$1(children)) {
+        res[parentId] = {
+          children: children.map((row) => getRowIdentity(row, rowKey)),
+          level
+        };
+      } else if (lazy.value) {
+        res[parentId] = {
+          children: [],
+          lazy: true,
+          level
+        };
+      }
+    }, childrenColumnName.value, lazyColumnIdentifier.value);
+    return res;
+  };
+  const updateTreeData = (ifChangeExpandRowKeys = false, ifExpandAll = ((_a2) => (_a2 = instance.store) == null ? void 0 : _a2.states.defaultExpandAll.value)()) => {
+    var _a2;
+    const nested = normalizedData.value;
+    const normalizedLazyNode_ = normalizedLazyNode.value;
+    const keys2 = Object.keys(nested);
+    const newTreeData = {};
+    if (keys2.length) {
+      const oldTreeData = unref(treeData);
+      const rootLazyRowKeys = [];
+      const getExpanded = (oldValue, key) => {
+        if (ifChangeExpandRowKeys) {
+          if (expandRowKeys.value) {
+            return ifExpandAll || expandRowKeys.value.includes(key);
+          } else {
+            return !!(ifExpandAll || (oldValue == null ? void 0 : oldValue.expanded));
+          }
+        } else {
+          const included = ifExpandAll || expandRowKeys.value && expandRowKeys.value.includes(key);
+          return !!((oldValue == null ? void 0 : oldValue.expanded) || included);
+        }
+      };
+      keys2.forEach((key) => {
+        const oldValue = oldTreeData[key];
+        const newValue = { ...nested[key] };
+        newValue.expanded = getExpanded(oldValue, key);
+        if (newValue.lazy) {
+          const { loaded = false, loading = false } = oldValue || {};
+          newValue.loaded = !!loaded;
+          newValue.loading = !!loading;
+          rootLazyRowKeys.push(key);
+        }
+        newTreeData[key] = newValue;
+      });
+      const lazyKeys = Object.keys(normalizedLazyNode_);
+      if (lazy.value && lazyKeys.length && rootLazyRowKeys.length) {
+        lazyKeys.forEach((key) => {
+          const oldValue = oldTreeData[key];
+          const lazyNodeChildren = normalizedLazyNode_[key].children;
+          if (rootLazyRowKeys.includes(key)) {
+            if (newTreeData[key].children.length !== 0) {
+              throw new Error("[ElTable]children must be an empty array.");
+            }
+            newTreeData[key].children = lazyNodeChildren;
+          } else {
+            const { loaded = false, loading = false } = oldValue || {};
+            newTreeData[key] = {
+              lazy: true,
+              loaded: !!loaded,
+              loading: !!loading,
+              expanded: getExpanded(oldValue, key),
+              children: lazyNodeChildren,
+              level: ""
+            };
+          }
+        });
+      }
+    }
+    treeData.value = newTreeData;
+    (_a2 = instance.store) == null ? void 0 : _a2.updateTableScrollY();
+  };
+  watch(() => expandRowKeys.value, () => {
+    updateTreeData(true);
+  });
+  watch(() => normalizedData.value, () => {
+    updateTreeData();
+  });
+  watch(() => normalizedLazyNode.value, () => {
+    updateTreeData();
+  });
+  const updateTreeExpandKeys = (value) => {
+    expandRowKeys.value = value;
+    updateTreeData();
+  };
+  const toggleTreeExpansion = (row, expanded) => {
+    instance.store.assertRowKey();
+    const rowKey = watcherData.rowKey.value;
+    const id = getRowIdentity(row, rowKey);
+    const data = id && treeData.value[id];
+    if (id && data && "expanded" in data) {
+      const oldExpanded = data.expanded;
+      expanded = isUndefined(expanded) ? !data.expanded : expanded;
+      treeData.value[id].expanded = expanded;
+      if (oldExpanded !== expanded) {
+        instance.emit("expand-change", row, expanded);
+      }
+      instance.store.updateTableScrollY();
+    }
+  };
+  const loadOrToggle = (row) => {
+    instance.store.assertRowKey();
+    const rowKey = watcherData.rowKey.value;
+    const id = getRowIdentity(row, rowKey);
+    const data = treeData.value[id];
+    if (lazy.value && data && "loaded" in data && !data.loaded) {
+      loadData(row, id, data);
+    } else {
+      toggleTreeExpansion(row, void 0);
+    }
+  };
+  const loadData = (row, key, treeNode) => {
+    const { load } = instance.props;
+    if (load && !treeData.value[key].loaded) {
+      treeData.value[key].loading = true;
+      load(row, treeNode, (data) => {
+        if (!isArray$1(data)) {
+          throw new TypeError("[ElTable] data must be an array");
+        }
+        treeData.value[key].loading = false;
+        treeData.value[key].loaded = true;
+        treeData.value[key].expanded = true;
+        if (data.length) {
+          lazyTreeNodeMap.value[key] = data;
+        }
+        instance.emit("expand-change", row, true);
+      });
+    }
+  };
+  const updateKeyChildren = (key, data) => {
+    const { lazy: lazy2, rowKey } = instance.props;
+    if (!lazy2)
+      return;
+    if (!rowKey)
+      throw new Error("[Table] rowKey is required in updateKeyChild");
+    if (lazyTreeNodeMap.value[key]) {
+      lazyTreeNodeMap.value[key] = data;
+    }
+  };
+  return {
+    loadData,
+    loadOrToggle,
+    toggleTreeExpansion,
+    updateTreeExpandKeys,
+    updateTreeData,
+    updateKeyChildren,
+    normalize,
+    states: {
+      expandRowKeys,
+      treeData,
+      indent,
+      lazy,
+      lazyTreeNodeMap,
+      lazyColumnIdentifier,
+      childrenColumnName,
+      checkStrictly
+    }
+  };
+}
+const sortData = (data, states) => {
+  const sortingColumn = states.sortingColumn;
+  if (!sortingColumn || isString$1(sortingColumn.sortable)) {
+    return data;
+  }
+  return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+};
+const doFlattenColumns = (columns) => {
+  const result = [];
+  columns.forEach((column) => {
+    if (column.children && column.children.length > 0) {
+      result.push.apply(result, doFlattenColumns(column.children));
+    } else {
+      result.push(column);
+    }
+  });
+  return result;
+};
+function useWatcher$1() {
+  var _a2;
+  const instance = getCurrentInstance();
+  const { size: tableSize } = toRefs((_a2 = instance.proxy) == null ? void 0 : _a2.$props);
+  const rowKey = ref(null);
+  const data = ref([]);
+  const _data = ref([]);
+  const isComplex = ref(false);
+  const _columns = ref([]);
+  const originColumns = ref([]);
+  const columns = ref([]);
+  const fixedColumns = ref([]);
+  const rightFixedColumns = ref([]);
+  const leafColumns = ref([]);
+  const fixedLeafColumns = ref([]);
+  const rightFixedLeafColumns = ref([]);
+  const updateOrderFns = [];
+  const leafColumnsLength = ref(0);
+  const fixedLeafColumnsLength = ref(0);
+  const rightFixedLeafColumnsLength = ref(0);
+  const isAllSelected = ref(false);
+  const selection = ref([]);
+  const reserveSelection = ref(false);
+  const selectOnIndeterminate = ref(false);
+  const selectable = ref(null);
+  const filters = ref({});
+  const filteredData = ref(null);
+  const sortingColumn = ref(null);
+  const sortProp = ref(null);
+  const sortOrder = ref(null);
+  const hoverRow = ref(null);
+  const selectedMap = computed(() => {
+    return rowKey.value ? getKeysMap(selection.value, rowKey.value) : void 0;
+  });
+  watch(data, () => {
+    var _a22;
+    if (instance.state) {
+      scheduleLayout(false);
+      const needUpdateFixed = instance.props.tableLayout === "auto";
+      if (needUpdateFixed) {
+        (_a22 = instance.refs.tableHeaderRef) == null ? void 0 : _a22.updateFixedColumnStyle();
+      }
+    }
+  }, {
+    deep: true
+  });
+  const assertRowKey = () => {
+    if (!rowKey.value)
+      throw new Error("[ElTable] prop row-key is required");
+  };
+  const updateChildFixed = (column) => {
+    var _a22;
+    (_a22 = column.children) == null ? void 0 : _a22.forEach((childColumn) => {
+      childColumn.fixed = column.fixed;
+      updateChildFixed(childColumn);
+    });
+  };
+  let selectionInitialFixed = void 0;
+  const updateColumns = () => {
+    _columns.value.forEach((column) => {
+      updateChildFixed(column);
+    });
+    fixedColumns.value = _columns.value.filter((column) => column.fixed === true || column.fixed === "left");
+    rightFixedColumns.value = _columns.value.filter((column) => column.fixed === "right");
+    if (isUndefined(selectionInitialFixed) && _columns.value[0] && _columns.value[0].type === "selection") {
+      selectionInitialFixed = Boolean(_columns.value[0].fixed);
+    }
+    if (fixedColumns.value.length > 0 && _columns.value[0] && _columns.value[0].type === "selection") {
+      if (!_columns.value[0].fixed) {
+        _columns.value[0].fixed = true;
+        fixedColumns.value.unshift(_columns.value[0]);
+      } else {
+        const hasNotSelectionColumns = fixedColumns.value.some((column) => column.type !== "selection");
+        if (!hasNotSelectionColumns) {
+          _columns.value[0].fixed = selectionInitialFixed;
+          if (!selectionInitialFixed)
+            fixedColumns.value.shift();
+        } else {
+          selectionInitialFixed = void 0;
+        }
+      }
+    }
+    const notFixedColumns = _columns.value.filter((column) => !column.fixed);
+    originColumns.value = [].concat(fixedColumns.value).concat(notFixedColumns).concat(rightFixedColumns.value);
+    const leafColumns2 = doFlattenColumns(notFixedColumns);
+    const fixedLeafColumns2 = doFlattenColumns(fixedColumns.value);
+    const rightFixedLeafColumns2 = doFlattenColumns(rightFixedColumns.value);
+    leafColumnsLength.value = leafColumns2.length;
+    fixedLeafColumnsLength.value = fixedLeafColumns2.length;
+    rightFixedLeafColumnsLength.value = rightFixedLeafColumns2.length;
+    columns.value = [].concat(fixedLeafColumns2).concat(leafColumns2).concat(rightFixedLeafColumns2);
+    isComplex.value = fixedColumns.value.length > 0 || rightFixedColumns.value.length > 0;
+  };
+  const scheduleLayout = (needUpdateColumns, immediate = false) => {
+    if (needUpdateColumns) {
+      updateColumns();
+    }
+    if (immediate) {
+      instance.state.doLayout();
+    } else {
+      instance.state.debouncedUpdateLayout();
+    }
+  };
+  const isSelected = (row) => {
+    if (selectedMap.value) {
+      return !!selectedMap.value[getRowIdentity(row, rowKey.value)];
+    } else {
+      return selection.value.includes(row);
+    }
+  };
+  const clearSelection = () => {
+    isAllSelected.value = false;
+    const oldSelection = selection.value;
+    selection.value = [];
+    if (oldSelection.length) {
+      instance.emit("selection-change", []);
+    }
+  };
+  const cleanSelection = () => {
+    let deleted;
+    if (rowKey.value) {
+      deleted = [];
+      const dataMap = getKeysMap(data.value, rowKey.value);
+      for (const key in selectedMap.value) {
+        if (hasOwn(selectedMap.value, key) && !dataMap[key]) {
+          deleted.push(selectedMap.value[key].row);
+        }
+      }
+    } else {
+      deleted = selection.value.filter((item) => !data.value.includes(item));
+    }
+    if (deleted.length) {
+      const newSelection = selection.value.filter((item) => !deleted.includes(item));
+      selection.value = newSelection;
+      instance.emit("selection-change", newSelection.slice());
+    }
+  };
+  const getSelectionRows = () => {
+    return (selection.value || []).slice();
+  };
+  const toggleRowSelection = (row, selected, emitChange = true, ignoreSelectable = false) => {
+    var _a22, _b, _c, _d;
+    const treeProps = {
+      children: (_b = (_a22 = instance == null ? void 0 : instance.store) == null ? void 0 : _a22.states) == null ? void 0 : _b.childrenColumnName.value,
+      checkStrictly: (_d = (_c = instance == null ? void 0 : instance.store) == null ? void 0 : _c.states) == null ? void 0 : _d.checkStrictly.value
+    };
+    const changed = toggleRowStatus(selection.value, row, selected, treeProps, ignoreSelectable ? void 0 : selectable.value);
+    if (changed) {
+      const newSelection = (selection.value || []).slice();
+      if (emitChange) {
+        instance.emit("select", newSelection, row);
+      }
+      instance.emit("selection-change", newSelection);
+    }
+  };
+  const _toggleAllSelection = () => {
+    var _a22, _b;
+    const value = selectOnIndeterminate.value ? !isAllSelected.value : !(isAllSelected.value || selection.value.length);
+    isAllSelected.value = value;
+    let selectionChanged = false;
+    let childrenCount = 0;
+    const rowKey2 = (_b = (_a22 = instance == null ? void 0 : instance.store) == null ? void 0 : _a22.states) == null ? void 0 : _b.rowKey.value;
+    const { childrenColumnName } = instance.store.states;
+    const treeProps = {
+      children: childrenColumnName.value,
+      checkStrictly: false
+    };
+    data.value.forEach((row, index) => {
+      const rowIndex = index + childrenCount;
+      if (toggleRowStatus(selection.value, row, value, treeProps, selectable.value, rowIndex)) {
+        selectionChanged = true;
+      }
+      childrenCount += getChildrenCount(getRowIdentity(row, rowKey2));
+    });
+    if (selectionChanged) {
+      instance.emit("selection-change", selection.value ? selection.value.slice() : []);
+    }
+    instance.emit("select-all", (selection.value || []).slice());
+  };
+  const updateSelectionByRowKey = () => {
+    data.value.forEach((row) => {
+      const rowId = getRowIdentity(row, rowKey.value);
+      const rowInfo = selectedMap.value[rowId];
+      if (rowInfo) {
+        selection.value[rowInfo.index] = row;
+      }
+    });
+  };
+  const updateAllSelected = () => {
+    var _a22;
+    if (((_a22 = data.value) == null ? void 0 : _a22.length) === 0) {
+      isAllSelected.value = false;
+      return;
+    }
+    const { childrenColumnName } = instance.store.states;
+    let rowIndex = 0;
+    let selectedCount = 0;
+    const checkSelectedStatus = (data2) => {
+      var _a3;
+      for (const row of data2) {
+        const isRowSelectable = selectable.value && selectable.value.call(null, row, rowIndex);
+        if (!isSelected(row)) {
+          if (!selectable.value || isRowSelectable) {
+            return false;
+          }
+        } else {
+          selectedCount++;
+        }
+        rowIndex++;
+        if (((_a3 = row[childrenColumnName.value]) == null ? void 0 : _a3.length) && !checkSelectedStatus(row[childrenColumnName.value])) {
+          return false;
+        }
+      }
+      return true;
+    };
+    const isAllSelected_ = checkSelectedStatus(data.value || []);
+    isAllSelected.value = selectedCount === 0 ? false : isAllSelected_;
+  };
+  const getChildrenCount = (rowKey2) => {
+    var _a22;
+    if (!instance || !instance.store)
+      return 0;
+    const { treeData } = instance.store.states;
+    let count = 0;
+    const children = (_a22 = treeData.value[rowKey2]) == null ? void 0 : _a22.children;
+    if (children) {
+      count += children.length;
+      children.forEach((childKey) => {
+        count += getChildrenCount(childKey);
+      });
+    }
+    return count;
+  };
+  const updateFilters = (columns2, values) => {
+    if (!isArray$1(columns2)) {
+      columns2 = [columns2];
+    }
+    const filters_ = {};
+    columns2.forEach((col) => {
+      filters.value[col.id] = values;
+      filters_[col.columnKey || col.id] = values;
+    });
+    return filters_;
+  };
+  const updateSort = (column, prop, order) => {
+    if (sortingColumn.value && sortingColumn.value !== column) {
+      sortingColumn.value.order = null;
+    }
+    sortingColumn.value = column;
+    sortProp.value = prop;
+    sortOrder.value = order;
+  };
+  const execFilter = () => {
+    let sourceData = unref(_data);
+    Object.keys(filters.value).forEach((columnId) => {
+      const values = filters.value[columnId];
+      if (!values || values.length === 0)
+        return;
+      const column = getColumnById({
+        columns: columns.value
+      }, columnId);
+      if (column && column.filterMethod) {
+        sourceData = sourceData.filter((row) => {
+          return values.some((value) => column.filterMethod.call(null, value, row, column));
+        });
+      }
+    });
+    filteredData.value = sourceData;
+  };
+  const execSort = () => {
+    data.value = sortData(filteredData.value, {
+      sortingColumn: sortingColumn.value,
+      sortProp: sortProp.value,
+      sortOrder: sortOrder.value
+    });
+  };
+  const execQuery = (ignore = void 0) => {
+    if (!(ignore && ignore.filter)) {
+      execFilter();
+    }
+    execSort();
+  };
+  const clearFilter = (columnKeys) => {
+    const { tableHeaderRef } = instance.refs;
+    if (!tableHeaderRef)
+      return;
+    const panels = Object.assign({}, tableHeaderRef.filterPanels);
+    const keys2 = Object.keys(panels);
+    if (!keys2.length)
+      return;
+    if (isString$1(columnKeys)) {
+      columnKeys = [columnKeys];
+    }
+    if (isArray$1(columnKeys)) {
+      const columns_ = columnKeys.map((key) => getColumnByKey({
+        columns: columns.value
+      }, key));
+      keys2.forEach((key) => {
+        const column = columns_.find((col) => col.id === key);
+        if (column) {
+          column.filteredValue = [];
+        }
+      });
+      instance.store.commit("filterChange", {
+        column: columns_,
+        values: [],
+        silent: true,
+        multi: true
+      });
+    } else {
+      keys2.forEach((key) => {
+        const column = columns.value.find((col) => col.id === key);
+        if (column) {
+          column.filteredValue = [];
+        }
+      });
+      filters.value = {};
+      instance.store.commit("filterChange", {
+        column: {},
+        values: [],
+        silent: true
+      });
+    }
+  };
+  const clearSort = () => {
+    if (!sortingColumn.value)
+      return;
+    updateSort(null, null, null);
+    instance.store.commit("changeSortCondition", {
+      silent: true
+    });
+  };
+  const {
+    setExpandRowKeys,
+    toggleRowExpansion,
+    updateExpandRows,
+    states: expandStates,
+    isRowExpanded
+  } = useExpand({
+    data,
+    rowKey
+  });
+  const {
+    updateTreeExpandKeys,
+    toggleTreeExpansion,
+    updateTreeData,
+    updateKeyChildren,
+    loadOrToggle,
+    states: treeStates
+  } = useTree({
+    data,
+    rowKey
+  });
+  const {
+    updateCurrentRowData,
+    updateCurrentRow,
+    setCurrentRowKey,
+    states: currentData
+  } = useCurrent({
+    data,
+    rowKey
+  });
+  const setExpandRowKeysAdapter = (val) => {
+    setExpandRowKeys(val);
+    updateTreeExpandKeys(val);
+  };
+  const toggleRowExpansionAdapter = (row, expanded) => {
+    const hasExpandColumn = columns.value.some(({ type: type4 }) => type4 === "expand");
+    if (hasExpandColumn) {
+      toggleRowExpansion(row, expanded);
+    } else {
+      toggleTreeExpansion(row, expanded);
+    }
+  };
+  return {
+    assertRowKey,
+    updateColumns,
+    scheduleLayout,
+    isSelected,
+    clearSelection,
+    cleanSelection,
+    getSelectionRows,
+    toggleRowSelection,
+    _toggleAllSelection,
+    toggleAllSelection: null,
+    updateSelectionByRowKey,
+    updateAllSelected,
+    updateFilters,
+    updateCurrentRow,
+    updateSort,
+    execFilter,
+    execSort,
+    execQuery,
+    clearFilter,
+    clearSort,
+    toggleRowExpansion,
+    setExpandRowKeysAdapter,
+    setCurrentRowKey,
+    toggleRowExpansionAdapter,
+    isRowExpanded,
+    updateExpandRows,
+    updateCurrentRowData,
+    loadOrToggle,
+    updateTreeData,
+    updateKeyChildren,
+    states: {
+      tableSize,
+      rowKey,
+      data,
+      _data,
+      isComplex,
+      _columns,
+      originColumns,
+      columns,
+      fixedColumns,
+      rightFixedColumns,
+      leafColumns,
+      fixedLeafColumns,
+      rightFixedLeafColumns,
+      updateOrderFns,
+      leafColumnsLength,
+      fixedLeafColumnsLength,
+      rightFixedLeafColumnsLength,
+      isAllSelected,
+      selection,
+      reserveSelection,
+      selectOnIndeterminate,
+      selectable,
+      filters,
+      filteredData,
+      sortingColumn,
+      sortProp,
+      sortOrder,
+      hoverRow,
+      ...expandStates,
+      ...treeStates,
+      ...currentData
+    }
+  };
+}
+function replaceColumn(array4, column) {
+  return array4.map((item) => {
+    var _a2;
+    if (item.id === column.id) {
+      return column;
+    } else if ((_a2 = item.children) == null ? void 0 : _a2.length) {
+      item.children = replaceColumn(item.children, column);
+    }
+    return item;
+  });
+}
+function sortColumn(array4) {
+  array4.forEach((item) => {
+    var _a2, _b;
+    item.no = (_a2 = item.getColumnIndex) == null ? void 0 : _a2.call(item);
+    if ((_b = item.children) == null ? void 0 : _b.length) {
+      sortColumn(item.children);
+    }
+  });
+  array4.sort((cur, pre) => cur.no - pre.no);
+}
+function useStore() {
+  const instance = getCurrentInstance();
+  const watcher = useWatcher$1();
+  const ns = useNamespace("table");
+  const mutations = {
+    setData(states, data) {
+      const dataInstanceChanged = unref(states._data) !== data;
+      states.data.value = data;
+      states._data.value = data;
+      instance.store.execQuery();
+      instance.store.updateCurrentRowData();
+      instance.store.updateExpandRows();
+      instance.store.updateTreeData(instance.store.states.defaultExpandAll.value);
+      if (unref(states.reserveSelection)) {
+        instance.store.assertRowKey();
+        instance.store.updateSelectionByRowKey();
+      } else {
+        if (dataInstanceChanged) {
+          instance.store.clearSelection();
+        } else {
+          instance.store.cleanSelection();
+        }
+      }
+      instance.store.updateAllSelected();
+      if (instance.$ready) {
+        instance.store.scheduleLayout();
+      }
+    },
+    insertColumn(states, column, parent, updateColumnOrder) {
+      const array4 = unref(states._columns);
+      let newColumns = [];
+      if (!parent) {
+        array4.push(column);
+        newColumns = array4;
+      } else {
+        if (parent && !parent.children) {
+          parent.children = [];
+        }
+        parent.children.push(column);
+        newColumns = replaceColumn(array4, parent);
+      }
+      sortColumn(newColumns);
+      states._columns.value = newColumns;
+      states.updateOrderFns.push(updateColumnOrder);
+      if (column.type === "selection") {
+        states.selectable.value = column.selectable;
+        states.reserveSelection.value = column.reserveSelection;
+      }
+      if (instance.$ready) {
+        instance.store.updateColumns();
+        instance.store.scheduleLayout();
+      }
+    },
+    updateColumnOrder(states, column) {
+      var _a2;
+      const newColumnIndex = (_a2 = column.getColumnIndex) == null ? void 0 : _a2.call(column);
+      if (newColumnIndex === column.no)
+        return;
+      sortColumn(states._columns.value);
+      if (instance.$ready) {
+        instance.store.updateColumns();
+      }
+    },
+    removeColumn(states, column, parent, updateColumnOrder) {
+      const array4 = unref(states._columns) || [];
+      if (parent) {
+        parent.children.splice(parent.children.findIndex((item) => item.id === column.id), 1);
+        nextTick(() => {
+          var _a2;
+          if (((_a2 = parent.children) == null ? void 0 : _a2.length) === 0) {
+            delete parent.children;
+          }
+        });
+        states._columns.value = replaceColumn(array4, parent);
+      } else {
+        const index = array4.indexOf(column);
+        if (index > -1) {
+          array4.splice(index, 1);
+          states._columns.value = array4;
+        }
+      }
+      const updateFnIndex = states.updateOrderFns.indexOf(updateColumnOrder);
+      updateFnIndex > -1 && states.updateOrderFns.splice(updateFnIndex, 1);
+      if (instance.$ready) {
+        instance.store.updateColumns();
+        instance.store.scheduleLayout();
+      }
+    },
+    sort(states, options) {
+      const { prop, order, init } = options;
+      if (prop) {
+        const column = unref(states.columns).find((column2) => column2.property === prop);
+        if (column) {
+          column.order = order;
+          instance.store.updateSort(column, prop, order);
+          instance.store.commit("changeSortCondition", { init });
+        }
+      }
+    },
+    changeSortCondition(states, options) {
+      const { sortingColumn, sortProp, sortOrder } = states;
+      const columnValue = unref(sortingColumn), propValue = unref(sortProp), orderValue = unref(sortOrder);
+      if (isNull(orderValue)) {
+        states.sortingColumn.value = null;
+        states.sortProp.value = null;
+      }
+      const ignore = { filter: true };
+      instance.store.execQuery(ignore);
+      if (!options || !(options.silent || options.init)) {
+        instance.emit("sort-change", {
+          column: columnValue,
+          prop: propValue,
+          order: orderValue
+        });
+      }
+      instance.store.updateTableScrollY();
+    },
+    filterChange(_states, options) {
+      const { column, values, silent } = options;
+      const newFilters = instance.store.updateFilters(column, values);
+      instance.store.execQuery();
+      if (!silent) {
+        instance.emit("filter-change", newFilters);
+      }
+      instance.store.updateTableScrollY();
+    },
+    toggleAllSelection() {
+      instance.store.toggleAllSelection();
+    },
+    rowSelectedChanged(_states, row) {
+      instance.store.toggleRowSelection(row);
+      instance.store.updateAllSelected();
+    },
+    setHoverRow(states, row) {
+      states.hoverRow.value = row;
+    },
+    setCurrentRow(_states, row) {
+      instance.store.updateCurrentRow(row);
+    }
+  };
+  const commit = function(name, ...args) {
+    const mutations2 = instance.store.mutations;
+    if (mutations2[name]) {
+      mutations2[name].apply(instance, [instance.store.states].concat(args));
+    } else {
+      throw new Error(`Action not found: ${name}`);
+    }
+  };
+  const updateTableScrollY = function() {
+    nextTick(() => instance.layout.updateScrollY.apply(instance.layout));
+  };
+  return {
+    ns,
+    ...watcher,
+    mutations,
+    commit,
+    updateTableScrollY
+  };
+}
+const InitialStateMap = {
+  rowKey: "rowKey",
+  defaultExpandAll: "defaultExpandAll",
+  selectOnIndeterminate: "selectOnIndeterminate",
+  indent: "indent",
+  lazy: "lazy",
+  data: "data",
+  ["treeProps.hasChildren"]: {
+    key: "lazyColumnIdentifier",
+    default: "hasChildren"
+  },
+  ["treeProps.children"]: {
+    key: "childrenColumnName",
+    default: "children"
+  },
+  ["treeProps.checkStrictly"]: {
+    key: "checkStrictly",
+    default: false
+  }
+};
+function createStore(table, props) {
+  if (!table) {
+    throw new Error("Table is required.");
+  }
+  const store = useStore();
+  store.toggleAllSelection = debounce(store._toggleAllSelection, 10);
+  Object.keys(InitialStateMap).forEach((key) => {
+    handleValue(getArrKeysValue(props, key), key, store);
+  });
+  proxyTableProps(store, props);
+  return store;
+}
+function proxyTableProps(store, props) {
+  Object.keys(InitialStateMap).forEach((key) => {
+    watch(() => getArrKeysValue(props, key), (value) => {
+      handleValue(value, key, store);
+    });
+  });
+}
+function handleValue(value, propsKey, store) {
+  let newVal = value;
+  let storeKey = InitialStateMap[propsKey];
+  if (isObject$1(InitialStateMap[propsKey])) {
+    storeKey = storeKey.key;
+    newVal = newVal || InitialStateMap[propsKey].default;
+  }
+  store.states[storeKey].value = newVal;
+}
+function getArrKeysValue(props, keys2) {
+  if (keys2.includes(".")) {
+    const keyList = keys2.split(".");
+    let value = props;
+    keyList.forEach((key) => {
+      value = value[key];
+    });
+    return value;
+  } else {
+    return props[keys2];
+  }
+}
+class TableLayout {
+  constructor(options) {
+    this.observers = [];
+    this.table = null;
+    this.store = null;
+    this.columns = [];
+    this.fit = true;
+    this.showHeader = true;
+    this.height = ref(null);
+    this.scrollX = ref(false);
+    this.scrollY = ref(false);
+    this.bodyWidth = ref(null);
+    this.fixedWidth = ref(null);
+    this.rightFixedWidth = ref(null);
+    this.gutterWidth = 0;
+    for (const name in options) {
+      if (hasOwn(options, name)) {
+        if (isRef(this[name])) {
+          this[name].value = options[name];
+        } else {
+          this[name] = options[name];
+        }
+      }
+    }
+    if (!this.table) {
+      throw new Error("Table is required for Table Layout");
+    }
+    if (!this.store) {
+      throw new Error("Store is required for Table Layout");
+    }
+  }
+  updateScrollY() {
+    const height = this.height.value;
+    if (isNull(height))
+      return false;
+    const scrollBarRef = this.table.refs.scrollBarRef;
+    if (this.table.vnode.el && (scrollBarRef == null ? void 0 : scrollBarRef.wrapRef)) {
+      let scrollY = true;
+      const prevScrollY = this.scrollY.value;
+      scrollY = scrollBarRef.wrapRef.scrollHeight > scrollBarRef.wrapRef.clientHeight;
+      this.scrollY.value = scrollY;
+      return prevScrollY !== scrollY;
+    }
+    return false;
+  }
+  setHeight(value, prop = "height") {
+    if (!isClient)
+      return;
+    const el = this.table.vnode.el;
+    value = parseHeight(value);
+    this.height.value = Number(value);
+    if (!el && (value || value === 0))
+      return nextTick(() => this.setHeight(value, prop));
+    if (isNumber(value)) {
+      el.style[prop] = `${value}px`;
+      this.updateElsHeight();
+    } else if (isString$1(value)) {
+      el.style[prop] = value;
+      this.updateElsHeight();
+    }
+  }
+  setMaxHeight(value) {
+    this.setHeight(value, "max-height");
+  }
+  getFlattenColumns() {
+    const flattenColumns = [];
+    const columns = this.table.store.states.columns.value;
+    columns.forEach((column) => {
+      if (column.isColumnGroup) {
+        flattenColumns.push.apply(flattenColumns, column.columns);
+      } else {
+        flattenColumns.push(column);
+      }
+    });
+    return flattenColumns;
+  }
+  updateElsHeight() {
+    this.updateScrollY();
+    this.notifyObservers("scrollable");
+  }
+  headerDisplayNone(elm) {
+    if (!elm)
+      return true;
+    let headerChild = elm;
+    while (headerChild.tagName !== "DIV") {
+      if (getComputedStyle(headerChild).display === "none") {
+        return true;
+      }
+      headerChild = headerChild.parentElement;
+    }
+    return false;
+  }
+  updateColumnsWidth() {
+    if (!isClient)
+      return;
+    const fit = this.fit;
+    const bodyWidth = this.table.vnode.el.clientWidth;
+    let bodyMinWidth = 0;
+    const flattenColumns = this.getFlattenColumns();
+    const flexColumns = flattenColumns.filter((column) => !isNumber(column.width));
+    flattenColumns.forEach((column) => {
+      if (isNumber(column.width) && column.realWidth)
+        column.realWidth = null;
+    });
+    if (flexColumns.length > 0 && fit) {
+      flattenColumns.forEach((column) => {
+        bodyMinWidth += Number(column.width || column.minWidth || 80);
+      });
+      if (bodyMinWidth <= bodyWidth) {
+        this.scrollX.value = false;
+        const totalFlexWidth = bodyWidth - bodyMinWidth;
+        if (flexColumns.length === 1) {
+          flexColumns[0].realWidth = Number(flexColumns[0].minWidth || 80) + totalFlexWidth;
+        } else {
+          const allColumnsWidth = flexColumns.reduce((prev, column) => prev + Number(column.minWidth || 80), 0);
+          const flexWidthPerPixel = totalFlexWidth / allColumnsWidth;
+          let noneFirstWidth = 0;
+          flexColumns.forEach((column, index) => {
+            if (index === 0)
+              return;
+            const flexWidth = Math.floor(Number(column.minWidth || 80) * flexWidthPerPixel);
+            noneFirstWidth += flexWidth;
+            column.realWidth = Number(column.minWidth || 80) + flexWidth;
+          });
+          flexColumns[0].realWidth = Number(flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
+        }
+      } else {
+        this.scrollX.value = true;
+        flexColumns.forEach((column) => {
+          column.realWidth = Number(column.minWidth);
+        });
+      }
+      this.bodyWidth.value = Math.max(bodyMinWidth, bodyWidth);
+      this.table.state.resizeState.value.width = this.bodyWidth.value;
+    } else {
+      flattenColumns.forEach((column) => {
+        if (!column.width && !column.minWidth) {
+          column.realWidth = 80;
+        } else {
+          column.realWidth = Number(column.width || column.minWidth);
+        }
+        bodyMinWidth += column.realWidth;
+      });
+      this.scrollX.value = bodyMinWidth > bodyWidth;
+      this.bodyWidth.value = bodyMinWidth;
+    }
+    const fixedColumns = this.store.states.fixedColumns.value;
+    if (fixedColumns.length > 0) {
+      let fixedWidth = 0;
+      fixedColumns.forEach((column) => {
+        fixedWidth += Number(column.realWidth || column.width);
+      });
+      this.fixedWidth.value = fixedWidth;
+    }
+    const rightFixedColumns = this.store.states.rightFixedColumns.value;
+    if (rightFixedColumns.length > 0) {
+      let rightFixedWidth = 0;
+      rightFixedColumns.forEach((column) => {
+        rightFixedWidth += Number(column.realWidth || column.width);
+      });
+      this.rightFixedWidth.value = rightFixedWidth;
+    }
+    this.notifyObservers("columns");
+  }
+  addObserver(observer) {
+    this.observers.push(observer);
+  }
+  removeObserver(observer) {
+    const index = this.observers.indexOf(observer);
+    if (index !== -1) {
+      this.observers.splice(index, 1);
+    }
+  }
+  notifyObservers(event) {
+    const observers = this.observers;
+    observers.forEach((observer) => {
+      var _a2, _b;
+      switch (event) {
+        case "columns":
+          (_a2 = observer.state) == null ? void 0 : _a2.onColumnsChange(this);
+          break;
+        case "scrollable":
+          (_b = observer.state) == null ? void 0 : _b.onScrollableChange(this);
+          break;
+        default:
+          throw new Error(`Table Layout don't have event ${event}.`);
+      }
+    });
+  }
+}
+const { CheckboxGroup: ElCheckboxGroup } = ElCheckbox;
+const _sfc_main$6 = defineComponent({
+  name: "ElTableFilterPanel",
+  components: {
+    ElCheckbox,
+    ElCheckboxGroup,
+    ElScrollbar,
+    ElTooltip,
+    ElIcon,
+    ArrowDown: arrow_down_default,
+    ArrowUp: arrow_up_default
+  },
+  directives: { ClickOutside },
+  props: {
+    placement: {
+      type: String,
+      default: "bottom-start"
+    },
+    store: {
+      type: Object
+    },
+    column: {
+      type: Object
+    },
+    upDataColumn: {
+      type: Function
+    },
+    appendTo: {
+      type: String
+    }
+  },
+  setup(props) {
+    const instance = getCurrentInstance();
+    const { t } = useLocale();
+    const ns = useNamespace("table-filter");
+    const parent = instance == null ? void 0 : instance.parent;
+    if (!parent.filterPanels.value[props.column.id]) {
+      parent.filterPanels.value[props.column.id] = instance;
+    }
+    const tooltipVisible = ref(false);
+    const tooltip = ref(null);
+    const filters = computed(() => {
+      return props.column && props.column.filters;
+    });
+    const filterClassName = computed(() => {
+      if (props.column.filterClassName) {
+        return `${ns.b()} ${props.column.filterClassName}`;
+      }
+      return ns.b();
+    });
+    const filterValue = computed({
+      get: () => {
+        var _a2;
+        return (((_a2 = props.column) == null ? void 0 : _a2.filteredValue) || [])[0];
+      },
+      set: (value) => {
+        if (filteredValue.value) {
+          if (!isPropAbsent(value)) {
+            filteredValue.value.splice(0, 1, value);
+          } else {
+            filteredValue.value.splice(0, 1);
+          }
+        }
+      }
+    });
+    const filteredValue = computed({
+      get() {
+        if (props.column) {
+          return props.column.filteredValue || [];
+        }
+        return [];
+      },
+      set(value) {
+        if (props.column) {
+          props.upDataColumn("filteredValue", value);
+        }
+      }
+    });
+    const multiple = computed(() => {
+      if (props.column) {
+        return props.column.filterMultiple;
+      }
+      return true;
+    });
+    const isActive = (filter) => {
+      return filter.value === filterValue.value;
+    };
+    const hidden = () => {
+      tooltipVisible.value = false;
+    };
+    const showFilterPanel = (e) => {
+      e.stopPropagation();
+      tooltipVisible.value = !tooltipVisible.value;
+    };
+    const hideFilterPanel = () => {
+      tooltipVisible.value = false;
+    };
+    const handleConfirm = () => {
+      confirmFilter(filteredValue.value);
+      hidden();
+    };
+    const handleReset = () => {
+      filteredValue.value = [];
+      confirmFilter(filteredValue.value);
+      hidden();
+    };
+    const handleSelect = (_filterValue) => {
+      filterValue.value = _filterValue;
+      if (!isPropAbsent(_filterValue)) {
+        confirmFilter(filteredValue.value);
+      } else {
+        confirmFilter([]);
+      }
+      hidden();
+    };
+    const confirmFilter = (filteredValue2) => {
+      props.store.commit("filterChange", {
+        column: props.column,
+        values: filteredValue2
+      });
+      props.store.updateAllSelected();
+    };
+    watch(tooltipVisible, (value) => {
+      if (props.column) {
+        props.upDataColumn("filterOpened", value);
+      }
+    }, {
+      immediate: true
+    });
+    const popperPaneRef = computed(() => {
+      var _a2, _b;
+      return (_b = (_a2 = tooltip.value) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
+    });
+    return {
+      tooltipVisible,
+      multiple,
+      filterClassName,
+      filteredValue,
+      filterValue,
+      filters,
+      handleConfirm,
+      handleReset,
+      handleSelect,
+      isPropAbsent,
+      isActive,
+      t,
+      ns,
+      showFilterPanel,
+      hideFilterPanel,
+      popperPaneRef,
+      tooltip
+    };
+  }
+});
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_el_checkbox = resolveComponent("el-checkbox");
+  const _component_el_checkbox_group = resolveComponent("el-checkbox-group");
+  const _component_el_scrollbar = resolveComponent("el-scrollbar");
+  const _component_arrow_up = resolveComponent("arrow-up");
+  const _component_arrow_down = resolveComponent("arrow-down");
+  const _component_el_icon = resolveComponent("el-icon");
+  const _component_el_tooltip = resolveComponent("el-tooltip");
+  const _directive_click_outside = resolveDirective("click-outside");
+  return openBlock(), createBlock(_component_el_tooltip, {
+    ref: "tooltip",
+    visible: _ctx.tooltipVisible,
+    offset: 0,
+    placement: _ctx.placement,
+    "show-arrow": false,
+    "stop-popper-mouse-event": false,
+    teleported: "",
+    effect: "light",
+    pure: "",
+    "popper-class": _ctx.filterClassName,
+    persistent: "",
+    "append-to": _ctx.appendTo
+  }, {
+    content: withCtx(() => [
+      _ctx.multiple ? (openBlock(), createElementBlock("div", { key: 0 }, [
+        createBaseVNode("div", {
+          class: normalizeClass(_ctx.ns.e("content"))
+        }, [
+          createVNode(_component_el_scrollbar, {
+            "wrap-class": _ctx.ns.e("wrap")
+          }, {
+            default: withCtx(() => [
+              createVNode(_component_el_checkbox_group, {
+                modelValue: _ctx.filteredValue,
+                "onUpdate:modelValue": ($event) => _ctx.filteredValue = $event,
+                class: normalizeClass(_ctx.ns.e("checkbox-group"))
+              }, {
+                default: withCtx(() => [
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.filters, (filter) => {
+                    return openBlock(), createBlock(_component_el_checkbox, {
+                      key: filter.value,
+                      value: filter.value
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode(toDisplayString(filter.text), 1)
+                      ]),
+                      _: 2
+                    }, 1032, ["value"]);
+                  }), 128))
+                ]),
+                _: 1
+              }, 8, ["modelValue", "onUpdate:modelValue", "class"])
+            ]),
+            _: 1
+          }, 8, ["wrap-class"])
+        ], 2),
+        createBaseVNode("div", {
+          class: normalizeClass(_ctx.ns.e("bottom"))
+        }, [
+          createBaseVNode("button", {
+            class: normalizeClass({ [_ctx.ns.is("disabled")]: _ctx.filteredValue.length === 0 }),
+            disabled: _ctx.filteredValue.length === 0,
+            type: "button",
+            onClick: _ctx.handleConfirm
+          }, toDisplayString(_ctx.t("el.table.confirmFilter")), 11, ["disabled", "onClick"]),
+          createBaseVNode("button", {
+            type: "button",
+            onClick: _ctx.handleReset
+          }, toDisplayString(_ctx.t("el.table.resetFilter")), 9, ["onClick"])
+        ], 2)
+      ])) : (openBlock(), createElementBlock("ul", {
+        key: 1,
+        class: normalizeClass(_ctx.ns.e("list"))
+      }, [
+        createBaseVNode("li", {
+          class: normalizeClass([
+            _ctx.ns.e("list-item"),
+            {
+              [_ctx.ns.is("active")]: _ctx.isPropAbsent(_ctx.filterValue)
+            }
+          ]),
+          onClick: ($event) => _ctx.handleSelect(null)
+        }, toDisplayString(_ctx.t("el.table.clearFilter")), 11, ["onClick"]),
+        (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.filters, (filter) => {
+          return openBlock(), createElementBlock("li", {
+            key: filter.value,
+            class: normalizeClass([_ctx.ns.e("list-item"), _ctx.ns.is("active", _ctx.isActive(filter))]),
+            label: filter.value,
+            onClick: ($event) => _ctx.handleSelect(filter.value)
+          }, toDisplayString(filter.text), 11, ["label", "onClick"]);
+        }), 128))
+      ], 2))
+    ]),
+    default: withCtx(() => [
+      withDirectives((openBlock(), createElementBlock("span", {
+        class: normalizeClass([
+          `${_ctx.ns.namespace.value}-table__column-filter-trigger`,
+          `${_ctx.ns.namespace.value}-none-outline`
+        ]),
+        onClick: _ctx.showFilterPanel
+      }, [
+        createVNode(_component_el_icon, null, {
+          default: withCtx(() => [
+            renderSlot(_ctx.$slots, "filter-icon", {}, () => [
+              _ctx.column.filterOpened ? (openBlock(), createBlock(_component_arrow_up, { key: 0 })) : (openBlock(), createBlock(_component_arrow_down, { key: 1 }))
+            ])
+          ]),
+          _: 3
+        })
+      ], 10, ["onClick"])), [
+        [_directive_click_outside, _ctx.hideFilterPanel, _ctx.popperPaneRef]
+      ])
+    ]),
+    _: 3
+  }, 8, ["visible", "placement", "popper-class", "append-to"]);
+}
+var FilterPanel = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$3], ["__file", "filter-panel.vue"]]);
+function useLayoutObserver(root2) {
+  const instance = getCurrentInstance();
+  onBeforeMount(() => {
+    tableLayout.value.addObserver(instance);
+  });
+  onMounted(() => {
+    onColumnsChange(tableLayout.value);
+    onScrollableChange(tableLayout.value);
+  });
+  onUpdated(() => {
+    onColumnsChange(tableLayout.value);
+    onScrollableChange(tableLayout.value);
+  });
+  onUnmounted(() => {
+    tableLayout.value.removeObserver(instance);
+  });
+  const tableLayout = computed(() => {
+    const layout = root2.layout;
+    if (!layout) {
+      throw new Error("Can not find table layout.");
+    }
+    return layout;
+  });
+  const onColumnsChange = (layout) => {
+    var _a2;
+    const cols = ((_a2 = root2.vnode.el) == null ? void 0 : _a2.querySelectorAll("colgroup > col")) || [];
+    if (!cols.length)
+      return;
+    const flattenColumns = layout.getFlattenColumns();
+    const columnsMap = {};
+    flattenColumns.forEach((column) => {
+      columnsMap[column.id] = column;
+    });
+    for (let i2 = 0, j2 = cols.length; i2 < j2; i2++) {
+      const col = cols[i2];
+      const name = col.getAttribute("name");
+      const column = columnsMap[name];
+      if (column) {
+        col.setAttribute("width", column.realWidth || column.width);
+      }
+    }
+  };
+  const onScrollableChange = (layout) => {
+    var _a2, _b;
+    const cols = ((_a2 = root2.vnode.el) == null ? void 0 : _a2.querySelectorAll("colgroup > col[name=gutter]")) || [];
+    for (let i2 = 0, j2 = cols.length; i2 < j2; i2++) {
+      const col = cols[i2];
+      col.setAttribute("width", layout.scrollY.value ? layout.gutterWidth : "0");
+    }
+    const ths = ((_b = root2.vnode.el) == null ? void 0 : _b.querySelectorAll("th.gutter")) || [];
+    for (let i2 = 0, j2 = ths.length; i2 < j2; i2++) {
+      const th = ths[i2];
+      th.style.width = layout.scrollY.value ? `${layout.gutterWidth}px` : "0";
+      th.style.display = layout.scrollY.value ? "" : "none";
+    }
+  };
+  return {
+    tableLayout: tableLayout.value,
+    onColumnsChange,
+    onScrollableChange
+  };
+}
+const TABLE_INJECTION_KEY = Symbol("ElTable");
+function useEvent(props, emit) {
+  const instance = getCurrentInstance();
+  const parent = inject(TABLE_INJECTION_KEY);
+  const handleFilterClick = (event) => {
+    event.stopPropagation();
+    return;
+  };
+  const handleHeaderClick = (event, column) => {
+    if (!column.filters && column.sortable) {
+      handleSortClick(event, column, false);
+    } else if (column.filterable && !column.sortable) {
+      handleFilterClick(event);
+    }
+    parent == null ? void 0 : parent.emit("header-click", column, event);
+  };
+  const handleHeaderContextMenu = (event, column) => {
+    parent == null ? void 0 : parent.emit("header-contextmenu", column, event);
+  };
+  const draggingColumn = ref(null);
+  const dragging = ref(false);
+  const dragState = ref({});
+  const handleMouseDown = (event, column) => {
+    if (!isClient)
+      return;
+    if (column.children && column.children.length > 0)
+      return;
+    if (draggingColumn.value && props.border) {
+      dragging.value = true;
+      const table = parent;
+      emit("set-drag-visible", true);
+      const tableEl = table == null ? void 0 : table.vnode.el;
+      const tableLeft = tableEl.getBoundingClientRect().left;
+      const columnEl = instance.vnode.el.querySelector(`th.${column.id}`);
+      const columnRect = columnEl.getBoundingClientRect();
+      const minLeft = columnRect.left - tableLeft + 30;
+      addClass(columnEl, "noclick");
+      dragState.value = {
+        startMouseLeft: event.clientX,
+        startLeft: columnRect.right - tableLeft,
+        startColumnLeft: columnRect.left - tableLeft,
+        tableLeft
+      };
+      const resizeProxy = table == null ? void 0 : table.refs.resizeProxy;
+      resizeProxy.style.left = `${dragState.value.startLeft}px`;
+      document.onselectstart = function() {
+        return false;
+      };
+      document.ondragstart = function() {
+        return false;
+      };
+      const handleMouseMove2 = (event2) => {
+        const deltaLeft = event2.clientX - dragState.value.startMouseLeft;
+        const proxyLeft = dragState.value.startLeft + deltaLeft;
+        resizeProxy.style.left = `${Math.max(minLeft, proxyLeft)}px`;
+      };
+      const handleMouseUp = () => {
+        if (dragging.value) {
+          const { startColumnLeft, startLeft } = dragState.value;
+          const finalLeft = Number.parseInt(resizeProxy.style.left, 10);
+          const columnWidth = finalLeft - startColumnLeft;
+          column.width = column.realWidth = columnWidth;
+          table == null ? void 0 : table.emit("header-dragend", column.width, startLeft - startColumnLeft, column, event);
+          requestAnimationFrame(() => {
+            props.store.scheduleLayout(false, true);
+          });
+          document.body.style.cursor = "";
+          dragging.value = false;
+          draggingColumn.value = null;
+          dragState.value = {};
+          emit("set-drag-visible", false);
+        }
+        document.removeEventListener("mousemove", handleMouseMove2);
+        document.removeEventListener("mouseup", handleMouseUp);
+        document.onselectstart = null;
+        document.ondragstart = null;
+        setTimeout(() => {
+          removeClass(columnEl, "noclick");
+        }, 0);
+      };
+      document.addEventListener("mousemove", handleMouseMove2);
+      document.addEventListener("mouseup", handleMouseUp);
+    }
+  };
+  const handleMouseMove = (event, column) => {
+    var _a2;
+    if (column.children && column.children.length > 0)
+      return;
+    const el = event.target;
+    if (!isElement(el)) {
+      return;
+    }
+    const target = el == null ? void 0 : el.closest("th");
+    if (!column || !column.resizable || !target)
+      return;
+    if (!dragging.value && props.border) {
+      const rect = target.getBoundingClientRect();
+      const bodyStyle = document.body.style;
+      const isLastTh = ((_a2 = target.parentNode) == null ? void 0 : _a2.lastElementChild) === target;
+      const allowDarg = props.allowDragLastColumn || !isLastTh;
+      if (rect.width > 12 && rect.right - event.pageX < 8 && allowDarg) {
+        bodyStyle.cursor = "col-resize";
+        if (hasClass(target, "is-sortable")) {
+          target.style.cursor = "col-resize";
+        }
+        draggingColumn.value = column;
+      } else if (!dragging.value) {
+        bodyStyle.cursor = "";
+        if (hasClass(target, "is-sortable")) {
+          target.style.cursor = "pointer";
+        }
+        draggingColumn.value = null;
+      }
+    }
+  };
+  const handleMouseOut = () => {
+    if (!isClient)
+      return;
+    document.body.style.cursor = "";
+  };
+  const toggleOrder = ({ order, sortOrders }) => {
+    if (order === "")
+      return sortOrders[0];
+    const index = sortOrders.indexOf(order || null);
+    return sortOrders[index > sortOrders.length - 2 ? 0 : index + 1];
+  };
+  const handleSortClick = (event, column, givenOrder) => {
+    var _a2;
+    event.stopPropagation();
+    const order = column.order === givenOrder ? null : givenOrder || toggleOrder(column);
+    const target = (_a2 = event.target) == null ? void 0 : _a2.closest("th");
+    if (target) {
+      if (hasClass(target, "noclick")) {
+        removeClass(target, "noclick");
+        return;
+      }
+    }
+    if (!column.sortable)
+      return;
+    const clickTarget = event.currentTarget;
+    if (["ascending", "descending"].some((str) => hasClass(clickTarget, str) && !column.sortOrders.includes(str))) {
+      return;
+    }
+    const states = props.store.states;
+    let sortProp = states.sortProp.value;
+    let sortOrder;
+    const sortingColumn = states.sortingColumn.value;
+    if (sortingColumn !== column || sortingColumn === column && isNull(sortingColumn.order)) {
+      if (sortingColumn) {
+        sortingColumn.order = null;
+      }
+      states.sortingColumn.value = column;
+      sortProp = column.property;
+    }
+    if (!order) {
+      sortOrder = column.order = null;
+    } else {
+      sortOrder = column.order = order;
+    }
+    states.sortProp.value = sortProp;
+    states.sortOrder.value = sortOrder;
+    parent == null ? void 0 : parent.store.commit("changeSortCondition");
+  };
+  return {
+    handleHeaderClick,
+    handleHeaderContextMenu,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseOut,
+    handleSortClick,
+    handleFilterClick
+  };
+}
+function useStyle$2(props) {
+  const parent = inject(TABLE_INJECTION_KEY);
+  const ns = useNamespace("table");
+  const getHeaderRowStyle = (rowIndex) => {
+    const headerRowStyle = parent == null ? void 0 : parent.props.headerRowStyle;
+    if (isFunction$1(headerRowStyle)) {
+      return headerRowStyle.call(null, { rowIndex });
+    }
+    return headerRowStyle;
+  };
+  const getHeaderRowClass = (rowIndex) => {
+    const classes = [];
+    const headerRowClassName = parent == null ? void 0 : parent.props.headerRowClassName;
+    if (isString$1(headerRowClassName)) {
+      classes.push(headerRowClassName);
+    } else if (isFunction$1(headerRowClassName)) {
+      classes.push(headerRowClassName.call(null, { rowIndex }));
+    }
+    return classes.join(" ");
+  };
+  const getHeaderCellStyle = (rowIndex, columnIndex, row, column) => {
+    var _a2;
+    let headerCellStyles = (_a2 = parent == null ? void 0 : parent.props.headerCellStyle) != null ? _a2 : {};
+    if (isFunction$1(headerCellStyles)) {
+      headerCellStyles = headerCellStyles.call(null, {
+        rowIndex,
+        columnIndex,
+        row,
+        column
+      });
+    }
+    const fixedStyle = getFixedColumnOffset(columnIndex, column.fixed, props.store, row);
+    ensurePosition(fixedStyle, "left");
+    ensurePosition(fixedStyle, "right");
+    return Object.assign({}, headerCellStyles, fixedStyle);
+  };
+  const getHeaderCellClass = (rowIndex, columnIndex, row, column) => {
+    const fixedClasses = getFixedColumnsClass(ns.b(), columnIndex, column.fixed, props.store, row);
+    const classes = [
+      column.id,
+      column.order,
+      column.headerAlign,
+      column.className,
+      column.labelClassName,
+      ...fixedClasses
+    ];
+    if (!column.children) {
+      classes.push("is-leaf");
+    }
+    if (column.sortable) {
+      classes.push("is-sortable");
+    }
+    const headerCellClassName = parent == null ? void 0 : parent.props.headerCellClassName;
+    if (isString$1(headerCellClassName)) {
+      classes.push(headerCellClassName);
+    } else if (isFunction$1(headerCellClassName)) {
+      classes.push(headerCellClassName.call(null, {
+        rowIndex,
+        columnIndex,
+        row,
+        column
+      }));
+    }
+    classes.push(ns.e("cell"));
+    return classes.filter((className) => Boolean(className)).join(" ");
+  };
+  return {
+    getHeaderRowStyle,
+    getHeaderRowClass,
+    getHeaderCellStyle,
+    getHeaderCellClass
+  };
+}
+const getAllColumns = (columns) => {
+  const result = [];
+  columns.forEach((column) => {
+    if (column.children) {
+      result.push(column);
+      result.push.apply(result, getAllColumns(column.children));
+    } else {
+      result.push(column);
+    }
+  });
+  return result;
+};
+const convertToRows = (originColumns) => {
+  let maxLevel = 1;
+  const traverse = (column, parent) => {
+    if (parent) {
+      column.level = parent.level + 1;
+      if (maxLevel < column.level) {
+        maxLevel = column.level;
+      }
+    }
+    if (column.children) {
+      let colSpan = 0;
+      column.children.forEach((subColumn) => {
+        traverse(subColumn, column);
+        colSpan += subColumn.colSpan;
+      });
+      column.colSpan = colSpan;
+    } else {
+      column.colSpan = 1;
+    }
+  };
+  originColumns.forEach((column) => {
+    column.level = 1;
+    traverse(column, void 0);
+  });
+  const rows = [];
+  for (let i2 = 0; i2 < maxLevel; i2++) {
+    rows.push([]);
+  }
+  const allColumns = getAllColumns(originColumns);
+  allColumns.forEach((column) => {
+    if (!column.children) {
+      column.rowSpan = maxLevel - column.level + 1;
+    } else {
+      column.rowSpan = 1;
+      column.children.forEach((col) => col.isSubColumn = true);
+    }
+    rows[column.level - 1].push(column);
+  });
+  return rows;
+};
+function useUtils$1(props) {
+  const parent = inject(TABLE_INJECTION_KEY);
+  const columnRows = computed(() => {
+    return convertToRows(props.store.states.originColumns.value);
+  });
+  const isGroup = computed(() => {
+    const result = columnRows.value.length > 1;
+    if (result && parent) {
+      parent.state.isGroup.value = true;
+    }
+    return result;
+  });
+  const toggleAllSelection = (event) => {
+    event.stopPropagation();
+    parent == null ? void 0 : parent.store.commit("toggleAllSelection");
+  };
+  return {
+    isGroup,
+    toggleAllSelection,
+    columnRows
+  };
+}
+var TableHeader = defineComponent({
+  name: "ElTableHeader",
+  components: {
+    ElCheckbox
+  },
+  props: {
+    fixed: {
+      type: String,
+      default: ""
+    },
+    store: {
+      required: true,
+      type: Object
+    },
+    border: Boolean,
+    defaultSort: {
+      type: Object,
+      default: () => {
+        return {
+          prop: "",
+          order: ""
+        };
+      }
+    },
+    appendFilterPanelTo: {
+      type: String
+    },
+    allowDragLastColumn: {
+      type: Boolean
+    }
+  },
+  setup(props, { emit }) {
+    const instance = getCurrentInstance();
+    const parent = inject(TABLE_INJECTION_KEY);
+    const ns = useNamespace("table");
+    const filterPanels = ref({});
+    const { onColumnsChange, onScrollableChange } = useLayoutObserver(parent);
+    const isTableLayoutAuto = (parent == null ? void 0 : parent.props.tableLayout) === "auto";
+    const saveIndexSelection = reactive(/* @__PURE__ */ new Map());
+    const theadRef = ref();
+    const updateFixedColumnStyle = () => {
+      setTimeout(() => {
+        if (saveIndexSelection.size > 0) {
+          saveIndexSelection.forEach((column, key) => {
+            const el = theadRef.value.querySelector(`.${key.replace(/\s/g, ".")}`);
+            if (el) {
+              const width = el.getBoundingClientRect().width;
+              column.width = width;
+            }
+          });
+          saveIndexSelection.clear();
+        }
+      });
+    };
+    watch(saveIndexSelection, updateFixedColumnStyle);
+    onMounted(async () => {
+      await nextTick();
+      await nextTick();
+      const { prop, order } = props.defaultSort;
+      parent == null ? void 0 : parent.store.commit("sort", { prop, order, init: true });
+      updateFixedColumnStyle();
+    });
+    const {
+      handleHeaderClick,
+      handleHeaderContextMenu,
+      handleMouseDown,
+      handleMouseMove,
+      handleMouseOut,
+      handleSortClick,
+      handleFilterClick
+    } = useEvent(props, emit);
+    const {
+      getHeaderRowStyle,
+      getHeaderRowClass,
+      getHeaderCellStyle,
+      getHeaderCellClass
+    } = useStyle$2(props);
+    const { isGroup, toggleAllSelection, columnRows } = useUtils$1(props);
+    instance.state = {
+      onColumnsChange,
+      onScrollableChange
+    };
+    instance.filterPanels = filterPanels;
+    return {
+      ns,
+      filterPanels,
+      onColumnsChange,
+      onScrollableChange,
+      columnRows,
+      getHeaderRowClass,
+      getHeaderRowStyle,
+      getHeaderCellClass,
+      getHeaderCellStyle,
+      handleHeaderClick,
+      handleHeaderContextMenu,
+      handleMouseDown,
+      handleMouseMove,
+      handleMouseOut,
+      handleSortClick,
+      handleFilterClick,
+      isGroup,
+      toggleAllSelection,
+      saveIndexSelection,
+      isTableLayoutAuto,
+      theadRef,
+      updateFixedColumnStyle
+    };
+  },
+  render() {
+    const {
+      ns,
+      isGroup,
+      columnRows,
+      getHeaderCellStyle,
+      getHeaderCellClass,
+      getHeaderRowClass,
+      getHeaderRowStyle,
+      handleHeaderClick,
+      handleHeaderContextMenu,
+      handleMouseDown,
+      handleMouseMove,
+      handleSortClick,
+      handleMouseOut,
+      store,
+      $parent,
+      saveIndexSelection,
+      isTableLayoutAuto
+    } = this;
+    let rowSpan = 1;
+    return h$1("thead", {
+      ref: "theadRef",
+      class: { [ns.is("group")]: isGroup }
+    }, columnRows.map((subColumns, rowIndex) => h$1("tr", {
+      class: getHeaderRowClass(rowIndex),
+      key: rowIndex,
+      style: getHeaderRowStyle(rowIndex)
+    }, subColumns.map((column, cellIndex) => {
+      if (column.rowSpan > rowSpan) {
+        rowSpan = column.rowSpan;
+      }
+      const _class = getHeaderCellClass(rowIndex, cellIndex, subColumns, column);
+      if (isTableLayoutAuto && column.fixed) {
+        saveIndexSelection.set(_class, column);
+      }
+      return h$1("th", {
+        class: _class,
+        colspan: column.colSpan,
+        key: `${column.id}-thead`,
+        rowspan: column.rowSpan,
+        style: getHeaderCellStyle(rowIndex, cellIndex, subColumns, column),
+        onClick: ($event) => {
+          if ($event.currentTarget.classList.contains("noclick")) {
+            return;
+          }
+          handleHeaderClick($event, column);
+        },
+        onContextmenu: ($event) => handleHeaderContextMenu($event, column),
+        onMousedown: ($event) => handleMouseDown($event, column),
+        onMousemove: ($event) => handleMouseMove($event, column),
+        onMouseout: handleMouseOut
+      }, [
+        h$1("div", {
+          class: [
+            "cell",
+            column.filteredValue && column.filteredValue.length > 0 ? "highlight" : ""
+          ]
+        }, [
+          column.renderHeader ? column.renderHeader({
+            column,
+            $index: cellIndex,
+            store,
+            _self: $parent
+          }) : column.label,
+          column.sortable && h$1("span", {
+            onClick: ($event) => handleSortClick($event, column),
+            class: "caret-wrapper"
+          }, [
+            h$1("i", {
+              onClick: ($event) => handleSortClick($event, column, "ascending"),
+              class: "sort-caret ascending"
+            }),
+            h$1("i", {
+              onClick: ($event) => handleSortClick($event, column, "descending"),
+              class: "sort-caret descending"
+            })
+          ]),
+          column.filterable && h$1(FilterPanel, {
+            store,
+            placement: column.filterPlacement || "bottom-start",
+            appendTo: $parent.appendFilterPanelTo,
+            column,
+            upDataColumn: (key, value) => {
+              column[key] = value;
+            }
+          }, {
+            "filter-icon": () => column.renderFilterIcon ? column.renderFilterIcon({
+              filterOpened: column.filterOpened
+            }) : null
+          })
+        ])
+      ]);
+    }))));
+  }
+});
+function isGreaterThan(a2, b2, epsilon = 0.03) {
+  return a2 - b2 > epsilon;
+}
+function useEvents(props) {
+  const parent = inject(TABLE_INJECTION_KEY);
+  const tooltipContent = ref("");
+  const tooltipTrigger = ref(h$1("div"));
+  const handleEvent = (event, row, name) => {
+    var _a2;
+    const table = parent;
+    const cell = getCell(event);
+    let column;
+    const namespace = (_a2 = table == null ? void 0 : table.vnode.el) == null ? void 0 : _a2.dataset.prefix;
+    if (cell) {
+      column = getColumnByCell({
+        columns: props.store.states.columns.value
+      }, cell, namespace);
+      if (column) {
+        table == null ? void 0 : table.emit(`cell-${name}`, row, column, cell, event);
+      }
+    }
+    table == null ? void 0 : table.emit(`row-${name}`, row, column, event);
+  };
+  const handleDoubleClick = (event, row) => {
+    handleEvent(event, row, "dblclick");
+  };
+  const handleClick = (event, row) => {
+    props.store.commit("setCurrentRow", row);
+    handleEvent(event, row, "click");
+  };
+  const handleContextMenu = (event, row) => {
+    handleEvent(event, row, "contextmenu");
+  };
+  const handleMouseEnter = debounce((index) => {
+    props.store.commit("setHoverRow", index);
+  }, 30);
+  const handleMouseLeave = debounce(() => {
+    props.store.commit("setHoverRow", null);
+  }, 30);
+  const getPadding = (el) => {
+    const style = window.getComputedStyle(el, null);
+    const paddingLeft = Number.parseInt(style.paddingLeft, 10) || 0;
+    const paddingRight = Number.parseInt(style.paddingRight, 10) || 0;
+    const paddingTop = Number.parseInt(style.paddingTop, 10) || 0;
+    const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0;
+    return {
+      left: paddingLeft,
+      right: paddingRight,
+      top: paddingTop,
+      bottom: paddingBottom
+    };
+  };
+  const toggleRowClassByCell = (rowSpan, event, toggle) => {
+    let node = event.target.parentNode;
+    while (rowSpan > 1) {
+      node = node == null ? void 0 : node.nextSibling;
+      if (!node || node.nodeName !== "TR")
+        break;
+      toggle(node, "hover-row hover-fixed-row");
+      rowSpan--;
+    }
+  };
+  const handleCellMouseEnter = (event, row, tooltipOptions) => {
+    var _a2, _b, _c;
+    const table = parent;
+    const cell = getCell(event);
+    const namespace = (_a2 = table == null ? void 0 : table.vnode.el) == null ? void 0 : _a2.dataset.prefix;
+    if (cell) {
+      const column = getColumnByCell({
+        columns: props.store.states.columns.value
+      }, cell, namespace);
+      if (cell.rowSpan > 1) {
+        toggleRowClassByCell(cell.rowSpan, event, addClass);
+      }
+      const hoverState = table.hoverState = { cell, column, row };
+      table == null ? void 0 : table.emit("cell-mouse-enter", hoverState.row, hoverState.column, hoverState.cell, event);
+    }
+    if (!tooltipOptions) {
+      return;
+    }
+    const cellChild = event.target.querySelector(".cell");
+    if (!(hasClass(cellChild, `${namespace}-tooltip`) && cellChild.childNodes.length)) {
+      return;
+    }
+    const range3 = document.createRange();
+    range3.setStart(cellChild, 0);
+    range3.setEnd(cellChild, cellChild.childNodes.length);
+    const { width: rangeWidth, height: rangeHeight } = range3.getBoundingClientRect();
+    const { width: cellChildWidth, height: cellChildHeight } = cellChild.getBoundingClientRect();
+    const { top, left, right, bottom } = getPadding(cellChild);
+    const horizontalPadding = left + right;
+    const verticalPadding = top + bottom;
+    if (isGreaterThan(rangeWidth + horizontalPadding, cellChildWidth) || isGreaterThan(rangeHeight + verticalPadding, cellChildHeight) || isGreaterThan(cellChild.scrollWidth, cellChildWidth)) {
+      createTablePopper(tooltipOptions, cell.innerText || cell.textContent, cell, table);
+    } else if (((_b = removePopper) == null ? void 0 : _b.trigger) === cell) {
+      (_c = removePopper) == null ? void 0 : _c();
+    }
+  };
+  const handleCellMouseLeave = (event) => {
+    const cell = getCell(event);
+    if (!cell)
+      return;
+    if (cell.rowSpan > 1) {
+      toggleRowClassByCell(cell.rowSpan, event, removeClass);
+    }
+    const oldHoverState = parent == null ? void 0 : parent.hoverState;
+    parent == null ? void 0 : parent.emit("cell-mouse-leave", oldHoverState == null ? void 0 : oldHoverState.row, oldHoverState == null ? void 0 : oldHoverState.column, oldHoverState == null ? void 0 : oldHoverState.cell, event);
+  };
+  return {
+    handleDoubleClick,
+    handleClick,
+    handleContextMenu,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleCellMouseEnter,
+    handleCellMouseLeave,
+    tooltipContent,
+    tooltipTrigger
+  };
+}
+function useStyles(props) {
+  const parent = inject(TABLE_INJECTION_KEY);
+  const ns = useNamespace("table");
+  const getRowStyle = (row, rowIndex) => {
+    const rowStyle = parent == null ? void 0 : parent.props.rowStyle;
+    if (isFunction$1(rowStyle)) {
+      return rowStyle.call(null, {
+        row,
+        rowIndex
+      });
+    }
+    return rowStyle || null;
+  };
+  const getRowClass = (row, rowIndex) => {
+    const classes = [ns.e("row")];
+    if ((parent == null ? void 0 : parent.props.highlightCurrentRow) && row === props.store.states.currentRow.value) {
+      classes.push("current-row");
+    }
+    if (props.stripe && rowIndex % 2 === 1) {
+      classes.push(ns.em("row", "striped"));
+    }
+    const rowClassName = parent == null ? void 0 : parent.props.rowClassName;
+    if (isString$1(rowClassName)) {
+      classes.push(rowClassName);
+    } else if (isFunction$1(rowClassName)) {
+      classes.push(rowClassName.call(null, {
+        row,
+        rowIndex
+      }));
+    }
+    return classes;
+  };
+  const getCellStyle = (rowIndex, columnIndex, row, column) => {
+    const cellStyle = parent == null ? void 0 : parent.props.cellStyle;
+    let cellStyles = cellStyle != null ? cellStyle : {};
+    if (isFunction$1(cellStyle)) {
+      cellStyles = cellStyle.call(null, {
+        rowIndex,
+        columnIndex,
+        row,
+        column
+      });
+    }
+    const fixedStyle = getFixedColumnOffset(columnIndex, props == null ? void 0 : props.fixed, props.store);
+    ensurePosition(fixedStyle, "left");
+    ensurePosition(fixedStyle, "right");
+    return Object.assign({}, cellStyles, fixedStyle);
+  };
+  const getCellClass = (rowIndex, columnIndex, row, column, offset) => {
+    const fixedClasses = getFixedColumnsClass(ns.b(), columnIndex, props == null ? void 0 : props.fixed, props.store, void 0, offset);
+    const classes = [column.id, column.align, column.className, ...fixedClasses];
+    const cellClassName = parent == null ? void 0 : parent.props.cellClassName;
+    if (isString$1(cellClassName)) {
+      classes.push(cellClassName);
+    } else if (isFunction$1(cellClassName)) {
+      classes.push(cellClassName.call(null, {
+        rowIndex,
+        columnIndex,
+        row,
+        column
+      }));
+    }
+    classes.push(ns.e("cell"));
+    return classes.filter((className) => Boolean(className)).join(" ");
+  };
+  const getSpan = (row, column, rowIndex, columnIndex) => {
+    let rowspan = 1;
+    let colspan = 1;
+    const fn2 = parent == null ? void 0 : parent.props.spanMethod;
+    if (isFunction$1(fn2)) {
+      const result = fn2({
+        row,
+        column,
+        rowIndex,
+        columnIndex
+      });
+      if (isArray$1(result)) {
+        rowspan = result[0];
+        colspan = result[1];
+      } else if (isObject$1(result)) {
+        rowspan = result.rowspan;
+        colspan = result.colspan;
+      }
+    }
+    return { rowspan, colspan };
+  };
+  const getColspanRealWidth = (columns, colspan, index) => {
+    if (colspan < 1) {
+      return columns[index].realWidth;
+    }
+    const widthArr = columns.map(({ realWidth, width }) => realWidth || width).slice(index, index + colspan);
+    return Number(widthArr.reduce((acc, width) => Number(acc) + Number(width), -1));
+  };
+  return {
+    getRowStyle,
+    getRowClass,
+    getCellStyle,
+    getCellClass,
+    getSpan,
+    getColspanRealWidth
+  };
+}
+const __default__$1 = defineComponent({
+  name: "TableTdWrapper"
+});
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  ...__default__$1,
+  props: {
+    colspan: {
+      type: Number,
+      default: 1
+    },
+    rowspan: {
+      type: Number,
+      default: 1
+    }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("td", {
+        colspan: __props.colspan,
+        rowspan: __props.rowspan
+      }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 8, ["colspan", "rowspan"]);
+    };
+  }
+});
+var TdWrapper = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__file", "td-wrapper.vue"]]);
+function useRender$1(props) {
+  const parent = inject(TABLE_INJECTION_KEY);
+  const ns = useNamespace("table");
+  const {
+    handleDoubleClick,
+    handleClick,
+    handleContextMenu,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleCellMouseEnter,
+    handleCellMouseLeave,
+    tooltipContent,
+    tooltipTrigger
+  } = useEvents(props);
+  const {
+    getRowStyle,
+    getRowClass,
+    getCellStyle,
+    getCellClass,
+    getSpan,
+    getColspanRealWidth
+  } = useStyles(props);
+  const firstDefaultColumnIndex = computed(() => {
+    return props.store.states.columns.value.findIndex(({ type: type4 }) => type4 === "default");
+  });
+  const getKeyOfRow = (row, index) => {
+    const rowKey = parent.props.rowKey;
+    if (rowKey) {
+      return getRowIdentity(row, rowKey);
+    }
+    return index;
+  };
+  const rowRender = (row, $index, treeRowData, expanded = false) => {
+    const { tooltipEffect, tooltipOptions, store } = props;
+    const { indent, columns } = store.states;
+    const rowClasses = getRowClass(row, $index);
+    let display = true;
+    if (treeRowData) {
+      rowClasses.push(ns.em("row", `level-${treeRowData.level}`));
+      display = treeRowData.display;
+    }
+    const displayStyle = display ? null : {
+      display: "none"
+    };
+    return h$1("tr", {
+      style: [displayStyle, getRowStyle(row, $index)],
+      class: rowClasses,
+      key: getKeyOfRow(row, $index),
+      onDblclick: ($event) => handleDoubleClick($event, row),
+      onClick: ($event) => handleClick($event, row),
+      onContextmenu: ($event) => handleContextMenu($event, row),
+      onMouseenter: () => handleMouseEnter($index),
+      onMouseleave: handleMouseLeave
+    }, columns.value.map((column, cellIndex) => {
+      const { rowspan, colspan } = getSpan(row, column, $index, cellIndex);
+      if (!rowspan || !colspan) {
+        return null;
+      }
+      const columnData = Object.assign({}, column);
+      columnData.realWidth = getColspanRealWidth(columns.value, colspan, cellIndex);
+      const data = {
+        store: props.store,
+        _self: props.context || parent,
+        column: columnData,
+        row,
+        $index,
+        cellIndex,
+        expanded
+      };
+      if (cellIndex === firstDefaultColumnIndex.value && treeRowData) {
+        data.treeNode = {
+          indent: treeRowData.level * indent.value,
+          level: treeRowData.level
+        };
+        if (isBoolean(treeRowData.expanded)) {
+          data.treeNode.expanded = treeRowData.expanded;
+          if ("loading" in treeRowData) {
+            data.treeNode.loading = treeRowData.loading;
+          }
+          if ("noLazyChildren" in treeRowData) {
+            data.treeNode.noLazyChildren = treeRowData.noLazyChildren;
+          }
+        }
+      }
+      const baseKey = `${getKeyOfRow(row, $index)},${cellIndex}`;
+      const patchKey = columnData.columnKey || columnData.rawColumnKey || "";
+      const mergedTooltipOptions = column.showOverflowTooltip && merge({
+        effect: tooltipEffect
+      }, tooltipOptions, column.showOverflowTooltip);
+      return h$1(TdWrapper, {
+        style: getCellStyle($index, cellIndex, row, column),
+        class: getCellClass($index, cellIndex, row, column, colspan - 1),
+        key: `${patchKey}${baseKey}`,
+        rowspan,
+        colspan,
+        onMouseenter: ($event) => handleCellMouseEnter($event, row, mergedTooltipOptions),
+        onMouseleave: handleCellMouseLeave
+      }, {
+        default: () => cellChildren(cellIndex, column, data)
+      });
+    }));
+  };
+  const cellChildren = (cellIndex, column, data) => {
+    return column.renderCell(data);
+  };
+  const wrappedRowRender = (row, $index) => {
+    const store = props.store;
+    const { isRowExpanded, assertRowKey } = store;
+    const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
+    const columns = store.states.columns.value;
+    const hasExpandColumn = columns.some(({ type: type4 }) => type4 === "expand");
+    if (hasExpandColumn) {
+      const expanded = isRowExpanded(row);
+      const tr = rowRender(row, $index, void 0, expanded);
+      const renderExpanded = parent.renderExpanded;
+      if (expanded) {
+        if (!renderExpanded) {
+          console.error("[Element Error]renderExpanded is required.");
+          return tr;
+        }
+        return [
+          [
+            tr,
+            h$1("tr", {
+              key: `expanded-row__${tr.key}`
+            }, [
+              h$1("td", {
+                colspan: columns.length,
+                class: `${ns.e("cell")} ${ns.e("expanded-cell")}`
+              }, [renderExpanded({ row, $index, store, expanded })])
+            ])
+          ]
+        ];
+      } else {
+        return [[tr]];
+      }
+    } else if (Object.keys(treeData.value).length) {
+      assertRowKey();
+      const key = getRowIdentity(row, rowKey.value);
+      let cur = treeData.value[key];
+      let treeRowData = null;
+      if (cur) {
+        treeRowData = {
+          expanded: cur.expanded,
+          level: cur.level,
+          display: true
+        };
+        if (isBoolean(cur.lazy)) {
+          if (isBoolean(cur.loaded) && cur.loaded) {
+            treeRowData.noLazyChildren = !(cur.children && cur.children.length);
+          }
+          treeRowData.loading = cur.loading;
+        }
+      }
+      const tmp = [rowRender(row, $index, treeRowData)];
+      if (cur) {
+        let i2 = 0;
+        const traverse = (children, parent2) => {
+          if (!(children && children.length && parent2))
+            return;
+          children.forEach((node) => {
+            const innerTreeRowData = {
+              display: parent2.display && parent2.expanded,
+              level: parent2.level + 1,
+              expanded: false,
+              noLazyChildren: false,
+              loading: false
+            };
+            const childKey = getRowIdentity(node, rowKey.value);
+            if (isPropAbsent(childKey)) {
+              throw new Error("For nested data item, row-key is required.");
+            }
+            cur = { ...treeData.value[childKey] };
+            if (cur) {
+              innerTreeRowData.expanded = cur.expanded;
+              cur.level = cur.level || innerTreeRowData.level;
+              cur.display = !!(cur.expanded && innerTreeRowData.display);
+              if (isBoolean(cur.lazy)) {
+                if (isBoolean(cur.loaded) && cur.loaded) {
+                  innerTreeRowData.noLazyChildren = !(cur.children && cur.children.length);
+                }
+                innerTreeRowData.loading = cur.loading;
+              }
+            }
+            i2++;
+            tmp.push(rowRender(node, $index + i2, innerTreeRowData));
+            if (cur) {
+              const nodes2 = lazyTreeNodeMap.value[childKey] || node[childrenColumnName.value];
+              traverse(nodes2, cur);
+            }
+          });
+        };
+        cur.display = true;
+        const nodes = lazyTreeNodeMap.value[key] || row[childrenColumnName.value];
+        traverse(nodes, cur);
+      }
+      return tmp;
+    } else {
+      return rowRender(row, $index, void 0);
+    }
+  };
+  return {
+    wrappedRowRender,
+    tooltipContent,
+    tooltipTrigger
+  };
+}
+const defaultProps$2 = {
+  store: {
+    required: true,
+    type: Object
+  },
+  stripe: Boolean,
+  tooltipEffect: String,
+  tooltipOptions: {
+    type: Object
+  },
+  context: {
+    default: () => ({}),
+    type: Object
+  },
+  rowClassName: [String, Function],
+  rowStyle: [Object, Function],
+  fixed: {
+    type: String,
+    default: ""
+  },
+  highlight: Boolean
+};
+var TableBody = defineComponent({
+  name: "ElTableBody",
+  props: defaultProps$2,
+  setup(props) {
+    const instance = getCurrentInstance();
+    const parent = inject(TABLE_INJECTION_KEY);
+    const ns = useNamespace("table");
+    const { wrappedRowRender, tooltipContent, tooltipTrigger } = useRender$1(props);
+    const { onColumnsChange, onScrollableChange } = useLayoutObserver(parent);
+    const hoveredCellList = [];
+    watch(props.store.states.hoverRow, (newVal, oldVal) => {
+      var _a2;
+      const el = instance == null ? void 0 : instance.vnode.el;
+      const rows = Array.from((el == null ? void 0 : el.children) || []).filter((e) => e == null ? void 0 : e.classList.contains(`${ns.e("row")}`));
+      let rowNum = newVal;
+      const childNodes = (_a2 = rows[rowNum]) == null ? void 0 : _a2.childNodes;
+      if (childNodes == null ? void 0 : childNodes.length) {
+        let control = 0;
+        const indexes = Array.from(childNodes).reduce((acc, item, index) => {
+          var _a22, _b;
+          if (((_a22 = childNodes[index]) == null ? void 0 : _a22.colSpan) > 1) {
+            control = (_b = childNodes[index]) == null ? void 0 : _b.colSpan;
+          }
+          if (item.nodeName !== "TD" && control === 0) {
+            acc.push(index);
+          }
+          control > 0 && control--;
+          return acc;
+        }, []);
+        indexes.forEach((rowIndex) => {
+          var _a22;
+          rowNum = newVal;
+          while (rowNum > 0) {
+            const preChildNodes = (_a22 = rows[rowNum - 1]) == null ? void 0 : _a22.childNodes;
+            if (preChildNodes[rowIndex] && preChildNodes[rowIndex].nodeName === "TD" && preChildNodes[rowIndex].rowSpan > 1) {
+              addClass(preChildNodes[rowIndex], "hover-cell");
+              hoveredCellList.push(preChildNodes[rowIndex]);
+              break;
+            }
+            rowNum--;
+          }
+        });
+      } else {
+        hoveredCellList.forEach((item) => removeClass(item, "hover-cell"));
+        hoveredCellList.length = 0;
+      }
+      if (!props.store.states.isComplex.value || !isClient)
+        return;
+      rAF(() => {
+        const oldRow = rows[oldVal];
+        const newRow = rows[newVal];
+        if (oldRow && !oldRow.classList.contains("hover-fixed-row")) {
+          removeClass(oldRow, "hover-row");
+        }
+        if (newRow) {
+          addClass(newRow, "hover-row");
+        }
+      });
+    });
+    onUnmounted(() => {
+      var _a2;
+      (_a2 = removePopper) == null ? void 0 : _a2();
+    });
+    return {
+      ns,
+      onColumnsChange,
+      onScrollableChange,
+      wrappedRowRender,
+      tooltipContent,
+      tooltipTrigger
+    };
+  },
+  render() {
+    const { wrappedRowRender, store } = this;
+    const data = store.states.data.value || [];
+    return h$1("tbody", { tabIndex: -1 }, [
+      data.reduce((acc, row) => {
+        return acc.concat(wrappedRowRender(row, acc.length));
+      }, [])
+    ]);
+  }
+});
+function useMapState() {
+  const table = inject(TABLE_INJECTION_KEY);
+  const store = table == null ? void 0 : table.store;
+  const leftFixedLeafCount = computed(() => {
+    return store.states.fixedLeafColumnsLength.value;
+  });
+  const rightFixedLeafCount = computed(() => {
+    return store.states.rightFixedColumns.value.length;
+  });
+  const columnsCount = computed(() => {
+    return store.states.columns.value.length;
+  });
+  const leftFixedCount = computed(() => {
+    return store.states.fixedColumns.value.length;
+  });
+  const rightFixedCount = computed(() => {
+    return store.states.rightFixedColumns.value.length;
+  });
+  return {
+    leftFixedLeafCount,
+    rightFixedLeafCount,
+    columnsCount,
+    leftFixedCount,
+    rightFixedCount,
+    columns: store.states.columns
+  };
+}
+function useStyle$1(props) {
+  const { columns } = useMapState();
+  const ns = useNamespace("table");
+  const getCellClasses = (columns2, cellIndex) => {
+    const column = columns2[cellIndex];
+    const classes = [
+      ns.e("cell"),
+      column.id,
+      column.align,
+      column.labelClassName,
+      ...getFixedColumnsClass(ns.b(), cellIndex, column.fixed, props.store)
+    ];
+    if (column.className) {
+      classes.push(column.className);
+    }
+    if (!column.children) {
+      classes.push(ns.is("leaf"));
+    }
+    return classes;
+  };
+  const getCellStyles = (column, cellIndex) => {
+    const fixedStyle = getFixedColumnOffset(cellIndex, column.fixed, props.store);
+    ensurePosition(fixedStyle, "left");
+    ensurePosition(fixedStyle, "right");
+    return fixedStyle;
+  };
+  return {
+    getCellClasses,
+    getCellStyles,
+    columns
+  };
+}
+var TableFooter = defineComponent({
+  name: "ElTableFooter",
+  props: {
+    fixed: {
+      type: String,
+      default: ""
+    },
+    store: {
+      required: true,
+      type: Object
+    },
+    summaryMethod: Function,
+    sumText: String,
+    border: Boolean,
+    defaultSort: {
+      type: Object,
+      default: () => {
+        return {
+          prop: "",
+          order: ""
+        };
+      }
+    }
+  },
+  setup(props) {
+    const { getCellClasses, getCellStyles, columns } = useStyle$1(props);
+    const ns = useNamespace("table");
+    return {
+      ns,
+      getCellClasses,
+      getCellStyles,
+      columns
+    };
+  },
+  render() {
+    const { columns, getCellStyles, getCellClasses, summaryMethod, sumText } = this;
+    const data = this.store.states.data.value;
+    let sums = [];
+    if (summaryMethod) {
+      sums = summaryMethod({
+        columns,
+        data
+      });
+    } else {
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = sumText;
+          return;
+        }
+        const values = data.map((item) => Number(item[column.property]));
+        const precisions = [];
+        let notNumber = true;
+        values.forEach((value) => {
+          if (!Number.isNaN(+value)) {
+            notNumber = false;
+            const decimal = `${value}`.split(".")[1];
+            precisions.push(decimal ? decimal.length : 0);
+          }
+        });
+        const precision = Math.max.apply(null, precisions);
+        if (!notNumber) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!Number.isNaN(+value)) {
+              return Number.parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
+            } else {
+              return prev;
+            }
+          }, 0);
+        } else {
+          sums[index] = "";
+        }
+      });
+    }
+    return h$1(h$1("tfoot", [
+      h$1("tr", {}, [
+        ...columns.map((column, cellIndex) => h$1("td", {
+          key: cellIndex,
+          colspan: column.colSpan,
+          rowspan: column.rowSpan,
+          class: getCellClasses(columns, cellIndex),
+          style: getCellStyles(column, cellIndex)
+        }, [
+          h$1("div", {
+            class: ["cell", column.labelClassName]
+          }, [sums[cellIndex]])
+        ]))
+      ])
+    ]));
+  }
+});
+function useUtils(store) {
+  const setCurrentRow = (row) => {
+    store.commit("setCurrentRow", row);
+  };
+  const getSelectionRows = () => {
+    return store.getSelectionRows();
+  };
+  const toggleRowSelection = (row, selected, ignoreSelectable = true) => {
+    store.toggleRowSelection(row, selected, false, ignoreSelectable);
+    store.updateAllSelected();
+  };
+  const clearSelection = () => {
+    store.clearSelection();
+  };
+  const clearFilter = (columnKeys) => {
+    store.clearFilter(columnKeys);
+  };
+  const toggleAllSelection = () => {
+    store.commit("toggleAllSelection");
+  };
+  const toggleRowExpansion = (row, expanded) => {
+    store.toggleRowExpansionAdapter(row, expanded);
+  };
+  const clearSort = () => {
+    store.clearSort();
+  };
+  const sort = (prop, order) => {
+    store.commit("sort", { prop, order });
+  };
+  const updateKeyChildren = (key, data) => {
+    store.updateKeyChildren(key, data);
+  };
+  return {
+    setCurrentRow,
+    getSelectionRows,
+    toggleRowSelection,
+    clearSelection,
+    clearFilter,
+    toggleAllSelection,
+    toggleRowExpansion,
+    clearSort,
+    sort,
+    updateKeyChildren
+  };
+}
+function useStyle(props, layout, store, table) {
+  const isHidden2 = ref(false);
+  const renderExpanded = ref(null);
+  const resizeProxyVisible = ref(false);
+  const setDragVisible = (visible) => {
+    resizeProxyVisible.value = visible;
+  };
+  const resizeState = ref({
+    width: null,
+    height: null,
+    headerHeight: null
+  });
+  const isGroup = ref(false);
+  const scrollbarViewStyle = {
+    display: "inline-block",
+    verticalAlign: "middle"
+  };
+  const tableWidth = ref();
+  const tableScrollHeight = ref(0);
+  const bodyScrollHeight = ref(0);
+  const headerScrollHeight = ref(0);
+  const footerScrollHeight = ref(0);
+  const appendScrollHeight = ref(0);
+  watchEffect(() => {
+    layout.setHeight(props.height);
+  });
+  watchEffect(() => {
+    layout.setMaxHeight(props.maxHeight);
+  });
+  watch(() => [props.currentRowKey, store.states.rowKey], ([currentRowKey, rowKey]) => {
+    if (!unref(rowKey) || !unref(currentRowKey))
+      return;
+    store.setCurrentRowKey(`${currentRowKey}`);
+  }, {
+    immediate: true
+  });
+  watch(() => props.data, (data) => {
+    table.store.commit("setData", data);
+  }, {
+    immediate: true,
+    deep: true
+  });
+  watchEffect(() => {
+    if (props.expandRowKeys) {
+      store.setExpandRowKeysAdapter(props.expandRowKeys);
+    }
+  });
+  const handleMouseLeave = () => {
+    table.store.commit("setHoverRow", null);
+    if (table.hoverState)
+      table.hoverState = null;
+  };
+  const handleHeaderFooterMousewheel = (event, data) => {
+    const { pixelX, pixelY } = data;
+    if (Math.abs(pixelX) >= Math.abs(pixelY)) {
+      table.refs.bodyWrapper.scrollLeft += data.pixelX / 5;
+    }
+  };
+  const shouldUpdateHeight = computed(() => {
+    return props.height || props.maxHeight || store.states.fixedColumns.value.length > 0 || store.states.rightFixedColumns.value.length > 0;
+  });
+  const tableBodyStyles = computed(() => {
+    return {
+      width: layout.bodyWidth.value ? `${layout.bodyWidth.value}px` : ""
+    };
+  });
+  const doLayout = () => {
+    if (shouldUpdateHeight.value) {
+      layout.updateElsHeight();
+    }
+    layout.updateColumnsWidth();
+    requestAnimationFrame(syncPosition);
+  };
+  onMounted(async () => {
+    await nextTick();
+    store.updateColumns();
+    bindEvents();
+    requestAnimationFrame(doLayout);
+    const el = table.vnode.el;
+    const tableHeader = table.refs.headerWrapper;
+    if (props.flexible && el && el.parentElement) {
+      el.parentElement.style.minWidth = "0";
+    }
+    resizeState.value = {
+      width: tableWidth.value = el.offsetWidth,
+      height: el.offsetHeight,
+      headerHeight: props.showHeader && tableHeader ? tableHeader.offsetHeight : null
+    };
+    store.states.columns.value.forEach((column) => {
+      if (column.filteredValue && column.filteredValue.length) {
+        table.store.commit("filterChange", {
+          column,
+          values: column.filteredValue,
+          silent: true
+        });
+      }
+    });
+    table.$ready = true;
+  });
+  const setScrollClassByEl = (el, className) => {
+    if (!el)
+      return;
+    const classList = Array.from(el.classList).filter((item) => !item.startsWith("is-scrolling-"));
+    classList.push(layout.scrollX.value ? className : "is-scrolling-none");
+    el.className = classList.join(" ");
+  };
+  const setScrollClass = (className) => {
+    const { tableWrapper } = table.refs;
+    setScrollClassByEl(tableWrapper, className);
+  };
+  const hasScrollClass = (className) => {
+    const { tableWrapper } = table.refs;
+    return !!(tableWrapper && tableWrapper.classList.contains(className));
+  };
+  const syncPosition = function() {
+    if (!table.refs.scrollBarRef)
+      return;
+    if (!layout.scrollX.value) {
+      const scrollingNoneClass = "is-scrolling-none";
+      if (!hasScrollClass(scrollingNoneClass)) {
+        setScrollClass(scrollingNoneClass);
+      }
+      return;
+    }
+    const scrollContainer = table.refs.scrollBarRef.wrapRef;
+    if (!scrollContainer)
+      return;
+    const { scrollLeft, offsetWidth, scrollWidth } = scrollContainer;
+    const { headerWrapper, footerWrapper } = table.refs;
+    if (headerWrapper)
+      headerWrapper.scrollLeft = scrollLeft;
+    if (footerWrapper)
+      footerWrapper.scrollLeft = scrollLeft;
+    const maxScrollLeftPosition = scrollWidth - offsetWidth - 1;
+    if (scrollLeft >= maxScrollLeftPosition) {
+      setScrollClass("is-scrolling-right");
+    } else if (scrollLeft === 0) {
+      setScrollClass("is-scrolling-left");
+    } else {
+      setScrollClass("is-scrolling-middle");
+    }
+  };
+  const bindEvents = () => {
+    if (!table.refs.scrollBarRef)
+      return;
+    if (table.refs.scrollBarRef.wrapRef) {
+      useEventListener(table.refs.scrollBarRef.wrapRef, "scroll", syncPosition, {
+        passive: true
+      });
+    }
+    if (props.fit) {
+      useResizeObserver(table.vnode.el, resizeListener);
+    } else {
+      useEventListener(window, "resize", resizeListener);
+    }
+    useResizeObserver(table.refs.bodyWrapper, () => {
+      var _a2, _b;
+      resizeListener();
+      (_b = (_a2 = table.refs) == null ? void 0 : _a2.scrollBarRef) == null ? void 0 : _b.update();
+    });
+  };
+  const resizeListener = () => {
+    var _a2, _b, _c, _d;
+    const el = table.vnode.el;
+    if (!table.$ready || !el)
+      return;
+    let shouldUpdateLayout = false;
+    const {
+      width: oldWidth,
+      height: oldHeight,
+      headerHeight: oldHeaderHeight
+    } = resizeState.value;
+    const width = tableWidth.value = el.offsetWidth;
+    if (oldWidth !== width) {
+      shouldUpdateLayout = true;
+    }
+    const height = el.offsetHeight;
+    if ((props.height || shouldUpdateHeight.value) && oldHeight !== height) {
+      shouldUpdateLayout = true;
+    }
+    const tableHeader = props.tableLayout === "fixed" ? table.refs.headerWrapper : (_a2 = table.refs.tableHeaderRef) == null ? void 0 : _a2.$el;
+    if (props.showHeader && (tableHeader == null ? void 0 : tableHeader.offsetHeight) !== oldHeaderHeight) {
+      shouldUpdateLayout = true;
+    }
+    tableScrollHeight.value = ((_b = table.refs.tableWrapper) == null ? void 0 : _b.scrollHeight) || 0;
+    headerScrollHeight.value = (tableHeader == null ? void 0 : tableHeader.scrollHeight) || 0;
+    footerScrollHeight.value = ((_c = table.refs.footerWrapper) == null ? void 0 : _c.offsetHeight) || 0;
+    appendScrollHeight.value = ((_d = table.refs.appendWrapper) == null ? void 0 : _d.offsetHeight) || 0;
+    bodyScrollHeight.value = tableScrollHeight.value - headerScrollHeight.value - footerScrollHeight.value - appendScrollHeight.value;
+    if (shouldUpdateLayout) {
+      resizeState.value = {
+        width,
+        height,
+        headerHeight: props.showHeader && (tableHeader == null ? void 0 : tableHeader.offsetHeight) || 0
+      };
+      doLayout();
+    }
+  };
+  const tableSize = useFormSize();
+  const bodyWidth = computed(() => {
+    const { bodyWidth: bodyWidth_, scrollY, gutterWidth } = layout;
+    return bodyWidth_.value ? `${bodyWidth_.value - (scrollY.value ? gutterWidth : 0)}px` : "";
+  });
+  const tableLayout = computed(() => {
+    if (props.maxHeight)
+      return "fixed";
+    return props.tableLayout;
+  });
+  const emptyBlockStyle = computed(() => {
+    if (props.data && props.data.length)
+      return null;
+    let height = "100%";
+    if (props.height && bodyScrollHeight.value) {
+      height = `${bodyScrollHeight.value}px`;
+    }
+    const width = tableWidth.value;
+    return {
+      width: width ? `${width}px` : "",
+      height
+    };
+  });
+  const scrollbarStyle = computed(() => {
+    if (props.height) {
+      return {
+        height: "100%"
+      };
+    }
+    if (props.maxHeight) {
+      if (!Number.isNaN(Number(props.maxHeight))) {
+        return {
+          maxHeight: `${props.maxHeight - headerScrollHeight.value - footerScrollHeight.value}px`
+        };
+      } else {
+        return {
+          maxHeight: `calc(${props.maxHeight} - ${headerScrollHeight.value + footerScrollHeight.value}px)`
+        };
+      }
+    }
+    return {};
+  });
+  const handleFixedMousewheel = (event, data) => {
+    const bodyWrapper = table.refs.bodyWrapper;
+    if (Math.abs(data.spinY) > 0) {
+      const currentScrollTop = bodyWrapper.scrollTop;
+      if (data.pixelY < 0 && currentScrollTop !== 0) {
+        event.preventDefault();
+      }
+      if (data.pixelY > 0 && bodyWrapper.scrollHeight - bodyWrapper.clientHeight > currentScrollTop) {
+        event.preventDefault();
+      }
+      bodyWrapper.scrollTop += Math.ceil(data.pixelY / 5);
+    } else {
+      bodyWrapper.scrollLeft += Math.ceil(data.pixelX / 5);
+    }
+  };
+  return {
+    isHidden: isHidden2,
+    renderExpanded,
+    setDragVisible,
+    isGroup,
+    handleMouseLeave,
+    handleHeaderFooterMousewheel,
+    tableSize,
+    emptyBlockStyle,
+    handleFixedMousewheel,
+    resizeProxyVisible,
+    bodyWidth,
+    resizeState,
+    doLayout,
+    tableBodyStyles,
+    tableLayout,
+    scrollbarViewStyle,
+    scrollbarStyle
+  };
+}
+function useKeyRender(table) {
+  const observer = ref();
+  const initWatchDom = () => {
+    const el = table.vnode.el;
+    const columnsWrapper = el.querySelector(".hidden-columns");
+    const config = { childList: true, subtree: true };
+    const updateOrderFns = table.store.states.updateOrderFns;
+    observer.value = new MutationObserver(() => {
+      updateOrderFns.forEach((fn2) => fn2());
+    });
+    observer.value.observe(columnsWrapper, config);
+  };
+  onMounted(() => {
+    initWatchDom();
+  });
+  onUnmounted(() => {
+    var _a2;
+    (_a2 = observer.value) == null ? void 0 : _a2.disconnect();
+  });
+}
+var defaultProps$1 = {
+  data: {
+    type: Array,
+    default: () => []
+  },
+  size: useSizeProp,
+  width: [String, Number],
+  height: [String, Number],
+  maxHeight: [String, Number],
+  fit: {
+    type: Boolean,
+    default: true
+  },
+  stripe: Boolean,
+  border: Boolean,
+  rowKey: [String, Function],
+  showHeader: {
+    type: Boolean,
+    default: true
+  },
+  showSummary: Boolean,
+  sumText: String,
+  summaryMethod: Function,
+  rowClassName: [String, Function],
+  rowStyle: [Object, Function],
+  cellClassName: [String, Function],
+  cellStyle: [Object, Function],
+  headerRowClassName: [String, Function],
+  headerRowStyle: [Object, Function],
+  headerCellClassName: [String, Function],
+  headerCellStyle: [Object, Function],
+  highlightCurrentRow: Boolean,
+  currentRowKey: [String, Number],
+  emptyText: String,
+  expandRowKeys: Array,
+  defaultExpandAll: Boolean,
+  defaultSort: Object,
+  tooltipEffect: String,
+  tooltipOptions: Object,
+  spanMethod: Function,
+  selectOnIndeterminate: {
+    type: Boolean,
+    default: true
+  },
+  indent: {
+    type: Number,
+    default: 16
+  },
+  treeProps: {
+    type: Object,
+    default: () => {
+      return {
+        hasChildren: "hasChildren",
+        children: "children",
+        checkStrictly: false
+      };
+    }
+  },
+  lazy: Boolean,
+  load: Function,
+  style: {
+    type: Object,
+    default: () => ({})
+  },
+  className: {
+    type: String,
+    default: ""
+  },
+  tableLayout: {
+    type: String,
+    default: "fixed"
+  },
+  scrollbarAlwaysOn: Boolean,
+  flexible: Boolean,
+  showOverflowTooltip: [Boolean, Object],
+  appendFilterPanelTo: String,
+  scrollbarTabindex: {
+    type: [Number, String],
+    default: void 0
+  },
+  allowDragLastColumn: {
+    type: Boolean,
+    default: true
+  }
+};
+function hColgroup(props) {
+  const isAuto = props.tableLayout === "auto";
+  let columns = props.columns || [];
+  if (isAuto) {
+    if (columns.every(({ width }) => isUndefined(width))) {
+      columns = [];
+    }
+  }
+  const getPropsData = (column) => {
+    const propsData = {
+      key: `${props.tableLayout}_${column.id}`,
+      style: {},
+      name: void 0
+    };
+    if (isAuto) {
+      propsData.style = {
+        width: `${column.width}px`
+      };
+    } else {
+      propsData.name = column.id;
+    }
+    return propsData;
+  };
+  return h$1("colgroup", {}, columns.map((column) => h$1("col", getPropsData(column))));
+}
+hColgroup.props = ["columns", "tableLayout"];
+const useScrollbar = () => {
+  const scrollBarRef = ref();
+  const scrollTo = (options, yCoord) => {
+    const scrollbar = scrollBarRef.value;
+    if (scrollbar) {
+      scrollbar.scrollTo(options, yCoord);
+    }
+  };
+  const setScrollPosition = (position, offset) => {
+    const scrollbar = scrollBarRef.value;
+    if (scrollbar && isNumber(offset) && ["Top", "Left"].includes(position)) {
+      scrollbar[`setScroll${position}`](offset);
+    }
+  };
+  const setScrollTop = (top) => setScrollPosition("Top", top);
+  const setScrollLeft = (left) => setScrollPosition("Left", left);
+  return {
+    scrollBarRef,
+    scrollTo,
+    setScrollTop,
+    setScrollLeft
+  };
+};
+var v$1 = false, o, f, s, u$1, d$1, N$2, l$1, p$2, m$1, w$2, D, x$1, E$2, M$1, F$1;
+function a() {
+  if (!v$1) {
+    v$1 = true;
+    var e = navigator.userAgent, n = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(e), i2 = /(Mac OS X)|(Windows)|(Linux)/.exec(e);
+    if (x$1 = /\b(iPhone|iP[ao]d)/.exec(e), E$2 = /\b(iP[ao]d)/.exec(e), w$2 = /Android/i.exec(e), M$1 = /FBAN\/\w+;/i.exec(e), F$1 = /Mobile/i.exec(e), D = !!/Win64/.exec(e), n) {
+      o = n[1] ? parseFloat(n[1]) : n[5] ? parseFloat(n[5]) : NaN, o && document && document.documentMode && (o = document.documentMode);
+      var r2 = /(?:Trident\/(\d+.\d+))/.exec(e);
+      N$2 = r2 ? parseFloat(r2[1]) + 4 : o, f = n[2] ? parseFloat(n[2]) : NaN, s = n[3] ? parseFloat(n[3]) : NaN, u$1 = n[4] ? parseFloat(n[4]) : NaN, u$1 ? (n = /(?:Chrome\/(\d+\.\d+))/.exec(e), d$1 = n && n[1] ? parseFloat(n[1]) : NaN) : d$1 = NaN;
+    } else o = f = s = d$1 = u$1 = NaN;
+    if (i2) {
+      if (i2[1]) {
+        var t = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(e);
+        l$1 = t ? parseFloat(t[1].replace("_", ".")) : true;
+      } else l$1 = false;
+      p$2 = !!i2[2], m$1 = !!i2[3];
+    } else l$1 = p$2 = m$1 = false;
+  }
+}
+var _$1 = { ie: function() {
+  return a() || o;
+}, ieCompatibilityMode: function() {
+  return a() || N$2 > o;
+}, ie64: function() {
+  return _$1.ie() && D;
+}, firefox: function() {
+  return a() || f;
+}, opera: function() {
+  return a() || s;
+}, webkit: function() {
+  return a() || u$1;
+}, safari: function() {
+  return _$1.webkit();
+}, chrome: function() {
+  return a() || d$1;
+}, windows: function() {
+  return a() || p$2;
+}, osx: function() {
+  return a() || l$1;
+}, linux: function() {
+  return a() || m$1;
+}, iphone: function() {
+  return a() || x$1;
+}, mobile: function() {
+  return a() || x$1 || E$2 || w$2 || F$1;
+}, nativeApp: function() {
+  return a() || M$1;
+}, android: function() {
+  return a() || w$2;
+}, ipad: function() {
+  return a() || E$2;
+} }, A$2 = _$1;
+var c$1 = !!(typeof window < "u" && window.document && window.document.createElement), U$1 = { canUseDOM: c$1, canUseWorkers: typeof Worker < "u", canUseEventListeners: c$1 && !!(window.addEventListener || window.attachEvent), canUseViewport: c$1 && !!window.screen, isInWorker: !c$1 }, h = U$1;
+var X$2;
+h.canUseDOM && (X$2 = document.implementation && document.implementation.hasFeature && document.implementation.hasFeature("", "") !== true);
+function S$2(e, n) {
+  if (!h.canUseDOM || n && !("addEventListener" in document)) return false;
+  var i2 = "on" + e, r2 = i2 in document;
+  if (!r2) {
+    var t = document.createElement("div");
+    t.setAttribute(i2, "return;"), r2 = typeof t[i2] == "function";
+  }
+  return !r2 && X$2 && e === "wheel" && (r2 = document.implementation.hasFeature("Events.wheel", "3.0")), r2;
+}
+var b$1 = S$2;
+var O$3 = 10, I = 40, P$2 = 800;
+function T$2(e) {
+  var n = 0, i2 = 0, r2 = 0, t = 0;
+  return "detail" in e && (i2 = e.detail), "wheelDelta" in e && (i2 = -e.wheelDelta / 120), "wheelDeltaY" in e && (i2 = -e.wheelDeltaY / 120), "wheelDeltaX" in e && (n = -e.wheelDeltaX / 120), "axis" in e && e.axis === e.HORIZONTAL_AXIS && (n = i2, i2 = 0), r2 = n * O$3, t = i2 * O$3, "deltaY" in e && (t = e.deltaY), "deltaX" in e && (r2 = e.deltaX), (r2 || t) && e.deltaMode && (e.deltaMode == 1 ? (r2 *= I, t *= I) : (r2 *= P$2, t *= P$2)), r2 && !n && (n = r2 < 1 ? -1 : 1), t && !i2 && (i2 = t < 1 ? -1 : 1), { spinX: n, spinY: i2, pixelX: r2, pixelY: t };
+}
+T$2.getEventType = function() {
+  return A$2.firefox() ? "DOMMouseScroll" : b$1("wheel") ? "wheel" : "mousewheel";
+};
+var Y$1 = T$2;
+/**
+* Checks if an event is supported in the current execution environment.
+*
+* NOTE: This will not work correctly for non-generic events such as `change`,
+* `reset`, `load`, `error`, and `select`.
+*
+* Borrows from Modernizr.
+*
+* @param {string} eventNameSuffix Event name, e.g. "click".
+* @param {?boolean} capture Check if the capture phase is supported.
+* @return {boolean} True if the event is supported.
+* @internal
+* @license Modernizr 3.0.0pre (Custom Build) | MIT
+*/
+const mousewheel = function(element, callback) {
+  if (element && element.addEventListener) {
+    const fn2 = function(event) {
+      const normalized = Y$1(event);
+      callback && Reflect.apply(callback, this, [event, normalized]);
+    };
+    element.addEventListener("wheel", fn2, { passive: true });
+  }
+};
+const Mousewheel = {
+  beforeMount(el, binding) {
+    mousewheel(el, binding.value);
+  }
+};
+let tableIdSeed = 1;
+const _sfc_main$4 = defineComponent({
+  name: "ElTable",
+  directives: {
+    Mousewheel
+  },
+  components: {
+    TableHeader,
+    TableBody,
+    TableFooter,
+    ElScrollbar,
+    hColgroup
+  },
+  props: defaultProps$1,
+  emits: [
+    "select",
+    "select-all",
+    "selection-change",
+    "cell-mouse-enter",
+    "cell-mouse-leave",
+    "cell-contextmenu",
+    "cell-click",
+    "cell-dblclick",
+    "row-click",
+    "row-contextmenu",
+    "row-dblclick",
+    "header-click",
+    "header-contextmenu",
+    "sort-change",
+    "filter-change",
+    "current-change",
+    "header-dragend",
+    "expand-change",
+    "scroll"
+  ],
+  setup(props) {
+    const { t } = useLocale();
+    const ns = useNamespace("table");
+    const table = getCurrentInstance();
+    provide(TABLE_INJECTION_KEY, table);
+    const store = createStore(table, props);
+    table.store = store;
+    const layout = new TableLayout({
+      store: table.store,
+      table,
+      fit: props.fit,
+      showHeader: props.showHeader
+    });
+    table.layout = layout;
+    const isEmpty2 = computed(() => (store.states.data.value || []).length === 0);
+    const {
+      setCurrentRow,
+      getSelectionRows,
+      toggleRowSelection,
+      clearSelection,
+      clearFilter,
+      toggleAllSelection,
+      toggleRowExpansion,
+      clearSort,
+      sort,
+      updateKeyChildren
+    } = useUtils(store);
+    const {
+      isHidden: isHidden2,
+      renderExpanded,
+      setDragVisible,
+      isGroup,
+      handleMouseLeave,
+      handleHeaderFooterMousewheel,
+      tableSize,
+      emptyBlockStyle,
+      handleFixedMousewheel,
+      resizeProxyVisible,
+      bodyWidth,
+      resizeState,
+      doLayout,
+      tableBodyStyles,
+      tableLayout,
+      scrollbarViewStyle,
+      scrollbarStyle
+    } = useStyle(props, layout, store, table);
+    const { scrollBarRef, scrollTo, setScrollLeft, setScrollTop } = useScrollbar();
+    const debouncedUpdateLayout = debounce(doLayout, 50);
+    const tableId = `${ns.namespace.value}-table_${tableIdSeed++}`;
+    table.tableId = tableId;
+    table.state = {
+      isGroup,
+      resizeState,
+      doLayout,
+      debouncedUpdateLayout
+    };
+    const computedSumText = computed(() => {
+      var _a2;
+      return (_a2 = props.sumText) != null ? _a2 : t("el.table.sumText");
+    });
+    const computedEmptyText = computed(() => {
+      var _a2;
+      return (_a2 = props.emptyText) != null ? _a2 : t("el.table.emptyText");
+    });
+    const columns = computed(() => {
+      return convertToRows(store.states.originColumns.value)[0];
+    });
+    useKeyRender(table);
+    onBeforeUnmount(() => {
+      debouncedUpdateLayout.cancel();
+    });
+    return {
+      ns,
+      layout,
+      store,
+      columns,
+      handleHeaderFooterMousewheel,
+      handleMouseLeave,
+      tableId,
+      tableSize,
+      isHidden: isHidden2,
+      isEmpty: isEmpty2,
+      renderExpanded,
+      resizeProxyVisible,
+      resizeState,
+      isGroup,
+      bodyWidth,
+      tableBodyStyles,
+      emptyBlockStyle,
+      debouncedUpdateLayout,
+      handleFixedMousewheel,
+      setCurrentRow,
+      getSelectionRows,
+      toggleRowSelection,
+      clearSelection,
+      clearFilter,
+      toggleAllSelection,
+      toggleRowExpansion,
+      clearSort,
+      doLayout,
+      sort,
+      updateKeyChildren,
+      t,
+      setDragVisible,
+      context: table,
+      computedSumText,
+      computedEmptyText,
+      tableLayout,
+      scrollbarViewStyle,
+      scrollbarStyle,
+      scrollBarRef,
+      scrollTo,
+      setScrollLeft,
+      setScrollTop,
+      allowDragLastColumn: props.allowDragLastColumn
+    };
+  }
+});
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_hColgroup = resolveComponent("hColgroup");
+  const _component_table_header = resolveComponent("table-header");
+  const _component_table_body = resolveComponent("table-body");
+  const _component_table_footer = resolveComponent("table-footer");
+  const _component_el_scrollbar = resolveComponent("el-scrollbar");
+  const _directive_mousewheel = resolveDirective("mousewheel");
+  return openBlock(), createElementBlock("div", {
+    ref: "tableWrapper",
+    class: normalizeClass([
+      {
+        [_ctx.ns.m("fit")]: _ctx.fit,
+        [_ctx.ns.m("striped")]: _ctx.stripe,
+        [_ctx.ns.m("border")]: _ctx.border || _ctx.isGroup,
+        [_ctx.ns.m("hidden")]: _ctx.isHidden,
+        [_ctx.ns.m("group")]: _ctx.isGroup,
+        [_ctx.ns.m("fluid-height")]: _ctx.maxHeight,
+        [_ctx.ns.m("scrollable-x")]: _ctx.layout.scrollX.value,
+        [_ctx.ns.m("scrollable-y")]: _ctx.layout.scrollY.value,
+        [_ctx.ns.m("enable-row-hover")]: !_ctx.store.states.isComplex.value,
+        [_ctx.ns.m("enable-row-transition")]: (_ctx.store.states.data.value || []).length !== 0 && (_ctx.store.states.data.value || []).length < 100,
+        "has-footer": _ctx.showSummary
+      },
+      _ctx.ns.m(_ctx.tableSize),
+      _ctx.className,
+      _ctx.ns.b(),
+      _ctx.ns.m(`layout-${_ctx.tableLayout}`)
+    ]),
+    style: normalizeStyle(_ctx.style),
+    "data-prefix": _ctx.ns.namespace.value,
+    onMouseleave: _ctx.handleMouseLeave
+  }, [
+    createBaseVNode("div", {
+      class: normalizeClass(_ctx.ns.e("inner-wrapper"))
+    }, [
+      createBaseVNode("div", {
+        ref: "hiddenColumns",
+        class: "hidden-columns"
+      }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 512),
+      _ctx.showHeader && _ctx.tableLayout === "fixed" ? withDirectives((openBlock(), createElementBlock("div", {
+        key: 0,
+        ref: "headerWrapper",
+        class: normalizeClass(_ctx.ns.e("header-wrapper"))
+      }, [
+        createBaseVNode("table", {
+          ref: "tableHeader",
+          class: normalizeClass(_ctx.ns.e("header")),
+          style: normalizeStyle(_ctx.tableBodyStyles),
+          border: "0",
+          cellpadding: "0",
+          cellspacing: "0"
+        }, [
+          createVNode(_component_hColgroup, {
+            columns: _ctx.store.states.columns.value,
+            "table-layout": _ctx.tableLayout
+          }, null, 8, ["columns", "table-layout"]),
+          createVNode(_component_table_header, {
+            ref: "tableHeaderRef",
+            border: _ctx.border,
+            "default-sort": _ctx.defaultSort,
+            store: _ctx.store,
+            "append-filter-panel-to": _ctx.appendFilterPanelTo,
+            "allow-drag-last-column": _ctx.allowDragLastColumn,
+            onSetDragVisible: _ctx.setDragVisible
+          }, null, 8, ["border", "default-sort", "store", "append-filter-panel-to", "allow-drag-last-column", "onSetDragVisible"])
+        ], 6)
+      ], 2)), [
+        [_directive_mousewheel, _ctx.handleHeaderFooterMousewheel]
+      ]) : createCommentVNode("v-if", true),
+      createBaseVNode("div", {
+        ref: "bodyWrapper",
+        class: normalizeClass(_ctx.ns.e("body-wrapper"))
+      }, [
+        createVNode(_component_el_scrollbar, {
+          ref: "scrollBarRef",
+          "view-style": _ctx.scrollbarViewStyle,
+          "wrap-style": _ctx.scrollbarStyle,
+          always: _ctx.scrollbarAlwaysOn,
+          tabindex: _ctx.scrollbarTabindex,
+          onScroll: ($event) => _ctx.$emit("scroll", $event)
+        }, {
+          default: withCtx(() => [
+            createBaseVNode("table", {
+              ref: "tableBody",
+              class: normalizeClass(_ctx.ns.e("body")),
+              cellspacing: "0",
+              cellpadding: "0",
+              border: "0",
+              style: normalizeStyle({
+                width: _ctx.bodyWidth,
+                tableLayout: _ctx.tableLayout
+              })
+            }, [
+              createVNode(_component_hColgroup, {
+                columns: _ctx.store.states.columns.value,
+                "table-layout": _ctx.tableLayout
+              }, null, 8, ["columns", "table-layout"]),
+              _ctx.showHeader && _ctx.tableLayout === "auto" ? (openBlock(), createBlock(_component_table_header, {
+                key: 0,
+                ref: "tableHeaderRef",
+                class: normalizeClass(_ctx.ns.e("body-header")),
+                border: _ctx.border,
+                "default-sort": _ctx.defaultSort,
+                store: _ctx.store,
+                "append-filter-panel-to": _ctx.appendFilterPanelTo,
+                onSetDragVisible: _ctx.setDragVisible
+              }, null, 8, ["class", "border", "default-sort", "store", "append-filter-panel-to", "onSetDragVisible"])) : createCommentVNode("v-if", true),
+              createVNode(_component_table_body, {
+                context: _ctx.context,
+                highlight: _ctx.highlightCurrentRow,
+                "row-class-name": _ctx.rowClassName,
+                "tooltip-effect": _ctx.tooltipEffect,
+                "tooltip-options": _ctx.tooltipOptions,
+                "row-style": _ctx.rowStyle,
+                store: _ctx.store,
+                stripe: _ctx.stripe
+              }, null, 8, ["context", "highlight", "row-class-name", "tooltip-effect", "tooltip-options", "row-style", "store", "stripe"]),
+              _ctx.showSummary && _ctx.tableLayout === "auto" ? (openBlock(), createBlock(_component_table_footer, {
+                key: 1,
+                class: normalizeClass(_ctx.ns.e("body-footer")),
+                border: _ctx.border,
+                "default-sort": _ctx.defaultSort,
+                store: _ctx.store,
+                "sum-text": _ctx.computedSumText,
+                "summary-method": _ctx.summaryMethod
+              }, null, 8, ["class", "border", "default-sort", "store", "sum-text", "summary-method"])) : createCommentVNode("v-if", true)
+            ], 6),
+            _ctx.isEmpty ? (openBlock(), createElementBlock("div", {
+              key: 0,
+              ref: "emptyBlock",
+              style: normalizeStyle(_ctx.emptyBlockStyle),
+              class: normalizeClass(_ctx.ns.e("empty-block"))
+            }, [
+              createBaseVNode("span", {
+                class: normalizeClass(_ctx.ns.e("empty-text"))
+              }, [
+                renderSlot(_ctx.$slots, "empty", {}, () => [
+                  createTextVNode(toDisplayString(_ctx.computedEmptyText), 1)
+                ])
+              ], 2)
+            ], 6)) : createCommentVNode("v-if", true),
+            _ctx.$slots.append ? (openBlock(), createElementBlock("div", {
+              key: 1,
+              ref: "appendWrapper",
+              class: normalizeClass(_ctx.ns.e("append-wrapper"))
+            }, [
+              renderSlot(_ctx.$slots, "append")
+            ], 2)) : createCommentVNode("v-if", true)
+          ]),
+          _: 3
+        }, 8, ["view-style", "wrap-style", "always", "tabindex", "onScroll"])
+      ], 2),
+      _ctx.showSummary && _ctx.tableLayout === "fixed" ? withDirectives((openBlock(), createElementBlock("div", {
+        key: 1,
+        ref: "footerWrapper",
+        class: normalizeClass(_ctx.ns.e("footer-wrapper"))
+      }, [
+        createBaseVNode("table", {
+          class: normalizeClass(_ctx.ns.e("footer")),
+          cellspacing: "0",
+          cellpadding: "0",
+          border: "0",
+          style: normalizeStyle(_ctx.tableBodyStyles)
+        }, [
+          createVNode(_component_hColgroup, {
+            columns: _ctx.store.states.columns.value,
+            "table-layout": _ctx.tableLayout
+          }, null, 8, ["columns", "table-layout"]),
+          createVNode(_component_table_footer, {
+            border: _ctx.border,
+            "default-sort": _ctx.defaultSort,
+            store: _ctx.store,
+            "sum-text": _ctx.computedSumText,
+            "summary-method": _ctx.summaryMethod
+          }, null, 8, ["border", "default-sort", "store", "sum-text", "summary-method"])
+        ], 6)
+      ], 2)), [
+        [vShow, !_ctx.isEmpty],
+        [_directive_mousewheel, _ctx.handleHeaderFooterMousewheel]
+      ]) : createCommentVNode("v-if", true),
+      _ctx.border || _ctx.isGroup ? (openBlock(), createElementBlock("div", {
+        key: 2,
+        class: normalizeClass(_ctx.ns.e("border-left-patch"))
+      }, null, 2)) : createCommentVNode("v-if", true)
+    ], 2),
+    withDirectives(createBaseVNode("div", {
+      ref: "resizeProxy",
+      class: normalizeClass(_ctx.ns.e("column-resize-proxy"))
+    }, null, 2), [
+      [vShow, _ctx.resizeProxyVisible]
+    ])
+  ], 46, ["data-prefix", "onMouseleave"]);
+}
+var Table = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$2], ["__file", "table.vue"]]);
+const defaultClassNames = {
+  selection: "table-column--selection",
+  expand: "table__expand-column"
+};
+const cellStarts = {
+  default: {
+    order: ""
+  },
+  selection: {
+    width: 48,
+    minWidth: 48,
+    realWidth: 48,
+    order: ""
+  },
+  expand: {
+    width: 48,
+    minWidth: 48,
+    realWidth: 48,
+    order: ""
+  },
+  index: {
+    width: 48,
+    minWidth: 48,
+    realWidth: 48,
+    order: ""
+  }
+};
+const getDefaultClassName = (type4) => {
+  return defaultClassNames[type4] || "";
+};
+const cellForced = {
+  selection: {
+    renderHeader({ store, column }) {
+      function isDisabled() {
+        return store.states.data.value && store.states.data.value.length === 0;
+      }
+      return h$1(ElCheckbox, {
+        disabled: isDisabled(),
+        size: store.states.tableSize.value,
+        indeterminate: store.states.selection.value.length > 0 && !store.states.isAllSelected.value,
+        "onUpdate:modelValue": store.toggleAllSelection,
+        modelValue: store.states.isAllSelected.value,
+        ariaLabel: column.label
+      });
+    },
+    renderCell({
+      row,
+      column,
+      store,
+      $index
+    }) {
+      return h$1(ElCheckbox, {
+        disabled: column.selectable ? !column.selectable.call(null, row, $index) : false,
+        size: store.states.tableSize.value,
+        onChange: () => {
+          store.commit("rowSelectedChanged", row);
+        },
+        onClick: (event) => event.stopPropagation(),
+        modelValue: store.isSelected(row),
+        ariaLabel: column.label
+      });
+    },
+    sortable: false,
+    resizable: false
+  },
+  index: {
+    renderHeader({ column }) {
+      return column.label || "#";
+    },
+    renderCell({
+      column,
+      $index
+    }) {
+      let i2 = $index + 1;
+      const index = column.index;
+      if (isNumber(index)) {
+        i2 = $index + index;
+      } else if (isFunction$1(index)) {
+        i2 = index($index);
+      }
+      return h$1("div", {}, [i2]);
+    },
+    sortable: false
+  },
+  expand: {
+    renderHeader({ column }) {
+      return column.label || "";
+    },
+    renderCell({
+      row,
+      store,
+      expanded
+    }) {
+      const { ns } = store;
+      const classes = [ns.e("expand-icon")];
+      if (expanded) {
+        classes.push(ns.em("expand-icon", "expanded"));
+      }
+      const callback = function(e) {
+        e.stopPropagation();
+        store.toggleRowExpansion(row);
+      };
+      return h$1("div", {
+        class: classes,
+        onClick: callback
+      }, {
+        default: () => {
+          return [
+            h$1(ElIcon, null, {
+              default: () => {
+                return [h$1(arrow_right_default)];
+              }
+            })
+          ];
+        }
+      });
+    },
+    sortable: false,
+    resizable: false
+  }
+};
+function defaultRenderCell({
+  row,
+  column,
+  $index
+}) {
+  var _a2;
+  const property2 = column.property;
+  const value = property2 && getProp(row, property2).value;
+  if (column && column.formatter) {
+    return column.formatter(row, column, value, $index);
+  }
+  return ((_a2 = value == null ? void 0 : value.toString) == null ? void 0 : _a2.call(value)) || "";
+}
+function treeCellPrefix({
+  row,
+  treeNode,
+  store
+}, createPlaceholder = false) {
+  const { ns } = store;
+  if (!treeNode) {
+    if (createPlaceholder) {
+      return [
+        h$1("span", {
+          class: ns.e("placeholder")
+        })
+      ];
+    }
+    return null;
+  }
+  const ele = [];
+  const callback = function(e) {
+    e.stopPropagation();
+    if (treeNode.loading) {
+      return;
+    }
+    store.loadOrToggle(row);
+  };
+  if (treeNode.indent) {
+    ele.push(h$1("span", {
+      class: ns.e("indent"),
+      style: { "padding-left": `${treeNode.indent}px` }
+    }));
+  }
+  if (isBoolean(treeNode.expanded) && !treeNode.noLazyChildren) {
+    const expandClasses = [
+      ns.e("expand-icon"),
+      treeNode.expanded ? ns.em("expand-icon", "expanded") : ""
+    ];
+    let icon = arrow_right_default;
+    if (treeNode.loading) {
+      icon = loading_default;
+    }
+    ele.push(h$1("div", {
+      class: expandClasses,
+      onClick: callback
+    }, {
+      default: () => {
+        return [
+          h$1(ElIcon, { class: { [ns.is("loading")]: treeNode.loading } }, {
+            default: () => [h$1(icon)]
+          })
+        ];
+      }
+    }));
+  } else {
+    ele.push(h$1("span", {
+      class: ns.e("placeholder")
+    }));
+  }
+  return ele;
+}
+function getAllAliases(props, aliases) {
+  return props.reduce((prev, cur) => {
+    prev[cur] = cur;
+    return prev;
+  }, aliases);
+}
+function useWatcher(owner, props_) {
+  const instance = getCurrentInstance();
+  const registerComplexWatchers = () => {
+    const props = ["fixed"];
+    const aliases = {
+      realWidth: "width",
+      realMinWidth: "minWidth"
+    };
+    const allAliases = getAllAliases(props, aliases);
+    Object.keys(allAliases).forEach((key) => {
+      const columnKey = aliases[key];
+      if (hasOwn(props_, columnKey)) {
+        watch(() => props_[columnKey], (newVal) => {
+          let value = newVal;
+          if (columnKey === "width" && key === "realWidth") {
+            value = parseWidth(newVal);
+          }
+          if (columnKey === "minWidth" && key === "realMinWidth") {
+            value = parseMinWidth(newVal);
+          }
+          instance.columnConfig.value[columnKey] = value;
+          instance.columnConfig.value[key] = value;
+          const updateColumns = columnKey === "fixed";
+          owner.value.store.scheduleLayout(updateColumns);
+        });
+      }
+    });
+  };
+  const registerNormalWatchers = () => {
+    const props = [
+      "label",
+      "filters",
+      "filterMultiple",
+      "filteredValue",
+      "sortable",
+      "index",
+      "formatter",
+      "className",
+      "labelClassName",
+      "filterClassName",
+      "showOverflowTooltip"
+    ];
+    const aliases = {
+      property: "prop",
+      align: "realAlign",
+      headerAlign: "realHeaderAlign"
+    };
+    const allAliases = getAllAliases(props, aliases);
+    Object.keys(allAliases).forEach((key) => {
+      const columnKey = aliases[key];
+      if (hasOwn(props_, columnKey)) {
+        watch(() => props_[columnKey], (newVal) => {
+          instance.columnConfig.value[key] = newVal;
+        });
+      }
+    });
+  };
+  return {
+    registerComplexWatchers,
+    registerNormalWatchers
+  };
+}
+function useRender(props, slots, owner) {
+  const instance = getCurrentInstance();
+  const columnId = ref("");
+  const isSubColumn = ref(false);
+  const realAlign = ref();
+  const realHeaderAlign = ref();
+  const ns = useNamespace("table");
+  watchEffect(() => {
+    realAlign.value = props.align ? `is-${props.align}` : null;
+    realAlign.value;
+  });
+  watchEffect(() => {
+    realHeaderAlign.value = props.headerAlign ? `is-${props.headerAlign}` : realAlign.value;
+    realHeaderAlign.value;
+  });
+  const columnOrTableParent = computed(() => {
+    let parent = instance.vnode.vParent || instance.parent;
+    while (parent && !parent.tableId && !parent.columnId) {
+      parent = parent.vnode.vParent || parent.parent;
+    }
+    return parent;
+  });
+  const hasTreeColumn = computed(() => {
+    const { store } = instance.parent;
+    if (!store)
+      return false;
+    const { treeData } = store.states;
+    const treeDataValue = treeData.value;
+    return treeDataValue && Object.keys(treeDataValue).length > 0;
+  });
+  const realWidth = ref(parseWidth(props.width));
+  const realMinWidth = ref(parseMinWidth(props.minWidth));
+  const setColumnWidth = (column) => {
+    if (realWidth.value)
+      column.width = realWidth.value;
+    if (realMinWidth.value) {
+      column.minWidth = realMinWidth.value;
+    }
+    if (!realWidth.value && realMinWidth.value) {
+      column.width = void 0;
+    }
+    if (!column.minWidth) {
+      column.minWidth = 80;
+    }
+    column.realWidth = Number(isUndefined(column.width) ? column.minWidth : column.width);
+    return column;
+  };
+  const setColumnForcedProps = (column) => {
+    const type4 = column.type;
+    const source = cellForced[type4] || {};
+    Object.keys(source).forEach((prop) => {
+      const value = source[prop];
+      if (prop !== "className" && !isUndefined(value)) {
+        column[prop] = value;
+      }
+    });
+    const className = getDefaultClassName(type4);
+    if (className) {
+      const forceClass = `${unref(ns.namespace)}-${className}`;
+      column.className = column.className ? `${column.className} ${forceClass}` : forceClass;
+    }
+    return column;
+  };
+  const checkSubColumn = (children) => {
+    if (isArray$1(children)) {
+      children.forEach((child) => check(child));
+    } else {
+      check(children);
+    }
+    function check(item) {
+      var _a2;
+      if (((_a2 = item == null ? void 0 : item.type) == null ? void 0 : _a2.name) === "ElTableColumn") {
+        item.vParent = instance;
+      }
+    }
+  };
+  const setColumnRenders = (column) => {
+    if (props.renderHeader) ;
+    else if (column.type !== "selection") {
+      column.renderHeader = (scope) => {
+        instance.columnConfig.value["label"];
+        return renderSlot(slots, "header", scope, () => [column.label]);
+      };
+    }
+    if (slots["filter-icon"]) {
+      column.renderFilterIcon = (scope) => {
+        return renderSlot(slots, "filter-icon", scope);
+      };
+    }
+    let originRenderCell = column.renderCell;
+    if (column.type === "expand") {
+      column.renderCell = (data) => h$1("div", {
+        class: "cell"
+      }, [originRenderCell(data)]);
+      owner.value.renderExpanded = (data) => {
+        return slots.default ? slots.default(data) : slots.default;
+      };
+    } else {
+      originRenderCell = originRenderCell || defaultRenderCell;
+      column.renderCell = (data) => {
+        let children = null;
+        if (slots.default) {
+          const vnodes = slots.default(data);
+          children = vnodes.some((v2) => v2.type !== Comment) ? vnodes : originRenderCell(data);
+        } else {
+          children = originRenderCell(data);
+        }
+        const { columns } = owner.value.store.states;
+        const firstUserColumnIndex = columns.value.findIndex((item) => item.type === "default");
+        const shouldCreatePlaceholder = hasTreeColumn.value && data.cellIndex === firstUserColumnIndex;
+        const prefix = treeCellPrefix(data, shouldCreatePlaceholder);
+        const props2 = {
+          class: "cell",
+          style: {}
+        };
+        if (column.showOverflowTooltip) {
+          props2.class = `${props2.class} ${unref(ns.namespace)}-tooltip`;
+          props2.style = {
+            width: `${(data.column.realWidth || Number(data.column.width)) - 1}px`
+          };
+        }
+        checkSubColumn(children);
+        return h$1("div", props2, [prefix, children]);
+      };
+    }
+    return column;
+  };
+  const getPropsData = (...propsKey) => {
+    return propsKey.reduce((prev, cur) => {
+      if (isArray$1(cur)) {
+        cur.forEach((key) => {
+          prev[key] = props[key];
+        });
+      }
+      return prev;
+    }, {});
+  };
+  const getColumnElIndex = (children, child) => {
+    return Array.prototype.indexOf.call(children, child);
+  };
+  const updateColumnOrder = () => {
+    owner.value.store.commit("updateColumnOrder", instance.columnConfig.value);
+  };
+  return {
+    columnId,
+    realAlign,
+    isSubColumn,
+    realHeaderAlign,
+    columnOrTableParent,
+    setColumnWidth,
+    setColumnForcedProps,
+    setColumnRenders,
+    getPropsData,
+    getColumnElIndex,
+    updateColumnOrder
+  };
+}
+var defaultProps = {
+  type: {
+    type: String,
+    default: "default"
+  },
+  label: String,
+  className: String,
+  labelClassName: String,
+  property: String,
+  prop: String,
+  width: {
+    type: [String, Number],
+    default: ""
+  },
+  minWidth: {
+    type: [String, Number],
+    default: ""
+  },
+  renderHeader: Function,
+  sortable: {
+    type: [Boolean, String],
+    default: false
+  },
+  sortMethod: Function,
+  sortBy: [String, Function, Array],
+  resizable: {
+    type: Boolean,
+    default: true
+  },
+  columnKey: String,
+  align: String,
+  headerAlign: String,
+  showOverflowTooltip: {
+    type: [Boolean, Object],
+    default: void 0
+  },
+  fixed: [Boolean, String],
+  formatter: Function,
+  selectable: Function,
+  reserveSelection: Boolean,
+  filterMethod: Function,
+  filteredValue: Array,
+  filters: Array,
+  filterPlacement: String,
+  filterMultiple: {
+    type: Boolean,
+    default: true
+  },
+  filterClassName: String,
+  index: [Number, Function],
+  sortOrders: {
+    type: Array,
+    default: () => {
+      return ["ascending", "descending", null];
+    },
+    validator: (val) => {
+      return val.every((order) => ["ascending", "descending", null].includes(order));
+    }
+  }
+};
+let columnIdSeed = 1;
+var ElTableColumn$1 = defineComponent({
+  name: "ElTableColumn",
+  components: {
+    ElCheckbox
+  },
+  props: defaultProps,
+  setup(props, { slots }) {
+    const instance = getCurrentInstance();
+    const columnConfig = ref({});
+    const owner = computed(() => {
+      let parent2 = instance.parent;
+      while (parent2 && !parent2.tableId) {
+        parent2 = parent2.parent;
+      }
+      return parent2;
+    });
+    const { registerNormalWatchers, registerComplexWatchers } = useWatcher(owner, props);
+    const {
+      columnId,
+      isSubColumn,
+      realHeaderAlign,
+      columnOrTableParent,
+      setColumnWidth,
+      setColumnForcedProps,
+      setColumnRenders,
+      getPropsData,
+      getColumnElIndex,
+      realAlign,
+      updateColumnOrder
+    } = useRender(props, slots, owner);
+    const parent = columnOrTableParent.value;
+    columnId.value = `${parent.tableId || parent.columnId}_column_${columnIdSeed++}`;
+    onBeforeMount(() => {
+      isSubColumn.value = owner.value !== parent;
+      const type4 = props.type || "default";
+      const sortable = props.sortable === "" ? true : props.sortable;
+      const showOverflowTooltip = isUndefined(props.showOverflowTooltip) ? parent.props.showOverflowTooltip : props.showOverflowTooltip;
+      const defaults = {
+        ...cellStarts[type4],
+        id: columnId.value,
+        type: type4,
+        property: props.prop || props.property,
+        align: realAlign,
+        headerAlign: realHeaderAlign,
+        showOverflowTooltip,
+        filterable: props.filters || props.filterMethod,
+        filteredValue: [],
+        filterPlacement: "",
+        filterClassName: "",
+        isColumnGroup: false,
+        isSubColumn: false,
+        filterOpened: false,
+        sortable,
+        index: props.index,
+        rawColumnKey: instance.vnode.key
+      };
+      const basicProps = [
+        "columnKey",
+        "label",
+        "className",
+        "labelClassName",
+        "type",
+        "renderHeader",
+        "formatter",
+        "fixed",
+        "resizable"
+      ];
+      const sortProps = ["sortMethod", "sortBy", "sortOrders"];
+      const selectProps = ["selectable", "reserveSelection"];
+      const filterProps = [
+        "filterMethod",
+        "filters",
+        "filterMultiple",
+        "filterOpened",
+        "filteredValue",
+        "filterPlacement",
+        "filterClassName"
+      ];
+      let column = getPropsData(basicProps, sortProps, selectProps, filterProps);
+      column = mergeOptions(defaults, column);
+      const chains = compose(setColumnRenders, setColumnWidth, setColumnForcedProps);
+      column = chains(column);
+      columnConfig.value = column;
+      registerNormalWatchers();
+      registerComplexWatchers();
+    });
+    onMounted(() => {
+      var _a2;
+      const parent2 = columnOrTableParent.value;
+      const children = isSubColumn.value ? parent2.vnode.el.children : (_a2 = parent2.refs.hiddenColumns) == null ? void 0 : _a2.children;
+      const getColumnIndex = () => getColumnElIndex(children || [], instance.vnode.el);
+      columnConfig.value.getColumnIndex = getColumnIndex;
+      const columnIndex = getColumnIndex();
+      columnIndex > -1 && owner.value.store.commit("insertColumn", columnConfig.value, isSubColumn.value ? parent2.columnConfig.value : null, updateColumnOrder);
+    });
+    onBeforeUnmount(() => {
+      const getColumnIndex = columnConfig.value.getColumnIndex;
+      const columnIndex = getColumnIndex ? getColumnIndex() : -1;
+      columnIndex > -1 && owner.value.store.commit("removeColumn", columnConfig.value, isSubColumn.value ? parent.columnConfig.value : null, updateColumnOrder);
+    });
+    instance.columnId = columnId.value;
+    instance.columnConfig = columnConfig;
+    return;
+  },
+  render() {
+    var _a2, _b, _c;
+    try {
+      const renderDefault = (_b = (_a2 = this.$slots).default) == null ? void 0 : _b.call(_a2, {
+        row: {},
+        column: {},
+        $index: -1
+      });
+      const children = [];
+      if (isArray$1(renderDefault)) {
+        for (const childNode of renderDefault) {
+          if (((_c = childNode.type) == null ? void 0 : _c.name) === "ElTableColumn" || childNode.shapeFlag & 2) {
+            children.push(childNode);
+          } else if (childNode.type === Fragment && isArray$1(childNode.children)) {
+            childNode.children.forEach((vnode2) => {
+              if ((vnode2 == null ? void 0 : vnode2.patchFlag) !== 1024 && !isString$1(vnode2 == null ? void 0 : vnode2.children)) {
+                children.push(vnode2);
+              }
+            });
+          }
+        }
+      }
+      const vnode = h$1("div", children);
+      return vnode;
+    } catch (e) {
+      return h$1("div", []);
+    }
+  }
+});
+const ElTable = withInstall(Table, {
+  TableColumn: ElTableColumn$1
+});
+const ElTableColumn = withNoopInstall(ElTableColumn$1);
 const O$2 = "星期", S$1 = [
   "日",
   "一",
@@ -17099,57 +22552,57 @@ const O$2 = "星期", S$1 = [
   53584,
   62034,
   54560
-], m = (a) => {
+], m = (a2) => {
   let x2 = 348;
-  for (let s = 32768; s > 8; s >>= 1)
-    x2 += T$1[a - r] & s ? 1 : 0;
-  return x2 + C$1(a);
-}, w$1 = (a, x2) => T$1[a - r] & 65536 >> x2 ? 30 : 29, F = (a) => T$1[a - r] & 15, C$1 = (a) => F(a) ? T$1[a - r] & 65536 ? 30 : 29 : 0, X$1 = (a, x2) => {
-  const s = (a * 2 - (x2 < V$1[a - 1] ? 2 : 0)) / 2;
-  return R$1[s];
-}, $$1 = (a) => {
-  const x2 = (a - 4) % 10, s = (a - 4) % 12;
-  return N$1[x2] + Q$1[s] + "年";
-}, L$1 = (a) => {
-  let x2 = _[a - 1];
+  for (let s2 = 32768; s2 > 8; s2 >>= 1)
+    x2 += T$1[a2 - r] & s2 ? 1 : 0;
+  return x2 + C$1(a2);
+}, w$1 = (a2, x2) => T$1[a2 - r] & 65536 >> x2 ? 30 : 29, F = (a2) => T$1[a2 - r] & 15, C$1 = (a2) => F(a2) ? T$1[a2 - r] & 65536 ? 30 : 29 : 0, X$1 = (a2, x2) => {
+  const s2 = (a2 * 2 - (x2 < V$1[a2 - 1] ? 2 : 0)) / 2;
+  return R$1[s2];
+}, $$1 = (a2) => {
+  const x2 = (a2 - 4) % 10, s2 = (a2 - 4) % 12;
+  return N$1[x2] + Q$1[s2] + "年";
+}, L$1 = (a2) => {
+  let x2 = _[a2 - 1];
   return x2 += P$1, x2;
-}, a0 = (a) => {
+}, a0 = (a2) => {
   let x2;
-  return a === 10 ? x2 = "初十" : a === 20 ? x2 = "二十" : a === 30 ? x2 = "三十" : (x2 = q$1[Math.floor(a / 10)], x2 += B$1[a % 10]), x2;
-}, x0 = (a) => {
-  const x2 = (a - 4) % 12;
+  return a2 === 10 ? x2 = "初十" : a2 === 20 ? x2 = "二十" : a2 === 30 ? x2 = "三十" : (x2 = q$1[Math.floor(a2 / 10)], x2 += B$1[a2 % 10]), x2;
+}, x0 = (a2) => {
+  const x2 = (a2 - 4) % 12;
   return E$1[x2];
-}, W$1 = (a, x2, s) => {
-  let n = parseInt(a), e = parseInt(x2), u2 = parseInt(s), c2;
+}, W$1 = (a2, x2, s2) => {
+  let n = parseInt(a2), e = parseInt(x2), u2 = parseInt(s2), c2;
   n ? c2 = new Date(n, e - 1, u2) : c2 = /* @__PURE__ */ new Date(), n = c2.getFullYear(), e = c2.getMonth() + 1, u2 = c2.getDate();
-  let h = c2.getDay();
-  const I2 = O$2 + S$1[h];
-  h == 0 && (h = 7);
+  let h2 = c2.getDay();
+  const I2 = O$2 + S$1[h2];
+  h2 == 0 && (h2 = 7);
   let y = false;
   const l2 = /* @__PURE__ */ new Date();
   l2.getFullYear() == n && l2.getMonth() + 1 == e && l2.getDate() == u2 && (y = true);
-  const o = n + "-" + e + "-" + u2, M2 = e + "-" + u2, g = X$1(e, u2);
+  const o2 = n + "-" + e + "-" + u2, M2 = e + "-" + u2, g = X$1(e, u2);
   let d2 = (Date.UTC(n, e - 1, u2) - Date.UTC(r, k$1 - 1, U)) / 864e5, b2 = 0, t;
   for (t = r; t <= v && d2 > 0; t++)
     b2 = m(t), d2 -= b2;
   d2 < 0 && (d2 += b2, t--);
-  const f = t;
-  let D = F(f), i2 = false;
+  const f2 = t;
+  let D2 = F(f2), i2 = false;
   for (t = 1; t <= 12 && d2 > 0; t++)
-    D > 0 && t == D + 1 && !i2 ? (--t, i2 = true, b2 = C$1(f)) : b2 = w$1(f, t), i2 && t === D + 1 && (i2 = false), d2 -= b2;
-  d2 === 0 && D > 0 && t === D + 1 && (i2 ? i2 = false : (i2 = true, --t)), d2 < 0 && (d2 += b2, --t);
+    D2 > 0 && t == D2 + 1 && !i2 ? (--t, i2 = true, b2 = C$1(f2)) : b2 = w$1(f2, t), i2 && t === D2 + 1 && (i2 = false), d2 -= b2;
+  d2 === 0 && D2 > 0 && t === D2 + 1 && (i2 ? i2 = false : (i2 = true, --t)), d2 < 0 && (d2 += b2, --t);
   let p2 = t, Y2 = d2 + 1;
-  const Z2 = f + "-" + p2 + "-" + Y2, j2 = p2 + "-" + Y2, z2 = $$1(f), A2 = L$1(p2), G2 = a0(Y2), K2 = x0(f);
+  const Z2 = f2 + "-" + p2 + "-" + Y2, j2 = p2 + "-" + Y2, z2 = $$1(f2), A2 = L$1(p2), G2 = a0(Y2), K2 = x0(f2);
   return {
-    sDate: o,
+    sDate: o2,
     sYear: n,
     sMonth: e,
     sDay: u2,
     sFestival: H$1[M2] || "",
     astro: g,
-    week: h,
+    week: h2,
     lDate: Z2,
-    lYear: f,
+    lYear: f2,
     lMonth: p2,
     lDay: Y2,
     lFestival: J[j2] || "",
@@ -17500,37 +22953,37 @@ const z = "星期", W = [
   const t = (n - 4) % 12;
   return O$1[t];
 }, it = (n, t, e) => {
-  let h = parseInt(n), r2 = parseInt(t), a = parseInt(e), i2;
-  h ? i2 = new Date(h, r2 - 1, a) : i2 = /* @__PURE__ */ new Date(), h = i2.getFullYear(), r2 = i2.getMonth() + 1, a = i2.getDate();
-  let o = i2.getDay();
-  const g = z + W[o];
-  o == 0 && (o = 7);
+  let h2 = parseInt(n), r2 = parseInt(t), a2 = parseInt(e), i2;
+  h2 ? i2 = new Date(h2, r2 - 1, a2) : i2 = /* @__PURE__ */ new Date(), h2 = i2.getFullYear(), r2 = i2.getMonth() + 1, a2 = i2.getDate();
+  let o2 = i2.getDay();
+  const g = z + W[o2];
+  o2 == 0 && (o2 = 7);
   let Z2 = false;
   const x2 = /* @__PURE__ */ new Date();
-  x2.getFullYear() == h && x2.getMonth() + 1 == r2 && x2.getDate() == a && (Z2 = true);
-  const D = h + "-" + r2 + "-" + a, E2 = r2 + "-" + a, F2 = et(r2, a);
-  let y = (Date.UTC(h, r2 - 1, a) - Date.UTC(G$1, C - 1, H)) / 864e5, m2 = 0, s;
-  for (s = G$1; s <= A$1 && y > 0; s++)
-    m2 = N(s), y -= m2;
-  y < 0 && (y += m2, s--);
-  const _2 = s;
+  x2.getFullYear() == h2 && x2.getMonth() + 1 == r2 && x2.getDate() == a2 && (Z2 = true);
+  const D2 = h2 + "-" + r2 + "-" + a2, E2 = r2 + "-" + a2, F2 = et(r2, a2);
+  let y = (Date.UTC(h2, r2 - 1, a2) - Date.UTC(G$1, C - 1, H)) / 864e5, m2 = 0, s2;
+  for (s2 = G$1; s2 <= A$1 && y > 0; s2++)
+    m2 = N(s2), y -= m2;
+  y < 0 && (y += m2, s2--);
+  const _2 = s2;
   let M2 = w(_2), d2 = false;
-  for (s = 1; s <= 12 && y > 0; s++)
-    M2 > 0 && s == M2 + 1 && !d2 ? (--s, d2 = true, m2 = T(_2)) : m2 = tt(_2, s), d2 && s === M2 + 1 && (d2 = false), y -= m2;
-  y === 0 && M2 > 0 && s === M2 + 1 && (d2 ? d2 = false : (d2 = true, --s)), y < 0 && (y += m2, --s);
-  let f = s, I2 = y + 1;
-  const L2 = _2 + "-" + f + "-" + I2, k2 = f + "-" + I2, v2 = nt(_2), J2 = at(f), U2 = rt(I2), b2 = ht(_2);
+  for (s2 = 1; s2 <= 12 && y > 0; s2++)
+    M2 > 0 && s2 == M2 + 1 && !d2 ? (--s2, d2 = true, m2 = T(_2)) : m2 = tt(_2, s2), d2 && s2 === M2 + 1 && (d2 = false), y -= m2;
+  y === 0 && M2 > 0 && s2 === M2 + 1 && (d2 ? d2 = false : (d2 = true, --s2)), y < 0 && (y += m2, --s2);
+  let f2 = s2, I2 = y + 1;
+  const L2 = _2 + "-" + f2 + "-" + I2, k2 = f2 + "-" + I2, v2 = nt(_2), J2 = at(f2), U2 = rt(I2), b2 = ht(_2);
   return {
-    sDate: D,
-    sYear: h,
+    sDate: D2,
+    sYear: h2,
     sMonth: r2,
-    sDay: a,
+    sDay: a2,
     sFestival: P[E2] || "",
     astro: F2,
-    week: o,
+    week: o2,
     lDate: L2,
     lYear: _2,
-    lMonth: f,
+    lMonth: f2,
     lDay: I2,
     lFestival: Q[k2] || "",
     cnYear: v2,
@@ -17587,35 +23040,35 @@ class l {
   }
   static _computeYear(t, e) {
     const r2 = e.getYear() - 4;
-    let a = r2 % 10, i2 = r2 % 12;
-    a < 0 && (a += 10), i2 < 0 && (i2 += 12), t.yearGan = c == null ? void 0 : c[a], t.yearZhi = u == null ? void 0 : u[i2], t.yearGanIndex = a, t.yearZhiIndex = i2;
+    let a2 = r2 % 10, i2 = r2 % 12;
+    a2 < 0 && (a2 += 10), i2 < 0 && (i2 += 12), t.yearGan = c == null ? void 0 : c[a2], t.yearZhi = u == null ? void 0 : u[i2], t.yearGanIndex = a2, t.yearZhiIndex = i2;
   }
   static _computeMonth(t, e) {
-    const h = e.getMonth() - 1, a = ((t.yearGanIndex + 1) * 2 + h) % 10, i2 = (h + 2) % 12;
-    t.monthGan = c == null ? void 0 : c[a], t.monthZhi = u == null ? void 0 : u[i2], t.monthGanIndex = a, t.monthZhiIndex = i2;
+    const h2 = e.getMonth() - 1, a2 = ((t.yearGanIndex + 1) * 2 + h2) % 10, i2 = (h2 + 2) % 12;
+    t.monthGan = c == null ? void 0 : c[a2], t.monthZhi = u == null ? void 0 : u[i2], t.monthGanIndex = a2, t.monthZhiIndex = i2;
   }
   static _computeDay(t, e) {
-    const h = e._solar, r2 = new S(
-      h.getYear(),
-      h.getMonth(),
-      h.getDay(),
+    const h2 = e._solar, r2 = new S(
+      h2.getYear(),
+      h2.getMonth(),
+      h2.getDay(),
       12,
       0,
       0
-    ), a = Math.floor(r2.getJulianDay()) - 11, i2 = a % 10, o = a % 12;
-    t.dayGan = c == null ? void 0 : c[i2], t.dayZhi = u == null ? void 0 : u[o], t.dayGanIndex = i2, t.dayZhiIndex = o;
+    ), a2 = Math.floor(r2.getJulianDay()) - 11, i2 = a2 % 10, o2 = a2 % 12;
+    t.dayGan = c == null ? void 0 : c[i2], t.dayZhi = u == null ? void 0 : u[o2], t.dayGanIndex = i2, t.dayZhiIndex = o2;
     let g = i2;
-    const Z2 = e._hour, x2 = e._minute, D = (Z2 < 10 ? "0" : "") + Z2 + ":" + (x2 < 10 ? "0" : "") + x2;
-    D >= "23:00" && D <= "23:59" && (g++, g >= 10 && (g -= 10), dayZhiExact++, dayZhiExact >= 12 && (dayZhiExact -= 12)), t.dayGanIndexExact = g;
+    const Z2 = e._hour, x2 = e._minute, D2 = (Z2 < 10 ? "0" : "") + Z2 + ":" + (x2 < 10 ? "0" : "") + x2;
+    D2 >= "23:00" && D2 <= "23:59" && (g++, g >= 10 && (g -= 10), dayZhiExact++, dayZhiExact >= 12 && (dayZhiExact -= 12)), t.dayGanIndexExact = g;
   }
   static _computeTime(t, e) {
-    const h = e._hour, r2 = e._minute, a = (h < 10 ? "0" : "") + h + ":" + (r2 < 10 ? "0" : "") + r2, i2 = st(a), o = (t.dayGanIndexExact % 5 * 2 + i2) % 10;
-    t.timeGan = c == null ? void 0 : c[o], t.timeZhi = u == null ? void 0 : u[i2];
+    const h2 = e._hour, r2 = e._minute, a2 = (h2 < 10 ? "0" : "") + h2 + ":" + (r2 < 10 ? "0" : "") + r2, i2 = st(a2), o2 = (t.dayGanIndexExact % 5 * 2 + i2) % 10;
+    t.timeGan = c == null ? void 0 : c[o2], t.timeZhi = u == null ? void 0 : u[i2];
   }
 }
 class Y {
-  constructor(t, e, h, r2 = 0, a = 0, i2 = 0, o) {
-    this._year = t, this._month = e, this._day = h, this._hour = r2, this._minute = a, this._second = i2, this._solar = o, this._char8 = new l(this);
+  constructor(t, e, h2, r2 = 0, a2 = 0, i2 = 0, o2) {
+    this._year = t, this._month = e, this._day = h2, this._hour = r2, this._minute = a2, this._second = i2, this._solar = o2, this._char8 = new l(this);
   }
   getYear() {
     return this._year;
@@ -17665,8 +23118,8 @@ class Y {
   }
 }
 class S {
-  constructor(t, e, h, r2 = 0, a = 0, i2 = 0) {
-    this._year = t, this._month = e, this._day = h, this._hour = r2, this._minute = a, this._second = i2;
+  constructor(t, e, h2, r2 = 0, a2 = 0, i2 = 0) {
+    this._year = t, this._month = e, this._day = h2, this._hour = r2, this._minute = a2, this._second = i2;
   }
   getYear() {
     return this._year;
@@ -17690,11 +23143,11 @@ class S {
     return Y.fromSolar(this);
   }
   getJulianDay() {
-    let t = this._year, e = this._month, h = this._day + ((this._second / 60 + this._minute) / 60 + this._hour) / 24, r2 = 0, a = false;
-    return t * 372 + e * 31 + Math.floor(h) >= 588829 && (a = true), e <= 2 && (e += 12, t--), a && (r2 = Math.floor(t / 100), r2 = 2 - r2 + Math.floor(r2 / 4)), Math.floor(365.25 * (t + 4716)) + Math.floor(30.6001 * (e + 1)) + h + r2 - 1524.5;
+    let t = this._year, e = this._month, h2 = this._day + ((this._second / 60 + this._minute) / 60 + this._hour) / 24, r2 = 0, a2 = false;
+    return t * 372 + e * 31 + Math.floor(h2) >= 588829 && (a2 = true), e <= 2 && (e += 12, t--), a2 && (r2 = Math.floor(t / 100), r2 = 2 - r2 + Math.floor(r2 / 4)), Math.floor(365.25 * (t + 4716)) + Math.floor(30.6001 * (e + 1)) + h2 + r2 - 1524.5;
   }
 }
-const ot = (n, t, e, h = 0, r2 = 0, a = 0) => new S(n, t, e, h, r2, a).getLunar()._char8;
+const ot = (n, t, e, h2 = 0, r2 = 0, a2 = 0) => new S(n, t, e, h2, r2, a2).getLunar()._char8;
 const E = {
   甲: "木",
   乙: "木",
@@ -18214,60 +23667,60 @@ const E = {
       亥: 0.798
     }
   }
-}, M = (s) => {
-  const o = s.char8[4];
-  s.main = E[o];
-}, j = (s) => {
-  const c2 = s.main, o = O[c2];
-  s.similars = [c2, o];
-}, x = (s) => {
-  let c2 = s.similars, o = [];
+}, M = (s2) => {
+  const o2 = s2.char8[4];
+  s2.main = E[o2];
+}, j = (s2) => {
+  const c2 = s2.main, o2 = O[c2];
+  s2.similars = [c2, o2];
+}, x = (s2) => {
+  let c2 = s2.similars, o2 = [];
   b.forEach((r2) => {
-    c2.includes(r2) || o.push(r2);
-  }), s.differents = o;
-}, p = (s, c2, o) => {
+    c2.includes(r2) || o2.push(r2);
+  }), s2.differents = o2;
+}, p = (s2, c2, o2) => {
   var i2;
-  const r2 = E[c2], h = ((i2 = s == null ? void 0 : s.score) == null ? void 0 : i2[r2]) || 0;
-  s.score[r2] = h + o;
-}, G = (s) => {
-  const c2 = s.char8, o = c2[3];
-  c2.forEach((a, e) => {
+  const r2 = E[c2], h2 = ((i2 = s2 == null ? void 0 : s2.score) == null ? void 0 : i2[r2]) || 0;
+  s2.score[r2] = h2 + o2;
+}, G = (s2) => {
+  const c2 = s2.char8, o2 = c2[3];
+  c2.forEach((a2, e) => {
     var t;
     if (e % 2 === 0) {
-      const n = (t = d == null ? void 0 : d[a]) == null ? void 0 : t[o];
-      p(s, a, n);
+      const n = (t = d == null ? void 0 : d[a2]) == null ? void 0 : t[o2];
+      p(s2, a2, n);
     } else {
-      const n = A[a];
+      const n = A[a2];
       Object.keys(n).forEach((S2) => {
-        const f = n[S2][o];
-        p(s, S2, f);
+        const f2 = n[S2][o2];
+        p(s2, S2, f2);
       });
     }
   });
-  const r2 = (a, e) => {
+  const r2 = (a2, e) => {
     let t = 0;
     return e.forEach((n) => {
-      t = t + (a.score[n] || 0);
+      t = t + (a2.score[n] || 0);
     }), t;
-  }, { similars: h, differents: i2 } = s;
-  s.similarScore = r2(s, h), s.differentScore = r2(s, i2);
-}, L = (s) => {
+  }, { similars: h2, differents: i2 } = s2;
+  s2.similarScore = r2(s2, h2), s2.differentScore = r2(s2, i2);
+}, L = (s2) => {
   let c2 = [];
-  s.shorts = c2;
-}, Z = (s) => {
-  const { similarScore: c2, differentScore: o, similars: r2, differents: h } = s, i2 = c2 - o, a = Math.abs(i2), e = (n, S2, f) => {
+  s2.shorts = c2;
+}, Z = (s2) => {
+  const { similarScore: c2, differentScore: o2, similars: r2, differents: h2 } = s2, i2 = c2 - o2, a2 = Math.abs(i2), e = (n, S2, f2) => {
     const { score: g = {} } = n;
     return S2.forEach((l2) => {
-      f || (f = l2);
-      const u2 = g[f] || 0, y = g[l2] || 0;
-      u2 > y && (f = l2);
-    }), f;
+      f2 || (f2 = l2);
+      const u2 = g[f2] || 0, y = g[l2] || 0;
+      u2 > y && (f2 = l2);
+    }), f2;
   };
   let t = "";
-  a > 0.8 && (i2 > 0 ? t = e(s, h) : t = e(s, r2)), s.supplyOf = t;
-}, k = (s) => {
+  a2 > 0.8 && (i2 > 0 ? t = e(s2, h2) : t = e(s2, r2)), s2.supplyOf = t;
+}, k = (s2) => {
   let c2 = {
-    char8: s,
+    char8: s2,
     // 日主五行属性
     main: "",
     // 同类
@@ -18279,7 +23732,7 @@ const E = {
     similarScore: 0,
     differentScore: 0
   };
-  return Array.isArray(s) && s.length === 8 && (M(c2), j(c2), x(c2), G(c2), L(c2), Z(c2)), c2;
+  return Array.isArray(s2) && s2.length === 8 && (M(c2), j(c2), x(c2), G(c2), L(c2), Z(c2)), c2;
 };
 const i = [
   {
@@ -68030,7 +73483,9 @@ const _sfc_main$3 = {
     ElDatePicker,
     ElTimePicker,
     ElSelect,
-    ElOption
+    ElOption,
+    ElTable,
+    ElTableColumn
   },
   data() {
     return {
@@ -68041,15 +73496,45 @@ const _sfc_main$3 = {
         time: ""
       },
       formRules: {
-        surname: [{ required: true, message: "请输入姓氏", trigger: "blur" }],
+        surname: [
+          { required: true, message: "请输入姓氏", trigger: "blur" },
+          {
+            pattern: /^[\u4e00-\u9fa5]{1,2}$/,
+            message: "只能输入 1 到 2 个汉字",
+            trigger: "blur"
+          }
+        ],
         sex: [{ required: true, message: "请输入性别", trigger: "blur" }],
         date: [{ required: true, message: "请输入日期", trigger: "blur" }],
         time: [{ required: true, message: "请输入时间", trigger: "blur" }]
       },
-      formInfo: {}
+      formInfo: {},
+      columns: [{ prop: "1" }, { prop: "2" }, { prop: "3" }, { prop: "4" }],
+      generated: false
     };
   },
+  computed: {
+    tableData() {
+      var _a2;
+      let results = [];
+      const size = 5;
+      const arr = ((_a2 = this.formInfo) == null ? void 0 : _a2.names) ?? [];
+      for (let i2 = 0; i2 < arr.length; i2 += size) {
+        const tempArr = arr.slice(i2, i2 + size);
+        let tempObj = {};
+        for (let j2 = 1; j2 < tempArr.length; j2++) {
+          tempObj[j2] = tempArr[j2 - 1];
+        }
+        results.push(tempObj);
+      }
+      return results;
+    }
+  },
   methods: {
+    getTableCellValue(item) {
+      var _a2;
+      return ((_a2 = this.formInfo) == null ? void 0 : _a2.surname) + item.map((ele) => ele.char).join("");
+    },
     async handlerSumbit() {
       const formEl = this.$refs.formRef;
       if (!formEl) return;
@@ -68062,6 +73547,7 @@ const _sfc_main$3 = {
       const formEl = this.$refs.formRef;
       if (!formEl) return;
       formEl.resetFields();
+      this.generated = false;
     },
     handlerData() {
       let info = { ...this.formValue };
@@ -68071,9 +73557,10 @@ const _sfc_main$3 = {
       getElement5(info);
       getCnChar(info);
       this.formInfo = info;
+      this.generated = true;
     },
-    handlerItemClick(index) {
-      console.log(this.formInfo, this.formInfo.names[index]);
+    handlerItemClick(row, column) {
+      console.log(row[column.property]);
     }
   }
 };
@@ -68082,8 +73569,6 @@ const _hoisted_2 = {
   key: 0,
   class: "result"
 };
-const _hoisted_3 = { class: "result-names" };
-const _hoisted_4 = ["onClick"];
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_input = resolveComponent("el-input");
   const _component_el_form_item = resolveComponent("el-form-item");
@@ -68093,14 +73578,16 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_time_picker = resolveComponent("el-time-picker");
   const _component_el_button = resolveComponent("el-button");
   const _component_el_form = resolveComponent("el-form");
+  const _component_el_table_column = resolveComponent("el-table-column");
+  const _component_el_table = resolveComponent("el-table");
   return openBlock(), createElementBlock("div", _hoisted_1$1, [
     createVNode(_component_el_form, {
       model: $data.formValue,
       rules: $data.formRules,
       ref: "formRef",
-      "status-icon": "",
       "label-width": "85px",
-      size: "large"
+      size: "large",
+      "label-position": "top"
     }, {
       default: withCtx(() => [
         createVNode(_component_el_form_item, {
@@ -68109,11 +73596,12 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           default: withCtx(() => [
             createVNode(_component_el_input, {
+              disabled: $data.generated,
               modelValue: $data.formValue.surname,
               "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formValue.surname = $event),
               placeholder: "输入孩子的姓氏",
               clearable: ""
-            }, null, 8, ["modelValue"])
+            }, null, 8, ["disabled", "modelValue"])
           ]),
           _: 1
         }),
@@ -68123,6 +73611,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         }, {
           default: withCtx(() => [
             createVNode(_component_el_select, {
+              disabled: $data.generated,
               modelValue: $data.formValue.sex,
               "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.formValue.sex = $event),
               placeholder: "选择孩子的性别",
@@ -68139,38 +73628,40 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
                 })
               ]),
               _: 1
-            }, 8, ["modelValue"])
+            }, 8, ["disabled", "modelValue"])
           ]),
           _: 1
         }),
         createVNode(_component_el_form_item, {
-          label: "阳历日期",
+          label: "出生日期(阳历)",
           prop: "date"
         }, {
           default: withCtx(() => [
             createVNode(_component_el_date_picker, {
+              disabled: $data.generated,
               modelValue: $data.formValue.date,
               "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.formValue.date = $event),
               type: "date",
               "value-format": "YYYY-MM-DD",
               placeholder: "选择一个日期",
               style: { "width": "100%" }
-            }, null, 8, ["modelValue"])
+            }, null, 8, ["disabled", "modelValue"])
           ]),
           _: 1
         }),
         createVNode(_component_el_form_item, {
-          label: "时间",
+          label: "出生时间",
           prop: "time"
         }, {
           default: withCtx(() => [
             createVNode(_component_el_time_picker, {
+              disabled: $data.generated,
               modelValue: $data.formValue.time,
               "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.formValue.time = $event),
               "value-format": "HH:mm",
               placeholder: "选择一个时间",
               style: { "width": "100%" }
-            }, null, 8, ["modelValue"])
+            }, null, 8, ["disabled", "modelValue"])
           ]),
           _: 1
         }),
@@ -68178,16 +73669,18 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
           default: withCtx(() => [
             createVNode(_component_el_button, {
               type: "primary",
-              onClick: $options.handlerSumbit
+              onClick: $options.handlerSumbit,
+              disabled: $data.generated
             }, {
               default: withCtx(() => _cache[4] || (_cache[4] = [
-                createTextVNode("起名")
+                createTextVNode(" 起名 ")
               ])),
               _: 1
-            }, 8, ["onClick"]),
+            }, 8, ["onClick", "disabled"]),
             createVNode(_component_el_button, {
               type: "primary",
-              onClick: $options.handlerReset
+              onClick: $options.handlerReset,
+              disabled: false
             }, {
               default: withCtx(() => _cache[5] || (_cache[5] = [
                 createTextVNode("重置")
@@ -68200,21 +73693,35 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       ]),
       _: 1
     }, 8, ["model", "rules"]),
-    $data.formInfo.names && Array.isArray($data.formInfo.names) && !!$data.formInfo.names.length ? (openBlock(), createElementBlock("div", _hoisted_2, [
+    $data.generated ? (openBlock(), createElementBlock("div", _hoisted_2, [
       _cache[6] || (_cache[6] = createBaseVNode("div", { class: "result-title" }, "生成结果", -1)),
-      createBaseVNode("div", _hoisted_3, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList($data.formInfo.names, (item, index) => {
-          return openBlock(), createElementBlock("div", {
-            class: "name-item",
-            key: index,
-            onClick: ($event) => $options.handlerItemClick(index)
-          }, toDisplayString($data.formInfo.surname + item.map((ele) => ele.char).join("")), 9, _hoisted_4);
-        }), 128))
-      ])
+      createVNode(_component_el_table, {
+        data: $options.tableData,
+        border: "",
+        "show-header": false,
+        "empty-text": "暂无数据",
+        style: { "width": "100%" },
+        onCellClick: $options.handlerItemClick
+      }, {
+        default: withCtx(() => [
+          (openBlock(true), createElementBlock(Fragment, null, renderList($data.columns, (item) => {
+            return openBlock(), createBlock(_component_el_table_column, {
+              key: item.prop,
+              prop: item.prop
+            }, {
+              default: withCtx((scope) => [
+                createTextVNode(toDisplayString($options.getTableCellValue(scope.row[item.prop])), 1)
+              ]),
+              _: 2
+            }, 1032, ["prop"]);
+          }), 128))
+        ]),
+        _: 1
+      }, 8, ["data", "onCellClick"])
     ])) : createCommentVNode("", true)
   ]);
 }
-const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-e45fbb6c"]]);
+const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-3024af47"]]);
 const _sfc_main$2 = {};
 function _sfc_render(_ctx, _cache) {
   return openBlock(), createElementBlock("div");
