@@ -73677,13 +73677,23 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               ])),
               _: 1
             }, 8, ["onClick", "disabled"]),
+            $data.generated ? (openBlock(), createBlock(_component_el_button, {
+              key: 0,
+              type: "warning",
+              onClick: $options.handlerSumbit
+            }, {
+              default: withCtx(() => _cache[5] || (_cache[5] = [
+                createTextVNode(" 重新生成 ")
+              ])),
+              _: 1
+            }, 8, ["onClick"])) : createCommentVNode("", true),
             createVNode(_component_el_button, {
-              type: "primary",
+              type: "info",
               onClick: $options.handlerReset,
               disabled: false
             }, {
-              default: withCtx(() => _cache[5] || (_cache[5] = [
-                createTextVNode("重置")
+              default: withCtx(() => _cache[6] || (_cache[6] = [
+                createTextVNode(" 重置 ")
               ])),
               _: 1
             }, 8, ["onClick"])
@@ -73694,7 +73704,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       _: 1
     }, 8, ["model", "rules"]),
     $data.generated ? (openBlock(), createElementBlock("div", _hoisted_2, [
-      _cache[6] || (_cache[6] = createBaseVNode("div", { class: "result-title" }, "生成结果", -1)),
+      _cache[7] || (_cache[7] = createBaseVNode("div", { class: "result-title" }, "生成结果", -1)),
       createVNode(_component_el_table, {
         data: $options.tableData,
         border: "",
@@ -73721,7 +73731,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     ])) : createCommentVNode("", true)
   ]);
 }
-const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-3024af47"]]);
+const Content = /* @__PURE__ */ _export_sfc$1(_sfc_main$3, [["render", _sfc_render$1], ["__scopeId", "data-v-f8ffcbcb"]]);
 const _sfc_main$2 = {};
 function _sfc_render(_ctx, _cache) {
   return openBlock(), createElementBlock("div");
