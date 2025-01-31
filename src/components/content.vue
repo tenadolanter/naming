@@ -50,9 +50,12 @@
         <el-button type="primary" @click="handlerSumbit" :disabled="generated">
           起名
         </el-button>
-        <el-button type="primary" @click="handlerReset" :disabled="false"
-          >重置</el-button
-        >
+        <el-button type="warning" @click="handlerSumbit" v-if="generated">
+          重新生成
+        </el-button>
+        <el-button type="info" @click="handlerReset" :disabled="false">
+          重置
+        </el-button>
       </el-form-item>
     </el-form>
     <div class="result" v-if="generated">
