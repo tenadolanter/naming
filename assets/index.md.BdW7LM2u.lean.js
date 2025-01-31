@@ -1,344 +1,77 @@
-import { h as ref, y as watch, a2 as getCurrentScope, a3 as onScopeDispose, p as unref, a4 as getCurrentInstance, l as onMounted, U as nextTick, a5 as isString$1, a6 as isArray$1, a7 as isObject$1, a8 as camelize, d as defineComponent, o as openBlock, c as createElementBlock, m as createBaseVNode, a9 as hasOwn, aa as warn, ab as NOOP, k as computed, O as inject, ac as isRef, ad as isFunction$1, H as shallowRef, ae as onBeforeUnmount, af as onBeforeMount, Y as provide, r as renderSlot, N as mergeProps, ag as toRef, A as onUnmounted, ah as reactive, ai as toRefs, n as normalizeClass, C as onUpdated, J as createVNode, F as Fragment, a1 as useSlots, w as withCtx, b as createBlock, K as resolveDynamicComponent, Q as normalizeStyle, a as createTextVNode, t as toDisplayString, e as createCommentVNode, aj as TransitionGroup, ak as useAttrs$1, a0 as withModifiers, al as withDirectives, am as vShow, T as Transition, an as cloneVNode, ao as Text, ap as Comment, aq as Teleport, W as readonly, ar as onDeactivated, as as isDate, G as renderList, Z as withKeys, at as toRaw, z as watchEffect, au as toRawType, E as resolveComponent, av as resolveDirective, aw as vModelText, _ as _export_sfc$1, q as pushScopeId, s as popScopeId } from "./chunks/framework.jFWLL5KV.js";
-const composeEventHandlers = (theirsHandler, oursHandler, { checkForDefaultPrevented = true } = {}) => {
-  const handleEvent = (event) => {
-    const shouldPrevent = theirsHandler == null ? void 0 : theirsHandler(event);
-    if (checkForDefaultPrevented === false || !shouldPrevent) {
-      return oursHandler == null ? void 0 : oursHandler(event);
-    }
-  };
-  return handleEvent;
+import { ae as getCurrentInstance, L as inject, p as ref, h as computed, k as unref, af as isArray$1, ag as isObject$1, ah as isString$1, q as watch, D as shallowRef, s as watchEffect, S as readonly, v as onMounted, P as nextTick, ai as getCurrentScope, aj as onScopeDispose, ak as isRef, al as hasOwn, am as warn, an as isFunction$1, ao as camelize, ap as NOOP, d as defineComponent, o as openBlock, c as createElementBlock, r as renderSlot, K as mergeProps, j as createBaseVNode, aq as toRef, x as onUnmounted, ar as useAttrs$1, $ as useSlots, e as createCommentVNode, F as Fragment, n as normalizeClass, b as createBlock, w as withCtx, Z as withModifiers, t as toDisplayString, N as normalizeStyle, H as resolveDynamicComponent, G as createVNode, Y as onBeforeUnmount, as as withDirectives, at as vShow, T as Transition, V as provide, au as reactive, av as onActivated, z as onUpdated, aw as cloneVNode, ax as Text, ay as Comment, az as Teleport$1, aA as onBeforeMount, aB as onDeactivated, aC as isDate, C as renderList, a as createTextVNode, X as withKeys, aD as toRefs, aE as TransitionGroup, aF as toRaw, aG as isPlainObject, B as resolveComponent, aH as resolveDirective, aI as vModelText, aJ as toHandlerKey, _ as _export_sfc$1 } from "./chunks/framework.ByEDUqkj.js";
+const configProviderContextKey = Symbol();
+const defaultNamespace = "el";
+const statePrefix = "is-";
+const _bem = (namespace, block, blockSuffix, element, modifier) => {
+  let cls = `${namespace}-${block}`;
+  if (blockSuffix) {
+    cls += `-${blockSuffix}`;
+  }
+  if (element) {
+    cls += `__${element}`;
+  }
+  if (modifier) {
+    cls += `--${modifier}`;
+  }
+  return cls;
 };
-var _a;
-const isClient = typeof window !== "undefined";
-const isString = (val) => typeof val === "string";
-const noop$1 = () => {
+const namespaceContextKey = Symbol("namespaceContextKey");
+const useGetDerivedNamespace = (namespaceOverrides) => {
+  const derivedNamespace = getCurrentInstance() ? inject(namespaceContextKey, ref(defaultNamespace)) : ref(defaultNamespace);
+  const namespace = computed(() => {
+    return unref(derivedNamespace) || defaultNamespace;
+  });
+  return namespace;
 };
-const isIOS = isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && /iP(ad|hone|od)/.test(window.navigator.userAgent);
-function resolveUnref(r2) {
-  return typeof r2 === "function" ? r2() : unref(r2);
-}
-function createFilterWrapper(filter, fn2) {
-  function wrapper(...args) {
-    return new Promise((resolve, reject) => {
-      Promise.resolve(filter(() => fn2.apply(this, args), { fn: fn2, thisArg: this, args })).then(resolve).catch(reject);
-    });
-  }
-  return wrapper;
-}
-function debounceFilter(ms, options = {}) {
-  let timer;
-  let maxTimer;
-  let lastRejector = noop$1;
-  const _clearTimeout = (timer2) => {
-    clearTimeout(timer2);
-    lastRejector();
-    lastRejector = noop$1;
+const useNamespace = (block, namespaceOverrides) => {
+  const namespace = useGetDerivedNamespace();
+  const b2 = (blockSuffix = "") => _bem(namespace.value, block, blockSuffix, "", "");
+  const e = (element) => element ? _bem(namespace.value, block, "", element, "") : "";
+  const m2 = (modifier) => modifier ? _bem(namespace.value, block, "", "", modifier) : "";
+  const be2 = (blockSuffix, element) => blockSuffix && element ? _bem(namespace.value, block, blockSuffix, element, "") : "";
+  const em = (element, modifier) => element && modifier ? _bem(namespace.value, block, "", element, modifier) : "";
+  const bm = (blockSuffix, modifier) => blockSuffix && modifier ? _bem(namespace.value, block, blockSuffix, "", modifier) : "";
+  const bem = (blockSuffix, element, modifier) => blockSuffix && element && modifier ? _bem(namespace.value, block, blockSuffix, element, modifier) : "";
+  const is = (name, ...args) => {
+    const state = args.length >= 1 ? args[0] : true;
+    return name && state ? `${statePrefix}${name}` : "";
   };
-  const filter = (invoke) => {
-    const duration = resolveUnref(ms);
-    const maxDuration = resolveUnref(options.maxWait);
-    if (timer)
-      _clearTimeout(timer);
-    if (duration <= 0 || maxDuration !== void 0 && maxDuration <= 0) {
-      if (maxTimer) {
-        _clearTimeout(maxTimer);
-        maxTimer = null;
+  const cssVar = (object4) => {
+    const styles = {};
+    for (const key in object4) {
+      if (object4[key]) {
+        styles[`--${namespace.value}-${key}`] = object4[key];
       }
-      return Promise.resolve(invoke());
     }
-    return new Promise((resolve, reject) => {
-      lastRejector = options.rejectOnCancel ? reject : resolve;
-      if (maxDuration && !maxTimer) {
-        maxTimer = setTimeout(() => {
-          if (timer)
-            _clearTimeout(timer);
-          maxTimer = null;
-          resolve(invoke());
-        }, maxDuration);
+    return styles;
+  };
+  const cssVarBlock = (object4) => {
+    const styles = {};
+    for (const key in object4) {
+      if (object4[key]) {
+        styles[`--${namespace.value}-${block}-${key}`] = object4[key];
       }
-      timer = setTimeout(() => {
-        if (maxTimer)
-          _clearTimeout(maxTimer);
-        maxTimer = null;
-        resolve(invoke());
-      }, duration);
-    });
-  };
-  return filter;
-}
-function identity$1(arg) {
-  return arg;
-}
-function tryOnScopeDispose(fn2) {
-  if (getCurrentScope()) {
-    onScopeDispose(fn2);
-    return true;
-  }
-  return false;
-}
-function useDebounceFn(fn2, ms = 200, options = {}) {
-  return createFilterWrapper(debounceFilter(ms, options), fn2);
-}
-function refDebounced(value, ms = 200, options = {}) {
-  const debounced = ref(value.value);
-  const updater = useDebounceFn(() => {
-    debounced.value = value.value;
-  }, ms, options);
-  watch(value, () => updater());
-  return debounced;
-}
-function tryOnMounted(fn2, sync = true) {
-  if (getCurrentInstance())
-    onMounted(fn2);
-  else if (sync)
-    fn2();
-  else
-    nextTick(fn2);
-}
-function unrefElement(elRef) {
-  var _a2;
-  const plain = resolveUnref(elRef);
-  return (_a2 = plain == null ? void 0 : plain.$el) != null ? _a2 : plain;
-}
-const defaultWindow = isClient ? window : void 0;
-function useEventListener(...args) {
-  let target;
-  let events;
-  let listeners;
-  let options;
-  if (isString(args[0]) || Array.isArray(args[0])) {
-    [events, listeners, options] = args;
-    target = defaultWindow;
-  } else {
-    [target, events, listeners, options] = args;
-  }
-  if (!target)
-    return noop$1;
-  if (!Array.isArray(events))
-    events = [events];
-  if (!Array.isArray(listeners))
-    listeners = [listeners];
-  const cleanups = [];
-  const cleanup = () => {
-    cleanups.forEach((fn2) => fn2());
-    cleanups.length = 0;
-  };
-  const register2 = (el, event, listener, options2) => {
-    el.addEventListener(event, listener, options2);
-    return () => el.removeEventListener(event, listener, options2);
-  };
-  const stopWatch = watch(() => [unrefElement(target), resolveUnref(options)], ([el, options2]) => {
-    cleanup();
-    if (!el)
-      return;
-    cleanups.push(...events.flatMap((event) => {
-      return listeners.map((listener) => register2(el, event, listener, options2));
-    }));
-  }, { immediate: true, flush: "post" });
-  const stop = () => {
-    stopWatch();
-    cleanup();
-  };
-  tryOnScopeDispose(stop);
-  return stop;
-}
-let _iOSWorkaround = false;
-function onClickOutside(target, handler, options = {}) {
-  const { window: window2 = defaultWindow, ignore = [], capture = true, detectIframe = false } = options;
-  if (!window2)
-    return;
-  if (isIOS && !_iOSWorkaround) {
-    _iOSWorkaround = true;
-    Array.from(window2.document.body.children).forEach((el) => el.addEventListener("click", noop$1));
-  }
-  let shouldListen = true;
-  const shouldIgnore = (event) => {
-    return ignore.some((target2) => {
-      if (typeof target2 === "string") {
-        return Array.from(window2.document.querySelectorAll(target2)).some((el) => el === event.target || event.composedPath().includes(el));
-      } else {
-        const el = unrefElement(target2);
-        return el && (event.target === el || event.composedPath().includes(el));
-      }
-    });
-  };
-  const listener = (event) => {
-    const el = unrefElement(target);
-    if (!el || el === event.target || event.composedPath().includes(el))
-      return;
-    if (event.detail === 0)
-      shouldListen = !shouldIgnore(event);
-    if (!shouldListen) {
-      shouldListen = true;
-      return;
     }
-    handler(event);
+    return styles;
   };
-  const cleanup = [
-    useEventListener(window2, "click", listener, { passive: true, capture }),
-    useEventListener(window2, "pointerdown", (e) => {
-      const el = unrefElement(target);
-      if (el)
-        shouldListen = !e.composedPath().includes(el) && !shouldIgnore(e);
-    }, { passive: true }),
-    detectIframe && useEventListener(window2, "blur", (event) => {
-      var _a2;
-      const el = unrefElement(target);
-      if (((_a2 = window2.document.activeElement) == null ? void 0 : _a2.tagName) === "IFRAME" && !(el == null ? void 0 : el.contains(window2.document.activeElement)))
-        handler(event);
-    })
-  ].filter(Boolean);
-  const stop = () => cleanup.forEach((fn2) => fn2());
-  return stop;
-}
-function useSupported(callback, sync = false) {
-  const isSupported = ref();
-  const update = () => isSupported.value = Boolean(callback());
-  update();
-  tryOnMounted(update, sync);
-  return isSupported;
-}
-const _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-const globalKey = "__vueuse_ssr_handlers__";
-_global[globalKey] = _global[globalKey] || {};
-var __getOwnPropSymbols$g = Object.getOwnPropertySymbols;
-var __hasOwnProp$g = Object.prototype.hasOwnProperty;
-var __propIsEnum$g = Object.prototype.propertyIsEnumerable;
-var __objRest$2 = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp$g.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols$g)
-    for (var prop of __getOwnPropSymbols$g(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum$g.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
-function useResizeObserver(target, callback, options = {}) {
-  const _a2 = options, { window: window2 = defaultWindow } = _a2, observerOptions = __objRest$2(_a2, ["window"]);
-  let observer;
-  const isSupported = useSupported(() => window2 && "ResizeObserver" in window2);
-  const cleanup = () => {
-    if (observer) {
-      observer.disconnect();
-      observer = void 0;
-    }
-  };
-  const stopWatch = watch(() => unrefElement(target), (el) => {
-    cleanup();
-    if (isSupported.value && window2 && el) {
-      observer = new ResizeObserver(callback);
-      observer.observe(el, observerOptions);
-    }
-  }, { immediate: true, flush: "post" });
-  const stop = () => {
-    cleanup();
-    stopWatch();
-  };
-  tryOnScopeDispose(stop);
+  const cssVarName = (name) => `--${namespace.value}-${name}`;
+  const cssVarBlockName = (name) => `--${namespace.value}-${block}-${name}`;
   return {
-    isSupported,
-    stop
+    namespace,
+    b: b2,
+    e,
+    m: m2,
+    be: be2,
+    em,
+    bm,
+    bem,
+    is,
+    cssVar,
+    cssVarName,
+    cssVarBlock,
+    cssVarBlockName
   };
-}
-var __getOwnPropSymbols$8 = Object.getOwnPropertySymbols;
-var __hasOwnProp$8 = Object.prototype.hasOwnProperty;
-var __propIsEnum$8 = Object.prototype.propertyIsEnumerable;
-var __objRest$1 = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp$8.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols$8)
-    for (var prop of __getOwnPropSymbols$8(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum$8.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
 };
-function useMutationObserver(target, callback, options = {}) {
-  const _a2 = options, { window: window2 = defaultWindow } = _a2, mutationOptions = __objRest$1(_a2, ["window"]);
-  let observer;
-  const isSupported = useSupported(() => window2 && "MutationObserver" in window2);
-  const cleanup = () => {
-    if (observer) {
-      observer.disconnect();
-      observer = void 0;
-    }
-  };
-  const stopWatch = watch(() => unrefElement(target), (el) => {
-    cleanup();
-    if (isSupported.value && window2 && el) {
-      observer = new MutationObserver(callback);
-      observer.observe(el, mutationOptions);
-    }
-  }, { immediate: true });
-  const stop = () => {
-    cleanup();
-    stopWatch();
-  };
-  tryOnScopeDispose(stop);
-  return {
-    isSupported,
-    stop
-  };
-}
-var SwipeDirection;
-(function(SwipeDirection2) {
-  SwipeDirection2["UP"] = "UP";
-  SwipeDirection2["RIGHT"] = "RIGHT";
-  SwipeDirection2["DOWN"] = "DOWN";
-  SwipeDirection2["LEFT"] = "LEFT";
-  SwipeDirection2["NONE"] = "NONE";
-})(SwipeDirection || (SwipeDirection = {}));
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp.call(b2, prop))
-      __defNormalProp(a, prop, b2[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b2)) {
-      if (__propIsEnum.call(b2, prop))
-        __defNormalProp(a, prop, b2[prop]);
-    }
-  return a;
-};
-const _TransitionPresets = {
-  easeInSine: [0.12, 0, 0.39, 0],
-  easeOutSine: [0.61, 1, 0.88, 1],
-  easeInOutSine: [0.37, 0, 0.63, 1],
-  easeInQuad: [0.11, 0, 0.5, 0],
-  easeOutQuad: [0.5, 1, 0.89, 1],
-  easeInOutQuad: [0.45, 0, 0.55, 1],
-  easeInCubic: [0.32, 0, 0.67, 0],
-  easeOutCubic: [0.33, 1, 0.68, 1],
-  easeInOutCubic: [0.65, 0, 0.35, 1],
-  easeInQuart: [0.5, 0, 0.75, 0],
-  easeOutQuart: [0.25, 1, 0.5, 1],
-  easeInOutQuart: [0.76, 0, 0.24, 1],
-  easeInQuint: [0.64, 0, 0.78, 0],
-  easeOutQuint: [0.22, 1, 0.36, 1],
-  easeInOutQuint: [0.83, 0, 0.17, 1],
-  easeInExpo: [0.7, 0, 0.84, 0],
-  easeOutExpo: [0.16, 1, 0.3, 1],
-  easeInOutExpo: [0.87, 0, 0.13, 1],
-  easeInCirc: [0.55, 0, 1, 0.45],
-  easeOutCirc: [0, 0.55, 0.45, 1],
-  easeInOutCirc: [0.85, 0, 0.15, 1],
-  easeInBack: [0.36, 0, 0.66, -0.56],
-  easeOutBack: [0.34, 1.56, 0.64, 1],
-  easeInOutBack: [0.68, -0.6, 0.32, 1.6]
-};
-__spreadValues({
-  linear: identity$1
-}, _TransitionPresets);
-const isFirefox = () => isClient && /firefox/i.test(window.navigator.userAgent);
 var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
 var freeSelf = typeof self == "object" && self && self.Object === Object && self;
 var root = freeGlobal || freeSelf || Function("return this")();
@@ -392,7 +125,6 @@ function arrayMap(array4, iteratee) {
   return result;
 }
 var isArray = Array.isArray;
-var INFINITY$3 = 1 / 0;
 var symbolProto$2 = Symbol$1 ? Symbol$1.prototype : void 0, symbolToString = symbolProto$2 ? symbolProto$2.toString : void 0;
 function baseToString(value) {
   if (typeof value == "string") {
@@ -405,7 +137,7 @@ function baseToString(value) {
     return symbolToString ? symbolToString.call(value) : "";
   }
   var result = value + "";
-  return result == "0" && 1 / value == -INFINITY$3 ? "-0" : result;
+  return result == "0" && 1 / value == -Infinity ? "-0" : result;
 }
 var reWhitespace = /\s/;
 function trimmedEndIndex(string3) {
@@ -445,23 +177,7 @@ function toNumber(value) {
   var isBinary = reIsBinary.test(value);
   return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
 }
-var INFINITY$2 = 1 / 0, MAX_INTEGER = 17976931348623157e292;
-function toFinite(value) {
-  if (!value) {
-    return value === 0 ? value : 0;
-  }
-  value = toNumber(value);
-  if (value === INFINITY$2 || value === -INFINITY$2) {
-    var sign = value < 0 ? -1 : 1;
-    return sign * MAX_INTEGER;
-  }
-  return value === value ? value : 0;
-}
-function toInteger(value) {
-  var result = toFinite(value), remainder = result % 1;
-  return result === result ? remainder ? result - remainder : result : 0;
-}
-function identity(value) {
+function identity$1(value) {
   return value;
 }
 var asyncTag = "[object AsyncFunction]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
@@ -548,7 +264,7 @@ function apply(func, thisArg, args) {
   }
   return func.apply(thisArg, args);
 }
-function noop() {
+function noop$1() {
 }
 function copyArray(source, array4) {
   var index = -1, length = source.length;
@@ -588,7 +304,7 @@ var defineProperty = function() {
   } catch (e) {
   }
 }();
-var baseSetToString = !defineProperty ? identity : function(func, string3) {
+var baseSetToString = !defineProperty ? identity$1 : function(func, string3) {
   return defineProperty(func, "toString", {
     "configurable": true,
     "enumerable": false,
@@ -596,8 +312,7 @@ var baseSetToString = !defineProperty ? identity : function(func, string3) {
     "writable": true
   });
 };
-const baseSetToString$1 = baseSetToString;
-var setToString = shortOut(baseSetToString$1);
+var setToString = shortOut(baseSetToString);
 function arrayEach(array4, iteratee) {
   var index = -1, length = array4 == null ? 0 : array4.length;
   while (++index < length) {
@@ -671,7 +386,7 @@ function copyObject(source, props, object4, customizer) {
   var index = -1, length = props.length;
   while (++index < length) {
     var key = props[index];
-    var newValue = customizer ? customizer(object4[key], source[key], key, object4, source) : void 0;
+    var newValue = void 0;
     if (newValue === void 0) {
       newValue = source[key];
     }
@@ -683,11 +398,11 @@ function copyObject(source, props, object4, customizer) {
   }
   return object4;
 }
-var nativeMax$2 = Math.max;
+var nativeMax$1 = Math.max;
 function overRest(func, start, transform) {
-  start = nativeMax$2(start === void 0 ? func.length - 1 : start, 0);
+  start = nativeMax$1(start === void 0 ? func.length - 1 : start, 0);
   return function() {
-    var args = arguments, index = -1, length = nativeMax$2(args.length - start, 0), array4 = Array(length);
+    var args = arguments, index = -1, length = nativeMax$1(args.length - start, 0), array4 = Array(length);
     while (++index < length) {
       array4[index] = args[start + index];
     }
@@ -701,7 +416,7 @@ function overRest(func, start, transform) {
   };
 }
 function baseRest(func, start) {
-  return setToString(overRest(func, start, identity), func + "");
+  return setToString(overRest(func, start, identity$1), func + "");
 }
 var MAX_SAFE_INTEGER = 9007199254740991;
 function isLength(value) {
@@ -1050,13 +765,12 @@ function castPath(value, object4) {
   }
   return isKey(value, object4) ? [value] : stringToPath(toString(value));
 }
-var INFINITY$1 = 1 / 0;
 function toKey(value) {
   if (typeof value == "string" || isSymbol(value)) {
     return value;
   }
   var result = value + "";
-  return result == "0" && 1 / value == -INFINITY$1 ? "-0" : result;
+  return result == "0" && 1 / value == -Infinity ? "-0" : result;
 }
 function baseGet(object4, path) {
   path = castPath(path, object4);
@@ -1087,10 +801,8 @@ function baseFlatten(array4, depth, predicate, isStrict, result) {
   result || (result = []);
   while (++index < length) {
     var value = array4[index];
-    if (depth > 0 && predicate(value)) {
-      if (depth > 1) {
-        baseFlatten(value, depth - 1, predicate, isStrict, result);
-      } else {
+    if (predicate(value)) {
+      {
         arrayPush(result, value);
       }
     } else if (!isStrict) {
@@ -1101,10 +813,12 @@ function baseFlatten(array4, depth, predicate, isStrict, result) {
 }
 function flatten(array4) {
   var length = array4 == null ? 0 : array4.length;
-  return length ? baseFlatten(array4, 1) : [];
+  return length ? baseFlatten(array4) : [];
+}
+function flatRest(func) {
+  return setToString(overRest(func, void 0, flatten), func + "");
 }
 var getPrototype = overArg(Object.getPrototypeOf, Object);
-const getPrototype$1 = getPrototype;
 function castArray$1() {
   if (!arguments.length) {
     return [];
@@ -1203,7 +917,7 @@ var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object4) {
   var result = [];
   while (object4) {
     arrayPush(result, getSymbols(object4));
-    object4 = getPrototype$1(object4);
+    object4 = getPrototype(object4);
   }
   return result;
 };
@@ -1247,7 +961,6 @@ if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag$3 || Map
     return result;
   };
 }
-const getTag$1 = getTag;
 var objectProto$2 = Object.prototype;
 var hasOwnProperty$2 = objectProto$2.hasOwnProperty;
 function initCloneArray(array4) {
@@ -1318,17 +1031,17 @@ function initCloneByTag(object4, tag, isDeep) {
   }
 }
 function initCloneObject(object4) {
-  return typeof object4.constructor == "function" && !isPrototype(object4) ? baseCreate(getPrototype$1(object4)) : {};
+  return typeof object4.constructor == "function" && !isPrototype(object4) ? baseCreate(getPrototype(object4)) : {};
 }
 var mapTag$2 = "[object Map]";
 function baseIsMap(value) {
-  return isObjectLike(value) && getTag$1(value) == mapTag$2;
+  return isObjectLike(value) && getTag(value) == mapTag$2;
 }
 var nodeIsMap = nodeUtil && nodeUtil.isMap;
 var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
 var setTag$2 = "[object Set]";
 function baseIsSet(value) {
-  return isObjectLike(value) && getTag$1(value) == setTag$2;
+  return isObjectLike(value) && getTag(value) == setTag$2;
 }
 var nodeIsSet = nodeUtil && nodeUtil.isSet;
 var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
@@ -1340,9 +1053,6 @@ cloneableTags[argsTag$1] = cloneableTags[arrayTag$1] = cloneableTags[arrayBuffer
 cloneableTags[errorTag$1] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
 function baseClone(value, bitmask, customizer, key, object4, stack) {
   var result, isDeep = bitmask & CLONE_DEEP_FLAG, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
-  if (customizer) {
-    result = object4 ? customizer(value, key, object4, stack) : customizer(value);
-  }
   if (result !== void 0) {
     return result;
   }
@@ -1356,7 +1066,7 @@ function baseClone(value, bitmask, customizer, key, object4, stack) {
       return copyArray(value, result);
     }
   } else {
-    var tag = getTag$1(value), isFunc = tag == funcTag || tag == genTag;
+    var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
     if (isBuffer(value)) {
       return cloneBuffer(value, isDeep);
     }
@@ -1590,7 +1300,7 @@ var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[o
 var objectProto = Object.prototype;
 var hasOwnProperty = objectProto.hasOwnProperty;
 function baseIsEqualDeep(object4, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray(object4), othIsArr = isArray(other), objTag = objIsArr ? arrayTag : getTag$1(object4), othTag = othIsArr ? arrayTag : getTag$1(other);
+  var objIsArr = isArray(object4), othIsArr = isArray(other), objTag = objIsArr ? arrayTag : getTag(object4), othTag = othIsArr ? arrayTag : getTag(other);
   objTag = objTag == argsTag ? objectTag : objTag;
   othTag = othTag == argsTag ? objectTag : othTag;
   var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
@@ -1630,29 +1340,27 @@ function baseIsEqual(value, other, bitmask, customizer, stack) {
 }
 var COMPARE_PARTIAL_FLAG$1 = 1, COMPARE_UNORDERED_FLAG$1 = 2;
 function baseIsMatch(object4, source, matchData, customizer) {
-  var index = matchData.length, length = index, noCustomizer = !customizer;
+  var index = matchData.length, length = index;
   if (object4 == null) {
     return !length;
   }
   object4 = Object(object4);
   while (index--) {
     var data = matchData[index];
-    if (noCustomizer && data[2] ? data[1] !== object4[data[0]] : !(data[0] in object4)) {
+    if (data[2] ? data[1] !== object4[data[0]] : !(data[0] in object4)) {
       return false;
     }
   }
   while (++index < length) {
     data = matchData[index];
     var key = data[0], objValue = object4[key], srcValue = data[1];
-    if (noCustomizer && data[2]) {
+    if (data[2]) {
       if (objValue === void 0 && !(key in object4)) {
         return false;
       }
     } else {
       var stack = new Stack();
-      if (customizer) {
-        var result = customizer(objValue, srcValue, key, object4, source, stack);
-      }
+      var result;
       if (!(result === void 0 ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG$1 | COMPARE_UNORDERED_FLAG$1, customizer, stack) : result)) {
         return false;
       }
@@ -1738,7 +1446,7 @@ function baseIteratee(value) {
     return value;
   }
   if (value == null) {
-    return identity;
+    return identity$1;
   }
   if (typeof value == "object") {
     return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
@@ -1749,7 +1457,7 @@ var now = function() {
   return root.Date.now();
 };
 var FUNC_ERROR_TEXT = "Expected a function";
-var nativeMax$1 = Math.max, nativeMin$1 = Math.min;
+var nativeMax = Math.max, nativeMin = Math.min;
 function debounce(func, wait, options) {
   var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
   if (typeof func != "function") {
@@ -1759,7 +1467,7 @@ function debounce(func, wait, options) {
   if (isObject(options)) {
     leading = !!options.leading;
     maxing = "maxWait" in options;
-    maxWait = maxing ? nativeMax$1(toNumber(options.maxWait) || 0, wait) : maxWait;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
     trailing = "trailing" in options ? !!options.trailing : trailing;
   }
   function invokeFunc(time) {
@@ -1776,7 +1484,7 @@ function debounce(func, wait, options) {
   }
   function remainingWait(time) {
     var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, timeWaiting = wait - timeSinceLastCall;
-    return maxing ? nativeMin$1(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+    return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
   }
   function shouldInvoke(time) {
     var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
@@ -1834,26 +1542,12 @@ function debounce(func, wait, options) {
 function isArrayLikeObject(value) {
   return isObjectLike(value) && isArrayLike(value);
 }
-function arrayIncludesWith(array4, value, comparator) {
-  var index = -1, length = array4 == null ? 0 : array4.length;
-  while (++index < length) {
-    if (comparator(value, array4[index])) {
-      return true;
-    }
-  }
-  return false;
-}
-var nativeMax = Math.max, nativeMin = Math.min;
 function findLastIndex(array4, predicate, fromIndex) {
   var length = array4 == null ? 0 : array4.length;
   if (!length) {
     return -1;
   }
   var index = length - 1;
-  if (fromIndex !== void 0) {
-    index = toInteger(fromIndex);
-    index = fromIndex < 0 ? nativeMax(length + index, 0) : nativeMin(index, length - 1);
-  }
   return baseFindIndex(array4, baseIteratee(predicate), index, true);
 }
 function fromPairs(pairs) {
@@ -1886,7 +1580,7 @@ function baseSet(object4, path, value, customizer) {
     }
     if (index != lastIndex) {
       var objValue = nested[key];
-      newValue = customizer ? customizer(objValue, key, nested) : void 0;
+      newValue = void 0;
       if (newValue === void 0) {
         newValue = isObject(objValue) ? objValue : isIndex(path[index + 1]) ? [] : {};
       }
@@ -1896,21 +1590,36 @@ function baseSet(object4, path, value, customizer) {
   }
   return object4;
 }
+function basePickBy(object4, paths, predicate) {
+  var index = -1, length = paths.length, result = {};
+  while (++index < length) {
+    var path = paths[index], value = baseGet(object4, path);
+    if (predicate(value, path)) {
+      baseSet(result, castPath(path, object4), value);
+    }
+  }
+  return result;
+}
+function basePick(object4, paths) {
+  return basePickBy(object4, paths, function(value, path) {
+    return hasIn(object4, path);
+  });
+}
+var pick = flatRest(function(object4, paths) {
+  return object4 == null ? {} : basePick(object4, paths);
+});
 function set(object4, path, value) {
   return object4 == null ? object4 : baseSet(object4, path, value);
 }
 var INFINITY = 1 / 0;
-var createSet = !(Set$1 && 1 / setToArray(new Set$1([, -0]))[1] == INFINITY) ? noop : function(values) {
+var createSet = !(Set$1 && 1 / setToArray(new Set$1([, -0]))[1] == INFINITY) ? noop$1 : function(values) {
   return new Set$1(values);
 };
 var LARGE_ARRAY_SIZE = 200;
 function baseUniq(array4, iteratee, comparator) {
   var index = -1, includes = arrayIncludes, length = array4.length, isCommon = true, result = [], seen = result;
-  if (comparator) {
-    isCommon = false;
-    includes = arrayIncludesWith;
-  } else if (length >= LARGE_ARRAY_SIZE) {
-    var set2 = iteratee ? null : createSet(array4);
+  if (length >= LARGE_ARRAY_SIZE) {
+    var set2 = createSet(array4);
     if (set2) {
       return setToArray(set2);
     }
@@ -1918,21 +1627,18 @@ function baseUniq(array4, iteratee, comparator) {
     includes = cacheHas;
     seen = new SetCache();
   } else {
-    seen = iteratee ? [] : result;
+    seen = result;
   }
   outer:
     while (++index < length) {
-      var value = array4[index], computed2 = iteratee ? iteratee(value) : value;
-      value = comparator || value !== 0 ? value : 0;
+      var value = array4[index], computed2 = value;
+      value = value !== 0 ? value : 0;
       if (isCommon && computed2 === computed2) {
         var seenIndex = seen.length;
         while (seenIndex--) {
           if (seen[seenIndex] === computed2) {
             continue outer;
           }
-        }
-        if (iteratee) {
-          seen.push(computed2);
         }
         result.push(value);
       } else if (!includes(seen, computed2, comparator)) {
@@ -1962,17 +1668,365 @@ const isStringNumber = (val) => {
   }
   return !Number.isNaN(Number(val));
 };
-const escapeStringRegexp = (string3 = "") => string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
-const getProp = (obj, path, defaultValue) => {
-  return {
-    get value() {
-      return get(obj, path, defaultValue);
-    },
-    set value(val) {
-      set(obj, path, val);
+var __defProp$9 = Object.defineProperty;
+var __defProps$6 = Object.defineProperties;
+var __getOwnPropDescs$6 = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols$b = Object.getOwnPropertySymbols;
+var __hasOwnProp$b = Object.prototype.hasOwnProperty;
+var __propIsEnum$b = Object.prototype.propertyIsEnumerable;
+var __defNormalProp$9 = (obj, key, value) => key in obj ? __defProp$9(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues$9 = (a, b2) => {
+  for (var prop in b2 || (b2 = {}))
+    if (__hasOwnProp$b.call(b2, prop))
+      __defNormalProp$9(a, prop, b2[prop]);
+  if (__getOwnPropSymbols$b)
+    for (var prop of __getOwnPropSymbols$b(b2)) {
+      if (__propIsEnum$b.call(b2, prop))
+        __defNormalProp$9(a, prop, b2[prop]);
+    }
+  return a;
+};
+var __spreadProps$6 = (a, b2) => __defProps$6(a, __getOwnPropDescs$6(b2));
+function computedEager(fn2, options) {
+  var _a2;
+  const result = shallowRef();
+  watchEffect(() => {
+    result.value = fn2();
+  }, __spreadProps$6(__spreadValues$9({}, options), {
+    flush: (_a2 = void 0) != null ? _a2 : "sync"
+  }));
+  return readonly(result);
+}
+var _a;
+const isClient = typeof window !== "undefined";
+const isString = (val) => typeof val === "string";
+const noop = () => {
+};
+const isIOS = isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && /iP(ad|hone|od)/.test(window.navigator.userAgent);
+function resolveUnref(r2) {
+  return typeof r2 === "function" ? r2() : unref(r2);
+}
+function createFilterWrapper(filter, fn2) {
+  function wrapper(...args) {
+    return new Promise((resolve, reject) => {
+      Promise.resolve(filter(() => fn2.apply(this, args), { fn: fn2, thisArg: this, args })).then(resolve).catch(reject);
+    });
+  }
+  return wrapper;
+}
+function debounceFilter(ms, options = {}) {
+  let timer;
+  let maxTimer;
+  let lastRejector = noop;
+  const _clearTimeout = (timer2) => {
+    clearTimeout(timer2);
+    lastRejector();
+    lastRejector = noop;
+  };
+  const filter = (invoke) => {
+    const duration = resolveUnref(ms);
+    const maxDuration = resolveUnref(options.maxWait);
+    if (timer)
+      _clearTimeout(timer);
+    if (duration <= 0 || maxDuration !== void 0 && maxDuration <= 0) {
+      if (maxTimer) {
+        _clearTimeout(maxTimer);
+        maxTimer = null;
+      }
+      return Promise.resolve(invoke());
+    }
+    return new Promise((resolve, reject) => {
+      lastRejector = options.rejectOnCancel ? reject : resolve;
+      if (maxDuration && !maxTimer) {
+        maxTimer = setTimeout(() => {
+          if (timer)
+            _clearTimeout(timer);
+          maxTimer = null;
+          resolve(invoke());
+        }, maxDuration);
+      }
+      timer = setTimeout(() => {
+        if (maxTimer)
+          _clearTimeout(maxTimer);
+        maxTimer = null;
+        resolve(invoke());
+      }, duration);
+    });
+  };
+  return filter;
+}
+function identity(arg) {
+  return arg;
+}
+function tryOnScopeDispose(fn2) {
+  if (getCurrentScope()) {
+    onScopeDispose(fn2);
+    return true;
+  }
+  return false;
+}
+function useDebounceFn(fn2, ms = 200, options = {}) {
+  return createFilterWrapper(debounceFilter(ms, options), fn2);
+}
+function refDebounced(value, ms = 200, options = {}) {
+  const debounced = ref(value.value);
+  const updater = useDebounceFn(() => {
+    debounced.value = value.value;
+  }, ms, options);
+  watch(value, () => updater());
+  return debounced;
+}
+function tryOnMounted(fn2, sync = true) {
+  if (getCurrentInstance())
+    onMounted(fn2);
+  else if (sync)
+    fn2();
+  else
+    nextTick(fn2);
+}
+function unrefElement(elRef) {
+  var _a2;
+  const plain = resolveUnref(elRef);
+  return (_a2 = plain == null ? void 0 : plain.$el) != null ? _a2 : plain;
+}
+const defaultWindow = isClient ? window : void 0;
+function useEventListener(...args) {
+  let target;
+  let events;
+  let listeners;
+  let options;
+  if (isString(args[0]) || Array.isArray(args[0])) {
+    [events, listeners, options] = args;
+    target = defaultWindow;
+  } else {
+    [target, events, listeners, options] = args;
+  }
+  if (!target)
+    return noop;
+  if (!Array.isArray(events))
+    events = [events];
+  if (!Array.isArray(listeners))
+    listeners = [listeners];
+  const cleanups = [];
+  const cleanup = () => {
+    cleanups.forEach((fn2) => fn2());
+    cleanups.length = 0;
+  };
+  const register2 = (el, event, listener, options2) => {
+    el.addEventListener(event, listener, options2);
+    return () => el.removeEventListener(event, listener, options2);
+  };
+  const stopWatch = watch(() => [unrefElement(target), resolveUnref(options)], ([el, options2]) => {
+    cleanup();
+    if (!el)
+      return;
+    cleanups.push(...events.flatMap((event) => {
+      return listeners.map((listener) => register2(el, event, listener, options2));
+    }));
+  }, { immediate: true, flush: "post" });
+  const stop = () => {
+    stopWatch();
+    cleanup();
+  };
+  tryOnScopeDispose(stop);
+  return stop;
+}
+let _iOSWorkaround = false;
+function onClickOutside(target, handler, options = {}) {
+  const { window: window2 = defaultWindow, ignore = [], capture = true, detectIframe = false } = options;
+  if (!window2)
+    return;
+  if (isIOS && !_iOSWorkaround) {
+    _iOSWorkaround = true;
+    Array.from(window2.document.body.children).forEach((el) => el.addEventListener("click", noop));
+  }
+  let shouldListen = true;
+  const shouldIgnore = (event) => {
+    return ignore.some((target2) => {
+      if (typeof target2 === "string") {
+        return Array.from(window2.document.querySelectorAll(target2)).some((el) => el === event.target || event.composedPath().includes(el));
+      } else {
+        const el = unrefElement(target2);
+        return el && (event.target === el || event.composedPath().includes(el));
+      }
+    });
+  };
+  const listener = (event) => {
+    const el = unrefElement(target);
+    if (!el || el === event.target || event.composedPath().includes(el))
+      return;
+    if (event.detail === 0)
+      shouldListen = !shouldIgnore(event);
+    if (!shouldListen) {
+      shouldListen = true;
+      return;
+    }
+    handler(event);
+  };
+  const cleanup = [
+    useEventListener(window2, "click", listener, { passive: true, capture }),
+    useEventListener(window2, "pointerdown", (e) => {
+      const el = unrefElement(target);
+      if (el)
+        shouldListen = !e.composedPath().includes(el) && !shouldIgnore(e);
+    }, { passive: true }),
+    detectIframe && useEventListener(window2, "blur", (event) => {
+      var _a2;
+      const el = unrefElement(target);
+      if (((_a2 = window2.document.activeElement) == null ? void 0 : _a2.tagName) === "IFRAME" && !(el == null ? void 0 : el.contains(window2.document.activeElement)))
+        handler(event);
+    })
+  ].filter(Boolean);
+  const stop = () => cleanup.forEach((fn2) => fn2());
+  return stop;
+}
+function useSupported(callback, sync = false) {
+  const isSupported = ref();
+  const update = () => isSupported.value = Boolean(callback());
+  update();
+  tryOnMounted(update, sync);
+  return isSupported;
+}
+const _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+const globalKey = "__vueuse_ssr_handlers__";
+_global[globalKey] = _global[globalKey] || {};
+var __getOwnPropSymbols$g = Object.getOwnPropertySymbols;
+var __hasOwnProp$g = Object.prototype.hasOwnProperty;
+var __propIsEnum$g = Object.prototype.propertyIsEnumerable;
+var __objRest$2 = (source, exclude) => {
+  var target = {};
+  for (var prop in source)
+    if (__hasOwnProp$g.call(source, prop) && exclude.indexOf(prop) < 0)
+      target[prop] = source[prop];
+  if (source != null && __getOwnPropSymbols$g)
+    for (var prop of __getOwnPropSymbols$g(source)) {
+      if (exclude.indexOf(prop) < 0 && __propIsEnum$g.call(source, prop))
+        target[prop] = source[prop];
+    }
+  return target;
+};
+function useResizeObserver(target, callback, options = {}) {
+  const _a2 = options, { window: window2 = defaultWindow } = _a2, observerOptions = __objRest$2(_a2, ["window"]);
+  let observer;
+  const isSupported = useSupported(() => window2 && "ResizeObserver" in window2);
+  const cleanup = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = void 0;
     }
   };
+  const stopWatch = watch(() => unrefElement(target), (el) => {
+    cleanup();
+    if (isSupported.value && window2 && el) {
+      observer = new ResizeObserver(callback);
+      observer.observe(el, observerOptions);
+    }
+  }, { immediate: true, flush: "post" });
+  const stop = () => {
+    cleanup();
+    stopWatch();
+  };
+  tryOnScopeDispose(stop);
+  return {
+    isSupported,
+    stop
+  };
+}
+var __getOwnPropSymbols$8 = Object.getOwnPropertySymbols;
+var __hasOwnProp$8 = Object.prototype.hasOwnProperty;
+var __propIsEnum$8 = Object.prototype.propertyIsEnumerable;
+var __objRest$1 = (source, exclude) => {
+  var target = {};
+  for (var prop in source)
+    if (__hasOwnProp$8.call(source, prop) && exclude.indexOf(prop) < 0)
+      target[prop] = source[prop];
+  if (source != null && __getOwnPropSymbols$8)
+    for (var prop of __getOwnPropSymbols$8(source)) {
+      if (exclude.indexOf(prop) < 0 && __propIsEnum$8.call(source, prop))
+        target[prop] = source[prop];
+    }
+  return target;
 };
+function useMutationObserver(target, callback, options = {}) {
+  const _a2 = options, { window: window2 = defaultWindow } = _a2, mutationOptions = __objRest$1(_a2, ["window"]);
+  let observer;
+  const isSupported = useSupported(() => window2 && "MutationObserver" in window2);
+  const cleanup = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = void 0;
+    }
+  };
+  const stopWatch = watch(() => unrefElement(target), (el) => {
+    cleanup();
+    if (isSupported.value && window2 && el) {
+      observer = new MutationObserver(callback);
+      observer.observe(el, mutationOptions);
+    }
+  }, { immediate: true });
+  const stop = () => {
+    cleanup();
+    stopWatch();
+  };
+  tryOnScopeDispose(stop);
+  return {
+    isSupported,
+    stop
+  };
+}
+var SwipeDirection;
+(function(SwipeDirection2) {
+  SwipeDirection2["UP"] = "UP";
+  SwipeDirection2["RIGHT"] = "RIGHT";
+  SwipeDirection2["DOWN"] = "DOWN";
+  SwipeDirection2["LEFT"] = "LEFT";
+  SwipeDirection2["NONE"] = "NONE";
+})(SwipeDirection || (SwipeDirection = {}));
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b2) => {
+  for (var prop in b2)
+    if (__hasOwnProp.call(b2, prop))
+      __defNormalProp(a, prop, b2[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b2)) {
+      if (__propIsEnum.call(b2, prop))
+        __defNormalProp(a, prop, b2[prop]);
+    }
+  return a;
+};
+const _TransitionPresets = {
+  easeInSine: [0.12, 0, 0.39, 0],
+  easeOutSine: [0.61, 1, 0.88, 1],
+  easeInOutSine: [0.37, 0, 0.63, 1],
+  easeInQuad: [0.11, 0, 0.5, 0],
+  easeOutQuad: [0.5, 1, 0.89, 1],
+  easeInOutQuad: [0.45, 0, 0.55, 1],
+  easeInCubic: [0.32, 0, 0.67, 0],
+  easeOutCubic: [0.33, 1, 0.68, 1],
+  easeInOutCubic: [0.65, 0, 0.35, 1],
+  easeInQuart: [0.5, 0, 0.75, 0],
+  easeOutQuart: [0.25, 1, 0.5, 1],
+  easeInOutQuart: [0.76, 0, 0.24, 1],
+  easeInQuint: [0.64, 0, 0.78, 0],
+  easeOutQuint: [0.22, 1, 0.36, 1],
+  easeInOutQuint: [0.83, 0, 0.17, 1],
+  easeInExpo: [0.7, 0, 0.84, 0],
+  easeOutExpo: [0.16, 1, 0.3, 1],
+  easeInOutExpo: [0.87, 0, 0.13, 1],
+  easeInCirc: [0.55, 0, 1, 0.45],
+  easeOutCirc: [0, 0.55, 0.45, 1],
+  easeInOutCirc: [0.85, 0, 0.15, 1],
+  easeInBack: [0.36, 0, 0.66, -0.56],
+  easeOutBack: [0.34, 1.56, 0.64, 1],
+  easeInOutBack: [0.68, -0.6, 0.32, 1.6]
+};
+__spreadValues({
+  linear: identity
+}, _TransitionPresets);
 class ElementPlusError extends Error {
   constructor(m2) {
     super(m2);
@@ -1984,6 +2038,348 @@ function throwError(scope, m2) {
 }
 function debugWarn(scope, message) {
 }
+const initial = {
+  current: 0
+};
+const zIndex = ref(0);
+const defaultInitialZIndex = 2e3;
+const ZINDEX_INJECTION_KEY = Symbol("elZIndexContextKey");
+const zIndexContextKey = Symbol("zIndexContextKey");
+const useZIndex = (zIndexOverrides) => {
+  const increasingInjection = getCurrentInstance() ? inject(ZINDEX_INJECTION_KEY, initial) : initial;
+  const zIndexInjection = getCurrentInstance() ? inject(zIndexContextKey, void 0) : void 0;
+  const initialZIndex = computed(() => {
+    const zIndexFromInjection = unref(zIndexInjection);
+    return isNumber(zIndexFromInjection) ? zIndexFromInjection : defaultInitialZIndex;
+  });
+  const currentZIndex = computed(() => initialZIndex.value + zIndex.value);
+  const nextZIndex = () => {
+    increasingInjection.current++;
+    zIndex.value = increasingInjection.current;
+    return currentZIndex.value;
+  };
+  if (!isClient && !inject(ZINDEX_INJECTION_KEY)) ;
+  return {
+    initialZIndex,
+    currentZIndex,
+    nextZIndex
+  };
+};
+var English = {
+  name: "en",
+  el: {
+    breadcrumb: {
+      label: "Breadcrumb"
+    },
+    colorpicker: {
+      confirm: "OK",
+      clear: "Clear",
+      defaultLabel: "color picker",
+      description: "current color is {color}. press enter to select a new color.",
+      alphaLabel: "pick alpha value"
+    },
+    datepicker: {
+      now: "Now",
+      today: "Today",
+      cancel: "Cancel",
+      clear: "Clear",
+      confirm: "OK",
+      dateTablePrompt: "Use the arrow keys and enter to select the day of the month",
+      monthTablePrompt: "Use the arrow keys and enter to select the month",
+      yearTablePrompt: "Use the arrow keys and enter to select the year",
+      selectedDate: "Selected date",
+      selectDate: "Select date",
+      selectTime: "Select time",
+      startDate: "Start Date",
+      startTime: "Start Time",
+      endDate: "End Date",
+      endTime: "End Time",
+      prevYear: "Previous Year",
+      nextYear: "Next Year",
+      prevMonth: "Previous Month",
+      nextMonth: "Next Month",
+      year: "",
+      month1: "January",
+      month2: "February",
+      month3: "March",
+      month4: "April",
+      month5: "May",
+      month6: "June",
+      month7: "July",
+      month8: "August",
+      month9: "September",
+      month10: "October",
+      month11: "November",
+      month12: "December",
+      week: "week",
+      weeks: {
+        sun: "Sun",
+        mon: "Mon",
+        tue: "Tue",
+        wed: "Wed",
+        thu: "Thu",
+        fri: "Fri",
+        sat: "Sat"
+      },
+      weeksFull: {
+        sun: "Sunday",
+        mon: "Monday",
+        tue: "Tuesday",
+        wed: "Wednesday",
+        thu: "Thursday",
+        fri: "Friday",
+        sat: "Saturday"
+      },
+      months: {
+        jan: "Jan",
+        feb: "Feb",
+        mar: "Mar",
+        apr: "Apr",
+        may: "May",
+        jun: "Jun",
+        jul: "Jul",
+        aug: "Aug",
+        sep: "Sep",
+        oct: "Oct",
+        nov: "Nov",
+        dec: "Dec"
+      }
+    },
+    inputNumber: {
+      decrease: "decrease number",
+      increase: "increase number"
+    },
+    select: {
+      loading: "Loading",
+      noMatch: "No matching data",
+      noData: "No data",
+      placeholder: "Select"
+    },
+    mention: {
+      loading: "Loading"
+    },
+    dropdown: {
+      toggleDropdown: "Toggle Dropdown"
+    },
+    cascader: {
+      noMatch: "No matching data",
+      loading: "Loading",
+      placeholder: "Select",
+      noData: "No data"
+    },
+    pagination: {
+      goto: "Go to",
+      pagesize: "/page",
+      total: "Total {total}",
+      pageClassifier: "",
+      page: "Page",
+      prev: "Go to previous page",
+      next: "Go to next page",
+      currentPage: "page {pager}",
+      prevPages: "Previous {pager} pages",
+      nextPages: "Next {pager} pages",
+      deprecationWarning: "Deprecated usages detected, please refer to the el-pagination documentation for more details"
+    },
+    dialog: {
+      close: "Close this dialog"
+    },
+    drawer: {
+      close: "Close this dialog"
+    },
+    messagebox: {
+      title: "Message",
+      confirm: "OK",
+      cancel: "Cancel",
+      error: "Illegal input",
+      close: "Close this dialog"
+    },
+    upload: {
+      deleteTip: "press delete to remove",
+      delete: "Delete",
+      preview: "Preview",
+      continue: "Continue"
+    },
+    slider: {
+      defaultLabel: "slider between {min} and {max}",
+      defaultRangeStartLabel: "pick start value",
+      defaultRangeEndLabel: "pick end value"
+    },
+    table: {
+      emptyText: "No Data",
+      confirmFilter: "Confirm",
+      resetFilter: "Reset",
+      clearFilter: "All",
+      sumText: "Sum"
+    },
+    tour: {
+      next: "Next",
+      previous: "Previous",
+      finish: "Finish"
+    },
+    tree: {
+      emptyText: "No Data"
+    },
+    transfer: {
+      noMatch: "No matching data",
+      noData: "No data",
+      titles: ["List 1", "List 2"],
+      filterPlaceholder: "Enter keyword",
+      noCheckedFormat: "{total} items",
+      hasCheckedFormat: "{checked}/{total} checked"
+    },
+    image: {
+      error: "FAILED"
+    },
+    pageHeader: {
+      title: "Back"
+    },
+    popconfirm: {
+      confirmButtonText: "Yes",
+      cancelButtonText: "No"
+    },
+    carousel: {
+      leftArrow: "Carousel arrow left",
+      rightArrow: "Carousel arrow right",
+      indicator: "Carousel switch to index {index}"
+    }
+  }
+};
+const buildTranslator = (locale) => (path, option) => translate(path, option, unref(locale));
+const translate = (path, option, locale) => get(locale, path, path).replace(/\{(\w+)\}/g, (_2, key) => {
+  var _a2;
+  return `${(_a2 = option == null ? void 0 : option[key]) != null ? _a2 : `{${key}}`}`;
+});
+const buildLocaleContext = (locale) => {
+  const lang = computed(() => unref(locale).name);
+  const localeRef = isRef(locale) ? locale : ref(locale);
+  return {
+    lang,
+    locale: localeRef,
+    t: buildTranslator(locale)
+  };
+};
+const localeContextKey = Symbol("localeContextKey");
+const useLocale = (localeOverrides) => {
+  const locale = inject(localeContextKey, ref());
+  return buildLocaleContext(computed(() => locale.value || English));
+};
+const epPropKey = "__epPropKey";
+const definePropType = (val) => val;
+const isEpProp = (val) => isObject$1(val) && !!val[epPropKey];
+const buildProp = (prop, key) => {
+  if (!isObject$1(prop) || isEpProp(prop))
+    return prop;
+  const { values, required: required4, default: defaultValue, type: type4, validator } = prop;
+  const _validator = values || validator ? (val) => {
+    let valid = false;
+    let allowedValues = [];
+    if (values) {
+      allowedValues = Array.from(values);
+      if (hasOwn(prop, "default")) {
+        allowedValues.push(defaultValue);
+      }
+      valid || (valid = allowedValues.includes(val));
+    }
+    if (validator)
+      valid || (valid = validator(val));
+    if (!valid && allowedValues.length > 0) {
+      const allowValuesText = [...new Set(allowedValues)].map((value) => JSON.stringify(value)).join(", ");
+      warn(`Invalid prop: validation failed${key ? ` for prop "${key}"` : ""}. Expected one of [${allowValuesText}], got value ${JSON.stringify(val)}.`);
+    }
+    return valid;
+  } : void 0;
+  const epProp = {
+    type: type4,
+    required: !!required4,
+    validator: _validator,
+    [epPropKey]: true
+  };
+  if (hasOwn(prop, "default"))
+    epProp.default = defaultValue;
+  return epProp;
+};
+const buildProps = (props) => fromPairs(Object.entries(props).map(([key, option]) => [
+  key,
+  buildProp(option, key)
+]));
+const componentSizes = ["", "default", "small", "large"];
+const useSizeProp = buildProp({
+  type: String,
+  values: componentSizes,
+  required: false
+});
+const SIZE_INJECTION_KEY = Symbol("size");
+const useGlobalSize = () => {
+  const injectedSize = inject(SIZE_INJECTION_KEY, {});
+  return computed(() => {
+    return unref(injectedSize.size) || "";
+  });
+};
+const emptyValuesContextKey = Symbol("emptyValuesContextKey");
+const DEFAULT_EMPTY_VALUES = ["", void 0, null];
+const DEFAULT_VALUE_ON_CLEAR = void 0;
+const useEmptyValuesProps = buildProps({
+  emptyValues: Array,
+  valueOnClear: {
+    type: [String, Number, Boolean, Function],
+    default: void 0,
+    validator: (val) => isFunction$1(val) ? !val() : !val
+  }
+});
+const useEmptyValues = (props, defaultValue) => {
+  const config = getCurrentInstance() ? inject(emptyValuesContextKey, ref({})) : ref({});
+  const emptyValues = computed(() => props.emptyValues || config.value.emptyValues || DEFAULT_EMPTY_VALUES);
+  const valueOnClear = computed(() => {
+    if (isFunction$1(props.valueOnClear)) {
+      return props.valueOnClear();
+    } else if (props.valueOnClear !== void 0) {
+      return props.valueOnClear;
+    } else if (isFunction$1(config.value.valueOnClear)) {
+      return config.value.valueOnClear();
+    } else if (config.value.valueOnClear !== void 0) {
+      return config.value.valueOnClear;
+    }
+    return defaultValue !== void 0 ? defaultValue : DEFAULT_VALUE_ON_CLEAR;
+  });
+  const isEmptyValue2 = (value) => {
+    return emptyValues.value.includes(value);
+  };
+  if (!emptyValues.value.includes(valueOnClear.value)) ;
+  return {
+    emptyValues,
+    valueOnClear,
+    isEmptyValue: isEmptyValue2
+  };
+};
+const getProp = (obj, path, defaultValue) => {
+  return {
+    get value() {
+      return get(obj, path, defaultValue);
+    },
+    set value(val) {
+      set(obj, path, val);
+    }
+  };
+};
+const globalConfig = ref();
+function useGlobalConfig(key, defaultValue = void 0) {
+  const config = getCurrentInstance() ? inject(configProviderContextKey, globalConfig) : globalConfig;
+  {
+    return computed(() => {
+      var _a2, _b;
+      return (_b = (_a2 = config.value) == null ? void 0 : _a2[key]) != null ? _b : defaultValue;
+    });
+  }
+}
+const UPDATE_MODEL_EVENT = "update:modelValue";
+const CHANGE_EVENT = "change";
+var _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 const hasClass = (el, cls) => {
   if (!el || !cls)
     return false;
@@ -1993,7 +2389,7 @@ const hasClass = (el, cls) => {
 };
 const getStyle = (element, styleName) => {
   var _a2;
-  if (!isClient || !element || !styleName)
+  if (!isClient || !element || false)
     return "";
   let key = camelize(styleName);
   if (key === "float")
@@ -2040,6 +2436,62 @@ function scrollIntoView(container, selected) {
     container.scrollTop = bottom - container.clientHeight;
   }
 }
+const withInstall = (main, extra) => {
+  main.install = (app) => {
+    for (const comp of [main, ...Object.values(extra != null ? extra : {})]) {
+      app.component(comp.name, comp);
+    }
+  };
+  if (extra) {
+    for (const [key, comp] of Object.entries(extra)) {
+      main[key] = comp;
+    }
+  }
+  return main;
+};
+const withNoopInstall = (component) => {
+  component.install = NOOP;
+  return component;
+};
+const iconProps = buildProps({
+  size: {
+    type: definePropType([Number, String])
+  },
+  color: {
+    type: String
+  }
+});
+const __default__$j = defineComponent({
+  name: "ElIcon",
+  inheritAttrs: false
+});
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
+  ...__default__$j,
+  props: iconProps,
+  setup(__props) {
+    const props = __props;
+    const ns = useNamespace("icon");
+    const style = computed(() => {
+      const { size, color } = props;
+      if (!size && !color)
+        return {};
+      return {
+        fontSize: isUndefined(size) ? void 0 : addUnit(size),
+        "--color": color
+      };
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("i", mergeProps({
+        class: unref(ns).b(),
+        style: unref(style)
+      }, _ctx.$attrs), [
+        renderSlot(_ctx.$slots, "default")
+      ], 16);
+    };
+  }
+});
+var Icon = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__file", "icon.vue"]]);
+const ElIcon = withInstall(Icon);
 /*! Element Plus Icons Vue v2.3.1 */
 var arrow_down_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineComponent({
   name: "ArrowDown",
@@ -2285,45 +2737,6 @@ var view_vue_vue_type_script_setup_true_lang_default = /* @__PURE__ */ defineCom
   }
 });
 var view_default = view_vue_vue_type_script_setup_true_lang_default;
-const epPropKey = "__epPropKey";
-const definePropType = (val) => val;
-const isEpProp = (val) => isObject$1(val) && !!val[epPropKey];
-const buildProp = (prop, key) => {
-  if (!isObject$1(prop) || isEpProp(prop))
-    return prop;
-  const { values, required: required4, default: defaultValue, type: type4, validator } = prop;
-  const _validator = values || validator ? (val) => {
-    let valid = false;
-    let allowedValues = [];
-    if (values) {
-      allowedValues = Array.from(values);
-      if (hasOwn(prop, "default")) {
-        allowedValues.push(defaultValue);
-      }
-      valid || (valid = allowedValues.includes(val));
-    }
-    if (validator)
-      valid || (valid = validator(val));
-    if (!valid && allowedValues.length > 0) {
-      const allowValuesText = [...new Set(allowedValues)].map((value) => JSON.stringify(value)).join(", ");
-      warn(`Invalid prop: validation failed${key ? ` for prop "${key}"` : ""}. Expected one of [${allowValuesText}], got value ${JSON.stringify(val)}.`);
-    }
-    return valid;
-  } : void 0;
-  const epProp = {
-    type: type4,
-    required: !!required4,
-    validator: _validator,
-    [epPropKey]: true
-  };
-  if (hasOwn(prop, "default"))
-    epProp.default = defaultValue;
-  return epProp;
-};
-const buildProps = (props) => fromPairs(Object.entries(props).map(([key, option]) => [
-  key,
-  buildProp(option, key)
-]));
 const iconPropType = definePropType([
   String,
   Object,
@@ -2334,22 +2747,1755 @@ const ValidateComponentsMap = {
   success: circle_check_default,
   error: circle_close_default
 };
-const withInstall = (main, extra) => {
-  main.install = (app) => {
-    for (const comp of [main, ...Object.values(extra != null ? extra : {})]) {
-      app.component(comp.name, comp);
+const isFirefox = () => isClient && /firefox/i.test(window.navigator.userAgent);
+let hiddenTextarea = void 0;
+const HIDDEN_STYLE = `
+  height:0 !important;
+  visibility:hidden !important;
+  ${isFirefox() ? "" : "overflow:hidden !important;"}
+  position:absolute !important;
+  z-index:-1000 !important;
+  top:0 !important;
+  right:0 !important;
+`;
+const CONTEXT_STYLE = [
+  "letter-spacing",
+  "line-height",
+  "padding-top",
+  "padding-bottom",
+  "font-family",
+  "font-weight",
+  "font-size",
+  "text-rendering",
+  "text-transform",
+  "width",
+  "text-indent",
+  "padding-left",
+  "padding-right",
+  "border-width",
+  "box-sizing"
+];
+function calculateNodeStyling(targetElement) {
+  const style = window.getComputedStyle(targetElement);
+  const boxSizing = style.getPropertyValue("box-sizing");
+  const paddingSize = Number.parseFloat(style.getPropertyValue("padding-bottom")) + Number.parseFloat(style.getPropertyValue("padding-top"));
+  const borderSize = Number.parseFloat(style.getPropertyValue("border-bottom-width")) + Number.parseFloat(style.getPropertyValue("border-top-width"));
+  const contextStyle = CONTEXT_STYLE.map((name) => `${name}:${style.getPropertyValue(name)}`).join(";");
+  return { contextStyle, paddingSize, borderSize, boxSizing };
+}
+function calcTextareaHeight(targetElement, minRows = 1, maxRows) {
+  var _a2;
+  if (!hiddenTextarea) {
+    hiddenTextarea = document.createElement("textarea");
+    document.body.appendChild(hiddenTextarea);
+  }
+  const { paddingSize, borderSize, boxSizing, contextStyle } = calculateNodeStyling(targetElement);
+  hiddenTextarea.setAttribute("style", `${contextStyle};${HIDDEN_STYLE}`);
+  hiddenTextarea.value = targetElement.value || targetElement.placeholder || "";
+  let height = hiddenTextarea.scrollHeight;
+  const result = {};
+  if (boxSizing === "border-box") {
+    height = height + borderSize;
+  } else if (boxSizing === "content-box") {
+    height = height - paddingSize;
+  }
+  hiddenTextarea.value = "";
+  const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+  if (isNumber(minRows)) {
+    let minHeight = singleRowHeight * minRows;
+    if (boxSizing === "border-box") {
+      minHeight = minHeight + paddingSize + borderSize;
+    }
+    height = Math.max(minHeight, height);
+    result.minHeight = `${minHeight}px`;
+  }
+  if (isNumber(maxRows)) {
+    let maxHeight = singleRowHeight * maxRows;
+    if (boxSizing === "border-box") {
+      maxHeight = maxHeight + paddingSize + borderSize;
+    }
+    height = Math.min(maxHeight, height);
+  }
+  result.height = `${height}px`;
+  (_a2 = hiddenTextarea.parentNode) == null ? void 0 : _a2.removeChild(hiddenTextarea);
+  hiddenTextarea = void 0;
+  return result;
+}
+const mutable = (val) => val;
+const ariaProps = buildProps({
+  ariaLabel: String,
+  ariaOrientation: {
+    type: String,
+    values: ["horizontal", "vertical", "undefined"]
+  },
+  ariaControls: String
+});
+const useAriaProps = (arias) => {
+  return pick(ariaProps, arias);
+};
+const inputProps = buildProps({
+  id: {
+    type: String,
+    default: void 0
+  },
+  size: useSizeProp,
+  disabled: Boolean,
+  modelValue: {
+    type: definePropType([
+      String,
+      Number,
+      Object
+    ]),
+    default: ""
+  },
+  maxlength: {
+    type: [String, Number]
+  },
+  minlength: {
+    type: [String, Number]
+  },
+  type: {
+    type: String,
+    default: "text"
+  },
+  resize: {
+    type: String,
+    values: ["none", "both", "horizontal", "vertical"]
+  },
+  autosize: {
+    type: definePropType([Boolean, Object]),
+    default: false
+  },
+  autocomplete: {
+    type: String,
+    default: "off"
+  },
+  formatter: {
+    type: Function
+  },
+  parser: {
+    type: Function
+  },
+  placeholder: {
+    type: String
+  },
+  form: {
+    type: String
+  },
+  readonly: Boolean,
+  clearable: Boolean,
+  showPassword: Boolean,
+  showWordLimit: Boolean,
+  suffixIcon: {
+    type: iconPropType
+  },
+  prefixIcon: {
+    type: iconPropType
+  },
+  containerRole: {
+    type: String,
+    default: void 0
+  },
+  tabindex: {
+    type: [String, Number],
+    default: 0
+  },
+  validateEvent: {
+    type: Boolean,
+    default: true
+  },
+  inputStyle: {
+    type: definePropType([Object, Array, String]),
+    default: () => mutable({})
+  },
+  autofocus: Boolean,
+  rows: {
+    type: Number,
+    default: 2
+  },
+  ...useAriaProps(["ariaLabel"])
+});
+const inputEmits = {
+  [UPDATE_MODEL_EVENT]: (value) => isString$1(value),
+  input: (value) => isString$1(value),
+  change: (value) => isString$1(value),
+  focus: (evt) => evt instanceof FocusEvent,
+  blur: (evt) => evt instanceof FocusEvent,
+  clear: () => true,
+  mouseleave: (evt) => evt instanceof MouseEvent,
+  mouseenter: (evt) => evt instanceof MouseEvent,
+  keydown: (evt) => evt instanceof Event,
+  compositionstart: (evt) => evt instanceof CompositionEvent,
+  compositionupdate: (evt) => evt instanceof CompositionEvent,
+  compositionend: (evt) => evt instanceof CompositionEvent
+};
+const DEFAULT_EXCLUDE_KEYS = ["class", "style"];
+const LISTENER_PREFIX = /^on[A-Z]/;
+const useAttrs = (params = {}) => {
+  const { excludeListeners = false, excludeKeys } = params;
+  const allExcludeKeys = computed(() => {
+    return ((excludeKeys == null ? void 0 : excludeKeys.value) || []).concat(DEFAULT_EXCLUDE_KEYS);
+  });
+  const instance = getCurrentInstance();
+  if (!instance) {
+    return computed(() => ({}));
+  }
+  return computed(() => {
+    var _a2;
+    return fromPairs(Object.entries((_a2 = instance.proxy) == null ? void 0 : _a2.$attrs).filter(([key]) => !allExcludeKeys.value.includes(key) && !(excludeListeners && LISTENER_PREFIX.test(key))));
+  });
+};
+const formContextKey = Symbol("formContextKey");
+const formItemContextKey = Symbol("formItemContextKey");
+const defaultIdInjection = {
+  prefix: Math.floor(Math.random() * 1e4),
+  current: 0
+};
+const ID_INJECTION_KEY = Symbol("elIdInjection");
+const useIdInjection = () => {
+  return getCurrentInstance() ? inject(ID_INJECTION_KEY, defaultIdInjection) : defaultIdInjection;
+};
+const useId = (deterministicId) => {
+  const idInjection = useIdInjection();
+  const namespace = useGetDerivedNamespace();
+  const idRef = computedEager(() => unref(deterministicId) || `${namespace.value}-id-${idInjection.prefix}-${idInjection.current++}`);
+  return idRef;
+};
+const useFormItem = () => {
+  const form = inject(formContextKey, void 0);
+  const formItem = inject(formItemContextKey, void 0);
+  return {
+    form,
+    formItem
+  };
+};
+const useFormItemInputId = (props, {
+  formItemContext,
+  disableIdGeneration,
+  disableIdManagement
+}) => {
+  if (!disableIdGeneration) {
+    disableIdGeneration = ref(false);
+  }
+  if (!disableIdManagement) {
+    disableIdManagement = ref(false);
+  }
+  const inputId = ref();
+  let idUnwatch = void 0;
+  const isLabeledByFormItem = computed(() => {
+    var _a2;
+    return !!(!(props.label || props.ariaLabel) && formItemContext && formItemContext.inputIds && ((_a2 = formItemContext.inputIds) == null ? void 0 : _a2.length) <= 1);
+  });
+  onMounted(() => {
+    idUnwatch = watch([toRef(props, "id"), disableIdGeneration], ([id, disableIdGeneration2]) => {
+      const newId = id != null ? id : !disableIdGeneration2 ? useId().value : void 0;
+      if (newId !== inputId.value) {
+        if (formItemContext == null ? void 0 : formItemContext.removeInputId) {
+          inputId.value && formItemContext.removeInputId(inputId.value);
+          if (!(disableIdManagement == null ? void 0 : disableIdManagement.value) && !disableIdGeneration2 && newId) {
+            formItemContext.addInputId(newId);
+          }
+        }
+        inputId.value = newId;
+      }
+    }, { immediate: true });
+  });
+  onUnmounted(() => {
+    idUnwatch && idUnwatch();
+    if (formItemContext == null ? void 0 : formItemContext.removeInputId) {
+      inputId.value && formItemContext.removeInputId(inputId.value);
+    }
+  });
+  return {
+    isLabeledByFormItem,
+    inputId
+  };
+};
+const useProp = (name) => {
+  const vm = getCurrentInstance();
+  return computed(() => {
+    var _a2, _b;
+    return (_b = (_a2 = vm == null ? void 0 : vm.proxy) == null ? void 0 : _a2.$props) == null ? void 0 : _b[name];
+  });
+};
+const useFormSize = (fallback, ignore = {}) => {
+  const emptyRef = ref(void 0);
+  const size = ignore.prop ? emptyRef : useProp("size");
+  const globalConfig2 = ignore.global ? emptyRef : useGlobalSize();
+  const form = ignore.form ? { size: void 0 } : inject(formContextKey, void 0);
+  const formItem = ignore.formItem ? { size: void 0 } : inject(formItemContextKey, void 0);
+  return computed(() => size.value || unref(fallback) || (formItem == null ? void 0 : formItem.size) || (form == null ? void 0 : form.size) || globalConfig2.value || "");
+};
+const useFormDisabled = (fallback) => {
+  const disabled = useProp("disabled");
+  const form = inject(formContextKey, void 0);
+  return computed(() => disabled.value || unref(fallback) || (form == null ? void 0 : form.disabled) || false);
+};
+function useFocusController(target, {
+  beforeFocus,
+  afterFocus,
+  beforeBlur,
+  afterBlur
+} = {}) {
+  const instance = getCurrentInstance();
+  const { emit } = instance;
+  const wrapperRef = shallowRef();
+  const isFocused = ref(false);
+  const handleFocus = (event) => {
+    const cancelFocus = isFunction$1(beforeFocus) ? beforeFocus(event) : false;
+    if (cancelFocus || isFocused.value)
+      return;
+    isFocused.value = true;
+    emit("focus", event);
+    afterFocus == null ? void 0 : afterFocus();
+  };
+  const handleBlur = (event) => {
+    var _a2;
+    const cancelBlur = isFunction$1(beforeBlur) ? beforeBlur(event) : false;
+    if (cancelBlur || event.relatedTarget && ((_a2 = wrapperRef.value) == null ? void 0 : _a2.contains(event.relatedTarget)))
+      return;
+    isFocused.value = false;
+    emit("blur", event);
+    afterBlur == null ? void 0 : afterBlur();
+  };
+  const handleClick = () => {
+    var _a2, _b;
+    if (((_a2 = wrapperRef.value) == null ? void 0 : _a2.contains(document.activeElement)) && wrapperRef.value !== document.activeElement)
+      return;
+    (_b = target.value) == null ? void 0 : _b.focus();
+  };
+  watch(wrapperRef, (el) => {
+    if (el) {
+      el.setAttribute("tabindex", "-1");
+    }
+  });
+  useEventListener(wrapperRef, "focus", handleFocus, true);
+  useEventListener(wrapperRef, "blur", handleBlur, true);
+  useEventListener(wrapperRef, "click", handleClick, true);
+  return {
+    isFocused,
+    wrapperRef,
+    handleFocus,
+    handleBlur
+  };
+}
+const isKorean = (text) => /([\uAC00-\uD7AF\u3130-\u318F])+/gi.test(text);
+function useComposition({
+  afterComposition,
+  emit
+}) {
+  const isComposing = ref(false);
+  const handleCompositionStart = (event) => {
+    emit == null ? void 0 : emit("compositionstart", event);
+    isComposing.value = true;
+  };
+  const handleCompositionUpdate = (event) => {
+    var _a2;
+    emit == null ? void 0 : emit("compositionupdate", event);
+    const text = (_a2 = event.target) == null ? void 0 : _a2.value;
+    const lastCharacter = text[text.length - 1] || "";
+    isComposing.value = !isKorean(lastCharacter);
+  };
+  const handleCompositionEnd = (event) => {
+    emit == null ? void 0 : emit("compositionend", event);
+    if (isComposing.value) {
+      isComposing.value = false;
+      nextTick(() => afterComposition(event));
     }
   };
-  if (extra) {
-    for (const [key, comp] of Object.entries(extra)) {
-      main[key] = comp;
+  const handleComposition = (event) => {
+    event.type === "compositionend" ? handleCompositionEnd(event) : handleCompositionUpdate(event);
+  };
+  return {
+    isComposing,
+    handleComposition,
+    handleCompositionStart,
+    handleCompositionUpdate,
+    handleCompositionEnd
+  };
+}
+function useCursor(input) {
+  let selectionInfo;
+  function recordCursor() {
+    if (input.value == void 0)
+      return;
+    const { selectionStart, selectionEnd, value } = input.value;
+    if (selectionStart == null || selectionEnd == null)
+      return;
+    const beforeTxt = value.slice(0, Math.max(0, selectionStart));
+    const afterTxt = value.slice(Math.max(0, selectionEnd));
+    selectionInfo = {
+      selectionStart,
+      selectionEnd,
+      value,
+      beforeTxt,
+      afterTxt
+    };
+  }
+  function setCursor() {
+    if (input.value == void 0 || selectionInfo == void 0)
+      return;
+    const { value } = input.value;
+    const { beforeTxt, afterTxt, selectionStart } = selectionInfo;
+    if (beforeTxt == void 0 || afterTxt == void 0 || selectionStart == void 0)
+      return;
+    let startPos = value.length;
+    if (value.endsWith(afterTxt)) {
+      startPos = value.length - afterTxt.length;
+    } else if (value.startsWith(beforeTxt)) {
+      startPos = beforeTxt.length;
+    } else {
+      const beforeLastChar = beforeTxt[selectionStart - 1];
+      const newIndex = value.indexOf(beforeLastChar, selectionStart - 1);
+      if (newIndex !== -1) {
+        startPos = newIndex + 1;
+      }
+    }
+    input.value.setSelectionRange(startPos, startPos);
+  }
+  return [recordCursor, setCursor];
+}
+const __default__$i = defineComponent({
+  name: "ElInput",
+  inheritAttrs: false
+});
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
+  ...__default__$i,
+  props: inputProps,
+  emits: inputEmits,
+  setup(__props, { expose, emit }) {
+    const props = __props;
+    const rawAttrs = useAttrs$1();
+    const attrs = useAttrs();
+    const slots = useSlots();
+    const containerKls = computed(() => [
+      props.type === "textarea" ? nsTextarea.b() : nsInput.b(),
+      nsInput.m(inputSize.value),
+      nsInput.is("disabled", inputDisabled.value),
+      nsInput.is("exceed", inputExceed.value),
+      {
+        [nsInput.b("group")]: slots.prepend || slots.append,
+        [nsInput.m("prefix")]: slots.prefix || props.prefixIcon,
+        [nsInput.m("suffix")]: slots.suffix || props.suffixIcon || props.clearable || props.showPassword,
+        [nsInput.bm("suffix", "password-clear")]: showClear.value && showPwdVisible.value,
+        [nsInput.b("hidden")]: props.type === "hidden"
+      },
+      rawAttrs.class
+    ]);
+    const wrapperKls = computed(() => [
+      nsInput.e("wrapper"),
+      nsInput.is("focus", isFocused.value)
+    ]);
+    const { form: elForm, formItem: elFormItem } = useFormItem();
+    const { inputId } = useFormItemInputId(props, {
+      formItemContext: elFormItem
+    });
+    const inputSize = useFormSize();
+    const inputDisabled = useFormDisabled();
+    const nsInput = useNamespace("input");
+    const nsTextarea = useNamespace("textarea");
+    const input = shallowRef();
+    const textarea = shallowRef();
+    const hovering = ref(false);
+    const passwordVisible = ref(false);
+    const countStyle = ref();
+    const textareaCalcStyle = shallowRef(props.inputStyle);
+    const _ref = computed(() => input.value || textarea.value);
+    const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(_ref, {
+      beforeFocus() {
+        return inputDisabled.value;
+      },
+      afterBlur() {
+        var _a2;
+        if (props.validateEvent) {
+          (_a2 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a2.call(elFormItem, "blur").catch((err) => debugWarn());
+        }
+      }
+    });
+    const needStatusIcon = computed(() => {
+      var _a2;
+      return (_a2 = elForm == null ? void 0 : elForm.statusIcon) != null ? _a2 : false;
+    });
+    const validateState = computed(() => (elFormItem == null ? void 0 : elFormItem.validateState) || "");
+    const validateIcon = computed(() => validateState.value && ValidateComponentsMap[validateState.value]);
+    const passwordIcon = computed(() => passwordVisible.value ? view_default : hide_default);
+    const containerStyle = computed(() => [
+      rawAttrs.style
+    ]);
+    const textareaStyle = computed(() => [
+      props.inputStyle,
+      textareaCalcStyle.value,
+      { resize: props.resize }
+    ]);
+    const nativeInputValue = computed(() => isNil(props.modelValue) ? "" : String(props.modelValue));
+    const showClear = computed(() => props.clearable && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (isFocused.value || hovering.value));
+    const showPwdVisible = computed(() => props.showPassword && !inputDisabled.value && !!nativeInputValue.value && (!!nativeInputValue.value || isFocused.value));
+    const isWordLimitVisible = computed(() => props.showWordLimit && !!props.maxlength && (props.type === "text" || props.type === "textarea") && !inputDisabled.value && !props.readonly && !props.showPassword);
+    const textLength = computed(() => nativeInputValue.value.length);
+    const inputExceed = computed(() => !!isWordLimitVisible.value && textLength.value > Number(props.maxlength));
+    const suffixVisible = computed(() => !!slots.suffix || !!props.suffixIcon || showClear.value || props.showPassword || isWordLimitVisible.value || !!validateState.value && needStatusIcon.value);
+    const [recordCursor, setCursor] = useCursor(input);
+    useResizeObserver(textarea, (entries) => {
+      onceInitSizeTextarea();
+      if (!isWordLimitVisible.value || props.resize !== "both")
+        return;
+      const entry = entries[0];
+      const { width } = entry.contentRect;
+      countStyle.value = {
+        right: `calc(100% - ${width + 15 + 6}px)`
+      };
+    });
+    const resizeTextarea = () => {
+      const { type: type4, autosize } = props;
+      if (!isClient || type4 !== "textarea" || !textarea.value)
+        return;
+      if (autosize) {
+        const minRows = isObject$1(autosize) ? autosize.minRows : void 0;
+        const maxRows = isObject$1(autosize) ? autosize.maxRows : void 0;
+        const textareaStyle2 = calcTextareaHeight(textarea.value, minRows, maxRows);
+        textareaCalcStyle.value = {
+          overflowY: "hidden",
+          ...textareaStyle2
+        };
+        nextTick(() => {
+          textarea.value.offsetHeight;
+          textareaCalcStyle.value = textareaStyle2;
+        });
+      } else {
+        textareaCalcStyle.value = {
+          minHeight: calcTextareaHeight(textarea.value).minHeight
+        };
+      }
+    };
+    const createOnceInitResize = (resizeTextarea2) => {
+      let isInit = false;
+      return () => {
+        var _a2;
+        if (isInit || !props.autosize)
+          return;
+        const isElHidden = ((_a2 = textarea.value) == null ? void 0 : _a2.offsetParent) === null;
+        if (!isElHidden) {
+          resizeTextarea2();
+          isInit = true;
+        }
+      };
+    };
+    const onceInitSizeTextarea = createOnceInitResize(resizeTextarea);
+    const setNativeInputValue = () => {
+      const input2 = _ref.value;
+      const formatterValue = props.formatter ? props.formatter(nativeInputValue.value) : nativeInputValue.value;
+      if (!input2 || input2.value === formatterValue)
+        return;
+      input2.value = formatterValue;
+    };
+    const handleInput = async (event) => {
+      recordCursor();
+      let { value } = event.target;
+      if (props.formatter) {
+        value = props.parser ? props.parser(value) : value;
+      }
+      if (isComposing.value)
+        return;
+      if (value === nativeInputValue.value) {
+        setNativeInputValue();
+        return;
+      }
+      emit(UPDATE_MODEL_EVENT, value);
+      emit("input", value);
+      await nextTick();
+      setNativeInputValue();
+      setCursor();
+    };
+    const handleChange = (event) => {
+      emit("change", event.target.value);
+    };
+    const {
+      isComposing,
+      handleCompositionStart,
+      handleCompositionUpdate,
+      handleCompositionEnd
+    } = useComposition({ emit, afterComposition: handleInput });
+    const handlePasswordVisible = () => {
+      recordCursor();
+      passwordVisible.value = !passwordVisible.value;
+      setTimeout(setCursor);
+    };
+    const focus = () => {
+      var _a2;
+      return (_a2 = _ref.value) == null ? void 0 : _a2.focus();
+    };
+    const blur = () => {
+      var _a2;
+      return (_a2 = _ref.value) == null ? void 0 : _a2.blur();
+    };
+    const handleMouseLeave = (evt) => {
+      hovering.value = false;
+      emit("mouseleave", evt);
+    };
+    const handleMouseEnter = (evt) => {
+      hovering.value = true;
+      emit("mouseenter", evt);
+    };
+    const handleKeydown = (evt) => {
+      emit("keydown", evt);
+    };
+    const select = () => {
+      var _a2;
+      (_a2 = _ref.value) == null ? void 0 : _a2.select();
+    };
+    const clear = () => {
+      emit(UPDATE_MODEL_EVENT, "");
+      emit("change", "");
+      emit("clear");
+      emit("input", "");
+    };
+    watch(() => props.modelValue, () => {
+      var _a2;
+      nextTick(() => resizeTextarea());
+      if (props.validateEvent) {
+        (_a2 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a2.call(elFormItem, "change").catch((err) => debugWarn());
+      }
+    });
+    watch(nativeInputValue, () => setNativeInputValue());
+    watch(() => props.type, async () => {
+      await nextTick();
+      setNativeInputValue();
+      resizeTextarea();
+    });
+    onMounted(() => {
+      if (!props.formatter && props.parser) ;
+      setNativeInputValue();
+      nextTick(resizeTextarea);
+    });
+    expose({
+      input,
+      textarea,
+      ref: _ref,
+      textareaStyle,
+      autosize: toRef(props, "autosize"),
+      isComposing,
+      focus,
+      blur,
+      select,
+      clear,
+      resizeTextarea
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass([
+          unref(containerKls),
+          {
+            [unref(nsInput).bm("group", "append")]: _ctx.$slots.append,
+            [unref(nsInput).bm("group", "prepend")]: _ctx.$slots.prepend
+          }
+        ]),
+        style: normalizeStyle(unref(containerStyle)),
+        onMouseenter: handleMouseEnter,
+        onMouseleave: handleMouseLeave
+      }, [
+        createCommentVNode(" input "),
+        _ctx.type !== "textarea" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+          createCommentVNode(" prepend slot "),
+          _ctx.$slots.prepend ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(unref(nsInput).be("group", "prepend"))
+          }, [
+            renderSlot(_ctx.$slots, "prepend")
+          ], 2)) : createCommentVNode("v-if", true),
+          createBaseVNode("div", {
+            ref_key: "wrapperRef",
+            ref: wrapperRef,
+            class: normalizeClass(unref(wrapperKls))
+          }, [
+            createCommentVNode(" prefix slot "),
+            _ctx.$slots.prefix || _ctx.prefixIcon ? (openBlock(), createElementBlock("span", {
+              key: 0,
+              class: normalizeClass(unref(nsInput).e("prefix"))
+            }, [
+              createBaseVNode("span", {
+                class: normalizeClass(unref(nsInput).e("prefix-inner"))
+              }, [
+                renderSlot(_ctx.$slots, "prefix"),
+                _ctx.prefixIcon ? (openBlock(), createBlock(unref(ElIcon), {
+                  key: 0,
+                  class: normalizeClass(unref(nsInput).e("icon"))
+                }, {
+                  default: withCtx(() => [
+                    (openBlock(), createBlock(resolveDynamicComponent(_ctx.prefixIcon)))
+                  ]),
+                  _: 1
+                }, 8, ["class"])) : createCommentVNode("v-if", true)
+              ], 2)
+            ], 2)) : createCommentVNode("v-if", true),
+            createBaseVNode("input", mergeProps({
+              id: unref(inputId),
+              ref_key: "input",
+              ref: input,
+              class: unref(nsInput).e("inner")
+            }, unref(attrs), {
+              minlength: _ctx.minlength,
+              maxlength: _ctx.maxlength,
+              type: _ctx.showPassword ? passwordVisible.value ? "text" : "password" : _ctx.type,
+              disabled: unref(inputDisabled),
+              readonly: _ctx.readonly,
+              autocomplete: _ctx.autocomplete,
+              tabindex: _ctx.tabindex,
+              "aria-label": _ctx.ariaLabel,
+              placeholder: _ctx.placeholder,
+              style: _ctx.inputStyle,
+              form: _ctx.form,
+              autofocus: _ctx.autofocus,
+              role: _ctx.containerRole,
+              onCompositionstart: unref(handleCompositionStart),
+              onCompositionupdate: unref(handleCompositionUpdate),
+              onCompositionend: unref(handleCompositionEnd),
+              onInput: handleInput,
+              onChange: handleChange,
+              onKeydown: handleKeydown
+            }), null, 16, ["id", "minlength", "maxlength", "type", "disabled", "readonly", "autocomplete", "tabindex", "aria-label", "placeholder", "form", "autofocus", "role", "onCompositionstart", "onCompositionupdate", "onCompositionend"]),
+            createCommentVNode(" suffix slot "),
+            unref(suffixVisible) ? (openBlock(), createElementBlock("span", {
+              key: 1,
+              class: normalizeClass(unref(nsInput).e("suffix"))
+            }, [
+              createBaseVNode("span", {
+                class: normalizeClass(unref(nsInput).e("suffix-inner"))
+              }, [
+                !unref(showClear) || !unref(showPwdVisible) || !unref(isWordLimitVisible) ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                  renderSlot(_ctx.$slots, "suffix"),
+                  _ctx.suffixIcon ? (openBlock(), createBlock(unref(ElIcon), {
+                    key: 0,
+                    class: normalizeClass(unref(nsInput).e("icon"))
+                  }, {
+                    default: withCtx(() => [
+                      (openBlock(), createBlock(resolveDynamicComponent(_ctx.suffixIcon)))
+                    ]),
+                    _: 1
+                  }, 8, ["class"])) : createCommentVNode("v-if", true)
+                ], 64)) : createCommentVNode("v-if", true),
+                unref(showClear) ? (openBlock(), createBlock(unref(ElIcon), {
+                  key: 1,
+                  class: normalizeClass([unref(nsInput).e("icon"), unref(nsInput).e("clear")]),
+                  onMousedown: withModifiers(unref(NOOP), ["prevent"]),
+                  onClick: clear
+                }, {
+                  default: withCtx(() => [
+                    createVNode(unref(circle_close_default))
+                  ]),
+                  _: 1
+                }, 8, ["class", "onMousedown"])) : createCommentVNode("v-if", true),
+                unref(showPwdVisible) ? (openBlock(), createBlock(unref(ElIcon), {
+                  key: 2,
+                  class: normalizeClass([unref(nsInput).e("icon"), unref(nsInput).e("password")]),
+                  onClick: handlePasswordVisible
+                }, {
+                  default: withCtx(() => [
+                    (openBlock(), createBlock(resolveDynamicComponent(unref(passwordIcon))))
+                  ]),
+                  _: 1
+                }, 8, ["class"])) : createCommentVNode("v-if", true),
+                unref(isWordLimitVisible) ? (openBlock(), createElementBlock("span", {
+                  key: 3,
+                  class: normalizeClass(unref(nsInput).e("count"))
+                }, [
+                  createBaseVNode("span", {
+                    class: normalizeClass(unref(nsInput).e("count-inner"))
+                  }, toDisplayString(unref(textLength)) + " / " + toDisplayString(_ctx.maxlength), 3)
+                ], 2)) : createCommentVNode("v-if", true),
+                unref(validateState) && unref(validateIcon) && unref(needStatusIcon) ? (openBlock(), createBlock(unref(ElIcon), {
+                  key: 4,
+                  class: normalizeClass([
+                    unref(nsInput).e("icon"),
+                    unref(nsInput).e("validateIcon"),
+                    unref(nsInput).is("loading", unref(validateState) === "validating")
+                  ])
+                }, {
+                  default: withCtx(() => [
+                    (openBlock(), createBlock(resolveDynamicComponent(unref(validateIcon))))
+                  ]),
+                  _: 1
+                }, 8, ["class"])) : createCommentVNode("v-if", true)
+              ], 2)
+            ], 2)) : createCommentVNode("v-if", true)
+          ], 2),
+          createCommentVNode(" append slot "),
+          _ctx.$slots.append ? (openBlock(), createElementBlock("div", {
+            key: 1,
+            class: normalizeClass(unref(nsInput).be("group", "append"))
+          }, [
+            renderSlot(_ctx.$slots, "append")
+          ], 2)) : createCommentVNode("v-if", true)
+        ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+          createCommentVNode(" textarea "),
+          createBaseVNode("textarea", mergeProps({
+            id: unref(inputId),
+            ref_key: "textarea",
+            ref: textarea,
+            class: [unref(nsTextarea).e("inner"), unref(nsInput).is("focus", unref(isFocused))]
+          }, unref(attrs), {
+            minlength: _ctx.minlength,
+            maxlength: _ctx.maxlength,
+            tabindex: _ctx.tabindex,
+            disabled: unref(inputDisabled),
+            readonly: _ctx.readonly,
+            autocomplete: _ctx.autocomplete,
+            style: unref(textareaStyle),
+            "aria-label": _ctx.ariaLabel,
+            placeholder: _ctx.placeholder,
+            form: _ctx.form,
+            autofocus: _ctx.autofocus,
+            rows: _ctx.rows,
+            role: _ctx.containerRole,
+            onCompositionstart: unref(handleCompositionStart),
+            onCompositionupdate: unref(handleCompositionUpdate),
+            onCompositionend: unref(handleCompositionEnd),
+            onInput: handleInput,
+            onFocus: unref(handleFocus),
+            onBlur: unref(handleBlur),
+            onChange: handleChange,
+            onKeydown: handleKeydown
+          }), null, 16, ["id", "minlength", "maxlength", "tabindex", "disabled", "readonly", "autocomplete", "aria-label", "placeholder", "form", "autofocus", "rows", "role", "onCompositionstart", "onCompositionupdate", "onCompositionend", "onFocus", "onBlur"]),
+          unref(isWordLimitVisible) ? (openBlock(), createElementBlock("span", {
+            key: 0,
+            style: normalizeStyle(countStyle.value),
+            class: normalizeClass(unref(nsInput).e("count"))
+          }, toDisplayString(unref(textLength)) + " / " + toDisplayString(_ctx.maxlength), 7)) : createCommentVNode("v-if", true)
+        ], 64))
+      ], 38);
+    };
+  }
+});
+var Input = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__file", "input.vue"]]);
+const ElInput = withInstall(Input);
+const GAP = 4;
+const BAR_MAP = {
+  vertical: {
+    offset: "offsetHeight",
+    scroll: "scrollTop",
+    scrollSize: "scrollHeight",
+    size: "height",
+    key: "vertical",
+    axis: "Y",
+    client: "clientY",
+    direction: "top"
+  },
+  horizontal: {
+    offset: "offsetWidth",
+    scroll: "scrollLeft",
+    scrollSize: "scrollWidth",
+    size: "width",
+    key: "horizontal",
+    axis: "X",
+    client: "clientX",
+    direction: "left"
+  }
+};
+const renderThumbStyle = ({
+  move,
+  size,
+  bar
+}) => ({
+  [bar.size]: size,
+  transform: `translate${bar.axis}(${move}%)`
+});
+const scrollbarContextKey = Symbol("scrollbarContextKey");
+const thumbProps = buildProps({
+  vertical: Boolean,
+  size: String,
+  move: Number,
+  ratio: {
+    type: Number,
+    required: true
+  },
+  always: Boolean
+});
+const COMPONENT_NAME$4 = "Thumb";
+const _sfc_main$A = /* @__PURE__ */ defineComponent({
+  __name: "thumb",
+  props: thumbProps,
+  setup(__props) {
+    const props = __props;
+    const scrollbar = inject(scrollbarContextKey);
+    const ns = useNamespace("scrollbar");
+    if (!scrollbar)
+      throwError(COMPONENT_NAME$4, "can not inject scrollbar context");
+    const instance = ref();
+    const thumb = ref();
+    const thumbState = ref({});
+    const visible = ref(false);
+    let cursorDown = false;
+    let cursorLeave = false;
+    let originalOnSelectStart = isClient ? document.onselectstart : null;
+    const bar = computed(() => BAR_MAP[props.vertical ? "vertical" : "horizontal"]);
+    const thumbStyle = computed(() => renderThumbStyle({
+      size: props.size,
+      move: props.move,
+      bar: bar.value
+    }));
+    const offsetRatio = computed(() => instance.value[bar.value.offset] ** 2 / scrollbar.wrapElement[bar.value.scrollSize] / props.ratio / thumb.value[bar.value.offset]);
+    const clickThumbHandler = (e) => {
+      var _a2;
+      e.stopPropagation();
+      if (e.ctrlKey || [1, 2].includes(e.button))
+        return;
+      (_a2 = window.getSelection()) == null ? void 0 : _a2.removeAllRanges();
+      startDrag(e);
+      const el = e.currentTarget;
+      if (!el)
+        return;
+      thumbState.value[bar.value.axis] = el[bar.value.offset] - (e[bar.value.client] - el.getBoundingClientRect()[bar.value.direction]);
+    };
+    const clickTrackHandler = (e) => {
+      if (!thumb.value || !instance.value || !scrollbar.wrapElement)
+        return;
+      const offset = Math.abs(e.target.getBoundingClientRect()[bar.value.direction] - e[bar.value.client]);
+      const thumbHalf = thumb.value[bar.value.offset] / 2;
+      const thumbPositionPercentage = (offset - thumbHalf) * 100 * offsetRatio.value / instance.value[bar.value.offset];
+      scrollbar.wrapElement[bar.value.scroll] = thumbPositionPercentage * scrollbar.wrapElement[bar.value.scrollSize] / 100;
+    };
+    const startDrag = (e) => {
+      e.stopImmediatePropagation();
+      cursorDown = true;
+      document.addEventListener("mousemove", mouseMoveDocumentHandler);
+      document.addEventListener("mouseup", mouseUpDocumentHandler);
+      originalOnSelectStart = document.onselectstart;
+      document.onselectstart = () => false;
+    };
+    const mouseMoveDocumentHandler = (e) => {
+      if (!instance.value || !thumb.value)
+        return;
+      if (cursorDown === false)
+        return;
+      const prevPage = thumbState.value[bar.value.axis];
+      if (!prevPage)
+        return;
+      const offset = (instance.value.getBoundingClientRect()[bar.value.direction] - e[bar.value.client]) * -1;
+      const thumbClickPosition = thumb.value[bar.value.offset] - prevPage;
+      const thumbPositionPercentage = (offset - thumbClickPosition) * 100 * offsetRatio.value / instance.value[bar.value.offset];
+      scrollbar.wrapElement[bar.value.scroll] = thumbPositionPercentage * scrollbar.wrapElement[bar.value.scrollSize] / 100;
+    };
+    const mouseUpDocumentHandler = () => {
+      cursorDown = false;
+      thumbState.value[bar.value.axis] = 0;
+      document.removeEventListener("mousemove", mouseMoveDocumentHandler);
+      document.removeEventListener("mouseup", mouseUpDocumentHandler);
+      restoreOnselectstart();
+      if (cursorLeave)
+        visible.value = false;
+    };
+    const mouseMoveScrollbarHandler = () => {
+      cursorLeave = false;
+      visible.value = !!props.size;
+    };
+    const mouseLeaveScrollbarHandler = () => {
+      cursorLeave = true;
+      visible.value = cursorDown;
+    };
+    onBeforeUnmount(() => {
+      restoreOnselectstart();
+      document.removeEventListener("mouseup", mouseUpDocumentHandler);
+    });
+    const restoreOnselectstart = () => {
+      if (document.onselectstart !== originalOnSelectStart)
+        document.onselectstart = originalOnSelectStart;
+    };
+    useEventListener(toRef(scrollbar, "scrollbarElement"), "mousemove", mouseMoveScrollbarHandler);
+    useEventListener(toRef(scrollbar, "scrollbarElement"), "mouseleave", mouseLeaveScrollbarHandler);
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(Transition, {
+        name: unref(ns).b("fade"),
+        persisted: ""
+      }, {
+        default: withCtx(() => [
+          withDirectives(createBaseVNode("div", {
+            ref_key: "instance",
+            ref: instance,
+            class: normalizeClass([unref(ns).e("bar"), unref(ns).is(unref(bar).key)]),
+            onMousedown: clickTrackHandler
+          }, [
+            createBaseVNode("div", {
+              ref_key: "thumb",
+              ref: thumb,
+              class: normalizeClass(unref(ns).e("thumb")),
+              style: normalizeStyle(unref(thumbStyle)),
+              onMousedown: clickThumbHandler
+            }, null, 38)
+          ], 34), [
+            [vShow, _ctx.always || visible.value]
+          ])
+        ]),
+        _: 1
+      }, 8, ["name"]);
+    };
+  }
+});
+var Thumb = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__file", "thumb.vue"]]);
+const barProps = buildProps({
+  always: {
+    type: Boolean,
+    default: true
+  },
+  minSize: {
+    type: Number,
+    required: true
+  }
+});
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
+  __name: "bar",
+  props: barProps,
+  setup(__props, { expose }) {
+    const props = __props;
+    const scrollbar = inject(scrollbarContextKey);
+    const moveX = ref(0);
+    const moveY = ref(0);
+    const sizeWidth = ref("");
+    const sizeHeight = ref("");
+    const ratioY = ref(1);
+    const ratioX = ref(1);
+    const handleScroll = (wrap) => {
+      if (wrap) {
+        const offsetHeight = wrap.offsetHeight - GAP;
+        const offsetWidth = wrap.offsetWidth - GAP;
+        moveY.value = wrap.scrollTop * 100 / offsetHeight * ratioY.value;
+        moveX.value = wrap.scrollLeft * 100 / offsetWidth * ratioX.value;
+      }
+    };
+    const update = () => {
+      const wrap = scrollbar == null ? void 0 : scrollbar.wrapElement;
+      if (!wrap)
+        return;
+      const offsetHeight = wrap.offsetHeight - GAP;
+      const offsetWidth = wrap.offsetWidth - GAP;
+      const originalHeight = offsetHeight ** 2 / wrap.scrollHeight;
+      const originalWidth = offsetWidth ** 2 / wrap.scrollWidth;
+      const height = Math.max(originalHeight, props.minSize);
+      const width = Math.max(originalWidth, props.minSize);
+      ratioY.value = originalHeight / (offsetHeight - originalHeight) / (height / (offsetHeight - height));
+      ratioX.value = originalWidth / (offsetWidth - originalWidth) / (width / (offsetWidth - width));
+      sizeHeight.value = height + GAP < offsetHeight ? `${height}px` : "";
+      sizeWidth.value = width + GAP < offsetWidth ? `${width}px` : "";
+    };
+    expose({
+      handleScroll,
+      update
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(Fragment, null, [
+        createVNode(Thumb, {
+          move: moveX.value,
+          ratio: ratioX.value,
+          size: sizeWidth.value,
+          always: _ctx.always
+        }, null, 8, ["move", "ratio", "size", "always"]),
+        createVNode(Thumb, {
+          move: moveY.value,
+          ratio: ratioY.value,
+          size: sizeHeight.value,
+          vertical: "",
+          always: _ctx.always
+        }, null, 8, ["move", "ratio", "size", "always"])
+      ], 64);
+    };
+  }
+});
+var Bar = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "bar.vue"]]);
+const scrollbarProps = buildProps({
+  height: {
+    type: [String, Number],
+    default: ""
+  },
+  maxHeight: {
+    type: [String, Number],
+    default: ""
+  },
+  native: {
+    type: Boolean,
+    default: false
+  },
+  wrapStyle: {
+    type: definePropType([String, Object, Array]),
+    default: ""
+  },
+  wrapClass: {
+    type: [String, Array],
+    default: ""
+  },
+  viewClass: {
+    type: [String, Array],
+    default: ""
+  },
+  viewStyle: {
+    type: [String, Array, Object],
+    default: ""
+  },
+  noresize: Boolean,
+  tag: {
+    type: String,
+    default: "div"
+  },
+  always: Boolean,
+  minSize: {
+    type: Number,
+    default: 20
+  },
+  tabindex: {
+    type: [String, Number],
+    default: void 0
+  },
+  id: String,
+  role: String,
+  ...useAriaProps(["ariaLabel", "ariaOrientation"])
+});
+const scrollbarEmits = {
+  scroll: ({
+    scrollTop,
+    scrollLeft
+  }) => [scrollTop, scrollLeft].every(isNumber)
+};
+const COMPONENT_NAME$3 = "ElScrollbar";
+const __default__$h = defineComponent({
+  name: COMPONENT_NAME$3
+});
+const _sfc_main$y = /* @__PURE__ */ defineComponent({
+  ...__default__$h,
+  props: scrollbarProps,
+  emits: scrollbarEmits,
+  setup(__props, { expose, emit }) {
+    const props = __props;
+    const ns = useNamespace("scrollbar");
+    let stopResizeObserver = void 0;
+    let stopResizeListener = void 0;
+    let wrapScrollTop = 0;
+    let wrapScrollLeft = 0;
+    const scrollbarRef = ref();
+    const wrapRef = ref();
+    const resizeRef = ref();
+    const barRef = ref();
+    const wrapStyle = computed(() => {
+      const style = {};
+      if (props.height)
+        style.height = addUnit(props.height);
+      if (props.maxHeight)
+        style.maxHeight = addUnit(props.maxHeight);
+      return [props.wrapStyle, style];
+    });
+    const wrapKls = computed(() => {
+      return [
+        props.wrapClass,
+        ns.e("wrap"),
+        { [ns.em("wrap", "hidden-default")]: !props.native }
+      ];
+    });
+    const resizeKls = computed(() => {
+      return [ns.e("view"), props.viewClass];
+    });
+    const handleScroll = () => {
+      var _a2;
+      if (wrapRef.value) {
+        (_a2 = barRef.value) == null ? void 0 : _a2.handleScroll(wrapRef.value);
+        wrapScrollTop = wrapRef.value.scrollTop;
+        wrapScrollLeft = wrapRef.value.scrollLeft;
+        emit("scroll", {
+          scrollTop: wrapRef.value.scrollTop,
+          scrollLeft: wrapRef.value.scrollLeft
+        });
+      }
+    };
+    function scrollTo(arg1, arg2) {
+      if (isObject$1(arg1)) {
+        wrapRef.value.scrollTo(arg1);
+      } else if (isNumber(arg1) && isNumber(arg2)) {
+        wrapRef.value.scrollTo(arg1, arg2);
+      }
+    }
+    const setScrollTop = (value) => {
+      if (!isNumber(value)) {
+        return;
+      }
+      wrapRef.value.scrollTop = value;
+    };
+    const setScrollLeft = (value) => {
+      if (!isNumber(value)) {
+        return;
+      }
+      wrapRef.value.scrollLeft = value;
+    };
+    const update = () => {
+      var _a2;
+      (_a2 = barRef.value) == null ? void 0 : _a2.update();
+    };
+    watch(() => props.noresize, (noresize) => {
+      if (noresize) {
+        stopResizeObserver == null ? void 0 : stopResizeObserver();
+        stopResizeListener == null ? void 0 : stopResizeListener();
+      } else {
+        ({ stop: stopResizeObserver } = useResizeObserver(resizeRef, update));
+        stopResizeListener = useEventListener("resize", update);
+      }
+    }, { immediate: true });
+    watch(() => [props.maxHeight, props.height], () => {
+      if (!props.native)
+        nextTick(() => {
+          var _a2;
+          update();
+          if (wrapRef.value) {
+            (_a2 = barRef.value) == null ? void 0 : _a2.handleScroll(wrapRef.value);
+          }
+        });
+    });
+    provide(scrollbarContextKey, reactive({
+      scrollbarElement: scrollbarRef,
+      wrapElement: wrapRef
+    }));
+    onActivated(() => {
+      if (wrapRef.value) {
+        wrapRef.value.scrollTop = wrapScrollTop;
+        wrapRef.value.scrollLeft = wrapScrollLeft;
+      }
+    });
+    onMounted(() => {
+      if (!props.native)
+        nextTick(() => {
+          update();
+        });
+    });
+    onUpdated(() => update());
+    expose({
+      wrapRef,
+      update,
+      scrollTo,
+      setScrollTop,
+      setScrollLeft,
+      handleScroll
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        ref_key: "scrollbarRef",
+        ref: scrollbarRef,
+        class: normalizeClass(unref(ns).b())
+      }, [
+        createBaseVNode("div", {
+          ref_key: "wrapRef",
+          ref: wrapRef,
+          class: normalizeClass(unref(wrapKls)),
+          style: normalizeStyle(unref(wrapStyle)),
+          tabindex: _ctx.tabindex,
+          onScroll: handleScroll
+        }, [
+          (openBlock(), createBlock(resolveDynamicComponent(_ctx.tag), {
+            id: _ctx.id,
+            ref_key: "resizeRef",
+            ref: resizeRef,
+            class: normalizeClass(unref(resizeKls)),
+            style: normalizeStyle(_ctx.viewStyle),
+            role: _ctx.role,
+            "aria-label": _ctx.ariaLabel,
+            "aria-orientation": _ctx.ariaOrientation
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }, 8, ["id", "class", "style", "role", "aria-label", "aria-orientation"]))
+        ], 46, ["tabindex"]),
+        !_ctx.native ? (openBlock(), createBlock(Bar, {
+          key: 0,
+          ref_key: "barRef",
+          ref: barRef,
+          always: _ctx.always,
+          "min-size": _ctx.minSize
+        }, null, 8, ["always", "min-size"])) : createCommentVNode("v-if", true)
+      ], 2);
+    };
+  }
+});
+var Scrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__file", "scrollbar.vue"]]);
+const ElScrollbar = withInstall(Scrollbar);
+const POPPER_INJECTION_KEY = Symbol("popper");
+const POPPER_CONTENT_INJECTION_KEY = Symbol("popperContent");
+const roleTypes = [
+  "dialog",
+  "grid",
+  "group",
+  "listbox",
+  "menu",
+  "navigation",
+  "tooltip",
+  "tree"
+];
+const popperProps = buildProps({
+  role: {
+    type: String,
+    values: roleTypes,
+    default: "tooltip"
+  }
+});
+const __default__$g = defineComponent({
+  name: "ElPopper",
+  inheritAttrs: false
+});
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
+  ...__default__$g,
+  props: popperProps,
+  setup(__props, { expose }) {
+    const props = __props;
+    const triggerRef = ref();
+    const popperInstanceRef = ref();
+    const contentRef = ref();
+    const referenceRef = ref();
+    const role = computed(() => props.role);
+    const popperProvides = {
+      triggerRef,
+      popperInstanceRef,
+      contentRef,
+      referenceRef,
+      role
+    };
+    expose(popperProvides);
+    provide(POPPER_INJECTION_KEY, popperProvides);
+    return (_ctx, _cache) => {
+      return renderSlot(_ctx.$slots, "default");
+    };
+  }
+});
+var Popper = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "popper.vue"]]);
+const popperArrowProps = buildProps({
+  arrowOffset: {
+    type: Number,
+    default: 5
+  }
+});
+const __default__$f = defineComponent({
+  name: "ElPopperArrow",
+  inheritAttrs: false
+});
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
+  ...__default__$f,
+  props: popperArrowProps,
+  setup(__props, { expose }) {
+    const props = __props;
+    const ns = useNamespace("popper");
+    const { arrowOffset, arrowRef, arrowStyle } = inject(POPPER_CONTENT_INJECTION_KEY, void 0);
+    watch(() => props.arrowOffset, (val) => {
+      arrowOffset.value = val;
+    });
+    onBeforeUnmount(() => {
+      arrowRef.value = void 0;
+    });
+    expose({
+      arrowRef
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("span", {
+        ref_key: "arrowRef",
+        ref: arrowRef,
+        class: normalizeClass(unref(ns).e("arrow")),
+        style: normalizeStyle(unref(arrowStyle)),
+        "data-popper-arrow": ""
+      }, null, 6);
+    };
+  }
+});
+var ElPopperArrow = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__file", "arrow.vue"]]);
+const popperTriggerProps = buildProps({
+  virtualRef: {
+    type: definePropType(Object)
+  },
+  virtualTriggering: Boolean,
+  onMouseenter: {
+    type: definePropType(Function)
+  },
+  onMouseleave: {
+    type: definePropType(Function)
+  },
+  onClick: {
+    type: definePropType(Function)
+  },
+  onKeydown: {
+    type: definePropType(Function)
+  },
+  onFocus: {
+    type: definePropType(Function)
+  },
+  onBlur: {
+    type: definePropType(Function)
+  },
+  onContextmenu: {
+    type: definePropType(Function)
+  },
+  id: String,
+  open: Boolean
+});
+const FORWARD_REF_INJECTION_KEY = Symbol("elForwardRef");
+const useForwardRef = (forwardRef) => {
+  const setForwardRef = (el) => {
+    forwardRef.value = el;
+  };
+  provide(FORWARD_REF_INJECTION_KEY, {
+    setForwardRef
+  });
+};
+const useForwardRefDirective = (setForwardRef) => {
+  return {
+    mounted(el) {
+      setForwardRef(el);
+    },
+    updated(el) {
+      setForwardRef(el);
+    },
+    unmounted() {
+      setForwardRef(null);
+    }
+  };
+};
+const isFocusable = (element) => {
+  if (element.tabIndex > 0 || element.tabIndex === 0 && element.getAttribute("tabIndex") !== null) {
+    return true;
+  }
+  if (element.tabIndex < 0 || element.hasAttribute("disabled") || element.getAttribute("aria-disabled") === "true") {
+    return false;
+  }
+  switch (element.nodeName) {
+    case "A": {
+      return !!element.href && element.rel !== "ignore";
+    }
+    case "INPUT": {
+      return !(element.type === "hidden" || element.type === "file");
+    }
+    case "BUTTON":
+    case "SELECT":
+    case "TEXTAREA": {
+      return true;
+    }
+    default: {
+      return false;
     }
   }
-  return main;
 };
-const withNoopInstall = (component) => {
-  component.install = NOOP;
-  return component;
+const NAME = "ElOnlyChild";
+const OnlyChild = defineComponent({
+  name: NAME,
+  setup(_2, {
+    slots,
+    attrs
+  }) {
+    var _a2;
+    const forwardRefInjection = inject(FORWARD_REF_INJECTION_KEY);
+    const forwardRefDirective = useForwardRefDirective((_a2 = forwardRefInjection == null ? void 0 : forwardRefInjection.setForwardRef) != null ? _a2 : NOOP);
+    return () => {
+      var _a22;
+      const defaultSlot = (_a22 = slots.default) == null ? void 0 : _a22.call(slots, attrs);
+      if (!defaultSlot)
+        return null;
+      if (defaultSlot.length > 1) {
+        return null;
+      }
+      const firstLegitNode = findFirstLegitChild(defaultSlot);
+      if (!firstLegitNode) {
+        return null;
+      }
+      return withDirectives(cloneVNode(firstLegitNode, attrs), [[forwardRefDirective]]);
+    };
+  }
+});
+function findFirstLegitChild(node) {
+  if (!node)
+    return null;
+  const children = node;
+  for (const child of children) {
+    if (isObject$1(child)) {
+      switch (child.type) {
+        case Comment:
+          continue;
+        case Text:
+        case "svg":
+          return wrapTextContent(child);
+        case Fragment:
+          return findFirstLegitChild(child.children);
+        default:
+          return child;
+      }
+    }
+    return wrapTextContent(child);
+  }
+  return null;
+}
+function wrapTextContent(s) {
+  const ns = useNamespace("only-child");
+  return createVNode("span", {
+    "class": ns.e("content")
+  }, [s]);
+}
+const __default__$e = defineComponent({
+  name: "ElPopperTrigger",
+  inheritAttrs: false
+});
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
+  ...__default__$e,
+  props: popperTriggerProps,
+  setup(__props, { expose }) {
+    const props = __props;
+    const { role, triggerRef } = inject(POPPER_INJECTION_KEY, void 0);
+    useForwardRef(triggerRef);
+    const ariaControls = computed(() => {
+      return ariaHaspopup.value ? props.id : void 0;
+    });
+    const ariaDescribedby = computed(() => {
+      if (role && role.value === "tooltip") {
+        return props.open && props.id ? props.id : void 0;
+      }
+      return void 0;
+    });
+    const ariaHaspopup = computed(() => {
+      if (role && role.value !== "tooltip") {
+        return role.value;
+      }
+      return void 0;
+    });
+    const ariaExpanded = computed(() => {
+      return ariaHaspopup.value ? `${props.open}` : void 0;
+    });
+    let virtualTriggerAriaStopWatch = void 0;
+    const TRIGGER_ELE_EVENTS = [
+      "onMouseenter",
+      "onMouseleave",
+      "onClick",
+      "onKeydown",
+      "onFocus",
+      "onBlur",
+      "onContextmenu"
+    ];
+    onMounted(() => {
+      watch(() => props.virtualRef, (virtualEl) => {
+        if (virtualEl) {
+          triggerRef.value = unrefElement(virtualEl);
+        }
+      }, {
+        immediate: true
+      });
+      watch(triggerRef, (el, prevEl) => {
+        virtualTriggerAriaStopWatch == null ? void 0 : virtualTriggerAriaStopWatch();
+        virtualTriggerAriaStopWatch = void 0;
+        if (isElement(el)) {
+          TRIGGER_ELE_EVENTS.forEach((eventName) => {
+            var _a2;
+            const handler = props[eventName];
+            if (handler) {
+              el.addEventListener(eventName.slice(2).toLowerCase(), handler);
+              (_a2 = prevEl == null ? void 0 : prevEl.removeEventListener) == null ? void 0 : _a2.call(prevEl, eventName.slice(2).toLowerCase(), handler);
+            }
+          });
+          if (isFocusable(el)) {
+            virtualTriggerAriaStopWatch = watch([ariaControls, ariaDescribedby, ariaHaspopup, ariaExpanded], (watches) => {
+              [
+                "aria-controls",
+                "aria-describedby",
+                "aria-haspopup",
+                "aria-expanded"
+              ].forEach((key, idx) => {
+                isNil(watches[idx]) ? el.removeAttribute(key) : el.setAttribute(key, watches[idx]);
+              });
+            }, { immediate: true });
+          }
+        }
+        if (isElement(prevEl) && isFocusable(prevEl)) {
+          [
+            "aria-controls",
+            "aria-describedby",
+            "aria-haspopup",
+            "aria-expanded"
+          ].forEach((key) => prevEl.removeAttribute(key));
+        }
+      }, {
+        immediate: true
+      });
+    });
+    onBeforeUnmount(() => {
+      virtualTriggerAriaStopWatch == null ? void 0 : virtualTriggerAriaStopWatch();
+      virtualTriggerAriaStopWatch = void 0;
+      if (triggerRef.value && isElement(triggerRef.value)) {
+        const el = triggerRef.value;
+        TRIGGER_ELE_EVENTS.forEach((eventName) => {
+          const handler = props[eventName];
+          if (handler) {
+            el.removeEventListener(eventName.slice(2).toLowerCase(), handler);
+          }
+        });
+        triggerRef.value = void 0;
+      }
+    });
+    expose({
+      triggerRef
+    });
+    return (_ctx, _cache) => {
+      return !_ctx.virtualTriggering ? (openBlock(), createBlock(unref(OnlyChild), mergeProps({ key: 0 }, _ctx.$attrs, {
+        "aria-controls": unref(ariaControls),
+        "aria-describedby": unref(ariaDescribedby),
+        "aria-expanded": unref(ariaExpanded),
+        "aria-haspopup": unref(ariaHaspopup)
+      }), {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16, ["aria-controls", "aria-describedby", "aria-expanded", "aria-haspopup"])) : createCommentVNode("v-if", true);
+    };
+  }
+});
+var ElPopperTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "trigger.vue"]]);
+const FOCUS_AFTER_TRAPPED = "focus-trap.focus-after-trapped";
+const FOCUS_AFTER_RELEASED = "focus-trap.focus-after-released";
+const FOCUSOUT_PREVENTED = "focus-trap.focusout-prevented";
+const FOCUS_AFTER_TRAPPED_OPTS = {
+  cancelable: true,
+  bubbles: false
+};
+const FOCUSOUT_PREVENTED_OPTS = {
+  cancelable: true,
+  bubbles: false
+};
+const ON_TRAP_FOCUS_EVT = "focusAfterTrapped";
+const ON_RELEASE_FOCUS_EVT = "focusAfterReleased";
+const FOCUS_TRAP_INJECTION_KEY = Symbol("elFocusTrap");
+const focusReason = ref();
+const lastUserFocusTimestamp = ref(0);
+const lastAutomatedFocusTimestamp = ref(0);
+let focusReasonUserCount = 0;
+const obtainAllFocusableElements = (element) => {
+  const nodes = [];
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, {
+    acceptNode: (node) => {
+      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
+      if (node.disabled || node.hidden || isHiddenInput)
+        return NodeFilter.FILTER_SKIP;
+      return node.tabIndex >= 0 || node === document.activeElement ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+  while (walker.nextNode())
+    nodes.push(walker.currentNode);
+  return nodes;
+};
+const getVisibleElement = (elements, container) => {
+  for (const element of elements) {
+    if (!isHidden(element, container))
+      return element;
+  }
+};
+const isHidden = (element, container) => {
+  if (getComputedStyle(element).visibility === "hidden")
+    return true;
+  while (element) {
+    if (container && element === container)
+      return false;
+    if (getComputedStyle(element).display === "none")
+      return true;
+    element = element.parentElement;
+  }
+  return false;
+};
+const getEdges = (container) => {
+  const focusable = obtainAllFocusableElements(container);
+  const first = getVisibleElement(focusable, container);
+  const last = getVisibleElement(focusable.reverse(), container);
+  return [first, last];
+};
+const isSelectable = (element) => {
+  return element instanceof HTMLInputElement && "select" in element;
+};
+const tryFocus = (element, shouldSelect) => {
+  if (element && element.focus) {
+    const prevFocusedElement = document.activeElement;
+    let cleanup = false;
+    if (isElement(element) && !isFocusable(element) && !element.getAttribute("tabindex")) {
+      element.setAttribute("tabindex", "-1");
+      cleanup = true;
+    }
+    element.focus({ preventScroll: true });
+    lastAutomatedFocusTimestamp.value = window.performance.now();
+    if (element !== prevFocusedElement && isSelectable(element) && shouldSelect) {
+      element.select();
+    }
+    if (isElement(element) && cleanup) {
+      element.removeAttribute("tabindex");
+    }
+  }
+};
+function removeFromStack(list, item) {
+  const copy = [...list];
+  const idx = list.indexOf(item);
+  if (idx !== -1) {
+    copy.splice(idx, 1);
+  }
+  return copy;
+}
+const createFocusableStack = () => {
+  let stack = [];
+  const push = (layer) => {
+    const currentLayer = stack[0];
+    if (currentLayer && layer !== currentLayer) {
+      currentLayer.pause();
+    }
+    stack = removeFromStack(stack, layer);
+    stack.unshift(layer);
+  };
+  const remove = (layer) => {
+    var _a2, _b;
+    stack = removeFromStack(stack, layer);
+    (_b = (_a2 = stack[0]) == null ? void 0 : _a2.resume) == null ? void 0 : _b.call(_a2);
+  };
+  return {
+    push,
+    remove
+  };
+};
+const focusFirstDescendant = (elements, shouldSelect = false) => {
+  const prevFocusedElement = document.activeElement;
+  for (const element of elements) {
+    tryFocus(element, shouldSelect);
+    if (document.activeElement !== prevFocusedElement)
+      return;
+  }
+};
+const focusableStack = createFocusableStack();
+const isFocusCausedByUserEvent = () => {
+  return lastUserFocusTimestamp.value > lastAutomatedFocusTimestamp.value;
+};
+const notifyFocusReasonPointer = () => {
+  focusReason.value = "pointer";
+  lastUserFocusTimestamp.value = window.performance.now();
+};
+const notifyFocusReasonKeydown = () => {
+  focusReason.value = "keyboard";
+  lastUserFocusTimestamp.value = window.performance.now();
+};
+const useFocusReason = () => {
+  onMounted(() => {
+    if (focusReasonUserCount === 0) {
+      document.addEventListener("mousedown", notifyFocusReasonPointer);
+      document.addEventListener("touchstart", notifyFocusReasonPointer);
+      document.addEventListener("keydown", notifyFocusReasonKeydown);
+    }
+    focusReasonUserCount++;
+  });
+  onBeforeUnmount(() => {
+    focusReasonUserCount--;
+    if (focusReasonUserCount <= 0) {
+      document.removeEventListener("mousedown", notifyFocusReasonPointer);
+      document.removeEventListener("touchstart", notifyFocusReasonPointer);
+      document.removeEventListener("keydown", notifyFocusReasonKeydown);
+    }
+  });
+  return {
+    focusReason,
+    lastUserFocusTimestamp,
+    lastAutomatedFocusTimestamp
+  };
+};
+const createFocusOutPreventedEvent = (detail) => {
+  return new CustomEvent(FOCUSOUT_PREVENTED, {
+    ...FOCUSOUT_PREVENTED_OPTS,
+    detail
+  });
 };
 const EVENT_CODE = {
   tab: "Tab",
@@ -2368,443 +4514,274 @@ const EVENT_CODE = {
   home: "Home",
   end: "End"
 };
-const datePickTypes = [
-  "year",
-  "years",
-  "month",
-  "date",
-  "dates",
-  "week",
-  "datetime",
-  "datetimerange",
-  "daterange",
-  "monthrange"
-];
-const UPDATE_MODEL_EVENT = "update:modelValue";
-const CHANGE_EVENT = "change";
-const componentSizes = ["", "default", "small", "large"];
-const castArray = (arr) => {
-  if (!arr && arr !== 0)
-    return [];
-  return Array.isArray(arr) ? arr : [arr];
-};
-const isKorean = (text) => /([\uAC00-\uD7AF\u3130-\u318F])+/gi.test(text);
-const mutable = (val) => val;
-const DEFAULT_EXCLUDE_KEYS = ["class", "style"];
-const LISTENER_PREFIX = /^on[A-Z]/;
-const useAttrs = (params = {}) => {
-  const { excludeListeners = false, excludeKeys } = params;
-  const allExcludeKeys = computed(() => {
-    return ((excludeKeys == null ? void 0 : excludeKeys.value) || []).concat(DEFAULT_EXCLUDE_KEYS);
-  });
-  const instance = getCurrentInstance();
-  if (!instance) {
-    return computed(() => ({}));
+let registeredEscapeHandlers = [];
+const cachedHandler = (event) => {
+  if (event.code === EVENT_CODE.esc) {
+    registeredEscapeHandlers.forEach((registeredHandler) => registeredHandler(event));
   }
-  return computed(() => {
-    var _a2;
-    return fromPairs(Object.entries((_a2 = instance.proxy) == null ? void 0 : _a2.$attrs).filter(([key]) => !allExcludeKeys.value.includes(key) && !(excludeListeners && LISTENER_PREFIX.test(key))));
+};
+const useEscapeKeydown = (handler) => {
+  onMounted(() => {
+    if (registeredEscapeHandlers.length === 0) {
+      document.addEventListener("keydown", cachedHandler);
+    }
+    if (isClient)
+      registeredEscapeHandlers.push(handler);
+  });
+  onBeforeUnmount(() => {
+    registeredEscapeHandlers = registeredEscapeHandlers.filter((registeredHandler) => registeredHandler !== handler);
+    if (registeredEscapeHandlers.length === 0) {
+      if (isClient)
+        document.removeEventListener("keydown", cachedHandler);
+    }
   });
 };
-const useDeprecated = ({ from, replacement, scope, version, ref: ref2, type: type4 = "API" }, condition) => {
-  watch(() => unref(condition), (val) => {
-  }, {
-    immediate: true
-  });
-};
-var English = {
-  name: "en",
-  el: {
-    colorpicker: {
-      confirm: "OK",
-      clear: "Clear",
-      defaultLabel: "color picker",
-      description: "current color is {color}. press enter to select a new color."
-    },
-    datepicker: {
-      now: "Now",
-      today: "Today",
-      cancel: "Cancel",
-      clear: "Clear",
-      confirm: "OK",
-      dateTablePrompt: "Use the arrow keys and enter to select the day of the month",
-      monthTablePrompt: "Use the arrow keys and enter to select the month",
-      yearTablePrompt: "Use the arrow keys and enter to select the year",
-      selectedDate: "Selected date",
-      selectDate: "Select date",
-      selectTime: "Select time",
-      startDate: "Start Date",
-      startTime: "Start Time",
-      endDate: "End Date",
-      endTime: "End Time",
-      prevYear: "Previous Year",
-      nextYear: "Next Year",
-      prevMonth: "Previous Month",
-      nextMonth: "Next Month",
-      year: "",
-      month1: "January",
-      month2: "February",
-      month3: "March",
-      month4: "April",
-      month5: "May",
-      month6: "June",
-      month7: "July",
-      month8: "August",
-      month9: "September",
-      month10: "October",
-      month11: "November",
-      month12: "December",
-      week: "week",
-      weeks: {
-        sun: "Sun",
-        mon: "Mon",
-        tue: "Tue",
-        wed: "Wed",
-        thu: "Thu",
-        fri: "Fri",
-        sat: "Sat"
+const _sfc_main$u = defineComponent({
+  name: "ElFocusTrap",
+  inheritAttrs: false,
+  props: {
+    loop: Boolean,
+    trapped: Boolean,
+    focusTrapEl: Object,
+    focusStartEl: {
+      type: [Object, String],
+      default: "first"
+    }
+  },
+  emits: [
+    ON_TRAP_FOCUS_EVT,
+    ON_RELEASE_FOCUS_EVT,
+    "focusin",
+    "focusout",
+    "focusout-prevented",
+    "release-requested"
+  ],
+  setup(props, { emit }) {
+    const forwardRef = ref();
+    let lastFocusBeforeTrapped;
+    let lastFocusAfterTrapped;
+    const { focusReason: focusReason2 } = useFocusReason();
+    useEscapeKeydown((event) => {
+      if (props.trapped && !focusLayer.paused) {
+        emit("release-requested", event);
+      }
+    });
+    const focusLayer = {
+      paused: false,
+      pause() {
+        this.paused = true;
       },
-      weeksFull: {
-        sun: "Sunday",
-        mon: "Monday",
-        tue: "Tuesday",
-        wed: "Wednesday",
-        thu: "Thursday",
-        fri: "Friday",
-        sat: "Saturday"
-      },
-      months: {
-        jan: "Jan",
-        feb: "Feb",
-        mar: "Mar",
-        apr: "Apr",
-        may: "May",
-        jun: "Jun",
-        jul: "Jul",
-        aug: "Aug",
-        sep: "Sep",
-        oct: "Oct",
-        nov: "Nov",
-        dec: "Dec"
-      }
-    },
-    inputNumber: {
-      decrease: "decrease number",
-      increase: "increase number"
-    },
-    select: {
-      loading: "Loading",
-      noMatch: "No matching data",
-      noData: "No data",
-      placeholder: "Select"
-    },
-    dropdown: {
-      toggleDropdown: "Toggle Dropdown"
-    },
-    cascader: {
-      noMatch: "No matching data",
-      loading: "Loading",
-      placeholder: "Select",
-      noData: "No data"
-    },
-    pagination: {
-      goto: "Go to",
-      pagesize: "/page",
-      total: "Total {total}",
-      pageClassifier: "",
-      page: "Page",
-      prev: "Go to previous page",
-      next: "Go to next page",
-      currentPage: "page {pager}",
-      prevPages: "Previous {pager} pages",
-      nextPages: "Next {pager} pages",
-      deprecationWarning: "Deprecated usages detected, please refer to the el-pagination documentation for more details"
-    },
-    dialog: {
-      close: "Close this dialog"
-    },
-    drawer: {
-      close: "Close this dialog"
-    },
-    messagebox: {
-      title: "Message",
-      confirm: "OK",
-      cancel: "Cancel",
-      error: "Illegal input",
-      close: "Close this dialog"
-    },
-    upload: {
-      deleteTip: "press delete to remove",
-      delete: "Delete",
-      preview: "Preview",
-      continue: "Continue"
-    },
-    slider: {
-      defaultLabel: "slider between {min} and {max}",
-      defaultRangeStartLabel: "pick start value",
-      defaultRangeEndLabel: "pick end value"
-    },
-    table: {
-      emptyText: "No Data",
-      confirmFilter: "Confirm",
-      resetFilter: "Reset",
-      clearFilter: "All",
-      sumText: "Sum"
-    },
-    tour: {
-      next: "Next",
-      previous: "Previous",
-      finish: "Finish"
-    },
-    tree: {
-      emptyText: "No Data"
-    },
-    transfer: {
-      noMatch: "No matching data",
-      noData: "No data",
-      titles: ["List 1", "List 2"],
-      filterPlaceholder: "Enter keyword",
-      noCheckedFormat: "{total} items",
-      hasCheckedFormat: "{checked}/{total} checked"
-    },
-    image: {
-      error: "FAILED"
-    },
-    pageHeader: {
-      title: "Back"
-    },
-    popconfirm: {
-      confirmButtonText: "Yes",
-      cancelButtonText: "No"
-    },
-    carousel: {
-      leftArrow: "Carousel arrow left",
-      rightArrow: "Carousel arrow right",
-      indicator: "Carousel switch to index {index}"
-    }
-  }
-};
-const buildTranslator = (locale) => (path, option) => translate(path, option, unref(locale));
-const translate = (path, option, locale) => get(locale, path, path).replace(/\{(\w+)\}/g, (_2, key) => {
-  var _a2;
-  return `${(_a2 = option == null ? void 0 : option[key]) != null ? _a2 : `{${key}}`}`;
-});
-const buildLocaleContext = (locale) => {
-  const lang = computed(() => unref(locale).name);
-  const localeRef = isRef(locale) ? locale : ref(locale);
-  return {
-    lang,
-    locale: localeRef,
-    t: buildTranslator(locale)
-  };
-};
-const localeContextKey = Symbol("localeContextKey");
-const useLocale = (localeOverrides) => {
-  const locale = localeOverrides || inject(localeContextKey, ref());
-  return buildLocaleContext(computed(() => locale.value || English));
-};
-const defaultNamespace = "el";
-const statePrefix = "is-";
-const _bem = (namespace, block, blockSuffix, element, modifier) => {
-  let cls = `${namespace}-${block}`;
-  if (blockSuffix) {
-    cls += `-${blockSuffix}`;
-  }
-  if (element) {
-    cls += `__${element}`;
-  }
-  if (modifier) {
-    cls += `--${modifier}`;
-  }
-  return cls;
-};
-const namespaceContextKey = Symbol("namespaceContextKey");
-const useGetDerivedNamespace = (namespaceOverrides) => {
-  const derivedNamespace = namespaceOverrides || (getCurrentInstance() ? inject(namespaceContextKey, ref(defaultNamespace)) : ref(defaultNamespace));
-  const namespace = computed(() => {
-    return unref(derivedNamespace) || defaultNamespace;
-  });
-  return namespace;
-};
-const useNamespace = (block, namespaceOverrides) => {
-  const namespace = useGetDerivedNamespace(namespaceOverrides);
-  const b2 = (blockSuffix = "") => _bem(namespace.value, block, blockSuffix, "", "");
-  const e = (element) => element ? _bem(namespace.value, block, "", element, "") : "";
-  const m2 = (modifier) => modifier ? _bem(namespace.value, block, "", "", modifier) : "";
-  const be2 = (blockSuffix, element) => blockSuffix && element ? _bem(namespace.value, block, blockSuffix, element, "") : "";
-  const em = (element, modifier) => element && modifier ? _bem(namespace.value, block, "", element, modifier) : "";
-  const bm = (blockSuffix, modifier) => blockSuffix && modifier ? _bem(namespace.value, block, blockSuffix, "", modifier) : "";
-  const bem = (blockSuffix, element, modifier) => blockSuffix && element && modifier ? _bem(namespace.value, block, blockSuffix, element, modifier) : "";
-  const is = (name, ...args) => {
-    const state = args.length >= 1 ? args[0] : true;
-    return name && state ? `${statePrefix}${name}` : "";
-  };
-  const cssVar = (object4) => {
-    const styles = {};
-    for (const key in object4) {
-      if (object4[key]) {
-        styles[`--${namespace.value}-${key}`] = object4[key];
-      }
-    }
-    return styles;
-  };
-  const cssVarBlock = (object4) => {
-    const styles = {};
-    for (const key in object4) {
-      if (object4[key]) {
-        styles[`--${namespace.value}-${block}-${key}`] = object4[key];
-      }
-    }
-    return styles;
-  };
-  const cssVarName = (name) => `--${namespace.value}-${name}`;
-  const cssVarBlockName = (name) => `--${namespace.value}-${block}-${name}`;
-  return {
-    namespace,
-    b: b2,
-    e,
-    m: m2,
-    be: be2,
-    em,
-    bm,
-    bem,
-    is,
-    cssVar,
-    cssVarName,
-    cssVarBlock,
-    cssVarBlockName
-  };
-};
-const _prop = buildProp({
-  type: definePropType(Boolean),
-  default: null
-});
-const _event = buildProp({
-  type: definePropType(Function)
-});
-const createModelToggleComposable = (name) => {
-  const updateEventKey = `update:${name}`;
-  const updateEventKeyRaw = `onUpdate:${name}`;
-  const useModelToggleEmits2 = [updateEventKey];
-  const useModelToggleProps2 = {
-    [name]: _prop,
-    [updateEventKeyRaw]: _event
-  };
-  const useModelToggle2 = ({
-    indicator,
-    toggleReason,
-    shouldHideWhenRouteChanges,
-    shouldProceed,
-    onShow,
-    onHide
-  }) => {
-    const instance = getCurrentInstance();
-    const { emit } = instance;
-    const props = instance.props;
-    const hasUpdateHandler = computed(() => isFunction$1(props[updateEventKeyRaw]));
-    const isModelBindingAbsent = computed(() => props[name] === null);
-    const doShow = (event) => {
-      if (indicator.value === true) {
-        return;
-      }
-      indicator.value = true;
-      if (toggleReason) {
-        toggleReason.value = event;
-      }
-      if (isFunction$1(onShow)) {
-        onShow(event);
+      resume() {
+        this.paused = false;
       }
     };
-    const doHide = (event) => {
-      if (indicator.value === false) {
+    const onKeydown = (e) => {
+      if (!props.loop && !props.trapped)
         return;
-      }
-      indicator.value = false;
-      if (toggleReason) {
-        toggleReason.value = event;
-      }
-      if (isFunction$1(onHide)) {
-        onHide(event);
-      }
-    };
-    const show = (event) => {
-      if (props.disabled === true || isFunction$1(shouldProceed) && !shouldProceed())
+      if (focusLayer.paused)
         return;
-      const shouldEmit = hasUpdateHandler.value && isClient;
-      if (shouldEmit) {
-        emit(updateEventKey, true);
-      }
-      if (isModelBindingAbsent.value || !shouldEmit) {
-        doShow(event);
-      }
-    };
-    const hide = (event) => {
-      if (props.disabled === true || !isClient)
-        return;
-      const shouldEmit = hasUpdateHandler.value && isClient;
-      if (shouldEmit) {
-        emit(updateEventKey, false);
-      }
-      if (isModelBindingAbsent.value || !shouldEmit) {
-        doHide(event);
-      }
-    };
-    const onChange = (val) => {
-      if (!isBoolean(val))
-        return;
-      if (props.disabled && val) {
-        if (hasUpdateHandler.value) {
-          emit(updateEventKey, false);
-        }
-      } else if (indicator.value !== val) {
-        if (val) {
-          doShow();
+      const { code, altKey, ctrlKey, metaKey, currentTarget, shiftKey } = e;
+      const { loop } = props;
+      const isTabbing = code === EVENT_CODE.tab && !altKey && !ctrlKey && !metaKey;
+      const currentFocusingEl = document.activeElement;
+      if (isTabbing && currentFocusingEl) {
+        const container = currentTarget;
+        const [first, last] = getEdges(container);
+        const isTabbable = first && last;
+        if (!isTabbable) {
+          if (currentFocusingEl === container) {
+            const focusoutPreventedEvent = createFocusOutPreventedEvent({
+              focusReason: focusReason2.value
+            });
+            emit("focusout-prevented", focusoutPreventedEvent);
+            if (!focusoutPreventedEvent.defaultPrevented) {
+              e.preventDefault();
+            }
+          }
         } else {
-          doHide();
+          if (!shiftKey && currentFocusingEl === last) {
+            const focusoutPreventedEvent = createFocusOutPreventedEvent({
+              focusReason: focusReason2.value
+            });
+            emit("focusout-prevented", focusoutPreventedEvent);
+            if (!focusoutPreventedEvent.defaultPrevented) {
+              e.preventDefault();
+              if (loop)
+                tryFocus(first, true);
+            }
+          } else if (shiftKey && [first, container].includes(currentFocusingEl)) {
+            const focusoutPreventedEvent = createFocusOutPreventedEvent({
+              focusReason: focusReason2.value
+            });
+            emit("focusout-prevented", focusoutPreventedEvent);
+            if (!focusoutPreventedEvent.defaultPrevented) {
+              e.preventDefault();
+              if (loop)
+                tryFocus(last, true);
+            }
+          }
         }
       }
     };
-    const toggle = () => {
-      if (indicator.value) {
-        hide();
+    provide(FOCUS_TRAP_INJECTION_KEY, {
+      focusTrapRef: forwardRef,
+      onKeydown
+    });
+    watch(() => props.focusTrapEl, (focusTrapEl) => {
+      if (focusTrapEl) {
+        forwardRef.value = focusTrapEl;
+      }
+    }, { immediate: true });
+    watch([forwardRef], ([forwardRef2], [oldForwardRef]) => {
+      if (forwardRef2) {
+        forwardRef2.addEventListener("keydown", onKeydown);
+        forwardRef2.addEventListener("focusin", onFocusIn);
+        forwardRef2.addEventListener("focusout", onFocusOut);
+      }
+      if (oldForwardRef) {
+        oldForwardRef.removeEventListener("keydown", onKeydown);
+        oldForwardRef.removeEventListener("focusin", onFocusIn);
+        oldForwardRef.removeEventListener("focusout", onFocusOut);
+      }
+    });
+    const trapOnFocus = (e) => {
+      emit(ON_TRAP_FOCUS_EVT, e);
+    };
+    const releaseOnFocus = (e) => emit(ON_RELEASE_FOCUS_EVT, e);
+    const onFocusIn = (e) => {
+      const trapContainer = unref(forwardRef);
+      if (!trapContainer)
+        return;
+      const target = e.target;
+      const relatedTarget = e.relatedTarget;
+      const isFocusedInTrap = target && trapContainer.contains(target);
+      if (!props.trapped) {
+        const isPrevFocusedInTrap = relatedTarget && trapContainer.contains(relatedTarget);
+        if (!isPrevFocusedInTrap) {
+          lastFocusBeforeTrapped = relatedTarget;
+        }
+      }
+      if (isFocusedInTrap)
+        emit("focusin", e);
+      if (focusLayer.paused)
+        return;
+      if (props.trapped) {
+        if (isFocusedInTrap) {
+          lastFocusAfterTrapped = target;
+        } else {
+          tryFocus(lastFocusAfterTrapped, true);
+        }
+      }
+    };
+    const onFocusOut = (e) => {
+      const trapContainer = unref(forwardRef);
+      if (focusLayer.paused || !trapContainer)
+        return;
+      if (props.trapped) {
+        const relatedTarget = e.relatedTarget;
+        if (!isNil(relatedTarget) && !trapContainer.contains(relatedTarget)) {
+          setTimeout(() => {
+            if (!focusLayer.paused && props.trapped) {
+              const focusoutPreventedEvent = createFocusOutPreventedEvent({
+                focusReason: focusReason2.value
+              });
+              emit("focusout-prevented", focusoutPreventedEvent);
+              if (!focusoutPreventedEvent.defaultPrevented) {
+                tryFocus(lastFocusAfterTrapped, true);
+              }
+            }
+          }, 0);
+        }
       } else {
-        show();
+        const target = e.target;
+        const isFocusedInTrap = target && trapContainer.contains(target);
+        if (!isFocusedInTrap)
+          emit("focusout", e);
       }
     };
-    watch(() => props[name], onChange);
-    if (shouldHideWhenRouteChanges && instance.appContext.config.globalProperties.$route !== void 0) {
-      watch(() => ({
-        ...instance.proxy.$route
-      }), () => {
-        if (shouldHideWhenRouteChanges.value && indicator.value) {
-          hide();
+    async function startTrap() {
+      await nextTick();
+      const trapContainer = unref(forwardRef);
+      if (trapContainer) {
+        focusableStack.push(focusLayer);
+        const prevFocusedElement = trapContainer.contains(document.activeElement) ? lastFocusBeforeTrapped : document.activeElement;
+        lastFocusBeforeTrapped = prevFocusedElement;
+        const isPrevFocusContained = trapContainer.contains(prevFocusedElement);
+        if (!isPrevFocusContained) {
+          const focusEvent = new Event(FOCUS_AFTER_TRAPPED, FOCUS_AFTER_TRAPPED_OPTS);
+          trapContainer.addEventListener(FOCUS_AFTER_TRAPPED, trapOnFocus);
+          trapContainer.dispatchEvent(focusEvent);
+          if (!focusEvent.defaultPrevented) {
+            nextTick(() => {
+              let focusStartEl = props.focusStartEl;
+              if (!isString$1(focusStartEl)) {
+                tryFocus(focusStartEl);
+                if (document.activeElement !== focusStartEl) {
+                  focusStartEl = "first";
+                }
+              }
+              if (focusStartEl === "first") {
+                focusFirstDescendant(obtainAllFocusableElements(trapContainer), true);
+              }
+              if (document.activeElement === prevFocusedElement || focusStartEl === "container") {
+                tryFocus(trapContainer);
+              }
+            });
+          }
         }
-      });
+      }
+    }
+    function stopTrap() {
+      const trapContainer = unref(forwardRef);
+      if (trapContainer) {
+        trapContainer.removeEventListener(FOCUS_AFTER_TRAPPED, trapOnFocus);
+        const releasedEvent = new CustomEvent(FOCUS_AFTER_RELEASED, {
+          ...FOCUS_AFTER_TRAPPED_OPTS,
+          detail: {
+            focusReason: focusReason2.value
+          }
+        });
+        trapContainer.addEventListener(FOCUS_AFTER_RELEASED, releaseOnFocus);
+        trapContainer.dispatchEvent(releasedEvent);
+        if (!releasedEvent.defaultPrevented && (focusReason2.value == "keyboard" || !isFocusCausedByUserEvent() || trapContainer.contains(document.activeElement))) {
+          tryFocus(lastFocusBeforeTrapped != null ? lastFocusBeforeTrapped : document.body);
+        }
+        trapContainer.removeEventListener(FOCUS_AFTER_RELEASED, releaseOnFocus);
+        focusableStack.remove(focusLayer);
+      }
     }
     onMounted(() => {
-      onChange(props[name]);
+      if (props.trapped) {
+        startTrap();
+      }
+      watch(() => props.trapped, (trapped) => {
+        if (trapped) {
+          startTrap();
+        } else {
+          stopTrap();
+        }
+      });
+    });
+    onBeforeUnmount(() => {
+      if (props.trapped) {
+        stopTrap();
+      }
+      if (forwardRef.value) {
+        forwardRef.value.removeEventListener("keydown", onKeydown);
+        forwardRef.value.removeEventListener("focusin", onFocusIn);
+        forwardRef.value.removeEventListener("focusout", onFocusOut);
+        forwardRef.value = void 0;
+      }
     });
     return {
-      hide,
-      show,
-      toggle,
-      hasUpdateHandler
+      onKeydown
     };
-  };
-  return {
-    useModelToggle: useModelToggle2,
-    useModelToggleProps: useModelToggleProps2,
-    useModelToggleEmits: useModelToggleEmits2
-  };
-};
-createModelToggleComposable("modelValue");
-const useProp = (name) => {
-  const vm = getCurrentInstance();
-  return computed(() => {
-    var _a2, _b;
-    return (_b = (_a2 = vm == null ? void 0 : vm.proxy) == null ? void 0 : _a2.$props) == null ? void 0 : _b[name];
-  });
-};
+  }
+});
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  return renderSlot(_ctx.$slots, "default", { handleKeydown: _ctx.onKeydown });
+}
+var ElFocusTrap = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$6], ["__file", "focus-trap.vue"]]);
 var E$2 = "top", R$2 = "bottom", W$2 = "right", P$2 = "left", me = "auto", G$2 = [E$2, R$2, W$2, P$2], U$1 = "start", J$1 = "end", Xe = "clippingParents", je = "viewport", K$1 = "popper", Ye = "reference", De = G$2.reduce(function(t, e) {
   return t.concat([e + "-" + U$1, e + "-" + J$1]);
 }, []), Ee = [].concat(G$2, [me]).reduce(function(t, e) {
@@ -2814,8 +4791,7 @@ function C$2(t) {
   return t ? (t.nodeName || "").toLowerCase() : null;
 }
 function H$2(t) {
-  if (t == null)
-    return window;
+  if (t == null) return window;
   if (t.toString() !== "[object Window]") {
     var e = t.ownerDocument;
     return e && e.defaultView || window;
@@ -2831,8 +4807,7 @@ function B$2(t) {
   return t instanceof e || t instanceof HTMLElement;
 }
 function Pe(t) {
-  if (typeof ShadowRoot == "undefined")
-    return false;
+  if (typeof ShadowRoot == "undefined") return false;
   var e = H$2(t).ShadowRoot;
   return t instanceof e || t instanceof ShadowRoot;
 }
@@ -2879,13 +4854,11 @@ function ke(t) {
 }
 function it$1(t, e) {
   var n = e.getRootNode && e.getRootNode();
-  if (t.contains(e))
-    return true;
+  if (t.contains(e)) return true;
   if (n && Pe(n)) {
     var r2 = e;
     do {
-      if (r2 && t.isSameNode(r2))
-        return true;
+      if (r2 && t.isSameNode(r2)) return true;
       r2 = r2.parentNode || r2.host;
     } while (r2);
   }
@@ -2910,21 +4883,18 @@ function Bt(t) {
   var e = navigator.userAgent.toLowerCase().indexOf("firefox") !== -1, n = navigator.userAgent.indexOf("Trident") !== -1;
   if (n && B$2(t)) {
     var r2 = N$2(t);
-    if (r2.position === "fixed")
-      return null;
+    if (r2.position === "fixed") return null;
   }
   var o = ge(t);
   for (Pe(o) && (o = o.host); B$2(o) && ["html", "body"].indexOf(C$2(o)) < 0; ) {
     var i2 = N$2(o);
-    if (i2.transform !== "none" || i2.perspective !== "none" || i2.contain === "paint" || ["transform", "perspective"].indexOf(i2.willChange) !== -1 || e && i2.willChange === "filter" || e && i2.filter && i2.filter !== "none")
-      return o;
+    if (i2.transform !== "none" || i2.perspective !== "none" || i2.contain === "paint" || ["transform", "perspective"].indexOf(i2.willChange) !== -1 || e && i2.willChange === "filter" || e && i2.filter && i2.filter !== "none") return o;
     o = o.parentNode;
   }
   return null;
 }
 function se(t) {
-  for (var e = H$2(t), n = at$1(t); n && Wt(n) && N$2(n).position === "static"; )
-    n = at$1(n);
+  for (var e = H$2(t), n = at$1(t); n && Wt(n) && N$2(n).position === "static"; ) n = at$1(n);
   return n && (C$2(n) === "html" || C$2(n) === "body" && N$2(n).position === "static") ? e : n || Bt(t) || e;
 }
 function Le(t) {
@@ -3134,8 +5104,7 @@ function Jt(t, e) {
   });
 }
 function Kt(t) {
-  if (q$2(t) === me)
-    return [];
+  if (q$2(t) === me) return [];
   var e = be(t);
   return [lt(t), e, lt(e)];
 }
@@ -3156,22 +5125,18 @@ function Qt(t) {
       }
       O2.set(D, _2);
     }
-    if (j2)
-      for (var ue = h ? 3 : 1, xe = function(z2) {
-        var V2 = d2.find(function(de) {
-          var ae = O2.get(de);
-          if (ae)
-            return ae.slice(0, z2).every(function(Y2) {
-              return Y2;
-            });
+    if (j2) for (var ue = h ? 3 : 1, xe = function(z2) {
+      var V2 = d2.find(function(de) {
+        var ae = O2.get(de);
+        if (ae) return ae.slice(0, z2).every(function(Y2) {
+          return Y2;
         });
-        if (V2)
-          return A2 = V2, "break";
-      }, ie = ue; ie > 0; ie--) {
-        var le = xe(ie);
-        if (le === "break")
-          break;
-      }
+      });
+      if (V2) return A2 = V2, "break";
+    }, ie = ue; ie > 0; ie--) {
+      var le = xe(ie);
+      if (le === "break") break;
+    }
     e.placement !== A2 && (e.modifiersData[r2]._skip = true, e.placement = A2, e.reset = true);
   }
 }
@@ -3286,8 +5251,7 @@ function dn(t) {
 }
 var Ot = { placement: "bottom", modifiers: [], strategy: "absolute" };
 function $t() {
-  for (var t = arguments.length, e = new Array(t), n = 0; n < t; n++)
-    e[n] = arguments[n];
+  for (var t = arguments.length, e = new Array(t), n = 0; n < t; n++) e[n] = arguments[n];
   return !e.some(function(r2) {
     return !(r2 && typeof r2.getBoundingClientRect == "function");
   });
@@ -3328,8 +5292,7 @@ function we(t) {
     }), destroy: function() {
       h(), m2 = true;
     } };
-    if (!$t(a, s))
-      return v2;
+    if (!$t(a, s)) return v2;
     v2.setOptions(f).then(function(p2) {
       !m2 && f.onFirstUpdate && f.onFirstUpdate(p2);
     });
@@ -3355,6 +5318,192 @@ we();
 var mn = [Re, He, Me, Ae];
 we({ defaultModifiers: mn });
 var gn = [Re, He, Me, Ae, wt, vt, xt, pt, bt], yn = we({ defaultModifiers: gn });
+const POSITIONING_STRATEGIES = ["fixed", "absolute"];
+const popperCoreConfigProps = buildProps({
+  boundariesPadding: {
+    type: Number,
+    default: 0
+  },
+  fallbackPlacements: {
+    type: definePropType(Array),
+    default: void 0
+  },
+  gpuAcceleration: {
+    type: Boolean,
+    default: true
+  },
+  offset: {
+    type: Number,
+    default: 12
+  },
+  placement: {
+    type: String,
+    values: Ee,
+    default: "bottom"
+  },
+  popperOptions: {
+    type: definePropType(Object),
+    default: () => ({})
+  },
+  strategy: {
+    type: String,
+    values: POSITIONING_STRATEGIES,
+    default: "absolute"
+  }
+});
+const popperContentProps = buildProps({
+  ...popperCoreConfigProps,
+  id: String,
+  style: {
+    type: definePropType([String, Array, Object])
+  },
+  className: {
+    type: definePropType([String, Array, Object])
+  },
+  effect: {
+    type: definePropType(String),
+    default: "dark"
+  },
+  visible: Boolean,
+  enterable: {
+    type: Boolean,
+    default: true
+  },
+  pure: Boolean,
+  focusOnShow: {
+    type: Boolean,
+    default: false
+  },
+  trapping: {
+    type: Boolean,
+    default: false
+  },
+  popperClass: {
+    type: definePropType([String, Array, Object])
+  },
+  popperStyle: {
+    type: definePropType([String, Array, Object])
+  },
+  referenceEl: {
+    type: definePropType(Object)
+  },
+  triggerTargetEl: {
+    type: definePropType(Object)
+  },
+  stopPopperMouseEvent: {
+    type: Boolean,
+    default: true
+  },
+  virtualTriggering: Boolean,
+  zIndex: Number,
+  ...useAriaProps(["ariaLabel"])
+});
+const popperContentEmits = {
+  mouseenter: (evt) => evt instanceof MouseEvent,
+  mouseleave: (evt) => evt instanceof MouseEvent,
+  focus: () => true,
+  blur: () => true,
+  close: () => true
+};
+const usePopperContentFocusTrap = (props, emit) => {
+  const trapped = ref(false);
+  const focusStartRef = ref();
+  const onFocusAfterTrapped = () => {
+    emit("focus");
+  };
+  const onFocusAfterReleased = (event) => {
+    var _a2;
+    if (((_a2 = event.detail) == null ? void 0 : _a2.focusReason) !== "pointer") {
+      focusStartRef.value = "first";
+      emit("blur");
+    }
+  };
+  const onFocusInTrap = (event) => {
+    if (props.visible && !trapped.value) {
+      if (event.target) {
+        focusStartRef.value = event.target;
+      }
+      trapped.value = true;
+    }
+  };
+  const onFocusoutPrevented = (event) => {
+    if (!props.trapping) {
+      if (event.detail.focusReason === "pointer") {
+        event.preventDefault();
+      }
+      trapped.value = false;
+    }
+  };
+  const onReleaseRequested = () => {
+    trapped.value = false;
+    emit("close");
+  };
+  return {
+    focusStartRef,
+    trapped,
+    onFocusAfterReleased,
+    onFocusAfterTrapped,
+    onFocusInTrap,
+    onFocusoutPrevented,
+    onReleaseRequested
+  };
+};
+const buildPopperOptions = (props, modifiers = []) => {
+  const { placement, strategy, popperOptions } = props;
+  const options = {
+    placement,
+    strategy,
+    ...popperOptions,
+    modifiers: [...genModifiers(props), ...modifiers]
+  };
+  deriveExtraModifiers(options, popperOptions == null ? void 0 : popperOptions.modifiers);
+  return options;
+};
+const unwrapMeasurableEl = ($el) => {
+  if (!isClient)
+    return;
+  return unrefElement($el);
+};
+function genModifiers(options) {
+  const { offset, gpuAcceleration, fallbackPlacements } = options;
+  return [
+    {
+      name: "offset",
+      options: {
+        offset: [0, offset != null ? offset : 12]
+      }
+    },
+    {
+      name: "preventOverflow",
+      options: {
+        padding: {
+          top: 2,
+          bottom: 2,
+          left: 5,
+          right: 5
+        }
+      }
+    },
+    {
+      name: "flip",
+      options: {
+        padding: 5,
+        fallbackPlacements
+      }
+    },
+    {
+      name: "computeStyles",
+      options: {
+        gpuAcceleration
+      }
+    }
+  ];
+}
+function deriveExtraModifiers(options, modifiers) {
+  if (modifiers) {
+    options.modifiers = [...options.modifiers, ...modifiers != null ? modifiers : []];
+  }
+}
 const usePopper = (referenceElementRef, popperElementRef, opts = {}) => {
   const stateUpdater = {
     name: "updateState",
@@ -3442,3962 +5591,6 @@ function deriveState(state) {
     styles,
     attributes
   };
-}
-function useTimeout() {
-  let timeoutHandle;
-  const registerTimeout = (fn2, delay) => {
-    cancelTimeout();
-    timeoutHandle = window.setTimeout(fn2, delay);
-  };
-  const cancelTimeout = () => window.clearTimeout(timeoutHandle);
-  tryOnScopeDispose(() => cancelTimeout());
-  return {
-    registerTimeout,
-    cancelTimeout
-  };
-}
-const defaultIdInjection = {
-  prefix: Math.floor(Math.random() * 1e4),
-  current: 0
-};
-const ID_INJECTION_KEY = Symbol("elIdInjection");
-const useIdInjection = () => {
-  return getCurrentInstance() ? inject(ID_INJECTION_KEY, defaultIdInjection) : defaultIdInjection;
-};
-const useId = (deterministicId) => {
-  const idInjection = useIdInjection();
-  const namespace = useGetDerivedNamespace();
-  const idRef = computed(() => unref(deterministicId) || `${namespace.value}-id-${idInjection.prefix}-${idInjection.current++}`);
-  return idRef;
-};
-let registeredEscapeHandlers = [];
-const cachedHandler = (e) => {
-  const event = e;
-  if (event.key === EVENT_CODE.esc) {
-    registeredEscapeHandlers.forEach((registeredHandler) => registeredHandler(event));
-  }
-};
-const useEscapeKeydown = (handler) => {
-  onMounted(() => {
-    if (registeredEscapeHandlers.length === 0) {
-      document.addEventListener("keydown", cachedHandler);
-    }
-    if (isClient)
-      registeredEscapeHandlers.push(handler);
-  });
-  onBeforeUnmount(() => {
-    registeredEscapeHandlers = registeredEscapeHandlers.filter((registeredHandler) => registeredHandler !== handler);
-    if (registeredEscapeHandlers.length === 0) {
-      if (isClient)
-        document.removeEventListener("keydown", cachedHandler);
-    }
-  });
-};
-let cachedContainer;
-const usePopperContainerId = () => {
-  const namespace = useGetDerivedNamespace();
-  const idInjection = useIdInjection();
-  const id = computed(() => {
-    return `${namespace.value}-popper-container-${idInjection.prefix}`;
-  });
-  const selector = computed(() => `#${id.value}`);
-  return {
-    id,
-    selector
-  };
-};
-const createContainer = (id) => {
-  const container = document.createElement("div");
-  container.id = id;
-  document.body.appendChild(container);
-  return container;
-};
-const usePopperContainer = () => {
-  const { id, selector } = usePopperContainerId();
-  onBeforeMount(() => {
-    if (!isClient)
-      return;
-    if (!cachedContainer && !document.body.querySelector(selector.value)) {
-      cachedContainer = createContainer(id.value);
-    }
-  });
-  return {
-    id,
-    selector
-  };
-};
-const useDelayedToggleProps = buildProps({
-  showAfter: {
-    type: Number,
-    default: 0
-  },
-  hideAfter: {
-    type: Number,
-    default: 200
-  },
-  autoClose: {
-    type: Number,
-    default: 0
-  }
-});
-const useDelayedToggle = ({
-  showAfter,
-  hideAfter,
-  autoClose,
-  open,
-  close
-}) => {
-  const { registerTimeout } = useTimeout();
-  const {
-    registerTimeout: registerTimeoutForAutoClose,
-    cancelTimeout: cancelTimeoutForAutoClose
-  } = useTimeout();
-  const onOpen = (event) => {
-    registerTimeout(() => {
-      open(event);
-      const _autoClose = unref(autoClose);
-      if (isNumber(_autoClose) && _autoClose > 0) {
-        registerTimeoutForAutoClose(() => {
-          close(event);
-        }, _autoClose);
-      }
-    }, unref(showAfter));
-  };
-  const onClose = (event) => {
-    cancelTimeoutForAutoClose();
-    registerTimeout(() => {
-      close(event);
-    }, unref(hideAfter));
-  };
-  return {
-    onOpen,
-    onClose
-  };
-};
-const FORWARD_REF_INJECTION_KEY = Symbol("elForwardRef");
-const useForwardRef = (forwardRef) => {
-  const setForwardRef = (el) => {
-    forwardRef.value = el;
-  };
-  provide(FORWARD_REF_INJECTION_KEY, {
-    setForwardRef
-  });
-};
-const useForwardRefDirective = (setForwardRef) => {
-  return {
-    mounted(el) {
-      setForwardRef(el);
-    },
-    updated(el) {
-      setForwardRef(el);
-    },
-    unmounted() {
-      setForwardRef(null);
-    }
-  };
-};
-const zIndex = ref(0);
-const defaultInitialZIndex = 2e3;
-const zIndexContextKey = Symbol("zIndexContextKey");
-const useZIndex = (zIndexOverrides) => {
-  const zIndexInjection = zIndexOverrides || (getCurrentInstance() ? inject(zIndexContextKey, void 0) : void 0);
-  const initialZIndex = computed(() => {
-    const zIndexFromInjection = unref(zIndexInjection);
-    return isNumber(zIndexFromInjection) ? zIndexFromInjection : defaultInitialZIndex;
-  });
-  const currentZIndex = computed(() => initialZIndex.value + zIndex.value);
-  const nextZIndex = () => {
-    zIndex.value++;
-    return currentZIndex.value;
-  };
-  return {
-    initialZIndex,
-    currentZIndex,
-    nextZIndex
-  };
-};
-function useCursor(input) {
-  const selectionRef = ref();
-  function recordCursor() {
-    if (input.value == void 0)
-      return;
-    const { selectionStart, selectionEnd, value } = input.value;
-    if (selectionStart == null || selectionEnd == null)
-      return;
-    const beforeTxt = value.slice(0, Math.max(0, selectionStart));
-    const afterTxt = value.slice(Math.max(0, selectionEnd));
-    selectionRef.value = {
-      selectionStart,
-      selectionEnd,
-      value,
-      beforeTxt,
-      afterTxt
-    };
-  }
-  function setCursor() {
-    if (input.value == void 0 || selectionRef.value == void 0)
-      return;
-    const { value } = input.value;
-    const { beforeTxt, afterTxt, selectionStart } = selectionRef.value;
-    if (beforeTxt == void 0 || afterTxt == void 0 || selectionStart == void 0)
-      return;
-    let startPos = value.length;
-    if (value.endsWith(afterTxt)) {
-      startPos = value.length - afterTxt.length;
-    } else if (value.startsWith(beforeTxt)) {
-      startPos = beforeTxt.length;
-    } else {
-      const beforeLastChar = beforeTxt[selectionStart - 1];
-      const newIndex = value.indexOf(beforeLastChar, selectionStart - 1);
-      if (newIndex !== -1) {
-        startPos = newIndex + 1;
-      }
-    }
-    input.value.setSelectionRange(startPos, startPos);
-  }
-  return [recordCursor, setCursor];
-}
-const useSizeProp = buildProp({
-  type: String,
-  values: componentSizes,
-  required: false
-});
-const SIZE_INJECTION_KEY = Symbol("size");
-const useGlobalSize = () => {
-  const injectedSize = inject(SIZE_INJECTION_KEY, {});
-  return computed(() => {
-    return unref(injectedSize.size) || "";
-  });
-};
-function useFocusController(target, { afterFocus, beforeBlur, afterBlur } = {}) {
-  const instance = getCurrentInstance();
-  const { emit } = instance;
-  const wrapperRef = shallowRef();
-  const isFocused = ref(false);
-  const handleFocus = (event) => {
-    if (isFocused.value)
-      return;
-    isFocused.value = true;
-    emit("focus", event);
-    afterFocus == null ? void 0 : afterFocus();
-  };
-  const handleBlur = (event) => {
-    var _a2;
-    const cancelBlur = isFunction$1(beforeBlur) ? beforeBlur(event) : false;
-    if (cancelBlur || event.relatedTarget && ((_a2 = wrapperRef.value) == null ? void 0 : _a2.contains(event.relatedTarget)))
-      return;
-    isFocused.value = false;
-    emit("blur", event);
-    afterBlur == null ? void 0 : afterBlur();
-  };
-  const handleClick = () => {
-    var _a2;
-    (_a2 = target.value) == null ? void 0 : _a2.focus();
-  };
-  watch(wrapperRef, (el) => {
-    if (el) {
-      el.setAttribute("tabindex", "-1");
-    }
-  });
-  useEventListener(wrapperRef, "click", handleClick);
-  return {
-    wrapperRef,
-    isFocused,
-    handleFocus,
-    handleBlur
-  };
-}
-const configProviderContextKey = Symbol();
-const globalConfig = ref();
-function useGlobalConfig(key, defaultValue = void 0) {
-  const config = getCurrentInstance() ? inject(configProviderContextKey, globalConfig) : globalConfig;
-  if (key) {
-    return computed(() => {
-      var _a2, _b;
-      return (_b = (_a2 = config.value) == null ? void 0 : _a2[key]) != null ? _b : defaultValue;
-    });
-  } else {
-    return config;
-  }
-}
-var _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
-const iconProps = buildProps({
-  size: {
-    type: definePropType([Number, String])
-  },
-  color: {
-    type: String
-  }
-});
-const __default__$h = defineComponent({
-  name: "ElIcon",
-  inheritAttrs: false
-});
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
-  ...__default__$h,
-  props: iconProps,
-  setup(__props) {
-    const props = __props;
-    const ns = useNamespace("icon");
-    const style = computed(() => {
-      const { size, color } = props;
-      if (!size && !color)
-        return {};
-      return {
-        fontSize: isUndefined(size) ? void 0 : addUnit(size),
-        "--color": color
-      };
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("i", mergeProps({
-        class: unref(ns).b(),
-        style: unref(style)
-      }, _ctx.$attrs), [
-        renderSlot(_ctx.$slots, "default")
-      ], 16);
-    };
-  }
-});
-var Icon = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__file", "icon.vue"]]);
-const ElIcon = withInstall(Icon);
-const formContextKey = Symbol("formContextKey");
-const formItemContextKey = Symbol("formItemContextKey");
-const useFormSize = (fallback, ignore = {}) => {
-  const emptyRef = ref(void 0);
-  const size = ignore.prop ? emptyRef : useProp("size");
-  const globalConfig2 = ignore.global ? emptyRef : useGlobalSize();
-  const form = ignore.form ? { size: void 0 } : inject(formContextKey, void 0);
-  const formItem = ignore.formItem ? { size: void 0 } : inject(formItemContextKey, void 0);
-  return computed(() => size.value || unref(fallback) || (formItem == null ? void 0 : formItem.size) || (form == null ? void 0 : form.size) || globalConfig2.value || "");
-};
-const useFormDisabled = (fallback) => {
-  const disabled = useProp("disabled");
-  const form = inject(formContextKey, void 0);
-  return computed(() => disabled.value || unref(fallback) || (form == null ? void 0 : form.disabled) || false);
-};
-const useFormItem = () => {
-  const form = inject(formContextKey, void 0);
-  const formItem = inject(formItemContextKey, void 0);
-  return {
-    form,
-    formItem
-  };
-};
-const useFormItemInputId = (props, {
-  formItemContext,
-  disableIdGeneration,
-  disableIdManagement
-}) => {
-  if (!disableIdGeneration) {
-    disableIdGeneration = ref(false);
-  }
-  if (!disableIdManagement) {
-    disableIdManagement = ref(false);
-  }
-  const inputId = ref();
-  let idUnwatch = void 0;
-  const isLabeledByFormItem = computed(() => {
-    var _a2;
-    return !!(!props.label && formItemContext && formItemContext.inputIds && ((_a2 = formItemContext.inputIds) == null ? void 0 : _a2.length) <= 1);
-  });
-  onMounted(() => {
-    idUnwatch = watch([toRef(props, "id"), disableIdGeneration], ([id, disableIdGeneration2]) => {
-      const newId = id != null ? id : !disableIdGeneration2 ? useId().value : void 0;
-      if (newId !== inputId.value) {
-        if (formItemContext == null ? void 0 : formItemContext.removeInputId) {
-          inputId.value && formItemContext.removeInputId(inputId.value);
-          if (!(disableIdManagement == null ? void 0 : disableIdManagement.value) && !disableIdGeneration2 && newId) {
-            formItemContext.addInputId(newId);
-          }
-        }
-        inputId.value = newId;
-      }
-    }, { immediate: true });
-  });
-  onUnmounted(() => {
-    idUnwatch && idUnwatch();
-    if (formItemContext == null ? void 0 : formItemContext.removeInputId) {
-      inputId.value && formItemContext.removeInputId(inputId.value);
-    }
-  });
-  return {
-    isLabeledByFormItem,
-    inputId
-  };
-};
-const formMetaProps = buildProps({
-  size: {
-    type: String,
-    values: componentSizes
-  },
-  disabled: Boolean
-});
-const formProps = buildProps({
-  ...formMetaProps,
-  model: Object,
-  rules: {
-    type: definePropType(Object)
-  },
-  labelPosition: {
-    type: String,
-    values: ["left", "right", "top"],
-    default: "right"
-  },
-  requireAsteriskPosition: {
-    type: String,
-    values: ["left", "right"],
-    default: "left"
-  },
-  labelWidth: {
-    type: [String, Number],
-    default: ""
-  },
-  labelSuffix: {
-    type: String,
-    default: ""
-  },
-  inline: Boolean,
-  inlineMessage: Boolean,
-  statusIcon: Boolean,
-  showMessage: {
-    type: Boolean,
-    default: true
-  },
-  validateOnRuleChange: {
-    type: Boolean,
-    default: true
-  },
-  hideRequiredAsterisk: Boolean,
-  scrollToError: Boolean,
-  scrollIntoViewOptions: {
-    type: [Object, Boolean]
-  }
-});
-const formEmits = {
-  validate: (prop, isValid, message) => (isArray$1(prop) || isString$1(prop)) && isBoolean(isValid) && isString$1(message)
-};
-function useFormLabelWidth() {
-  const potentialLabelWidthArr = ref([]);
-  const autoLabelWidth = computed(() => {
-    if (!potentialLabelWidthArr.value.length)
-      return "0";
-    const max = Math.max(...potentialLabelWidthArr.value);
-    return max ? `${max}px` : "";
-  });
-  function getLabelWidthIndex(width) {
-    const index = potentialLabelWidthArr.value.indexOf(width);
-    if (index === -1 && autoLabelWidth.value === "0")
-      ;
-    return index;
-  }
-  function registerLabelWidth(val, oldVal) {
-    if (val && oldVal) {
-      const index = getLabelWidthIndex(oldVal);
-      potentialLabelWidthArr.value.splice(index, 1, val);
-    } else if (val) {
-      potentialLabelWidthArr.value.push(val);
-    }
-  }
-  function deregisterLabelWidth(val) {
-    const index = getLabelWidthIndex(val);
-    if (index > -1) {
-      potentialLabelWidthArr.value.splice(index, 1);
-    }
-  }
-  return {
-    autoLabelWidth,
-    registerLabelWidth,
-    deregisterLabelWidth
-  };
-}
-const filterFields = (fields, props) => {
-  const normalized = castArray$1(props);
-  return normalized.length > 0 ? fields.filter((field) => field.prop && normalized.includes(field.prop)) : fields;
-};
-const COMPONENT_NAME$4 = "ElForm";
-const __default__$g = defineComponent({
-  name: COMPONENT_NAME$4
-});
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
-  ...__default__$g,
-  props: formProps,
-  emits: formEmits,
-  setup(__props, { expose, emit }) {
-    const props = __props;
-    const fields = [];
-    const formSize = useFormSize();
-    const ns = useNamespace("form");
-    const formClasses = computed(() => {
-      const { labelPosition, inline } = props;
-      return [
-        ns.b(),
-        ns.m(formSize.value || "default"),
-        {
-          [ns.m(`label-${labelPosition}`)]: labelPosition,
-          [ns.m("inline")]: inline
-        }
-      ];
-    });
-    const getField = (prop) => {
-      return fields.find((field) => field.prop === prop);
-    };
-    const addField = (field) => {
-      fields.push(field);
-    };
-    const removeField = (field) => {
-      if (field.prop) {
-        fields.splice(fields.indexOf(field), 1);
-      }
-    };
-    const resetFields = (properties = []) => {
-      if (!props.model) {
-        return;
-      }
-      filterFields(fields, properties).forEach((field) => field.resetField());
-    };
-    const clearValidate = (props2 = []) => {
-      filterFields(fields, props2).forEach((field) => field.clearValidate());
-    };
-    const isValidatable = computed(() => {
-      const hasModel = !!props.model;
-      return hasModel;
-    });
-    const obtainValidateFields = (props2) => {
-      if (fields.length === 0)
-        return [];
-      const filteredFields = filterFields(fields, props2);
-      if (!filteredFields.length) {
-        return [];
-      }
-      return filteredFields;
-    };
-    const validate = async (callback) => validateField(void 0, callback);
-    const doValidateField = async (props2 = []) => {
-      if (!isValidatable.value)
-        return false;
-      const fields2 = obtainValidateFields(props2);
-      if (fields2.length === 0)
-        return true;
-      let validationErrors = {};
-      for (const field of fields2) {
-        try {
-          await field.validate("");
-        } catch (fields3) {
-          validationErrors = {
-            ...validationErrors,
-            ...fields3
-          };
-        }
-      }
-      if (Object.keys(validationErrors).length === 0)
-        return true;
-      return Promise.reject(validationErrors);
-    };
-    const validateField = async (modelProps = [], callback) => {
-      const shouldThrow = !isFunction$1(callback);
-      try {
-        const result = await doValidateField(modelProps);
-        if (result === true) {
-          callback == null ? void 0 : callback(result);
-        }
-        return result;
-      } catch (e) {
-        if (e instanceof Error)
-          throw e;
-        const invalidFields = e;
-        if (props.scrollToError) {
-          scrollToField(Object.keys(invalidFields)[0]);
-        }
-        callback == null ? void 0 : callback(false, invalidFields);
-        return shouldThrow && Promise.reject(invalidFields);
-      }
-    };
-    const scrollToField = (prop) => {
-      var _a2;
-      const field = filterFields(fields, prop)[0];
-      if (field) {
-        (_a2 = field.$el) == null ? void 0 : _a2.scrollIntoView(props.scrollIntoViewOptions);
-      }
-    };
-    watch(() => props.rules, () => {
-      if (props.validateOnRuleChange) {
-        validate().catch((err) => debugWarn());
-      }
-    }, { deep: true });
-    provide(formContextKey, reactive({
-      ...toRefs(props),
-      emit,
-      resetFields,
-      clearValidate,
-      validateField,
-      getField,
-      addField,
-      removeField,
-      ...useFormLabelWidth()
-    }));
-    expose({
-      validate,
-      validateField,
-      resetFields,
-      clearValidate,
-      scrollToField
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("form", {
-        class: normalizeClass(unref(formClasses))
-      }, [
-        renderSlot(_ctx.$slots, "default")
-      ], 2);
-    };
-  }
-});
-var Form = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__file", "form.vue"]]);
-var define_process_env_default = {};
-function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i2 = 1; i2 < arguments.length; i2++) {
-      var source = arguments[i2];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends.apply(this, arguments);
-}
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  _setPrototypeOf(subClass, superClass);
-}
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf2(o2) {
-    return o2.__proto__ || Object.getPrototypeOf(o2);
-  };
-  return _getPrototypeOf(o);
-}
-function _setPrototypeOf(o, p2) {
-  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p22) {
-    o2.__proto__ = p22;
-    return o2;
-  };
-  return _setPrototypeOf(o, p2);
-}
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct)
-    return false;
-  if (Reflect.construct.sham)
-    return false;
-  if (typeof Proxy === "function")
-    return true;
-  try {
-    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-    }));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-function _construct(Parent, args, Class) {
-  if (_isNativeReflectConstruct()) {
-    _construct = Reflect.construct.bind();
-  } else {
-    _construct = function _construct2(Parent2, args2, Class2) {
-      var a = [null];
-      a.push.apply(a, args2);
-      var Constructor = Function.bind.apply(Parent2, a);
-      var instance = new Constructor();
-      if (Class2)
-        _setPrototypeOf(instance, Class2.prototype);
-      return instance;
-    };
-  }
-  return _construct.apply(null, arguments);
-}
-function _isNativeFunction(fn2) {
-  return Function.toString.call(fn2).indexOf("[native code]") !== -1;
-}
-function _wrapNativeSuper(Class) {
-  var _cache = typeof Map === "function" ? /* @__PURE__ */ new Map() : void 0;
-  _wrapNativeSuper = function _wrapNativeSuper2(Class2) {
-    if (Class2 === null || !_isNativeFunction(Class2))
-      return Class2;
-    if (typeof Class2 !== "function") {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    if (typeof _cache !== "undefined") {
-      if (_cache.has(Class2))
-        return _cache.get(Class2);
-      _cache.set(Class2, Wrapper);
-    }
-    function Wrapper() {
-      return _construct(Class2, arguments, _getPrototypeOf(this).constructor);
-    }
-    Wrapper.prototype = Object.create(Class2.prototype, {
-      constructor: {
-        value: Wrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    return _setPrototypeOf(Wrapper, Class2);
-  };
-  return _wrapNativeSuper(Class);
-}
-var formatRegExp = /%[sdj%]/g;
-var warning = function warning2() {
-};
-if (typeof process !== "undefined" && define_process_env_default && false) {
-  warning = function warning3(type4, errors) {
-    if (typeof console !== "undefined" && console.warn && typeof ASYNC_VALIDATOR_NO_WARNING === "undefined") {
-      if (errors.every(function(e) {
-        return typeof e === "string";
-      })) {
-        console.warn(type4, errors);
-      }
-    }
-  };
-}
-function convertFieldsError(errors) {
-  if (!errors || !errors.length)
-    return null;
-  var fields = {};
-  errors.forEach(function(error) {
-    var field = error.field;
-    fields[field] = fields[field] || [];
-    fields[field].push(error);
-  });
-  return fields;
-}
-function format(template) {
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-  var i2 = 0;
-  var len = args.length;
-  if (typeof template === "function") {
-    return template.apply(null, args);
-  }
-  if (typeof template === "string") {
-    var str = template.replace(formatRegExp, function(x2) {
-      if (x2 === "%%") {
-        return "%";
-      }
-      if (i2 >= len) {
-        return x2;
-      }
-      switch (x2) {
-        case "%s":
-          return String(args[i2++]);
-        case "%d":
-          return Number(args[i2++]);
-        case "%j":
-          try {
-            return JSON.stringify(args[i2++]);
-          } catch (_2) {
-            return "[Circular]";
-          }
-          break;
-        default:
-          return x2;
-      }
-    });
-    return str;
-  }
-  return template;
-}
-function isNativeStringType(type4) {
-  return type4 === "string" || type4 === "url" || type4 === "hex" || type4 === "email" || type4 === "date" || type4 === "pattern";
-}
-function isEmptyValue(value, type4) {
-  if (value === void 0 || value === null) {
-    return true;
-  }
-  if (type4 === "array" && Array.isArray(value) && !value.length) {
-    return true;
-  }
-  if (isNativeStringType(type4) && typeof value === "string" && !value) {
-    return true;
-  }
-  return false;
-}
-function asyncParallelArray(arr, func, callback) {
-  var results = [];
-  var total = 0;
-  var arrLength = arr.length;
-  function count(errors) {
-    results.push.apply(results, errors || []);
-    total++;
-    if (total === arrLength) {
-      callback(results);
-    }
-  }
-  arr.forEach(function(a) {
-    func(a, count);
-  });
-}
-function asyncSerialArray(arr, func, callback) {
-  var index = 0;
-  var arrLength = arr.length;
-  function next(errors) {
-    if (errors && errors.length) {
-      callback(errors);
-      return;
-    }
-    var original = index;
-    index = index + 1;
-    if (original < arrLength) {
-      func(arr[original], next);
-    } else {
-      callback([]);
-    }
-  }
-  next([]);
-}
-function flattenObjArr(objArr) {
-  var ret = [];
-  Object.keys(objArr).forEach(function(k2) {
-    ret.push.apply(ret, objArr[k2] || []);
-  });
-  return ret;
-}
-var AsyncValidationError = /* @__PURE__ */ function(_Error) {
-  _inheritsLoose(AsyncValidationError2, _Error);
-  function AsyncValidationError2(errors, fields) {
-    var _this;
-    _this = _Error.call(this, "Async Validation Error") || this;
-    _this.errors = errors;
-    _this.fields = fields;
-    return _this;
-  }
-  return AsyncValidationError2;
-}(/* @__PURE__ */ _wrapNativeSuper(Error));
-function asyncMap(objArr, option, func, callback, source) {
-  if (option.first) {
-    var _pending = new Promise(function(resolve, reject) {
-      var next = function next2(errors) {
-        callback(errors);
-        return errors.length ? reject(new AsyncValidationError(errors, convertFieldsError(errors))) : resolve(source);
-      };
-      var flattenArr = flattenObjArr(objArr);
-      asyncSerialArray(flattenArr, func, next);
-    });
-    _pending["catch"](function(e) {
-      return e;
-    });
-    return _pending;
-  }
-  var firstFields = option.firstFields === true ? Object.keys(objArr) : option.firstFields || [];
-  var objArrKeys = Object.keys(objArr);
-  var objArrLength = objArrKeys.length;
-  var total = 0;
-  var results = [];
-  var pending = new Promise(function(resolve, reject) {
-    var next = function next2(errors) {
-      results.push.apply(results, errors);
-      total++;
-      if (total === objArrLength) {
-        callback(results);
-        return results.length ? reject(new AsyncValidationError(results, convertFieldsError(results))) : resolve(source);
-      }
-    };
-    if (!objArrKeys.length) {
-      callback(results);
-      resolve(source);
-    }
-    objArrKeys.forEach(function(key) {
-      var arr = objArr[key];
-      if (firstFields.indexOf(key) !== -1) {
-        asyncSerialArray(arr, func, next);
-      } else {
-        asyncParallelArray(arr, func, next);
-      }
-    });
-  });
-  pending["catch"](function(e) {
-    return e;
-  });
-  return pending;
-}
-function isErrorObj(obj) {
-  return !!(obj && obj.message !== void 0);
-}
-function getValue(value, path) {
-  var v2 = value;
-  for (var i2 = 0; i2 < path.length; i2++) {
-    if (v2 == void 0) {
-      return v2;
-    }
-    v2 = v2[path[i2]];
-  }
-  return v2;
-}
-function complementError(rule, source) {
-  return function(oe) {
-    var fieldValue;
-    if (rule.fullFields) {
-      fieldValue = getValue(source, rule.fullFields);
-    } else {
-      fieldValue = source[oe.field || rule.fullField];
-    }
-    if (isErrorObj(oe)) {
-      oe.field = oe.field || rule.fullField;
-      oe.fieldValue = fieldValue;
-      return oe;
-    }
-    return {
-      message: typeof oe === "function" ? oe() : oe,
-      fieldValue,
-      field: oe.field || rule.fullField
-    };
-  };
-}
-function deepMerge(target, source) {
-  if (source) {
-    for (var s in source) {
-      if (source.hasOwnProperty(s)) {
-        var value = source[s];
-        if (typeof value === "object" && typeof target[s] === "object") {
-          target[s] = _extends({}, target[s], value);
-        } else {
-          target[s] = value;
-        }
-      }
-    }
-  }
-  return target;
-}
-var required$1 = function required(rule, value, source, errors, options, type4) {
-  if (rule.required && (!source.hasOwnProperty(rule.field) || isEmptyValue(value, type4 || rule.type))) {
-    errors.push(format(options.messages.required, rule.fullField));
-  }
-};
-var whitespace = function whitespace2(rule, value, source, errors, options) {
-  if (/^\s+$/.test(value) || value === "") {
-    errors.push(format(options.messages.whitespace, rule.fullField));
-  }
-};
-var urlReg;
-var getUrlRegex = function() {
-  if (urlReg) {
-    return urlReg;
-  }
-  var word = "[a-fA-F\\d:]";
-  var b2 = function b22(options) {
-    return options && options.includeBoundaries ? "(?:(?<=\\s|^)(?=" + word + ")|(?<=" + word + ")(?=\\s|$))" : "";
-  };
-  var v4 = "(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)){3}";
-  var v6seg = "[a-fA-F\\d]{1,4}";
-  var v6 = ("\n(?:\n(?:" + v6seg + ":){7}(?:" + v6seg + "|:)|                                    // 1:2:3:4:5:6:7::  1:2:3:4:5:6:7:8\n(?:" + v6seg + ":){6}(?:" + v4 + "|:" + v6seg + "|:)|                             // 1:2:3:4:5:6::    1:2:3:4:5:6::8   1:2:3:4:5:6::8  1:2:3:4:5:6::1.2.3.4\n(?:" + v6seg + ":){5}(?::" + v4 + "|(?::" + v6seg + "){1,2}|:)|                   // 1:2:3:4:5::      1:2:3:4:5::7:8   1:2:3:4:5::8    1:2:3:4:5::7:1.2.3.4\n(?:" + v6seg + ":){4}(?:(?::" + v6seg + "){0,1}:" + v4 + "|(?::" + v6seg + "){1,3}|:)| // 1:2:3:4::        1:2:3:4::6:7:8   1:2:3:4::8      1:2:3:4::6:7:1.2.3.4\n(?:" + v6seg + ":){3}(?:(?::" + v6seg + "){0,2}:" + v4 + "|(?::" + v6seg + "){1,4}|:)| // 1:2:3::          1:2:3::5:6:7:8   1:2:3::8        1:2:3::5:6:7:1.2.3.4\n(?:" + v6seg + ":){2}(?:(?::" + v6seg + "){0,3}:" + v4 + "|(?::" + v6seg + "){1,5}|:)| // 1:2::            1:2::4:5:6:7:8   1:2::8          1:2::4:5:6:7:1.2.3.4\n(?:" + v6seg + ":){1}(?:(?::" + v6seg + "){0,4}:" + v4 + "|(?::" + v6seg + "){1,6}|:)| // 1::              1::3:4:5:6:7:8   1::8            1::3:4:5:6:7:1.2.3.4\n(?::(?:(?::" + v6seg + "){0,5}:" + v4 + "|(?::" + v6seg + "){1,7}|:))             // ::2:3:4:5:6:7:8  ::2:3:4:5:6:7:8  ::8             ::1.2.3.4\n)(?:%[0-9a-zA-Z]{1,})?                                             // %eth0            %1\n").replace(/\s*\/\/.*$/gm, "").replace(/\n/g, "").trim();
-  var v46Exact = new RegExp("(?:^" + v4 + "$)|(?:^" + v6 + "$)");
-  var v4exact = new RegExp("^" + v4 + "$");
-  var v6exact = new RegExp("^" + v6 + "$");
-  var ip = function ip2(options) {
-    return options && options.exact ? v46Exact : new RegExp("(?:" + b2(options) + v4 + b2(options) + ")|(?:" + b2(options) + v6 + b2(options) + ")", "g");
-  };
-  ip.v4 = function(options) {
-    return options && options.exact ? v4exact : new RegExp("" + b2(options) + v4 + b2(options), "g");
-  };
-  ip.v6 = function(options) {
-    return options && options.exact ? v6exact : new RegExp("" + b2(options) + v6 + b2(options), "g");
-  };
-  var protocol = "(?:(?:[a-z]+:)?//)";
-  var auth = "(?:\\S+(?::\\S*)?@)?";
-  var ipv4 = ip.v4().source;
-  var ipv6 = ip.v6().source;
-  var host = "(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)";
-  var domain = "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*";
-  var tld = "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))";
-  var port = "(?::\\d{2,5})?";
-  var path = '(?:[/?#][^\\s"]*)?';
-  var regex = "(?:" + protocol + "|www\\.)" + auth + "(?:localhost|" + ipv4 + "|" + ipv6 + "|" + host + domain + tld + ")" + port + path;
-  urlReg = new RegExp("(?:^" + regex + "$)", "i");
-  return urlReg;
-};
-var pattern$2 = {
-  // http://emailregex.com/
-  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+\.)+[a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]{2,}))$/,
-  // url: new RegExp(
-  //   '^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$',
-  //   'i',
-  // ),
-  hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
-};
-var types = {
-  integer: function integer(value) {
-    return types.number(value) && parseInt(value, 10) === value;
-  },
-  "float": function float(value) {
-    return types.number(value) && !types.integer(value);
-  },
-  array: function array(value) {
-    return Array.isArray(value);
-  },
-  regexp: function regexp(value) {
-    if (value instanceof RegExp) {
-      return true;
-    }
-    try {
-      return !!new RegExp(value);
-    } catch (e) {
-      return false;
-    }
-  },
-  date: function date(value) {
-    return typeof value.getTime === "function" && typeof value.getMonth === "function" && typeof value.getYear === "function" && !isNaN(value.getTime());
-  },
-  number: function number(value) {
-    if (isNaN(value)) {
-      return false;
-    }
-    return typeof value === "number";
-  },
-  object: function object(value) {
-    return typeof value === "object" && !types.array(value);
-  },
-  method: function method(value) {
-    return typeof value === "function";
-  },
-  email: function email(value) {
-    return typeof value === "string" && value.length <= 320 && !!value.match(pattern$2.email);
-  },
-  url: function url(value) {
-    return typeof value === "string" && value.length <= 2048 && !!value.match(getUrlRegex());
-  },
-  hex: function hex(value) {
-    return typeof value === "string" && !!value.match(pattern$2.hex);
-  }
-};
-var type$1 = function type(rule, value, source, errors, options) {
-  if (rule.required && value === void 0) {
-    required$1(rule, value, source, errors, options);
-    return;
-  }
-  var custom = ["integer", "float", "array", "regexp", "object", "method", "email", "number", "date", "url", "hex"];
-  var ruleType = rule.type;
-  if (custom.indexOf(ruleType) > -1) {
-    if (!types[ruleType](value)) {
-      errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
-    }
-  } else if (ruleType && typeof value !== rule.type) {
-    errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
-  }
-};
-var range = function range2(rule, value, source, errors, options) {
-  var len = typeof rule.len === "number";
-  var min = typeof rule.min === "number";
-  var max = typeof rule.max === "number";
-  var spRegexp = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
-  var val = value;
-  var key = null;
-  var num = typeof value === "number";
-  var str = typeof value === "string";
-  var arr = Array.isArray(value);
-  if (num) {
-    key = "number";
-  } else if (str) {
-    key = "string";
-  } else if (arr) {
-    key = "array";
-  }
-  if (!key) {
-    return false;
-  }
-  if (arr) {
-    val = value.length;
-  }
-  if (str) {
-    val = value.replace(spRegexp, "_").length;
-  }
-  if (len) {
-    if (val !== rule.len) {
-      errors.push(format(options.messages[key].len, rule.fullField, rule.len));
-    }
-  } else if (min && !max && val < rule.min) {
-    errors.push(format(options.messages[key].min, rule.fullField, rule.min));
-  } else if (max && !min && val > rule.max) {
-    errors.push(format(options.messages[key].max, rule.fullField, rule.max));
-  } else if (min && max && (val < rule.min || val > rule.max)) {
-    errors.push(format(options.messages[key].range, rule.fullField, rule.min, rule.max));
-  }
-};
-var ENUM$1 = "enum";
-var enumerable$1 = function enumerable(rule, value, source, errors, options) {
-  rule[ENUM$1] = Array.isArray(rule[ENUM$1]) ? rule[ENUM$1] : [];
-  if (rule[ENUM$1].indexOf(value) === -1) {
-    errors.push(format(options.messages[ENUM$1], rule.fullField, rule[ENUM$1].join(", ")));
-  }
-};
-var pattern$1 = function pattern(rule, value, source, errors, options) {
-  if (rule.pattern) {
-    if (rule.pattern instanceof RegExp) {
-      rule.pattern.lastIndex = 0;
-      if (!rule.pattern.test(value)) {
-        errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
-      }
-    } else if (typeof rule.pattern === "string") {
-      var _pattern = new RegExp(rule.pattern);
-      if (!_pattern.test(value)) {
-        errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
-      }
-    }
-  }
-};
-var rules = {
-  required: required$1,
-  whitespace,
-  type: type$1,
-  range,
-  "enum": enumerable$1,
-  pattern: pattern$1
-};
-var string = function string2(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value, "string") && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options, "string");
-    if (!isEmptyValue(value, "string")) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
-      rules.pattern(rule, value, source, errors, options);
-      if (rule.whitespace === true) {
-        rules.whitespace(rule, value, source, errors, options);
-      }
-    }
-  }
-  callback(errors);
-};
-var method2 = function method3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules.type(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var number2 = function number3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (value === "") {
-      value = void 0;
-    }
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var _boolean = function _boolean2(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules.type(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var regexp2 = function regexp3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (!isEmptyValue(value)) {
-      rules.type(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var integer2 = function integer3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var floatFn = function floatFn2(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var array2 = function array3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if ((value === void 0 || value === null) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options, "array");
-    if (value !== void 0 && value !== null) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var object2 = function object3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules.type(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var ENUM = "enum";
-var enumerable2 = function enumerable3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (value !== void 0) {
-      rules[ENUM](rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var pattern2 = function pattern3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value, "string") && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (!isEmptyValue(value, "string")) {
-      rules.pattern(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var date2 = function date3(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value, "date") && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-    if (!isEmptyValue(value, "date")) {
-      var dateObject;
-      if (value instanceof Date) {
-        dateObject = value;
-      } else {
-        dateObject = new Date(value);
-      }
-      rules.type(rule, dateObject, source, errors, options);
-      if (dateObject) {
-        rules.range(rule, dateObject.getTime(), source, errors, options);
-      }
-    }
-  }
-  callback(errors);
-};
-var required2 = function required3(rule, value, callback, source, options) {
-  var errors = [];
-  var type4 = Array.isArray(value) ? "array" : typeof value;
-  rules.required(rule, value, source, errors, options, type4);
-  callback(errors);
-};
-var type2 = function type3(rule, value, callback, source, options) {
-  var ruleType = rule.type;
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value, ruleType) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options, ruleType);
-    if (!isEmptyValue(value, ruleType)) {
-      rules.type(rule, value, source, errors, options);
-    }
-  }
-  callback(errors);
-};
-var any = function any2(rule, value, callback, source, options) {
-  var errors = [];
-  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
-  if (validate) {
-    if (isEmptyValue(value) && !rule.required) {
-      return callback();
-    }
-    rules.required(rule, value, source, errors, options);
-  }
-  callback(errors);
-};
-var validators = {
-  string,
-  method: method2,
-  number: number2,
-  "boolean": _boolean,
-  regexp: regexp2,
-  integer: integer2,
-  "float": floatFn,
-  array: array2,
-  object: object2,
-  "enum": enumerable2,
-  pattern: pattern2,
-  date: date2,
-  url: type2,
-  hex: type2,
-  email: type2,
-  required: required2,
-  any
-};
-function newMessages() {
-  return {
-    "default": "Validation error on field %s",
-    required: "%s is required",
-    "enum": "%s must be one of %s",
-    whitespace: "%s cannot be empty",
-    date: {
-      format: "%s date %s is invalid for format %s",
-      parse: "%s date could not be parsed, %s is invalid ",
-      invalid: "%s date %s is invalid"
-    },
-    types: {
-      string: "%s is not a %s",
-      method: "%s is not a %s (function)",
-      array: "%s is not an %s",
-      object: "%s is not an %s",
-      number: "%s is not a %s",
-      date: "%s is not a %s",
-      "boolean": "%s is not a %s",
-      integer: "%s is not an %s",
-      "float": "%s is not a %s",
-      regexp: "%s is not a valid %s",
-      email: "%s is not a valid %s",
-      url: "%s is not a valid %s",
-      hex: "%s is not a valid %s"
-    },
-    string: {
-      len: "%s must be exactly %s characters",
-      min: "%s must be at least %s characters",
-      max: "%s cannot be longer than %s characters",
-      range: "%s must be between %s and %s characters"
-    },
-    number: {
-      len: "%s must equal %s",
-      min: "%s cannot be less than %s",
-      max: "%s cannot be greater than %s",
-      range: "%s must be between %s and %s"
-    },
-    array: {
-      len: "%s must be exactly %s in length",
-      min: "%s cannot be less than %s in length",
-      max: "%s cannot be greater than %s in length",
-      range: "%s must be between %s and %s in length"
-    },
-    pattern: {
-      mismatch: "%s value %s does not match pattern %s"
-    },
-    clone: function clone2() {
-      var cloned = JSON.parse(JSON.stringify(this));
-      cloned.clone = this.clone;
-      return cloned;
-    }
-  };
-}
-var messages = newMessages();
-var Schema = /* @__PURE__ */ function() {
-  function Schema2(descriptor) {
-    this.rules = null;
-    this._messages = messages;
-    this.define(descriptor);
-  }
-  var _proto = Schema2.prototype;
-  _proto.define = function define(rules2) {
-    var _this = this;
-    if (!rules2) {
-      throw new Error("Cannot configure a schema with no rules");
-    }
-    if (typeof rules2 !== "object" || Array.isArray(rules2)) {
-      throw new Error("Rules must be an object");
-    }
-    this.rules = {};
-    Object.keys(rules2).forEach(function(name) {
-      var item = rules2[name];
-      _this.rules[name] = Array.isArray(item) ? item : [item];
-    });
-  };
-  _proto.messages = function messages2(_messages) {
-    if (_messages) {
-      this._messages = deepMerge(newMessages(), _messages);
-    }
-    return this._messages;
-  };
-  _proto.validate = function validate(source_, o, oc) {
-    var _this2 = this;
-    if (o === void 0) {
-      o = {};
-    }
-    if (oc === void 0) {
-      oc = function oc2() {
-      };
-    }
-    var source = source_;
-    var options = o;
-    var callback = oc;
-    if (typeof options === "function") {
-      callback = options;
-      options = {};
-    }
-    if (!this.rules || Object.keys(this.rules).length === 0) {
-      if (callback) {
-        callback(null, source);
-      }
-      return Promise.resolve(source);
-    }
-    function complete(results) {
-      var errors = [];
-      var fields = {};
-      function add(e) {
-        if (Array.isArray(e)) {
-          var _errors;
-          errors = (_errors = errors).concat.apply(_errors, e);
-        } else {
-          errors.push(e);
-        }
-      }
-      for (var i2 = 0; i2 < results.length; i2++) {
-        add(results[i2]);
-      }
-      if (!errors.length) {
-        callback(null, source);
-      } else {
-        fields = convertFieldsError(errors);
-        callback(errors, fields);
-      }
-    }
-    if (options.messages) {
-      var messages$1 = this.messages();
-      if (messages$1 === messages) {
-        messages$1 = newMessages();
-      }
-      deepMerge(messages$1, options.messages);
-      options.messages = messages$1;
-    } else {
-      options.messages = this.messages();
-    }
-    var series = {};
-    var keys2 = options.keys || Object.keys(this.rules);
-    keys2.forEach(function(z2) {
-      var arr = _this2.rules[z2];
-      var value = source[z2];
-      arr.forEach(function(r2) {
-        var rule = r2;
-        if (typeof rule.transform === "function") {
-          if (source === source_) {
-            source = _extends({}, source);
-          }
-          value = source[z2] = rule.transform(value);
-        }
-        if (typeof rule === "function") {
-          rule = {
-            validator: rule
-          };
-        } else {
-          rule = _extends({}, rule);
-        }
-        rule.validator = _this2.getValidationMethod(rule);
-        if (!rule.validator) {
-          return;
-        }
-        rule.field = z2;
-        rule.fullField = rule.fullField || z2;
-        rule.type = _this2.getType(rule);
-        series[z2] = series[z2] || [];
-        series[z2].push({
-          rule,
-          value,
-          source,
-          field: z2
-        });
-      });
-    });
-    var errorFields = {};
-    return asyncMap(series, options, function(data, doIt) {
-      var rule = data.rule;
-      var deep = (rule.type === "object" || rule.type === "array") && (typeof rule.fields === "object" || typeof rule.defaultField === "object");
-      deep = deep && (rule.required || !rule.required && data.value);
-      rule.field = data.field;
-      function addFullField(key, schema) {
-        return _extends({}, schema, {
-          fullField: rule.fullField + "." + key,
-          fullFields: rule.fullFields ? [].concat(rule.fullFields, [key]) : [key]
-        });
-      }
-      function cb(e) {
-        if (e === void 0) {
-          e = [];
-        }
-        var errorList = Array.isArray(e) ? e : [e];
-        if (!options.suppressWarning && errorList.length) {
-          Schema2.warning("async-validator:", errorList);
-        }
-        if (errorList.length && rule.message !== void 0) {
-          errorList = [].concat(rule.message);
-        }
-        var filledErrors = errorList.map(complementError(rule, source));
-        if (options.first && filledErrors.length) {
-          errorFields[rule.field] = 1;
-          return doIt(filledErrors);
-        }
-        if (!deep) {
-          doIt(filledErrors);
-        } else {
-          if (rule.required && !data.value) {
-            if (rule.message !== void 0) {
-              filledErrors = [].concat(rule.message).map(complementError(rule, source));
-            } else if (options.error) {
-              filledErrors = [options.error(rule, format(options.messages.required, rule.field))];
-            }
-            return doIt(filledErrors);
-          }
-          var fieldsSchema = {};
-          if (rule.defaultField) {
-            Object.keys(data.value).map(function(key) {
-              fieldsSchema[key] = rule.defaultField;
-            });
-          }
-          fieldsSchema = _extends({}, fieldsSchema, data.rule.fields);
-          var paredFieldsSchema = {};
-          Object.keys(fieldsSchema).forEach(function(field) {
-            var fieldSchema = fieldsSchema[field];
-            var fieldSchemaList = Array.isArray(fieldSchema) ? fieldSchema : [fieldSchema];
-            paredFieldsSchema[field] = fieldSchemaList.map(addFullField.bind(null, field));
-          });
-          var schema = new Schema2(paredFieldsSchema);
-          schema.messages(options.messages);
-          if (data.rule.options) {
-            data.rule.options.messages = options.messages;
-            data.rule.options.error = options.error;
-          }
-          schema.validate(data.value, data.rule.options || options, function(errs) {
-            var finalErrors = [];
-            if (filledErrors && filledErrors.length) {
-              finalErrors.push.apply(finalErrors, filledErrors);
-            }
-            if (errs && errs.length) {
-              finalErrors.push.apply(finalErrors, errs);
-            }
-            doIt(finalErrors.length ? finalErrors : null);
-          });
-        }
-      }
-      var res;
-      if (rule.asyncValidator) {
-        res = rule.asyncValidator(rule, data.value, cb, data.source, options);
-      } else if (rule.validator) {
-        try {
-          res = rule.validator(rule, data.value, cb, data.source, options);
-        } catch (error) {
-          console.error == null ? void 0 : console.error(error);
-          if (!options.suppressValidatorError) {
-            setTimeout(function() {
-              throw error;
-            }, 0);
-          }
-          cb(error.message);
-        }
-        if (res === true) {
-          cb();
-        } else if (res === false) {
-          cb(typeof rule.message === "function" ? rule.message(rule.fullField || rule.field) : rule.message || (rule.fullField || rule.field) + " fails");
-        } else if (res instanceof Array) {
-          cb(res);
-        } else if (res instanceof Error) {
-          cb(res.message);
-        }
-      }
-      if (res && res.then) {
-        res.then(function() {
-          return cb();
-        }, function(e) {
-          return cb(e);
-        });
-      }
-    }, function(results) {
-      complete(results);
-    }, source);
-  };
-  _proto.getType = function getType(rule) {
-    if (rule.type === void 0 && rule.pattern instanceof RegExp) {
-      rule.type = "pattern";
-    }
-    if (typeof rule.validator !== "function" && rule.type && !validators.hasOwnProperty(rule.type)) {
-      throw new Error(format("Unknown rule type %s", rule.type));
-    }
-    return rule.type || "string";
-  };
-  _proto.getValidationMethod = function getValidationMethod(rule) {
-    if (typeof rule.validator === "function") {
-      return rule.validator;
-    }
-    var keys2 = Object.keys(rule);
-    var messageIndex = keys2.indexOf("message");
-    if (messageIndex !== -1) {
-      keys2.splice(messageIndex, 1);
-    }
-    if (keys2.length === 1 && keys2[0] === "required") {
-      return validators.required;
-    }
-    return validators[this.getType(rule)] || void 0;
-  };
-  return Schema2;
-}();
-Schema.register = function register(type4, validator) {
-  if (typeof validator !== "function") {
-    throw new Error("Cannot register a validator by type, validator is not a function");
-  }
-  validators[type4] = validator;
-};
-Schema.warning = warning;
-Schema.messages = messages;
-Schema.validators = validators;
-const formItemValidateStates = [
-  "",
-  "error",
-  "validating",
-  "success"
-];
-const formItemProps = buildProps({
-  label: String,
-  labelWidth: {
-    type: [String, Number],
-    default: ""
-  },
-  prop: {
-    type: definePropType([String, Array])
-  },
-  required: {
-    type: Boolean,
-    default: void 0
-  },
-  rules: {
-    type: definePropType([Object, Array])
-  },
-  error: String,
-  validateStatus: {
-    type: String,
-    values: formItemValidateStates
-  },
-  for: String,
-  inlineMessage: {
-    type: [String, Boolean],
-    default: ""
-  },
-  showMessage: {
-    type: Boolean,
-    default: true
-  },
-  size: {
-    type: String,
-    values: componentSizes
-  }
-});
-const COMPONENT_NAME$3 = "ElLabelWrap";
-var FormLabelWrap = defineComponent({
-  name: COMPONENT_NAME$3,
-  props: {
-    isAutoWidth: Boolean,
-    updateAll: Boolean
-  },
-  setup(props, {
-    slots
-  }) {
-    const formContext = inject(formContextKey, void 0);
-    const formItemContext = inject(formItemContextKey);
-    if (!formItemContext)
-      throwError(COMPONENT_NAME$3, "usage: <el-form-item><label-wrap /></el-form-item>");
-    const ns = useNamespace("form");
-    const el = ref();
-    const computedWidth = ref(0);
-    const getLabelWidth = () => {
-      var _a2;
-      if ((_a2 = el.value) == null ? void 0 : _a2.firstElementChild) {
-        const width = window.getComputedStyle(el.value.firstElementChild).width;
-        return Math.ceil(Number.parseFloat(width));
-      } else {
-        return 0;
-      }
-    };
-    const updateLabelWidth = (action = "update") => {
-      nextTick(() => {
-        if (slots.default && props.isAutoWidth) {
-          if (action === "update") {
-            computedWidth.value = getLabelWidth();
-          } else if (action === "remove") {
-            formContext == null ? void 0 : formContext.deregisterLabelWidth(computedWidth.value);
-          }
-        }
-      });
-    };
-    const updateLabelWidthFn = () => updateLabelWidth("update");
-    onMounted(() => {
-      updateLabelWidthFn();
-    });
-    onBeforeUnmount(() => {
-      updateLabelWidth("remove");
-    });
-    onUpdated(() => updateLabelWidthFn());
-    watch(computedWidth, (val, oldVal) => {
-      if (props.updateAll) {
-        formContext == null ? void 0 : formContext.registerLabelWidth(val, oldVal);
-      }
-    });
-    useResizeObserver(computed(() => {
-      var _a2, _b;
-      return (_b = (_a2 = el.value) == null ? void 0 : _a2.firstElementChild) != null ? _b : null;
-    }), updateLabelWidthFn);
-    return () => {
-      var _a2, _b;
-      if (!slots)
-        return null;
-      const {
-        isAutoWidth
-      } = props;
-      if (isAutoWidth) {
-        const autoLabelWidth = formContext == null ? void 0 : formContext.autoLabelWidth;
-        const hasLabel = formItemContext == null ? void 0 : formItemContext.hasLabel;
-        const style = {};
-        if (hasLabel && autoLabelWidth && autoLabelWidth !== "auto") {
-          const marginWidth = Math.max(0, Number.parseInt(autoLabelWidth, 10) - computedWidth.value);
-          const marginPosition = formContext.labelPosition === "left" ? "marginRight" : "marginLeft";
-          if (marginWidth) {
-            style[marginPosition] = `${marginWidth}px`;
-          }
-        }
-        return createVNode("div", {
-          "ref": el,
-          "class": [ns.be("item", "label-wrap")],
-          "style": style
-        }, [(_a2 = slots.default) == null ? void 0 : _a2.call(slots)]);
-      } else {
-        return createVNode(Fragment, {
-          "ref": el
-        }, [(_b = slots.default) == null ? void 0 : _b.call(slots)]);
-      }
-    };
-  }
-});
-const _hoisted_1$f = ["role", "aria-labelledby"];
-const __default__$f = defineComponent({
-  name: "ElFormItem"
-});
-const _sfc_main$x = /* @__PURE__ */ defineComponent({
-  ...__default__$f,
-  props: formItemProps,
-  setup(__props, { expose }) {
-    const props = __props;
-    const slots = useSlots();
-    const formContext = inject(formContextKey, void 0);
-    const parentFormItemContext = inject(formItemContextKey, void 0);
-    const _size = useFormSize(void 0, { formItem: false });
-    const ns = useNamespace("form-item");
-    const labelId = useId().value;
-    const inputIds = ref([]);
-    const validateState = ref("");
-    const validateStateDebounced = refDebounced(validateState, 100);
-    const validateMessage = ref("");
-    const formItemRef = ref();
-    let initialValue = void 0;
-    let isResettingField = false;
-    const labelStyle = computed(() => {
-      if ((formContext == null ? void 0 : formContext.labelPosition) === "top") {
-        return {};
-      }
-      const labelWidth = addUnit(props.labelWidth || (formContext == null ? void 0 : formContext.labelWidth) || "");
-      if (labelWidth)
-        return { width: labelWidth };
-      return {};
-    });
-    const contentStyle = computed(() => {
-      if ((formContext == null ? void 0 : formContext.labelPosition) === "top" || (formContext == null ? void 0 : formContext.inline)) {
-        return {};
-      }
-      if (!props.label && !props.labelWidth && isNested) {
-        return {};
-      }
-      const labelWidth = addUnit(props.labelWidth || (formContext == null ? void 0 : formContext.labelWidth) || "");
-      if (!props.label && !slots.label) {
-        return { marginLeft: labelWidth };
-      }
-      return {};
-    });
-    const formItemClasses = computed(() => [
-      ns.b(),
-      ns.m(_size.value),
-      ns.is("error", validateState.value === "error"),
-      ns.is("validating", validateState.value === "validating"),
-      ns.is("success", validateState.value === "success"),
-      ns.is("required", isRequired.value || props.required),
-      ns.is("no-asterisk", formContext == null ? void 0 : formContext.hideRequiredAsterisk),
-      (formContext == null ? void 0 : formContext.requireAsteriskPosition) === "right" ? "asterisk-right" : "asterisk-left",
-      { [ns.m("feedback")]: formContext == null ? void 0 : formContext.statusIcon }
-    ]);
-    const _inlineMessage = computed(() => isBoolean(props.inlineMessage) ? props.inlineMessage : (formContext == null ? void 0 : formContext.inlineMessage) || false);
-    const validateClasses = computed(() => [
-      ns.e("error"),
-      { [ns.em("error", "inline")]: _inlineMessage.value }
-    ]);
-    const propString = computed(() => {
-      if (!props.prop)
-        return "";
-      return isString$1(props.prop) ? props.prop : props.prop.join(".");
-    });
-    const hasLabel = computed(() => {
-      return !!(props.label || slots.label);
-    });
-    const labelFor = computed(() => {
-      return props.for || (inputIds.value.length === 1 ? inputIds.value[0] : void 0);
-    });
-    const isGroup = computed(() => {
-      return !labelFor.value && hasLabel.value;
-    });
-    const isNested = !!parentFormItemContext;
-    const fieldValue = computed(() => {
-      const model = formContext == null ? void 0 : formContext.model;
-      if (!model || !props.prop) {
-        return;
-      }
-      return getProp(model, props.prop).value;
-    });
-    const normalizedRules = computed(() => {
-      const { required: required4 } = props;
-      const rules2 = [];
-      if (props.rules) {
-        rules2.push(...castArray$1(props.rules));
-      }
-      const formRules = formContext == null ? void 0 : formContext.rules;
-      if (formRules && props.prop) {
-        const _rules = getProp(formRules, props.prop).value;
-        if (_rules) {
-          rules2.push(...castArray$1(_rules));
-        }
-      }
-      if (required4 !== void 0) {
-        const requiredRules = rules2.map((rule, i2) => [rule, i2]).filter(([rule]) => Object.keys(rule).includes("required"));
-        if (requiredRules.length > 0) {
-          for (const [rule, i2] of requiredRules) {
-            if (rule.required === required4)
-              continue;
-            rules2[i2] = { ...rule, required: required4 };
-          }
-        } else {
-          rules2.push({ required: required4 });
-        }
-      }
-      return rules2;
-    });
-    const validateEnabled = computed(() => normalizedRules.value.length > 0);
-    const getFilteredRule = (trigger) => {
-      const rules2 = normalizedRules.value;
-      return rules2.filter((rule) => {
-        if (!rule.trigger || !trigger)
-          return true;
-        if (Array.isArray(rule.trigger)) {
-          return rule.trigger.includes(trigger);
-        } else {
-          return rule.trigger === trigger;
-        }
-      }).map(({ trigger: trigger2, ...rule }) => rule);
-    };
-    const isRequired = computed(() => normalizedRules.value.some((rule) => rule.required));
-    const shouldShowError = computed(() => {
-      var _a2;
-      return validateStateDebounced.value === "error" && props.showMessage && ((_a2 = formContext == null ? void 0 : formContext.showMessage) != null ? _a2 : true);
-    });
-    const currentLabel = computed(() => `${props.label || ""}${(formContext == null ? void 0 : formContext.labelSuffix) || ""}`);
-    const setValidationState = (state) => {
-      validateState.value = state;
-    };
-    const onValidationFailed = (error) => {
-      var _a2, _b;
-      const { errors, fields } = error;
-      if (!errors || !fields) {
-        console.error(error);
-      }
-      setValidationState("error");
-      validateMessage.value = errors ? (_b = (_a2 = errors == null ? void 0 : errors[0]) == null ? void 0 : _a2.message) != null ? _b : `${props.prop} is required` : "";
-      formContext == null ? void 0 : formContext.emit("validate", props.prop, false, validateMessage.value);
-    };
-    const onValidationSucceeded = () => {
-      setValidationState("success");
-      formContext == null ? void 0 : formContext.emit("validate", props.prop, true, "");
-    };
-    const doValidate = async (rules2) => {
-      const modelName = propString.value;
-      const validator = new Schema({
-        [modelName]: rules2
-      });
-      return validator.validate({ [modelName]: fieldValue.value }, { firstFields: true }).then(() => {
-        onValidationSucceeded();
-        return true;
-      }).catch((err) => {
-        onValidationFailed(err);
-        return Promise.reject(err);
-      });
-    };
-    const validate = async (trigger, callback) => {
-      if (isResettingField || !props.prop) {
-        return false;
-      }
-      const hasCallback = isFunction$1(callback);
-      if (!validateEnabled.value) {
-        callback == null ? void 0 : callback(false);
-        return false;
-      }
-      const rules2 = getFilteredRule(trigger);
-      if (rules2.length === 0) {
-        callback == null ? void 0 : callback(true);
-        return true;
-      }
-      setValidationState("validating");
-      return doValidate(rules2).then(() => {
-        callback == null ? void 0 : callback(true);
-        return true;
-      }).catch((err) => {
-        const { fields } = err;
-        callback == null ? void 0 : callback(false, fields);
-        return hasCallback ? false : Promise.reject(fields);
-      });
-    };
-    const clearValidate = () => {
-      setValidationState("");
-      validateMessage.value = "";
-      isResettingField = false;
-    };
-    const resetField = async () => {
-      const model = formContext == null ? void 0 : formContext.model;
-      if (!model || !props.prop)
-        return;
-      const computedValue = getProp(model, props.prop);
-      isResettingField = true;
-      computedValue.value = clone(initialValue);
-      await nextTick();
-      clearValidate();
-      isResettingField = false;
-    };
-    const addInputId = (id) => {
-      if (!inputIds.value.includes(id)) {
-        inputIds.value.push(id);
-      }
-    };
-    const removeInputId = (id) => {
-      inputIds.value = inputIds.value.filter((listId) => listId !== id);
-    };
-    watch(() => props.error, (val) => {
-      validateMessage.value = val || "";
-      setValidationState(val ? "error" : "");
-    }, { immediate: true });
-    watch(() => props.validateStatus, (val) => setValidationState(val || ""));
-    const context = reactive({
-      ...toRefs(props),
-      $el: formItemRef,
-      size: _size,
-      validateState,
-      labelId,
-      inputIds,
-      isGroup,
-      hasLabel,
-      fieldValue,
-      addInputId,
-      removeInputId,
-      resetField,
-      clearValidate,
-      validate
-    });
-    provide(formItemContextKey, context);
-    onMounted(() => {
-      if (props.prop) {
-        formContext == null ? void 0 : formContext.addField(context);
-        initialValue = clone(fieldValue.value);
-      }
-    });
-    onBeforeUnmount(() => {
-      formContext == null ? void 0 : formContext.removeField(context);
-    });
-    expose({
-      size: _size,
-      validateMessage,
-      validateState,
-      validate,
-      clearValidate,
-      resetField
-    });
-    return (_ctx, _cache) => {
-      var _a2;
-      return openBlock(), createElementBlock("div", {
-        ref_key: "formItemRef",
-        ref: formItemRef,
-        class: normalizeClass(unref(formItemClasses)),
-        role: unref(isGroup) ? "group" : void 0,
-        "aria-labelledby": unref(isGroup) ? unref(labelId) : void 0
-      }, [
-        createVNode(unref(FormLabelWrap), {
-          "is-auto-width": unref(labelStyle).width === "auto",
-          "update-all": ((_a2 = unref(formContext)) == null ? void 0 : _a2.labelWidth) === "auto"
-        }, {
-          default: withCtx(() => [
-            unref(hasLabel) ? (openBlock(), createBlock(resolveDynamicComponent(unref(labelFor) ? "label" : "div"), {
-              key: 0,
-              id: unref(labelId),
-              for: unref(labelFor),
-              class: normalizeClass(unref(ns).e("label")),
-              style: normalizeStyle(unref(labelStyle))
-            }, {
-              default: withCtx(() => [
-                renderSlot(_ctx.$slots, "label", { label: unref(currentLabel) }, () => [
-                  createTextVNode(toDisplayString(unref(currentLabel)), 1)
-                ])
-              ]),
-              _: 3
-            }, 8, ["id", "for", "class", "style"])) : createCommentVNode("v-if", true)
-          ]),
-          _: 3
-        }, 8, ["is-auto-width", "update-all"]),
-        createBaseVNode("div", {
-          class: normalizeClass(unref(ns).e("content")),
-          style: normalizeStyle(unref(contentStyle))
-        }, [
-          renderSlot(_ctx.$slots, "default"),
-          createVNode(TransitionGroup, {
-            name: `${unref(ns).namespace.value}-zoom-in-top`
-          }, {
-            default: withCtx(() => [
-              unref(shouldShowError) ? renderSlot(_ctx.$slots, "error", {
-                key: 0,
-                error: validateMessage.value
-              }, () => [
-                createBaseVNode("div", {
-                  class: normalizeClass(unref(validateClasses))
-                }, toDisplayString(validateMessage.value), 3)
-              ]) : createCommentVNode("v-if", true)
-            ]),
-            _: 3
-          }, 8, ["name"])
-        ], 6)
-      ], 10, _hoisted_1$f);
-    };
-  }
-});
-var FormItem = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "form-item.vue"]]);
-const ElForm = withInstall(Form, {
-  FormItem
-});
-const ElFormItem = withNoopInstall(FormItem);
-let hiddenTextarea = void 0;
-const HIDDEN_STYLE = `
-  height:0 !important;
-  visibility:hidden !important;
-  ${isFirefox() ? "" : "overflow:hidden !important;"}
-  position:absolute !important;
-  z-index:-1000 !important;
-  top:0 !important;
-  right:0 !important;
-`;
-const CONTEXT_STYLE = [
-  "letter-spacing",
-  "line-height",
-  "padding-top",
-  "padding-bottom",
-  "font-family",
-  "font-weight",
-  "font-size",
-  "text-rendering",
-  "text-transform",
-  "width",
-  "text-indent",
-  "padding-left",
-  "padding-right",
-  "border-width",
-  "box-sizing"
-];
-function calculateNodeStyling(targetElement) {
-  const style = window.getComputedStyle(targetElement);
-  const boxSizing = style.getPropertyValue("box-sizing");
-  const paddingSize = Number.parseFloat(style.getPropertyValue("padding-bottom")) + Number.parseFloat(style.getPropertyValue("padding-top"));
-  const borderSize = Number.parseFloat(style.getPropertyValue("border-bottom-width")) + Number.parseFloat(style.getPropertyValue("border-top-width"));
-  const contextStyle = CONTEXT_STYLE.map((name) => `${name}:${style.getPropertyValue(name)}`).join(";");
-  return { contextStyle, paddingSize, borderSize, boxSizing };
-}
-function calcTextareaHeight(targetElement, minRows = 1, maxRows) {
-  var _a2;
-  if (!hiddenTextarea) {
-    hiddenTextarea = document.createElement("textarea");
-    document.body.appendChild(hiddenTextarea);
-  }
-  const { paddingSize, borderSize, boxSizing, contextStyle } = calculateNodeStyling(targetElement);
-  hiddenTextarea.setAttribute("style", `${contextStyle};${HIDDEN_STYLE}`);
-  hiddenTextarea.value = targetElement.value || targetElement.placeholder || "";
-  let height = hiddenTextarea.scrollHeight;
-  const result = {};
-  if (boxSizing === "border-box") {
-    height = height + borderSize;
-  } else if (boxSizing === "content-box") {
-    height = height - paddingSize;
-  }
-  hiddenTextarea.value = "";
-  const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
-  if (isNumber(minRows)) {
-    let minHeight = singleRowHeight * minRows;
-    if (boxSizing === "border-box") {
-      minHeight = minHeight + paddingSize + borderSize;
-    }
-    height = Math.max(minHeight, height);
-    result.minHeight = `${minHeight}px`;
-  }
-  if (isNumber(maxRows)) {
-    let maxHeight = singleRowHeight * maxRows;
-    if (boxSizing === "border-box") {
-      maxHeight = maxHeight + paddingSize + borderSize;
-    }
-    height = Math.min(maxHeight, height);
-  }
-  result.height = `${height}px`;
-  (_a2 = hiddenTextarea.parentNode) == null ? void 0 : _a2.removeChild(hiddenTextarea);
-  hiddenTextarea = void 0;
-  return result;
-}
-const inputProps = buildProps({
-  id: {
-    type: String,
-    default: void 0
-  },
-  size: useSizeProp,
-  disabled: Boolean,
-  modelValue: {
-    type: definePropType([
-      String,
-      Number,
-      Object
-    ]),
-    default: ""
-  },
-  maxlength: {
-    type: [String, Number]
-  },
-  minlength: {
-    type: [String, Number]
-  },
-  type: {
-    type: String,
-    default: "text"
-  },
-  resize: {
-    type: String,
-    values: ["none", "both", "horizontal", "vertical"]
-  },
-  autosize: {
-    type: definePropType([Boolean, Object]),
-    default: false
-  },
-  autocomplete: {
-    type: String,
-    default: "off"
-  },
-  formatter: {
-    type: Function
-  },
-  parser: {
-    type: Function
-  },
-  placeholder: {
-    type: String
-  },
-  form: {
-    type: String
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  clearable: {
-    type: Boolean,
-    default: false
-  },
-  showPassword: {
-    type: Boolean,
-    default: false
-  },
-  showWordLimit: {
-    type: Boolean,
-    default: false
-  },
-  suffixIcon: {
-    type: iconPropType
-  },
-  prefixIcon: {
-    type: iconPropType
-  },
-  containerRole: {
-    type: String,
-    default: void 0
-  },
-  label: {
-    type: String,
-    default: void 0
-  },
-  tabindex: {
-    type: [String, Number],
-    default: 0
-  },
-  validateEvent: {
-    type: Boolean,
-    default: true
-  },
-  inputStyle: {
-    type: definePropType([Object, Array, String]),
-    default: () => mutable({})
-  },
-  autofocus: {
-    type: Boolean,
-    default: false
-  }
-});
-const inputEmits = {
-  [UPDATE_MODEL_EVENT]: (value) => isString$1(value),
-  input: (value) => isString$1(value),
-  change: (value) => isString$1(value),
-  focus: (evt) => evt instanceof FocusEvent,
-  blur: (evt) => evt instanceof FocusEvent,
-  clear: () => true,
-  mouseleave: (evt) => evt instanceof MouseEvent,
-  mouseenter: (evt) => evt instanceof MouseEvent,
-  keydown: (evt) => evt instanceof Event,
-  compositionstart: (evt) => evt instanceof CompositionEvent,
-  compositionupdate: (evt) => evt instanceof CompositionEvent,
-  compositionend: (evt) => evt instanceof CompositionEvent
-};
-const _hoisted_1$e = ["role"];
-const _hoisted_2$b = ["id", "minlength", "maxlength", "type", "disabled", "readonly", "autocomplete", "tabindex", "aria-label", "placeholder", "form", "autofocus"];
-const _hoisted_3$7 = ["id", "minlength", "maxlength", "tabindex", "disabled", "readonly", "autocomplete", "aria-label", "placeholder", "form", "autofocus"];
-const __default__$e = defineComponent({
-  name: "ElInput",
-  inheritAttrs: false
-});
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
-  ...__default__$e,
-  props: inputProps,
-  emits: inputEmits,
-  setup(__props, { expose, emit }) {
-    const props = __props;
-    const rawAttrs = useAttrs$1();
-    const slots = useSlots();
-    const containerAttrs = computed(() => {
-      const comboBoxAttrs = {};
-      if (props.containerRole === "combobox") {
-        comboBoxAttrs["aria-haspopup"] = rawAttrs["aria-haspopup"];
-        comboBoxAttrs["aria-owns"] = rawAttrs["aria-owns"];
-        comboBoxAttrs["aria-expanded"] = rawAttrs["aria-expanded"];
-      }
-      return comboBoxAttrs;
-    });
-    const containerKls = computed(() => [
-      props.type === "textarea" ? nsTextarea.b() : nsInput.b(),
-      nsInput.m(inputSize.value),
-      nsInput.is("disabled", inputDisabled.value),
-      nsInput.is("exceed", inputExceed.value),
-      {
-        [nsInput.b("group")]: slots.prepend || slots.append,
-        [nsInput.bm("group", "append")]: slots.append,
-        [nsInput.bm("group", "prepend")]: slots.prepend,
-        [nsInput.m("prefix")]: slots.prefix || props.prefixIcon,
-        [nsInput.m("suffix")]: slots.suffix || props.suffixIcon || props.clearable || props.showPassword,
-        [nsInput.bm("suffix", "password-clear")]: showClear.value && showPwdVisible.value,
-        [nsInput.b("hidden")]: props.type === "hidden"
-      },
-      rawAttrs.class
-    ]);
-    const wrapperKls = computed(() => [
-      nsInput.e("wrapper"),
-      nsInput.is("focus", isFocused.value)
-    ]);
-    const attrs = useAttrs({
-      excludeKeys: computed(() => {
-        return Object.keys(containerAttrs.value);
-      })
-    });
-    const { form: elForm, formItem: elFormItem } = useFormItem();
-    const { inputId } = useFormItemInputId(props, {
-      formItemContext: elFormItem
-    });
-    const inputSize = useFormSize();
-    const inputDisabled = useFormDisabled();
-    const nsInput = useNamespace("input");
-    const nsTextarea = useNamespace("textarea");
-    const input = shallowRef();
-    const textarea = shallowRef();
-    const hovering = ref(false);
-    const isComposing = ref(false);
-    const passwordVisible = ref(false);
-    const countStyle = ref();
-    const textareaCalcStyle = shallowRef(props.inputStyle);
-    const _ref = computed(() => input.value || textarea.value);
-    const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(_ref, {
-      afterBlur() {
-        var _a2;
-        if (props.validateEvent) {
-          (_a2 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a2.call(elFormItem, "blur").catch((err) => debugWarn());
-        }
-      }
-    });
-    const needStatusIcon = computed(() => {
-      var _a2;
-      return (_a2 = elForm == null ? void 0 : elForm.statusIcon) != null ? _a2 : false;
-    });
-    const validateState = computed(() => (elFormItem == null ? void 0 : elFormItem.validateState) || "");
-    const validateIcon = computed(() => validateState.value && ValidateComponentsMap[validateState.value]);
-    const passwordIcon = computed(() => passwordVisible.value ? view_default : hide_default);
-    const containerStyle = computed(() => [
-      rawAttrs.style
-    ]);
-    const textareaStyle = computed(() => [
-      props.inputStyle,
-      textareaCalcStyle.value,
-      { resize: props.resize }
-    ]);
-    const nativeInputValue = computed(() => isNil(props.modelValue) ? "" : String(props.modelValue));
-    const showClear = computed(() => props.clearable && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (isFocused.value || hovering.value));
-    const showPwdVisible = computed(() => props.showPassword && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (!!nativeInputValue.value || isFocused.value));
-    const isWordLimitVisible = computed(() => props.showWordLimit && !!props.maxlength && (props.type === "text" || props.type === "textarea") && !inputDisabled.value && !props.readonly && !props.showPassword);
-    const textLength = computed(() => nativeInputValue.value.length);
-    const inputExceed = computed(() => !!isWordLimitVisible.value && textLength.value > Number(props.maxlength));
-    const suffixVisible = computed(() => !!slots.suffix || !!props.suffixIcon || showClear.value || props.showPassword || isWordLimitVisible.value || !!validateState.value && needStatusIcon.value);
-    const [recordCursor, setCursor] = useCursor(input);
-    useResizeObserver(textarea, (entries) => {
-      onceInitSizeTextarea();
-      if (!isWordLimitVisible.value || props.resize !== "both")
-        return;
-      const entry = entries[0];
-      const { width } = entry.contentRect;
-      countStyle.value = {
-        right: `calc(100% - ${width + 15 + 6}px)`
-      };
-    });
-    const resizeTextarea = () => {
-      const { type: type4, autosize } = props;
-      if (!isClient || type4 !== "textarea" || !textarea.value)
-        return;
-      if (autosize) {
-        const minRows = isObject$1(autosize) ? autosize.minRows : void 0;
-        const maxRows = isObject$1(autosize) ? autosize.maxRows : void 0;
-        const textareaStyle2 = calcTextareaHeight(textarea.value, minRows, maxRows);
-        textareaCalcStyle.value = {
-          overflowY: "hidden",
-          ...textareaStyle2
-        };
-        nextTick(() => {
-          textarea.value.offsetHeight;
-          textareaCalcStyle.value = textareaStyle2;
-        });
-      } else {
-        textareaCalcStyle.value = {
-          minHeight: calcTextareaHeight(textarea.value).minHeight
-        };
-      }
-    };
-    const createOnceInitResize = (resizeTextarea2) => {
-      let isInit = false;
-      return () => {
-        var _a2;
-        if (isInit || !props.autosize)
-          return;
-        const isElHidden = ((_a2 = textarea.value) == null ? void 0 : _a2.offsetParent) === null;
-        if (!isElHidden) {
-          resizeTextarea2();
-          isInit = true;
-        }
-      };
-    };
-    const onceInitSizeTextarea = createOnceInitResize(resizeTextarea);
-    const setNativeInputValue = () => {
-      const input2 = _ref.value;
-      const formatterValue = props.formatter ? props.formatter(nativeInputValue.value) : nativeInputValue.value;
-      if (!input2 || input2.value === formatterValue)
-        return;
-      input2.value = formatterValue;
-    };
-    const handleInput = async (event) => {
-      recordCursor();
-      let { value } = event.target;
-      if (props.formatter) {
-        value = props.parser ? props.parser(value) : value;
-      }
-      if (isComposing.value)
-        return;
-      if (value === nativeInputValue.value) {
-        setNativeInputValue();
-        return;
-      }
-      emit(UPDATE_MODEL_EVENT, value);
-      emit("input", value);
-      await nextTick();
-      setNativeInputValue();
-      setCursor();
-    };
-    const handleChange = (event) => {
-      emit("change", event.target.value);
-    };
-    const handleCompositionStart = (event) => {
-      emit("compositionstart", event);
-      isComposing.value = true;
-    };
-    const handleCompositionUpdate = (event) => {
-      var _a2;
-      emit("compositionupdate", event);
-      const text = (_a2 = event.target) == null ? void 0 : _a2.value;
-      const lastCharacter = text[text.length - 1] || "";
-      isComposing.value = !isKorean(lastCharacter);
-    };
-    const handleCompositionEnd = (event) => {
-      emit("compositionend", event);
-      if (isComposing.value) {
-        isComposing.value = false;
-        handleInput(event);
-      }
-    };
-    const handlePasswordVisible = () => {
-      passwordVisible.value = !passwordVisible.value;
-      focus();
-    };
-    const focus = async () => {
-      var _a2;
-      await nextTick();
-      (_a2 = _ref.value) == null ? void 0 : _a2.focus();
-    };
-    const blur = () => {
-      var _a2;
-      return (_a2 = _ref.value) == null ? void 0 : _a2.blur();
-    };
-    const handleMouseLeave = (evt) => {
-      hovering.value = false;
-      emit("mouseleave", evt);
-    };
-    const handleMouseEnter = (evt) => {
-      hovering.value = true;
-      emit("mouseenter", evt);
-    };
-    const handleKeydown = (evt) => {
-      emit("keydown", evt);
-    };
-    const select = () => {
-      var _a2;
-      (_a2 = _ref.value) == null ? void 0 : _a2.select();
-    };
-    const clear = () => {
-      emit(UPDATE_MODEL_EVENT, "");
-      emit("change", "");
-      emit("clear");
-      emit("input", "");
-    };
-    watch(() => props.modelValue, () => {
-      var _a2;
-      nextTick(() => resizeTextarea());
-      if (props.validateEvent) {
-        (_a2 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a2.call(elFormItem, "change").catch((err) => debugWarn());
-      }
-    });
-    watch(nativeInputValue, () => setNativeInputValue());
-    watch(() => props.type, async () => {
-      await nextTick();
-      setNativeInputValue();
-      resizeTextarea();
-    });
-    onMounted(() => {
-      if (!props.formatter && props.parser)
-        ;
-      setNativeInputValue();
-      nextTick(resizeTextarea);
-    });
-    expose({
-      input,
-      textarea,
-      ref: _ref,
-      textareaStyle,
-      autosize: toRef(props, "autosize"),
-      focus,
-      blur,
-      select,
-      clear,
-      resizeTextarea
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", mergeProps(unref(containerAttrs), {
-        class: unref(containerKls),
-        style: unref(containerStyle),
-        role: _ctx.containerRole,
-        onMouseenter: handleMouseEnter,
-        onMouseleave: handleMouseLeave
-      }), [
-        createCommentVNode(" input "),
-        _ctx.type !== "textarea" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-          createCommentVNode(" prepend slot "),
-          _ctx.$slots.prepend ? (openBlock(), createElementBlock("div", {
-            key: 0,
-            class: normalizeClass(unref(nsInput).be("group", "prepend"))
-          }, [
-            renderSlot(_ctx.$slots, "prepend")
-          ], 2)) : createCommentVNode("v-if", true),
-          createBaseVNode("div", {
-            ref_key: "wrapperRef",
-            ref: wrapperRef,
-            class: normalizeClass(unref(wrapperKls))
-          }, [
-            createCommentVNode(" prefix slot "),
-            _ctx.$slots.prefix || _ctx.prefixIcon ? (openBlock(), createElementBlock("span", {
-              key: 0,
-              class: normalizeClass(unref(nsInput).e("prefix"))
-            }, [
-              createBaseVNode("span", {
-                class: normalizeClass(unref(nsInput).e("prefix-inner"))
-              }, [
-                renderSlot(_ctx.$slots, "prefix"),
-                _ctx.prefixIcon ? (openBlock(), createBlock(unref(ElIcon), {
-                  key: 0,
-                  class: normalizeClass(unref(nsInput).e("icon"))
-                }, {
-                  default: withCtx(() => [
-                    (openBlock(), createBlock(resolveDynamicComponent(_ctx.prefixIcon)))
-                  ]),
-                  _: 1
-                }, 8, ["class"])) : createCommentVNode("v-if", true)
-              ], 2)
-            ], 2)) : createCommentVNode("v-if", true),
-            createBaseVNode("input", mergeProps({
-              id: unref(inputId),
-              ref_key: "input",
-              ref: input,
-              class: unref(nsInput).e("inner")
-            }, unref(attrs), {
-              minlength: _ctx.minlength,
-              maxlength: _ctx.maxlength,
-              type: _ctx.showPassword ? passwordVisible.value ? "text" : "password" : _ctx.type,
-              disabled: unref(inputDisabled),
-              readonly: _ctx.readonly,
-              autocomplete: _ctx.autocomplete,
-              tabindex: _ctx.tabindex,
-              "aria-label": _ctx.label,
-              placeholder: _ctx.placeholder,
-              style: _ctx.inputStyle,
-              form: _ctx.form,
-              autofocus: _ctx.autofocus,
-              onCompositionstart: handleCompositionStart,
-              onCompositionupdate: handleCompositionUpdate,
-              onCompositionend: handleCompositionEnd,
-              onInput: handleInput,
-              onFocus: _cache[0] || (_cache[0] = (...args) => unref(handleFocus) && unref(handleFocus)(...args)),
-              onBlur: _cache[1] || (_cache[1] = (...args) => unref(handleBlur) && unref(handleBlur)(...args)),
-              onChange: handleChange,
-              onKeydown: handleKeydown
-            }), null, 16, _hoisted_2$b),
-            createCommentVNode(" suffix slot "),
-            unref(suffixVisible) ? (openBlock(), createElementBlock("span", {
-              key: 1,
-              class: normalizeClass(unref(nsInput).e("suffix"))
-            }, [
-              createBaseVNode("span", {
-                class: normalizeClass(unref(nsInput).e("suffix-inner"))
-              }, [
-                !unref(showClear) || !unref(showPwdVisible) || !unref(isWordLimitVisible) ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-                  renderSlot(_ctx.$slots, "suffix"),
-                  _ctx.suffixIcon ? (openBlock(), createBlock(unref(ElIcon), {
-                    key: 0,
-                    class: normalizeClass(unref(nsInput).e("icon"))
-                  }, {
-                    default: withCtx(() => [
-                      (openBlock(), createBlock(resolveDynamicComponent(_ctx.suffixIcon)))
-                    ]),
-                    _: 1
-                  }, 8, ["class"])) : createCommentVNode("v-if", true)
-                ], 64)) : createCommentVNode("v-if", true),
-                unref(showClear) ? (openBlock(), createBlock(unref(ElIcon), {
-                  key: 1,
-                  class: normalizeClass([unref(nsInput).e("icon"), unref(nsInput).e("clear")]),
-                  onMousedown: withModifiers(unref(NOOP), ["prevent"]),
-                  onClick: clear
-                }, {
-                  default: withCtx(() => [
-                    createVNode(unref(circle_close_default))
-                  ]),
-                  _: 1
-                }, 8, ["class", "onMousedown"])) : createCommentVNode("v-if", true),
-                unref(showPwdVisible) ? (openBlock(), createBlock(unref(ElIcon), {
-                  key: 2,
-                  class: normalizeClass([unref(nsInput).e("icon"), unref(nsInput).e("password")]),
-                  onClick: handlePasswordVisible
-                }, {
-                  default: withCtx(() => [
-                    (openBlock(), createBlock(resolveDynamicComponent(unref(passwordIcon))))
-                  ]),
-                  _: 1
-                }, 8, ["class"])) : createCommentVNode("v-if", true),
-                unref(isWordLimitVisible) ? (openBlock(), createElementBlock("span", {
-                  key: 3,
-                  class: normalizeClass(unref(nsInput).e("count"))
-                }, [
-                  createBaseVNode("span", {
-                    class: normalizeClass(unref(nsInput).e("count-inner"))
-                  }, toDisplayString(unref(textLength)) + " / " + toDisplayString(_ctx.maxlength), 3)
-                ], 2)) : createCommentVNode("v-if", true),
-                unref(validateState) && unref(validateIcon) && unref(needStatusIcon) ? (openBlock(), createBlock(unref(ElIcon), {
-                  key: 4,
-                  class: normalizeClass([
-                    unref(nsInput).e("icon"),
-                    unref(nsInput).e("validateIcon"),
-                    unref(nsInput).is("loading", unref(validateState) === "validating")
-                  ])
-                }, {
-                  default: withCtx(() => [
-                    (openBlock(), createBlock(resolveDynamicComponent(unref(validateIcon))))
-                  ]),
-                  _: 1
-                }, 8, ["class"])) : createCommentVNode("v-if", true)
-              ], 2)
-            ], 2)) : createCommentVNode("v-if", true)
-          ], 2),
-          createCommentVNode(" append slot "),
-          _ctx.$slots.append ? (openBlock(), createElementBlock("div", {
-            key: 1,
-            class: normalizeClass(unref(nsInput).be("group", "append"))
-          }, [
-            renderSlot(_ctx.$slots, "append")
-          ], 2)) : createCommentVNode("v-if", true)
-        ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-          createCommentVNode(" textarea "),
-          createBaseVNode("textarea", mergeProps({
-            id: unref(inputId),
-            ref_key: "textarea",
-            ref: textarea,
-            class: unref(nsTextarea).e("inner")
-          }, unref(attrs), {
-            minlength: _ctx.minlength,
-            maxlength: _ctx.maxlength,
-            tabindex: _ctx.tabindex,
-            disabled: unref(inputDisabled),
-            readonly: _ctx.readonly,
-            autocomplete: _ctx.autocomplete,
-            style: unref(textareaStyle),
-            "aria-label": _ctx.label,
-            placeholder: _ctx.placeholder,
-            form: _ctx.form,
-            autofocus: _ctx.autofocus,
-            onCompositionstart: handleCompositionStart,
-            onCompositionupdate: handleCompositionUpdate,
-            onCompositionend: handleCompositionEnd,
-            onInput: handleInput,
-            onFocus: _cache[2] || (_cache[2] = (...args) => unref(handleFocus) && unref(handleFocus)(...args)),
-            onBlur: _cache[3] || (_cache[3] = (...args) => unref(handleBlur) && unref(handleBlur)(...args)),
-            onChange: handleChange,
-            onKeydown: handleKeydown
-          }), null, 16, _hoisted_3$7),
-          unref(isWordLimitVisible) ? (openBlock(), createElementBlock("span", {
-            key: 0,
-            style: normalizeStyle(countStyle.value),
-            class: normalizeClass(unref(nsInput).e("count"))
-          }, toDisplayString(unref(textLength)) + " / " + toDisplayString(_ctx.maxlength), 7)) : createCommentVNode("v-if", true)
-        ], 64))
-      ], 16, _hoisted_1$e);
-    };
-  }
-});
-var Input = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__file", "input.vue"]]);
-const ElInput = withInstall(Input);
-const GAP = 4;
-const BAR_MAP = {
-  vertical: {
-    offset: "offsetHeight",
-    scroll: "scrollTop",
-    scrollSize: "scrollHeight",
-    size: "height",
-    key: "vertical",
-    axis: "Y",
-    client: "clientY",
-    direction: "top"
-  },
-  horizontal: {
-    offset: "offsetWidth",
-    scroll: "scrollLeft",
-    scrollSize: "scrollWidth",
-    size: "width",
-    key: "horizontal",
-    axis: "X",
-    client: "clientX",
-    direction: "left"
-  }
-};
-const renderThumbStyle = ({
-  move,
-  size,
-  bar
-}) => ({
-  [bar.size]: size,
-  transform: `translate${bar.axis}(${move}%)`
-});
-const scrollbarContextKey = Symbol("scrollbarContextKey");
-const thumbProps = buildProps({
-  vertical: Boolean,
-  size: String,
-  move: Number,
-  ratio: {
-    type: Number,
-    required: true
-  },
-  always: Boolean
-});
-const COMPONENT_NAME$2 = "Thumb";
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
-  __name: "thumb",
-  props: thumbProps,
-  setup(__props) {
-    const props = __props;
-    const scrollbar = inject(scrollbarContextKey);
-    const ns = useNamespace("scrollbar");
-    if (!scrollbar)
-      throwError(COMPONENT_NAME$2, "can not inject scrollbar context");
-    const instance = ref();
-    const thumb = ref();
-    const thumbState = ref({});
-    const visible = ref(false);
-    let cursorDown = false;
-    let cursorLeave = false;
-    let originalOnSelectStart = isClient ? document.onselectstart : null;
-    const bar = computed(() => BAR_MAP[props.vertical ? "vertical" : "horizontal"]);
-    const thumbStyle = computed(() => renderThumbStyle({
-      size: props.size,
-      move: props.move,
-      bar: bar.value
-    }));
-    const offsetRatio = computed(() => instance.value[bar.value.offset] ** 2 / scrollbar.wrapElement[bar.value.scrollSize] / props.ratio / thumb.value[bar.value.offset]);
-    const clickThumbHandler = (e) => {
-      var _a2;
-      e.stopPropagation();
-      if (e.ctrlKey || [1, 2].includes(e.button))
-        return;
-      (_a2 = window.getSelection()) == null ? void 0 : _a2.removeAllRanges();
-      startDrag(e);
-      const el = e.currentTarget;
-      if (!el)
-        return;
-      thumbState.value[bar.value.axis] = el[bar.value.offset] - (e[bar.value.client] - el.getBoundingClientRect()[bar.value.direction]);
-    };
-    const clickTrackHandler = (e) => {
-      if (!thumb.value || !instance.value || !scrollbar.wrapElement)
-        return;
-      const offset = Math.abs(e.target.getBoundingClientRect()[bar.value.direction] - e[bar.value.client]);
-      const thumbHalf = thumb.value[bar.value.offset] / 2;
-      const thumbPositionPercentage = (offset - thumbHalf) * 100 * offsetRatio.value / instance.value[bar.value.offset];
-      scrollbar.wrapElement[bar.value.scroll] = thumbPositionPercentage * scrollbar.wrapElement[bar.value.scrollSize] / 100;
-    };
-    const startDrag = (e) => {
-      e.stopImmediatePropagation();
-      cursorDown = true;
-      document.addEventListener("mousemove", mouseMoveDocumentHandler);
-      document.addEventListener("mouseup", mouseUpDocumentHandler);
-      originalOnSelectStart = document.onselectstart;
-      document.onselectstart = () => false;
-    };
-    const mouseMoveDocumentHandler = (e) => {
-      if (!instance.value || !thumb.value)
-        return;
-      if (cursorDown === false)
-        return;
-      const prevPage = thumbState.value[bar.value.axis];
-      if (!prevPage)
-        return;
-      const offset = (instance.value.getBoundingClientRect()[bar.value.direction] - e[bar.value.client]) * -1;
-      const thumbClickPosition = thumb.value[bar.value.offset] - prevPage;
-      const thumbPositionPercentage = (offset - thumbClickPosition) * 100 * offsetRatio.value / instance.value[bar.value.offset];
-      scrollbar.wrapElement[bar.value.scroll] = thumbPositionPercentage * scrollbar.wrapElement[bar.value.scrollSize] / 100;
-    };
-    const mouseUpDocumentHandler = () => {
-      cursorDown = false;
-      thumbState.value[bar.value.axis] = 0;
-      document.removeEventListener("mousemove", mouseMoveDocumentHandler);
-      document.removeEventListener("mouseup", mouseUpDocumentHandler);
-      restoreOnselectstart();
-      if (cursorLeave)
-        visible.value = false;
-    };
-    const mouseMoveScrollbarHandler = () => {
-      cursorLeave = false;
-      visible.value = !!props.size;
-    };
-    const mouseLeaveScrollbarHandler = () => {
-      cursorLeave = true;
-      visible.value = cursorDown;
-    };
-    onBeforeUnmount(() => {
-      restoreOnselectstart();
-      document.removeEventListener("mouseup", mouseUpDocumentHandler);
-    });
-    const restoreOnselectstart = () => {
-      if (document.onselectstart !== originalOnSelectStart)
-        document.onselectstart = originalOnSelectStart;
-    };
-    useEventListener(toRef(scrollbar, "scrollbarElement"), "mousemove", mouseMoveScrollbarHandler);
-    useEventListener(toRef(scrollbar, "scrollbarElement"), "mouseleave", mouseLeaveScrollbarHandler);
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(Transition, {
-        name: unref(ns).b("fade"),
-        persisted: ""
-      }, {
-        default: withCtx(() => [
-          withDirectives(createBaseVNode("div", {
-            ref_key: "instance",
-            ref: instance,
-            class: normalizeClass([unref(ns).e("bar"), unref(ns).is(unref(bar).key)]),
-            onMousedown: clickTrackHandler
-          }, [
-            createBaseVNode("div", {
-              ref_key: "thumb",
-              ref: thumb,
-              class: normalizeClass(unref(ns).e("thumb")),
-              style: normalizeStyle(unref(thumbStyle)),
-              onMousedown: clickThumbHandler
-            }, null, 38)
-          ], 34), [
-            [vShow, _ctx.always || visible.value]
-          ])
-        ]),
-        _: 1
-      }, 8, ["name"]);
-    };
-  }
-});
-var Thumb = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "thumb.vue"]]);
-const barProps = buildProps({
-  always: {
-    type: Boolean,
-    default: true
-  },
-  minSize: {
-    type: Number,
-    required: true
-  }
-});
-const _sfc_main$u = /* @__PURE__ */ defineComponent({
-  __name: "bar",
-  props: barProps,
-  setup(__props, { expose }) {
-    const props = __props;
-    const scrollbar = inject(scrollbarContextKey);
-    const moveX = ref(0);
-    const moveY = ref(0);
-    const sizeWidth = ref("");
-    const sizeHeight = ref("");
-    const ratioY = ref(1);
-    const ratioX = ref(1);
-    const handleScroll = (wrap) => {
-      if (wrap) {
-        const offsetHeight = wrap.offsetHeight - GAP;
-        const offsetWidth = wrap.offsetWidth - GAP;
-        moveY.value = wrap.scrollTop * 100 / offsetHeight * ratioY.value;
-        moveX.value = wrap.scrollLeft * 100 / offsetWidth * ratioX.value;
-      }
-    };
-    const update = () => {
-      const wrap = scrollbar == null ? void 0 : scrollbar.wrapElement;
-      if (!wrap)
-        return;
-      const offsetHeight = wrap.offsetHeight - GAP;
-      const offsetWidth = wrap.offsetWidth - GAP;
-      const originalHeight = offsetHeight ** 2 / wrap.scrollHeight;
-      const originalWidth = offsetWidth ** 2 / wrap.scrollWidth;
-      const height = Math.max(originalHeight, props.minSize);
-      const width = Math.max(originalWidth, props.minSize);
-      ratioY.value = originalHeight / (offsetHeight - originalHeight) / (height / (offsetHeight - height));
-      ratioX.value = originalWidth / (offsetWidth - originalWidth) / (width / (offsetWidth - width));
-      sizeHeight.value = height + GAP < offsetHeight ? `${height}px` : "";
-      sizeWidth.value = width + GAP < offsetWidth ? `${width}px` : "";
-    };
-    expose({
-      handleScroll,
-      update
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock(Fragment, null, [
-        createVNode(Thumb, {
-          move: moveX.value,
-          ratio: ratioX.value,
-          size: sizeWidth.value,
-          always: _ctx.always
-        }, null, 8, ["move", "ratio", "size", "always"]),
-        createVNode(Thumb, {
-          move: moveY.value,
-          ratio: ratioY.value,
-          size: sizeHeight.value,
-          vertical: "",
-          always: _ctx.always
-        }, null, 8, ["move", "ratio", "size", "always"])
-      ], 64);
-    };
-  }
-});
-var Bar = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__file", "bar.vue"]]);
-const scrollbarProps = buildProps({
-  height: {
-    type: [String, Number],
-    default: ""
-  },
-  maxHeight: {
-    type: [String, Number],
-    default: ""
-  },
-  native: {
-    type: Boolean,
-    default: false
-  },
-  wrapStyle: {
-    type: definePropType([String, Object, Array]),
-    default: ""
-  },
-  wrapClass: {
-    type: [String, Array],
-    default: ""
-  },
-  viewClass: {
-    type: [String, Array],
-    default: ""
-  },
-  viewStyle: {
-    type: [String, Array, Object],
-    default: ""
-  },
-  noresize: Boolean,
-  tag: {
-    type: String,
-    default: "div"
-  },
-  always: Boolean,
-  minSize: {
-    type: Number,
-    default: 20
-  },
-  id: String,
-  role: String,
-  ariaLabel: String,
-  ariaOrientation: {
-    type: String,
-    values: ["horizontal", "vertical"]
-  }
-});
-const scrollbarEmits = {
-  scroll: ({
-    scrollTop,
-    scrollLeft
-  }) => [scrollTop, scrollLeft].every(isNumber)
-};
-const COMPONENT_NAME$1 = "ElScrollbar";
-const __default__$d = defineComponent({
-  name: COMPONENT_NAME$1
-});
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
-  ...__default__$d,
-  props: scrollbarProps,
-  emits: scrollbarEmits,
-  setup(__props, { expose, emit }) {
-    const props = __props;
-    const ns = useNamespace("scrollbar");
-    let stopResizeObserver = void 0;
-    let stopResizeListener = void 0;
-    const scrollbarRef = ref();
-    const wrapRef = ref();
-    const resizeRef = ref();
-    const barRef = ref();
-    const wrapStyle = computed(() => {
-      const style = {};
-      if (props.height)
-        style.height = addUnit(props.height);
-      if (props.maxHeight)
-        style.maxHeight = addUnit(props.maxHeight);
-      return [props.wrapStyle, style];
-    });
-    const wrapKls = computed(() => {
-      return [
-        props.wrapClass,
-        ns.e("wrap"),
-        { [ns.em("wrap", "hidden-default")]: !props.native }
-      ];
-    });
-    const resizeKls = computed(() => {
-      return [ns.e("view"), props.viewClass];
-    });
-    const handleScroll = () => {
-      var _a2;
-      if (wrapRef.value) {
-        (_a2 = barRef.value) == null ? void 0 : _a2.handleScroll(wrapRef.value);
-        emit("scroll", {
-          scrollTop: wrapRef.value.scrollTop,
-          scrollLeft: wrapRef.value.scrollLeft
-        });
-      }
-    };
-    function scrollTo(arg1, arg2) {
-      if (isObject$1(arg1)) {
-        wrapRef.value.scrollTo(arg1);
-      } else if (isNumber(arg1) && isNumber(arg2)) {
-        wrapRef.value.scrollTo(arg1, arg2);
-      }
-    }
-    const setScrollTop = (value) => {
-      if (!isNumber(value)) {
-        return;
-      }
-      wrapRef.value.scrollTop = value;
-    };
-    const setScrollLeft = (value) => {
-      if (!isNumber(value)) {
-        return;
-      }
-      wrapRef.value.scrollLeft = value;
-    };
-    const update = () => {
-      var _a2;
-      (_a2 = barRef.value) == null ? void 0 : _a2.update();
-    };
-    watch(() => props.noresize, (noresize) => {
-      if (noresize) {
-        stopResizeObserver == null ? void 0 : stopResizeObserver();
-        stopResizeListener == null ? void 0 : stopResizeListener();
-      } else {
-        ({ stop: stopResizeObserver } = useResizeObserver(resizeRef, update));
-        stopResizeListener = useEventListener("resize", update);
-      }
-    }, { immediate: true });
-    watch(() => [props.maxHeight, props.height], () => {
-      if (!props.native)
-        nextTick(() => {
-          var _a2;
-          update();
-          if (wrapRef.value) {
-            (_a2 = barRef.value) == null ? void 0 : _a2.handleScroll(wrapRef.value);
-          }
-        });
-    });
-    provide(scrollbarContextKey, reactive({
-      scrollbarElement: scrollbarRef,
-      wrapElement: wrapRef
-    }));
-    onMounted(() => {
-      if (!props.native)
-        nextTick(() => {
-          update();
-        });
-    });
-    onUpdated(() => update());
-    expose({
-      wrapRef,
-      update,
-      scrollTo,
-      setScrollTop,
-      setScrollLeft,
-      handleScroll
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        ref_key: "scrollbarRef",
-        ref: scrollbarRef,
-        class: normalizeClass(unref(ns).b())
-      }, [
-        createBaseVNode("div", {
-          ref_key: "wrapRef",
-          ref: wrapRef,
-          class: normalizeClass(unref(wrapKls)),
-          style: normalizeStyle(unref(wrapStyle)),
-          onScroll: handleScroll
-        }, [
-          (openBlock(), createBlock(resolveDynamicComponent(_ctx.tag), {
-            id: _ctx.id,
-            ref_key: "resizeRef",
-            ref: resizeRef,
-            class: normalizeClass(unref(resizeKls)),
-            style: normalizeStyle(_ctx.viewStyle),
-            role: _ctx.role,
-            "aria-label": _ctx.ariaLabel,
-            "aria-orientation": _ctx.ariaOrientation
-          }, {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "default")
-            ]),
-            _: 3
-          }, 8, ["id", "class", "style", "role", "aria-label", "aria-orientation"]))
-        ], 38),
-        !_ctx.native ? (openBlock(), createBlock(Bar, {
-          key: 0,
-          ref_key: "barRef",
-          ref: barRef,
-          always: _ctx.always,
-          "min-size": _ctx.minSize
-        }, null, 8, ["always", "min-size"])) : createCommentVNode("v-if", true)
-      ], 2);
-    };
-  }
-});
-var Scrollbar = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__file", "scrollbar.vue"]]);
-const ElScrollbar = withInstall(Scrollbar);
-const POPPER_INJECTION_KEY = Symbol("popper");
-const POPPER_CONTENT_INJECTION_KEY = Symbol("popperContent");
-const roleTypes = [
-  "dialog",
-  "grid",
-  "group",
-  "listbox",
-  "menu",
-  "navigation",
-  "tooltip",
-  "tree"
-];
-const popperProps = buildProps({
-  role: {
-    type: String,
-    values: roleTypes,
-    default: "tooltip"
-  }
-});
-const __default__$c = defineComponent({
-  name: "ElPopper",
-  inheritAttrs: false
-});
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
-  ...__default__$c,
-  props: popperProps,
-  setup(__props, { expose }) {
-    const props = __props;
-    const triggerRef = ref();
-    const popperInstanceRef = ref();
-    const contentRef = ref();
-    const referenceRef = ref();
-    const role = computed(() => props.role);
-    const popperProvides = {
-      triggerRef,
-      popperInstanceRef,
-      contentRef,
-      referenceRef,
-      role
-    };
-    expose(popperProvides);
-    provide(POPPER_INJECTION_KEY, popperProvides);
-    return (_ctx, _cache) => {
-      return renderSlot(_ctx.$slots, "default");
-    };
-  }
-});
-var Popper = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__file", "popper.vue"]]);
-const popperArrowProps = buildProps({
-  arrowOffset: {
-    type: Number,
-    default: 5
-  }
-});
-const __default__$b = defineComponent({
-  name: "ElPopperArrow",
-  inheritAttrs: false
-});
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
-  ...__default__$b,
-  props: popperArrowProps,
-  setup(__props, { expose }) {
-    const props = __props;
-    const ns = useNamespace("popper");
-    const { arrowOffset, arrowRef, arrowStyle } = inject(POPPER_CONTENT_INJECTION_KEY, void 0);
-    watch(() => props.arrowOffset, (val) => {
-      arrowOffset.value = val;
-    });
-    onBeforeUnmount(() => {
-      arrowRef.value = void 0;
-    });
-    expose({
-      arrowRef
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("span", {
-        ref_key: "arrowRef",
-        ref: arrowRef,
-        class: normalizeClass(unref(ns).e("arrow")),
-        style: normalizeStyle(unref(arrowStyle)),
-        "data-popper-arrow": ""
-      }, null, 6);
-    };
-  }
-});
-var ElPopperArrow = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "arrow.vue"]]);
-const NAME = "ElOnlyChild";
-const OnlyChild = defineComponent({
-  name: NAME,
-  setup(_2, {
-    slots,
-    attrs
-  }) {
-    var _a2;
-    const forwardRefInjection = inject(FORWARD_REF_INJECTION_KEY);
-    const forwardRefDirective = useForwardRefDirective((_a2 = forwardRefInjection == null ? void 0 : forwardRefInjection.setForwardRef) != null ? _a2 : NOOP);
-    return () => {
-      var _a22;
-      const defaultSlot = (_a22 = slots.default) == null ? void 0 : _a22.call(slots, attrs);
-      if (!defaultSlot)
-        return null;
-      if (defaultSlot.length > 1) {
-        return null;
-      }
-      const firstLegitNode = findFirstLegitChild(defaultSlot);
-      if (!firstLegitNode) {
-        return null;
-      }
-      return withDirectives(cloneVNode(firstLegitNode, attrs), [[forwardRefDirective]]);
-    };
-  }
-});
-function findFirstLegitChild(node) {
-  if (!node)
-    return null;
-  const children = node;
-  for (const child of children) {
-    if (isObject$1(child)) {
-      switch (child.type) {
-        case Comment:
-          continue;
-        case Text:
-        case "svg":
-          return wrapTextContent(child);
-        case Fragment:
-          return findFirstLegitChild(child.children);
-        default:
-          return child;
-      }
-    }
-    return wrapTextContent(child);
-  }
-  return null;
-}
-function wrapTextContent(s) {
-  const ns = useNamespace("only-child");
-  return createVNode("span", {
-    "class": ns.e("content")
-  }, [s]);
-}
-const popperTriggerProps = buildProps({
-  virtualRef: {
-    type: definePropType(Object)
-  },
-  virtualTriggering: Boolean,
-  onMouseenter: {
-    type: definePropType(Function)
-  },
-  onMouseleave: {
-    type: definePropType(Function)
-  },
-  onClick: {
-    type: definePropType(Function)
-  },
-  onKeydown: {
-    type: definePropType(Function)
-  },
-  onFocus: {
-    type: definePropType(Function)
-  },
-  onBlur: {
-    type: definePropType(Function)
-  },
-  onContextmenu: {
-    type: definePropType(Function)
-  },
-  id: String,
-  open: Boolean
-});
-const __default__$a = defineComponent({
-  name: "ElPopperTrigger",
-  inheritAttrs: false
-});
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
-  ...__default__$a,
-  props: popperTriggerProps,
-  setup(__props, { expose }) {
-    const props = __props;
-    const { role, triggerRef } = inject(POPPER_INJECTION_KEY, void 0);
-    useForwardRef(triggerRef);
-    const ariaControls = computed(() => {
-      return ariaHaspopup.value ? props.id : void 0;
-    });
-    const ariaDescribedby = computed(() => {
-      if (role && role.value === "tooltip") {
-        return props.open && props.id ? props.id : void 0;
-      }
-      return void 0;
-    });
-    const ariaHaspopup = computed(() => {
-      if (role && role.value !== "tooltip") {
-        return role.value;
-      }
-      return void 0;
-    });
-    const ariaExpanded = computed(() => {
-      return ariaHaspopup.value ? `${props.open}` : void 0;
-    });
-    let virtualTriggerAriaStopWatch = void 0;
-    onMounted(() => {
-      watch(() => props.virtualRef, (virtualEl) => {
-        if (virtualEl) {
-          triggerRef.value = unrefElement(virtualEl);
-        }
-      }, {
-        immediate: true
-      });
-      watch(triggerRef, (el, prevEl) => {
-        virtualTriggerAriaStopWatch == null ? void 0 : virtualTriggerAriaStopWatch();
-        virtualTriggerAriaStopWatch = void 0;
-        if (isElement(el)) {
-          [
-            "onMouseenter",
-            "onMouseleave",
-            "onClick",
-            "onKeydown",
-            "onFocus",
-            "onBlur",
-            "onContextmenu"
-          ].forEach((eventName) => {
-            var _a2;
-            const handler = props[eventName];
-            if (handler) {
-              el.addEventListener(eventName.slice(2).toLowerCase(), handler);
-              (_a2 = prevEl == null ? void 0 : prevEl.removeEventListener) == null ? void 0 : _a2.call(prevEl, eventName.slice(2).toLowerCase(), handler);
-            }
-          });
-          virtualTriggerAriaStopWatch = watch([ariaControls, ariaDescribedby, ariaHaspopup, ariaExpanded], (watches) => {
-            [
-              "aria-controls",
-              "aria-describedby",
-              "aria-haspopup",
-              "aria-expanded"
-            ].forEach((key, idx) => {
-              isNil(watches[idx]) ? el.removeAttribute(key) : el.setAttribute(key, watches[idx]);
-            });
-          }, { immediate: true });
-        }
-        if (isElement(prevEl)) {
-          [
-            "aria-controls",
-            "aria-describedby",
-            "aria-haspopup",
-            "aria-expanded"
-          ].forEach((key) => prevEl.removeAttribute(key));
-        }
-      }, {
-        immediate: true
-      });
-    });
-    onBeforeUnmount(() => {
-      virtualTriggerAriaStopWatch == null ? void 0 : virtualTriggerAriaStopWatch();
-      virtualTriggerAriaStopWatch = void 0;
-    });
-    expose({
-      triggerRef
-    });
-    return (_ctx, _cache) => {
-      return !_ctx.virtualTriggering ? (openBlock(), createBlock(unref(OnlyChild), mergeProps({ key: 0 }, _ctx.$attrs, {
-        "aria-controls": unref(ariaControls),
-        "aria-describedby": unref(ariaDescribedby),
-        "aria-expanded": unref(ariaExpanded),
-        "aria-haspopup": unref(ariaHaspopup)
-      }), {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "default")
-        ]),
-        _: 3
-      }, 16, ["aria-controls", "aria-describedby", "aria-expanded", "aria-haspopup"])) : createCommentVNode("v-if", true);
-    };
-  }
-});
-var ElPopperTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "trigger.vue"]]);
-const FOCUS_AFTER_TRAPPED = "focus-trap.focus-after-trapped";
-const FOCUS_AFTER_RELEASED = "focus-trap.focus-after-released";
-const FOCUSOUT_PREVENTED = "focus-trap.focusout-prevented";
-const FOCUS_AFTER_TRAPPED_OPTS = {
-  cancelable: true,
-  bubbles: false
-};
-const FOCUSOUT_PREVENTED_OPTS = {
-  cancelable: true,
-  bubbles: false
-};
-const ON_TRAP_FOCUS_EVT = "focusAfterTrapped";
-const ON_RELEASE_FOCUS_EVT = "focusAfterReleased";
-const FOCUS_TRAP_INJECTION_KEY = Symbol("elFocusTrap");
-const focusReason = ref();
-const lastUserFocusTimestamp = ref(0);
-const lastAutomatedFocusTimestamp = ref(0);
-let focusReasonUserCount = 0;
-const obtainAllFocusableElements = (element) => {
-  const nodes = [];
-  const walker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, {
-    acceptNode: (node) => {
-      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
-      if (node.disabled || node.hidden || isHiddenInput)
-        return NodeFilter.FILTER_SKIP;
-      return node.tabIndex >= 0 || node === document.activeElement ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-    }
-  });
-  while (walker.nextNode())
-    nodes.push(walker.currentNode);
-  return nodes;
-};
-const getVisibleElement = (elements, container) => {
-  for (const element of elements) {
-    if (!isHidden(element, container))
-      return element;
-  }
-};
-const isHidden = (element, container) => {
-  if (getComputedStyle(element).visibility === "hidden")
-    return true;
-  while (element) {
-    if (container && element === container)
-      return false;
-    if (getComputedStyle(element).display === "none")
-      return true;
-    element = element.parentElement;
-  }
-  return false;
-};
-const getEdges = (container) => {
-  const focusable = obtainAllFocusableElements(container);
-  const first = getVisibleElement(focusable, container);
-  const last = getVisibleElement(focusable.reverse(), container);
-  return [first, last];
-};
-const isSelectable = (element) => {
-  return element instanceof HTMLInputElement && "select" in element;
-};
-const tryFocus = (element, shouldSelect) => {
-  if (element && element.focus) {
-    const prevFocusedElement = document.activeElement;
-    element.focus({ preventScroll: true });
-    lastAutomatedFocusTimestamp.value = window.performance.now();
-    if (element !== prevFocusedElement && isSelectable(element) && shouldSelect) {
-      element.select();
-    }
-  }
-};
-function removeFromStack(list, item) {
-  const copy = [...list];
-  const idx = list.indexOf(item);
-  if (idx !== -1) {
-    copy.splice(idx, 1);
-  }
-  return copy;
-}
-const createFocusableStack = () => {
-  let stack = [];
-  const push = (layer) => {
-    const currentLayer = stack[0];
-    if (currentLayer && layer !== currentLayer) {
-      currentLayer.pause();
-    }
-    stack = removeFromStack(stack, layer);
-    stack.unshift(layer);
-  };
-  const remove = (layer) => {
-    var _a2, _b;
-    stack = removeFromStack(stack, layer);
-    (_b = (_a2 = stack[0]) == null ? void 0 : _a2.resume) == null ? void 0 : _b.call(_a2);
-  };
-  return {
-    push,
-    remove
-  };
-};
-const focusFirstDescendant = (elements, shouldSelect = false) => {
-  const prevFocusedElement = document.activeElement;
-  for (const element of elements) {
-    tryFocus(element, shouldSelect);
-    if (document.activeElement !== prevFocusedElement)
-      return;
-  }
-};
-const focusableStack = createFocusableStack();
-const isFocusCausedByUserEvent = () => {
-  return lastUserFocusTimestamp.value > lastAutomatedFocusTimestamp.value;
-};
-const notifyFocusReasonPointer = () => {
-  focusReason.value = "pointer";
-  lastUserFocusTimestamp.value = window.performance.now();
-};
-const notifyFocusReasonKeydown = () => {
-  focusReason.value = "keyboard";
-  lastUserFocusTimestamp.value = window.performance.now();
-};
-const useFocusReason = () => {
-  onMounted(() => {
-    if (focusReasonUserCount === 0) {
-      document.addEventListener("mousedown", notifyFocusReasonPointer);
-      document.addEventListener("touchstart", notifyFocusReasonPointer);
-      document.addEventListener("keydown", notifyFocusReasonKeydown);
-    }
-    focusReasonUserCount++;
-  });
-  onBeforeUnmount(() => {
-    focusReasonUserCount--;
-    if (focusReasonUserCount <= 0) {
-      document.removeEventListener("mousedown", notifyFocusReasonPointer);
-      document.removeEventListener("touchstart", notifyFocusReasonPointer);
-      document.removeEventListener("keydown", notifyFocusReasonKeydown);
-    }
-  });
-  return {
-    focusReason,
-    lastUserFocusTimestamp,
-    lastAutomatedFocusTimestamp
-  };
-};
-const createFocusOutPreventedEvent = (detail) => {
-  return new CustomEvent(FOCUSOUT_PREVENTED, {
-    ...FOCUSOUT_PREVENTED_OPTS,
-    detail
-  });
-};
-const _sfc_main$p = defineComponent({
-  name: "ElFocusTrap",
-  inheritAttrs: false,
-  props: {
-    loop: Boolean,
-    trapped: Boolean,
-    focusTrapEl: Object,
-    focusStartEl: {
-      type: [Object, String],
-      default: "first"
-    }
-  },
-  emits: [
-    ON_TRAP_FOCUS_EVT,
-    ON_RELEASE_FOCUS_EVT,
-    "focusin",
-    "focusout",
-    "focusout-prevented",
-    "release-requested"
-  ],
-  setup(props, { emit }) {
-    const forwardRef = ref();
-    let lastFocusBeforeTrapped;
-    let lastFocusAfterTrapped;
-    const { focusReason: focusReason2 } = useFocusReason();
-    useEscapeKeydown((event) => {
-      if (props.trapped && !focusLayer.paused) {
-        emit("release-requested", event);
-      }
-    });
-    const focusLayer = {
-      paused: false,
-      pause() {
-        this.paused = true;
-      },
-      resume() {
-        this.paused = false;
-      }
-    };
-    const onKeydown = (e) => {
-      if (!props.loop && !props.trapped)
-        return;
-      if (focusLayer.paused)
-        return;
-      const { key, altKey, ctrlKey, metaKey, currentTarget, shiftKey } = e;
-      const { loop } = props;
-      const isTabbing = key === EVENT_CODE.tab && !altKey && !ctrlKey && !metaKey;
-      const currentFocusingEl = document.activeElement;
-      if (isTabbing && currentFocusingEl) {
-        const container = currentTarget;
-        const [first, last] = getEdges(container);
-        const isTabbable = first && last;
-        if (!isTabbable) {
-          if (currentFocusingEl === container) {
-            const focusoutPreventedEvent = createFocusOutPreventedEvent({
-              focusReason: focusReason2.value
-            });
-            emit("focusout-prevented", focusoutPreventedEvent);
-            if (!focusoutPreventedEvent.defaultPrevented) {
-              e.preventDefault();
-            }
-          }
-        } else {
-          if (!shiftKey && currentFocusingEl === last) {
-            const focusoutPreventedEvent = createFocusOutPreventedEvent({
-              focusReason: focusReason2.value
-            });
-            emit("focusout-prevented", focusoutPreventedEvent);
-            if (!focusoutPreventedEvent.defaultPrevented) {
-              e.preventDefault();
-              if (loop)
-                tryFocus(first, true);
-            }
-          } else if (shiftKey && [first, container].includes(currentFocusingEl)) {
-            const focusoutPreventedEvent = createFocusOutPreventedEvent({
-              focusReason: focusReason2.value
-            });
-            emit("focusout-prevented", focusoutPreventedEvent);
-            if (!focusoutPreventedEvent.defaultPrevented) {
-              e.preventDefault();
-              if (loop)
-                tryFocus(last, true);
-            }
-          }
-        }
-      }
-    };
-    provide(FOCUS_TRAP_INJECTION_KEY, {
-      focusTrapRef: forwardRef,
-      onKeydown
-    });
-    watch(() => props.focusTrapEl, (focusTrapEl) => {
-      if (focusTrapEl) {
-        forwardRef.value = focusTrapEl;
-      }
-    }, { immediate: true });
-    watch([forwardRef], ([forwardRef2], [oldForwardRef]) => {
-      if (forwardRef2) {
-        forwardRef2.addEventListener("keydown", onKeydown);
-        forwardRef2.addEventListener("focusin", onFocusIn);
-        forwardRef2.addEventListener("focusout", onFocusOut);
-      }
-      if (oldForwardRef) {
-        oldForwardRef.removeEventListener("keydown", onKeydown);
-        oldForwardRef.removeEventListener("focusin", onFocusIn);
-        oldForwardRef.removeEventListener("focusout", onFocusOut);
-      }
-    });
-    const trapOnFocus = (e) => {
-      emit(ON_TRAP_FOCUS_EVT, e);
-    };
-    const releaseOnFocus = (e) => emit(ON_RELEASE_FOCUS_EVT, e);
-    const onFocusIn = (e) => {
-      const trapContainer = unref(forwardRef);
-      if (!trapContainer)
-        return;
-      const target = e.target;
-      const relatedTarget = e.relatedTarget;
-      const isFocusedInTrap = target && trapContainer.contains(target);
-      if (!props.trapped) {
-        const isPrevFocusedInTrap = relatedTarget && trapContainer.contains(relatedTarget);
-        if (!isPrevFocusedInTrap) {
-          lastFocusBeforeTrapped = relatedTarget;
-        }
-      }
-      if (isFocusedInTrap)
-        emit("focusin", e);
-      if (focusLayer.paused)
-        return;
-      if (props.trapped) {
-        if (isFocusedInTrap) {
-          lastFocusAfterTrapped = target;
-        } else {
-          tryFocus(lastFocusAfterTrapped, true);
-        }
-      }
-    };
-    const onFocusOut = (e) => {
-      const trapContainer = unref(forwardRef);
-      if (focusLayer.paused || !trapContainer)
-        return;
-      if (props.trapped) {
-        const relatedTarget = e.relatedTarget;
-        if (!isNil(relatedTarget) && !trapContainer.contains(relatedTarget)) {
-          setTimeout(() => {
-            if (!focusLayer.paused && props.trapped) {
-              const focusoutPreventedEvent = createFocusOutPreventedEvent({
-                focusReason: focusReason2.value
-              });
-              emit("focusout-prevented", focusoutPreventedEvent);
-              if (!focusoutPreventedEvent.defaultPrevented) {
-                tryFocus(lastFocusAfterTrapped, true);
-              }
-            }
-          }, 0);
-        }
-      } else {
-        const target = e.target;
-        const isFocusedInTrap = target && trapContainer.contains(target);
-        if (!isFocusedInTrap)
-          emit("focusout", e);
-      }
-    };
-    async function startTrap() {
-      await nextTick();
-      const trapContainer = unref(forwardRef);
-      if (trapContainer) {
-        focusableStack.push(focusLayer);
-        const prevFocusedElement = trapContainer.contains(document.activeElement) ? lastFocusBeforeTrapped : document.activeElement;
-        lastFocusBeforeTrapped = prevFocusedElement;
-        const isPrevFocusContained = trapContainer.contains(prevFocusedElement);
-        if (!isPrevFocusContained) {
-          const focusEvent = new Event(FOCUS_AFTER_TRAPPED, FOCUS_AFTER_TRAPPED_OPTS);
-          trapContainer.addEventListener(FOCUS_AFTER_TRAPPED, trapOnFocus);
-          trapContainer.dispatchEvent(focusEvent);
-          if (!focusEvent.defaultPrevented) {
-            nextTick(() => {
-              let focusStartEl = props.focusStartEl;
-              if (!isString$1(focusStartEl)) {
-                tryFocus(focusStartEl);
-                if (document.activeElement !== focusStartEl) {
-                  focusStartEl = "first";
-                }
-              }
-              if (focusStartEl === "first") {
-                focusFirstDescendant(obtainAllFocusableElements(trapContainer), true);
-              }
-              if (document.activeElement === prevFocusedElement || focusStartEl === "container") {
-                tryFocus(trapContainer);
-              }
-            });
-          }
-        }
-      }
-    }
-    function stopTrap() {
-      const trapContainer = unref(forwardRef);
-      if (trapContainer) {
-        trapContainer.removeEventListener(FOCUS_AFTER_TRAPPED, trapOnFocus);
-        const releasedEvent = new CustomEvent(FOCUS_AFTER_RELEASED, {
-          ...FOCUS_AFTER_TRAPPED_OPTS,
-          detail: {
-            focusReason: focusReason2.value
-          }
-        });
-        trapContainer.addEventListener(FOCUS_AFTER_RELEASED, releaseOnFocus);
-        trapContainer.dispatchEvent(releasedEvent);
-        if (!releasedEvent.defaultPrevented && (focusReason2.value == "keyboard" || !isFocusCausedByUserEvent() || trapContainer.contains(document.activeElement))) {
-          tryFocus(lastFocusBeforeTrapped != null ? lastFocusBeforeTrapped : document.body);
-        }
-        trapContainer.removeEventListener(FOCUS_AFTER_RELEASED, releaseOnFocus);
-        focusableStack.remove(focusLayer);
-      }
-    }
-    onMounted(() => {
-      if (props.trapped) {
-        startTrap();
-      }
-      watch(() => props.trapped, (trapped) => {
-        if (trapped) {
-          startTrap();
-        } else {
-          stopTrap();
-        }
-      });
-    });
-    onBeforeUnmount(() => {
-      if (props.trapped) {
-        stopTrap();
-      }
-    });
-    return {
-      onKeydown
-    };
-  }
-});
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  return renderSlot(_ctx.$slots, "default", { handleKeydown: _ctx.onKeydown });
-}
-var ElFocusTrap = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$6], ["__file", "focus-trap.vue"]]);
-const POSITIONING_STRATEGIES = ["fixed", "absolute"];
-const popperCoreConfigProps = buildProps({
-  boundariesPadding: {
-    type: Number,
-    default: 0
-  },
-  fallbackPlacements: {
-    type: definePropType(Array),
-    default: void 0
-  },
-  gpuAcceleration: {
-    type: Boolean,
-    default: true
-  },
-  offset: {
-    type: Number,
-    default: 12
-  },
-  placement: {
-    type: String,
-    values: Ee,
-    default: "bottom"
-  },
-  popperOptions: {
-    type: definePropType(Object),
-    default: () => ({})
-  },
-  strategy: {
-    type: String,
-    values: POSITIONING_STRATEGIES,
-    default: "absolute"
-  }
-});
-const popperContentProps = buildProps({
-  ...popperCoreConfigProps,
-  id: String,
-  style: {
-    type: definePropType([String, Array, Object])
-  },
-  className: {
-    type: definePropType([String, Array, Object])
-  },
-  effect: {
-    type: String,
-    default: "dark"
-  },
-  visible: Boolean,
-  enterable: {
-    type: Boolean,
-    default: true
-  },
-  pure: Boolean,
-  focusOnShow: {
-    type: Boolean,
-    default: false
-  },
-  trapping: {
-    type: Boolean,
-    default: false
-  },
-  popperClass: {
-    type: definePropType([String, Array, Object])
-  },
-  popperStyle: {
-    type: definePropType([String, Array, Object])
-  },
-  referenceEl: {
-    type: definePropType(Object)
-  },
-  triggerTargetEl: {
-    type: definePropType(Object)
-  },
-  stopPopperMouseEvent: {
-    type: Boolean,
-    default: true
-  },
-  ariaLabel: {
-    type: String,
-    default: void 0
-  },
-  virtualTriggering: Boolean,
-  zIndex: Number
-});
-const popperContentEmits = {
-  mouseenter: (evt) => evt instanceof MouseEvent,
-  mouseleave: (evt) => evt instanceof MouseEvent,
-  focus: () => true,
-  blur: () => true,
-  close: () => true
-};
-const buildPopperOptions = (props, modifiers = []) => {
-  const { placement, strategy, popperOptions } = props;
-  const options = {
-    placement,
-    strategy,
-    ...popperOptions,
-    modifiers: [...genModifiers(props), ...modifiers]
-  };
-  deriveExtraModifiers(options, popperOptions == null ? void 0 : popperOptions.modifiers);
-  return options;
-};
-const unwrapMeasurableEl = ($el) => {
-  if (!isClient)
-    return;
-  return unrefElement($el);
-};
-function genModifiers(options) {
-  const { offset, gpuAcceleration, fallbackPlacements } = options;
-  return [
-    {
-      name: "offset",
-      options: {
-        offset: [0, offset != null ? offset : 12]
-      }
-    },
-    {
-      name: "preventOverflow",
-      options: {
-        padding: {
-          top: 2,
-          bottom: 2,
-          left: 5,
-          right: 5
-        }
-      }
-    },
-    {
-      name: "flip",
-      options: {
-        padding: 5,
-        fallbackPlacements
-      }
-    },
-    {
-      name: "computeStyles",
-      options: {
-        gpuAcceleration
-      }
-    }
-  ];
-}
-function deriveExtraModifiers(options, modifiers) {
-  if (modifiers) {
-    options.modifiers = [...options.modifiers, ...modifiers != null ? modifiers : []];
-  }
 }
 const DEFAULT_ARROW_OFFSET = 0;
 const usePopperContent = (props) => {
@@ -7494,54 +5687,11 @@ const usePopperContentDOM = (props, {
     updateZIndex
   };
 };
-const usePopperContentFocusTrap = (props, emit) => {
-  const trapped = ref(false);
-  const focusStartRef = ref();
-  const onFocusAfterTrapped = () => {
-    emit("focus");
-  };
-  const onFocusAfterReleased = (event) => {
-    var _a2;
-    if (((_a2 = event.detail) == null ? void 0 : _a2.focusReason) !== "pointer") {
-      focusStartRef.value = "first";
-      emit("blur");
-    }
-  };
-  const onFocusInTrap = (event) => {
-    if (props.visible && !trapped.value) {
-      if (event.target) {
-        focusStartRef.value = event.target;
-      }
-      trapped.value = true;
-    }
-  };
-  const onFocusoutPrevented = (event) => {
-    if (!props.trapping) {
-      if (event.detail.focusReason === "pointer") {
-        event.preventDefault();
-      }
-      trapped.value = false;
-    }
-  };
-  const onReleaseRequested = () => {
-    trapped.value = false;
-    emit("close");
-  };
-  return {
-    focusStartRef,
-    trapped,
-    onFocusAfterReleased,
-    onFocusAfterTrapped,
-    onFocusInTrap,
-    onFocusoutPrevented,
-    onReleaseRequested
-  };
-};
-const __default__$9 = defineComponent({
+const __default__$d = defineComponent({
   name: "ElPopperContent"
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
-  ...__default__$9,
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
+  ...__default__$d,
   props: popperContentProps,
   emits: popperContentEmits,
   setup(__props, { expose, emit }) {
@@ -7575,7 +5725,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
       arrowRef,
       arrowOffset
     });
-    if (formItemContext && (formItemContext.addInputId || formItemContext.removeInputId)) {
+    if (formItemContext) {
       provide(formItemContextKey, {
         ...formItemContext,
         addInputId: NOOP,
@@ -7634,8 +5784,8 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
         style: unref(contentStyle),
         class: unref(contentClass),
         tabindex: "-1",
-        onMouseenter: _cache[0] || (_cache[0] = (e) => _ctx.$emit("mouseenter", e)),
-        onMouseleave: _cache[1] || (_cache[1] = (e) => _ctx.$emit("mouseleave", e))
+        onMouseenter: (e) => _ctx.$emit("mouseenter", e),
+        onMouseleave: (e) => _ctx.$emit("mouseleave", e)
       }), [
         createVNode(unref(ElFocusTrap), {
           trapped: unref(trapped),
@@ -7653,13 +5803,74 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
           ]),
           _: 3
         }, 8, ["trapped", "focus-trap-el", "focus-start-el", "onFocusAfterTrapped", "onFocusAfterReleased", "onFocusin", "onFocusoutPrevented", "onReleaseRequested"])
-      ], 16);
+      ], 16, ["onMouseenter", "onMouseleave"]);
     };
   }
 });
-var ElPopperContent = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "content.vue"]]);
+var ElPopperContent = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__file", "content.vue"]]);
 const ElPopper = withInstall(Popper);
 const TOOLTIP_INJECTION_KEY = Symbol("elTooltip");
+function useTimeout() {
+  let timeoutHandle;
+  const registerTimeout = (fn2, delay) => {
+    cancelTimeout();
+    timeoutHandle = window.setTimeout(fn2, delay);
+  };
+  const cancelTimeout = () => window.clearTimeout(timeoutHandle);
+  tryOnScopeDispose(() => cancelTimeout());
+  return {
+    registerTimeout,
+    cancelTimeout
+  };
+}
+const useDelayedToggleProps = buildProps({
+  showAfter: {
+    type: Number,
+    default: 0
+  },
+  hideAfter: {
+    type: Number,
+    default: 200
+  },
+  autoClose: {
+    type: Number,
+    default: 0
+  }
+});
+const useDelayedToggle = ({
+  showAfter,
+  hideAfter,
+  autoClose,
+  open,
+  close
+}) => {
+  const { registerTimeout } = useTimeout();
+  const {
+    registerTimeout: registerTimeoutForAutoClose,
+    cancelTimeout: cancelTimeoutForAutoClose
+  } = useTimeout();
+  const onOpen = (event) => {
+    registerTimeout(() => {
+      open(event);
+      const _autoClose = unref(autoClose);
+      if (isNumber(_autoClose) && _autoClose > 0) {
+        registerTimeoutForAutoClose(() => {
+          close(event);
+        }, _autoClose);
+      }
+    }, unref(showAfter));
+  };
+  const onClose = (event) => {
+    cancelTimeoutForAutoClose();
+    registerTimeout(() => {
+      close(event);
+    }, unref(hideAfter));
+  };
+  return {
+    onOpen,
+    onClose
+  };
+};
 const useTooltipContentProps = buildProps({
   ...useDelayedToggleProps,
   ...popperContentProps,
@@ -7670,12 +5881,8 @@ const useTooltipContentProps = buildProps({
     type: String,
     default: ""
   },
-  rawContent: {
-    type: Boolean,
-    default: false
-  },
+  rawContent: Boolean,
   persistent: Boolean,
-  ariaLabel: String,
   visible: {
     type: definePropType(Boolean),
     default: null
@@ -7685,7 +5892,8 @@ const useTooltipContentProps = buildProps({
     type: Boolean,
     default: true
   },
-  disabled: Boolean
+  disabled: Boolean,
+  ...useAriaProps(["ariaLabel"])
 });
 const useTooltipTriggerProps = buildProps({
   ...popperTriggerProps,
@@ -7696,9 +5904,131 @@ const useTooltipTriggerProps = buildProps({
   },
   triggerKeys: {
     type: definePropType(Array),
-    default: () => [EVENT_CODE.enter, EVENT_CODE.space]
+    default: () => [EVENT_CODE.enter, EVENT_CODE.numpadEnter, EVENT_CODE.space]
   }
 });
+const _prop = buildProp({
+  type: definePropType(Boolean),
+  default: null
+});
+const _event = buildProp({
+  type: definePropType(Function)
+});
+const createModelToggleComposable = (name) => {
+  const updateEventKey = `update:${name}`;
+  const updateEventKeyRaw = `onUpdate:${name}`;
+  const useModelToggleEmits2 = [updateEventKey];
+  const useModelToggleProps2 = {
+    [name]: _prop,
+    [updateEventKeyRaw]: _event
+  };
+  const useModelToggle2 = ({
+    indicator,
+    toggleReason,
+    shouldHideWhenRouteChanges,
+    shouldProceed,
+    onShow,
+    onHide
+  }) => {
+    const instance = getCurrentInstance();
+    const { emit } = instance;
+    const props = instance.props;
+    const hasUpdateHandler = computed(() => isFunction$1(props[updateEventKeyRaw]));
+    const isModelBindingAbsent = computed(() => props[name] === null);
+    const doShow = (event) => {
+      if (indicator.value === true) {
+        return;
+      }
+      indicator.value = true;
+      if (toggleReason) {
+        toggleReason.value = event;
+      }
+      if (isFunction$1(onShow)) {
+        onShow(event);
+      }
+    };
+    const doHide = (event) => {
+      if (indicator.value === false) {
+        return;
+      }
+      indicator.value = false;
+      if (toggleReason) {
+        toggleReason.value = event;
+      }
+      if (isFunction$1(onHide)) {
+        onHide(event);
+      }
+    };
+    const show = (event) => {
+      if (props.disabled === true || isFunction$1(shouldProceed) && !shouldProceed())
+        return;
+      const shouldEmit = hasUpdateHandler.value && isClient;
+      if (shouldEmit) {
+        emit(updateEventKey, true);
+      }
+      if (isModelBindingAbsent.value || !shouldEmit) {
+        doShow(event);
+      }
+    };
+    const hide = (event) => {
+      if (props.disabled === true || !isClient)
+        return;
+      const shouldEmit = hasUpdateHandler.value && isClient;
+      if (shouldEmit) {
+        emit(updateEventKey, false);
+      }
+      if (isModelBindingAbsent.value || !shouldEmit) {
+        doHide(event);
+      }
+    };
+    const onChange = (val) => {
+      if (!isBoolean(val))
+        return;
+      if (props.disabled && val) {
+        if (hasUpdateHandler.value) {
+          emit(updateEventKey, false);
+        }
+      } else if (indicator.value !== val) {
+        if (val) {
+          doShow();
+        } else {
+          doHide();
+        }
+      }
+    };
+    const toggle = () => {
+      if (indicator.value) {
+        hide();
+      } else {
+        show();
+      }
+    };
+    watch(() => props[name], onChange);
+    if (shouldHideWhenRouteChanges && instance.appContext.config.globalProperties.$route !== void 0) {
+      watch(() => ({
+        ...instance.proxy.$route
+      }), () => {
+        if (shouldHideWhenRouteChanges.value && indicator.value) {
+          hide();
+        }
+      });
+    }
+    onMounted(() => {
+      onChange(props[name]);
+    });
+    return {
+      hide,
+      show,
+      toggle,
+      hasUpdateHandler
+    };
+  };
+  return {
+    useModelToggle: useModelToggle2,
+    useModelToggleProps: useModelToggleProps2,
+    useModelToggleEmits: useModelToggleEmits2
+  };
+};
 const {
   useModelToggleProps: useTooltipModelToggleProps,
   useModelToggleEmits: useTooltipModelToggleEmits,
@@ -7735,11 +6065,20 @@ const whenTrigger = (trigger, type4, handler) => {
     isTriggerType(unref(trigger), type4) && handler(e);
   };
 };
-const __default__$8 = defineComponent({
+const composeEventHandlers = (theirsHandler, oursHandler, { checkForDefaultPrevented = true } = {}) => {
+  const handleEvent = (event) => {
+    const shouldPrevent = theirsHandler == null ? void 0 : theirsHandler(event);
+    if (checkForDefaultPrevented === false || !shouldPrevent) {
+      return oursHandler == null ? void 0 : oursHandler(event);
+    }
+  };
+  return handleEvent;
+};
+const __default__$c = defineComponent({
   name: "ElTooltipTrigger"
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
-  ...__default__$8,
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
+  ...__default__$c,
   props: useTooltipTriggerProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -7798,20 +6137,75 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var ElTooltipTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "trigger.vue"]]);
-const __default__$7 = defineComponent({
+var ElTooltipTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__file", "trigger.vue"]]);
+const teleportProps = buildProps({
+  to: {
+    type: definePropType([String, Object]),
+    required: true
+  },
+  disabled: Boolean
+});
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
+  __name: "teleport",
+  props: teleportProps,
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return _ctx.disabled ? renderSlot(_ctx.$slots, "default", { key: 0 }) : (openBlock(), createBlock(Teleport$1, {
+        key: 1,
+        to: _ctx.to
+      }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 8, ["to"]));
+    };
+  }
+});
+var Teleport = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "teleport.vue"]]);
+const ElTeleport = withInstall(Teleport);
+const usePopperContainerId = () => {
+  const namespace = useGetDerivedNamespace();
+  const idInjection = useIdInjection();
+  const id = computed(() => {
+    return `${namespace.value}-popper-container-${idInjection.prefix}`;
+  });
+  const selector = computed(() => `#${id.value}`);
+  return {
+    id,
+    selector
+  };
+};
+const createContainer = (id) => {
+  const container = document.createElement("div");
+  container.id = id;
+  document.body.appendChild(container);
+  return container;
+};
+const usePopperContainer = () => {
+  const { id, selector } = usePopperContainerId();
+  onBeforeMount(() => {
+    if (!isClient)
+      return;
+    if (!document.body.querySelector(selector.value)) {
+      createContainer(id.value);
+    }
+  });
+  return {
+    id,
+    selector
+  };
+};
+const __default__$b = defineComponent({
   name: "ElTooltipContent",
   inheritAttrs: false
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
-  ...__default__$7,
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
+  ...__default__$b,
   props: useTooltipContentProps,
   setup(__props, { expose }) {
     const props = __props;
     const { selector } = usePopperContainerId();
     const ns = useNamespace("tooltip");
-    const contentRef = ref(null);
-    const destroyed = ref(false);
+    const contentRef = ref();
+    let stopHandle;
     const {
       controlled,
       id,
@@ -7831,7 +6225,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
       return props.persistent;
     });
     onBeforeUnmount(() => {
-      destroyed.value = true;
+      stopHandle == null ? void 0 : stopHandle();
     });
     const shouldRender = computed(() => {
       return unref(persistentRef) ? true : unref(open);
@@ -7846,9 +6240,11 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
       var _a2;
       return (_a2 = props.style) != null ? _a2 : {};
     });
-    const ariaHidden = computed(() => !unref(open));
+    const ariaHidden = ref(true);
     const onTransitionLeave = () => {
       onHide();
+      isFocusInsideContent() && tryFocus(document.body);
+      ariaHidden.value = true;
     };
     const stopWhenControlled = () => {
       if (unref(controlled))
@@ -7891,10 +6287,17 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
         onClose();
       }
     };
-    let stopHandle;
+    const isFocusInsideContent = (event) => {
+      var _a2;
+      const popperContent = (_a2 = contentRef.value) == null ? void 0 : _a2.popperContentRef;
+      const activeElement = (event == null ? void 0 : event.relatedTarget) || document.activeElement;
+      return popperContent == null ? void 0 : popperContent.contains(activeElement);
+    };
     watch(() => unref(open), (val) => {
       if (!val) {
         stopHandle == null ? void 0 : stopHandle();
+      } else {
+        ariaHidden.value = false;
       }
     }, {
       flush: "post"
@@ -7904,72 +6307,74 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
       (_b = (_a2 = contentRef.value) == null ? void 0 : _a2.updatePopper) == null ? void 0 : _b.call(_a2);
     });
     expose({
-      contentRef
+      contentRef,
+      isFocusInsideContent
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, {
+      return openBlock(), createBlock(unref(ElTeleport), {
         disabled: !_ctx.teleported,
         to: unref(appendTo)
-      }, [
-        createVNode(Transition, {
-          name: unref(transitionClass),
-          onAfterLeave: onTransitionLeave,
-          onBeforeEnter,
-          onAfterEnter: onAfterShow,
-          onBeforeLeave
-        }, {
-          default: withCtx(() => [
-            unref(shouldRender) ? withDirectives((openBlock(), createBlock(unref(ElPopperContent), mergeProps({
-              key: 0,
-              id: unref(id),
-              ref_key: "contentRef",
-              ref: contentRef
-            }, _ctx.$attrs, {
-              "aria-label": _ctx.ariaLabel,
-              "aria-hidden": unref(ariaHidden),
-              "boundaries-padding": _ctx.boundariesPadding,
-              "fallback-placements": _ctx.fallbackPlacements,
-              "gpu-acceleration": _ctx.gpuAcceleration,
-              offset: _ctx.offset,
-              placement: _ctx.placement,
-              "popper-options": _ctx.popperOptions,
-              strategy: _ctx.strategy,
-              effect: _ctx.effect,
-              enterable: _ctx.enterable,
-              pure: _ctx.pure,
-              "popper-class": _ctx.popperClass,
-              "popper-style": [_ctx.popperStyle, unref(contentStyle)],
-              "reference-el": _ctx.referenceEl,
-              "trigger-target-el": _ctx.triggerTargetEl,
-              visible: unref(shouldShow),
-              "z-index": _ctx.zIndex,
-              onMouseenter: unref(onContentEnter),
-              onMouseleave: unref(onContentLeave),
-              onBlur,
-              onClose: unref(onClose)
-            }), {
-              default: withCtx(() => [
-                !destroyed.value ? renderSlot(_ctx.$slots, "default", { key: 0 }) : createCommentVNode("v-if", true)
-              ]),
-              _: 3
-            }, 16, ["id", "aria-label", "aria-hidden", "boundaries-padding", "fallback-placements", "gpu-acceleration", "offset", "placement", "popper-options", "strategy", "effect", "enterable", "pure", "popper-class", "popper-style", "reference-el", "trigger-target-el", "visible", "z-index", "onMouseenter", "onMouseleave", "onClose"])), [
-              [vShow, unref(shouldShow)]
-            ]) : createCommentVNode("v-if", true)
-          ]),
-          _: 3
-        }, 8, ["name"])
-      ], 8, ["disabled", "to"]);
+      }, {
+        default: withCtx(() => [
+          createVNode(Transition, {
+            name: unref(transitionClass),
+            onAfterLeave: onTransitionLeave,
+            onBeforeEnter,
+            onAfterEnter: onAfterShow,
+            onBeforeLeave
+          }, {
+            default: withCtx(() => [
+              unref(shouldRender) ? withDirectives((openBlock(), createBlock(unref(ElPopperContent), mergeProps({
+                key: 0,
+                id: unref(id),
+                ref_key: "contentRef",
+                ref: contentRef
+              }, _ctx.$attrs, {
+                "aria-label": _ctx.ariaLabel,
+                "aria-hidden": ariaHidden.value,
+                "boundaries-padding": _ctx.boundariesPadding,
+                "fallback-placements": _ctx.fallbackPlacements,
+                "gpu-acceleration": _ctx.gpuAcceleration,
+                offset: _ctx.offset,
+                placement: _ctx.placement,
+                "popper-options": _ctx.popperOptions,
+                strategy: _ctx.strategy,
+                effect: _ctx.effect,
+                enterable: _ctx.enterable,
+                pure: _ctx.pure,
+                "popper-class": _ctx.popperClass,
+                "popper-style": [_ctx.popperStyle, unref(contentStyle)],
+                "reference-el": _ctx.referenceEl,
+                "trigger-target-el": _ctx.triggerTargetEl,
+                visible: unref(shouldShow),
+                "z-index": _ctx.zIndex,
+                onMouseenter: unref(onContentEnter),
+                onMouseleave: unref(onContentLeave),
+                onBlur,
+                onClose: unref(onClose)
+              }), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default")
+                ]),
+                _: 3
+              }, 16, ["id", "aria-label", "aria-hidden", "boundaries-padding", "fallback-placements", "gpu-acceleration", "offset", "placement", "popper-options", "strategy", "effect", "enterable", "pure", "popper-class", "popper-style", "reference-el", "trigger-target-el", "visible", "z-index", "onMouseenter", "onMouseleave", "onClose"])), [
+                [vShow, unref(shouldShow)]
+              ]) : createCommentVNode("v-if", true)
+            ]),
+            _: 3
+          }, 8, ["name"])
+        ]),
+        _: 3
+      }, 8, ["disabled", "to"]);
     };
   }
 });
-var ElTooltipContent = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "content.vue"]]);
-const _hoisted_1$d = ["innerHTML"];
-const _hoisted_2$a = { key: 1 };
-const __default__$6 = defineComponent({
+var ElTooltipContent = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "content.vue"]]);
+const __default__$a = defineComponent({
   name: "ElTooltip"
 });
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
-  ...__default__$6,
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
+  ...__default__$a,
   props: useTooltipProps,
   emits: tooltipEmits,
   setup(__props, { expose, emit }) {
@@ -8037,10 +6442,8 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       }
     });
     const isFocusInsideContent = (event) => {
-      var _a2, _b;
-      const popperContent = (_b = (_a2 = contentRef.value) == null ? void 0 : _a2.contentRef) == null ? void 0 : _b.popperContentRef;
-      const activeElement = (event == null ? void 0 : event.relatedTarget) || document.activeElement;
-      return popperContent && popperContent.contains(activeElement);
+      var _a2;
+      return (_a2 = contentRef.value) == null ? void 0 : _a2.isFocusInsideContent(event);
     };
     onDeactivated(() => open.value && hide());
     expose({
@@ -8106,7 +6509,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                 _ctx.rawContent ? (openBlock(), createElementBlock("span", {
                   key: 0,
                   innerHTML: _ctx.content
-                }, null, 8, _hoisted_1$d)) : (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString(_ctx.content), 1))
+                }, null, 8, ["innerHTML"])) : (openBlock(), createElementBlock("span", { key: 1 }, toDisplayString(_ctx.content), 1))
               ]),
               _ctx.showArrow ? (openBlock(), createBlock(unref(ElPopperArrow), {
                 key: 0,
@@ -8121,9 +6524,15 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Tooltip = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "tooltip.vue"]]);
+var Tooltip = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__file", "tooltip.vue"]]);
 const ElTooltip = withInstall(Tooltip);
 const buttonGroupContextKey = Symbol("buttonGroupContextKey");
+const useDeprecated = ({ from, replacement, scope, version, ref: ref2, type: type4 = "API" }, condition) => {
+  watch(() => unref(condition), (val) => {
+  }, {
+    immediate: true
+  });
+};
 const useButton = (props, emit) => {
   useDeprecated({
     from: "type.text",
@@ -8168,6 +6577,10 @@ const useButton = (props, emit) => {
     return false;
   });
   const handleClick = (evt) => {
+    if (_disabled.value || props.loading) {
+      evt.stopPropagation();
+      return;
+    }
     if (props.nativeType === "reset") {
       form == null ? void 0 : form.resetFields();
     }
@@ -9127,8 +7540,12 @@ function useButtonCustomStyle(props) {
   const ns = useNamespace("button");
   return computed(() => {
     let styles = {};
-    const buttonColor = props.color;
+    let buttonColor = props.color;
     if (buttonColor) {
+      const match = buttonColor.match(/var\((.*?)\)/);
+      if (match) {
+        buttonColor = window.getComputedStyle(window.document.documentElement).getPropertyValue(match[1]);
+      }
       const color = new TinyColor(buttonColor);
       const activeBgColor = props.dark ? color.tint(20).toString() : darken(color, 20);
       if (props.plain) {
@@ -9172,11 +7589,11 @@ function useButtonCustomStyle(props) {
     return styles;
   });
 }
-const __default__$5 = defineComponent({
+const __default__$9 = defineComponent({
   name: "ElButton"
 });
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
-  ...__default__$5,
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
+  ...__default__$9,
   props: buttonProps,
   emits: buttonEmits,
   setup(__props, { expose, emit }) {
@@ -9184,6 +7601,19 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     const buttonStyle = useButtonCustomStyle(props);
     const ns = useNamespace("button");
     const { _ref, _size, _type, _disabled, _props, shouldAddSpace, handleClick } = useButton(props, emit);
+    const buttonKls = computed(() => [
+      ns.b(),
+      ns.m(_type.value),
+      ns.m(_size.value),
+      ns.is("disabled", _disabled.value),
+      ns.is("loading", props.loading),
+      ns.is("plain", props.plain),
+      ns.is("round", props.round),
+      ns.is("circle", props.circle),
+      ns.is("text", props.text),
+      ns.is("link", props.link),
+      ns.is("has-bg", props.bg)
+    ]);
     expose({
       ref: _ref,
       size: _size,
@@ -9196,19 +7626,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
         ref_key: "_ref",
         ref: _ref
       }, unref(_props), {
-        class: [
-          unref(ns).b(),
-          unref(ns).m(unref(_type)),
-          unref(ns).m(unref(_size)),
-          unref(ns).is("disabled", unref(_disabled)),
-          unref(ns).is("loading", _ctx.loading),
-          unref(ns).is("plain", _ctx.plain),
-          unref(ns).is("round", _ctx.round),
-          unref(ns).is("circle", _ctx.circle),
-          unref(ns).is("text", _ctx.text),
-          unref(ns).is("link", _ctx.link),
-          unref(ns).is("has-bg", _ctx.bg)
-        ],
+        class: unref(buttonKls),
         style: unref(buttonStyle),
         onClick: unref(handleClick)
       }), {
@@ -9241,16 +7659,16 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Button = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "button.vue"]]);
+var Button = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__file", "button.vue"]]);
 const buttonGroupProps = {
   size: buttonProps.size,
   type: buttonProps.type
 };
-const __default__$4 = defineComponent({
+const __default__$8 = defineComponent({
   name: "ElButtonGroup"
 });
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
-  ...__default__$4,
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
+  ...__default__$8,
   props: buttonGroupProps,
   setup(__props) {
     const props = __props;
@@ -9261,14 +7679,14 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     const ns = useNamespace("button");
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass(`${unref(ns).b("group")}`)
+        class: normalizeClass(unref(ns).b("group"))
       }, [
         renderSlot(_ctx.$slots, "default")
       ], 2);
     };
   }
 });
-var ButtonGroup = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "button-group.vue"]]);
+var ButtonGroup = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__file", "button-group.vue"]]);
 const ElButton = withInstall(Button, {
   ButtonGroup
 });
@@ -9292,8 +7710,7 @@ var dayjs_min = { exports: {} };
       var e2 = -t2.utcOffset(), n2 = Math.abs(e2), r3 = Math.floor(n2 / 60), i3 = n2 % 60;
       return (e2 <= 0 ? "+" : "-") + m2(r3, 2, "0") + ":" + m2(i3, 2, "0");
     }, m: function t2(e2, n2) {
-      if (e2.date() < n2.date())
-        return -t2(n2, e2);
+      if (e2.date() < n2.date()) return -t2(n2, e2);
       var r3 = 12 * (n2.year() - e2.year()) + (n2.month() - e2.month()), i3 = e2.clone().add(r3, c2), s2 = n2 - i3 < 0, u3 = e2.clone().add(r3 + (s2 ? -1 : 1), c2);
       return +(-(r3 + (n2 - i3) / (s2 ? i3 - u3 : u3 - i3)) || 0);
     }, a: function(t2) {
@@ -9308,22 +7725,19 @@ var dayjs_min = { exports: {} };
       return t2 instanceof _2 || !(!t2 || !t2[p2]);
     }, w2 = function t2(e2, n2, r3) {
       var i3;
-      if (!e2)
-        return g;
+      if (!e2) return g;
       if ("string" == typeof e2) {
         var s2 = e2.toLowerCase();
         D[s2] && (i3 = s2), n2 && (D[s2] = n2, i3 = s2);
         var u3 = e2.split("-");
-        if (!i3 && u3.length > 1)
-          return t2(u3[0]);
+        if (!i3 && u3.length > 1) return t2(u3[0]);
       } else {
         var a2 = e2.name;
         D[a2] = e2, i3 = a2;
       }
       return !r3 && i3 && (g = i3), i3 || !r3 && g;
     }, O2 = function(t2, e2) {
-      if (S2(t2))
-        return t2.clone();
+      if (S2(t2)) return t2.clone();
       var n2 = "object" == typeof e2 ? e2 : {};
       return n2.date = t2, n2.args = arguments, new _2(n2);
     }, b2 = v2;
@@ -9338,12 +7752,9 @@ var dayjs_min = { exports: {} };
       return m3.parse = function(t2) {
         this.$d = function(t3) {
           var e2 = t3.date, n2 = t3.utc;
-          if (null === e2)
-            return /* @__PURE__ */ new Date(NaN);
-          if (b2.u(e2))
-            return /* @__PURE__ */ new Date();
-          if (e2 instanceof Date)
-            return new Date(e2);
+          if (null === e2) return /* @__PURE__ */ new Date(NaN);
+          if (b2.u(e2)) return /* @__PURE__ */ new Date();
+          if (e2 instanceof Date) return new Date(e2);
           if ("string" == typeof e2 && !/Z$/i.test(e2)) {
             var r3 = e2.match($2);
             if (r3) {
@@ -9407,8 +7818,7 @@ var dayjs_min = { exports: {} };
         if (o2 === c2 || o2 === h) {
           var y2 = this.clone().set(d2, 1);
           y2.$d[l3]($3), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
-        } else
-          l3 && this.$d[l3]($3);
+        } else l3 && this.$d[l3]($3);
         return this.init(), this;
       }, m3.set = function(t2, e2) {
         return this.clone().$set(t2, e2);
@@ -9421,22 +7831,17 @@ var dayjs_min = { exports: {} };
           var e2 = O2(l3);
           return b2.w(e2.date(e2.date() + Math.round(t2 * r3)), l3);
         };
-        if ($3 === c2)
-          return this.set(c2, this.$M + r3);
-        if ($3 === h)
-          return this.set(h, this.$y + r3);
-        if ($3 === a)
-          return y2(1);
-        if ($3 === o)
-          return y2(7);
+        if ($3 === c2) return this.set(c2, this.$M + r3);
+        if ($3 === h) return this.set(h, this.$y + r3);
+        if ($3 === a) return y2(1);
+        if ($3 === o) return y2(7);
         var M4 = (d3 = {}, d3[s] = e, d3[u2] = n, d3[i2] = t, d3)[$3] || 1, m4 = this.$d.getTime() + r3 * M4;
         return b2.w(m4, this);
       }, m3.subtract = function(t2, e2) {
         return this.add(-1 * t2, e2);
       }, m3.format = function(t2) {
         var e2 = this, n2 = this.$locale();
-        if (!this.isValid())
-          return n2.invalidDate || l2;
+        if (!this.isValid()) return n2.invalidDate || l2;
         var r3 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i3 = b2.z(this), s2 = this.$H, u3 = this.$m, a2 = this.$M, o2 = n2.weekdays, c3 = n2.months, f2 = n2.meridiem, h2 = function(t3, n3, i4, s3) {
           return t3 && (t3[n3] || t3(e2, r3)) || i4[n3].slice(0, s3);
         }, d3 = function(t3) {
@@ -9540,8 +7945,7 @@ var dayjs_min = { exports: {} };
       }, m3.$locale = function() {
         return D[this.$L];
       }, m3.locale = function(t2, e2) {
-        if (!t2)
-          return this.$L;
+        if (!t2) return this.$L;
         var n2 = this.clone(), r3 = w2(t2, e2, true);
         return r3 && (n2.$L = r3), n2;
       }, m3.clone = function() {
@@ -9569,156 +7973,6 @@ var dayjs_min = { exports: {} };
 })(dayjs_min);
 var dayjs_minExports = dayjs_min.exports;
 const dayjs = /* @__PURE__ */ getDefaultExportFromCjs(dayjs_minExports);
-var customParseFormat$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t) {
-    module2.exports = t();
-  }(commonjsGlobal, function() {
-    var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d\d/, r2 = /\d\d?/, i2 = /\d*[^-_:/,()\s\d]+/, o = {}, s = function(e2) {
-      return (e2 = +e2) + (e2 > 68 ? 1900 : 2e3);
-    };
-    var a = function(e2) {
-      return function(t2) {
-        this[e2] = +t2;
-      };
-    }, f = [/[+-]\d\d:?(\d\d)?|Z/, function(e2) {
-      (this.zone || (this.zone = {})).offset = function(e3) {
-        if (!e3)
-          return 0;
-        if ("Z" === e3)
-          return 0;
-        var t2 = e3.match(/([+-]|\d\d)/g), n2 = 60 * t2[1] + (+t2[2] || 0);
-        return 0 === n2 ? 0 : "+" === t2[0] ? -n2 : n2;
-      }(e2);
-    }], h = function(e2) {
-      var t2 = o[e2];
-      return t2 && (t2.indexOf ? t2 : t2.s.concat(t2.f));
-    }, u2 = function(e2, t2) {
-      var n2, r3 = o.meridiem;
-      if (r3) {
-        for (var i3 = 1; i3 <= 24; i3 += 1)
-          if (e2.indexOf(r3(i3, 0, t2)) > -1) {
-            n2 = i3 > 12;
-            break;
-          }
-      } else
-        n2 = e2 === (t2 ? "pm" : "PM");
-      return n2;
-    }, d2 = { A: [i2, function(e2) {
-      this.afternoon = u2(e2, false);
-    }], a: [i2, function(e2) {
-      this.afternoon = u2(e2, true);
-    }], S: [/\d/, function(e2) {
-      this.milliseconds = 100 * +e2;
-    }], SS: [n, function(e2) {
-      this.milliseconds = 10 * +e2;
-    }], SSS: [/\d{3}/, function(e2) {
-      this.milliseconds = +e2;
-    }], s: [r2, a("seconds")], ss: [r2, a("seconds")], m: [r2, a("minutes")], mm: [r2, a("minutes")], H: [r2, a("hours")], h: [r2, a("hours")], HH: [r2, a("hours")], hh: [r2, a("hours")], D: [r2, a("day")], DD: [n, a("day")], Do: [i2, function(e2) {
-      var t2 = o.ordinal, n2 = e2.match(/\d+/);
-      if (this.day = n2[0], t2)
-        for (var r3 = 1; r3 <= 31; r3 += 1)
-          t2(r3).replace(/\[|\]/g, "") === e2 && (this.day = r3);
-    }], M: [r2, a("month")], MM: [n, a("month")], MMM: [i2, function(e2) {
-      var t2 = h("months"), n2 = (h("monthsShort") || t2.map(function(e3) {
-        return e3.slice(0, 3);
-      })).indexOf(e2) + 1;
-      if (n2 < 1)
-        throw new Error();
-      this.month = n2 % 12 || n2;
-    }], MMMM: [i2, function(e2) {
-      var t2 = h("months").indexOf(e2) + 1;
-      if (t2 < 1)
-        throw new Error();
-      this.month = t2 % 12 || t2;
-    }], Y: [/[+-]?\d+/, a("year")], YY: [n, function(e2) {
-      this.year = s(e2);
-    }], YYYY: [/\d{4}/, a("year")], Z: f, ZZ: f };
-    function c2(n2) {
-      var r3, i3;
-      r3 = n2, i3 = o && o.formats;
-      for (var s2 = (n2 = r3.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, function(t2, n3, r4) {
-        var o2 = r4 && r4.toUpperCase();
-        return n3 || i3[r4] || e[r4] || i3[o2].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(e2, t3, n4) {
-          return t3 || n4.slice(1);
-        });
-      })).match(t), a2 = s2.length, f2 = 0; f2 < a2; f2 += 1) {
-        var h2 = s2[f2], u3 = d2[h2], c3 = u3 && u3[0], l2 = u3 && u3[1];
-        s2[f2] = l2 ? { regex: c3, parser: l2 } : h2.replace(/^\[|\]$/g, "");
-      }
-      return function(e2) {
-        for (var t2 = {}, n3 = 0, r4 = 0; n3 < a2; n3 += 1) {
-          var i4 = s2[n3];
-          if ("string" == typeof i4)
-            r4 += i4.length;
-          else {
-            var o2 = i4.regex, f3 = i4.parser, h3 = e2.slice(r4), u4 = o2.exec(h3)[0];
-            f3.call(t2, u4), e2 = e2.replace(u4, "");
-          }
-        }
-        return function(e3) {
-          var t3 = e3.afternoon;
-          if (void 0 !== t3) {
-            var n4 = e3.hours;
-            t3 ? n4 < 12 && (e3.hours += 12) : 12 === n4 && (e3.hours = 0), delete e3.afternoon;
-          }
-        }(t2), t2;
-      };
-    }
-    return function(e2, t2, n2) {
-      n2.p.customParseFormat = true, e2 && e2.parseTwoDigitYear && (s = e2.parseTwoDigitYear);
-      var r3 = t2.prototype, i3 = r3.parse;
-      r3.parse = function(e3) {
-        var t3 = e3.date, r4 = e3.utc, s2 = e3.args;
-        this.$u = r4;
-        var a2 = s2[1];
-        if ("string" == typeof a2) {
-          var f2 = true === s2[2], h2 = true === s2[3], u3 = f2 || h2, d3 = s2[2];
-          h2 && (d3 = s2[2]), o = this.$locale(), !f2 && d3 && (o = n2.Ls[d3]), this.$d = function(e4, t4, n3) {
-            try {
-              if (["x", "X"].indexOf(t4) > -1)
-                return new Date(("X" === t4 ? 1e3 : 1) * e4);
-              var r5 = c2(t4)(e4), i4 = r5.year, o2 = r5.month, s3 = r5.day, a3 = r5.hours, f3 = r5.minutes, h3 = r5.seconds, u4 = r5.milliseconds, d4 = r5.zone, l3 = /* @__PURE__ */ new Date(), m3 = s3 || (i4 || o2 ? 1 : l3.getDate()), M3 = i4 || l3.getFullYear(), Y2 = 0;
-              i4 && !o2 || (Y2 = o2 > 0 ? o2 - 1 : l3.getMonth());
-              var p2 = a3 || 0, v2 = f3 || 0, D = h3 || 0, g = u4 || 0;
-              return d4 ? new Date(Date.UTC(M3, Y2, m3, p2, v2, D, g + 60 * d4.offset * 1e3)) : n3 ? new Date(Date.UTC(M3, Y2, m3, p2, v2, D, g)) : new Date(M3, Y2, m3, p2, v2, D, g);
-            } catch (e5) {
-              return /* @__PURE__ */ new Date("");
-            }
-          }(t3, a2, r4), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a2) && (this.$d = /* @__PURE__ */ new Date("")), o = {};
-        } else if (a2 instanceof Array)
-          for (var l2 = a2.length, m2 = 1; m2 <= l2; m2 += 1) {
-            s2[1] = a2[m2 - 1];
-            var M2 = n2.apply(this, s2);
-            if (M2.isValid()) {
-              this.$d = M2.$d, this.$L = M2.$L, this.init();
-              break;
-            }
-            m2 === l2 && (this.$d = /* @__PURE__ */ new Date(""));
-          }
-        else
-          i3.call(this, e3);
-      };
-    };
-  });
-})(customParseFormat$1);
-var customParseFormatExports = customParseFormat$1.exports;
-const customParseFormat = /* @__PURE__ */ getDefaultExportFromCjs(customParseFormatExports);
-const timeUnits = ["hours", "minutes", "seconds"];
-const DEFAULT_FORMATS_TIME = "HH:mm:ss";
-const DEFAULT_FORMATS_DATE = "YYYY-MM-DD";
-const DEFAULT_FORMATS_DATEPICKER = {
-  date: DEFAULT_FORMATS_DATE,
-  dates: DEFAULT_FORMATS_DATE,
-  week: "gggg[w]ww",
-  year: "YYYY",
-  years: "YYYY",
-  month: "YYYY-MM",
-  datetime: `${DEFAULT_FORMATS_DATE} ${DEFAULT_FORMATS_TIME}`,
-  monthrange: "YYYY-MM",
-  daterange: DEFAULT_FORMATS_DATE,
-  datetimerange: `${DEFAULT_FORMATS_DATE} ${DEFAULT_FORMATS_TIME}`
-};
 const buildTimeList = (value, bound) => {
   return [
     value > 0 ? value - 1 : void 0,
@@ -9758,16 +8012,16 @@ const valueEquals = function(a, b2) {
   }
   return false;
 };
-const parseDate = function(date5, format2, lang) {
-  const day = isEmpty(format2) || format2 === "x" ? dayjs(date5).locale(lang) : dayjs(date5, format2).locale(lang);
+const parseDate = function(date4, format2, lang) {
+  const day = isEmpty(format2) || format2 === "x" ? dayjs(date4).locale(lang) : dayjs(date4, format2).locale(lang);
   return day.isValid() ? day : void 0;
 };
-const formatter = function(date5, format2, lang) {
+const formatter = function(date4, format2, lang) {
   if (isEmpty(format2))
-    return date5;
+    return date4;
   if (format2 === "x")
-    return +date5;
-  return dayjs(date5).locale(lang).format(format2);
+    return +date4;
+  return dayjs(date4).locale(lang).format(format2);
 };
 const makeList = (total, method4) => {
   var _a2;
@@ -9777,6 +8031,568 @@ const makeList = (total, method4) => {
     arr.push((_a2 = disabledArr == null ? void 0 : disabledArr.includes(i2)) != null ? _a2 : false);
   }
   return arr;
+};
+const dayOrDaysToDate = (dayOrDays) => {
+  return isArray$1(dayOrDays) ? dayOrDays.map((d2) => d2.toDate()) : dayOrDays.toDate();
+};
+var localeData$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(n, e) {
+    module2.exports = e();
+  }(commonjsGlobal, function() {
+    return function(n, e, t) {
+      var r2 = e.prototype, o = function(n2) {
+        return n2 && (n2.indexOf ? n2 : n2.s);
+      }, u2 = function(n2, e2, t2, r3, u3) {
+        var i3 = n2.name ? n2 : n2.$locale(), a2 = o(i3[e2]), s2 = o(i3[t2]), f = a2 || s2.map(function(n3) {
+          return n3.slice(0, r3);
+        });
+        if (!u3) return f;
+        var d2 = i3.weekStart;
+        return f.map(function(n3, e3) {
+          return f[(e3 + (d2 || 0)) % 7];
+        });
+      }, i2 = function() {
+        return t.Ls[t.locale()];
+      }, a = function(n2, e2) {
+        return n2.formats[e2] || function(n3) {
+          return n3.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(n4, e3, t2) {
+            return e3 || t2.slice(1);
+          });
+        }(n2.formats[e2.toUpperCase()]);
+      }, s = function() {
+        var n2 = this;
+        return { months: function(e2) {
+          return e2 ? e2.format("MMMM") : u2(n2, "months");
+        }, monthsShort: function(e2) {
+          return e2 ? e2.format("MMM") : u2(n2, "monthsShort", "months", 3);
+        }, firstDayOfWeek: function() {
+          return n2.$locale().weekStart || 0;
+        }, weekdays: function(e2) {
+          return e2 ? e2.format("dddd") : u2(n2, "weekdays");
+        }, weekdaysMin: function(e2) {
+          return e2 ? e2.format("dd") : u2(n2, "weekdaysMin", "weekdays", 2);
+        }, weekdaysShort: function(e2) {
+          return e2 ? e2.format("ddd") : u2(n2, "weekdaysShort", "weekdays", 3);
+        }, longDateFormat: function(e2) {
+          return a(n2.$locale(), e2);
+        }, meridiem: this.$locale().meridiem, ordinal: this.$locale().ordinal };
+      };
+      r2.localeData = function() {
+        return s.bind(this)();
+      }, t.localeData = function() {
+        var n2 = i2();
+        return { firstDayOfWeek: function() {
+          return n2.weekStart || 0;
+        }, weekdays: function() {
+          return t.weekdays();
+        }, weekdaysShort: function() {
+          return t.weekdaysShort();
+        }, weekdaysMin: function() {
+          return t.weekdaysMin();
+        }, months: function() {
+          return t.months();
+        }, monthsShort: function() {
+          return t.monthsShort();
+        }, longDateFormat: function(e2) {
+          return a(n2, e2);
+        }, meridiem: n2.meridiem, ordinal: n2.ordinal };
+      }, t.months = function() {
+        return u2(i2(), "months");
+      }, t.monthsShort = function() {
+        return u2(i2(), "monthsShort", "months", 3);
+      }, t.weekdays = function(n2) {
+        return u2(i2(), "weekdays", null, null, n2);
+      }, t.weekdaysShort = function(n2) {
+        return u2(i2(), "weekdaysShort", "weekdays", 3, n2);
+      }, t.weekdaysMin = function(n2) {
+        return u2(i2(), "weekdaysMin", "weekdays", 2, n2);
+      };
+    };
+  });
+})(localeData$1);
+var localeDataExports = localeData$1.exports;
+const localeData = /* @__PURE__ */ getDefaultExportFromCjs(localeDataExports);
+const datePickTypes = [
+  "year",
+  "years",
+  "month",
+  "months",
+  "date",
+  "dates",
+  "week",
+  "datetime",
+  "datetimerange",
+  "daterange",
+  "monthrange",
+  "yearrange"
+];
+const escapeStringRegexp = (string3 = "") => string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
+const castArray = (arr) => {
+  if (!arr && arr !== 0)
+    return [];
+  return isArray$1(arr) ? arr : [arr];
+};
+const tagProps = buildProps({
+  type: {
+    type: String,
+    values: ["primary", "success", "info", "warning", "danger"],
+    default: "primary"
+  },
+  closable: Boolean,
+  disableTransitions: Boolean,
+  hit: Boolean,
+  color: String,
+  size: {
+    type: String,
+    values: componentSizes
+  },
+  effect: {
+    type: String,
+    values: ["dark", "light", "plain"],
+    default: "light"
+  },
+  round: Boolean
+});
+const tagEmits = {
+  close: (evt) => evt instanceof MouseEvent,
+  click: (evt) => evt instanceof MouseEvent
+};
+const __default__$7 = defineComponent({
+  name: "ElTag"
+});
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
+  ...__default__$7,
+  props: tagProps,
+  emits: tagEmits,
+  setup(__props, { emit }) {
+    const props = __props;
+    const tagSize = useFormSize();
+    const ns = useNamespace("tag");
+    const containerKls = computed(() => {
+      const { type: type4, hit, effect, closable, round } = props;
+      return [
+        ns.b(),
+        ns.is("closable", closable),
+        ns.m(type4 || "primary"),
+        ns.m(tagSize.value),
+        ns.m(effect),
+        ns.is("hit", hit),
+        ns.is("round", round)
+      ];
+    });
+    const handleClose = (event) => {
+      emit("close", event);
+    };
+    const handleClick = (event) => {
+      emit("click", event);
+    };
+    const handleVNodeMounted = (vnode) => {
+      var _a2, _b, _c;
+      if ((_c = (_b = (_a2 = vnode == null ? void 0 : vnode.component) == null ? void 0 : _a2.subTree) == null ? void 0 : _b.component) == null ? void 0 : _c.bum) {
+        vnode.component.subTree.component.bum = null;
+      }
+    };
+    return (_ctx, _cache) => {
+      return _ctx.disableTransitions ? (openBlock(), createElementBlock("span", {
+        key: 0,
+        class: normalizeClass(unref(containerKls)),
+        style: normalizeStyle({ backgroundColor: _ctx.color }),
+        onClick: handleClick
+      }, [
+        createBaseVNode("span", {
+          class: normalizeClass(unref(ns).e("content"))
+        }, [
+          renderSlot(_ctx.$slots, "default")
+        ], 2),
+        _ctx.closable ? (openBlock(), createBlock(unref(ElIcon), {
+          key: 0,
+          class: normalizeClass(unref(ns).e("close")),
+          onClick: withModifiers(handleClose, ["stop"])
+        }, {
+          default: withCtx(() => [
+            createVNode(unref(close_default))
+          ]),
+          _: 1
+        }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
+      ], 6)) : (openBlock(), createBlock(Transition, {
+        key: 1,
+        name: `${unref(ns).namespace.value}-zoom-in-center`,
+        appear: "",
+        onVnodeMounted: handleVNodeMounted
+      }, {
+        default: withCtx(() => [
+          createBaseVNode("span", {
+            class: normalizeClass(unref(containerKls)),
+            style: normalizeStyle({ backgroundColor: _ctx.color }),
+            onClick: handleClick
+          }, [
+            createBaseVNode("span", {
+              class: normalizeClass(unref(ns).e("content"))
+            }, [
+              renderSlot(_ctx.$slots, "default")
+            ], 2),
+            _ctx.closable ? (openBlock(), createBlock(unref(ElIcon), {
+              key: 0,
+              class: normalizeClass(unref(ns).e("close")),
+              onClick: withModifiers(handleClose, ["stop"])
+            }, {
+              default: withCtx(() => [
+                createVNode(unref(close_default))
+              ]),
+              _: 1
+            }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
+          ], 6)
+        ]),
+        _: 3
+      }, 8, ["name"]));
+    };
+  }
+});
+var Tag = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__file", "tag.vue"]]);
+const ElTag = withInstall(Tag);
+const nodeList = /* @__PURE__ */ new Map();
+if (isClient) {
+  let startClick;
+  document.addEventListener("mousedown", (e) => startClick = e);
+  document.addEventListener("mouseup", (e) => {
+    if (startClick) {
+      for (const handlers of nodeList.values()) {
+        for (const { documentHandler } of handlers) {
+          documentHandler(e, startClick);
+        }
+      }
+      startClick = void 0;
+    }
+  });
+}
+function createDocumentHandler(el, binding) {
+  let excludes = [];
+  if (isArray$1(binding.arg)) {
+    excludes = binding.arg;
+  } else if (isElement(binding.arg)) {
+    excludes.push(binding.arg);
+  }
+  return function(mouseup, mousedown) {
+    const popperRef = binding.instance.popperRef;
+    const mouseUpTarget = mouseup.target;
+    const mouseDownTarget = mousedown == null ? void 0 : mousedown.target;
+    const isBound = !binding || !binding.instance;
+    const isTargetExists = !mouseUpTarget || !mouseDownTarget;
+    const isContainedByEl = el.contains(mouseUpTarget) || el.contains(mouseDownTarget);
+    const isSelf = el === mouseUpTarget;
+    const isTargetExcluded = excludes.length && excludes.some((item) => item == null ? void 0 : item.contains(mouseUpTarget)) || excludes.length && excludes.includes(mouseDownTarget);
+    const isContainedByPopper = popperRef && (popperRef.contains(mouseUpTarget) || popperRef.contains(mouseDownTarget));
+    if (isBound || isTargetExists || isContainedByEl || isSelf || isTargetExcluded || isContainedByPopper) {
+      return;
+    }
+    binding.value(mouseup, mousedown);
+  };
+}
+const ClickOutside = {
+  beforeMount(el, binding) {
+    if (!nodeList.has(el)) {
+      nodeList.set(el, []);
+    }
+    nodeList.get(el).push({
+      documentHandler: createDocumentHandler(el, binding),
+      bindingFn: binding.value
+    });
+  },
+  updated(el, binding) {
+    if (!nodeList.has(el)) {
+      nodeList.set(el, []);
+    }
+    const handlers = nodeList.get(el);
+    const oldHandlerIndex = handlers.findIndex((item) => item.bindingFn === binding.oldValue);
+    const newHandler = {
+      documentHandler: createDocumentHandler(el, binding),
+      bindingFn: binding.value
+    };
+    if (oldHandlerIndex >= 0) {
+      handlers.splice(oldHandlerIndex, 1, newHandler);
+    } else {
+      handlers.push(newHandler);
+    }
+  },
+  unmounted(el) {
+    nodeList.delete(el);
+  }
+};
+var customParseFormat$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t) {
+    module2.exports = t();
+  }(commonjsGlobal, function() {
+    var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d/, r2 = /\d\d/, i2 = /\d\d?/, o = /\d*[^-_:/,()\s\d]+/, s = {}, a = function(e2) {
+      return (e2 = +e2) + (e2 > 68 ? 1900 : 2e3);
+    };
+    var f = function(e2) {
+      return function(t2) {
+        this[e2] = +t2;
+      };
+    }, h = [/[+-]\d\d:?(\d\d)?|Z/, function(e2) {
+      (this.zone || (this.zone = {})).offset = function(e3) {
+        if (!e3) return 0;
+        if ("Z" === e3) return 0;
+        var t2 = e3.match(/([+-]|\d\d)/g), n2 = 60 * t2[1] + (+t2[2] || 0);
+        return 0 === n2 ? 0 : "+" === t2[0] ? -n2 : n2;
+      }(e2);
+    }], u2 = function(e2) {
+      var t2 = s[e2];
+      return t2 && (t2.indexOf ? t2 : t2.s.concat(t2.f));
+    }, d2 = function(e2, t2) {
+      var n2, r3 = s.meridiem;
+      if (r3) {
+        for (var i3 = 1; i3 <= 24; i3 += 1) if (e2.indexOf(r3(i3, 0, t2)) > -1) {
+          n2 = i3 > 12;
+          break;
+        }
+      } else n2 = e2 === (t2 ? "pm" : "PM");
+      return n2;
+    }, c2 = { A: [o, function(e2) {
+      this.afternoon = d2(e2, false);
+    }], a: [o, function(e2) {
+      this.afternoon = d2(e2, true);
+    }], Q: [n, function(e2) {
+      this.month = 3 * (e2 - 1) + 1;
+    }], S: [n, function(e2) {
+      this.milliseconds = 100 * +e2;
+    }], SS: [r2, function(e2) {
+      this.milliseconds = 10 * +e2;
+    }], SSS: [/\d{3}/, function(e2) {
+      this.milliseconds = +e2;
+    }], s: [i2, f("seconds")], ss: [i2, f("seconds")], m: [i2, f("minutes")], mm: [i2, f("minutes")], H: [i2, f("hours")], h: [i2, f("hours")], HH: [i2, f("hours")], hh: [i2, f("hours")], D: [i2, f("day")], DD: [r2, f("day")], Do: [o, function(e2) {
+      var t2 = s.ordinal, n2 = e2.match(/\d+/);
+      if (this.day = n2[0], t2) for (var r3 = 1; r3 <= 31; r3 += 1) t2(r3).replace(/\[|\]/g, "") === e2 && (this.day = r3);
+    }], w: [i2, f("week")], ww: [r2, f("week")], M: [i2, f("month")], MM: [r2, f("month")], MMM: [o, function(e2) {
+      var t2 = u2("months"), n2 = (u2("monthsShort") || t2.map(function(e3) {
+        return e3.slice(0, 3);
+      })).indexOf(e2) + 1;
+      if (n2 < 1) throw new Error();
+      this.month = n2 % 12 || n2;
+    }], MMMM: [o, function(e2) {
+      var t2 = u2("months").indexOf(e2) + 1;
+      if (t2 < 1) throw new Error();
+      this.month = t2 % 12 || t2;
+    }], Y: [/[+-]?\d+/, f("year")], YY: [r2, function(e2) {
+      this.year = a(e2);
+    }], YYYY: [/\d{4}/, f("year")], Z: h, ZZ: h };
+    function l2(n2) {
+      var r3, i3;
+      r3 = n2, i3 = s && s.formats;
+      for (var o2 = (n2 = r3.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, function(t2, n3, r4) {
+        var o3 = r4 && r4.toUpperCase();
+        return n3 || i3[r4] || e[r4] || i3[o3].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(e2, t3, n4) {
+          return t3 || n4.slice(1);
+        });
+      })).match(t), a2 = o2.length, f2 = 0; f2 < a2; f2 += 1) {
+        var h2 = o2[f2], u3 = c2[h2], d3 = u3 && u3[0], l3 = u3 && u3[1];
+        o2[f2] = l3 ? { regex: d3, parser: l3 } : h2.replace(/^\[|\]$/g, "");
+      }
+      return function(e2) {
+        for (var t2 = {}, n3 = 0, r4 = 0; n3 < a2; n3 += 1) {
+          var i4 = o2[n3];
+          if ("string" == typeof i4) r4 += i4.length;
+          else {
+            var s2 = i4.regex, f3 = i4.parser, h3 = e2.slice(r4), u4 = s2.exec(h3)[0];
+            f3.call(t2, u4), e2 = e2.replace(u4, "");
+          }
+        }
+        return function(e3) {
+          var t3 = e3.afternoon;
+          if (void 0 !== t3) {
+            var n4 = e3.hours;
+            t3 ? n4 < 12 && (e3.hours += 12) : 12 === n4 && (e3.hours = 0), delete e3.afternoon;
+          }
+        }(t2), t2;
+      };
+    }
+    return function(e2, t2, n2) {
+      n2.p.customParseFormat = true, e2 && e2.parseTwoDigitYear && (a = e2.parseTwoDigitYear);
+      var r3 = t2.prototype, i3 = r3.parse;
+      r3.parse = function(e3) {
+        var t3 = e3.date, r4 = e3.utc, o2 = e3.args;
+        this.$u = r4;
+        var a2 = o2[1];
+        if ("string" == typeof a2) {
+          var f2 = true === o2[2], h2 = true === o2[3], u3 = f2 || h2, d3 = o2[2];
+          h2 && (d3 = o2[2]), s = this.$locale(), !f2 && d3 && (s = n2.Ls[d3]), this.$d = function(e4, t4, n3, r5) {
+            try {
+              if (["x", "X"].indexOf(t4) > -1) return new Date(("X" === t4 ? 1e3 : 1) * e4);
+              var i4 = l2(t4)(e4), o3 = i4.year, s2 = i4.month, a3 = i4.day, f3 = i4.hours, h3 = i4.minutes, u4 = i4.seconds, d4 = i4.milliseconds, c4 = i4.zone, m3 = i4.week, M3 = /* @__PURE__ */ new Date(), Y2 = a3 || (o3 || s2 ? 1 : M3.getDate()), p2 = o3 || M3.getFullYear(), v2 = 0;
+              o3 && !s2 || (v2 = s2 > 0 ? s2 - 1 : M3.getMonth());
+              var D, w2 = f3 || 0, g = h3 || 0, y = u4 || 0, L2 = d4 || 0;
+              return c4 ? new Date(Date.UTC(p2, v2, Y2, w2, g, y, L2 + 60 * c4.offset * 1e3)) : n3 ? new Date(Date.UTC(p2, v2, Y2, w2, g, y, L2)) : (D = new Date(p2, v2, Y2, w2, g, y, L2), m3 && (D = r5(D).week(m3).toDate()), D);
+            } catch (e5) {
+              return /* @__PURE__ */ new Date("");
+            }
+          }(t3, a2, r4, n2), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a2) && (this.$d = /* @__PURE__ */ new Date("")), s = {};
+        } else if (a2 instanceof Array) for (var c3 = a2.length, m2 = 1; m2 <= c3; m2 += 1) {
+          o2[1] = a2[m2 - 1];
+          var M2 = n2.apply(this, o2);
+          if (M2.isValid()) {
+            this.$d = M2.$d, this.$L = M2.$L, this.init();
+            break;
+          }
+          m2 === c3 && (this.$d = /* @__PURE__ */ new Date(""));
+        }
+        else i3.call(this, e3);
+      };
+    };
+  });
+})(customParseFormat$1);
+var customParseFormatExports = customParseFormat$1.exports;
+const customParseFormat = /* @__PURE__ */ getDefaultExportFromCjs(customParseFormatExports);
+var advancedFormat$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t) {
+    module2.exports = t();
+  }(commonjsGlobal, function() {
+    return function(e, t) {
+      var r2 = t.prototype, n = r2.format;
+      r2.format = function(e2) {
+        var t2 = this, r3 = this.$locale();
+        if (!this.isValid()) return n.bind(this)(e2);
+        var s = this.$utils(), a = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
+          switch (e3) {
+            case "Q":
+              return Math.ceil((t2.$M + 1) / 3);
+            case "Do":
+              return r3.ordinal(t2.$D);
+            case "gggg":
+              return t2.weekYear();
+            case "GGGG":
+              return t2.isoWeekYear();
+            case "wo":
+              return r3.ordinal(t2.week(), "W");
+            case "w":
+            case "ww":
+              return s.s(t2.week(), "w" === e3 ? 1 : 2, "0");
+            case "W":
+            case "WW":
+              return s.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
+            case "k":
+            case "kk":
+              return s.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
+            case "X":
+              return Math.floor(t2.$d.getTime() / 1e3);
+            case "x":
+              return t2.$d.getTime();
+            case "z":
+              return "[" + t2.offsetName() + "]";
+            case "zzz":
+              return "[" + t2.offsetName("long") + "]";
+            default:
+              return e3;
+          }
+        });
+        return n.bind(this)(a);
+      };
+    };
+  });
+})(advancedFormat$1);
+var advancedFormatExports = advancedFormat$1.exports;
+const advancedFormat = /* @__PURE__ */ getDefaultExportFromCjs(advancedFormatExports);
+var weekOfYear$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t) {
+    module2.exports = t();
+  }(commonjsGlobal, function() {
+    var e = "week", t = "year";
+    return function(i2, n, r2) {
+      var f = n.prototype;
+      f.week = function(i3) {
+        if (void 0 === i3 && (i3 = null), null !== i3) return this.add(7 * (i3 - this.week()), "day");
+        var n2 = this.$locale().yearStart || 1;
+        if (11 === this.month() && this.date() > 25) {
+          var f2 = r2(this).startOf(t).add(1, t).date(n2), s = r2(this).endOf(e);
+          if (f2.isBefore(s)) return 1;
+        }
+        var a = r2(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o = this.diff(a, e, true);
+        return o < 0 ? r2(this).startOf("week").week() : Math.ceil(o);
+      }, f.weeks = function(e2) {
+        return void 0 === e2 && (e2 = null), this.week(e2);
+      };
+    };
+  });
+})(weekOfYear$1);
+var weekOfYearExports = weekOfYear$1.exports;
+const weekOfYear = /* @__PURE__ */ getDefaultExportFromCjs(weekOfYearExports);
+var weekYear$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t) {
+    module2.exports = t();
+  }(commonjsGlobal, function() {
+    return function(e, t) {
+      t.prototype.weekYear = function() {
+        var e2 = this.month(), t2 = this.week(), n = this.year();
+        return 1 === t2 && 11 === e2 ? n + 1 : 0 === e2 && t2 >= 52 ? n - 1 : n;
+      };
+    };
+  });
+})(weekYear$1);
+var weekYearExports = weekYear$1.exports;
+const weekYear = /* @__PURE__ */ getDefaultExportFromCjs(weekYearExports);
+var dayOfYear$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t) {
+    module2.exports = t();
+  }(commonjsGlobal, function() {
+    return function(e, t, n) {
+      t.prototype.dayOfYear = function(e2) {
+        var t2 = Math.round((n(this).startOf("day") - n(this).startOf("year")) / 864e5) + 1;
+        return null == e2 ? t2 : this.add(e2 - t2, "day");
+      };
+    };
+  });
+})(dayOfYear$1);
+var dayOfYearExports = dayOfYear$1.exports;
+const dayOfYear = /* @__PURE__ */ getDefaultExportFromCjs(dayOfYearExports);
+var isSameOrAfter$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, t) {
+    module2.exports = t();
+  }(commonjsGlobal, function() {
+    return function(e, t) {
+      t.prototype.isSameOrAfter = function(e2, t2) {
+        return this.isSame(e2, t2) || this.isAfter(e2, t2);
+      };
+    };
+  });
+})(isSameOrAfter$1);
+var isSameOrAfterExports = isSameOrAfter$1.exports;
+const isSameOrAfter = /* @__PURE__ */ getDefaultExportFromCjs(isSameOrAfterExports);
+var isSameOrBefore$1 = { exports: {} };
+(function(module2, exports2) {
+  !function(e, i2) {
+    module2.exports = i2();
+  }(commonjsGlobal, function() {
+    return function(e, i2) {
+      i2.prototype.isSameOrBefore = function(e2, i3) {
+        return this.isSame(e2, i3) || this.isBefore(e2, i3);
+      };
+    };
+  });
+})(isSameOrBefore$1);
+var isSameOrBeforeExports = isSameOrBefore$1.exports;
+const isSameOrBefore = /* @__PURE__ */ getDefaultExportFromCjs(isSameOrBeforeExports);
+const timeUnits = ["hours", "minutes", "seconds"];
+const DEFAULT_FORMATS_TIME = "HH:mm:ss";
+const DEFAULT_FORMATS_DATE = "YYYY-MM-DD";
+const DEFAULT_FORMATS_DATEPICKER = {
+  date: DEFAULT_FORMATS_DATE,
+  dates: DEFAULT_FORMATS_DATE,
+  week: "gggg[w]ww",
+  year: "YYYY",
+  years: "YYYY",
+  month: "YYYY-MM",
+  months: "YYYY-MM",
+  datetime: `${DEFAULT_FORMATS_DATE} ${DEFAULT_FORMATS_TIME}`,
+  monthrange: "YYYY-MM",
+  yearrange: "YYYY",
+  daterange: DEFAULT_FORMATS_DATE,
+  datetimerange: `${DEFAULT_FORMATS_DATE} ${DEFAULT_FORMATS_TIME}`
 };
 const disabledTimeListsProps = buildProps({
   disabledHours: {
@@ -9805,8 +8621,7 @@ const timePickerDefaultProps = buildProps({
     type: definePropType([Array, String])
   },
   name: {
-    type: definePropType([Array, String]),
-    default: ""
+    type: definePropType([Array, String])
   },
   popperClass: {
     type: String,
@@ -9876,10 +8691,6 @@ const timePickerDefaultProps = buildProps({
     default: () => []
   },
   arrowControl: Boolean,
-  label: {
-    type: String,
-    default: void 0
-  },
   tabindex: {
     type: definePropType([String, Number]),
     default: 0
@@ -9888,21 +8699,152 @@ const timePickerDefaultProps = buildProps({
     type: Boolean,
     default: true
   },
-  unlinkPanels: Boolean
+  unlinkPanels: Boolean,
+  placement: {
+    type: definePropType(String),
+    values: Ee,
+    default: "bottom"
+  },
+  fallbackPlacements: {
+    type: definePropType(Array),
+    default: ["bottom", "top", "right", "left"]
+  },
+  ...useEmptyValuesProps,
+  ...useAriaProps(["ariaLabel"]),
+  showNow: {
+    type: Boolean,
+    default: true
+  }
 });
-const _hoisted_1$c = ["id", "name", "placeholder", "value", "disabled", "readonly"];
-const _hoisted_2$9 = ["id", "name", "placeholder", "value", "disabled", "readonly"];
-const __default__$3 = defineComponent({
+const timePickerRngeTriggerProps = buildProps({
+  id: {
+    type: definePropType(Array)
+  },
+  name: {
+    type: definePropType(Array)
+  },
+  modelValue: {
+    type: definePropType([Array, String])
+  },
+  startPlaceholder: String,
+  endPlaceholder: String
+});
+const __default__$6 = defineComponent({
+  name: "PickerRangeTrigger",
+  inheritAttrs: false
+});
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
+  ...__default__$6,
+  props: timePickerRngeTriggerProps,
+  emits: [
+    "mouseenter",
+    "mouseleave",
+    "click",
+    "touchstart",
+    "focus",
+    "blur",
+    "startInput",
+    "endInput",
+    "startChange",
+    "endChange"
+  ],
+  setup(__props, { expose, emit }) {
+    const attrs = useAttrs();
+    const nsDate = useNamespace("date");
+    const nsRange = useNamespace("range");
+    const inputRef = ref();
+    const endInputRef = ref();
+    const { wrapperRef, isFocused } = useFocusController(inputRef);
+    const handleClick = (evt) => {
+      emit("click", evt);
+    };
+    const handleMouseEnter = (evt) => {
+      emit("mouseenter", evt);
+    };
+    const handleMouseLeave = (evt) => {
+      emit("mouseleave", evt);
+    };
+    const handleTouchStart = (evt) => {
+      emit("mouseenter", evt);
+    };
+    const handleStartInput = (evt) => {
+      emit("startInput", evt);
+    };
+    const handleEndInput = (evt) => {
+      emit("endInput", evt);
+    };
+    const handleStartChange = (evt) => {
+      emit("startChange", evt);
+    };
+    const handleEndChange = (evt) => {
+      emit("endChange", evt);
+    };
+    const focus = () => {
+      var _a2;
+      (_a2 = inputRef.value) == null ? void 0 : _a2.focus();
+    };
+    const blur = () => {
+      var _a2, _b;
+      (_a2 = inputRef.value) == null ? void 0 : _a2.blur();
+      (_b = endInputRef.value) == null ? void 0 : _b.blur();
+    };
+    expose({
+      focus,
+      blur
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        ref_key: "wrapperRef",
+        ref: wrapperRef,
+        class: normalizeClass([unref(nsDate).is("active", unref(isFocused)), _ctx.$attrs.class]),
+        style: normalizeStyle(_ctx.$attrs.style),
+        onClick: handleClick,
+        onMouseenter: handleMouseEnter,
+        onMouseleave: handleMouseLeave,
+        onTouchstartPassive: handleTouchStart
+      }, [
+        renderSlot(_ctx.$slots, "prefix"),
+        createBaseVNode("input", mergeProps(unref(attrs), {
+          id: _ctx.id && _ctx.id[0],
+          ref_key: "inputRef",
+          ref: inputRef,
+          name: _ctx.name && _ctx.name[0],
+          placeholder: _ctx.startPlaceholder,
+          value: _ctx.modelValue && _ctx.modelValue[0],
+          class: unref(nsRange).b("input"),
+          onInput: handleStartInput,
+          onChange: handleStartChange
+        }), null, 16, ["id", "name", "placeholder", "value"]),
+        renderSlot(_ctx.$slots, "range-separator"),
+        createBaseVNode("input", mergeProps(unref(attrs), {
+          id: _ctx.id && _ctx.id[1],
+          ref_key: "endInputRef",
+          ref: endInputRef,
+          name: _ctx.name && _ctx.name[1],
+          placeholder: _ctx.endPlaceholder,
+          value: _ctx.modelValue && _ctx.modelValue[1],
+          class: unref(nsRange).b("input"),
+          onInput: handleEndInput,
+          onChange: handleEndChange
+        }), null, 16, ["id", "name", "placeholder", "value"]),
+        renderSlot(_ctx.$slots, "suffix")
+      ], 38);
+    };
+  }
+});
+var PickerRangeTrigger = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "picker-range-trigger.vue"]]);
+const __default__$5 = defineComponent({
   name: "Picker"
 });
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
-  ...__default__$3,
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
+  ...__default__$5,
   props: timePickerDefaultProps,
   emits: [
     "update:modelValue",
     "change",
     "focus",
     "blur",
+    "clear",
     "calendar-change",
     "panel-change",
     "visible-change",
@@ -9917,13 +8859,31 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     const nsRange = useNamespace("range");
     const { form, formItem } = useFormItem();
     const elPopperOptions = inject("ElPopperOptions", {});
+    const { valueOnClear } = useEmptyValues(props, null);
     const refPopper = ref();
     const inputRef = ref();
     const pickerVisible = ref(false);
     const pickerActualVisible = ref(false);
     const valueOnOpen = ref(null);
     let hasJustTabExitedInput = false;
-    let ignoreFocusEvent = false;
+    const { isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
+      beforeFocus() {
+        return props.readonly || pickerDisabled.value;
+      },
+      afterFocus() {
+        pickerVisible.value = true;
+      },
+      beforeBlur(event) {
+        var _a2;
+        return !hasJustTabExitedInput && ((_a2 = refPopper.value) == null ? void 0 : _a2.isFocusInsideContent(event));
+      },
+      afterBlur() {
+        handleChange();
+        pickerVisible.value = false;
+        hasJustTabExitedInput = false;
+        props.validateEvent && (formItem == null ? void 0 : formItem.validate("blur").catch((err) => debugWarn()));
+      }
+    });
     const rangeInputKls = computed(() => [
       nsDate.b("editor"),
       nsDate.bm("editor", props.type),
@@ -9975,8 +8935,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
     const refInput = computed(() => {
       if (inputRef.value) {
-        const _r = isRangeInput.value ? inputRef.value : inputRef.value.$el;
-        return Array.from(_r.querySelectorAll("input"));
+        return Array.from(inputRef.value.$el.querySelectorAll("input"));
       }
       return [];
     });
@@ -9992,22 +8951,13 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         _inputs[1].focus();
       }
     };
-    const focusOnInputBox = () => {
-      focus(true, true);
-      nextTick(() => {
-        ignoreFocusEvent = false;
-      });
-    };
-    const onPick = (date5 = "", visible = false) => {
-      if (!visible) {
-        ignoreFocusEvent = true;
-      }
+    const onPick = (date4 = "", visible = false) => {
       pickerVisible.value = visible;
       let result;
-      if (isArray$1(date5)) {
-        result = date5.map((_2) => _2.toDate());
+      if (isArray$1(date4)) {
+        result = date4.map((_2) => _2.toDate());
       } else {
-        result = date5 ? date5.toDate() : date5;
+        result = date4 ? date4.toDate() : date4;
       }
       userInput.value = null;
       emitInput(result);
@@ -10018,15 +8968,9 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     const onShow = () => {
       emit("visible-change", true);
     };
-    const onKeydownPopperContent = (event) => {
-      if ((event == null ? void 0 : event.key) === EVENT_CODE.esc) {
-        focus(true, true);
-      }
-    };
     const onHide = () => {
       pickerActualVisible.value = false;
       pickerVisible.value = false;
-      ignoreFocusEvent = false;
       emit("visible-change", false);
     };
     const handleOpen = () => {
@@ -10035,49 +8979,10 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     const handleClose = () => {
       pickerVisible.value = false;
     };
-    const focus = (focusStartInput = true, isIgnoreFocusEvent = false) => {
-      ignoreFocusEvent = isIgnoreFocusEvent;
-      const [leftInput, rightInput] = unref(refInput);
-      let input = leftInput;
-      if (!focusStartInput && isRangeInput.value) {
-        input = rightInput;
-      }
-      if (input) {
-        input.focus();
-      }
-    };
-    const handleFocusInput = (e) => {
-      if (props.readonly || pickerDisabled.value || pickerVisible.value || ignoreFocusEvent) {
-        return;
-      }
-      pickerVisible.value = true;
-      emit("focus", e);
-    };
-    let currentHandleBlurDeferCallback = void 0;
-    const handleBlurInput = (e) => {
-      const handleBlurDefer = async () => {
-        setTimeout(() => {
-          var _a2;
-          if (currentHandleBlurDeferCallback === handleBlurDefer) {
-            if (!(((_a2 = refPopper.value) == null ? void 0 : _a2.isFocusInsideContent()) && !hasJustTabExitedInput) && refInput.value.filter((input) => {
-              return input.contains(document.activeElement);
-            }).length === 0) {
-              handleChange();
-              pickerVisible.value = false;
-              emit("blur", e);
-              props.validateEvent && (formItem == null ? void 0 : formItem.validate("blur").catch((err) => debugWarn()));
-            }
-            hasJustTabExitedInput = false;
-          }
-        }, 0);
-      };
-      currentHandleBlurDeferCallback = handleBlurDefer;
-      handleBlurDefer();
-    };
     const pickerDisabled = computed(() => {
       return props.disabled || (form == null ? void 0 : form.disabled);
     });
-    const parsedValue2 = computed(() => {
+    const parsedValue = computed(() => {
       let dayOrDays;
       if (valueIsEmpty.value) {
         if (pickerOptions.value.getDefaultValue) {
@@ -10094,7 +8999,9 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         const availableResult = pickerOptions.value.getRangeAvailableTime(dayOrDays);
         if (!isEqual(availableResult, dayOrDays)) {
           dayOrDays = availableResult;
-          emitInput(isArray$1(dayOrDays) ? dayOrDays.map((_2) => _2.toDate()) : dayOrDays.toDate());
+          if (!valueIsEmpty.value) {
+            emitInput(dayOrDaysToDate(dayOrDays));
+          }
         }
       }
       if (isArray$1(dayOrDays) && dayOrDays.some((day) => !day)) {
@@ -10105,7 +9012,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     const displayValue = computed(() => {
       if (!pickerOptions.value.panelReady)
         return "";
-      const formattedValue = formatDayjsToString(parsedValue2.value);
+      const formattedValue = formatDayjsToString(parsedValue.value);
       if (isArray$1(userInput.value)) {
         return [
           userInput.value[0] || formattedValue && formattedValue[0] || "",
@@ -10119,13 +9026,14 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       if (!pickerVisible.value && valueIsEmpty.value)
         return "";
       if (formattedValue) {
-        return isDatesPicker.value || isYearsPicker.value ? formattedValue.join(", ") : formattedValue;
+        return isDatesPicker.value || isMonthsPicker.value || isYearsPicker.value ? formattedValue.join(", ") : formattedValue;
       }
       return "";
     });
     const isTimeLikePicker = computed(() => props.type.includes("time"));
     const isTimePicker = computed(() => props.type.startsWith("time"));
     const isDatesPicker = computed(() => props.type === "dates");
+    const isMonthsPicker = computed(() => props.type === "months");
     const isYearsPicker = computed(() => props.type === "years");
     const triggerIcon = computed(() => props.prefixIcon || (isTimeLikePicker.value ? clock_default : calendar_default));
     const showClose = ref(false);
@@ -10134,13 +9042,16 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         return;
       if (showClose.value) {
         event.stopPropagation();
-        focusOnInputBox();
-        emitInput(null);
-        emitChange(null, true);
+        if (pickerOptions.value.handleClear) {
+          pickerOptions.value.handleClear();
+        } else {
+          emitInput(valueOnClear.value);
+        }
+        emitChange(valueOnClear.value, true);
         showClose.value = false;
-        pickerVisible.value = false;
-        pickerOptions.value.handleClear && pickerOptions.value.handleClear();
+        onHide();
       }
+      emit("clear");
     };
     const valueIsEmpty = computed(() => {
       const { modelValue } = props;
@@ -10150,7 +9061,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       var _a2;
       if (props.readonly || pickerDisabled.value)
         return;
-      if (((_a2 = event.target) == null ? void 0 : _a2.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
+      if (((_a2 = event.target) == null ? void 0 : _a2.tagName) !== "INPUT" || isFocused.value) {
         pickerVisible.value = true;
       }
     };
@@ -10168,7 +9079,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       var _a2;
       if (props.readonly || pickerDisabled.value)
         return;
-      if (((_a2 = event.touches[0].target) == null ? void 0 : _a2.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
+      if (((_a2 = event.touches[0].target) == null ? void 0 : _a2.tagName) !== "INPUT" || isFocused.value) {
         pickerVisible.value = true;
       }
     };
@@ -10180,19 +9091,15 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       var _a2, _b;
       return (_b = (_a2 = unref(refPopper)) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
     });
-    const actualInputRef = computed(() => {
-      var _a2;
-      if (unref(isRangeInput)) {
-        return unref(inputRef);
-      }
-      return (_a2 = unref(inputRef)) == null ? void 0 : _a2.$el;
-    });
-    onClickOutside(actualInputRef, (e) => {
+    const stophandle = onClickOutside(inputRef, (e) => {
       const unrefedPopperEl = unref(popperEl);
-      const inputEl = unref(actualInputRef);
-      if (unrefedPopperEl && (e.target === unrefedPopperEl || e.composedPath().includes(unrefedPopperEl)) || e.target === inputEl || e.composedPath().includes(inputEl))
+      const inputEl = unrefElement(inputRef);
+      if (unrefedPopperEl && (e.target === unrefedPopperEl || e.composedPath().includes(unrefedPopperEl)) || e.target === inputEl || inputEl && e.composedPath().includes(inputEl))
         return;
       pickerVisible.value = false;
+    });
+    onBeforeUnmount(() => {
+      stophandle == null ? void 0 : stophandle();
     });
     const userInput = ref(null);
     const handleChange = () => {
@@ -10200,14 +9107,14 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         const value = parseUserInputToDayjs(displayValue.value);
         if (value) {
           if (isValidValue(value)) {
-            emitInput(isArray$1(value) ? value.map((_2) => _2.toDate()) : value.toDate());
+            emitInput(dayOrDaysToDate(value));
             userInput.value = null;
           }
         }
       }
       if (userInput.value === "") {
-        emitInput(null);
-        emitChange(null);
+        emitInput(valueOnClear.value);
+        emitChange(valueOnClear.value);
         userInput.value = null;
       }
     };
@@ -10297,7 +9204,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       var _a2;
       const values = userInput.value;
       const value = parseUserInputToDayjs(values && values[0]);
-      const parsedVal = unref(parsedValue2);
+      const parsedVal = unref(parsedValue);
       if (value && value.isValid()) {
         userInput.value = [
           formatDayjsToString(value),
@@ -10305,7 +9212,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         ];
         const newValue = [value, parsedVal && (parsedVal[1] || null)];
         if (isValidValue(newValue)) {
-          emitInput(newValue);
+          emitInput(dayOrDaysToDate(newValue));
           userInput.value = null;
         }
       }
@@ -10314,7 +9221,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       var _a2;
       const values = unref(userInput);
       const value = parseUserInputToDayjs(values && values[1]);
-      const parsedVal = unref(parsedValue2);
+      const parsedVal = unref(parsedValue);
       if (value && value.isValid()) {
         userInput.value = [
           ((_a2 = unref(displayValue)) == null ? void 0 : _a2[0]) || null,
@@ -10322,7 +9229,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         ];
         const newValue = [parsedVal && parsedVal[0], value];
         if (isValidValue(newValue)) {
-          emitInput(newValue);
+          emitInput(dayOrDaysToDate(newValue));
           userInput.value = null;
         }
       }
@@ -10338,13 +9245,20 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     const onPanelChange = (value, mode, view) => {
       emit("panel-change", value, mode, view);
     };
+    const focus = () => {
+      var _a2;
+      (_a2 = inputRef.value) == null ? void 0 : _a2.focus();
+    };
+    const blur = () => {
+      var _a2;
+      (_a2 = inputRef.value) == null ? void 0 : _a2.blur();
+    };
     provide("EP_PICKER_BASE", {
       props
     });
     expose({
       focus,
-      handleFocusInput,
-      handleBlurInput,
+      blur,
       handleOpen,
       handleClose,
       onPick
@@ -10363,8 +9277,9 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         transition: `${unref(nsDate).namespace.value}-zoom-in-top`,
         "popper-class": [`${unref(nsDate).namespace.value}-picker__popper`, _ctx.popperClass],
         "popper-options": unref(elPopperOptions),
-        "fallback-placements": ["bottom", "top", "right", "left"],
+        "fallback-placements": _ctx.fallbackPlacements,
         "gpu-acceleration": false,
+        placement: _ctx.placement,
         "stop-popper-mouse-event": false,
         "hide-after": 0,
         persistent: "",
@@ -10386,28 +9301,28 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
             placeholder: _ctx.placeholder,
             class: normalizeClass([unref(nsDate).b("editor"), unref(nsDate).bm("editor", _ctx.type), _ctx.$attrs.class]),
             style: normalizeStyle(_ctx.$attrs.style),
-            readonly: !_ctx.editable || _ctx.readonly || unref(isDatesPicker) || unref(isYearsPicker) || _ctx.type === "week",
-            label: _ctx.label,
+            readonly: !_ctx.editable || _ctx.readonly || unref(isDatesPicker) || unref(isMonthsPicker) || unref(isYearsPicker) || _ctx.type === "week",
+            "aria-label": _ctx.ariaLabel,
             tabindex: _ctx.tabindex,
             "validate-event": false,
             onInput: onUserInput,
-            onFocus: handleFocusInput,
-            onBlur: handleBlurInput,
+            onFocus: unref(handleFocus),
+            onBlur: unref(handleBlur),
             onKeydown: handleKeydownInput,
             onChange: handleChange,
             onMousedown: onMouseDownInput,
             onMouseenter: onMouseEnter,
             onMouseleave: onMouseLeave,
-            onTouchstart: onTouchStartInput,
-            onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-            }, ["stop"]))
+            onTouchstartPassive: onTouchStartInput,
+            onClick: withModifiers(() => {
+            }, ["stop"])
           }, {
             prefix: withCtx(() => [
               unref(triggerIcon) ? (openBlock(), createBlock(unref(ElIcon), {
                 key: 0,
                 class: normalizeClass(unref(nsInput).e("icon")),
                 onMousedown: withModifiers(onMouseDownInput, ["prevent"]),
-                onTouchstart: onTouchStartInput
+                onTouchstartPassive: onTouchStartInput
               }, {
                 default: withCtx(() => [
                   (openBlock(), createBlock(resolveDynamicComponent(unref(triggerIcon))))
@@ -10419,112 +9334,107 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
               showClose.value && _ctx.clearIcon ? (openBlock(), createBlock(unref(ElIcon), {
                 key: 0,
                 class: normalizeClass(`${unref(nsInput).e("icon")} clear-icon`),
-                onClick: withModifiers(onClearIconClick, ["stop"])
+                onMousedown: withModifiers(unref(NOOP), ["prevent"]),
+                onClick: onClearIconClick
               }, {
                 default: withCtx(() => [
                   (openBlock(), createBlock(resolveDynamicComponent(_ctx.clearIcon)))
                 ]),
                 _: 1
-              }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
+              }, 8, ["class", "onMousedown"])) : createCommentVNode("v-if", true)
             ]),
             _: 1
-          }, 8, ["id", "model-value", "name", "size", "disabled", "placeholder", "class", "style", "readonly", "label", "tabindex", "onKeydown"])) : (openBlock(), createElementBlock("div", {
+          }, 8, ["id", "model-value", "name", "size", "disabled", "placeholder", "class", "style", "readonly", "aria-label", "tabindex", "onFocus", "onBlur", "onClick"])) : (openBlock(), createBlock(PickerRangeTrigger, {
             key: 1,
+            id: _ctx.id,
             ref_key: "inputRef",
             ref: inputRef,
+            "model-value": unref(displayValue),
+            name: _ctx.name,
+            disabled: unref(pickerDisabled),
+            readonly: !_ctx.editable || _ctx.readonly,
+            "start-placeholder": _ctx.startPlaceholder,
+            "end-placeholder": _ctx.endPlaceholder,
             class: normalizeClass(unref(rangeInputKls)),
             style: normalizeStyle(_ctx.$attrs.style),
-            onClick: handleFocusInput,
+            "aria-label": _ctx.ariaLabel,
+            tabindex: _ctx.tabindex,
+            autocomplete: "off",
+            role: "combobox",
+            onClick: onMouseDownInput,
+            onFocus: unref(handleFocus),
+            onBlur: unref(handleBlur),
+            onStartInput: handleStartInput,
+            onStartChange: handleStartChange,
+            onEndInput: handleEndInput,
+            onEndChange: handleEndChange,
+            onMousedown: onMouseDownInput,
             onMouseenter: onMouseEnter,
             onMouseleave: onMouseLeave,
-            onTouchstart: onTouchStartInput,
+            onTouchstartPassive: onTouchStartInput,
             onKeydown: handleKeydownInput
-          }, [
-            unref(triggerIcon) ? (openBlock(), createBlock(unref(ElIcon), {
-              key: 0,
-              class: normalizeClass([unref(nsInput).e("icon"), unref(nsRange).e("icon")]),
-              onMousedown: withModifiers(onMouseDownInput, ["prevent"]),
-              onTouchstart: onTouchStartInput
-            }, {
-              default: withCtx(() => [
-                (openBlock(), createBlock(resolveDynamicComponent(unref(triggerIcon))))
-              ]),
-              _: 1
-            }, 8, ["class", "onMousedown"])) : createCommentVNode("v-if", true),
-            createBaseVNode("input", {
-              id: _ctx.id && _ctx.id[0],
-              autocomplete: "off",
-              name: _ctx.name && _ctx.name[0],
-              placeholder: _ctx.startPlaceholder,
-              value: unref(displayValue) && unref(displayValue)[0],
-              disabled: unref(pickerDisabled),
-              readonly: !_ctx.editable || _ctx.readonly,
-              class: normalizeClass(unref(nsRange).b("input")),
-              onMousedown: onMouseDownInput,
-              onInput: handleStartInput,
-              onChange: handleStartChange,
-              onFocus: handleFocusInput,
-              onBlur: handleBlurInput
-            }, null, 42, _hoisted_1$c),
-            renderSlot(_ctx.$slots, "range-separator", {}, () => [
-              createBaseVNode("span", {
-                class: normalizeClass(unref(nsRange).b("separator"))
-              }, toDisplayString(_ctx.rangeSeparator), 3)
+          }, {
+            prefix: withCtx(() => [
+              unref(triggerIcon) ? (openBlock(), createBlock(unref(ElIcon), {
+                key: 0,
+                class: normalizeClass([unref(nsInput).e("icon"), unref(nsRange).e("icon")])
+              }, {
+                default: withCtx(() => [
+                  (openBlock(), createBlock(resolveDynamicComponent(unref(triggerIcon))))
+                ]),
+                _: 1
+              }, 8, ["class"])) : createCommentVNode("v-if", true)
             ]),
-            createBaseVNode("input", {
-              id: _ctx.id && _ctx.id[1],
-              autocomplete: "off",
-              name: _ctx.name && _ctx.name[1],
-              placeholder: _ctx.endPlaceholder,
-              value: unref(displayValue) && unref(displayValue)[1],
-              disabled: unref(pickerDisabled),
-              readonly: !_ctx.editable || _ctx.readonly,
-              class: normalizeClass(unref(nsRange).b("input")),
-              onMousedown: onMouseDownInput,
-              onFocus: handleFocusInput,
-              onBlur: handleBlurInput,
-              onInput: handleEndInput,
-              onChange: handleEndChange
-            }, null, 42, _hoisted_2$9),
-            _ctx.clearIcon ? (openBlock(), createBlock(unref(ElIcon), {
-              key: 1,
-              class: normalizeClass(unref(clearIconKls)),
-              onClick: onClearIconClick
-            }, {
-              default: withCtx(() => [
-                (openBlock(), createBlock(resolveDynamicComponent(_ctx.clearIcon)))
-              ]),
-              _: 1
-            }, 8, ["class"])) : createCommentVNode("v-if", true)
-          ], 38))
+            "range-separator": withCtx(() => [
+              renderSlot(_ctx.$slots, "range-separator", {}, () => [
+                createBaseVNode("span", {
+                  class: normalizeClass(unref(nsRange).b("separator"))
+                }, toDisplayString(_ctx.rangeSeparator), 3)
+              ])
+            ]),
+            suffix: withCtx(() => [
+              _ctx.clearIcon ? (openBlock(), createBlock(unref(ElIcon), {
+                key: 0,
+                class: normalizeClass(unref(clearIconKls)),
+                onMousedown: withModifiers(unref(NOOP), ["prevent"]),
+                onClick: onClearIconClick
+              }, {
+                default: withCtx(() => [
+                  (openBlock(), createBlock(resolveDynamicComponent(_ctx.clearIcon)))
+                ]),
+                _: 1
+              }, 8, ["class", "onMousedown"])) : createCommentVNode("v-if", true)
+            ]),
+            _: 3
+          }, 8, ["id", "model-value", "name", "disabled", "readonly", "start-placeholder", "end-placeholder", "class", "style", "aria-label", "tabindex", "onFocus", "onBlur"]))
         ]),
         content: withCtx(() => [
           renderSlot(_ctx.$slots, "default", {
             visible: pickerVisible.value,
             actualVisible: pickerActualVisible.value,
-            parsedValue: unref(parsedValue2),
+            parsedValue: unref(parsedValue),
             format: _ctx.format,
             dateFormat: _ctx.dateFormat,
             timeFormat: _ctx.timeFormat,
             unlinkPanels: _ctx.unlinkPanels,
             type: _ctx.type,
             defaultValue: _ctx.defaultValue,
+            showNow: _ctx.showNow,
             onPick,
             onSelectRange: setSelectionRange,
             onSetPickerOption,
             onCalendarChange,
             onPanelChange,
-            onKeydown: onKeydownPopperContent,
-            onMousedown: _cache[1] || (_cache[1] = withModifiers(() => {
-            }, ["stop"]))
+            onMousedown: withModifiers(() => {
+            }, ["stop"])
           })
         ]),
         _: 3
-      }, 16, ["visible", "transition", "popper-class", "popper-options"]);
+      }, 16, ["visible", "transition", "popper-class", "popper-options", "fallback-placements", "placement"]);
     };
   }
 });
-var CommonPicker = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__file", "picker.vue"]]);
+var CommonPicker = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "picker.vue"]]);
 const panelTimePickerProps = buildProps({
   ...timePanelSharedProps,
   datetimeRole: String,
@@ -10537,13 +9447,13 @@ const useTimePanel = ({
   getAvailableMinutes,
   getAvailableSeconds
 }) => {
-  const getAvailableTime = (date5, role, first, compareDate) => {
+  const getAvailableTime = (date4, role, first, compareDate) => {
     const availableTimeGetters = {
       hour: getAvailableHours,
       minute: getAvailableMinutes,
       second: getAvailableSeconds
     };
-    let result = date5;
+    let result = date4;
     ["hour", "minute", "second"].forEach((type4) => {
       if (availableTimeGetters[type4]) {
         let availableTimeSlots;
@@ -10627,71 +9537,26 @@ const useOldValue = (props) => {
   });
   return oldValue;
 };
-const nodeList = /* @__PURE__ */ new Map();
-let startClick;
-if (isClient) {
-  document.addEventListener("mousedown", (e) => startClick = e);
-  document.addEventListener("mouseup", (e) => {
-    for (const handlers of nodeList.values()) {
-      for (const { documentHandler } of handlers) {
-        documentHandler(e, startClick);
-      }
-    }
-  });
-}
-function createDocumentHandler(el, binding) {
-  let excludes = [];
-  if (Array.isArray(binding.arg)) {
-    excludes = binding.arg;
-  } else if (isElement(binding.arg)) {
-    excludes.push(binding.arg);
-  }
-  return function(mouseup, mousedown) {
-    const popperRef = binding.instance.popperRef;
-    const mouseUpTarget = mouseup.target;
-    const mouseDownTarget = mousedown == null ? void 0 : mousedown.target;
-    const isBound = !binding || !binding.instance;
-    const isTargetExists = !mouseUpTarget || !mouseDownTarget;
-    const isContainedByEl = el.contains(mouseUpTarget) || el.contains(mouseDownTarget);
-    const isSelf = el === mouseUpTarget;
-    const isTargetExcluded = excludes.length && excludes.some((item) => item == null ? void 0 : item.contains(mouseUpTarget)) || excludes.length && excludes.includes(mouseDownTarget);
-    const isContainedByPopper = popperRef && (popperRef.contains(mouseUpTarget) || popperRef.contains(mouseDownTarget));
-    if (isBound || isTargetExists || isContainedByEl || isSelf || isTargetExcluded || isContainedByPopper) {
-      return;
-    }
-    binding.value(mouseup, mousedown);
-  };
-}
-const ClickOutside = {
-  beforeMount(el, binding) {
-    if (!nodeList.has(el)) {
-      nodeList.set(el, []);
-    }
-    nodeList.get(el).push({
-      documentHandler: createDocumentHandler(el, binding),
-      bindingFn: binding.value
-    });
+const basicTimeSpinnerProps = buildProps({
+  role: {
+    type: String,
+    required: true
   },
-  updated(el, binding) {
-    if (!nodeList.has(el)) {
-      nodeList.set(el, []);
-    }
-    const handlers = nodeList.get(el);
-    const oldHandlerIndex = handlers.findIndex((item) => item.bindingFn === binding.oldValue);
-    const newHandler = {
-      documentHandler: createDocumentHandler(el, binding),
-      bindingFn: binding.value
-    };
-    if (oldHandlerIndex >= 0) {
-      handlers.splice(oldHandlerIndex, 1, newHandler);
-    } else {
-      handlers.push(newHandler);
-    }
+  spinnerDate: {
+    type: definePropType(Object),
+    required: true
   },
-  unmounted(el) {
-    nodeList.delete(el);
-  }
-};
+  showSeconds: {
+    type: Boolean,
+    default: true
+  },
+  arrowControl: Boolean,
+  amPmMode: {
+    type: definePropType(String),
+    default: ""
+  },
+  ...disabledTimeListsProps
+});
 const REPEAT_INTERVAL = 100;
 const REPEAT_DELAY = 600;
 const vRepeatClick = {
@@ -10727,34 +9592,14 @@ const vRepeatClick = {
     });
   }
 };
-const basicTimeSpinnerProps = buildProps({
-  role: {
-    type: String,
-    required: true
-  },
-  spinnerDate: {
-    type: definePropType(Object),
-    required: true
-  },
-  showSeconds: {
-    type: Boolean,
-    default: true
-  },
-  arrowControl: Boolean,
-  amPmMode: {
-    type: definePropType(String),
-    default: ""
-  },
-  ...disabledTimeListsProps
-});
-const _hoisted_1$b = ["onClick"];
-const _hoisted_2$8 = ["onMouseenter"];
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
   __name: "basic-time-spinner",
   props: basicTimeSpinnerProps,
   emits: ["change", "select-range", "set-option"],
   setup(__props, { emit }) {
     const props = __props;
+    const pickerBase = inject("EP_PICKER_BASE");
+    const { isRange } = pickerBase.props;
     const ns = useNamespace("time");
     const { getHoursList, getMinutesList, getSecondsList } = getTimeLists(props.disabledHours, props.disabledMinutes, props.disabledSeconds);
     let isScrolling = false;
@@ -10779,10 +9624,12 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     });
     const timeList = computed(() => {
       const { hours, minutes } = unref(timePartials);
+      const { role, spinnerDate } = props;
+      const compare = !isRange ? spinnerDate : void 0;
       return {
-        hours: getHoursList(props.role),
-        minutes: getMinutesList(hours, props.role),
-        seconds: getSecondsList(hours, minutes, props.role)
+        hours: getHoursList(role, compare),
+        minutes: getMinutesList(hours, role, compare),
+        seconds: getSecondsList(hours, minutes, role, compare)
       };
     });
     const arrowControlTimeList = computed(() => {
@@ -10903,9 +9750,12 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
       }
     };
     const handleScroll = (type4) => {
+      const scrollbar = unref(listRefsMap[type4]);
+      if (!scrollbar)
+        return;
       isScrolling = true;
       debouncedResetScroll(type4);
-      const value = Math.min(Math.round((getScrollbarElement(unref(listRefsMap[type4]).$el).scrollTop - (scrollBarHeight(type4) * 0.5 - 10) / typeItemHeight(type4) + 3) / typeItemHeight(type4)), type4 === "hours" ? 23 : 59);
+      const value = Math.min(Math.round((getScrollbarElement(scrollbar.$el).scrollTop - (scrollBarHeight(type4) * 0.5 - 10) / typeItemHeight(type4) + 3) / typeItemHeight(type4)), type4 === "hours" ? 23 : 59);
       modifyDateField(type4, value);
     };
     const scrollBarHeight = (type4) => {
@@ -10933,7 +9783,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
       });
     });
     const setRef = (scrollbar, type4) => {
-      listRefsMap[type4].value = scrollbar;
+      listRefsMap[type4].value = scrollbar != null ? scrollbar : void 0;
     };
     emit("set-option", [`${props.role}_scrollDown`, scrollDown]);
     emit("set-option", [`${props.role}_emitSelectRange`, emitSelectRange]);
@@ -10975,7 +9825,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                   ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
                     createTextVNode(toDisplayString(("0" + key).slice(-2)), 1)
                   ], 64))
-                ], 10, _hoisted_1$b);
+                ], 10, ["onClick"]);
               }), 128))
             ]),
             _: 2
@@ -11019,7 +9869,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                     unref(ns).is("disabled", unref(timeList)[item][time])
                   ])
                 }, [
-                  typeof time === "number" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                  unref(isNumber)(time) ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
                     item === "hours" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
                       createTextVNode(toDisplayString(("0" + (_ctx.amPmMode ? time % 12 || 12 : time)).slice(-2)) + toDisplayString(getAmPmFlag(time)), 1)
                     ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
@@ -11029,14 +9879,14 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                 ], 2);
               }), 128))
             ], 2)
-          ], 42, _hoisted_2$8);
+          ], 42, ["onMouseenter"]);
         }), 128)) : createCommentVNode("v-if", true)
       ], 2);
     };
   }
 });
-var TimeSpinner = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "basic-time-spinner.vue"]]);
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+var TimeSpinner = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "basic-time-spinner.vue"]]);
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "panel-time-pick",
   props: panelTimePickerProps,
   emits: ["pick", "select-range", "set-picker-option"],
@@ -11120,8 +9970,8 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
       getAvailableMinutes,
       getAvailableSeconds
     });
-    const getRangeAvailableTime = (date5) => {
-      return getAvailableTime(date5, props.datetimeRole || "", true);
+    const getRangeAvailableTime = (date4) => {
+      return getAvailableTime(date4, props.datetimeRole || "", true);
     };
     const parseUserInput = (value) => {
       if (!value)
@@ -11178,8 +10028,8 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
               createBaseVNode("button", {
                 type: "button",
                 class: normalizeClass([unref(ns).be("panel", "btn"), "confirm"]),
-                onClick: _cache[0] || (_cache[0] = ($event) => handleConfirm())
-              }, toDisplayString(unref(t)("el.datepicker.confirm")), 3)
+                onClick: ($event) => handleConfirm()
+              }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, ["onClick"])
             ], 2)
           ], 2)) : createCommentVNode("v-if", true)
         ]),
@@ -11188,15 +10038,14 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var TimePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "panel-time-pick.vue"]]);
+var TimePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__file", "panel-time-pick.vue"]]);
 const panelTimeRangeProps = buildProps({
   ...timePanelSharedProps,
   parsedValue: {
     type: definePropType(Array)
   }
 });
-const _hoisted_1$a = ["disabled"];
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "panel-time-range",
   props: panelTimeRangeProps,
   emits: ["pick", "select-range", "set-picker-option"],
@@ -11251,11 +10100,11 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     const handleConfirm = (visible = false) => {
       emit("pick", [startTime.value, endTime.value], visible);
     };
-    const handleMinChange = (date5) => {
-      handleChange(date5.millisecond(0), endTime.value);
+    const handleMinChange = (date4) => {
+      handleChange(date4.millisecond(0), endTime.value);
     };
-    const handleMaxChange = (date5) => {
-      handleChange(startTime.value, date5.millisecond(0));
+    const handleMaxChange = (date4) => {
+      handleChange(startTime.value, date4.millisecond(0));
     };
     const isValidValue = (_date) => {
       const parsedDate = _date.map((_2) => dayjs(_2).locale(lang.value));
@@ -11263,6 +10112,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       return parsedDate[0].isSame(result[0]) && parsedDate[1].isSame(result[1]);
     };
     const handleChange = (start, end) => {
+      if (!props.visible) {
+        return;
+      }
       emit("pick", [start, end], true);
     };
     const btnConfirmDisabled = computed(() => {
@@ -11451,20 +10303,20 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           createBaseVNode("button", {
             type: "button",
             class: normalizeClass([unref(nsTime).be("panel", "btn"), "cancel"]),
-            onClick: _cache[0] || (_cache[0] = ($event) => handleCancel())
-          }, toDisplayString(unref(t)("el.datepicker.cancel")), 3),
+            onClick: ($event) => handleCancel()
+          }, toDisplayString(unref(t)("el.datepicker.cancel")), 11, ["onClick"]),
           createBaseVNode("button", {
             type: "button",
             class: normalizeClass([unref(nsTime).be("panel", "btn"), "confirm"]),
             disabled: unref(btnConfirmDisabled),
-            onClick: _cache[1] || (_cache[1] = ($event) => handleConfirm())
-          }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, _hoisted_1$a)
+            onClick: ($event) => handleConfirm()
+          }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, ["disabled", "onClick"])
         ], 2)
       ], 2)) : createCommentVNode("v-if", true);
     };
   }
 });
-var TimeRangePanel = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "panel-time-range.vue"]]);
+var TimeRangePanel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__file", "panel-time-range.vue"]]);
 dayjs.extend(customParseFormat);
 var TimePicker = defineComponent({
   name: "ElTimePicker",
@@ -11483,13 +10335,13 @@ var TimePicker = defineComponent({
     const modelUpdater = (value) => ctx.emit("update:modelValue", value);
     provide("ElPopperOptions", props.popperOptions);
     ctx.expose({
-      focus: (e) => {
+      focus: () => {
         var _a2;
-        (_a2 = commonPicker.value) == null ? void 0 : _a2.handleFocusInput(e);
+        (_a2 = commonPicker.value) == null ? void 0 : _a2.focus();
       },
-      blur: (e) => {
+      blur: () => {
         var _a2;
-        (_a2 = commonPicker.value) == null ? void 0 : _a2.handleBlurInput(e);
+        (_a2 = commonPicker.value) == null ? void 0 : _a2.blur();
       },
       handleOpen: () => {
         var _a2;
@@ -11514,337 +10366,7 @@ var TimePicker = defineComponent({
     };
   }
 });
-const _TimePicker = TimePicker;
-_TimePicker.install = (app) => {
-  app.component(_TimePicker.name, _TimePicker);
-};
-const ElTimePicker = _TimePicker;
-var localeData$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(n, e) {
-    module2.exports = e();
-  }(commonjsGlobal, function() {
-    return function(n, e, t) {
-      var r2 = e.prototype, o = function(n2) {
-        return n2 && (n2.indexOf ? n2 : n2.s);
-      }, u2 = function(n2, e2, t2, r3, u3) {
-        var i3 = n2.name ? n2 : n2.$locale(), a2 = o(i3[e2]), s2 = o(i3[t2]), f = a2 || s2.map(function(n3) {
-          return n3.slice(0, r3);
-        });
-        if (!u3)
-          return f;
-        var d2 = i3.weekStart;
-        return f.map(function(n3, e3) {
-          return f[(e3 + (d2 || 0)) % 7];
-        });
-      }, i2 = function() {
-        return t.Ls[t.locale()];
-      }, a = function(n2, e2) {
-        return n2.formats[e2] || function(n3) {
-          return n3.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, function(n4, e3, t2) {
-            return e3 || t2.slice(1);
-          });
-        }(n2.formats[e2.toUpperCase()]);
-      }, s = function() {
-        var n2 = this;
-        return { months: function(e2) {
-          return e2 ? e2.format("MMMM") : u2(n2, "months");
-        }, monthsShort: function(e2) {
-          return e2 ? e2.format("MMM") : u2(n2, "monthsShort", "months", 3);
-        }, firstDayOfWeek: function() {
-          return n2.$locale().weekStart || 0;
-        }, weekdays: function(e2) {
-          return e2 ? e2.format("dddd") : u2(n2, "weekdays");
-        }, weekdaysMin: function(e2) {
-          return e2 ? e2.format("dd") : u2(n2, "weekdaysMin", "weekdays", 2);
-        }, weekdaysShort: function(e2) {
-          return e2 ? e2.format("ddd") : u2(n2, "weekdaysShort", "weekdays", 3);
-        }, longDateFormat: function(e2) {
-          return a(n2.$locale(), e2);
-        }, meridiem: this.$locale().meridiem, ordinal: this.$locale().ordinal };
-      };
-      r2.localeData = function() {
-        return s.bind(this)();
-      }, t.localeData = function() {
-        var n2 = i2();
-        return { firstDayOfWeek: function() {
-          return n2.weekStart || 0;
-        }, weekdays: function() {
-          return t.weekdays();
-        }, weekdaysShort: function() {
-          return t.weekdaysShort();
-        }, weekdaysMin: function() {
-          return t.weekdaysMin();
-        }, months: function() {
-          return t.months();
-        }, monthsShort: function() {
-          return t.monthsShort();
-        }, longDateFormat: function(e2) {
-          return a(n2, e2);
-        }, meridiem: n2.meridiem, ordinal: n2.ordinal };
-      }, t.months = function() {
-        return u2(i2(), "months");
-      }, t.monthsShort = function() {
-        return u2(i2(), "monthsShort", "months", 3);
-      }, t.weekdays = function(n2) {
-        return u2(i2(), "weekdays", null, null, n2);
-      }, t.weekdaysShort = function(n2) {
-        return u2(i2(), "weekdaysShort", "weekdays", 3, n2);
-      }, t.weekdaysMin = function(n2) {
-        return u2(i2(), "weekdaysMin", "weekdays", 2, n2);
-      };
-    };
-  });
-})(localeData$1);
-var localeDataExports = localeData$1.exports;
-const localeData = /* @__PURE__ */ getDefaultExportFromCjs(localeDataExports);
-const tagProps = buildProps({
-  type: {
-    type: String,
-    values: ["primary", "success", "info", "warning", "danger"],
-    default: "primary"
-  },
-  closable: Boolean,
-  disableTransitions: Boolean,
-  hit: Boolean,
-  color: String,
-  size: {
-    type: String,
-    values: componentSizes
-  },
-  effect: {
-    type: String,
-    values: ["dark", "light", "plain"],
-    default: "light"
-  },
-  round: Boolean
-});
-const tagEmits = {
-  close: (evt) => evt instanceof MouseEvent,
-  click: (evt) => evt instanceof MouseEvent
-};
-const __default__$2 = defineComponent({
-  name: "ElTag"
-});
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
-  ...__default__$2,
-  props: tagProps,
-  emits: tagEmits,
-  setup(__props, { emit }) {
-    const props = __props;
-    const tagSize = useFormSize();
-    const ns = useNamespace("tag");
-    const containerKls = computed(() => {
-      const { type: type4, hit, effect, closable, round } = props;
-      return [
-        ns.b(),
-        ns.is("closable", closable),
-        ns.m(type4 || "primary"),
-        ns.m(tagSize.value),
-        ns.m(effect),
-        ns.is("hit", hit),
-        ns.is("round", round)
-      ];
-    });
-    const handleClose = (event) => {
-      emit("close", event);
-    };
-    const handleClick = (event) => {
-      emit("click", event);
-    };
-    return (_ctx, _cache) => {
-      return _ctx.disableTransitions ? (openBlock(), createElementBlock("span", {
-        key: 0,
-        class: normalizeClass(unref(containerKls)),
-        style: normalizeStyle({ backgroundColor: _ctx.color }),
-        onClick: handleClick
-      }, [
-        createBaseVNode("span", {
-          class: normalizeClass(unref(ns).e("content"))
-        }, [
-          renderSlot(_ctx.$slots, "default")
-        ], 2),
-        _ctx.closable ? (openBlock(), createBlock(unref(ElIcon), {
-          key: 0,
-          class: normalizeClass(unref(ns).e("close")),
-          onClick: withModifiers(handleClose, ["stop"])
-        }, {
-          default: withCtx(() => [
-            createVNode(unref(close_default))
-          ]),
-          _: 1
-        }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
-      ], 6)) : (openBlock(), createBlock(Transition, {
-        key: 1,
-        name: `${unref(ns).namespace.value}-zoom-in-center`,
-        appear: ""
-      }, {
-        default: withCtx(() => [
-          createBaseVNode("span", {
-            class: normalizeClass(unref(containerKls)),
-            style: normalizeStyle({ backgroundColor: _ctx.color }),
-            onClick: handleClick
-          }, [
-            createBaseVNode("span", {
-              class: normalizeClass(unref(ns).e("content"))
-            }, [
-              renderSlot(_ctx.$slots, "default")
-            ], 2),
-            _ctx.closable ? (openBlock(), createBlock(unref(ElIcon), {
-              key: 0,
-              class: normalizeClass(unref(ns).e("close")),
-              onClick: withModifiers(handleClose, ["stop"])
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(close_default))
-              ]),
-              _: 1
-            }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
-          ], 6)
-        ]),
-        _: 3
-      }, 8, ["name"]));
-    };
-  }
-});
-var Tag = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__file", "tag.vue"]]);
-const ElTag = withInstall(Tag);
-var advancedFormat$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t) {
-    module2.exports = t();
-  }(commonjsGlobal, function() {
-    return function(e, t) {
-      var r2 = t.prototype, n = r2.format;
-      r2.format = function(e2) {
-        var t2 = this, r3 = this.$locale();
-        if (!this.isValid())
-          return n.bind(this)(e2);
-        var s = this.$utils(), a = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
-          switch (e3) {
-            case "Q":
-              return Math.ceil((t2.$M + 1) / 3);
-            case "Do":
-              return r3.ordinal(t2.$D);
-            case "gggg":
-              return t2.weekYear();
-            case "GGGG":
-              return t2.isoWeekYear();
-            case "wo":
-              return r3.ordinal(t2.week(), "W");
-            case "w":
-            case "ww":
-              return s.s(t2.week(), "w" === e3 ? 1 : 2, "0");
-            case "W":
-            case "WW":
-              return s.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
-            case "k":
-            case "kk":
-              return s.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
-            case "X":
-              return Math.floor(t2.$d.getTime() / 1e3);
-            case "x":
-              return t2.$d.getTime();
-            case "z":
-              return "[" + t2.offsetName() + "]";
-            case "zzz":
-              return "[" + t2.offsetName("long") + "]";
-            default:
-              return e3;
-          }
-        });
-        return n.bind(this)(a);
-      };
-    };
-  });
-})(advancedFormat$1);
-var advancedFormatExports = advancedFormat$1.exports;
-const advancedFormat = /* @__PURE__ */ getDefaultExportFromCjs(advancedFormatExports);
-var weekOfYear$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t) {
-    module2.exports = t();
-  }(commonjsGlobal, function() {
-    var e = "week", t = "year";
-    return function(i2, n, r2) {
-      var f = n.prototype;
-      f.week = function(i3) {
-        if (void 0 === i3 && (i3 = null), null !== i3)
-          return this.add(7 * (i3 - this.week()), "day");
-        var n2 = this.$locale().yearStart || 1;
-        if (11 === this.month() && this.date() > 25) {
-          var f2 = r2(this).startOf(t).add(1, t).date(n2), s = r2(this).endOf(e);
-          if (f2.isBefore(s))
-            return 1;
-        }
-        var a = r2(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o = this.diff(a, e, true);
-        return o < 0 ? r2(this).startOf("week").week() : Math.ceil(o);
-      }, f.weeks = function(e2) {
-        return void 0 === e2 && (e2 = null), this.week(e2);
-      };
-    };
-  });
-})(weekOfYear$1);
-var weekOfYearExports = weekOfYear$1.exports;
-const weekOfYear = /* @__PURE__ */ getDefaultExportFromCjs(weekOfYearExports);
-var weekYear$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t) {
-    module2.exports = t();
-  }(commonjsGlobal, function() {
-    return function(e, t) {
-      t.prototype.weekYear = function() {
-        var e2 = this.month(), t2 = this.week(), n = this.year();
-        return 1 === t2 && 11 === e2 ? n + 1 : 0 === e2 && t2 >= 52 ? n - 1 : n;
-      };
-    };
-  });
-})(weekYear$1);
-var weekYearExports = weekYear$1.exports;
-const weekYear = /* @__PURE__ */ getDefaultExportFromCjs(weekYearExports);
-var dayOfYear$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t) {
-    module2.exports = t();
-  }(commonjsGlobal, function() {
-    return function(e, t, n) {
-      t.prototype.dayOfYear = function(e2) {
-        var t2 = Math.round((n(this).startOf("day") - n(this).startOf("year")) / 864e5) + 1;
-        return null == e2 ? t2 : this.add(e2 - t2, "day");
-      };
-    };
-  });
-})(dayOfYear$1);
-var dayOfYearExports = dayOfYear$1.exports;
-const dayOfYear = /* @__PURE__ */ getDefaultExportFromCjs(dayOfYearExports);
-var isSameOrAfter$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, t) {
-    module2.exports = t();
-  }(commonjsGlobal, function() {
-    return function(e, t) {
-      t.prototype.isSameOrAfter = function(e2, t2) {
-        return this.isSame(e2, t2) || this.isAfter(e2, t2);
-      };
-    };
-  });
-})(isSameOrAfter$1);
-var isSameOrAfterExports = isSameOrAfter$1.exports;
-const isSameOrAfter = /* @__PURE__ */ getDefaultExportFromCjs(isSameOrAfterExports);
-var isSameOrBefore$1 = { exports: {} };
-(function(module2, exports2) {
-  !function(e, i2) {
-    module2.exports = i2();
-  }(commonjsGlobal, function() {
-    return function(e, i2) {
-      i2.prototype.isSameOrBefore = function(e2, i3) {
-        return this.isSame(e2, i3) || this.isBefore(e2, i3);
-      };
-    };
-  });
-})(isSameOrBefore$1);
-var isSameOrBeforeExports = isSameOrBefore$1.exports;
-const isSameOrBefore = /* @__PURE__ */ getDefaultExportFromCjs(isSameOrBeforeExports);
+const ElTimePicker = withInstall(TimePicker);
 const ROOT_PICKER_INJECTION_KEY = Symbol();
 const datePickerProps = buildProps({
   ...timePickerDefaultProps,
@@ -11859,6 +10381,7 @@ const selectionModes = [
   "year",
   "years",
   "month",
+  "months",
   "week",
   "range"
 ];
@@ -11894,7 +10417,11 @@ const panelSharedProps = buildProps({
     values: datePickTypes
   },
   dateFormat: String,
-  timeFormat: String
+  timeFormat: String,
+  showNow: {
+    type: Boolean,
+    default: true
+  }
 });
 const panelRangeSharedProps = buildProps({
   unlinkPanels: Boolean,
@@ -11922,15 +10449,6 @@ const panelDatePickProps = buildProps({
     default: ""
   }
 });
-const basicDateTableProps = buildProps({
-  ...datePickerSharedProps,
-  cellClassName: {
-    type: definePropType(Function)
-  },
-  showWeekNumber: Boolean,
-  selectionMode: selectionModeWithDefault("date")
-});
-const basicDateTableEmits = ["changerange", "pick", "select"];
 const isValidRange = (range3) => {
   if (!isArray$1(range3))
     return false;
@@ -12001,6 +10519,46 @@ const buildPickerTable = (dimension, rows, {
     setRowMetadata == null ? void 0 : setRowMetadata(row);
   }
 };
+const datesInMonth = (year, month, lang) => {
+  const firstDay = dayjs().locale(lang).startOf("month").month(month).year(year);
+  const numOfDays = firstDay.daysInMonth();
+  return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
+};
+const getValidDateOfMonth = (year, month, lang, disabledDate) => {
+  const _value = dayjs().year(year).month(month).startOf("month");
+  const _date = datesInMonth(year, month, lang).find((date4) => {
+    return !(disabledDate == null ? void 0 : disabledDate(date4));
+  });
+  if (_date) {
+    return dayjs(_date).locale(lang);
+  }
+  return _value.locale(lang);
+};
+const getValidDateOfYear = (value, lang, disabledDate) => {
+  const year = value.year();
+  if (!(disabledDate == null ? void 0 : disabledDate(value.toDate()))) {
+    return value.locale(lang);
+  }
+  const month = value.month();
+  if (!datesInMonth(year, month, lang).every(disabledDate)) {
+    return getValidDateOfMonth(year, month, lang, disabledDate);
+  }
+  for (let i2 = 0; i2 < 12; i2++) {
+    if (!datesInMonth(year, i2, lang).every(disabledDate)) {
+      return getValidDateOfMonth(year, i2, lang, disabledDate);
+    }
+  }
+  return value;
+};
+const basicDateTableProps = buildProps({
+  ...datePickerSharedProps,
+  cellClassName: {
+    type: definePropType(Function)
+  },
+  showWeekNumber: Boolean,
+  selectionMode: selectionModeWithDefault("date")
+});
+const basicDateTableEmits = ["changerange", "pick", "select"];
 const isNormalDay = (type4 = "") => {
   return ["normal", "today"].includes(type4);
 };
@@ -12067,14 +10625,14 @@ const useBasicDateTable = (props, emit) => {
     return false;
   };
   const setCellMetadata = (cell, { columnIndex, rowIndex }, count) => {
-    const { disabledDate: disabledDate2, cellClassName } = props;
+    const { disabledDate, cellClassName } = props;
     const _selectedDate = unref(selectedDate);
     const shouldIncrement = setDateText(cell, { count, rowIndex, columnIndex });
     const cellDate = cell.dayjs.toDate();
     cell.selected = _selectedDate.find((d2) => d2.isSame(cell.dayjs, "day"));
     cell.isSelected = !!cell.selected;
     cell.isCurrent = isCurrent(cell);
-    cell.disabled = disabledDate2 == null ? void 0 : disabledDate2(cellDate);
+    cell.disabled = disabledDate == null ? void 0 : disabledDate(cellDate);
     cell.customClass = cellClassName == null ? void 0 : cellClassName(cellDate);
     return shouldIncrement;
   };
@@ -12134,10 +10692,10 @@ const useBasicDateTable = (props, emit) => {
   const isCurrent = (cell) => {
     return props.selectionMode === "date" && isNormalDay(cell.type) && cellMatchesDate(cell, props.parsedValue);
   };
-  const cellMatchesDate = (cell, date5) => {
-    if (!date5)
+  const cellMatchesDate = (cell, date4) => {
+    if (!date4)
       return false;
-    return dayjs(date5).locale(unref(lang)).isSame(props.date.date(Number(cell.text)), "day");
+    return dayjs(date4).locale(unref(lang)).isSame(props.date.date(Number(cell.text)), "day");
   };
   const getDateOfCell = (row, column) => {
     const offsetFromStart = row * 7 + (column - (props.showWeekNumber ? 1 : 0)) - unref(offsetDay);
@@ -12256,7 +10814,7 @@ const useBasicDateTable = (props, emit) => {
       newDate = newDate.add(1, "month");
     }
     newDate = newDate.date(Number.parseInt(cell.text, 10));
-    if (props.parsedValue && !Array.isArray(props.parsedValue)) {
+    if (props.parsedValue && !isArray$1(props.parsedValue)) {
       const dayOffset = (props.parsedValue.day() - firstDayOfWeek + 7) % 7 - 1;
       const weekDate = props.parsedValue.subtract(dayOffset, "day");
       return weekDate.isSame(newDate, "day");
@@ -12356,22 +10914,18 @@ var ElDatePickerCell = defineComponent({
       } = props;
       return renderSlot(slots, "default", {
         ...cell
-      }, () => [createVNode("div", {
-        "class": ns.b()
-      }, [createVNode("span", {
-        "class": ns.e("text")
-      }, [cell == null ? void 0 : cell.text])])]);
+      }, () => {
+        var _a2;
+        return [createVNode("div", {
+          "class": ns.b()
+        }, [createVNode("span", {
+          "class": ns.e("text")
+        }, [(_a2 = cell == null ? void 0 : cell.renderText) != null ? _a2 : cell == null ? void 0 : cell.text])])];
+      });
     };
   }
 });
-const _hoisted_1$9 = ["aria-label"];
-const _hoisted_2$7 = {
-  key: 0,
-  scope: "col"
-};
-const _hoisted_3$6 = ["aria-label"];
-const _hoisted_4$4 = ["aria-current", "aria-selected", "tabindex"];
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
   __name: "basic-date-table",
   props: basicDateTableProps,
   emits: basicDateTableEmits,
@@ -12406,23 +10960,26 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
         cellspacing: "0",
         cellpadding: "0",
         role: "grid",
-        onClick: _cache[1] || (_cache[1] = (...args) => unref(handlePickDate) && unref(handlePickDate)(...args)),
-        onMousemove: _cache[2] || (_cache[2] = (...args) => unref(handleMouseMove) && unref(handleMouseMove)(...args)),
-        onMousedown: _cache[3] || (_cache[3] = withModifiers((...args) => unref(handleMouseDown) && unref(handleMouseDown)(...args), ["prevent"])),
-        onMouseup: _cache[4] || (_cache[4] = (...args) => unref(handleMouseUp) && unref(handleMouseUp)(...args))
+        onClick: unref(handlePickDate),
+        onMousemove: unref(handleMouseMove),
+        onMousedown: withModifiers(unref(handleMouseDown), ["prevent"]),
+        onMouseup: unref(handleMouseUp)
       }, [
         createBaseVNode("tbody", {
           ref_key: "tbodyRef",
           ref: tbodyRef
         }, [
           createBaseVNode("tr", null, [
-            _ctx.showWeekNumber ? (openBlock(), createElementBlock("th", _hoisted_2$7, toDisplayString(unref(weekLabel)), 1)) : createCommentVNode("v-if", true),
+            _ctx.showWeekNumber ? (openBlock(), createElementBlock("th", {
+              key: 0,
+              scope: "col"
+            }, toDisplayString(unref(weekLabel)), 1)) : createCommentVNode("v-if", true),
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(WEEKS), (week, key) => {
               return openBlock(), createElementBlock("th", {
                 key,
                 "aria-label": unref(t)("el.datepicker.weeksFull." + week),
                 scope: "col"
-              }, toDisplayString(unref(t)("el.datepicker.weeks." + week)), 9, _hoisted_3$6);
+              }, toDisplayString(unref(t)("el.datepicker.weeks." + week)), 9, ["aria-label"]);
             }), 128))
           ]),
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(rows), (row, rowKey) => {
@@ -12439,37 +10996,29 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
                   "aria-current": cell.isCurrent ? "date" : void 0,
                   "aria-selected": cell.isCurrent,
                   tabindex: unref(isSelectedCell)(cell) ? 0 : -1,
-                  onFocus: _cache[0] || (_cache[0] = (...args) => unref(handleFocus) && unref(handleFocus)(...args))
+                  onFocus: unref(handleFocus)
                 }, [
                   createVNode(unref(ElDatePickerCell), { cell }, null, 8, ["cell"])
-                ], 42, _hoisted_4$4);
+                ], 42, ["aria-current", "aria-selected", "tabindex", "onFocus"]);
               }), 128))
             ], 2);
           }), 128))
         ], 512)
-      ], 42, _hoisted_1$9);
+      ], 42, ["aria-label", "onClick", "onMousemove", "onMousedown", "onMouseup"]);
     };
   }
 });
-var DateTable = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "basic-date-table.vue"]]);
+var DateTable = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__file", "basic-date-table.vue"]]);
 const basicMonthTableProps = buildProps({
   ...datePickerSharedProps,
   selectionMode: selectionModeWithDefault("month")
 });
-const _hoisted_1$8 = ["aria-label"];
-const _hoisted_2$6 = ["aria-selected", "aria-label", "tabindex", "onKeydown"];
-const _hoisted_3$5 = { class: "cell" };
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
   __name: "basic-month-table",
   props: basicMonthTableProps,
   emits: ["changerange", "pick", "select"],
   setup(__props, { expose, emit }) {
     const props = __props;
-    const datesInMonth = (year, month, lang2) => {
-      const firstDay = dayjs().locale(lang2).startOf("month").month(month).year(year);
-      const numOfDays = firstDay.daysInMonth();
-      return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
-    };
     const ns = useNamespace("month-table");
     const { t, lang } = useLocale();
     const tbodyRef = ref();
@@ -12531,7 +11080,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       const today = /* @__PURE__ */ new Date();
       const month = cell.text;
       style.disabled = props.disabledDate ? datesInMonth(year, month, lang.value).every(props.disabledDate) : false;
-      style.current = castArray(props.parsedValue).findIndex((date5) => dayjs.isDayjs(date5) && date5.year() === year && date5.month() === month) >= 0;
+      style.current = castArray(props.parsedValue).findIndex((date4) => dayjs.isDayjs(date4) && date4.year() === year && date4.month() === month) >= 0;
       style.today = today.getFullYear() === year && today.getMonth() === month;
       if (cell.inRange) {
         style["in-range"] = true;
@@ -12547,7 +11096,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     const isSelectedCell = (cell) => {
       const year = props.date.year();
       const month = cell.text;
-      return castArray(props.date).findIndex((date5) => date5.year() === year && date5.month() === month) >= 0;
+      return castArray(props.date).findIndex((date4) => date4.year() === year && date4.month() === month) >= 0;
     };
     const handleMouseMove = (event) => {
       var _a2;
@@ -12586,7 +11135,15 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       const row = target.parentNode.rowIndex;
       const month = row * 4 + column;
       const newDate = props.date.startOf("year").month(month);
-      if (props.selectionMode === "range") {
+      if (props.selectionMode === "months") {
+        if (event.type === "keydown") {
+          emit("pick", castArray(props.parsedValue), false);
+          return;
+        }
+        const newMonth = getValidDateOfMonth(props.date.year(), month, lang.value, props.disabledDate);
+        const newValue = hasClass(target, "current") ? castArray(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.month()) !== newMonth.month()) : castArray(props.parsedValue).concat([dayjs(newMonth)]);
+        emit("pick", newValue);
+      } else if (props.selectionMode === "range") {
         if (!props.rangeState.selecting) {
           emit("pick", { minDate: newDate, maxDate: null });
           emit("select", true);
@@ -12640,34 +11197,30 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                     withKeys(withModifiers(handleMonthTableClick, ["prevent", "stop"]), ["enter"])
                   ]
                 }, [
-                  createBaseVNode("div", null, [
-                    createBaseVNode("span", _hoisted_3$5, toDisplayString(unref(t)("el.datepicker.months." + months.value[cell.text])), 1)
-                  ])
-                ], 42, _hoisted_2$6);
+                  createVNode(unref(ElDatePickerCell), {
+                    cell: {
+                      ...cell,
+                      renderText: unref(t)("el.datepicker.months." + months.value[cell.text])
+                    }
+                  }, null, 8, ["cell"])
+                ], 42, ["aria-selected", "aria-label", "tabindex", "onKeydown"]);
               }), 128))
             ]);
           }), 128))
         ], 512)
-      ], 42, _hoisted_1$8);
+      ], 42, ["aria-label"]);
     };
   }
 });
-var MonthTable = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "basic-month-table.vue"]]);
-const { date: date4, disabledDate, parsedValue } = datePickerSharedProps;
+var MonthTable = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "basic-month-table.vue"]]);
 const basicYearTableProps = buildProps({
-  date: date4,
-  disabledDate,
-  parsedValue,
+  ...datePickerSharedProps,
   selectionMode: selectionModeWithDefault("year")
 });
-const _hoisted_1$7 = ["aria-label"];
-const _hoisted_2$5 = ["aria-selected", "tabindex", "onKeydown"];
-const _hoisted_3$4 = { class: "cell" };
-const _hoisted_4$3 = { key: 1 };
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
   __name: "basic-year-table",
   props: basicYearTableProps,
-  emits: ["pick"],
+  emits: ["changerange", "pick", "select"],
   setup(__props, { expose, emit }) {
     const props = __props;
     const datesInYear = (year, lang2) => {
@@ -12683,38 +11236,133 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     const startYear = computed(() => {
       return Math.floor(props.date.year() / 10) * 10;
     });
+    const tableRows = ref([[], [], []]);
+    const lastRow = ref();
+    const lastColumn = ref();
+    const rows = computed(() => {
+      var _a2;
+      const rows2 = tableRows.value;
+      const now2 = dayjs().locale(lang.value).startOf("year");
+      for (let i2 = 0; i2 < 3; i2++) {
+        const row = rows2[i2];
+        for (let j2 = 0; j2 < 4; j2++) {
+          if (i2 * 4 + j2 >= 10) {
+            break;
+          }
+          let cell = row[j2];
+          if (!cell) {
+            cell = {
+              row: i2,
+              column: j2,
+              type: "normal",
+              inRange: false,
+              start: false,
+              end: false,
+              text: -1,
+              disabled: false
+            };
+          }
+          cell.type = "normal";
+          const index = i2 * 4 + j2 + startYear.value;
+          const calTime = dayjs().year(index);
+          const calEndDate = props.rangeState.endDate || props.maxDate || props.rangeState.selecting && props.minDate || null;
+          cell.inRange = !!(props.minDate && calTime.isSameOrAfter(props.minDate, "year") && calEndDate && calTime.isSameOrBefore(calEndDate, "year")) || !!(props.minDate && calTime.isSameOrBefore(props.minDate, "year") && calEndDate && calTime.isSameOrAfter(calEndDate, "year"));
+          if ((_a2 = props.minDate) == null ? void 0 : _a2.isSameOrAfter(calEndDate)) {
+            cell.start = !!(calEndDate && calTime.isSame(calEndDate, "year"));
+            cell.end = !!(props.minDate && calTime.isSame(props.minDate, "year"));
+          } else {
+            cell.start = !!(props.minDate && calTime.isSame(props.minDate, "year"));
+            cell.end = !!(calEndDate && calTime.isSame(calEndDate, "year"));
+          }
+          const isToday = now2.isSame(calTime);
+          if (isToday) {
+            cell.type = "today";
+          }
+          cell.text = index;
+          const cellDate = calTime.toDate();
+          cell.disabled = props.disabledDate && props.disabledDate(cellDate) || false;
+          row[j2] = cell;
+        }
+      }
+      return rows2;
+    });
     const focus = () => {
       var _a2;
       (_a2 = currentCellRef.value) == null ? void 0 : _a2.focus();
     };
-    const getCellKls = (year) => {
+    const getCellKls = (cell) => {
       const kls = {};
       const today = dayjs().locale(lang.value);
+      const year = cell.text;
       kls.disabled = props.disabledDate ? datesInYear(year, lang.value).every(props.disabledDate) : false;
-      kls.current = castArray(props.parsedValue).findIndex((d2) => d2.year() === year) >= 0;
       kls.today = today.year() === year;
+      kls.current = castArray(props.parsedValue).findIndex((d2) => d2.year() === year) >= 0;
+      if (cell.inRange) {
+        kls["in-range"] = true;
+        if (cell.start) {
+          kls["start-date"] = true;
+        }
+        if (cell.end) {
+          kls["end-date"] = true;
+        }
+      }
       return kls;
     };
-    const isSelectedCell = (year) => {
-      return year === startYear.value && props.date.year() < startYear.value && props.date.year() > startYear.value + 9 || castArray(props.date).findIndex((date5) => date5.year() === year) >= 0 || castArray(props.parsedValue).findIndex((date5) => (date5 == null ? void 0 : date5.year()) === year) >= 0;
+    const isSelectedCell = (cell) => {
+      const year = cell.text;
+      return castArray(props.date).findIndex((date4) => date4.year() === year) >= 0;
     };
     const handleYearTableClick = (event) => {
-      const clickTarget = event.target;
-      const target = clickTarget.closest("td");
-      if (target && target.textContent) {
-        if (hasClass(target, "disabled"))
-          return;
-        const year = target.textContent || target.innerText;
-        if (props.selectionMode === "years") {
-          if (event.type === "keydown") {
-            emit("pick", castArray(props.parsedValue), false);
-            return;
-          }
-          const newValue = hasClass(target, "current") ? castArray(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.year()) !== Number(year)) : castArray(props.parsedValue).concat([dayjs(year)]);
-          emit("pick", newValue);
+      var _a2;
+      const target = (_a2 = event.target) == null ? void 0 : _a2.closest("td");
+      if (!target || !target.textContent || hasClass(target, "disabled"))
+        return;
+      const column = target.cellIndex;
+      const row = target.parentNode.rowIndex;
+      const selectedYear = row * 4 + column + startYear.value;
+      const newDate = dayjs().year(selectedYear);
+      if (props.selectionMode === "range") {
+        if (!props.rangeState.selecting) {
+          emit("pick", { minDate: newDate, maxDate: null });
+          emit("select", true);
         } else {
-          emit("pick", Number(year));
+          if (props.minDate && newDate >= props.minDate) {
+            emit("pick", { minDate: props.minDate, maxDate: newDate });
+          } else {
+            emit("pick", { minDate: newDate, maxDate: props.minDate });
+          }
+          emit("select", false);
         }
+      } else if (props.selectionMode === "years") {
+        if (event.type === "keydown") {
+          emit("pick", castArray(props.parsedValue), false);
+          return;
+        }
+        const vaildYear = getValidDateOfYear(newDate.startOf("year"), lang.value, props.disabledDate);
+        const newValue = hasClass(target, "current") ? castArray(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.year()) !== selectedYear) : castArray(props.parsedValue).concat([vaildYear]);
+        emit("pick", newValue);
+      } else {
+        emit("pick", selectedYear);
+      }
+    };
+    const handleMouseMove = (event) => {
+      var _a2;
+      if (!props.rangeState.selecting)
+        return;
+      const target = (_a2 = event.target) == null ? void 0 : _a2.closest("td");
+      if (!target)
+        return;
+      const row = target.parentNode.rowIndex;
+      const column = target.cellIndex;
+      if (rows.value[row][column].disabled)
+        return;
+      if (row !== lastRow.value || column !== lastColumn.value) {
+        lastRow.value = row;
+        lastColumn.value = column;
+        emit("changerange", {
+          selecting: true,
+          endDate: dayjs().year(startYear.value).add(row * 4 + column, "year")
+        });
       }
     };
     watch(() => props.date, async () => {
@@ -12732,50 +11380,41 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
         role: "grid",
         "aria-label": unref(t)("el.datepicker.yearTablePrompt"),
         class: normalizeClass(unref(ns).b()),
-        onClick: handleYearTableClick
+        onClick: handleYearTableClick,
+        onMousemove: handleMouseMove
       }, [
         createBaseVNode("tbody", {
           ref_key: "tbodyRef",
           ref: tbodyRef
         }, [
-          (openBlock(), createElementBlock(Fragment, null, renderList(3, (_2, i2) => {
-            return createBaseVNode("tr", { key: i2 }, [
-              (openBlock(), createElementBlock(Fragment, null, renderList(4, (__, j2) => {
-                return openBlock(), createElementBlock(Fragment, {
-                  key: i2 + "_" + j2
+          (openBlock(true), createElementBlock(Fragment, null, renderList(unref(rows), (row, rowKey) => {
+            return openBlock(), createElementBlock("tr", { key: rowKey }, [
+              (openBlock(true), createElementBlock(Fragment, null, renderList(row, (cell, cellKey) => {
+                return openBlock(), createElementBlock("td", {
+                  key: `${rowKey}_${cellKey}`,
+                  ref_for: true,
+                  ref: (el) => isSelectedCell(cell) && (currentCellRef.value = el),
+                  class: normalizeClass(["available", getCellKls(cell)]),
+                  "aria-selected": isSelectedCell(cell),
+                  "aria-label": String(cell.text),
+                  tabindex: isSelectedCell(cell) ? 0 : -1,
+                  onKeydown: [
+                    withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["space"]),
+                    withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["enter"])
+                  ]
                 }, [
-                  i2 * 4 + j2 < 10 ? (openBlock(), createElementBlock("td", {
-                    key: 0,
-                    ref_for: true,
-                    ref: (el) => isSelectedCell(unref(startYear) + i2 * 4 + j2) && (currentCellRef.value = el),
-                    class: normalizeClass(["available", getCellKls(unref(startYear) + i2 * 4 + j2)]),
-                    "aria-selected": `${isSelectedCell(unref(startYear) + i2 * 4 + j2)}`,
-                    tabindex: isSelectedCell(unref(startYear) + i2 * 4 + j2) ? 0 : -1,
-                    onKeydown: [
-                      withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["space"]),
-                      withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["enter"])
-                    ]
-                  }, [
-                    createBaseVNode("div", null, [
-                      createBaseVNode("span", _hoisted_3$4, toDisplayString(unref(startYear) + i2 * 4 + j2), 1)
-                    ])
-                  ], 42, _hoisted_2$5)) : (openBlock(), createElementBlock("td", _hoisted_4$3))
-                ], 64);
-              }), 64))
+                  createVNode(unref(ElDatePickerCell), { cell }, null, 8, ["cell"])
+                ], 42, ["aria-selected", "aria-label", "tabindex", "onKeydown"]);
+              }), 128))
             ]);
-          }), 64))
+          }), 128))
         ], 512)
-      ], 10, _hoisted_1$7);
+      ], 42, ["aria-label"]);
     };
   }
 });
-var YearTable = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "basic-year-table.vue"]]);
-const _hoisted_1$6 = ["onClick"];
-const _hoisted_2$4 = ["aria-label"];
-const _hoisted_3$3 = ["aria-label"];
-const _hoisted_4$2 = ["aria-label"];
-const _hoisted_5$2 = ["aria-label"];
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+var YearTable = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__file", "basic-year-table.vue"]]);
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "panel-date-pick",
   props: panelDatePickProps,
   emits: ["pick", "set-picker-option", "panel-change"],
@@ -12789,7 +11428,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const { t, lang } = useLocale();
     const pickerBase = inject("EP_PICKER_BASE");
     const popper = inject(TOOLTIP_INJECTION_KEY);
-    const { shortcuts, disabledDate: disabledDate2, cellClassName, defaultTime } = pickerBase.props;
+    const { shortcuts, disabledDate, cellClassName, defaultTime } = pickerBase.props;
     const defaultValue = toRef(pickerBase.props, "defaultValue");
     const currentViewRef = ref();
     const innerDate = ref(dayjs().locale(lang.value));
@@ -12807,8 +11446,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const selectableRange = ref([]);
     const userInputDate = ref(null);
     const userInputTime = ref(null);
-    const checkDateWithinRange = (date5) => {
-      return selectableRange.value.length > 0 ? timeWithinRange(date5, selectableRange.value, props.format || "HH:mm:ss") : true;
+    const checkDateWithinRange = (date4) => {
+      return selectableRange.value.length > 0 ? timeWithinRange(date4, selectableRange.value, props.format || "HH:mm:ss") : true;
     };
     const formatEmit = (emitDayjs) => {
       if (defaultTime && !visibleTime.value && !isChangeToNow.value && !isShortcut) {
@@ -12891,19 +11530,25 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
     const selectionMode = computed(() => {
       const { type: type4 } = props;
-      if (["week", "month", "year", "years", "dates"].includes(type4))
+      if (["week", "month", "months", "year", "years", "dates"].includes(type4))
         return type4;
       return "date";
+    });
+    const isMultipleType = computed(() => {
+      return selectionMode.value === "dates" || selectionMode.value === "months" || selectionMode.value === "years";
     });
     const keyboardMode = computed(() => {
       return selectionMode.value === "date" ? currentView.value : selectionMode.value;
     });
     const hasShortcuts = computed(() => !!shortcuts.length);
-    const handleMonthPick = async (month2) => {
-      innerDate.value = innerDate.value.startOf("month").month(month2);
+    const handleMonthPick = async (month2, keepOpen) => {
       if (selectionMode.value === "month") {
+        innerDate.value = getValidDateOfMonth(innerDate.value.year(), month2, lang.value, disabledDate);
         emit(innerDate.value, false);
+      } else if (selectionMode.value === "months") {
+        emit(month2, keepOpen != null ? keepOpen : true);
       } else {
+        innerDate.value = getValidDateOfMonth(innerDate.value.year(), month2, lang.value, disabledDate);
         currentView.value = "date";
         if (["month", "year", "date", "week"].includes(selectionMode.value)) {
           emit(innerDate.value, true);
@@ -12915,12 +11560,14 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
     const handleYearPick = async (year2, keepOpen) => {
       if (selectionMode.value === "year") {
-        innerDate.value = innerDate.value.startOf("year").year(year2);
+        const data = innerDate.value.startOf("year").year(year2);
+        innerDate.value = getValidDateOfYear(data, lang.value, disabledDate);
         emit(innerDate.value, false);
       } else if (selectionMode.value === "years") {
         emit(year2, keepOpen != null ? keepOpen : true);
       } else {
-        innerDate.value = innerDate.value.year(year2);
+        const data = innerDate.value.year(year2);
+        innerDate.value = getValidDateOfYear(data, lang.value, disabledDate);
         currentView.value = "month";
         if (["month", "year", "date", "week"].includes(selectionMode.value)) {
           emit(innerDate.value, true);
@@ -12939,22 +11586,24 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const footerVisible = computed(() => {
       const showDateFooter = showTime.value || selectionMode.value === "dates";
       const showYearFooter = selectionMode.value === "years";
+      const showMonthFooter = selectionMode.value === "months";
       const isDateView = currentView.value === "date";
       const isYearView = currentView.value === "year";
-      return showDateFooter && isDateView || showYearFooter && isYearView;
+      const isMonthView = currentView.value === "month";
+      return showDateFooter && isDateView || showYearFooter && isYearView || showMonthFooter && isMonthView;
     });
     const disabledConfirm = computed(() => {
-      if (!disabledDate2)
+      if (!disabledDate)
         return false;
       if (!props.parsedValue)
         return true;
       if (isArray$1(props.parsedValue)) {
-        return disabledDate2(props.parsedValue[0].toDate());
+        return disabledDate(props.parsedValue[0].toDate());
       }
-      return disabledDate2(props.parsedValue.toDate());
+      return disabledDate(props.parsedValue.toDate());
     });
     const onConfirm = () => {
-      if (selectionMode.value === "dates" || selectionMode.value === "years") {
+      if (isMultipleType.value) {
         emit(props.parsedValue);
       } else {
         let result = props.parsedValue;
@@ -12968,15 +11617,15 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       }
     };
     const disabledNow = computed(() => {
-      if (!disabledDate2)
+      if (!disabledDate)
         return false;
-      return disabledDate2(dayjs().locale(lang.value).toDate());
+      return disabledDate(dayjs().locale(lang.value).toDate());
     });
     const changeToNow = () => {
       const now2 = dayjs().locale(lang.value);
       const nowDate = now2.toDate();
       isChangeToNow.value = true;
-      if ((!disabledDate2 || !disabledDate2(nowDate)) && checkDateWithinRange(nowDate)) {
+      if ((!disabledDate || !disabledDate(nowDate)) && checkDateWithinRange(nowDate)) {
         innerDate.value = dayjs().locale(lang.value);
         emit(innerDate.value);
       }
@@ -13008,14 +11657,14 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const handleTimePickClose = () => {
       timePickerVisible.value = false;
     };
-    const getUnits = (date5) => {
+    const getUnits = (date4) => {
       return {
-        hour: date5.hour(),
-        minute: date5.minute(),
-        second: date5.second(),
-        year: date5.year(),
-        month: date5.month(),
-        date: date5.date()
+        hour: date4.hour(),
+        minute: date4.minute(),
+        second: date4.second(),
+        year: date4.year(),
+        month: date4.month(),
+        date: date4.date()
       };
     };
     const handleTimePick = (value, visible, first) => {
@@ -13030,8 +11679,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const handleVisibleTimeChange = (value) => {
       const newDate = dayjs(value, timeFormat.value).locale(lang.value);
       if (newDate.isValid() && checkDateWithinRange(newDate)) {
-        const { year: year2, month: month2, date: date5 } = getUnits(innerDate.value);
-        innerDate.value = newDate.year(year2).month(month2).date(date5);
+        const { year: year2, month: month2, date: date4 } = getUnits(innerDate.value);
+        innerDate.value = newDate.year(year2).month(month2).date(date4);
         userInputTime.value = null;
         timePickerVisible.value = false;
         emit(innerDate.value, true);
@@ -13040,7 +11689,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     const handleVisibleDateChange = (value) => {
       const newDate = dayjs(value, dateFormat.value).locale(lang.value);
       if (newDate.isValid()) {
-        if (disabledDate2 && disabledDate2(newDate.toDate())) {
+        if (disabledDate && disabledDate(newDate.toDate())) {
           return;
         }
         const { hour, minute, second } = getUnits(innerDate.value);
@@ -13049,8 +11698,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
         emit(innerDate.value, true);
       }
     };
-    const isValidValue = (date5) => {
-      return dayjs.isDayjs(date5) && date5.isValid() && (disabledDate2 ? !disabledDate2(date5.toDate()) : true);
+    const isValidValue = (date4) => {
+      return dayjs.isDayjs(date4) && date4.isValid() && (disabledDate ? !disabledDate(date4.toDate()) : true);
     };
     const formatToString = (value) => {
       return isArray$1(value) ? value.map((_2) => _2.format(props.format)) : value.format(props.format);
@@ -13066,13 +11715,16 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       }
       return parseDate2;
     };
-    const handleFocusPicker = async () => {
+    const handleFocusPicker = () => {
       var _a2;
       if (["week", "month", "year", "date"].includes(selectionMode.value)) {
         (_a2 = currentViewRef.value) == null ? void 0 : _a2.focus();
-        if (selectionMode.value === "week") {
-          handleKeyControl(EVENT_CODE.down);
-        }
+      }
+    };
+    const _handleFocusPicker = () => {
+      handleFocusPicker();
+      if (selectionMode.value === "week") {
+        handleKeyControl(EVENT_CODE.down);
       }
     };
     const handleKeydownTable = (event) => {
@@ -13106,32 +11758,32 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
           [down]: 4,
           [left]: -1,
           [right]: 1,
-          offset: (date5, step) => date5.setFullYear(date5.getFullYear() + step)
+          offset: (date4, step) => date4.setFullYear(date4.getFullYear() + step)
         },
         month: {
           [up]: -4,
           [down]: 4,
           [left]: -1,
           [right]: 1,
-          offset: (date5, step) => date5.setMonth(date5.getMonth() + step)
+          offset: (date4, step) => date4.setMonth(date4.getMonth() + step)
         },
         week: {
           [up]: -1,
           [down]: 1,
           [left]: -1,
           [right]: 1,
-          offset: (date5, step) => date5.setDate(date5.getDate() + step * 7)
+          offset: (date4, step) => date4.setDate(date4.getDate() + step * 7)
         },
         date: {
           [up]: -7,
           [down]: 7,
           [left]: -1,
           [right]: 1,
-          [home]: (date5) => -date5.getDay(),
-          [end]: (date5) => -date5.getDay() + 6,
-          [pageUp]: (date5) => -new Date(date5.getFullYear(), date5.getMonth(), 0).getDate(),
-          [pageDown]: (date5) => new Date(date5.getFullYear(), date5.getMonth() + 1, 0).getDate(),
-          offset: (date5, step) => date5.setDate(date5.getDate() + step)
+          [home]: (date4) => -date4.getDay(),
+          [end]: (date4) => -date4.getDay() + 6,
+          [pageUp]: (date4) => -new Date(date4.getFullYear(), date4.getMonth(), 0).getDate(),
+          [pageDown]: (date4) => new Date(date4.getFullYear(), date4.getMonth() + 1, 0).getDate(),
+          offset: (date4, step) => date4.setDate(date4.getDate() + step)
         }
       };
       const newDate = innerDate.value.toDate();
@@ -13140,7 +11792,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
         if (!map)
           return;
         map.offset(newDate, isFunction$1(map[code]) ? map[code](newDate) : (_a2 = map[code]) != null ? _a2 : 0);
-        if (disabledDate2 && disabledDate2(newDate)) {
+        if (disabledDate && disabledDate(newDate)) {
           break;
         }
         const result = dayjs(newDate).locale(lang.value);
@@ -13159,6 +11811,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       } else if (val === "years") {
         currentView.value = "year";
         return;
+      } else if (val === "months") {
+        currentView.value = "month";
+        return;
       }
       currentView.value = "date";
     }, { immediate: true });
@@ -13172,9 +11827,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     }, { immediate: true });
     watch(() => props.parsedValue, (val) => {
       if (val) {
-        if (selectionMode.value === "dates" || selectionMode.value === "years")
+        if (isMultipleType.value)
           return;
-        if (Array.isArray(val))
+        if (isArray$1(val))
           return;
         innerDate.value = val;
       } else {
@@ -13184,7 +11839,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     contextEmit("set-picker-option", ["isValidValue", isValidValue]);
     contextEmit("set-picker-option", ["formatToString", formatToString]);
     contextEmit("set-picker-option", ["parseUserInput", parseUserInput]);
-    contextEmit("set-picker-option", ["handleFocusPicker", handleFocusPicker]);
+    contextEmit("set-picker-option", ["handleFocusPicker", _handleFocusPicker]);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: normalizeClass([
@@ -13212,7 +11867,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 type: "button",
                 class: normalizeClass(unref(ppNs).e("shortcut")),
                 onClick: ($event) => handleShortcutClick(shortcut)
-              }, toDisplayString(shortcut.text), 11, _hoisted_1$6);
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
             }), 128))
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
@@ -13230,9 +11885,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   "model-value": unref(visibleDate),
                   size: "small",
                   "validate-event": false,
-                  onInput: _cache[0] || (_cache[0] = (val) => userInputDate.value = val),
+                  onInput: (val) => userInputDate.value = val,
                   onChange: handleVisibleDateChange
-                }, null, 8, ["placeholder", "model-value"])
+                }, null, 8, ["placeholder", "model-value", "onInput"])
               ], 2),
               withDirectives((openBlock(), createElementBlock("span", {
                 class: normalizeClass(unref(dpNs).e("editor-wrap"))
@@ -13243,9 +11898,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   size: "small",
                   "validate-event": false,
                   onFocus: onTimePickerInputFocus,
-                  onInput: _cache[1] || (_cache[1] = (val) => userInputTime.value = val),
+                  onInput: (val) => userInputTime.value = val,
                   onChange: handleVisibleTimeChange
-                }, null, 8, ["placeholder", "model-value"]),
+                }, null, 8, ["placeholder", "model-value", "onInput"]),
                 createVNode(unref(TimePickPanel), {
                   visible: timePickerVisible.value,
                   format: unref(timeFormat),
@@ -13269,28 +11924,32 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.prevYear`),
                   class: normalizeClass(["d-arrow-left", unref(ppNs).e("icon-btn")]),
-                  onClick: _cache[2] || (_cache[2] = ($event) => moveByYear(false))
+                  onClick: ($event) => moveByYear(false)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_2$4),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"]),
                 withDirectives(createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
-                  onClick: _cache[3] || (_cache[3] = ($event) => moveByMonth(false))
+                  onClick: ($event) => moveByMonth(false)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_3$3), [
+                  renderSlot(_ctx.$slots, "prev-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"]), [
                   [vShow, currentView.value === "date"]
                 ])
               ], 2),
@@ -13299,9 +11958,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 class: normalizeClass(unref(dpNs).e("header-label")),
                 "aria-live": "polite",
                 tabindex: "0",
-                onKeydown: _cache[4] || (_cache[4] = withKeys(($event) => showPicker("year"), ["enter"])),
-                onClick: _cache[5] || (_cache[5] = ($event) => showPicker("year"))
-              }, toDisplayString(unref(yearLabel)), 35),
+                onKeydown: withKeys(($event) => showPicker("year"), ["enter"]),
+                onClick: ($event) => showPicker("year")
+              }, toDisplayString(unref(yearLabel)), 43, ["onKeydown", "onClick"]),
               withDirectives(createBaseVNode("span", {
                 role: "button",
                 "aria-live": "polite",
@@ -13310,9 +11969,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   unref(dpNs).e("header-label"),
                   { active: currentView.value === "month" }
                 ]),
-                onKeydown: _cache[6] || (_cache[6] = withKeys(($event) => showPicker("month"), ["enter"])),
-                onClick: _cache[7] || (_cache[7] = ($event) => showPicker("month"))
-              }, toDisplayString(unref(t)(`el.datepicker.month${unref(month) + 1}`)), 35), [
+                onKeydown: withKeys(($event) => showPicker("month"), ["enter"]),
+                onClick: ($event) => showPicker("month")
+              }, toDisplayString(unref(t)(`el.datepicker.month${unref(month) + 1}`)), 43, ["onKeydown", "onClick"]), [
                 [vShow, currentView.value === "date"]
               ]),
               createBaseVNode("span", {
@@ -13322,30 +11981,34 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-right"]),
-                  onClick: _cache[8] || (_cache[8] = ($event) => moveByMonth(true))
+                  onClick: ($event) => moveByMonth(true)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_4$2), [
+                  renderSlot(_ctx.$slots, "next-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"]), [
                   [vShow, currentView.value === "date"]
                 ]),
                 createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.nextYear`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
-                  onClick: _cache[9] || (_cache[9] = ($event) => moveByYear(true))
+                  onClick: ($event) => moveByYear(true)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_5$2)
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"])
               ], 2)
             ], 2), [
               [vShow, currentView.value !== "time"]
@@ -13361,7 +12024,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 "selection-mode": unref(selectionMode),
                 date: innerDate.value,
                 "parsed-value": _ctx.parsedValue,
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "cell-class-name": unref(cellClassName),
                 onPick: handleDatePick
               }, null, 8, ["selection-mode", "date", "parsed-value", "disabled-date", "cell-class-name"])) : createCommentVNode("v-if", true),
@@ -13371,7 +12034,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 ref: currentViewRef,
                 "selection-mode": unref(selectionMode),
                 date: innerDate.value,
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "parsed-value": _ctx.parsedValue,
                 onPick: handleYearPick
               }, null, 8, ["selection-mode", "date", "disabled-date", "parsed-value"])) : createCommentVNode("v-if", true),
@@ -13379,11 +12042,12 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                 key: 2,
                 ref_key: "currentViewRef",
                 ref: currentViewRef,
+                "selection-mode": unref(selectionMode),
                 date: innerDate.value,
                 "parsed-value": _ctx.parsedValue,
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 onPick: handleMonthPick
-              }, null, 8, ["date", "parsed-value", "disabled-date"])) : createCommentVNode("v-if", true)
+              }, null, 8, ["selection-mode", "date", "parsed-value", "disabled-date"])) : createCommentVNode("v-if", true)
             ], 34)
           ], 2)
         ], 2),
@@ -13402,7 +12066,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             ]),
             _: 1
           }, 8, ["class", "disabled"]), [
-            [vShow, unref(selectionMode) !== "dates" && unref(selectionMode) !== "years"]
+            [vShow, !unref(isMultipleType) && _ctx.showNow]
           ]),
           createVNode(unref(ElButton), {
             plain: "",
@@ -13423,10 +12087,11 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var DatePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "panel-date-pick.vue"]]);
+var DatePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "panel-date-pick.vue"]]);
 const panelDateRangeProps = buildProps({
   ...panelSharedProps,
-  ...panelRangeSharedProps
+  ...panelRangeSharedProps,
+  visible: Boolean
 });
 const useShortcut = (lang) => {
   const { emit } = getCurrentInstance();
@@ -13485,6 +12150,17 @@ const useRangePicker = (props, {
       rangeState.value.endDate = null;
     }
   };
+  const onReset = (parsedValue) => {
+    if (isArray$1(parsedValue) && parsedValue.length === 2) {
+      const [start, end] = parsedValue;
+      minDate.value = start;
+      leftDate.value = start;
+      maxDate.value = end;
+      onParsedValueChanged(unref(minDate), unref(maxDate));
+    } else {
+      restoreDefault();
+    }
+  };
   const restoreDefault = () => {
     const [start, end] = getDefaultValue(unref(defaultValue), {
       lang: unref(lang),
@@ -13501,17 +12177,7 @@ const useRangePicker = (props, {
       restoreDefault();
     }
   }, { immediate: true });
-  watch(() => props.parsedValue, (parsedValue2) => {
-    if (isArray$1(parsedValue2) && parsedValue2.length === 2) {
-      const [start, end] = parsedValue2;
-      minDate.value = start;
-      leftDate.value = start;
-      maxDate.value = end;
-      onParsedValueChanged(unref(minDate), unref(maxDate));
-    } else {
-      restoreDefault();
-    }
-  }, { immediate: true });
+  watch(() => props.parsedValue, onReset, { immediate: true });
   return {
     minDate,
     maxDate,
@@ -13523,20 +12189,12 @@ const useRangePicker = (props, {
     handleRangeConfirm,
     handleShortcutClick,
     onSelect,
+    onReset,
     t
   };
 };
-const _hoisted_1$5 = ["onClick"];
-const _hoisted_2$3 = ["aria-label"];
-const _hoisted_3$2 = ["aria-label"];
-const _hoisted_4$1 = ["disabled", "aria-label"];
-const _hoisted_5$1 = ["disabled", "aria-label"];
-const _hoisted_6 = ["disabled", "aria-label"];
-const _hoisted_7 = ["disabled", "aria-label"];
-const _hoisted_8 = ["aria-label"];
-const _hoisted_9 = ["aria-label"];
-const unit$1 = "month";
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const unit$2 = "month";
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "panel-date-range",
   props: panelDateRangeProps,
   emits: [
@@ -13548,12 +12206,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   setup(__props, { emit }) {
     const props = __props;
     const pickerBase = inject("EP_PICKER_BASE");
-    const { disabledDate: disabledDate2, cellClassName, format: format2, defaultTime, clearable } = pickerBase.props;
+    const { disabledDate, cellClassName, defaultTime, clearable } = pickerBase.props;
+    const format2 = toRef(pickerBase.props, "format");
     const shortcuts = toRef(pickerBase.props, "shortcuts");
     const defaultValue = toRef(pickerBase.props, "defaultValue");
     const { lang } = useLocale();
     const leftDate = ref(dayjs().locale(lang.value));
-    const rightDate = ref(dayjs().locale(lang.value).add(1, unit$1));
+    const rightDate = ref(dayjs().locale(lang.value).add(1, unit$2));
     const {
       minDate,
       maxDate,
@@ -13564,13 +12223,20 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       handleRangeConfirm,
       handleShortcutClick,
       onSelect,
+      onReset,
       t
     } = useRangePicker(props, {
       defaultValue,
       leftDate,
       rightDate,
-      unit: unit$1,
+      unit: unit$2,
       onParsedValueChanged
+    });
+    watch(() => props.visible, (visible) => {
+      if (!visible && rangeState.value.selecting) {
+        onReset(props.parsedValue);
+        onSelect(false);
+      }
     });
     const dateUserInput = ref({
       min: null,
@@ -13628,13 +12294,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       return "";
     });
     const timeFormat = computed(() => {
-      return props.timeFormat || extractTimeFormat(format2);
+      return props.timeFormat || extractTimeFormat(format2.value);
     });
     const dateFormat = computed(() => {
-      return props.dateFormat || extractDateFormat(format2);
+      return props.dateFormat || extractDateFormat(format2.value);
     });
-    const isValidValue = (date5) => {
-      return isValidRange(date5) && (disabledDate2 ? !disabledDate2(date5[0].toDate()) && !disabledDate2(date5[1].toDate()) : true);
+    const isValidValue = (date4) => {
+      return isValidRange(date4) && (disabledDate ? !disabledDate(date4[0].toDate()) && !disabledDate(date4[1].toDate()) : true);
     };
     const leftPrevYear = () => {
       leftDate.value = leftDate.value.subtract(1, "year");
@@ -13735,7 +12401,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       dateUserInput.value[type4] = value;
       const parsedValueD = dayjs(value, dateFormat.value).locale(lang.value);
       if (parsedValueD.isValid()) {
-        if (disabledDate2 && disabledDate2(parsedValueD.toDate())) {
+        if (disabledDate && disabledDate(parsedValueD.toDate())) {
           return;
         }
         if (type4 === "min") {
@@ -13765,16 +12431,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         if (type4 === "min") {
           minTimePickerVisible.value = true;
           minDate.value = (minDate.value || leftDate.value).hour(parsedValueD.hour()).minute(parsedValueD.minute()).second(parsedValueD.second());
-          if (!maxDate.value || maxDate.value.isBefore(minDate.value)) {
-            maxDate.value = minDate.value;
-          }
         } else {
           maxTimePickerVisible.value = true;
           maxDate.value = (maxDate.value || rightDate.value).hour(parsedValueD.hour()).minute(parsedValueD.minute()).second(parsedValueD.second());
           rightDate.value = maxDate.value;
-          if (maxDate.value && maxDate.value.isBefore(minDate.value)) {
-            minDate.value = maxDate.value;
-          }
         }
       }
     };
@@ -13783,9 +12443,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       if (type4 === "min") {
         leftDate.value = minDate.value;
         minTimePickerVisible.value = false;
+        if (!maxDate.value || maxDate.value.isBefore(minDate.value)) {
+          maxDate.value = minDate.value;
+        }
       } else {
         rightDate.value = maxDate.value;
         maxTimePickerVisible.value = false;
+        if (maxDate.value && maxDate.value.isBefore(minDate.value)) {
+          minDate.value = maxDate.value;
+        }
       }
     };
     const handleMinTimePick = (value, visible, first) => {
@@ -13824,13 +12490,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         unlinkPanels: props.unlinkPanels
       })[0];
       rightDate.value = leftDate.value.add(1, "month");
+      maxDate.value = void 0;
+      minDate.value = void 0;
       emit("pick", null);
     };
     const formatToString = (value) => {
-      return isArray$1(value) ? value.map((_2) => _2.format(format2)) : value.format(format2);
+      return isArray$1(value) ? value.map((_2) => _2.format(format2.value)) : value.format(format2.value);
     };
     const parseUserInput = (value) => {
-      return isArray$1(value) ? value.map((_2) => dayjs(_2, format2).locale(lang.value)) : dayjs(value, format2).locale(lang.value);
+      return isArray$1(value) ? value.map((_2) => dayjs(_2, format2.value).locale(lang.value)) : dayjs(value, format2.value).locale(lang.value);
     };
     function onParsedValueChanged(minDate2, maxDate2) {
       if (props.unlinkPanels && maxDate2) {
@@ -13838,9 +12506,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         const minDateMonth = (minDate2 == null ? void 0 : minDate2.month()) || 0;
         const maxDateYear = maxDate2.year();
         const maxDateMonth = maxDate2.month();
-        rightDate.value = minDateYear === maxDateYear && minDateMonth === maxDateMonth ? maxDate2.add(1, unit$1) : maxDate2;
+        rightDate.value = minDateYear === maxDateYear && minDateMonth === maxDateMonth ? maxDate2.add(1, unit$2) : maxDate2;
       } else {
-        rightDate.value = leftDate.value.add(1, unit$1);
+        rightDate.value = leftDate.value.add(1, unit$2);
         if (maxDate2) {
           rightDate.value = rightDate.value.hour(maxDate2.hour()).minute(maxDate2.minute()).second(maxDate2.second());
         }
@@ -13877,7 +12545,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 type: "button",
                 class: normalizeClass(unref(ppNs).e("shortcut")),
                 onClick: ($event) => unref(handleShortcutClick)(shortcut)
-              }, toDisplayString(shortcut.text), 11, _hoisted_1$5);
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
             }), 128))
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
@@ -13900,9 +12568,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     class: normalizeClass(unref(drpNs).e("editor")),
                     "model-value": unref(minVisibleDate),
                     "validate-event": false,
-                    onInput: _cache[0] || (_cache[0] = (val) => handleDateInput(val, "min")),
-                    onChange: _cache[1] || (_cache[1] = (val) => handleDateChange(val, "min"))
-                  }, null, 8, ["disabled", "placeholder", "class", "model-value"])
+                    onInput: (val) => handleDateInput(val, "min"),
+                    onChange: (val) => handleDateChange(val, "min")
+                  }, null, 8, ["disabled", "placeholder", "class", "model-value", "onInput", "onChange"])
                 ], 2),
                 withDirectives((openBlock(), createElementBlock("span", {
                   class: normalizeClass(unref(drpNs).e("time-picker-wrap"))
@@ -13914,10 +12582,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     placeholder: unref(t)("el.datepicker.startTime"),
                     "model-value": unref(minVisibleTime),
                     "validate-event": false,
-                    onFocus: _cache[2] || (_cache[2] = ($event) => minTimePickerVisible.value = true),
-                    onInput: _cache[3] || (_cache[3] = (val) => handleTimeInput(val, "min")),
-                    onChange: _cache[4] || (_cache[4] = (val) => handleTimeChange(val, "min"))
-                  }, null, 8, ["class", "disabled", "placeholder", "model-value"]),
+                    onFocus: ($event) => minTimePickerVisible.value = true,
+                    onInput: (val) => handleTimeInput(val, "min"),
+                    onChange: (val) => handleTimeChange(val, "min")
+                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "onFocus", "onInput", "onChange"]),
                   createVNode(unref(TimePickPanel), {
                     visible: minTimePickerVisible.value,
                     format: unref(timeFormat),
@@ -13951,9 +12619,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     "model-value": unref(maxVisibleDate),
                     readonly: !unref(minDate),
                     "validate-event": false,
-                    onInput: _cache[5] || (_cache[5] = (val) => handleDateInput(val, "max")),
-                    onChange: _cache[6] || (_cache[6] = (val) => handleDateChange(val, "max"))
-                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly"])
+                    onInput: (val) => handleDateInput(val, "max"),
+                    onChange: (val) => handleDateChange(val, "max")
+                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly", "onInput", "onChange"])
                 ], 2),
                 withDirectives((openBlock(), createElementBlock("span", {
                   class: normalizeClass(unref(drpNs).e("time-picker-wrap"))
@@ -13966,10 +12634,10 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                     "model-value": unref(maxVisibleTime),
                     readonly: !unref(minDate),
                     "validate-event": false,
-                    onFocus: _cache[7] || (_cache[7] = ($event) => unref(minDate) && (maxTimePickerVisible.value = true)),
-                    onInput: _cache[8] || (_cache[8] = (val) => handleTimeInput(val, "max")),
-                    onChange: _cache[9] || (_cache[9] = (val) => handleTimeChange(val, "max"))
-                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly"]),
+                    onFocus: ($event) => unref(minDate) && (maxTimePickerVisible.value = true),
+                    onInput: (val) => handleTimeInput(val, "max"),
+                    onChange: (val) => handleTimeChange(val, "max")
+                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly", "onFocus", "onInput", "onChange"]),
                   createVNode(unref(TimePickPanel), {
                     "datetime-role": "end",
                     visible: maxTimePickerVisible.value,
@@ -13994,26 +12662,30 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   "aria-label": unref(t)(`el.datepicker.prevYear`),
                   onClick: leftPrevYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_2$3),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
                   "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   onClick: leftPrevMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_3$2),
+                  renderSlot(_ctx.$slots, "prev-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 0,
                   type: "button",
@@ -14022,13 +12694,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   "aria-label": unref(t)(`el.datepicker.nextYear`),
                   onClick: leftNextYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_4$1)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 1,
                   type: "button",
@@ -14040,13 +12714,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   onClick: leftNextMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_5$1)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "next-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
               ], 2),
               createVNode(DateTable, {
@@ -14055,7 +12731,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "cell-class-name": unref(cellClassName),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
@@ -14076,13 +12752,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   "aria-label": unref(t)(`el.datepicker.prevYear`),
                   onClick: rightPrevYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_6)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 1,
                   type: "button",
@@ -14094,39 +12772,45 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                   "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   onClick: rightPrevMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_7)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "prev-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.nextYear`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
                   onClick: rightNextYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_8),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-right"]),
                   "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   onClick: rightNextMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_9),
+                  renderSlot(_ctx.$slots, "next-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 createBaseVNode("div", null, toDisplayString(unref(rightLabel)), 1)
               ], 2),
               createVNode(DateTable, {
@@ -14135,7 +12819,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "cell-class-name": unref(cellClassName),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
@@ -14165,19 +12849,19 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             size: "small",
             class: normalizeClass(unref(ppNs).e("link-btn")),
             disabled: unref(btnDisabled),
-            onClick: _cache[10] || (_cache[10] = ($event) => unref(handleRangeConfirm)(false))
+            onClick: ($event) => unref(handleRangeConfirm)(false)
           }, {
             default: withCtx(() => [
               createTextVNode(toDisplayString(unref(t)("el.datepicker.confirm")), 1)
             ]),
             _: 1
-          }, 8, ["class", "disabled"])
+          }, 8, ["class", "disabled", "onClick"])
         ], 2)) : createCommentVNode("v-if", true)
       ], 2);
     };
   }
 });
-var DateRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "panel-date-range.vue"]]);
+var DateRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "panel-date-range.vue"]]);
 const panelMonthRangeProps = buildProps({
   ...panelRangeSharedProps
 });
@@ -14233,25 +12917,23 @@ const useMonthRangeHeader = ({
     rightYear
   };
 };
-const _hoisted_1$4 = ["onClick"];
-const _hoisted_2$2 = ["disabled"];
-const _hoisted_3$1 = ["disabled"];
-const unit = "year";
-const __default__$1 = defineComponent({
+const unit$1 = "year";
+const __default__$4 = defineComponent({
   name: "DatePickerMonthRange"
 });
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  ...__default__$1,
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
+  ...__default__$4,
   props: panelMonthRangeProps,
   emits: panelMonthRangeEmits,
   setup(__props, { emit }) {
     const props = __props;
     const { lang } = useLocale();
     const pickerBase = inject("EP_PICKER_BASE");
-    const { shortcuts, disabledDate: disabledDate2, format: format2 } = pickerBase.props;
+    const { shortcuts, disabledDate } = pickerBase.props;
+    const format2 = toRef(pickerBase.props, "format");
     const defaultValue = toRef(pickerBase.props, "defaultValue");
     const leftDate = ref(dayjs().locale(lang.value));
-    const rightDate = ref(dayjs().locale(lang.value).add(1, unit));
+    const rightDate = ref(dayjs().locale(lang.value).add(1, unit$1));
     const {
       minDate,
       maxDate,
@@ -14266,7 +12948,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       defaultValue,
       leftDate,
       rightDate,
-      unit,
+      unit: unit$1,
       onParsedValueChanged
     });
     const hasShortcuts = computed(() => !!shortcuts.length);
@@ -14300,19 +12982,34 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         return;
       handleRangeConfirm();
     };
-    const formatToString = (days) => {
-      return days.map((day) => day.format(format2));
+    const handleClear = () => {
+      leftDate.value = getDefaultValue(unref(defaultValue), {
+        lang: unref(lang),
+        unit: "year",
+        unlinkPanels: props.unlinkPanels
+      })[0];
+      rightDate.value = leftDate.value.add(1, "year");
+      emit("pick", null);
+    };
+    const formatToString = (value) => {
+      return isArray$1(value) ? value.map((_2) => _2.format(format2.value)) : value.format(format2.value);
+    };
+    const parseUserInput = (value) => {
+      return isArray$1(value) ? value.map((_2) => dayjs(_2, format2.value).locale(lang.value)) : dayjs(value, format2.value).locale(lang.value);
     };
     function onParsedValueChanged(minDate2, maxDate2) {
       if (props.unlinkPanels && maxDate2) {
         const minDateYear = (minDate2 == null ? void 0 : minDate2.year()) || 0;
         const maxDateYear = maxDate2.year();
-        rightDate.value = minDateYear === maxDateYear ? maxDate2.add(1, unit) : maxDate2;
+        rightDate.value = minDateYear === maxDateYear ? maxDate2.add(1, unit$1) : maxDate2;
       } else {
-        rightDate.value = leftDate.value.add(1, unit);
+        rightDate.value = leftDate.value.add(1, unit$1);
       }
     }
+    emit("set-picker-option", ["isValidValue", isValidRange]);
     emit("set-picker-option", ["formatToString", formatToString]);
+    emit("set-picker-option", ["parseUserInput", parseUserInput]);
+    emit("set-picker-option", ["handleClear", handleClear]);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: normalizeClass([
@@ -14339,7 +13036,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                 type: "button",
                 class: normalizeClass(unref(ppNs).e("shortcut")),
                 onClick: ($event) => unref(handleShortcutClick)(shortcut)
-              }, toDisplayString(shortcut.text), 11, _hoisted_1$4);
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
             }), 128))
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
@@ -14354,15 +13051,17 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-left"]),
-                  onClick: _cache[0] || (_cache[0] = (...args) => unref(leftPrevYear) && unref(leftPrevYear)(...args))
+                  onClick: unref(leftPrevYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 2),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 0,
                   type: "button",
@@ -14371,15 +13070,17 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                     unref(ppNs).e("icon-btn"),
                     { [unref(ppNs).is("disabled")]: !unref(enableYearArrow) }
                   ], "d-arrow-right"]),
-                  onClick: _cache[1] || (_cache[1] = (...args) => unref(leftNextYear) && unref(leftNextYear)(...args))
+                  onClick: unref(leftNextYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_2$2)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
                 createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
               ], 2),
               createVNode(MonthTable, {
@@ -14388,7 +13089,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
                 onSelect: unref(onSelect)
@@ -14405,27 +13106,31 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                   type: "button",
                   disabled: !unref(enableYearArrow),
                   class: normalizeClass([[unref(ppNs).e("icon-btn"), { "is-disabled": !unref(enableYearArrow) }], "d-arrow-left"]),
-                  onClick: _cache[2] || (_cache[2] = (...args) => unref(rightPrevYear) && unref(rightPrevYear)(...args))
+                  onClick: unref(rightPrevYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_3$1)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
-                  onClick: _cache[3] || (_cache[3] = (...args) => unref(rightNextYear) && unref(rightNextYear)(...args))
+                  onClick: unref(rightNextYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 2),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
                 createBaseVNode("div", null, toDisplayString(unref(rightLabel)), 1)
               ], 2),
               createVNode(MonthTable, {
@@ -14434,7 +13139,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
                 onSelect: unref(onSelect)
@@ -14446,7 +13151,363 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var MonthRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "panel-month-range.vue"]]);
+var MonthRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "panel-month-range.vue"]]);
+const panelYearRangeProps = buildProps({
+  ...panelRangeSharedProps
+});
+const panelYearRangeEmits = [
+  "pick",
+  "set-picker-option",
+  "calendar-change"
+];
+const useYearRangeHeader = ({
+  unlinkPanels,
+  leftDate,
+  rightDate
+}) => {
+  const leftPrevYear = () => {
+    leftDate.value = leftDate.value.subtract(10, "year");
+    if (!unlinkPanels.value) {
+      rightDate.value = rightDate.value.subtract(10, "year");
+    }
+  };
+  const rightNextYear = () => {
+    if (!unlinkPanels.value) {
+      leftDate.value = leftDate.value.add(10, "year");
+    }
+    rightDate.value = rightDate.value.add(10, "year");
+  };
+  const leftNextYear = () => {
+    leftDate.value = leftDate.value.add(10, "year");
+  };
+  const rightPrevYear = () => {
+    rightDate.value = rightDate.value.subtract(10, "year");
+  };
+  const leftLabel = computed(() => {
+    const leftStartDate = Math.floor(leftDate.value.year() / 10) * 10;
+    return `${leftStartDate}-${leftStartDate + 9}`;
+  });
+  const rightLabel = computed(() => {
+    const rightStartDate = Math.floor(rightDate.value.year() / 10) * 10;
+    return `${rightStartDate}-${rightStartDate + 9}`;
+  });
+  const leftYear = computed(() => {
+    const leftEndDate = Math.floor(leftDate.value.year() / 10) * 10 + 9;
+    return leftEndDate;
+  });
+  const rightYear = computed(() => {
+    const rightStartDate = Math.floor(rightDate.value.year() / 10) * 10;
+    return rightStartDate;
+  });
+  return {
+    leftPrevYear,
+    rightNextYear,
+    leftNextYear,
+    rightPrevYear,
+    leftLabel,
+    rightLabel,
+    leftYear,
+    rightYear
+  };
+};
+const unit = "year";
+const __default__$3 = defineComponent({
+  name: "DatePickerYearRange"
+});
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
+  ...__default__$3,
+  props: panelYearRangeProps,
+  emits: panelYearRangeEmits,
+  setup(__props, { emit }) {
+    const props = __props;
+    const { lang } = useLocale();
+    const leftDate = ref(dayjs().locale(lang.value));
+    const rightDate = ref(leftDate.value.add(10, "year"));
+    const { pickerNs: ppNs } = inject(ROOT_PICKER_INJECTION_KEY);
+    const drpNs = useNamespace("date-range-picker");
+    const hasShortcuts = computed(() => !!shortcuts.length);
+    const panelKls = computed(() => [
+      ppNs.b(),
+      drpNs.b(),
+      {
+        "has-sidebar": Boolean(useSlots().sidebar) || hasShortcuts.value
+      }
+    ]);
+    const leftPanelKls = computed(() => {
+      return {
+        content: [ppNs.e("content"), drpNs.e("content"), "is-left"],
+        arrowLeftBtn: [ppNs.e("icon-btn"), "d-arrow-left"],
+        arrowRightBtn: [
+          ppNs.e("icon-btn"),
+          { [ppNs.is("disabled")]: !enableYearArrow.value },
+          "d-arrow-right"
+        ]
+      };
+    });
+    const rightPanelKls = computed(() => {
+      return {
+        content: [ppNs.e("content"), drpNs.e("content"), "is-right"],
+        arrowLeftBtn: [
+          ppNs.e("icon-btn"),
+          { "is-disabled": !enableYearArrow.value },
+          "d-arrow-left"
+        ],
+        arrowRightBtn: [ppNs.e("icon-btn"), "d-arrow-right"]
+      };
+    });
+    const handleShortcutClick = useShortcut(lang);
+    const {
+      leftPrevYear,
+      rightNextYear,
+      leftNextYear,
+      rightPrevYear,
+      leftLabel,
+      rightLabel,
+      leftYear,
+      rightYear
+    } = useYearRangeHeader({
+      unlinkPanels: toRef(props, "unlinkPanels"),
+      leftDate,
+      rightDate
+    });
+    const enableYearArrow = computed(() => {
+      return props.unlinkPanels && rightYear.value > leftYear.value + 1;
+    });
+    const minDate = ref();
+    const maxDate = ref();
+    const rangeState = ref({
+      endDate: null,
+      selecting: false
+    });
+    const handleChangeRange = (val) => {
+      rangeState.value = val;
+    };
+    const handleRangePick = (val, close = true) => {
+      const minDate_ = val.minDate;
+      const maxDate_ = val.maxDate;
+      if (maxDate.value === maxDate_ && minDate.value === minDate_) {
+        return;
+      }
+      emit("calendar-change", [minDate_.toDate(), maxDate_ && maxDate_.toDate()]);
+      maxDate.value = maxDate_;
+      minDate.value = minDate_;
+      if (!close)
+        return;
+      handleConfirm();
+    };
+    const handleConfirm = (visible = false) => {
+      if (isValidRange([minDate.value, maxDate.value])) {
+        emit("pick", [minDate.value, maxDate.value], visible);
+      }
+    };
+    const onSelect = (selecting) => {
+      rangeState.value.selecting = selecting;
+      if (!selecting) {
+        rangeState.value.endDate = null;
+      }
+    };
+    const pickerBase = inject("EP_PICKER_BASE");
+    const { shortcuts, disabledDate } = pickerBase.props;
+    const format2 = toRef(pickerBase.props, "format");
+    const defaultValue = toRef(pickerBase.props, "defaultValue");
+    const getDefaultValue2 = () => {
+      let start;
+      if (isArray$1(defaultValue.value)) {
+        const left = dayjs(defaultValue.value[0]);
+        let right = dayjs(defaultValue.value[1]);
+        if (!props.unlinkPanels) {
+          right = left.add(10, unit);
+        }
+        return [left, right];
+      } else if (defaultValue.value) {
+        start = dayjs(defaultValue.value);
+      } else {
+        start = dayjs();
+      }
+      start = start.locale(lang.value);
+      return [start, start.add(10, unit)];
+    };
+    watch(() => defaultValue.value, (val) => {
+      if (val) {
+        const defaultArr = getDefaultValue2();
+        leftDate.value = defaultArr[0];
+        rightDate.value = defaultArr[1];
+      }
+    }, { immediate: true });
+    watch(() => props.parsedValue, (newVal) => {
+      if (newVal && newVal.length === 2) {
+        minDate.value = newVal[0];
+        maxDate.value = newVal[1];
+        leftDate.value = minDate.value;
+        if (props.unlinkPanels && maxDate.value) {
+          const minDateYear = minDate.value.year();
+          const maxDateYear = maxDate.value.year();
+          rightDate.value = minDateYear === maxDateYear ? maxDate.value.add(10, "year") : maxDate.value;
+        } else {
+          rightDate.value = leftDate.value.add(10, "year");
+        }
+      } else {
+        const defaultArr = getDefaultValue2();
+        minDate.value = void 0;
+        maxDate.value = void 0;
+        leftDate.value = defaultArr[0];
+        rightDate.value = defaultArr[1];
+      }
+    }, { immediate: true });
+    const parseUserInput = (value) => {
+      return isArray$1(value) ? value.map((_2) => dayjs(_2, format2.value).locale(lang.value)) : dayjs(value, format2.value).locale(lang.value);
+    };
+    const formatToString = (value) => {
+      return isArray$1(value) ? value.map((day) => day.format(format2.value)) : value.format(format2.value);
+    };
+    const isValidValue = (date4) => {
+      return isValidRange(date4) && (disabledDate ? !disabledDate(date4[0].toDate()) && !disabledDate(date4[1].toDate()) : true);
+    };
+    const handleClear = () => {
+      const defaultArr = getDefaultValue2();
+      leftDate.value = defaultArr[0];
+      rightDate.value = defaultArr[1];
+      maxDate.value = void 0;
+      minDate.value = void 0;
+      emit("pick", null);
+    };
+    emit("set-picker-option", ["isValidValue", isValidValue]);
+    emit("set-picker-option", ["parseUserInput", parseUserInput]);
+    emit("set-picker-option", ["formatToString", formatToString]);
+    emit("set-picker-option", ["handleClear", handleClear]);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(unref(panelKls))
+      }, [
+        createBaseVNode("div", {
+          class: normalizeClass(unref(ppNs).e("body-wrapper"))
+        }, [
+          renderSlot(_ctx.$slots, "sidebar", {
+            class: normalizeClass(unref(ppNs).e("sidebar"))
+          }),
+          unref(hasShortcuts) ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(unref(ppNs).e("sidebar"))
+          }, [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(unref(shortcuts), (shortcut, key) => {
+              return openBlock(), createElementBlock("button", {
+                key,
+                type: "button",
+                class: normalizeClass(unref(ppNs).e("shortcut")),
+                onClick: ($event) => unref(handleShortcutClick)(shortcut)
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
+            }), 128))
+          ], 2)) : createCommentVNode("v-if", true),
+          createBaseVNode("div", {
+            class: normalizeClass(unref(ppNs).e("body"))
+          }, [
+            createBaseVNode("div", {
+              class: normalizeClass(unref(leftPanelKls).content)
+            }, [
+              createBaseVNode("div", {
+                class: normalizeClass(unref(drpNs).e("header"))
+              }, [
+                createBaseVNode("button", {
+                  type: "button",
+                  class: normalizeClass(unref(leftPanelKls).arrowLeftBtn),
+                  onClick: unref(leftPrevYear)
+                }, [
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
+                _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
+                  key: 0,
+                  type: "button",
+                  disabled: !unref(enableYearArrow),
+                  class: normalizeClass(unref(leftPanelKls).arrowRightBtn),
+                  onClick: unref(leftNextYear)
+                }, [
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
+                createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
+              ], 2),
+              createVNode(YearTable, {
+                "selection-mode": "range",
+                date: leftDate.value,
+                "min-date": minDate.value,
+                "max-date": maxDate.value,
+                "range-state": rangeState.value,
+                "disabled-date": unref(disabledDate),
+                onChangerange: handleChangeRange,
+                onPick: handleRangePick,
+                onSelect
+              }, null, 8, ["date", "min-date", "max-date", "range-state", "disabled-date"])
+            ], 2),
+            createBaseVNode("div", {
+              class: normalizeClass(unref(rightPanelKls).content)
+            }, [
+              createBaseVNode("div", {
+                class: normalizeClass(unref(drpNs).e("header"))
+              }, [
+                _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
+                  key: 0,
+                  type: "button",
+                  disabled: !unref(enableYearArrow),
+                  class: normalizeClass(unref(rightPanelKls).arrowLeftBtn),
+                  onClick: unref(rightPrevYear)
+                }, [
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
+                createBaseVNode("button", {
+                  type: "button",
+                  class: normalizeClass(unref(rightPanelKls).arrowRightBtn),
+                  onClick: unref(rightNextYear)
+                }, [
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
+                createBaseVNode("div", null, toDisplayString(unref(rightLabel)), 1)
+              ], 2),
+              createVNode(YearTable, {
+                "selection-mode": "range",
+                date: rightDate.value,
+                "min-date": minDate.value,
+                "max-date": maxDate.value,
+                "range-state": rangeState.value,
+                "disabled-date": unref(disabledDate),
+                onChangerange: handleChangeRange,
+                onPick: handleRangePick,
+                onSelect
+              }, null, 8, ["date", "min-date", "max-date", "range-state", "disabled-date"])
+            ], 2)
+          ], 2)
+        ], 2)
+      ], 2);
+    };
+  }
+});
+var YearRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "panel-year-range.vue"]]);
 const getPanel = function(type4) {
   switch (type4) {
     case "daterange":
@@ -14455,6 +13516,9 @@ const getPanel = function(type4) {
     }
     case "monthrange": {
       return MonthRangePickPanel;
+    }
+    case "yearrange": {
+      return YearRangePickPanel;
     }
     default: {
       return DatePickPanel;
@@ -14487,9 +13551,13 @@ var DatePicker = defineComponent({
     });
     const commonPicker = ref();
     const refProps = {
-      focus: (focusStartInput = true) => {
+      focus: () => {
         var _a2;
-        (_a2 = commonPicker.value) == null ? void 0 : _a2.focus(focusStartInput);
+        (_a2 = commonPicker.value) == null ? void 0 : _a2.focus();
+      },
+      blur: () => {
+        var _a2;
+        (_a2 = commonPicker.value) == null ? void 0 : _a2.blur();
       },
       handleOpen: () => {
         var _a2;
@@ -14514,32 +13582,1753 @@ var DatePicker = defineComponent({
         "ref": commonPicker,
         "onUpdate:modelValue": onModelValueUpdated
       }), {
-        default: (scopedProps) => createVNode(Component, scopedProps, null),
+        default: (scopedProps) => createVNode(Component, scopedProps, {
+          "prev-month": slots["prev-month"],
+          "next-month": slots["next-month"],
+          "prev-year": slots["prev-year"],
+          "next-year": slots["next-year"]
+        }),
         "range-separator": slots["range-separator"]
       });
     };
   }
 });
-const _DatePicker = DatePicker;
-_DatePicker.install = (app) => {
-  app.component(_DatePicker.name, _DatePicker);
+const ElDatePicker = withInstall(DatePicker);
+const formMetaProps = buildProps({
+  size: {
+    type: String,
+    values: componentSizes
+  },
+  disabled: Boolean
+});
+const formProps = buildProps({
+  ...formMetaProps,
+  model: Object,
+  rules: {
+    type: definePropType(Object)
+  },
+  labelPosition: {
+    type: String,
+    values: ["left", "right", "top"],
+    default: "right"
+  },
+  requireAsteriskPosition: {
+    type: String,
+    values: ["left", "right"],
+    default: "left"
+  },
+  labelWidth: {
+    type: [String, Number],
+    default: ""
+  },
+  labelSuffix: {
+    type: String,
+    default: ""
+  },
+  inline: Boolean,
+  inlineMessage: Boolean,
+  statusIcon: Boolean,
+  showMessage: {
+    type: Boolean,
+    default: true
+  },
+  validateOnRuleChange: {
+    type: Boolean,
+    default: true
+  },
+  hideRequiredAsterisk: Boolean,
+  scrollToError: Boolean,
+  scrollIntoViewOptions: {
+    type: [Object, Boolean]
+  }
+});
+const formEmits = {
+  validate: (prop, isValid, message) => (isArray$1(prop) || isString$1(prop)) && isBoolean(isValid) && isString$1(message)
 };
-const ElDatePicker = _DatePicker;
+function useFormLabelWidth() {
+  const potentialLabelWidthArr = ref([]);
+  const autoLabelWidth = computed(() => {
+    if (!potentialLabelWidthArr.value.length)
+      return "0";
+    const max = Math.max(...potentialLabelWidthArr.value);
+    return max ? `${max}px` : "";
+  });
+  function getLabelWidthIndex(width) {
+    const index = potentialLabelWidthArr.value.indexOf(width);
+    if (index === -1 && autoLabelWidth.value === "0") ;
+    return index;
+  }
+  function registerLabelWidth(val, oldVal) {
+    if (val && oldVal) {
+      const index = getLabelWidthIndex(oldVal);
+      potentialLabelWidthArr.value.splice(index, 1, val);
+    } else if (val) {
+      potentialLabelWidthArr.value.push(val);
+    }
+  }
+  function deregisterLabelWidth(val) {
+    const index = getLabelWidthIndex(val);
+    if (index > -1) {
+      potentialLabelWidthArr.value.splice(index, 1);
+    }
+  }
+  return {
+    autoLabelWidth,
+    registerLabelWidth,
+    deregisterLabelWidth
+  };
+}
+const filterFields = (fields, props) => {
+  const normalized = castArray$1(props);
+  return normalized.length > 0 ? fields.filter((field) => field.prop && normalized.includes(field.prop)) : fields;
+};
+const COMPONENT_NAME$2 = "ElForm";
+const __default__$2 = defineComponent({
+  name: COMPONENT_NAME$2
+});
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+  ...__default__$2,
+  props: formProps,
+  emits: formEmits,
+  setup(__props, { expose, emit }) {
+    const props = __props;
+    const fields = [];
+    const formSize = useFormSize();
+    const ns = useNamespace("form");
+    const formClasses = computed(() => {
+      const { labelPosition, inline } = props;
+      return [
+        ns.b(),
+        ns.m(formSize.value || "default"),
+        {
+          [ns.m(`label-${labelPosition}`)]: labelPosition,
+          [ns.m("inline")]: inline
+        }
+      ];
+    });
+    const getField = (prop) => {
+      return fields.find((field) => field.prop === prop);
+    };
+    const addField = (field) => {
+      fields.push(field);
+    };
+    const removeField = (field) => {
+      if (field.prop) {
+        fields.splice(fields.indexOf(field), 1);
+      }
+    };
+    const resetFields = (properties = []) => {
+      if (!props.model) {
+        return;
+      }
+      filterFields(fields, properties).forEach((field) => field.resetField());
+    };
+    const clearValidate = (props2 = []) => {
+      filterFields(fields, props2).forEach((field) => field.clearValidate());
+    };
+    const isValidatable = computed(() => {
+      const hasModel = !!props.model;
+      return hasModel;
+    });
+    const obtainValidateFields = (props2) => {
+      if (fields.length === 0)
+        return [];
+      const filteredFields = filterFields(fields, props2);
+      if (!filteredFields.length) {
+        return [];
+      }
+      return filteredFields;
+    };
+    const validate = async (callback) => validateField(void 0, callback);
+    const doValidateField = async (props2 = []) => {
+      if (!isValidatable.value)
+        return false;
+      const fields2 = obtainValidateFields(props2);
+      if (fields2.length === 0)
+        return true;
+      let validationErrors = {};
+      for (const field of fields2) {
+        try {
+          await field.validate("");
+          if (field.validateState === "error")
+            field.resetField();
+        } catch (fields3) {
+          validationErrors = {
+            ...validationErrors,
+            ...fields3
+          };
+        }
+      }
+      if (Object.keys(validationErrors).length === 0)
+        return true;
+      return Promise.reject(validationErrors);
+    };
+    const validateField = async (modelProps = [], callback) => {
+      const shouldThrow = !isFunction$1(callback);
+      try {
+        const result = await doValidateField(modelProps);
+        if (result === true) {
+          await (callback == null ? void 0 : callback(result));
+        }
+        return result;
+      } catch (e) {
+        if (e instanceof Error)
+          throw e;
+        const invalidFields = e;
+        if (props.scrollToError) {
+          scrollToField(Object.keys(invalidFields)[0]);
+        }
+        await (callback == null ? void 0 : callback(false, invalidFields));
+        return shouldThrow && Promise.reject(invalidFields);
+      }
+    };
+    const scrollToField = (prop) => {
+      var _a2;
+      const field = filterFields(fields, prop)[0];
+      if (field) {
+        (_a2 = field.$el) == null ? void 0 : _a2.scrollIntoView(props.scrollIntoViewOptions);
+      }
+    };
+    watch(() => props.rules, () => {
+      if (props.validateOnRuleChange) {
+        validate().catch((err) => debugWarn());
+      }
+    }, { deep: true, flush: "post" });
+    provide(formContextKey, reactive({
+      ...toRefs(props),
+      emit,
+      resetFields,
+      clearValidate,
+      validateField,
+      getField,
+      addField,
+      removeField,
+      ...useFormLabelWidth()
+    }));
+    expose({
+      validate,
+      validateField,
+      resetFields,
+      clearValidate,
+      scrollToField,
+      fields
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("form", {
+        class: normalizeClass(unref(formClasses))
+      }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 2);
+    };
+  }
+});
+var Form = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "form.vue"]]);
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i2 = 1; i2 < arguments.length; i2++) {
+      var source = arguments[i2];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  _setPrototypeOf(subClass, superClass);
+}
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf2(o2) {
+    return o2.__proto__ || Object.getPrototypeOf(o2);
+  };
+  return _getPrototypeOf(o);
+}
+function _setPrototypeOf(o, p2) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p22) {
+    o2.__proto__ = p22;
+    return o2;
+  };
+  return _setPrototypeOf(o, p2);
+}
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+    }));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+function _construct(Parent, args, Class) {
+  if (_isNativeReflectConstruct()) {
+    _construct = Reflect.construct.bind();
+  } else {
+    _construct = function _construct2(Parent2, args2, Class2) {
+      var a = [null];
+      a.push.apply(a, args2);
+      var Constructor = Function.bind.apply(Parent2, a);
+      var instance = new Constructor();
+      if (Class2) _setPrototypeOf(instance, Class2.prototype);
+      return instance;
+    };
+  }
+  return _construct.apply(null, arguments);
+}
+function _isNativeFunction(fn2) {
+  return Function.toString.call(fn2).indexOf("[native code]") !== -1;
+}
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? /* @__PURE__ */ new Map() : void 0;
+  _wrapNativeSuper = function _wrapNativeSuper2(Class2) {
+    if (Class2 === null || !_isNativeFunction(Class2)) return Class2;
+    if (typeof Class2 !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class2)) return _cache.get(Class2);
+      _cache.set(Class2, Wrapper);
+    }
+    function Wrapper() {
+      return _construct(Class2, arguments, _getPrototypeOf(this).constructor);
+    }
+    Wrapper.prototype = Object.create(Class2.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return _setPrototypeOf(Wrapper, Class2);
+  };
+  return _wrapNativeSuper(Class);
+}
+var formatRegExp = /%[sdj%]/g;
+var warning = function warning2() {
+};
+function convertFieldsError(errors) {
+  if (!errors || !errors.length) return null;
+  var fields = {};
+  errors.forEach(function(error) {
+    var field = error.field;
+    fields[field] = fields[field] || [];
+    fields[field].push(error);
+  });
+  return fields;
+}
+function format(template) {
+  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+  var i2 = 0;
+  var len = args.length;
+  if (typeof template === "function") {
+    return template.apply(null, args);
+  }
+  if (typeof template === "string") {
+    var str = template.replace(formatRegExp, function(x2) {
+      if (x2 === "%%") {
+        return "%";
+      }
+      if (i2 >= len) {
+        return x2;
+      }
+      switch (x2) {
+        case "%s":
+          return String(args[i2++]);
+        case "%d":
+          return Number(args[i2++]);
+        case "%j":
+          try {
+            return JSON.stringify(args[i2++]);
+          } catch (_2) {
+            return "[Circular]";
+          }
+          break;
+        default:
+          return x2;
+      }
+    });
+    return str;
+  }
+  return template;
+}
+function isNativeStringType(type4) {
+  return type4 === "string" || type4 === "url" || type4 === "hex" || type4 === "email" || type4 === "date" || type4 === "pattern";
+}
+function isEmptyValue(value, type4) {
+  if (value === void 0 || value === null) {
+    return true;
+  }
+  if (type4 === "array" && Array.isArray(value) && !value.length) {
+    return true;
+  }
+  if (isNativeStringType(type4) && typeof value === "string" && !value) {
+    return true;
+  }
+  return false;
+}
+function asyncParallelArray(arr, func, callback) {
+  var results = [];
+  var total = 0;
+  var arrLength = arr.length;
+  function count(errors) {
+    results.push.apply(results, errors || []);
+    total++;
+    if (total === arrLength) {
+      callback(results);
+    }
+  }
+  arr.forEach(function(a) {
+    func(a, count);
+  });
+}
+function asyncSerialArray(arr, func, callback) {
+  var index = 0;
+  var arrLength = arr.length;
+  function next(errors) {
+    if (errors && errors.length) {
+      callback(errors);
+      return;
+    }
+    var original = index;
+    index = index + 1;
+    if (original < arrLength) {
+      func(arr[original], next);
+    } else {
+      callback([]);
+    }
+  }
+  next([]);
+}
+function flattenObjArr(objArr) {
+  var ret = [];
+  Object.keys(objArr).forEach(function(k2) {
+    ret.push.apply(ret, objArr[k2] || []);
+  });
+  return ret;
+}
+var AsyncValidationError = /* @__PURE__ */ function(_Error) {
+  _inheritsLoose(AsyncValidationError2, _Error);
+  function AsyncValidationError2(errors, fields) {
+    var _this;
+    _this = _Error.call(this, "Async Validation Error") || this;
+    _this.errors = errors;
+    _this.fields = fields;
+    return _this;
+  }
+  return AsyncValidationError2;
+}(/* @__PURE__ */ _wrapNativeSuper(Error));
+function asyncMap(objArr, option, func, callback, source) {
+  if (option.first) {
+    var _pending = new Promise(function(resolve, reject) {
+      var next = function next2(errors) {
+        callback(errors);
+        return errors.length ? reject(new AsyncValidationError(errors, convertFieldsError(errors))) : resolve(source);
+      };
+      var flattenArr = flattenObjArr(objArr);
+      asyncSerialArray(flattenArr, func, next);
+    });
+    _pending["catch"](function(e) {
+      return e;
+    });
+    return _pending;
+  }
+  var firstFields = option.firstFields === true ? Object.keys(objArr) : option.firstFields || [];
+  var objArrKeys = Object.keys(objArr);
+  var objArrLength = objArrKeys.length;
+  var total = 0;
+  var results = [];
+  var pending = new Promise(function(resolve, reject) {
+    var next = function next2(errors) {
+      results.push.apply(results, errors);
+      total++;
+      if (total === objArrLength) {
+        callback(results);
+        return results.length ? reject(new AsyncValidationError(results, convertFieldsError(results))) : resolve(source);
+      }
+    };
+    if (!objArrKeys.length) {
+      callback(results);
+      resolve(source);
+    }
+    objArrKeys.forEach(function(key) {
+      var arr = objArr[key];
+      if (firstFields.indexOf(key) !== -1) {
+        asyncSerialArray(arr, func, next);
+      } else {
+        asyncParallelArray(arr, func, next);
+      }
+    });
+  });
+  pending["catch"](function(e) {
+    return e;
+  });
+  return pending;
+}
+function isErrorObj(obj) {
+  return !!(obj && obj.message !== void 0);
+}
+function getValue(value, path) {
+  var v2 = value;
+  for (var i2 = 0; i2 < path.length; i2++) {
+    if (v2 == void 0) {
+      return v2;
+    }
+    v2 = v2[path[i2]];
+  }
+  return v2;
+}
+function complementError(rule, source) {
+  return function(oe) {
+    var fieldValue;
+    if (rule.fullFields) {
+      fieldValue = getValue(source, rule.fullFields);
+    } else {
+      fieldValue = source[oe.field || rule.fullField];
+    }
+    if (isErrorObj(oe)) {
+      oe.field = oe.field || rule.fullField;
+      oe.fieldValue = fieldValue;
+      return oe;
+    }
+    return {
+      message: typeof oe === "function" ? oe() : oe,
+      fieldValue,
+      field: oe.field || rule.fullField
+    };
+  };
+}
+function deepMerge(target, source) {
+  if (source) {
+    for (var s in source) {
+      if (source.hasOwnProperty(s)) {
+        var value = source[s];
+        if (typeof value === "object" && typeof target[s] === "object") {
+          target[s] = _extends({}, target[s], value);
+        } else {
+          target[s] = value;
+        }
+      }
+    }
+  }
+  return target;
+}
+var required$1 = function required(rule, value, source, errors, options, type4) {
+  if (rule.required && (!source.hasOwnProperty(rule.field) || isEmptyValue(value, type4 || rule.type))) {
+    errors.push(format(options.messages.required, rule.fullField));
+  }
+};
+var whitespace = function whitespace2(rule, value, source, errors, options) {
+  if (/^\s+$/.test(value) || value === "") {
+    errors.push(format(options.messages.whitespace, rule.fullField));
+  }
+};
+var urlReg;
+var getUrlRegex = function() {
+  if (urlReg) {
+    return urlReg;
+  }
+  var word = "[a-fA-F\\d:]";
+  var b2 = function b22(options) {
+    return options && options.includeBoundaries ? "(?:(?<=\\s|^)(?=" + word + ")|(?<=" + word + ")(?=\\s|$))" : "";
+  };
+  var v4 = "(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)){3}";
+  var v6seg = "[a-fA-F\\d]{1,4}";
+  var v6 = ("\n(?:\n(?:" + v6seg + ":){7}(?:" + v6seg + "|:)|                                    // 1:2:3:4:5:6:7::  1:2:3:4:5:6:7:8\n(?:" + v6seg + ":){6}(?:" + v4 + "|:" + v6seg + "|:)|                             // 1:2:3:4:5:6::    1:2:3:4:5:6::8   1:2:3:4:5:6::8  1:2:3:4:5:6::1.2.3.4\n(?:" + v6seg + ":){5}(?::" + v4 + "|(?::" + v6seg + "){1,2}|:)|                   // 1:2:3:4:5::      1:2:3:4:5::7:8   1:2:3:4:5::8    1:2:3:4:5::7:1.2.3.4\n(?:" + v6seg + ":){4}(?:(?::" + v6seg + "){0,1}:" + v4 + "|(?::" + v6seg + "){1,3}|:)| // 1:2:3:4::        1:2:3:4::6:7:8   1:2:3:4::8      1:2:3:4::6:7:1.2.3.4\n(?:" + v6seg + ":){3}(?:(?::" + v6seg + "){0,2}:" + v4 + "|(?::" + v6seg + "){1,4}|:)| // 1:2:3::          1:2:3::5:6:7:8   1:2:3::8        1:2:3::5:6:7:1.2.3.4\n(?:" + v6seg + ":){2}(?:(?::" + v6seg + "){0,3}:" + v4 + "|(?::" + v6seg + "){1,5}|:)| // 1:2::            1:2::4:5:6:7:8   1:2::8          1:2::4:5:6:7:1.2.3.4\n(?:" + v6seg + ":){1}(?:(?::" + v6seg + "){0,4}:" + v4 + "|(?::" + v6seg + "){1,6}|:)| // 1::              1::3:4:5:6:7:8   1::8            1::3:4:5:6:7:1.2.3.4\n(?::(?:(?::" + v6seg + "){0,5}:" + v4 + "|(?::" + v6seg + "){1,7}|:))             // ::2:3:4:5:6:7:8  ::2:3:4:5:6:7:8  ::8             ::1.2.3.4\n)(?:%[0-9a-zA-Z]{1,})?                                             // %eth0            %1\n").replace(/\s*\/\/.*$/gm, "").replace(/\n/g, "").trim();
+  var v46Exact = new RegExp("(?:^" + v4 + "$)|(?:^" + v6 + "$)");
+  var v4exact = new RegExp("^" + v4 + "$");
+  var v6exact = new RegExp("^" + v6 + "$");
+  var ip = function ip2(options) {
+    return options && options.exact ? v46Exact : new RegExp("(?:" + b2(options) + v4 + b2(options) + ")|(?:" + b2(options) + v6 + b2(options) + ")", "g");
+  };
+  ip.v4 = function(options) {
+    return options && options.exact ? v4exact : new RegExp("" + b2(options) + v4 + b2(options), "g");
+  };
+  ip.v6 = function(options) {
+    return options && options.exact ? v6exact : new RegExp("" + b2(options) + v6 + b2(options), "g");
+  };
+  var protocol = "(?:(?:[a-z]+:)?//)";
+  var auth = "(?:\\S+(?::\\S*)?@)?";
+  var ipv4 = ip.v4().source;
+  var ipv6 = ip.v6().source;
+  var host = "(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)";
+  var domain = "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*";
+  var tld = "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))";
+  var port = "(?::\\d{2,5})?";
+  var path = '(?:[/?#][^\\s"]*)?';
+  var regex = "(?:" + protocol + "|www\\.)" + auth + "(?:localhost|" + ipv4 + "|" + ipv6 + "|" + host + domain + tld + ")" + port + path;
+  urlReg = new RegExp("(?:^" + regex + "$)", "i");
+  return urlReg;
+};
+var pattern$2 = {
+  // http://emailregex.com/
+  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+\.)+[a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]{2,}))$/,
+  // url: new RegExp(
+  //   '^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$',
+  //   'i',
+  // ),
+  hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
+};
+var types = {
+  integer: function integer(value) {
+    return types.number(value) && parseInt(value, 10) === value;
+  },
+  "float": function float(value) {
+    return types.number(value) && !types.integer(value);
+  },
+  array: function array(value) {
+    return Array.isArray(value);
+  },
+  regexp: function regexp(value) {
+    if (value instanceof RegExp) {
+      return true;
+    }
+    try {
+      return !!new RegExp(value);
+    } catch (e) {
+      return false;
+    }
+  },
+  date: function date(value) {
+    return typeof value.getTime === "function" && typeof value.getMonth === "function" && typeof value.getYear === "function" && !isNaN(value.getTime());
+  },
+  number: function number(value) {
+    if (isNaN(value)) {
+      return false;
+    }
+    return typeof value === "number";
+  },
+  object: function object(value) {
+    return typeof value === "object" && !types.array(value);
+  },
+  method: function method(value) {
+    return typeof value === "function";
+  },
+  email: function email(value) {
+    return typeof value === "string" && value.length <= 320 && !!value.match(pattern$2.email);
+  },
+  url: function url(value) {
+    return typeof value === "string" && value.length <= 2048 && !!value.match(getUrlRegex());
+  },
+  hex: function hex(value) {
+    return typeof value === "string" && !!value.match(pattern$2.hex);
+  }
+};
+var type$1 = function type(rule, value, source, errors, options) {
+  if (rule.required && value === void 0) {
+    required$1(rule, value, source, errors, options);
+    return;
+  }
+  var custom = ["integer", "float", "array", "regexp", "object", "method", "email", "number", "date", "url", "hex"];
+  var ruleType = rule.type;
+  if (custom.indexOf(ruleType) > -1) {
+    if (!types[ruleType](value)) {
+      errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
+    }
+  } else if (ruleType && typeof value !== rule.type) {
+    errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
+  }
+};
+var range = function range2(rule, value, source, errors, options) {
+  var len = typeof rule.len === "number";
+  var min = typeof rule.min === "number";
+  var max = typeof rule.max === "number";
+  var spRegexp = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+  var val = value;
+  var key = null;
+  var num = typeof value === "number";
+  var str = typeof value === "string";
+  var arr = Array.isArray(value);
+  if (num) {
+    key = "number";
+  } else if (str) {
+    key = "string";
+  } else if (arr) {
+    key = "array";
+  }
+  if (!key) {
+    return false;
+  }
+  if (arr) {
+    val = value.length;
+  }
+  if (str) {
+    val = value.replace(spRegexp, "_").length;
+  }
+  if (len) {
+    if (val !== rule.len) {
+      errors.push(format(options.messages[key].len, rule.fullField, rule.len));
+    }
+  } else if (min && !max && val < rule.min) {
+    errors.push(format(options.messages[key].min, rule.fullField, rule.min));
+  } else if (max && !min && val > rule.max) {
+    errors.push(format(options.messages[key].max, rule.fullField, rule.max));
+  } else if (min && max && (val < rule.min || val > rule.max)) {
+    errors.push(format(options.messages[key].range, rule.fullField, rule.min, rule.max));
+  }
+};
+var ENUM$1 = "enum";
+var enumerable$1 = function enumerable(rule, value, source, errors, options) {
+  rule[ENUM$1] = Array.isArray(rule[ENUM$1]) ? rule[ENUM$1] : [];
+  if (rule[ENUM$1].indexOf(value) === -1) {
+    errors.push(format(options.messages[ENUM$1], rule.fullField, rule[ENUM$1].join(", ")));
+  }
+};
+var pattern$1 = function pattern(rule, value, source, errors, options) {
+  if (rule.pattern) {
+    if (rule.pattern instanceof RegExp) {
+      rule.pattern.lastIndex = 0;
+      if (!rule.pattern.test(value)) {
+        errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+      }
+    } else if (typeof rule.pattern === "string") {
+      var _pattern = new RegExp(rule.pattern);
+      if (!_pattern.test(value)) {
+        errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+      }
+    }
+  }
+};
+var rules = {
+  required: required$1,
+  whitespace,
+  type: type$1,
+  range,
+  "enum": enumerable$1,
+  pattern: pattern$1
+};
+var string = function string2(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value, "string") && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options, "string");
+    if (!isEmptyValue(value, "string")) {
+      rules.type(rule, value, source, errors, options);
+      rules.range(rule, value, source, errors, options);
+      rules.pattern(rule, value, source, errors, options);
+      if (rule.whitespace === true) {
+        rules.whitespace(rule, value, source, errors, options);
+      }
+    }
+  }
+  callback(errors);
+};
+var method2 = function method3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules.type(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var number2 = function number3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (value === "") {
+      value = void 0;
+    }
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules.type(rule, value, source, errors, options);
+      rules.range(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var _boolean = function _boolean2(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules.type(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var regexp2 = function regexp3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (!isEmptyValue(value)) {
+      rules.type(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var integer2 = function integer3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules.type(rule, value, source, errors, options);
+      rules.range(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var floatFn = function floatFn2(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules.type(rule, value, source, errors, options);
+      rules.range(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var array2 = function array3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if ((value === void 0 || value === null) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options, "array");
+    if (value !== void 0 && value !== null) {
+      rules.type(rule, value, source, errors, options);
+      rules.range(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var object2 = function object3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules.type(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var ENUM = "enum";
+var enumerable2 = function enumerable3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (value !== void 0) {
+      rules[ENUM](rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var pattern2 = function pattern3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value, "string") && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (!isEmptyValue(value, "string")) {
+      rules.pattern(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var date2 = function date3(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value, "date") && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+    if (!isEmptyValue(value, "date")) {
+      var dateObject;
+      if (value instanceof Date) {
+        dateObject = value;
+      } else {
+        dateObject = new Date(value);
+      }
+      rules.type(rule, dateObject, source, errors, options);
+      if (dateObject) {
+        rules.range(rule, dateObject.getTime(), source, errors, options);
+      }
+    }
+  }
+  callback(errors);
+};
+var required2 = function required3(rule, value, callback, source, options) {
+  var errors = [];
+  var type4 = Array.isArray(value) ? "array" : typeof value;
+  rules.required(rule, value, source, errors, options, type4);
+  callback(errors);
+};
+var type2 = function type3(rule, value, callback, source, options) {
+  var ruleType = rule.type;
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value, ruleType) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options, ruleType);
+    if (!isEmptyValue(value, ruleType)) {
+      rules.type(rule, value, source, errors, options);
+    }
+  }
+  callback(errors);
+};
+var any = function any2(rule, value, callback, source, options) {
+  var errors = [];
+  var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+  if (validate) {
+    if (isEmptyValue(value) && !rule.required) {
+      return callback();
+    }
+    rules.required(rule, value, source, errors, options);
+  }
+  callback(errors);
+};
+var validators = {
+  string,
+  method: method2,
+  number: number2,
+  "boolean": _boolean,
+  regexp: regexp2,
+  integer: integer2,
+  "float": floatFn,
+  array: array2,
+  object: object2,
+  "enum": enumerable2,
+  pattern: pattern2,
+  date: date2,
+  url: type2,
+  hex: type2,
+  email: type2,
+  required: required2,
+  any
+};
+function newMessages() {
+  return {
+    "default": "Validation error on field %s",
+    required: "%s is required",
+    "enum": "%s must be one of %s",
+    whitespace: "%s cannot be empty",
+    date: {
+      format: "%s date %s is invalid for format %s",
+      parse: "%s date could not be parsed, %s is invalid ",
+      invalid: "%s date %s is invalid"
+    },
+    types: {
+      string: "%s is not a %s",
+      method: "%s is not a %s (function)",
+      array: "%s is not an %s",
+      object: "%s is not an %s",
+      number: "%s is not a %s",
+      date: "%s is not a %s",
+      "boolean": "%s is not a %s",
+      integer: "%s is not an %s",
+      "float": "%s is not a %s",
+      regexp: "%s is not a valid %s",
+      email: "%s is not a valid %s",
+      url: "%s is not a valid %s",
+      hex: "%s is not a valid %s"
+    },
+    string: {
+      len: "%s must be exactly %s characters",
+      min: "%s must be at least %s characters",
+      max: "%s cannot be longer than %s characters",
+      range: "%s must be between %s and %s characters"
+    },
+    number: {
+      len: "%s must equal %s",
+      min: "%s cannot be less than %s",
+      max: "%s cannot be greater than %s",
+      range: "%s must be between %s and %s"
+    },
+    array: {
+      len: "%s must be exactly %s in length",
+      min: "%s cannot be less than %s in length",
+      max: "%s cannot be greater than %s in length",
+      range: "%s must be between %s and %s in length"
+    },
+    pattern: {
+      mismatch: "%s value %s does not match pattern %s"
+    },
+    clone: function clone2() {
+      var cloned = JSON.parse(JSON.stringify(this));
+      cloned.clone = this.clone;
+      return cloned;
+    }
+  };
+}
+var messages = newMessages();
+var Schema = /* @__PURE__ */ function() {
+  function Schema2(descriptor) {
+    this.rules = null;
+    this._messages = messages;
+    this.define(descriptor);
+  }
+  var _proto = Schema2.prototype;
+  _proto.define = function define(rules2) {
+    var _this = this;
+    if (!rules2) {
+      throw new Error("Cannot configure a schema with no rules");
+    }
+    if (typeof rules2 !== "object" || Array.isArray(rules2)) {
+      throw new Error("Rules must be an object");
+    }
+    this.rules = {};
+    Object.keys(rules2).forEach(function(name) {
+      var item = rules2[name];
+      _this.rules[name] = Array.isArray(item) ? item : [item];
+    });
+  };
+  _proto.messages = function messages2(_messages) {
+    if (_messages) {
+      this._messages = deepMerge(newMessages(), _messages);
+    }
+    return this._messages;
+  };
+  _proto.validate = function validate(source_, o, oc) {
+    var _this2 = this;
+    if (o === void 0) {
+      o = {};
+    }
+    if (oc === void 0) {
+      oc = function oc2() {
+      };
+    }
+    var source = source_;
+    var options = o;
+    var callback = oc;
+    if (typeof options === "function") {
+      callback = options;
+      options = {};
+    }
+    if (!this.rules || Object.keys(this.rules).length === 0) {
+      if (callback) {
+        callback(null, source);
+      }
+      return Promise.resolve(source);
+    }
+    function complete(results) {
+      var errors = [];
+      var fields = {};
+      function add(e) {
+        if (Array.isArray(e)) {
+          var _errors;
+          errors = (_errors = errors).concat.apply(_errors, e);
+        } else {
+          errors.push(e);
+        }
+      }
+      for (var i2 = 0; i2 < results.length; i2++) {
+        add(results[i2]);
+      }
+      if (!errors.length) {
+        callback(null, source);
+      } else {
+        fields = convertFieldsError(errors);
+        callback(errors, fields);
+      }
+    }
+    if (options.messages) {
+      var messages$1 = this.messages();
+      if (messages$1 === messages) {
+        messages$1 = newMessages();
+      }
+      deepMerge(messages$1, options.messages);
+      options.messages = messages$1;
+    } else {
+      options.messages = this.messages();
+    }
+    var series = {};
+    var keys2 = options.keys || Object.keys(this.rules);
+    keys2.forEach(function(z2) {
+      var arr = _this2.rules[z2];
+      var value = source[z2];
+      arr.forEach(function(r2) {
+        var rule = r2;
+        if (typeof rule.transform === "function") {
+          if (source === source_) {
+            source = _extends({}, source);
+          }
+          value = source[z2] = rule.transform(value);
+        }
+        if (typeof rule === "function") {
+          rule = {
+            validator: rule
+          };
+        } else {
+          rule = _extends({}, rule);
+        }
+        rule.validator = _this2.getValidationMethod(rule);
+        if (!rule.validator) {
+          return;
+        }
+        rule.field = z2;
+        rule.fullField = rule.fullField || z2;
+        rule.type = _this2.getType(rule);
+        series[z2] = series[z2] || [];
+        series[z2].push({
+          rule,
+          value,
+          source,
+          field: z2
+        });
+      });
+    });
+    var errorFields = {};
+    return asyncMap(series, options, function(data, doIt) {
+      var rule = data.rule;
+      var deep = (rule.type === "object" || rule.type === "array") && (typeof rule.fields === "object" || typeof rule.defaultField === "object");
+      deep = deep && (rule.required || !rule.required && data.value);
+      rule.field = data.field;
+      function addFullField(key, schema) {
+        return _extends({}, schema, {
+          fullField: rule.fullField + "." + key,
+          fullFields: rule.fullFields ? [].concat(rule.fullFields, [key]) : [key]
+        });
+      }
+      function cb(e) {
+        if (e === void 0) {
+          e = [];
+        }
+        var errorList = Array.isArray(e) ? e : [e];
+        if (!options.suppressWarning && errorList.length) {
+          Schema2.warning("async-validator:", errorList);
+        }
+        if (errorList.length && rule.message !== void 0) {
+          errorList = [].concat(rule.message);
+        }
+        var filledErrors = errorList.map(complementError(rule, source));
+        if (options.first && filledErrors.length) {
+          errorFields[rule.field] = 1;
+          return doIt(filledErrors);
+        }
+        if (!deep) {
+          doIt(filledErrors);
+        } else {
+          if (rule.required && !data.value) {
+            if (rule.message !== void 0) {
+              filledErrors = [].concat(rule.message).map(complementError(rule, source));
+            } else if (options.error) {
+              filledErrors = [options.error(rule, format(options.messages.required, rule.field))];
+            }
+            return doIt(filledErrors);
+          }
+          var fieldsSchema = {};
+          if (rule.defaultField) {
+            Object.keys(data.value).map(function(key) {
+              fieldsSchema[key] = rule.defaultField;
+            });
+          }
+          fieldsSchema = _extends({}, fieldsSchema, data.rule.fields);
+          var paredFieldsSchema = {};
+          Object.keys(fieldsSchema).forEach(function(field) {
+            var fieldSchema = fieldsSchema[field];
+            var fieldSchemaList = Array.isArray(fieldSchema) ? fieldSchema : [fieldSchema];
+            paredFieldsSchema[field] = fieldSchemaList.map(addFullField.bind(null, field));
+          });
+          var schema = new Schema2(paredFieldsSchema);
+          schema.messages(options.messages);
+          if (data.rule.options) {
+            data.rule.options.messages = options.messages;
+            data.rule.options.error = options.error;
+          }
+          schema.validate(data.value, data.rule.options || options, function(errs) {
+            var finalErrors = [];
+            if (filledErrors && filledErrors.length) {
+              finalErrors.push.apply(finalErrors, filledErrors);
+            }
+            if (errs && errs.length) {
+              finalErrors.push.apply(finalErrors, errs);
+            }
+            doIt(finalErrors.length ? finalErrors : null);
+          });
+        }
+      }
+      var res;
+      if (rule.asyncValidator) {
+        res = rule.asyncValidator(rule, data.value, cb, data.source, options);
+      } else if (rule.validator) {
+        try {
+          res = rule.validator(rule, data.value, cb, data.source, options);
+        } catch (error) {
+          console.error == null ? void 0 : console.error(error);
+          if (!options.suppressValidatorError) {
+            setTimeout(function() {
+              throw error;
+            }, 0);
+          }
+          cb(error.message);
+        }
+        if (res === true) {
+          cb();
+        } else if (res === false) {
+          cb(typeof rule.message === "function" ? rule.message(rule.fullField || rule.field) : rule.message || (rule.fullField || rule.field) + " fails");
+        } else if (res instanceof Array) {
+          cb(res);
+        } else if (res instanceof Error) {
+          cb(res.message);
+        }
+      }
+      if (res && res.then) {
+        res.then(function() {
+          return cb();
+        }, function(e) {
+          return cb(e);
+        });
+      }
+    }, function(results) {
+      complete(results);
+    }, source);
+  };
+  _proto.getType = function getType(rule) {
+    if (rule.type === void 0 && rule.pattern instanceof RegExp) {
+      rule.type = "pattern";
+    }
+    if (typeof rule.validator !== "function" && rule.type && !validators.hasOwnProperty(rule.type)) {
+      throw new Error(format("Unknown rule type %s", rule.type));
+    }
+    return rule.type || "string";
+  };
+  _proto.getValidationMethod = function getValidationMethod(rule) {
+    if (typeof rule.validator === "function") {
+      return rule.validator;
+    }
+    var keys2 = Object.keys(rule);
+    var messageIndex = keys2.indexOf("message");
+    if (messageIndex !== -1) {
+      keys2.splice(messageIndex, 1);
+    }
+    if (keys2.length === 1 && keys2[0] === "required") {
+      return validators.required;
+    }
+    return validators[this.getType(rule)] || void 0;
+  };
+  return Schema2;
+}();
+Schema.register = function register(type4, validator) {
+  if (typeof validator !== "function") {
+    throw new Error("Cannot register a validator by type, validator is not a function");
+  }
+  validators[type4] = validator;
+};
+Schema.warning = warning;
+Schema.messages = messages;
+Schema.validators = validators;
+const formItemValidateStates = [
+  "",
+  "error",
+  "validating",
+  "success"
+];
+const formItemProps = buildProps({
+  label: String,
+  labelWidth: {
+    type: [String, Number],
+    default: ""
+  },
+  labelPosition: {
+    type: String,
+    values: ["left", "right", "top", ""],
+    default: ""
+  },
+  prop: {
+    type: definePropType([String, Array])
+  },
+  required: {
+    type: Boolean,
+    default: void 0
+  },
+  rules: {
+    type: definePropType([Object, Array])
+  },
+  error: String,
+  validateStatus: {
+    type: String,
+    values: formItemValidateStates
+  },
+  for: String,
+  inlineMessage: {
+    type: [String, Boolean],
+    default: ""
+  },
+  showMessage: {
+    type: Boolean,
+    default: true
+  },
+  size: {
+    type: String,
+    values: componentSizes
+  }
+});
+const COMPONENT_NAME$1 = "ElLabelWrap";
+var FormLabelWrap = defineComponent({
+  name: COMPONENT_NAME$1,
+  props: {
+    isAutoWidth: Boolean,
+    updateAll: Boolean
+  },
+  setup(props, {
+    slots
+  }) {
+    const formContext = inject(formContextKey, void 0);
+    const formItemContext = inject(formItemContextKey);
+    if (!formItemContext)
+      throwError(COMPONENT_NAME$1, "usage: <el-form-item><label-wrap /></el-form-item>");
+    const ns = useNamespace("form");
+    const el = ref();
+    const computedWidth = ref(0);
+    const getLabelWidth = () => {
+      var _a2;
+      if ((_a2 = el.value) == null ? void 0 : _a2.firstElementChild) {
+        const width = window.getComputedStyle(el.value.firstElementChild).width;
+        return Math.ceil(Number.parseFloat(width));
+      } else {
+        return 0;
+      }
+    };
+    const updateLabelWidth = (action = "update") => {
+      nextTick(() => {
+        if (slots.default && props.isAutoWidth) {
+          if (action === "update") {
+            computedWidth.value = getLabelWidth();
+          } else if (action === "remove") {
+            formContext == null ? void 0 : formContext.deregisterLabelWidth(computedWidth.value);
+          }
+        }
+      });
+    };
+    const updateLabelWidthFn = () => updateLabelWidth("update");
+    onMounted(() => {
+      updateLabelWidthFn();
+    });
+    onBeforeUnmount(() => {
+      updateLabelWidth("remove");
+    });
+    onUpdated(() => updateLabelWidthFn());
+    watch(computedWidth, (val, oldVal) => {
+      if (props.updateAll) {
+        formContext == null ? void 0 : formContext.registerLabelWidth(val, oldVal);
+      }
+    });
+    useResizeObserver(computed(() => {
+      var _a2, _b;
+      return (_b = (_a2 = el.value) == null ? void 0 : _a2.firstElementChild) != null ? _b : null;
+    }), updateLabelWidthFn);
+    return () => {
+      var _a2, _b;
+      if (!slots)
+        return null;
+      const {
+        isAutoWidth
+      } = props;
+      if (isAutoWidth) {
+        const autoLabelWidth = formContext == null ? void 0 : formContext.autoLabelWidth;
+        const hasLabel = formItemContext == null ? void 0 : formItemContext.hasLabel;
+        const style = {};
+        if (hasLabel && autoLabelWidth && autoLabelWidth !== "auto") {
+          const marginWidth = Math.max(0, Number.parseInt(autoLabelWidth, 10) - computedWidth.value);
+          const labelPosition = formItemContext.labelPosition || formContext.labelPosition;
+          const marginPosition = labelPosition === "left" ? "marginRight" : "marginLeft";
+          if (marginWidth) {
+            style[marginPosition] = `${marginWidth}px`;
+          }
+        }
+        return createVNode("div", {
+          "ref": el,
+          "class": [ns.be("item", "label-wrap")],
+          "style": style
+        }, [(_a2 = slots.default) == null ? void 0 : _a2.call(slots)]);
+      } else {
+        return createVNode(Fragment, {
+          "ref": el
+        }, [(_b = slots.default) == null ? void 0 : _b.call(slots)]);
+      }
+    };
+  }
+});
+const __default__$1 = defineComponent({
+  name: "ElFormItem"
+});
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+  ...__default__$1,
+  props: formItemProps,
+  setup(__props, { expose }) {
+    const props = __props;
+    const slots = useSlots();
+    const formContext = inject(formContextKey, void 0);
+    const parentFormItemContext = inject(formItemContextKey, void 0);
+    const _size = useFormSize(void 0, { formItem: false });
+    const ns = useNamespace("form-item");
+    const labelId = useId().value;
+    const inputIds = ref([]);
+    const validateState = ref("");
+    const validateStateDebounced = refDebounced(validateState, 100);
+    const validateMessage = ref("");
+    const formItemRef = ref();
+    let initialValue = void 0;
+    let isResettingField = false;
+    const labelPosition = computed(() => props.labelPosition || (formContext == null ? void 0 : formContext.labelPosition));
+    const labelStyle = computed(() => {
+      if (labelPosition.value === "top") {
+        return {};
+      }
+      const labelWidth = addUnit(props.labelWidth || (formContext == null ? void 0 : formContext.labelWidth) || "");
+      if (labelWidth)
+        return { width: labelWidth };
+      return {};
+    });
+    const contentStyle = computed(() => {
+      if (labelPosition.value === "top" || (formContext == null ? void 0 : formContext.inline)) {
+        return {};
+      }
+      if (!props.label && !props.labelWidth && isNested) {
+        return {};
+      }
+      const labelWidth = addUnit(props.labelWidth || (formContext == null ? void 0 : formContext.labelWidth) || "");
+      if (!props.label && !slots.label) {
+        return { marginLeft: labelWidth };
+      }
+      return {};
+    });
+    const formItemClasses = computed(() => [
+      ns.b(),
+      ns.m(_size.value),
+      ns.is("error", validateState.value === "error"),
+      ns.is("validating", validateState.value === "validating"),
+      ns.is("success", validateState.value === "success"),
+      ns.is("required", isRequired.value || props.required),
+      ns.is("no-asterisk", formContext == null ? void 0 : formContext.hideRequiredAsterisk),
+      (formContext == null ? void 0 : formContext.requireAsteriskPosition) === "right" ? "asterisk-right" : "asterisk-left",
+      {
+        [ns.m("feedback")]: formContext == null ? void 0 : formContext.statusIcon,
+        [ns.m(`label-${labelPosition.value}`)]: labelPosition.value
+      }
+    ]);
+    const _inlineMessage = computed(() => isBoolean(props.inlineMessage) ? props.inlineMessage : (formContext == null ? void 0 : formContext.inlineMessage) || false);
+    const validateClasses = computed(() => [
+      ns.e("error"),
+      { [ns.em("error", "inline")]: _inlineMessage.value }
+    ]);
+    const propString = computed(() => {
+      if (!props.prop)
+        return "";
+      return isString$1(props.prop) ? props.prop : props.prop.join(".");
+    });
+    const hasLabel = computed(() => {
+      return !!(props.label || slots.label);
+    });
+    const labelFor = computed(() => {
+      return props.for || (inputIds.value.length === 1 ? inputIds.value[0] : void 0);
+    });
+    const isGroup = computed(() => {
+      return !labelFor.value && hasLabel.value;
+    });
+    const isNested = !!parentFormItemContext;
+    const fieldValue = computed(() => {
+      const model = formContext == null ? void 0 : formContext.model;
+      if (!model || !props.prop) {
+        return;
+      }
+      return getProp(model, props.prop).value;
+    });
+    const normalizedRules = computed(() => {
+      const { required: required4 } = props;
+      const rules2 = [];
+      if (props.rules) {
+        rules2.push(...castArray$1(props.rules));
+      }
+      const formRules = formContext == null ? void 0 : formContext.rules;
+      if (formRules && props.prop) {
+        const _rules = getProp(formRules, props.prop).value;
+        if (_rules) {
+          rules2.push(...castArray$1(_rules));
+        }
+      }
+      if (required4 !== void 0) {
+        const requiredRules = rules2.map((rule, i2) => [rule, i2]).filter(([rule]) => Object.keys(rule).includes("required"));
+        if (requiredRules.length > 0) {
+          for (const [rule, i2] of requiredRules) {
+            if (rule.required === required4)
+              continue;
+            rules2[i2] = { ...rule, required: required4 };
+          }
+        } else {
+          rules2.push({ required: required4 });
+        }
+      }
+      return rules2;
+    });
+    const validateEnabled = computed(() => normalizedRules.value.length > 0);
+    const getFilteredRule = (trigger) => {
+      const rules2 = normalizedRules.value;
+      return rules2.filter((rule) => {
+        if (!rule.trigger || !trigger)
+          return true;
+        if (isArray$1(rule.trigger)) {
+          return rule.trigger.includes(trigger);
+        } else {
+          return rule.trigger === trigger;
+        }
+      }).map(({ trigger: trigger2, ...rule }) => rule);
+    };
+    const isRequired = computed(() => normalizedRules.value.some((rule) => rule.required));
+    const shouldShowError = computed(() => {
+      var _a2;
+      return validateStateDebounced.value === "error" && props.showMessage && ((_a2 = formContext == null ? void 0 : formContext.showMessage) != null ? _a2 : true);
+    });
+    const currentLabel = computed(() => `${props.label || ""}${(formContext == null ? void 0 : formContext.labelSuffix) || ""}`);
+    const setValidationState = (state) => {
+      validateState.value = state;
+    };
+    const onValidationFailed = (error) => {
+      var _a2, _b;
+      const { errors, fields } = error;
+      if (!errors || !fields) {
+        console.error(error);
+      }
+      setValidationState("error");
+      validateMessage.value = errors ? (_b = (_a2 = errors == null ? void 0 : errors[0]) == null ? void 0 : _a2.message) != null ? _b : `${props.prop} is required` : "";
+      formContext == null ? void 0 : formContext.emit("validate", props.prop, false, validateMessage.value);
+    };
+    const onValidationSucceeded = () => {
+      setValidationState("success");
+      formContext == null ? void 0 : formContext.emit("validate", props.prop, true, "");
+    };
+    const doValidate = async (rules2) => {
+      const modelName = propString.value;
+      const validator = new Schema({
+        [modelName]: rules2
+      });
+      return validator.validate({ [modelName]: fieldValue.value }, { firstFields: true }).then(() => {
+        onValidationSucceeded();
+        return true;
+      }).catch((err) => {
+        onValidationFailed(err);
+        return Promise.reject(err);
+      });
+    };
+    const validate = async (trigger, callback) => {
+      if (isResettingField || !props.prop) {
+        return false;
+      }
+      const hasCallback = isFunction$1(callback);
+      if (!validateEnabled.value) {
+        callback == null ? void 0 : callback(false);
+        return false;
+      }
+      const rules2 = getFilteredRule(trigger);
+      if (rules2.length === 0) {
+        callback == null ? void 0 : callback(true);
+        return true;
+      }
+      setValidationState("validating");
+      return doValidate(rules2).then(() => {
+        callback == null ? void 0 : callback(true);
+        return true;
+      }).catch((err) => {
+        const { fields } = err;
+        callback == null ? void 0 : callback(false, fields);
+        return hasCallback ? false : Promise.reject(fields);
+      });
+    };
+    const clearValidate = () => {
+      setValidationState("");
+      validateMessage.value = "";
+      isResettingField = false;
+    };
+    const resetField = async () => {
+      const model = formContext == null ? void 0 : formContext.model;
+      if (!model || !props.prop)
+        return;
+      const computedValue = getProp(model, props.prop);
+      isResettingField = true;
+      computedValue.value = clone(initialValue);
+      await nextTick();
+      clearValidate();
+      isResettingField = false;
+    };
+    const addInputId = (id) => {
+      if (!inputIds.value.includes(id)) {
+        inputIds.value.push(id);
+      }
+    };
+    const removeInputId = (id) => {
+      inputIds.value = inputIds.value.filter((listId) => listId !== id);
+    };
+    watch(() => props.error, (val) => {
+      validateMessage.value = val || "";
+      setValidationState(val ? "error" : "");
+    }, { immediate: true });
+    watch(() => props.validateStatus, (val) => setValidationState(val || ""));
+    const context = reactive({
+      ...toRefs(props),
+      $el: formItemRef,
+      size: _size,
+      validateState,
+      labelId,
+      inputIds,
+      isGroup,
+      hasLabel,
+      fieldValue,
+      addInputId,
+      removeInputId,
+      resetField,
+      clearValidate,
+      validate
+    });
+    provide(formItemContextKey, context);
+    onMounted(() => {
+      if (props.prop) {
+        formContext == null ? void 0 : formContext.addField(context);
+        initialValue = clone(fieldValue.value);
+      }
+    });
+    onBeforeUnmount(() => {
+      formContext == null ? void 0 : formContext.removeField(context);
+    });
+    expose({
+      size: _size,
+      validateMessage,
+      validateState,
+      validate,
+      clearValidate,
+      resetField
+    });
+    return (_ctx, _cache) => {
+      var _a2;
+      return openBlock(), createElementBlock("div", {
+        ref_key: "formItemRef",
+        ref: formItemRef,
+        class: normalizeClass(unref(formItemClasses)),
+        role: unref(isGroup) ? "group" : void 0,
+        "aria-labelledby": unref(isGroup) ? unref(labelId) : void 0
+      }, [
+        createVNode(unref(FormLabelWrap), {
+          "is-auto-width": unref(labelStyle).width === "auto",
+          "update-all": ((_a2 = unref(formContext)) == null ? void 0 : _a2.labelWidth) === "auto"
+        }, {
+          default: withCtx(() => [
+            unref(hasLabel) ? (openBlock(), createBlock(resolveDynamicComponent(unref(labelFor) ? "label" : "div"), {
+              key: 0,
+              id: unref(labelId),
+              for: unref(labelFor),
+              class: normalizeClass(unref(ns).e("label")),
+              style: normalizeStyle(unref(labelStyle))
+            }, {
+              default: withCtx(() => [
+                renderSlot(_ctx.$slots, "label", { label: unref(currentLabel) }, () => [
+                  createTextVNode(toDisplayString(unref(currentLabel)), 1)
+                ])
+              ]),
+              _: 3
+            }, 8, ["id", "for", "class", "style"])) : createCommentVNode("v-if", true)
+          ]),
+          _: 3
+        }, 8, ["is-auto-width", "update-all"]),
+        createBaseVNode("div", {
+          class: normalizeClass(unref(ns).e("content")),
+          style: normalizeStyle(unref(contentStyle))
+        }, [
+          renderSlot(_ctx.$slots, "default"),
+          createVNode(TransitionGroup, {
+            name: `${unref(ns).namespace.value}-zoom-in-top`
+          }, {
+            default: withCtx(() => [
+              unref(shouldShowError) ? renderSlot(_ctx.$slots, "error", {
+                key: 0,
+                error: validateMessage.value
+              }, () => [
+                createBaseVNode("div", {
+                  class: normalizeClass(unref(validateClasses))
+                }, toDisplayString(validateMessage.value), 3)
+              ]) : createCommentVNode("v-if", true)
+            ]),
+            _: 3
+          }, 8, ["name"])
+        ], 6)
+      ], 10, ["role", "aria-labelledby"]);
+    };
+  }
+});
+var FormItem = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "form-item.vue"]]);
+const ElForm = withInstall(Form, {
+  FormItem
+});
+const ElFormItem = withNoopInstall(FormItem);
+function useCalcInputWidth() {
+  const calculatorRef = shallowRef();
+  const calculatorWidth = ref(0);
+  const MINIMUM_INPUT_WIDTH = 11;
+  const inputStyle = computed(() => ({
+    minWidth: `${Math.max(calculatorWidth.value, MINIMUM_INPUT_WIDTH)}px`
+  }));
+  const resetCalculatorWidth = () => {
+    var _a2, _b;
+    calculatorWidth.value = (_b = (_a2 = calculatorRef.value) == null ? void 0 : _a2.getBoundingClientRect().width) != null ? _b : 0;
+  };
+  useResizeObserver(calculatorRef, resetCalculatorWidth);
+  return {
+    calculatorRef,
+    calculatorWidth,
+    inputStyle
+  };
+}
 const selectGroupKey = Symbol("ElSelectGroup");
 const selectKey = Symbol("ElSelect");
 function useOption(props, states) {
   const select = inject(selectKey);
   const selectGroup = inject(selectGroupKey, { disabled: false });
   const itemSelected = computed(() => {
-    if (select.props.multiple) {
-      return contains(select.props.modelValue, props.value);
-    } else {
-      return contains([select.props.modelValue], props.value);
-    }
+    return contains(castArray$1(select.props.modelValue), props.value);
   });
   const limitReached = computed(() => {
+    var _a2;
     if (select.props.multiple) {
-      const modelValue = select.props.modelValue || [];
+      const modelValue = castArray$1((_a2 = select.props.modelValue) != null ? _a2 : []);
       return !itemSelected.value && modelValue.length >= select.props.multipleLimit && select.props.multipleLimit > 0;
     } else {
       return false;
@@ -14580,7 +15369,7 @@ function useOption(props, states) {
   });
   watch(() => props.value, (val, oldVal) => {
     const { remote, valueKey } = select.props;
-    if (!isEqual(val, oldVal)) {
+    if (val !== oldVal) {
       select.onOptionDestroy(oldVal, instance.proxy);
       select.onOptionCreate(instance.proxy);
     }
@@ -14644,8 +15433,7 @@ const _sfc_main$7 = defineComponent({
     select.onOptionCreate(vm);
     onBeforeUnmount(() => {
       const key = vm.value;
-      const { selected } = select.states;
-      const selectedOptions = select.props.multiple ? selected : [selected];
+      const { selected: selectedOptions } = select.states;
       const doesSelected = selectedOptions.some((item) => {
         return item.value === vm.value;
       });
@@ -14657,7 +15445,7 @@ const _sfc_main$7 = defineComponent({
       select.onOptionDestroy(key, vm);
     });
     function selectOptionClick() {
-      if (props.disabled !== true && states.groupDisabled !== true) {
+      if (!isDisabled.value) {
         select.handleOptionSelect(vm);
       }
     }
@@ -14678,7 +15466,6 @@ const _sfc_main$7 = defineComponent({
     };
   }
 });
-const _hoisted_1$3 = ["id", "aria-disabled", "aria-selected"];
 function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("li", {
     id: _ctx.id,
@@ -14686,13 +15473,13 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     role: "option",
     "aria-disabled": _ctx.isDisabled || void 0,
     "aria-selected": _ctx.itemSelected,
-    onMouseenter: _cache[0] || (_cache[0] = (...args) => _ctx.hoverItem && _ctx.hoverItem(...args)),
-    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.selectOptionClick && _ctx.selectOptionClick(...args), ["stop"]))
+    onMousemove: _ctx.hoverItem,
+    onClick: withModifiers(_ctx.selectOptionClick, ["stop"])
   }, [
     renderSlot(_ctx.$slots, "default", {}, () => [
       createBaseVNode("span", null, toDisplayString(_ctx.currentLabel), 1)
     ])
-  ], 42, _hoisted_1$3)), [
+  ], 42, ["id", "aria-disabled", "aria-selected", "onMousemove", "onClick"])), [
     [vShow, _ctx.visible]
   ]);
 }
@@ -14745,31 +15532,6 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
   ], 6);
 }
 var ElSelectMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4], ["__file", "select-dropdown.vue"]]);
-function useInput(handleInput) {
-  const isComposing = ref(false);
-  const handleCompositionStart = () => {
-    isComposing.value = true;
-  };
-  const handleCompositionUpdate = (event) => {
-    const text = event.target.value;
-    const lastCharacter = text[text.length - 1] || "";
-    isComposing.value = !isKorean(lastCharacter);
-  };
-  const handleCompositionEnd = (event) => {
-    if (isComposing.value) {
-      isComposing.value = false;
-      if (isFunction$1(handleInput)) {
-        handleInput(event);
-      }
-    }
-  };
-  return {
-    handleCompositionStart,
-    handleCompositionUpdate,
-    handleCompositionEnd
-  };
-}
-const MINIMUM_INPUT_WIDTH = 11;
 const useSelect = (props, emit) => {
   const { t } = useLocale();
   const contentId = useId();
@@ -14779,11 +15541,9 @@ const useSelect = (props, emit) => {
     inputValue: "",
     options: /* @__PURE__ */ new Map(),
     cachedOptions: /* @__PURE__ */ new Map(),
-    disabledOptions: /* @__PURE__ */ new Map(),
     optionValues: [],
-    selected: props.multiple ? [] : {},
+    selected: [],
     selectionWidth: 0,
-    calculatorWidth: 0,
     collapseItemWidth: 0,
     selectedLabel: "",
     hoveringIndex: -1,
@@ -14797,14 +15557,24 @@ const useSelect = (props, emit) => {
   const tooltipRef = ref(null);
   const tagTooltipRef = ref(null);
   const inputRef = ref(null);
-  const calculatorRef = ref(null);
   const prefixRef = ref(null);
   const suffixRef = ref(null);
   const menuRef = ref(null);
   const tagMenuRef = ref(null);
   const collapseItemRef = ref(null);
   const scrollbarRef = ref(null);
-  const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
+  const {
+    isComposing,
+    handleCompositionStart,
+    handleCompositionUpdate,
+    handleCompositionEnd
+  } = useComposition({
+    afterComposition: (e) => onInput(e)
+  });
+  const { wrapperRef, isFocused, handleBlur } = useFocusController(inputRef, {
+    beforeFocus() {
+      return selectDisabled.value;
+    },
     afterFocus() {
       if (props.automaticDropdown && !expanded.value) {
         expanded.value = true;
@@ -14826,26 +15596,28 @@ const useSelect = (props, emit) => {
   const { inputId } = useFormItemInputId(props, {
     formItemContext: formItem
   });
+  const { valueOnClear, isEmptyValue: isEmptyValue2 } = useEmptyValues(props);
   const selectDisabled = computed(() => props.disabled || (form == null ? void 0 : form.disabled));
-  const hasEmptyStringOption = computed(() => optionsArray.value.some((option) => option.value === ""));
   const hasModelValue = computed(() => {
-    return props.multiple ? isArray$1(props.modelValue) && props.modelValue.length > 0 : !isNil(props.modelValue) && (props.modelValue !== "" || hasEmptyStringOption.value);
+    return isArray$1(props.modelValue) ? props.modelValue.length > 0 : !isEmptyValue2(props.modelValue);
+  });
+  const needStatusIcon = computed(() => {
+    var _a2;
+    return (_a2 = form == null ? void 0 : form.statusIcon) != null ? _a2 : false;
   });
   const showClose = computed(() => {
-    const criteria = props.clearable && !selectDisabled.value && states.inputHovering && hasModelValue.value;
-    return criteria;
+    return props.clearable && !selectDisabled.value && states.inputHovering && hasModelValue.value;
   });
   const iconComponent = computed(() => props.remote && props.filterable && !props.remoteShowSuffix ? "" : props.suffixIcon);
   const iconReverse = computed(() => nsSelect.is("reverse", iconComponent.value && expanded.value));
   const validateState = computed(() => (formItem == null ? void 0 : formItem.validateState) || "");
   const validateIcon = computed(() => ValidateComponentsMap[validateState.value]);
   const debounce$1 = computed(() => props.remote ? 300 : 0);
+  const isRemoteSearchEmpty = computed(() => props.remote && !states.inputValue && states.options.size === 0);
   const emptyText = computed(() => {
     if (props.loading) {
       return props.loadingText || t("el.select.loading");
     } else {
-      if (props.remote && !states.inputValue && states.options.size === 0)
-        return false;
       if (props.filterable && states.inputValue && states.options.size > 0 && filteredOptionsCount.value === 0) {
         return props.noMatchText || t("el.select.noMatch");
       }
@@ -14882,30 +15654,33 @@ const useSelect = (props, emit) => {
     if (props.filterable && props.remote && isFunction$1(props.remoteMethod))
       return;
     optionsArray.value.forEach((option) => {
-      option.updateOption(states.inputValue);
+      var _a2;
+      (_a2 = option.updateOption) == null ? void 0 : _a2.call(option, states.inputValue);
     });
   };
   const selectSize = useFormSize();
   const collapseTagSize = computed(() => ["small"].includes(selectSize.value) ? "small" : "default");
   const dropdownMenuVisible = computed({
     get() {
-      return expanded.value && emptyText.value !== false;
+      return expanded.value && !isRemoteSearchEmpty.value;
     },
     set(val) {
       expanded.value = val;
     }
   });
   const shouldShowPlaceholder = computed(() => {
-    if (isArray$1(props.modelValue)) {
-      return props.modelValue.length === 0 && !states.inputValue;
+    if (props.multiple && !isUndefined(props.modelValue)) {
+      return castArray$1(props.modelValue).length === 0 && !states.inputValue;
     }
-    return props.filterable ? !states.inputValue : true;
+    const value = isArray$1(props.modelValue) ? props.modelValue[0] : props.modelValue;
+    return props.filterable || isUndefined(value) ? !states.inputValue : true;
   });
   const currentPlaceholder = computed(() => {
     var _a2;
     const _placeholder = (_a2 = props.placeholder) != null ? _a2 : t("el.select.placeholder");
     return props.multiple || !hasModelValue.value ? _placeholder : states.selectedLabel;
   });
+  const mouseEnterEventName = computed(() => isIOS ? null : "mouseenter");
   watch(() => props.modelValue, (val, oldVal) => {
     if (props.multiple) {
       if (props.filterable && !props.reserveKeyword) {
@@ -14932,13 +15707,9 @@ const useSelect = (props, emit) => {
     emit("visible-change", val);
   });
   watch(() => states.options.entries(), () => {
-    var _a2;
     if (!isClient)
       return;
-    const inputs = ((_a2 = selectRef.value) == null ? void 0 : _a2.querySelectorAll("input")) || [];
-    if (!props.filterable && !props.defaultFirstOption && !isUndefined(props.modelValue) || !Array.from(inputs).includes(document.activeElement)) {
-      setSelected();
-    }
+    setSelected();
     if (props.defaultFirstOption && (props.filterable || props.remote) && filteredOptionsCount.value) {
       checkDefaultFirstOption();
     }
@@ -14961,7 +15732,7 @@ const useSelect = (props, emit) => {
     updateOptions();
   });
   const handleQueryChange = (val) => {
-    if (states.previousQuery === val) {
+    if (states.previousQuery === val || isComposing.value) {
       return;
     }
     states.previousQuery = val;
@@ -14980,20 +15751,22 @@ const useSelect = (props, emit) => {
     const optionsInDropdown = optionsArray.value.filter((n) => n.visible && !n.disabled && !n.states.groupDisabled);
     const userCreatedOption = optionsInDropdown.find((n) => n.created);
     const firstOriginOption = optionsInDropdown[0];
-    states.hoveringIndex = getValueIndex(optionsArray.value, userCreatedOption || firstOriginOption);
+    const valueList = optionsArray.value.map((item) => item.value);
+    states.hoveringIndex = getValueIndex(valueList, userCreatedOption || firstOriginOption);
   };
   const setSelected = () => {
     if (!props.multiple) {
-      const option = getOption(props.modelValue);
+      const value = isArray$1(props.modelValue) ? props.modelValue[0] : props.modelValue;
+      const option = getOption(value);
       states.selectedLabel = option.currentLabel;
-      states.selected = option;
+      states.selected = [option];
       return;
     } else {
       states.selectedLabel = "";
     }
     const result = [];
-    if (isArray$1(props.modelValue)) {
-      props.modelValue.forEach((value) => {
+    if (!isUndefined(props.modelValue)) {
+      castArray$1(props.modelValue).forEach((value) => {
         result.push(getOption(value));
       });
     }
@@ -15001,9 +15774,7 @@ const useSelect = (props, emit) => {
   };
   const getOption = (value) => {
     let option;
-    const isObjectValue = toRawType(value).toLowerCase() === "object";
-    const isNull = toRawType(value).toLowerCase() === "null";
-    const isUndefined2 = toRawType(value).toLowerCase() === "undefined";
+    const isObjectValue = isPlainObject(value);
     for (let i2 = states.cachedOptions.size - 1; i2 >= 0; i2--) {
       const cachedOption = cachedOptionsArray.value[i2];
       const isEqualValue = isObjectValue ? get(cachedOption.value, props.valueKey) === get(value, props.valueKey) : cachedOption.value === value;
@@ -15011,14 +15782,16 @@ const useSelect = (props, emit) => {
         option = {
           value,
           currentLabel: cachedOption.currentLabel,
-          isDisabled: cachedOption.isDisabled
+          get isDisabled() {
+            return cachedOption.isDisabled;
+          }
         };
         break;
       }
     }
     if (option)
       return option;
-    const label = isObjectValue ? value.label : !isNull && !isUndefined2 ? value : "";
+    const label = isObjectValue ? value.label : value != null ? value : "";
     const newOption = {
       value,
       currentLabel: label
@@ -15026,19 +15799,10 @@ const useSelect = (props, emit) => {
     return newOption;
   };
   const updateHoveringIndex = () => {
-    if (!props.multiple) {
-      states.hoveringIndex = optionsArray.value.findIndex((item) => {
-        return getValueKey(item) === getValueKey(states.selected);
-      });
-    } else {
-      states.hoveringIndex = optionsArray.value.findIndex((item) => states.selected.some((selected) => getValueKey(selected) === getValueKey(item)));
-    }
+    states.hoveringIndex = optionsArray.value.findIndex((item) => states.selected.some((selected) => getValueKey(selected) === getValueKey(item)));
   };
   const resetSelectionWidth = () => {
     states.selectionWidth = selectionRef.value.getBoundingClientRect().width;
-  };
-  const resetCalculatorWidth = () => {
-    states.calculatorWidth = calculatorRef.value.getBoundingClientRect().width;
   };
   const resetCollapseItemWidth = () => {
     states.collapseItemWidth = collapseItemRef.value.getBoundingClientRect().width;
@@ -15073,26 +15837,31 @@ const useSelect = (props, emit) => {
       emit(CHANGE_EVENT, val);
     }
   };
-  const getLastNotDisabledIndex = (value) => findLastIndex(value, (it2) => !states.disabledOptions.has(it2));
+  const getLastNotDisabledIndex = (value) => findLastIndex(value, (it2) => {
+    const option = states.cachedOptions.get(it2);
+    return option && !option.disabled && !option.states.groupDisabled;
+  });
   const deletePrevTag = (e) => {
     if (!props.multiple)
       return;
     if (e.code === EVENT_CODE.delete)
       return;
     if (e.target.value.length <= 0) {
-      const value = props.modelValue.slice();
+      const value = castArray$1(props.modelValue).slice();
       const lastNotDisabledIndex = getLastNotDisabledIndex(value);
       if (lastNotDisabledIndex < 0)
         return;
+      const removeTagValue = value[lastNotDisabledIndex];
       value.splice(lastNotDisabledIndex, 1);
       emit(UPDATE_MODEL_EVENT, value);
       emitChange(value);
+      emit("remove-tag", removeTagValue);
     }
   };
   const deleteTag = (event, tag) => {
     const index = states.selected.indexOf(tag);
     if (index > -1 && !selectDisabled.value) {
-      const value = props.modelValue.slice();
+      const value = castArray$1(props.modelValue).slice();
       value.splice(index, 1);
       emit(UPDATE_MODEL_EVENT, value);
       emitChange(value);
@@ -15103,7 +15872,7 @@ const useSelect = (props, emit) => {
   };
   const deleteSelected = (event) => {
     event.stopPropagation();
-    const value = props.multiple ? [] : void 0;
+    const value = props.multiple ? [] : valueOnClear.value;
     if (props.multiple) {
       for (const item of states.selected) {
         if (item.isDisabled)
@@ -15118,9 +15887,10 @@ const useSelect = (props, emit) => {
     focus();
   };
   const handleOptionSelect = (option) => {
+    var _a2;
     if (props.multiple) {
-      const value = (props.modelValue || []).slice();
-      const optionIndex = getValueIndex(value, option.value);
+      const value = castArray$1((_a2 = props.modelValue) != null ? _a2 : []).slice();
+      const optionIndex = getValueIndex(value, option);
       if (optionIndex > -1) {
         value.splice(optionIndex, 1);
       } else if (props.multipleLimit <= 0 || value.length < props.multipleLimit) {
@@ -15146,19 +15916,14 @@ const useSelect = (props, emit) => {
       scrollToOption(option);
     });
   };
-  const getValueIndex = (arr = [], value) => {
-    if (!isObject$1(value))
-      return arr.indexOf(value);
-    const valueKey = props.valueKey;
-    let index = -1;
-    arr.some((item, i2) => {
-      if (toRaw(get(item, valueKey)) === get(value, valueKey)) {
-        index = i2;
-        return true;
-      }
-      return false;
+  const getValueIndex = (arr = [], option) => {
+    if (isUndefined(option))
+      return -1;
+    if (!isObject$1(option.value))
+      return arr.indexOf(option.value);
+    return arr.findIndex((item) => {
+      return isEqual(get(item, props.valueKey), getValueKey(option));
     });
-    return index;
   };
   const scrollToOption = (option) => {
     var _a2, _b, _c, _d, _e;
@@ -15181,23 +15946,18 @@ const useSelect = (props, emit) => {
   const onOptionCreate = (vm) => {
     states.options.set(vm.value, vm);
     states.cachedOptions.set(vm.value, vm);
-    vm.disabled && states.disabledOptions.set(vm.value, vm);
   };
   const onOptionDestroy = (key, vm) => {
     if (states.options.get(key) === vm) {
       states.options.delete(key);
     }
   };
-  const {
-    handleCompositionStart,
-    handleCompositionUpdate,
-    handleCompositionEnd
-  } = useInput((e) => onInput(e));
   const popperRef = computed(() => {
     var _a2, _b;
     return (_b = (_a2 = tooltipRef.value) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
   });
   const handleMenuEnter = () => {
+    states.isBeforeHide = false;
     nextTick(() => scrollToOption(states.selected));
   };
   const focus = () => {
@@ -15205,7 +15965,16 @@ const useSelect = (props, emit) => {
     (_a2 = inputRef.value) == null ? void 0 : _a2.focus();
   };
   const blur = () => {
-    handleClickOutside();
+    var _a2;
+    if (expanded.value) {
+      expanded.value = false;
+      nextTick(() => {
+        var _a22;
+        return (_a22 = inputRef.value) == null ? void 0 : _a22.blur();
+      });
+      return;
+    }
+    (_a2 = inputRef.value) == null ? void 0 : _a2.blur();
   };
   const handleClearClick = (event) => {
     deleteSelected(event);
@@ -15227,6 +15996,8 @@ const useSelect = (props, emit) => {
   const toggleMenu = () => {
     if (selectDisabled.value)
       return;
+    if (isIOS)
+      states.inputHovering = true;
     if (states.menuVisibleOnFocus) {
       states.menuVisibleOnFocus = false;
     } else {
@@ -15237,15 +16008,16 @@ const useSelect = (props, emit) => {
     if (!expanded.value) {
       toggleMenu();
     } else {
-      if (optionsArray.value[states.hoveringIndex]) {
-        handleOptionSelect(optionsArray.value[states.hoveringIndex]);
+      const option = optionsArray.value[states.hoveringIndex];
+      if (option && !option.isDisabled) {
+        handleOptionSelect(option);
       }
     }
   };
   const getValueKey = (item) => {
     return isObject$1(item.value) ? get(item.value, props.valueKey) : item.value;
   };
-  const optionsAllDisabled = computed(() => optionsArray.value.filter((option) => option.visible).every((option) => option.disabled));
+  const optionsAllDisabled = computed(() => optionsArray.value.filter((option) => option.visible).every((option) => option.isDisabled));
   const showTagList = computed(() => {
     if (!props.multiple) {
       return [];
@@ -15263,7 +16035,7 @@ const useSelect = (props, emit) => {
       expanded.value = true;
       return;
     }
-    if (states.options.size === 0 || filteredOptionsCount.value === 0)
+    if (states.options.size === 0 || filteredOptionsCount.value === 0 || isComposing.value)
       return;
     if (!optionsAllDisabled.value) {
       if (direction === "next") {
@@ -15278,7 +16050,7 @@ const useSelect = (props, emit) => {
         }
       }
       const option = optionsArray.value[states.hoveringIndex];
-      if (option.disabled === true || option.states.groupDisabled === true || !option.visible) {
+      if (option.isDisabled || !option.visible) {
         navigateOptions(direction);
       }
       nextTick(() => scrollToOption(hoverOption.value));
@@ -15298,17 +16070,7 @@ const useSelect = (props, emit) => {
   const collapseTagStyle = computed(() => {
     return { maxWidth: `${states.selectionWidth}px` };
   });
-  const inputStyle = computed(() => ({
-    width: `${Math.max(states.calculatorWidth, MINIMUM_INPUT_WIDTH)}px`
-  }));
-  if (props.multiple && !isArray$1(props.modelValue)) {
-    emit(UPDATE_MODEL_EVENT, []);
-  }
-  if (!props.multiple && isArray$1(props.modelValue)) {
-    emit(UPDATE_MODEL_EVENT, "");
-  }
   useResizeObserver(selectionRef, resetSelectionWidth);
-  useResizeObserver(calculatorRef, resetCalculatorWidth);
   useResizeObserver(menuRef, updateTooltip);
   useResizeObserver(wrapperRef, updateTooltip);
   useResizeObserver(tagMenuRef, updateTagTooltip);
@@ -15328,7 +16090,6 @@ const useSelect = (props, emit) => {
     hoverOption,
     selectSize,
     filteredOptionsCount,
-    resetCalculatorWidth,
     updateTooltip,
     updateTagTooltip,
     debouncedOnInputChange,
@@ -15341,6 +16102,8 @@ const useSelect = (props, emit) => {
     hasModelValue,
     shouldShowPlaceholder,
     currentPlaceholder,
+    mouseEnterEventName,
+    needStatusIcon,
     showClose,
     iconComponent,
     iconReverse,
@@ -15358,10 +16121,8 @@ const useSelect = (props, emit) => {
     onOptionCreate,
     onOptionDestroy,
     handleMenuEnter,
-    handleFocus,
     focus,
     blur,
-    handleBlur,
     handleClearClick,
     handleClickOutside,
     handleEsc,
@@ -15374,12 +16135,10 @@ const useSelect = (props, emit) => {
     collapseTagList,
     tagStyle,
     collapseTagStyle,
-    inputStyle,
     popperRef,
     inputRef,
     tooltipRef,
     tagTooltipRef,
-    calculatorRef,
     prefixRef,
     suffixRef,
     selectRef,
@@ -15502,11 +16261,20 @@ const SelectProps = buildProps({
     default: arrow_down_default
   },
   tagType: { ...tagProps.type, default: "info" },
+  tagEffect: { ...tagProps.effect, default: "light" },
   validateEvent: {
     type: Boolean,
     default: true
   },
   remoteShowSuffix: Boolean,
+  showArrow: {
+    type: Boolean,
+    default: true
+  },
+  offset: {
+    type: Number,
+    default: 12
+  },
   placement: {
     type: definePropType(String),
     values: Ee,
@@ -15516,17 +16284,19 @@ const SelectProps = buildProps({
     type: definePropType(Array),
     default: ["bottom-start", "top-start", "right", "left"]
   },
-  ariaLabel: {
-    type: String,
-    default: void 0
-  }
+  tabindex: {
+    type: [String, Number],
+    default: 0
+  },
+  appendTo: String,
+  ...useEmptyValuesProps,
+  ...useAriaProps(["ariaLabel"])
 });
 const COMPONENT_NAME = "ElSelect";
 const _sfc_main$5 = defineComponent({
   name: COMPONENT_NAME,
   componentName: COMPONENT_NAME,
   components: {
-    ElInput,
     ElSelectMenu,
     ElOption: Option,
     ElOptions,
@@ -15547,9 +16317,22 @@ const _sfc_main$5 = defineComponent({
     "blur"
   ],
   setup(props, { emit }) {
-    const API = useSelect(props, emit);
+    const modelValue = computed(() => {
+      const { modelValue: rawModelValue, multiple } = props;
+      const fallback = multiple ? [] : void 0;
+      if (isArray$1(rawModelValue)) {
+        return multiple ? rawModelValue : fallback;
+      }
+      return multiple ? fallback : rawModelValue;
+    });
+    const _props = reactive({
+      ...toRefs(props),
+      modelValue
+    });
+    const API = useSelect(_props, emit);
+    const { calculatorRef, inputStyle } = useCalcInputWidth();
     provide(selectKey, reactive({
-      props,
+      props: _props,
       states: API.states,
       optionsArray: API.optionsArray,
       handleOptionSelect: API.handleOptionSelect,
@@ -15558,13 +16341,21 @@ const _sfc_main$5 = defineComponent({
       selectRef: API.selectRef,
       setSelected: API.setSelected
     }));
+    const selectedLabel = computed(() => {
+      if (!props.multiple) {
+        return API.states.selectedLabel;
+      }
+      return API.states.selected.map((i2) => i2.currentLabel);
+    });
     return {
-      ...API
+      ...API,
+      modelValue,
+      selectedLabel,
+      calculatorRef,
+      inputStyle
     };
   }
 });
-const _hoisted_1$2 = ["id", "disabled", "autocomplete", "readonly", "aria-activedescendant", "aria-controls", "aria-expanded", "aria-label"];
-const _hoisted_2$1 = ["textContent"];
 function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_tag = resolveComponent("el-tag");
   const _component_el_tooltip = resolveComponent("el-tooltip");
@@ -15577,9 +16368,8 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("div", {
     ref: "selectRef",
     class: normalizeClass([_ctx.nsSelect.b(), _ctx.nsSelect.m(_ctx.selectSize)]),
-    onMouseenter: _cache[14] || (_cache[14] = ($event) => _ctx.states.inputHovering = true),
-    onMouseleave: _cache[15] || (_cache[15] = ($event) => _ctx.states.inputHovering = false),
-    onClick: _cache[16] || (_cache[16] = withModifiers((...args) => _ctx.toggleMenu && _ctx.toggleMenu(...args), ["stop"]))
+    [toHandlerKey(_ctx.mouseEnterEventName)]: ($event) => _ctx.states.inputHovering = true,
+    onMouseleave: ($event) => _ctx.states.inputHovering = false
   }, [
     createVNode(_component_el_tooltip, {
       ref: "tooltipRef",
@@ -15596,8 +16386,11 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
       "stop-popper-mouse-event": false,
       "gpu-acceleration": false,
       persistent: _ctx.persistent,
+      "append-to": _ctx.appendTo,
+      "show-arrow": _ctx.showArrow,
+      offset: _ctx.offset,
       onBeforeShow: _ctx.handleMenuEnter,
-      onHide: _cache[13] || (_cache[13] = ($event) => _ctx.states.isBeforeHide = false)
+      onHide: ($event) => _ctx.states.isBeforeHide = false
     }, {
       default: withCtx(() => {
         var _a2;
@@ -15610,7 +16403,8 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
               _ctx.nsSelect.is("hovering", _ctx.states.inputHovering),
               _ctx.nsSelect.is("filterable", _ctx.filterable),
               _ctx.nsSelect.is("disabled", _ctx.selectDisabled)
-            ])
+            ]),
+            onClick: withModifiers(_ctx.toggleMenu, ["prevent"])
           }, [
             _ctx.$slots.prefix ? (openBlock(), createElementBlock("div", {
               key: 0,
@@ -15636,6 +16430,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                       closable: !_ctx.selectDisabled && !item.isDisabled,
                       size: _ctx.collapseTagSize,
                       type: _ctx.tagType,
+                      effect: _ctx.tagEffect,
                       "disable-transitions": "",
                       style: normalizeStyle(_ctx.tagStyle),
                       onClose: ($event) => _ctx.deleteTag($event, item)
@@ -15643,10 +16438,17 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                       default: withCtx(() => [
                         createBaseVNode("span", {
                           class: normalizeClass(_ctx.nsSelect.e("tags-text"))
-                        }, toDisplayString(item.currentLabel), 3)
+                        }, [
+                          renderSlot(_ctx.$slots, "label", {
+                            label: item.currentLabel,
+                            value: item.value
+                          }, () => [
+                            createTextVNode(toDisplayString(item.currentLabel), 1)
+                          ])
+                        ], 2)
                       ]),
                       _: 2
-                    }, 1032, ["closable", "size", "type", "style", "onClose"])
+                    }, 1032, ["closable", "size", "type", "effect", "style", "onClose"])
                   ], 2);
                 }), 128)),
                 _ctx.collapseTags && _ctx.states.selected.length > _ctx.maxCollapseTags ? (openBlock(), createBlock(_component_el_tooltip, {
@@ -15667,6 +16469,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                         closable: false,
                         size: _ctx.collapseTagSize,
                         type: _ctx.tagType,
+                        effect: _ctx.tagEffect,
                         "disable-transitions": "",
                         style: normalizeStyle(_ctx.collapseTagStyle)
                       }, {
@@ -15676,7 +16479,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                           }, " + " + toDisplayString(_ctx.states.selected.length - _ctx.maxCollapseTags), 3)
                         ]),
                         _: 1
-                      }, 8, ["size", "type", "style"])
+                      }, 8, ["size", "type", "effect", "style"])
                     ], 2)
                   ]),
                   content: withCtx(() => [
@@ -15694,25 +16497,32 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                             closable: !_ctx.selectDisabled && !item.isDisabled,
                             size: _ctx.collapseTagSize,
                             type: _ctx.tagType,
+                            effect: _ctx.tagEffect,
                             "disable-transitions": "",
                             onClose: ($event) => _ctx.deleteTag($event, item)
                           }, {
                             default: withCtx(() => [
                               createBaseVNode("span", {
                                 class: normalizeClass(_ctx.nsSelect.e("tags-text"))
-                              }, toDisplayString(item.currentLabel), 3)
+                              }, [
+                                renderSlot(_ctx.$slots, "label", {
+                                  label: item.currentLabel,
+                                  value: item.value
+                                }, () => [
+                                  createTextVNode(toDisplayString(item.currentLabel), 1)
+                                ])
+                              ], 2)
                             ]),
                             _: 2
-                          }, 1032, ["closable", "size", "type", "onClose"])
+                          }, 1032, ["closable", "size", "type", "effect", "onClose"])
                         ], 2);
                       }), 128))
                     ], 2)
                   ]),
-                  _: 1
+                  _: 3
                 }, 8, ["disabled", "effect", "teleported"])) : createCommentVNode("v-if", true)
               ]) : createCommentVNode("v-if", true),
-              !_ctx.selectDisabled ? (openBlock(), createElementBlock("div", {
-                key: 1,
+              createBaseVNode("div", {
                 class: normalizeClass([
                   _ctx.nsSelect.e("selected-item"),
                   _ctx.nsSelect.e("input-wrapper"),
@@ -15722,12 +16532,14 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 withDirectives(createBaseVNode("input", {
                   id: _ctx.inputId,
                   ref: "inputRef",
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.states.inputValue = $event),
+                  "onUpdate:modelValue": ($event) => _ctx.states.inputValue = $event,
                   type: "text",
+                  name: _ctx.name,
                   class: normalizeClass([_ctx.nsSelect.e("input"), _ctx.nsSelect.is(_ctx.selectSize)]),
                   disabled: _ctx.selectDisabled,
                   autocomplete: _ctx.autocomplete,
                   style: normalizeStyle(_ctx.inputStyle),
+                  tabindex: _ctx.tabindex,
                   role: "combobox",
                   readonly: !_ctx.filterable,
                   spellcheck: "false",
@@ -15737,21 +16549,19 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                   "aria-label": _ctx.ariaLabel,
                   "aria-autocomplete": "none",
                   "aria-haspopup": "listbox",
-                  onFocus: _cache[1] || (_cache[1] = (...args) => _ctx.handleFocus && _ctx.handleFocus(...args)),
-                  onBlur: _cache[2] || (_cache[2] = (...args) => _ctx.handleBlur && _ctx.handleBlur(...args)),
                   onKeydown: [
-                    _cache[3] || (_cache[3] = withKeys(withModifiers(($event) => _ctx.navigateOptions("next"), ["stop", "prevent"]), ["down"])),
-                    _cache[4] || (_cache[4] = withKeys(withModifiers(($event) => _ctx.navigateOptions("prev"), ["stop", "prevent"]), ["up"])),
-                    _cache[5] || (_cache[5] = withKeys(withModifiers((...args) => _ctx.handleEsc && _ctx.handleEsc(...args), ["stop", "prevent"]), ["esc"])),
-                    _cache[6] || (_cache[6] = withKeys(withModifiers((...args) => _ctx.selectOption && _ctx.selectOption(...args), ["stop", "prevent"]), ["enter"])),
-                    _cache[7] || (_cache[7] = withKeys(withModifiers((...args) => _ctx.deletePrevTag && _ctx.deletePrevTag(...args), ["stop"]), ["delete"]))
+                    withKeys(withModifiers(($event) => _ctx.navigateOptions("next"), ["stop", "prevent"]), ["down"]),
+                    withKeys(withModifiers(($event) => _ctx.navigateOptions("prev"), ["stop", "prevent"]), ["up"]),
+                    withKeys(withModifiers(_ctx.handleEsc, ["stop", "prevent"]), ["esc"]),
+                    withKeys(withModifiers(_ctx.selectOption, ["stop", "prevent"]), ["enter"]),
+                    withKeys(withModifiers(_ctx.deletePrevTag, ["stop"]), ["delete"])
                   ],
-                  onCompositionstart: _cache[8] || (_cache[8] = (...args) => _ctx.handleCompositionStart && _ctx.handleCompositionStart(...args)),
-                  onCompositionupdate: _cache[9] || (_cache[9] = (...args) => _ctx.handleCompositionUpdate && _ctx.handleCompositionUpdate(...args)),
-                  onCompositionend: _cache[10] || (_cache[10] = (...args) => _ctx.handleCompositionEnd && _ctx.handleCompositionEnd(...args)),
-                  onInput: _cache[11] || (_cache[11] = (...args) => _ctx.onInput && _ctx.onInput(...args)),
-                  onClick: _cache[12] || (_cache[12] = withModifiers((...args) => _ctx.toggleMenu && _ctx.toggleMenu(...args), ["stop"]))
-                }, null, 46, _hoisted_1$2), [
+                  onCompositionstart: _ctx.handleCompositionStart,
+                  onCompositionupdate: _ctx.handleCompositionUpdate,
+                  onCompositionend: _ctx.handleCompositionEnd,
+                  onInput: _ctx.onInput,
+                  onClick: withModifiers(_ctx.toggleMenu, ["stop"])
+                }, null, 46, ["id", "onUpdate:modelValue", "name", "disabled", "autocomplete", "tabindex", "readonly", "aria-activedescendant", "aria-controls", "aria-expanded", "aria-label", "onKeydown", "onCompositionstart", "onCompositionupdate", "onCompositionend", "onInput", "onClick"]), [
                   [vModelText, _ctx.states.inputValue]
                 ]),
                 _ctx.filterable ? (openBlock(), createElementBlock("span", {
@@ -15760,17 +16570,23 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                   "aria-hidden": "true",
                   class: normalizeClass(_ctx.nsSelect.e("input-calculator")),
                   textContent: toDisplayString(_ctx.states.inputValue)
-                }, null, 10, _hoisted_2$1)) : createCommentVNode("v-if", true)
-              ], 2)) : createCommentVNode("v-if", true),
+                }, null, 10, ["textContent"])) : createCommentVNode("v-if", true)
+              ], 2),
               _ctx.shouldShowPlaceholder ? (openBlock(), createElementBlock("div", {
-                key: 2,
+                key: 1,
                 class: normalizeClass([
                   _ctx.nsSelect.e("selected-item"),
                   _ctx.nsSelect.e("placeholder"),
                   _ctx.nsSelect.is("transparent", !_ctx.hasModelValue || _ctx.expanded && !_ctx.states.inputValue)
                 ])
               }, [
-                createBaseVNode("span", null, toDisplayString(_ctx.currentPlaceholder), 1)
+                _ctx.hasModelValue ? renderSlot(_ctx.$slots, "label", {
+                  key: 0,
+                  label: _ctx.currentPlaceholder,
+                  value: _ctx.modelValue
+                }, () => [
+                  createBaseVNode("span", null, toDisplayString(_ctx.currentPlaceholder), 1)
+                ]) : (openBlock(), createElementBlock("span", { key: 1 }, toDisplayString(_ctx.currentPlaceholder), 1))
               ], 2)) : createCommentVNode("v-if", true)
             ], 2),
             createBaseVNode("div", {
@@ -15788,7 +16604,11 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
               }, 8, ["class"])) : createCommentVNode("v-if", true),
               _ctx.showClose && _ctx.clearIcon ? (openBlock(), createBlock(_component_el_icon, {
                 key: 1,
-                class: normalizeClass([_ctx.nsSelect.e("caret"), _ctx.nsSelect.e("icon")]),
+                class: normalizeClass([
+                  _ctx.nsSelect.e("caret"),
+                  _ctx.nsSelect.e("icon"),
+                  _ctx.nsSelect.e("clear")
+                ]),
                 onClick: _ctx.handleClearClick
               }, {
                 default: withCtx(() => [
@@ -15796,9 +16616,13 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 ]),
                 _: 1
               }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true),
-              _ctx.validateState && _ctx.validateIcon ? (openBlock(), createBlock(_component_el_icon, {
+              _ctx.validateState && _ctx.validateIcon && _ctx.needStatusIcon ? (openBlock(), createBlock(_component_el_icon, {
                 key: 2,
-                class: normalizeClass([_ctx.nsInput.e("icon"), _ctx.nsInput.e("validateIcon")])
+                class: normalizeClass([
+                  _ctx.nsInput.e("icon"),
+                  _ctx.nsInput.e("validateIcon"),
+                  _ctx.nsInput.is("loading", _ctx.validateState === "validating")
+                ])
               }, {
                 default: withCtx(() => [
                   (openBlock(), createBlock(resolveDynamicComponent(_ctx.validateIcon)))
@@ -15806,7 +16630,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 _: 1
               }, 8, ["class"])) : createCommentVNode("v-if", true)
             ], 2)
-          ], 2)
+          ], 10, ["onClick"])
         ];
       }),
       content: withCtx(() => [
@@ -15814,10 +16638,12 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
           default: withCtx(() => [
             _ctx.$slots.header ? (openBlock(), createElementBlock("div", {
               key: 0,
-              class: normalizeClass(_ctx.nsSelect.be("dropdown", "header"))
+              class: normalizeClass(_ctx.nsSelect.be("dropdown", "header")),
+              onClick: withModifiers(() => {
+              }, ["stop"])
             }, [
               renderSlot(_ctx.$slots, "header")
-            ], 2)) : createCommentVNode("v-if", true),
+            ], 10, ["onClick"])) : createCommentVNode("v-if", true),
             withDirectives(createVNode(_component_el_scrollbar, {
               id: _ctx.contentId,
               ref: "scrollbarRef",
@@ -15861,17 +16687,19 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
             ], 2)) : createCommentVNode("v-if", true),
             _ctx.$slots.footer ? (openBlock(), createElementBlock("div", {
               key: 3,
-              class: normalizeClass(_ctx.nsSelect.be("dropdown", "footer"))
+              class: normalizeClass(_ctx.nsSelect.be("dropdown", "footer")),
+              onClick: withModifiers(() => {
+              }, ["stop"])
             }, [
               renderSlot(_ctx.$slots, "footer")
-            ], 2)) : createCommentVNode("v-if", true)
+            ], 10, ["onClick"])) : createCommentVNode("v-if", true)
           ]),
           _: 3
         }, 512)
       ]),
       _: 3
-    }, 8, ["visible", "placement", "teleported", "popper-class", "popper-options", "fallback-placements", "effect", "transition", "persistent", "onBeforeShow"])
-  ], 34)), [
+    }, 8, ["visible", "placement", "teleported", "popper-class", "popper-options", "fallback-placements", "effect", "transition", "persistent", "append-to", "show-arrow", "offset", "onBeforeShow", "onHide"])
+  ], 16, ["onMouseleave"])), [
     [_directive_click_outside, _ctx.handleClickOutside, _ctx.popperRef]
   ]);
 }
@@ -15892,20 +16720,23 @@ const _sfc_main$4 = defineComponent({
       ...toRefs(props)
     }));
     const visible = computed(() => children.value.some((option) => option.visible === true));
+    const isOption = (node) => {
+      var _a2, _b;
+      return ((_a2 = node.type) == null ? void 0 : _a2.name) === "ElOption" && !!((_b = node.component) == null ? void 0 : _b.proxy);
+    };
     const flattedChildren = (node) => {
+      const Nodes = castArray$1(node);
       const children2 = [];
-      if (isArray$1(node.children)) {
-        node.children.forEach((child) => {
-          var _a2, _b;
-          if (child.type && child.type.name === "ElOption" && child.component && child.component.proxy) {
-            children2.push(child.component.proxy);
-          } else if ((_a2 = child.children) == null ? void 0 : _a2.length) {
-            children2.push(...flattedChildren(child));
-          } else if ((_b = child.component) == null ? void 0 : _b.subTree) {
-            children2.push(...flattedChildren(child.component.subTree));
-          }
-        });
-      }
+      Nodes.forEach((child) => {
+        var _a2, _b;
+        if (isOption(child)) {
+          children2.push(child.component.proxy);
+        } else if ((_a2 = child.children) == null ? void 0 : _a2.length) {
+          children2.push(...flattedChildren(child.children));
+        } else if ((_b = child.component) == null ? void 0 : _b.subTree) {
+          children2.push(...flattedChildren(child.component.subTree));
+        }
+      });
       return children2;
     };
     const updateChildren = () => {
@@ -17424,8 +18255,8 @@ const E = {
   let c2 = [];
   s.shorts = c2;
 }, Z = (s) => {
-  const { similarScore: c2, differentScore: o, similars: r2, differents: h } = s ?? {}, i2 = c2 - o, a = Math.abs(i2), e = (n, S2, f) => {
-    const { score: g = {} } = n ?? {};
+  const { similarScore: c2, differentScore: o, similars: r2, differents: h } = s, i2 = c2 - o, a = Math.abs(i2), e = (n, S2, f) => {
+    const { score: g = {} } = n;
     return S2.forEach((l2) => {
       f || (f = l2);
       const u2 = g[f] || 0, y = g[l2] || 0;
@@ -67170,9 +68001,9 @@ const getLunar = (info) => {
   return lunarData;
 };
 const getYearMonthDay = (info) => {
-  const { date: date5, time } = info;
+  const { date: date4, time } = info;
   let year, month, day, hour, minute, second;
-  const dayjsDate = dayjs(`${date5} ${time}`);
+  const dayjsDate = dayjs(`${date4} ${time}`);
   year = dayjsDate.year();
   month = dayjsDate.month();
   day = dayjsDate.date();
@@ -67221,8 +68052,7 @@ const _sfc_main$3 = {
   methods: {
     async handlerSumbit() {
       const formEl = this.$refs.formRef;
-      if (!formEl)
-        return;
+      if (!formEl) return;
       const validate = await formEl.validate();
       if (validate) {
         this.handlerData();
@@ -67230,8 +68060,7 @@ const _sfc_main$3 = {
     },
     handlerReset() {
       const formEl = this.$refs.formRef;
-      if (!formEl)
-        return;
+      if (!formEl) return;
       formEl.resetFields();
     },
     handlerData() {
@@ -67248,15 +68077,13 @@ const _sfc_main$3 = {
     }
   }
 };
-const _withScopeId = (n) => (pushScopeId("data-v-e45fbb6c"), n = n(), popScopeId(), n);
 const _hoisted_1$1 = { class: "content-wrap" };
 const _hoisted_2 = {
   key: 0,
   class: "result"
 };
-const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", { class: "result-title" }, "生成结果", -1));
-const _hoisted_4 = { class: "result-names" };
-const _hoisted_5 = ["onClick"];
+const _hoisted_3 = { class: "result-names" };
+const _hoisted_4 = ["onClick"];
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_input = resolveComponent("el-input");
   const _component_el_form_item = resolveComponent("el-form-item");
@@ -67353,18 +68180,18 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
               type: "primary",
               onClick: $options.handlerSumbit
             }, {
-              default: withCtx(() => [
+              default: withCtx(() => _cache[4] || (_cache[4] = [
                 createTextVNode("起名")
-              ]),
+              ])),
               _: 1
             }, 8, ["onClick"]),
             createVNode(_component_el_button, {
               type: "primary",
               onClick: $options.handlerReset
             }, {
-              default: withCtx(() => [
+              default: withCtx(() => _cache[5] || (_cache[5] = [
                 createTextVNode("重置")
-              ]),
+              ])),
               _: 1
             }, 8, ["onClick"])
           ]),
@@ -67374,14 +68201,14 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       _: 1
     }, 8, ["model", "rules"]),
     $data.formInfo.names && Array.isArray($data.formInfo.names) && !!$data.formInfo.names.length ? (openBlock(), createElementBlock("div", _hoisted_2, [
-      _hoisted_3,
-      createBaseVNode("div", _hoisted_4, [
+      _cache[6] || (_cache[6] = createBaseVNode("div", { class: "result-title" }, "生成结果", -1)),
+      createBaseVNode("div", _hoisted_3, [
         (openBlock(true), createElementBlock(Fragment, null, renderList($data.formInfo.names, (item, index) => {
           return openBlock(), createElementBlock("div", {
             class: "name-item",
             key: index,
             onClick: ($event) => $options.handlerItemClick(index)
-          }, toDisplayString($data.formInfo.surname + item.map((ele) => ele.char).join("")), 9, _hoisted_5);
+          }, toDisplayString($data.formInfo.surname + item.map((ele) => ele.char).join("")), 9, _hoisted_4);
         }), 128))
       ])
     ])) : createCommentVNode("", true)

@@ -1,5 +1,5 @@
-import { d as defineComponent, o as openBlock, c as createElementBlock, r as renderSlot, n as normalizeClass, a as createTextVNode, t as toDisplayString, b as createBlock, w as withCtx, T as Transition, e as createCommentVNode, _ as _export_sfc, u as useData$1, i as isExternal, f as treatAsHtml, g as withBase, h as ref, j as inBrowser, k as computed, l as onMounted, m as createBaseVNode, p as unref, q as pushScopeId, s as popScopeId, v as isActive, x as useMediaQuery, y as watch, z as watchEffect, A as onUnmounted, B as watchPostEffect, C as onUpdated, D as getScrollOffset, E as resolveComponent, F as Fragment, G as renderList, H as shallowRef, I as onContentUpdated, J as createVNode, K as resolveDynamicComponent, L as EXTERNAL_URL_RE, M as useRoute, N as mergeProps, O as inject, P as useWindowSize, Q as normalizeStyle, R as onClickOutside, S as onKeyStroke, U as nextTick, V as useWindowScroll, W as readonly, X as useScrollLock, Y as provide, Z as withKeys, $ as toHandlers, a0 as withModifiers, a1 as useSlots } from "./framework.jFWLL5KV.js";
-const _sfc_main$W = /* @__PURE__ */ defineComponent({
+import { d as defineComponent, o as openBlock, c as createElementBlock, r as renderSlot, a as createTextVNode, t as toDisplayString, n as normalizeClass, b as createBlock, w as withCtx, e as createCommentVNode, T as Transition, _ as _export_sfc, u as useData$1, i as isExternal, f as treatAsHtml, g as withBase, h as computed, j as createBaseVNode, k as unref, l as isActive, m as useMediaQuery, p as ref, q as watch, s as watchEffect, v as onMounted, x as onUnmounted, y as watchPostEffect, z as onUpdated, A as getScrollOffset, B as resolveComponent, F as Fragment, C as renderList, D as shallowRef, E as onContentUpdated, G as createVNode, H as resolveDynamicComponent, I as EXTERNAL_URL_RE, J as useRoute, K as mergeProps, L as inject, M as useWindowSize, N as normalizeStyle, O as onKeyStroke, P as nextTick, Q as useWindowScroll, R as inBrowser, S as readonly, U as useScrollLock, V as provide, W as toHandlers, X as withKeys, Y as onBeforeUnmount, Z as withModifiers, $ as useSlots } from "./framework.ByEDUqkj.js";
+const _sfc_main$X = /* @__PURE__ */ defineComponent({
   __name: "VPBadge",
   props: {
     text: {},
@@ -21,7 +21,7 @@ const _hoisted_1$I = {
   key: 0,
   class: "VPBackdrop"
 };
-const _sfc_main$V = /* @__PURE__ */ defineComponent({
+const _sfc_main$W = /* @__PURE__ */ defineComponent({
   __name: "VPBackdrop",
   props: {
     show: { type: Boolean }
@@ -37,7 +37,7 @@ const _sfc_main$V = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPBackdrop = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["__scopeId", "data-v-c79a1216"]]);
+const VPBackdrop = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["__scopeId", "data-v-c79a1216"]]);
 const useData = useData$1;
 function throttleAndDebounce(fn, delay) {
   let timeoutId;
@@ -53,7 +53,7 @@ function throttleAndDebounce(fn, delay) {
   };
 }
 function ensureStartingSlash(path) {
-  return /^\//.test(path) ? path : `/${path}`;
+  return path.startsWith("/") ? path : `/${path}`;
 }
 function normalizeLink$1(url) {
   const { pathname, search, hash, protocol } = new URL(url, "http://a.com");
@@ -63,14 +63,8 @@ function normalizeLink$1(url) {
   const normalizedPath = pathname.endsWith("/") || pathname.endsWith(".html") ? url : url.replace(/(?:(^\.+)\/)?.*$/, `$1${pathname.replace(/(\.md)?$/, site.value.cleanUrls ? "" : ".html")}${search}${hash}`);
   return withBase(normalizedPath);
 }
-const hashRef = ref(inBrowser ? location.hash : "");
-if (inBrowser) {
-  window.addEventListener("hashchange", () => {
-    hashRef.value = location.hash;
-  });
-}
-function useLangs({ removeCurrent = true, correspondingLink = false } = {}) {
-  const { site, localeIndex, page, theme: theme2 } = useData();
+function useLangs({ correspondingLink = false } = {}) {
+  const { site, localeIndex, page, theme: theme2, hash } = useData();
   const currentLang = computed(() => {
     var _a, _b;
     return {
@@ -78,55 +72,45 @@ function useLangs({ removeCurrent = true, correspondingLink = false } = {}) {
       link: ((_b = site.value.locales[localeIndex.value]) == null ? void 0 : _b.link) || (localeIndex.value === "root" ? "/" : `/${localeIndex.value}/`)
     };
   });
-  const localeLinks = computed(() => Object.entries(site.value.locales).flatMap(([key, value]) => removeCurrent && currentLang.value.label === value.label ? [] : {
+  const localeLinks = computed(() => Object.entries(site.value.locales).flatMap(([key, value]) => currentLang.value.label === value.label ? [] : {
     text: value.label,
-    link: normalizeLink(value.link || (key === "root" ? "/" : `/${key}/`), theme2.value.i18nRouting !== false && correspondingLink, page.value.relativePath.slice(currentLang.value.link.length - 1), !site.value.cleanUrls) + hashRef.value
+    link: normalizeLink(value.link || (key === "root" ? "/" : `/${key}/`), theme2.value.i18nRouting !== false && correspondingLink, page.value.relativePath.slice(currentLang.value.link.length - 1), !site.value.cleanUrls) + hash.value
   }));
   return { localeLinks, currentLang };
 }
 function normalizeLink(link, addPath, path, addExt) {
   return addPath ? link.replace(/\/$/, "") + ensureStartingSlash(path.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, addExt ? ".html" : "")) : link;
 }
-const _withScopeId$h = (n) => (pushScopeId("data-v-f87ff6e4"), n = n(), popScopeId(), n);
 const _hoisted_1$H = { class: "NotFound" };
-const _hoisted_2$u = { class: "code" };
-const _hoisted_3$l = { class: "title" };
-const _hoisted_4$c = /* @__PURE__ */ _withScopeId$h(() => /* @__PURE__ */ createBaseVNode("div", { class: "divider" }, null, -1));
-const _hoisted_5$a = { class: "quote" };
-const _hoisted_6$7 = { class: "action" };
-const _hoisted_7$5 = ["href", "aria-label"];
-const _sfc_main$U = /* @__PURE__ */ defineComponent({
+const _hoisted_2$p = { class: "code" };
+const _hoisted_3$g = { class: "title" };
+const _hoisted_4$8 = { class: "quote" };
+const _hoisted_5$8 = { class: "action" };
+const _hoisted_6$6 = ["href", "aria-label"];
+const _sfc_main$V = /* @__PURE__ */ defineComponent({
   __name: "NotFound",
   setup(__props) {
-    const { site, theme: theme2 } = useData();
-    const { localeLinks } = useLangs({ removeCurrent: false });
-    const root = ref("/");
-    onMounted(() => {
-      var _a;
-      const path = window.location.pathname.replace(site.value.base, "").replace(/(^.*?\/).*$/, "/$1");
-      if (localeLinks.value.length) {
-        root.value = ((_a = localeLinks.value.find(({ link }) => link.startsWith(path))) == null ? void 0 : _a.link) || localeLinks.value[0].link;
-      }
-    });
+    const { theme: theme2 } = useData();
+    const { currentLang } = useLangs();
     return (_ctx, _cache) => {
       var _a, _b, _c, _d, _e;
       return openBlock(), createElementBlock("div", _hoisted_1$H, [
-        createBaseVNode("p", _hoisted_2$u, toDisplayString(((_a = unref(theme2).notFound) == null ? void 0 : _a.code) ?? "404"), 1),
-        createBaseVNode("h1", _hoisted_3$l, toDisplayString(((_b = unref(theme2).notFound) == null ? void 0 : _b.title) ?? "PAGE NOT FOUND"), 1),
-        _hoisted_4$c,
-        createBaseVNode("blockquote", _hoisted_5$a, toDisplayString(((_c = unref(theme2).notFound) == null ? void 0 : _c.quote) ?? "But if you don't change your direction, and if you keep looking, you may end up where you are heading."), 1),
-        createBaseVNode("div", _hoisted_6$7, [
+        createBaseVNode("p", _hoisted_2$p, toDisplayString(((_a = unref(theme2).notFound) == null ? void 0 : _a.code) ?? "404"), 1),
+        createBaseVNode("h1", _hoisted_3$g, toDisplayString(((_b = unref(theme2).notFound) == null ? void 0 : _b.title) ?? "PAGE NOT FOUND"), 1),
+        _cache[0] || (_cache[0] = createBaseVNode("div", { class: "divider" }, null, -1)),
+        createBaseVNode("blockquote", _hoisted_4$8, toDisplayString(((_c = unref(theme2).notFound) == null ? void 0 : _c.quote) ?? "But if you don't change your direction, and if you keep looking, you may end up where you are heading."), 1),
+        createBaseVNode("div", _hoisted_5$8, [
           createBaseVNode("a", {
             class: "link",
-            href: unref(withBase)(root.value),
+            href: unref(withBase)(unref(currentLang).link),
             "aria-label": ((_d = unref(theme2).notFound) == null ? void 0 : _d.linkLabel) ?? "go to home"
-          }, toDisplayString(((_e = unref(theme2).notFound) == null ? void 0 : _e.linkText) ?? "Take me home"), 9, _hoisted_7$5)
+          }, toDisplayString(((_e = unref(theme2).notFound) == null ? void 0 : _e.linkText) ?? "Take me home"), 9, _hoisted_6$6)
         ])
       ]);
     };
   }
 });
-const NotFound = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["__scopeId", "data-v-f87ff6e4"]]);
+const NotFound = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["__scopeId", "data-v-d6be1790"]]);
 function getSidebar(_sidebar, path) {
   if (Array.isArray(_sidebar))
     return addBase(_sidebar);
@@ -267,7 +251,7 @@ function useCloseSidebarOnEscape(isOpen, close) {
   }
 }
 function useSidebarControl(item) {
-  const { page } = useData();
+  const { page, hash } = useData();
   const collapsed = ref(false);
   const collapsible = computed(() => {
     return item.value.collapsed != null;
@@ -279,7 +263,7 @@ function useSidebarControl(item) {
   const updateIsActiveLink = () => {
     isActiveLink.value = isActive(page.value.relativePath, item.value.link);
   };
-  watch([page, item, hashRef], updateIsActiveLink);
+  watch([page, item, hash], updateIsActiveLink);
   onMounted(updateIsActiveLink);
   const hasActiveLink$1 = computed(() => {
     if (isActiveLink.value) {
@@ -325,6 +309,7 @@ function useAside() {
     isAsideEnabled
   };
 }
+const ignoreRE = /\b(?:VPBadge|header-anchor|footnote-ref|ignore-header)\b/;
 const resolvedHeaders = [];
 function resolveTitle(theme2) {
   return typeof theme2.outline === "object" && !Array.isArray(theme2.outline) && theme2.outline.label || theme2.outlineTitle || "On this page";
@@ -347,9 +332,8 @@ function serializeHeader(h) {
   let ret = "";
   for (const node of h.childNodes) {
     if (node.nodeType === 1) {
-      if (node.classList.contains("VPBadge") || node.classList.contains("header-anchor") || node.classList.contains("ignore-header")) {
+      if (ignoreRE.test(node.className))
         continue;
-      }
       ret += node.textContent;
     } else if (node.nodeType === 3) {
       ret += node.textContent;
@@ -363,29 +347,7 @@ function resolveHeaders(headers, range) {
   }
   const levelsRange = (typeof range === "object" && !Array.isArray(range) ? range.level : range) || 2;
   const [high, low] = typeof levelsRange === "number" ? [levelsRange, levelsRange] : levelsRange === "deep" ? [2, 6] : levelsRange;
-  headers = headers.filter((h) => h.level >= high && h.level <= low);
-  resolvedHeaders.length = 0;
-  for (const { element, link } of headers) {
-    resolvedHeaders.push({ element, link });
-  }
-  const ret = [];
-  outer:
-    for (let i = 0; i < headers.length; i++) {
-      const cur = headers[i];
-      if (i === 0) {
-        ret.push(cur);
-      } else {
-        for (let j = i - 1; j >= 0; j--) {
-          const prev = headers[j];
-          if (prev.level < cur.level) {
-            (prev.children || (prev.children = [])).push(cur);
-            continue outer;
-          }
-        }
-        ret.push(cur);
-      }
-    }
-  return ret;
+  return buildTree(headers, high, low);
 }
 function useActiveAnchor(container, marker) {
   const { isAsideEnabled } = useAside();
@@ -465,8 +427,34 @@ function getAbsoluteTop(element) {
   }
   return offsetTop;
 }
+function buildTree(data, min, max) {
+  resolvedHeaders.length = 0;
+  const result = [];
+  const stack = [];
+  data.forEach((item) => {
+    const node = { ...item, children: [] };
+    let parent = stack[stack.length - 1];
+    while (parent && parent.level >= node.level) {
+      stack.pop();
+      parent = stack[stack.length - 1];
+    }
+    if (node.element.classList.contains("ignore-header") || parent && "shouldIgnore" in parent) {
+      stack.push({ level: node.level, shouldIgnore: true });
+      return;
+    }
+    if (node.level > max || node.level < min)
+      return;
+    resolvedHeaders.push({ element: node.element, link: node.link });
+    if (parent)
+      parent.children.push(node);
+    else
+      result.push(node);
+    stack.push(node);
+  });
+  return result;
+}
 const _hoisted_1$G = ["href", "title"];
-const _sfc_main$T = /* @__PURE__ */ defineComponent({
+const _sfc_main$U = /* @__PURE__ */ defineComponent({
   __name: "VPDocOutlineItem",
   props: {
     headers: {},
@@ -501,20 +489,15 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPDocOutlineItem = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-b933a997"]]);
-const _withScopeId$g = (n) => (pushScopeId("data-v-935f8a84"), n = n(), popScopeId(), n);
+const VPDocOutlineItem = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["__scopeId", "data-v-b933a997"]]);
 const _hoisted_1$F = { class: "content" };
-const _hoisted_2$t = {
+const _hoisted_2$o = {
+  "aria-level": "2",
   class: "outline-title",
-  role: "heading",
-  "aria-level": "2"
+  id: "doc-outline-aria-label",
+  role: "heading"
 };
-const _hoisted_3$k = { "aria-labelledby": "doc-outline-aria-label" };
-const _hoisted_4$b = /* @__PURE__ */ _withScopeId$g(() => /* @__PURE__ */ createBaseVNode("span", {
-  class: "visually-hidden",
-  id: "doc-outline-aria-label"
-}, " Table of Contents for current page ", -1));
-const _sfc_main$S = /* @__PURE__ */ defineComponent({
+const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "VPDocAsideOutline",
   setup(__props) {
     const { frontmatter, theme: theme2 } = useData();
@@ -526,11 +509,11 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     const marker = ref();
     useActiveAnchor(container, marker);
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
+      return openBlock(), createElementBlock("nav", {
+        "aria-labelledby": "doc-outline-aria-label",
         class: normalizeClass(["VPDocAsideOutline", { "has-outline": headers.value.length > 0 }]),
         ref_key: "container",
-        ref: container,
-        role: "navigation"
+        ref: container
       }, [
         createBaseVNode("div", _hoisted_1$F, [
           createBaseVNode("div", {
@@ -538,22 +521,19 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
             ref_key: "marker",
             ref: marker
           }, null, 512),
-          createBaseVNode("div", _hoisted_2$t, toDisplayString(unref(resolveTitle)(unref(theme2))), 1),
-          createBaseVNode("nav", _hoisted_3$k, [
-            _hoisted_4$b,
-            createVNode(VPDocOutlineItem, {
-              headers: headers.value,
-              root: true
-            }, null, 8, ["headers"])
-          ])
+          createBaseVNode("div", _hoisted_2$o, toDisplayString(unref(resolveTitle)(unref(theme2))), 1),
+          createVNode(VPDocOutlineItem, {
+            headers: headers.value,
+            root: true
+          }, null, 8, ["headers"])
         ])
       ], 2);
     };
   }
 });
-const VPDocAsideOutline = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-935f8a84"]]);
+const VPDocAsideOutline = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-a5bbad30"]]);
 const _hoisted_1$E = { class: "VPDocAsideCarbonAds" };
-const _sfc_main$R = /* @__PURE__ */ defineComponent({
+const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "VPDocAsideCarbonAds",
   props: {
     carbonAds: {}
@@ -567,10 +547,8 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _withScopeId$f = (n) => (pushScopeId("data-v-3f215769"), n = n(), popScopeId(), n);
 const _hoisted_1$D = { class: "VPDocAside" };
-const _hoisted_2$s = /* @__PURE__ */ _withScopeId$f(() => /* @__PURE__ */ createBaseVNode("div", { class: "spacer" }, null, -1));
-const _sfc_main$Q = /* @__PURE__ */ defineComponent({
+const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "VPDocAside",
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -580,9 +558,9 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
         renderSlot(_ctx.$slots, "aside-outline-before", {}, void 0, true),
         createVNode(VPDocAsideOutline),
         renderSlot(_ctx.$slots, "aside-outline-after", {}, void 0, true),
-        _hoisted_2$s,
+        _cache[0] || (_cache[0] = createBaseVNode("div", { class: "spacer" }, null, -1)),
         renderSlot(_ctx.$slots, "aside-ads-before", {}, void 0, true),
-        unref(theme2).carbonAds ? (openBlock(), createBlock(_sfc_main$R, {
+        unref(theme2).carbonAds ? (openBlock(), createBlock(_sfc_main$S, {
           key: 0,
           "carbon-ads": unref(theme2).carbonAds
         }, null, 8, ["carbon-ads"])) : createCommentVNode("", true),
@@ -592,7 +570,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPDocAside = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["__scopeId", "data-v-3f215769"]]);
+const VPDocAside = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["__scopeId", "data-v-3f215769"]]);
 function useEditLink() {
   const { theme: theme2, page } = useData();
   return computed(() => {
@@ -611,7 +589,8 @@ function usePrevNext() {
   return computed(() => {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     const sidebar = getSidebar(theme2.value.sidebar, page.value.relativePath);
-    const candidates = getFlatSideBarLinks(sidebar);
+    const links = getFlatSideBarLinks(sidebar);
+    const candidates = uniqBy(links, (link) => link.link.replace(/[?#].*$/, ""));
     const index = candidates.findIndex((link) => {
       return isActive(page.value.relativePath, link.link);
     });
@@ -629,7 +608,14 @@ function usePrevNext() {
     };
   });
 }
-const _sfc_main$P = /* @__PURE__ */ defineComponent({
+function uniqBy(array, keyFn) {
+  const seen = /* @__PURE__ */ new Set();
+  return array.filter((item) => {
+    const k = keyFn(item);
+    return seen.has(k) ? false : seen.add(k);
+  });
+}
+const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   __name: "VPLink",
   props: {
     tag: {},
@@ -641,7 +627,9 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const tag = computed(() => props.tag ?? (props.href ? "a" : "span"));
-    const isExternal2 = computed(() => props.href && EXTERNAL_URL_RE.test(props.href));
+    const isExternal2 = computed(
+      () => props.href && EXTERNAL_URL_RE.test(props.href) || props.target === "_blank"
+    );
     return (_ctx, _cache) => {
       return openBlock(), createBlock(resolveDynamicComponent(tag.value), {
         class: normalizeClass(["VPLink", {
@@ -662,13 +650,13 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$C = { class: "VPLastUpdated" };
-const _hoisted_2$r = ["datetime"];
-const _sfc_main$O = /* @__PURE__ */ defineComponent({
+const _hoisted_2$n = ["datetime"];
+const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "VPDocFooterLastUpdated",
   setup(__props) {
-    const { theme: theme2, page, frontmatter, lang } = useData();
+    const { theme: theme2, page, lang } = useData();
     const date = computed(
-      () => new Date(frontmatter.value.lastUpdated ?? page.value.lastUpdated)
+      () => new Date(page.value.lastUpdated)
     );
     const isoDatetime = computed(() => date.value.toISOString());
     const datetime = ref("");
@@ -688,80 +676,81 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
       var _a;
       return openBlock(), createElementBlock("p", _hoisted_1$C, [
         createTextVNode(toDisplayString(((_a = unref(theme2).lastUpdated) == null ? void 0 : _a.text) || unref(theme2).lastUpdatedText || "Last updated") + ": ", 1),
-        createBaseVNode("time", { datetime: isoDatetime.value }, toDisplayString(datetime.value), 9, _hoisted_2$r)
+        createBaseVNode("time", { datetime: isoDatetime.value }, toDisplayString(datetime.value), 9, _hoisted_2$n)
       ]);
     };
   }
 });
-const VPDocFooterLastUpdated = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["__scopeId", "data-v-7e05ebdb"]]);
-const _withScopeId$e = (n) => (pushScopeId("data-v-09de1c0f"), n = n(), popScopeId(), n);
+const VPDocFooterLastUpdated = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-e98dd255"]]);
 const _hoisted_1$B = {
   key: 0,
   class: "VPDocFooter"
 };
-const _hoisted_2$q = {
+const _hoisted_2$m = {
   key: 0,
   class: "edit-info"
 };
-const _hoisted_3$j = {
+const _hoisted_3$f = {
   key: 0,
   class: "edit-link"
 };
-const _hoisted_4$a = /* @__PURE__ */ _withScopeId$e(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-square-pen edit-link-icon" }, null, -1));
-const _hoisted_5$9 = {
+const _hoisted_4$7 = {
   key: 1,
   class: "last-updated"
 };
-const _hoisted_6$6 = {
+const _hoisted_5$7 = {
   key: 1,
-  class: "prev-next"
+  class: "prev-next",
+  "aria-labelledby": "doc-footer-aria-label"
 };
-const _hoisted_7$4 = { class: "pager" };
-const _hoisted_8$3 = ["innerHTML"];
-const _hoisted_9$1 = ["innerHTML"];
-const _hoisted_10$1 = { class: "pager" };
+const _hoisted_6$5 = { class: "pager" };
+const _hoisted_7$3 = ["innerHTML"];
+const _hoisted_8$2 = ["innerHTML"];
+const _hoisted_9$1 = { class: "pager" };
+const _hoisted_10 = ["innerHTML"];
 const _hoisted_11 = ["innerHTML"];
-const _hoisted_12 = ["innerHTML"];
-const _sfc_main$N = /* @__PURE__ */ defineComponent({
+const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "VPDocFooter",
   setup(__props) {
     const { theme: theme2, page, frontmatter } = useData();
     const editLink = useEditLink();
     const control = usePrevNext();
-    const hasEditLink = computed(() => {
-      return theme2.value.editLink && frontmatter.value.editLink !== false;
-    });
-    const hasLastUpdated = computed(() => {
-      return page.value.lastUpdated && frontmatter.value.lastUpdated !== false;
-    });
-    const showFooter = computed(() => {
-      return hasEditLink.value || hasLastUpdated.value || control.value.prev || control.value.next;
-    });
+    const hasEditLink = computed(
+      () => theme2.value.editLink && frontmatter.value.editLink !== false
+    );
+    const hasLastUpdated = computed(() => page.value.lastUpdated);
+    const showFooter = computed(
+      () => hasEditLink.value || hasLastUpdated.value || control.value.prev || control.value.next
+    );
     return (_ctx, _cache) => {
       var _a, _b, _c, _d;
       return showFooter.value ? (openBlock(), createElementBlock("footer", _hoisted_1$B, [
         renderSlot(_ctx.$slots, "doc-footer-before", {}, void 0, true),
-        hasEditLink.value || hasLastUpdated.value ? (openBlock(), createElementBlock("div", _hoisted_2$q, [
-          hasEditLink.value ? (openBlock(), createElementBlock("div", _hoisted_3$j, [
-            createVNode(_sfc_main$P, {
+        hasEditLink.value || hasLastUpdated.value ? (openBlock(), createElementBlock("div", _hoisted_2$m, [
+          hasEditLink.value ? (openBlock(), createElementBlock("div", _hoisted_3$f, [
+            createVNode(_sfc_main$Q, {
               class: "edit-link-button",
               href: unref(editLink).url,
               "no-icon": true
             }, {
               default: withCtx(() => [
-                _hoisted_4$a,
+                _cache[0] || (_cache[0] = createBaseVNode("span", { class: "vpi-square-pen edit-link-icon" }, null, -1)),
                 createTextVNode(" " + toDisplayString(unref(editLink).text), 1)
               ]),
               _: 1
             }, 8, ["href"])
           ])) : createCommentVNode("", true),
-          hasLastUpdated.value ? (openBlock(), createElementBlock("div", _hoisted_5$9, [
+          hasLastUpdated.value ? (openBlock(), createElementBlock("div", _hoisted_4$7, [
             createVNode(VPDocFooterLastUpdated)
           ])) : createCommentVNode("", true)
         ])) : createCommentVNode("", true),
-        ((_a = unref(control).prev) == null ? void 0 : _a.link) || ((_b = unref(control).next) == null ? void 0 : _b.link) ? (openBlock(), createElementBlock("nav", _hoisted_6$6, [
-          createBaseVNode("div", _hoisted_7$4, [
-            ((_c = unref(control).prev) == null ? void 0 : _c.link) ? (openBlock(), createBlock(_sfc_main$P, {
+        ((_a = unref(control).prev) == null ? void 0 : _a.link) || ((_b = unref(control).next) == null ? void 0 : _b.link) ? (openBlock(), createElementBlock("nav", _hoisted_5$7, [
+          _cache[1] || (_cache[1] = createBaseVNode("span", {
+            class: "visually-hidden",
+            id: "doc-footer-aria-label"
+          }, "Pager", -1)),
+          createBaseVNode("div", _hoisted_6$5, [
+            ((_c = unref(control).prev) == null ? void 0 : _c.link) ? (openBlock(), createBlock(_sfc_main$Q, {
               key: 0,
               class: "pager-link prev",
               href: unref(control).prev.link
@@ -772,18 +761,18 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
                   createBaseVNode("span", {
                     class: "desc",
                     innerHTML: ((_a2 = unref(theme2).docFooter) == null ? void 0 : _a2.prev) || "Previous page"
-                  }, null, 8, _hoisted_8$3),
+                  }, null, 8, _hoisted_7$3),
                   createBaseVNode("span", {
                     class: "title",
                     innerHTML: unref(control).prev.text
-                  }, null, 8, _hoisted_9$1)
+                  }, null, 8, _hoisted_8$2)
                 ];
               }),
               _: 1
             }, 8, ["href"])) : createCommentVNode("", true)
           ]),
-          createBaseVNode("div", _hoisted_10$1, [
-            ((_d = unref(control).next) == null ? void 0 : _d.link) ? (openBlock(), createBlock(_sfc_main$P, {
+          createBaseVNode("div", _hoisted_9$1, [
+            ((_d = unref(control).next) == null ? void 0 : _d.link) ? (openBlock(), createBlock(_sfc_main$Q, {
               key: 0,
               class: "pager-link next",
               href: unref(control).next.link
@@ -794,11 +783,11 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
                   createBaseVNode("span", {
                     class: "desc",
                     innerHTML: ((_a2 = unref(theme2).docFooter) == null ? void 0 : _a2.next) || "Next page"
-                  }, null, 8, _hoisted_11),
+                  }, null, 8, _hoisted_10),
                   createBaseVNode("span", {
                     class: "title",
                     innerHTML: unref(control).next.text
-                  }, null, 8, _hoisted_12)
+                  }, null, 8, _hoisted_11)
                 ];
               }),
               _: 1
@@ -809,16 +798,14 @@ const _sfc_main$N = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPDocFooter = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["__scopeId", "data-v-09de1c0f"]]);
-const _withScopeId$d = (n) => (pushScopeId("data-v-39a288b8"), n = n(), popScopeId(), n);
+const VPDocFooter = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["__scopeId", "data-v-e257564d"]]);
 const _hoisted_1$A = { class: "container" };
-const _hoisted_2$p = /* @__PURE__ */ _withScopeId$d(() => /* @__PURE__ */ createBaseVNode("div", { class: "aside-curtain" }, null, -1));
-const _hoisted_3$i = { class: "aside-container" };
-const _hoisted_4$9 = { class: "aside-content" };
-const _hoisted_5$8 = { class: "content" };
-const _hoisted_6$5 = { class: "content-container" };
-const _hoisted_7$3 = { class: "main" };
-const _sfc_main$M = /* @__PURE__ */ defineComponent({
+const _hoisted_2$l = { class: "aside-container" };
+const _hoisted_3$e = { class: "aside-content" };
+const _hoisted_4$6 = { class: "content" };
+const _hoisted_5$6 = { class: "content-container" };
+const _hoisted_6$4 = { class: "main" };
+const _sfc_main$N = /* @__PURE__ */ defineComponent({
   __name: "VPDoc",
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -838,9 +825,9 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
             key: 0,
             class: normalizeClass(["aside", { "left-aside": unref(leftAside) }])
           }, [
-            _hoisted_2$p,
-            createBaseVNode("div", _hoisted_3$i, [
-              createBaseVNode("div", _hoisted_4$9, [
+            _cache[0] || (_cache[0] = createBaseVNode("div", { class: "aside-curtain" }, null, -1)),
+            createBaseVNode("div", _hoisted_2$l, [
+              createBaseVNode("div", _hoisted_3$e, [
                 createVNode(VPDocAside, null, {
                   "aside-top": withCtx(() => [
                     renderSlot(_ctx.$slots, "aside-top", {}, void 0, true)
@@ -865,10 +852,10 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
               ])
             ])
           ], 2)) : createCommentVNode("", true),
-          createBaseVNode("div", _hoisted_5$8, [
-            createBaseVNode("div", _hoisted_6$5, [
+          createBaseVNode("div", _hoisted_4$6, [
+            createBaseVNode("div", _hoisted_5$6, [
               renderSlot(_ctx.$slots, "doc-before", {}, void 0, true),
-              createBaseVNode("main", _hoisted_7$3, [
+              createBaseVNode("main", _hoisted_6$4, [
                 createVNode(_component_Content, {
                   class: normalizeClass(["vp-doc", [
                     pageName.value,
@@ -891,8 +878,8 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPDoc = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-39a288b8"]]);
-const _sfc_main$L = /* @__PURE__ */ defineComponent({
+const VPDoc = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["__scopeId", "data-v-39a288b8"]]);
+const _sfc_main$M = /* @__PURE__ */ defineComponent({
   __name: "VPButton",
   props: {
     tag: {},
@@ -909,7 +896,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
       () => props.href && EXTERNAL_URL_RE.test(props.href)
     );
     const component = computed(() => {
-      return props.tag || props.href ? "a" : "button";
+      return props.tag || (props.href ? "a" : "button");
     });
     return (_ctx, _cache) => {
       return openBlock(), createBlock(resolveDynamicComponent(component.value), {
@@ -926,9 +913,9 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPButton = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["__scopeId", "data-v-cad61b99"]]);
+const VPButton = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-fa7799d5"]]);
 const _hoisted_1$z = ["src", "alt"];
-const _sfc_main$K = /* @__PURE__ */ defineComponent({
+const _sfc_main$L = /* @__PURE__ */ defineComponent({
   ...{ inheritAttrs: false },
   __name: "VPImage",
   props: {
@@ -961,28 +948,23 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPImage = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-8426fc1a"]]);
-const _withScopeId$c = (n) => (pushScopeId("data-v-303bb580"), n = n(), popScopeId(), n);
+const VPImage = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["__scopeId", "data-v-8426fc1a"]]);
 const _hoisted_1$y = { class: "container" };
-const _hoisted_2$o = { class: "main" };
-const _hoisted_3$h = {
-  key: 0,
-  class: "name"
-};
-const _hoisted_4$8 = ["innerHTML"];
-const _hoisted_5$7 = ["innerHTML"];
-const _hoisted_6$4 = ["innerHTML"];
+const _hoisted_2$k = { class: "main" };
+const _hoisted_3$d = { class: "heading" };
+const _hoisted_4$5 = ["innerHTML"];
+const _hoisted_5$5 = ["innerHTML"];
+const _hoisted_6$3 = ["innerHTML"];
 const _hoisted_7$2 = {
   key: 0,
   class: "actions"
 };
-const _hoisted_8$2 = {
+const _hoisted_8$1 = {
   key: 0,
   class: "image"
 };
 const _hoisted_9 = { class: "image-container" };
-const _hoisted_10 = /* @__PURE__ */ _withScopeId$c(() => /* @__PURE__ */ createBaseVNode("div", { class: "image-bg" }, null, -1));
-const _sfc_main$J = /* @__PURE__ */ defineComponent({
+const _sfc_main$K = /* @__PURE__ */ defineComponent({
   __name: "VPHero",
   props: {
     name: {},
@@ -998,25 +980,26 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
         class: normalizeClass(["VPHero", { "has-image": _ctx.image || unref(heroImageSlotExists) }])
       }, [
         createBaseVNode("div", _hoisted_1$y, [
-          createBaseVNode("div", _hoisted_2$o, [
+          createBaseVNode("div", _hoisted_2$k, [
             renderSlot(_ctx.$slots, "home-hero-info-before", {}, void 0, true),
             renderSlot(_ctx.$slots, "home-hero-info", {}, () => [
-              _ctx.name ? (openBlock(), createElementBlock("h1", _hoisted_3$h, [
-                createBaseVNode("span", {
+              createBaseVNode("h1", _hoisted_3$d, [
+                _ctx.name ? (openBlock(), createElementBlock("span", {
+                  key: 0,
                   innerHTML: _ctx.name,
-                  class: "clip"
-                }, null, 8, _hoisted_4$8)
-              ])) : createCommentVNode("", true),
-              _ctx.text ? (openBlock(), createElementBlock("p", {
-                key: 1,
-                innerHTML: _ctx.text,
-                class: "text"
-              }, null, 8, _hoisted_5$7)) : createCommentVNode("", true),
+                  class: "name clip"
+                }, null, 8, _hoisted_4$5)) : createCommentVNode("", true),
+                _ctx.text ? (openBlock(), createElementBlock("span", {
+                  key: 1,
+                  innerHTML: _ctx.text,
+                  class: "text"
+                }, null, 8, _hoisted_5$5)) : createCommentVNode("", true)
+              ]),
               _ctx.tagline ? (openBlock(), createElementBlock("p", {
-                key: 2,
+                key: 0,
                 innerHTML: _ctx.tagline,
                 class: "tagline"
-              }, null, 8, _hoisted_6$4)) : createCommentVNode("", true)
+              }, null, 8, _hoisted_6$3)) : createCommentVNode("", true)
             ], true),
             renderSlot(_ctx.$slots, "home-hero-info-after", {}, void 0, true),
             _ctx.actions ? (openBlock(), createElementBlock("div", _hoisted_7$2, [
@@ -1039,9 +1022,9 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
             ])) : createCommentVNode("", true),
             renderSlot(_ctx.$slots, "home-hero-actions-after", {}, void 0, true)
           ]),
-          _ctx.image || unref(heroImageSlotExists) ? (openBlock(), createElementBlock("div", _hoisted_8$2, [
+          _ctx.image || unref(heroImageSlotExists) ? (openBlock(), createElementBlock("div", _hoisted_8$1, [
             createBaseVNode("div", _hoisted_9, [
-              _hoisted_10,
+              _cache[0] || (_cache[0] = createBaseVNode("div", { class: "image-bg" }, null, -1)),
               renderSlot(_ctx.$slots, "home-hero-image", {}, () => [
                 _ctx.image ? (openBlock(), createBlock(VPImage, {
                   key: 0,
@@ -1056,8 +1039,8 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPHero = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["__scopeId", "data-v-303bb580"]]);
-const _sfc_main$I = /* @__PURE__ */ defineComponent({
+const VPHero = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-4f9c455b"]]);
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
   __name: "VPHomeHero",
   setup(__props) {
     const { frontmatter: fm } = useData();
@@ -1091,22 +1074,20 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _withScopeId$b = (n) => (pushScopeId("data-v-a3976bdc"), n = n(), popScopeId(), n);
 const _hoisted_1$x = { class: "box" };
-const _hoisted_2$n = {
+const _hoisted_2$j = {
   key: 0,
   class: "icon"
 };
-const _hoisted_3$g = ["innerHTML"];
-const _hoisted_4$7 = ["innerHTML"];
-const _hoisted_5$6 = ["innerHTML"];
-const _hoisted_6$3 = {
+const _hoisted_3$c = ["innerHTML"];
+const _hoisted_4$4 = ["innerHTML"];
+const _hoisted_5$4 = ["innerHTML"];
+const _hoisted_6$2 = {
   key: 4,
   class: "link-text"
 };
 const _hoisted_7$1 = { class: "link-text-value" };
-const _hoisted_8$1 = /* @__PURE__ */ _withScopeId$b(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-arrow-right link-text-icon" }, null, -1));
-const _sfc_main$H = /* @__PURE__ */ defineComponent({
+const _sfc_main$I = /* @__PURE__ */ defineComponent({
   __name: "VPFeature",
   props: {
     icon: {},
@@ -1119,7 +1100,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$P, {
+      return openBlock(), createBlock(_sfc_main$Q, {
         class: "VPFeature",
         href: _ctx.link,
         rel: _ctx.rel,
@@ -1129,7 +1110,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx(() => [
           createBaseVNode("article", _hoisted_1$x, [
-            typeof _ctx.icon === "object" && _ctx.icon.wrap ? (openBlock(), createElementBlock("div", _hoisted_2$n, [
+            typeof _ctx.icon === "object" && _ctx.icon.wrap ? (openBlock(), createElementBlock("div", _hoisted_2$j, [
               createVNode(VPImage, {
                 image: _ctx.icon,
                 alt: _ctx.icon.alt,
@@ -1146,20 +1127,20 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
               key: 2,
               class: "icon",
               innerHTML: _ctx.icon
-            }, null, 8, _hoisted_3$g)) : createCommentVNode("", true),
+            }, null, 8, _hoisted_3$c)) : createCommentVNode("", true),
             createBaseVNode("h2", {
               class: "title",
               innerHTML: _ctx.title
-            }, null, 8, _hoisted_4$7),
+            }, null, 8, _hoisted_4$4),
             _ctx.details ? (openBlock(), createElementBlock("p", {
               key: 3,
               class: "details",
               innerHTML: _ctx.details
-            }, null, 8, _hoisted_5$6)) : createCommentVNode("", true),
-            _ctx.linkText ? (openBlock(), createElementBlock("div", _hoisted_6$3, [
+            }, null, 8, _hoisted_5$4)) : createCommentVNode("", true),
+            _ctx.linkText ? (openBlock(), createElementBlock("div", _hoisted_6$2, [
               createBaseVNode("p", _hoisted_7$1, [
                 createTextVNode(toDisplayString(_ctx.linkText) + " ", 1),
-                _hoisted_8$1
+                _cache[0] || (_cache[0] = createBaseVNode("span", { class: "vpi-arrow-right link-text-icon" }, null, -1))
               ])
             ])) : createCommentVNode("", true)
           ])
@@ -1169,14 +1150,14 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPFeature = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["__scopeId", "data-v-a3976bdc"]]);
+const VPFeature = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-a3976bdc"]]);
 const _hoisted_1$w = {
   key: 0,
   class: "VPFeatures"
 };
-const _hoisted_2$m = { class: "container" };
-const _hoisted_3$f = { class: "items" };
-const _sfc_main$G = /* @__PURE__ */ defineComponent({
+const _hoisted_2$i = { class: "container" };
+const _hoisted_3$b = { class: "items" };
+const _sfc_main$H = /* @__PURE__ */ defineComponent({
   __name: "VPFeatures",
   props: {
     features: {}
@@ -1199,8 +1180,8 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return _ctx.features ? (openBlock(), createElementBlock("div", _hoisted_1$w, [
-        createBaseVNode("div", _hoisted_2$m, [
-          createBaseVNode("div", _hoisted_3$f, [
+        createBaseVNode("div", _hoisted_2$i, [
+          createBaseVNode("div", _hoisted_3$b, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.features, (feature) => {
               return openBlock(), createElementBlock("div", {
                 key: feature.title,
@@ -1223,8 +1204,8 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPFeatures = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["__scopeId", "data-v-a6181336"]]);
-const _sfc_main$F = /* @__PURE__ */ defineComponent({
+const VPFeatures = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["__scopeId", "data-v-a6181336"]]);
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "VPHomeFeatures",
   setup(__props) {
     const { frontmatter: fm } = useData();
@@ -1237,10 +1218,13 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$E = /* @__PURE__ */ defineComponent({
+const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "VPHomeContent",
   setup(__props) {
-    const { width: vw } = useWindowSize({ includeScrollbar: false });
+    const { width: vw } = useWindowSize({
+      initialWidth: 0,
+      includeScrollbar: false
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: "vp-doc container",
@@ -1251,17 +1235,20 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPHomeContent = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["__scopeId", "data-v-82d4af08"]]);
-const _hoisted_1$v = { class: "VPHome" };
-const _sfc_main$D = /* @__PURE__ */ defineComponent({
+const VPHomeContent = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-8e2d4988"]]);
+const _sfc_main$E = /* @__PURE__ */ defineComponent({
   __name: "VPHome",
   setup(__props) {
-    const { frontmatter } = useData();
+    const { frontmatter, theme: theme2 } = useData();
     return (_ctx, _cache) => {
       const _component_Content = resolveComponent("Content");
-      return openBlock(), createElementBlock("div", _hoisted_1$v, [
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(["VPHome", {
+          "external-link-icon-enabled": unref(theme2).externalLinkIcon
+        }])
+      }, [
         renderSlot(_ctx.$slots, "home-hero-before", {}, void 0, true),
-        createVNode(_sfc_main$I, null, {
+        createVNode(_sfc_main$J, null, {
           "home-hero-info-before": withCtx(() => [
             renderSlot(_ctx.$slots, "home-hero-info-before", {}, void 0, true)
           ]),
@@ -1281,7 +1268,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
         }),
         renderSlot(_ctx.$slots, "home-hero-after", {}, void 0, true),
         renderSlot(_ctx.$slots, "home-features-before", {}, void 0, true),
-        createVNode(_sfc_main$F),
+        createVNode(_sfc_main$G),
         renderSlot(_ctx.$slots, "home-features-after", {}, void 0, true),
         unref(frontmatter).markdownStyles !== false ? (openBlock(), createBlock(VPHomeContent, { key: 0 }, {
           default: withCtx(() => [
@@ -1289,23 +1276,23 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
           ]),
           _: 1
         })) : (openBlock(), createBlock(_component_Content, { key: 1 }))
-      ]);
+      ], 2);
     };
   }
 });
-const VPHome = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__scopeId", "data-v-686f80a6"]]);
-const _sfc_main$C = {};
-const _hoisted_1$u = { class: "VPPage" };
+const VPHome = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["__scopeId", "data-v-8b561e3d"]]);
+const _sfc_main$D = {};
+const _hoisted_1$v = { class: "VPPage" };
 function _sfc_render$1(_ctx, _cache) {
   const _component_Content = resolveComponent("Content");
-  return openBlock(), createElementBlock("div", _hoisted_1$u, [
+  return openBlock(), createElementBlock("div", _hoisted_1$v, [
     renderSlot(_ctx.$slots, "page-top"),
     createVNode(_component_Content),
     renderSlot(_ctx.$slots, "page-bottom")
   ]);
 }
-const VPPage = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$1]]);
-const _sfc_main$B = /* @__PURE__ */ defineComponent({
+const VPPage = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$1]]);
+const _sfc_main$C = /* @__PURE__ */ defineComponent({
   __name: "VPContent",
   setup(__props) {
     const { page, frontmatter } = useData();
@@ -1397,11 +1384,11 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPContent = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-1428d186"]]);
-const _hoisted_1$t = { class: "container" };
-const _hoisted_2$l = ["innerHTML"];
-const _hoisted_3$e = ["innerHTML"];
-const _sfc_main$A = /* @__PURE__ */ defineComponent({
+const VPContent = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__scopeId", "data-v-1428d186"]]);
+const _hoisted_1$u = { class: "container" };
+const _hoisted_2$h = ["innerHTML"];
+const _hoisted_3$a = ["innerHTML"];
+const _sfc_main$B = /* @__PURE__ */ defineComponent({
   __name: "VPFooter",
   setup(__props) {
     const { theme: theme2, frontmatter } = useData();
@@ -1411,23 +1398,23 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
         key: 0,
         class: normalizeClass(["VPFooter", { "has-sidebar": unref(hasSidebar) }])
       }, [
-        createBaseVNode("div", _hoisted_1$t, [
+        createBaseVNode("div", _hoisted_1$u, [
           unref(theme2).footer.message ? (openBlock(), createElementBlock("p", {
             key: 0,
             class: "message",
             innerHTML: unref(theme2).footer.message
-          }, null, 8, _hoisted_2$l)) : createCommentVNode("", true),
+          }, null, 8, _hoisted_2$h)) : createCommentVNode("", true),
           unref(theme2).footer.copyright ? (openBlock(), createElementBlock("p", {
             key: 1,
             class: "copyright",
             innerHTML: unref(theme2).footer.copyright
-          }, null, 8, _hoisted_3$e)) : createCommentVNode("", true)
+          }, null, 8, _hoisted_3$a)) : createCommentVNode("", true)
         ])
       ], 2)) : createCommentVNode("", true);
     };
   }
 });
-const VPFooter = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-e315a0ad"]]);
+const VPFooter = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-e315a0ad"]]);
 function useLocalNav() {
   const { theme: theme2, frontmatter } = useData();
   const headers = shallowRef([]);
@@ -1442,11 +1429,10 @@ function useLocalNav() {
     hasLocalNav
   };
 }
-const _withScopeId$a = (n) => (pushScopeId("data-v-d2ecc192"), n = n(), popScopeId(), n);
-const _hoisted_1$s = /* @__PURE__ */ _withScopeId$a(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-chevron-right icon" }, null, -1));
-const _hoisted_2$k = { class: "header" };
-const _hoisted_3$d = { class: "outline" };
-const _sfc_main$z = /* @__PURE__ */ defineComponent({
+const _hoisted_1$t = { class: "menu-text" };
+const _hoisted_2$g = { class: "header" };
+const _hoisted_3$9 = { class: "outline" };
+const _sfc_main$A = /* @__PURE__ */ defineComponent({
   __name: "VPLocalNavOutlineDropdown",
   props: {
     headers: {},
@@ -1459,8 +1445,18 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     const vh = ref(0);
     const main = ref();
     const items = ref();
-    onClickOutside(main, () => {
-      open.value = false;
+    function closeOnClickOutside(e) {
+      var _a;
+      if (!((_a = main.value) == null ? void 0 : _a.contains(e.target))) {
+        open.value = false;
+      }
+    }
+    watch(open, (value) => {
+      if (value) {
+        document.addEventListener("click", closeOnClickOutside);
+        return;
+      }
+      document.removeEventListener("click", closeOnClickOutside);
     });
     onKeyStroke("Escape", () => {
       open.value = false;
@@ -1498,8 +1494,8 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
           onClick: toggle,
           class: normalizeClass({ open: open.value })
         }, [
-          createTextVNode(toDisplayString(unref(resolveTitle)(unref(theme2))) + " ", 1),
-          _hoisted_1$s
+          createBaseVNode("span", _hoisted_1$t, toDisplayString(unref(resolveTitle)(unref(theme2))), 1),
+          _cache[0] || (_cache[0] = createBaseVNode("span", { class: "vpi-chevron-right icon" }, null, -1))
         ], 2)) : (openBlock(), createElementBlock("button", {
           key: 1,
           onClick: scrollToTop
@@ -1513,14 +1509,14 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
               class: "items",
               onClick: onItemClick
             }, [
-              createBaseVNode("div", _hoisted_2$k, [
+              createBaseVNode("div", _hoisted_2$g, [
                 createBaseVNode("a", {
                   class: "top-link",
                   href: "#",
                   onClick: scrollToTop
                 }, toDisplayString(unref(theme2).returnToTopLabel || "Return to top"), 1)
               ]),
-              createBaseVNode("div", _hoisted_3$d, [
+              createBaseVNode("div", _hoisted_3$9, [
                 createVNode(VPDocOutlineItem, { headers: _ctx.headers }, null, 8, ["headers"])
               ])
             ], 512)) : createCommentVNode("", true)
@@ -1531,13 +1527,11 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPLocalNavOutlineDropdown = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-d2ecc192"]]);
-const _withScopeId$9 = (n) => (pushScopeId("data-v-a6f0e41e"), n = n(), popScopeId(), n);
-const _hoisted_1$r = { class: "container" };
-const _hoisted_2$j = ["aria-expanded"];
-const _hoisted_3$c = /* @__PURE__ */ _withScopeId$9(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-align-left menu-icon" }, null, -1));
-const _hoisted_4$6 = { class: "menu-text" };
-const _sfc_main$y = /* @__PURE__ */ defineComponent({
+const VPLocalNavOutlineDropdown = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-8a42e2b4"]]);
+const _hoisted_1$s = { class: "container" };
+const _hoisted_2$f = ["aria-expanded"];
+const _hoisted_3$8 = { class: "menu-text" };
+const _sfc_main$z = /* @__PURE__ */ defineComponent({
   __name: "VPLocalNav",
   props: {
     open: { type: Boolean }
@@ -1578,7 +1572,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
         key: 0,
         class: normalizeClass(classes.value)
       }, [
-        createBaseVNode("div", _hoisted_1$r, [
+        createBaseVNode("div", _hoisted_1$s, [
           unref(hasSidebar) ? (openBlock(), createElementBlock("button", {
             key: 0,
             class: "menu",
@@ -1586,9 +1580,9 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
             "aria-controls": "VPSidebarNav",
             onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("open-menu"))
           }, [
-            _hoisted_3$c,
-            createBaseVNode("span", _hoisted_4$6, toDisplayString(unref(theme2).sidebarMenuLabel || "Menu"), 1)
-          ], 8, _hoisted_2$j)) : createCommentVNode("", true),
+            _cache[1] || (_cache[1] = createBaseVNode("span", { class: "vpi-align-left menu-icon" }, null, -1)),
+            createBaseVNode("span", _hoisted_3$8, toDisplayString(unref(theme2).sidebarMenuLabel || "Menu"), 1)
+          ], 8, _hoisted_2$f)) : createCommentVNode("", true),
           createVNode(VPLocalNavOutlineDropdown, {
             headers: unref(headers),
             navHeight: navHeight.value
@@ -1598,7 +1592,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPLocalNav = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__scopeId", "data-v-a6f0e41e"]]);
+const VPLocalNav = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-a6f0e41e"]]);
 function useNav() {
   const isScreenOpen = ref(false);
   function openScreen() {
@@ -1624,39 +1618,37 @@ function useNav() {
     toggleScreen
   };
 }
-const _sfc_main$x = {};
-const _hoisted_1$q = {
+const _sfc_main$y = {};
+const _hoisted_1$r = {
   class: "VPSwitch",
   type: "button",
   role: "switch"
 };
-const _hoisted_2$i = { class: "check" };
-const _hoisted_3$b = {
+const _hoisted_2$e = { class: "check" };
+const _hoisted_3$7 = {
   key: 0,
   class: "icon"
 };
 function _sfc_render(_ctx, _cache) {
-  return openBlock(), createElementBlock("button", _hoisted_1$q, [
-    createBaseVNode("span", _hoisted_2$i, [
-      _ctx.$slots.default ? (openBlock(), createElementBlock("span", _hoisted_3$b, [
+  return openBlock(), createElementBlock("button", _hoisted_1$r, [
+    createBaseVNode("span", _hoisted_2$e, [
+      _ctx.$slots.default ? (openBlock(), createElementBlock("span", _hoisted_3$7, [
         renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])) : createCommentVNode("", true)
     ])
   ]);
 }
-const VPSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render], ["__scopeId", "data-v-1d5665e3"]]);
-const _withScopeId$8 = (n) => (pushScopeId("data-v-d1f28634"), n = n(), popScopeId(), n);
-const _hoisted_1$p = /* @__PURE__ */ _withScopeId$8(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-sun sun" }, null, -1));
-const _hoisted_2$h = /* @__PURE__ */ _withScopeId$8(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-moon moon" }, null, -1));
-const _sfc_main$w = /* @__PURE__ */ defineComponent({
+const VPSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render], ["__scopeId", "data-v-1d5665e3"]]);
+const _sfc_main$x = /* @__PURE__ */ defineComponent({
   __name: "VPSwitchAppearance",
   setup(__props) {
     const { isDark, theme: theme2 } = useData();
     const toggleAppearance = inject("toggle-appearance", () => {
       isDark.value = !isDark.value;
     });
-    const switchTitle = computed(() => {
-      return isDark.value ? theme2.value.lightModeSwitchTitle || "Switch to light theme" : theme2.value.darkModeSwitchTitle || "Switch to dark theme";
+    const switchTitle = ref("");
+    watchPostEffect(() => {
+      switchTitle.value = isDark.value ? theme2.value.lightModeSwitchTitle || "Switch to light theme" : theme2.value.darkModeSwitchTitle || "Switch to dark theme";
     });
     return (_ctx, _cache) => {
       return openBlock(), createBlock(VPSwitch, {
@@ -1665,32 +1657,32 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
         "aria-checked": unref(isDark),
         onClick: unref(toggleAppearance)
       }, {
-        default: withCtx(() => [
-          _hoisted_1$p,
-          _hoisted_2$h
-        ]),
+        default: withCtx(() => _cache[0] || (_cache[0] = [
+          createBaseVNode("span", { class: "vpi-sun sun" }, null, -1),
+          createBaseVNode("span", { class: "vpi-moon moon" }, null, -1)
+        ])),
         _: 1
       }, 8, ["title", "aria-checked", "onClick"]);
     };
   }
 });
-const VPSwitchAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__scopeId", "data-v-d1f28634"]]);
-const _hoisted_1$o = {
+const VPSwitchAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-5337faa4"]]);
+const _hoisted_1$q = {
   key: 0,
   class: "VPNavBarAppearance"
 };
-const _sfc_main$v = /* @__PURE__ */ defineComponent({
+const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarAppearance",
   setup(__props) {
     const { site } = useData();
     return (_ctx, _cache) => {
-      return unref(site).appearance && unref(site).appearance !== "force-dark" ? (openBlock(), createElementBlock("div", _hoisted_1$o, [
+      return unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto" ? (openBlock(), createElementBlock("div", _hoisted_1$q, [
         createVNode(VPSwitchAppearance)
       ])) : createCommentVNode("", true);
     };
   }
 });
-const VPNavBarAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__scopeId", "data-v-e6aabb21"]]);
+const VPNavBarAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__scopeId", "data-v-6c893767"]]);
 const focusedElement = ref();
 let active = false;
 let listeners = 0;
@@ -1730,8 +1722,9 @@ function deactivateFocusTracking() {
 function handleFocusIn() {
   focusedElement.value = document.activeElement;
 }
-const _hoisted_1$n = { class: "VPMenuLink" };
-const _sfc_main$u = /* @__PURE__ */ defineComponent({
+const _hoisted_1$p = { class: "VPMenuLink" };
+const _hoisted_2$d = ["innerHTML"];
+const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "VPMenuLink",
   props: {
     item: {}
@@ -1739,29 +1732,38 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const { page } = useData();
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$n, [
-        createVNode(_sfc_main$P, {
-          class: normalizeClass({ active: unref(isActive)(unref(page).relativePath, _ctx.item.activeMatch || _ctx.item.link, !!_ctx.item.activeMatch) }),
+      return openBlock(), createElementBlock("div", _hoisted_1$p, [
+        createVNode(_sfc_main$Q, {
+          class: normalizeClass({
+            active: unref(isActive)(
+              unref(page).relativePath,
+              _ctx.item.activeMatch || _ctx.item.link,
+              !!_ctx.item.activeMatch
+            )
+          }),
           href: _ctx.item.link,
           target: _ctx.item.target,
-          rel: _ctx.item.rel
+          rel: _ctx.item.rel,
+          "no-icon": _ctx.item.noIcon
         }, {
           default: withCtx(() => [
-            createTextVNode(toDisplayString(_ctx.item.text), 1)
+            createBaseVNode("span", {
+              innerHTML: _ctx.item.text
+            }, null, 8, _hoisted_2$d)
           ]),
           _: 1
-        }, 8, ["class", "href", "target", "rel"])
+        }, 8, ["class", "href", "target", "rel", "no-icon"])
       ]);
     };
   }
 });
-const VPMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__scopeId", "data-v-43f1e123"]]);
-const _hoisted_1$m = { class: "VPMenuGroup" };
-const _hoisted_2$g = {
+const VPMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__scopeId", "data-v-35975db6"]]);
+const _hoisted_1$o = { class: "VPMenuGroup" };
+const _hoisted_2$c = {
   key: 0,
   class: "title"
 };
-const _sfc_main$t = /* @__PURE__ */ defineComponent({
+const _sfc_main$u = /* @__PURE__ */ defineComponent({
   __name: "VPMenuGroup",
   props: {
     text: {},
@@ -1769,8 +1771,8 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$m, [
-        _ctx.text ? (openBlock(), createElementBlock("p", _hoisted_2$g, toDisplayString(_ctx.text), 1)) : createCommentVNode("", true),
+      return openBlock(), createElementBlock("div", _hoisted_1$o, [
+        _ctx.text ? (openBlock(), createElementBlock("p", _hoisted_2$c, toDisplayString(_ctx.text), 1)) : createCommentVNode("", true),
         (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.items, (item) => {
           return openBlock(), createElementBlock(Fragment, null, [
             "link" in item ? (openBlock(), createBlock(VPMenuLink, {
@@ -1783,30 +1785,33 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__scopeId", "data-v-69e747b5"]]);
-const _hoisted_1$l = { class: "VPMenu" };
-const _hoisted_2$f = {
+const VPMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__scopeId", "data-v-69e747b5"]]);
+const _hoisted_1$n = { class: "VPMenu" };
+const _hoisted_2$b = {
   key: 0,
   class: "items"
 };
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
   __name: "VPMenu",
   props: {
     items: {}
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$l, [
-        _ctx.items ? (openBlock(), createElementBlock("div", _hoisted_2$f, [
+      return openBlock(), createElementBlock("div", _hoisted_1$n, [
+        _ctx.items ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.items, (item) => {
             return openBlock(), createElementBlock(Fragment, {
-              key: item.text
+              key: JSON.stringify(item)
             }, [
               "link" in item ? (openBlock(), createBlock(VPMenuLink, {
                 key: 0,
                 item
-              }, null, 8, ["item"])) : (openBlock(), createBlock(VPMenuGroup, {
+              }, null, 8, ["item"])) : "component" in item ? (openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps({
                 key: 1,
+                ref_for: true
+              }, item.props), null, 16)) : (openBlock(), createBlock(VPMenuGroup, {
+                key: 2,
                 text: item.text,
                 items: item.items
               }, null, 8, ["text", "items"]))
@@ -1818,21 +1823,19 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPMenu = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__scopeId", "data-v-e7ea1737"]]);
-const _withScopeId$7 = (n) => (pushScopeId("data-v-b6c34ac9"), n = n(), popScopeId(), n);
-const _hoisted_1$k = ["aria-expanded", "aria-label"];
-const _hoisted_2$e = {
+const VPMenu = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__scopeId", "data-v-b98bc113"]]);
+const _hoisted_1$m = ["aria-expanded", "aria-label"];
+const _hoisted_2$a = {
   key: 0,
   class: "text"
 };
-const _hoisted_3$a = ["innerHTML"];
-const _hoisted_4$5 = /* @__PURE__ */ _withScopeId$7(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-chevron-down text-icon" }, null, -1));
-const _hoisted_5$5 = {
+const _hoisted_3$6 = ["innerHTML"];
+const _hoisted_4$3 = {
   key: 1,
   class: "vpi-more-horizontal icon"
 };
-const _hoisted_6$2 = { class: "menu" };
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
+const _hoisted_5$3 = { class: "menu" };
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "VPFlyout",
   props: {
     icon: {},
@@ -1863,7 +1866,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
           "aria-label": _ctx.label,
           onClick: _cache[0] || (_cache[0] = ($event) => open.value = !open.value)
         }, [
-          _ctx.button || _ctx.icon ? (openBlock(), createElementBlock("span", _hoisted_2$e, [
+          _ctx.button || _ctx.icon ? (openBlock(), createElementBlock("span", _hoisted_2$a, [
             _ctx.icon ? (openBlock(), createElementBlock("span", {
               key: 0,
               class: normalizeClass([_ctx.icon, "option-icon"])
@@ -1871,11 +1874,11 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
             _ctx.button ? (openBlock(), createElementBlock("span", {
               key: 1,
               innerHTML: _ctx.button
-            }, null, 8, _hoisted_3$a)) : createCommentVNode("", true),
-            _hoisted_4$5
-          ])) : (openBlock(), createElementBlock("span", _hoisted_5$5))
-        ], 8, _hoisted_1$k),
-        createBaseVNode("div", _hoisted_6$2, [
+            }, null, 8, _hoisted_3$6)) : createCommentVNode("", true),
+            _cache[3] || (_cache[3] = createBaseVNode("span", { class: "vpi-chevron-down text-icon" }, null, -1))
+          ])) : (openBlock(), createElementBlock("span", _hoisted_4$3))
+        ], 8, _hoisted_1$m),
+        createBaseVNode("div", _hoisted_5$3, [
           createVNode(VPMenu, { items: _ctx.items }, {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default", {}, void 0, true)
@@ -1887,9 +1890,9 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPFlyout = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-b6c34ac9"]]);
-const _hoisted_1$j = ["href", "aria-label", "innerHTML"];
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
+const VPFlyout = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__scopeId", "data-v-cf11d7a2"]]);
+const _hoisted_1$l = ["href", "aria-label", "innerHTML"];
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
   __name: "VPSocialLink",
   props: {
     icon: {},
@@ -1898,33 +1901,46 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
+    const el = ref();
+    onMounted(async () => {
+      var _a;
+      await nextTick();
+      const span = (_a = el.value) == null ? void 0 : _a.children[0];
+      if (span instanceof HTMLElement && span.className.startsWith("vpi-social-") && (getComputedStyle(span).maskImage || getComputedStyle(span).webkitMaskImage) === "none") {
+        span.style.setProperty(
+          "--icon",
+          `url('https://api.iconify.design/simple-icons/${props.icon}.svg')`
+        );
+      }
+    });
     const svg = computed(() => {
-      if (typeof props.icon === "object")
-        return props.icon.svg;
-      return `<span class="vpi-social-${props.icon}" />`;
+      if (typeof props.icon === "object") return props.icon.svg;
+      return `<span class="vpi-social-${props.icon}"></span>`;
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("a", {
+        ref_key: "el",
+        ref: el,
         class: "VPSocialLink no-icon",
         href: _ctx.link,
         "aria-label": _ctx.ariaLabel ?? (typeof _ctx.icon === "string" ? _ctx.icon : ""),
         target: "_blank",
         rel: "noopener",
         innerHTML: svg.value
-      }, null, 8, _hoisted_1$j);
+      }, null, 8, _hoisted_1$l);
     };
   }
 });
-const VPSocialLink = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-eee4e7cb"]]);
-const _hoisted_1$i = { class: "VPSocialLinks" };
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
+const VPSocialLink = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-bd121fe5"]]);
+const _hoisted_1$k = { class: "VPSocialLinks" };
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
   __name: "VPSocialLinks",
   props: {
     links: {}
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$i, [
+      return openBlock(), createElementBlock("div", _hoisted_1$k, [
         (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.links, ({ link, icon, ariaLabel }) => {
           return openBlock(), createBlock(VPSocialLink, {
             key: link,
@@ -1937,25 +1953,25 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-7bc22406"]]);
-const _hoisted_1$h = {
+const VPSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-7bc22406"]]);
+const _hoisted_1$j = {
   key: 0,
   class: "group translations"
 };
-const _hoisted_2$d = { class: "trans-title" };
-const _hoisted_3$9 = {
+const _hoisted_2$9 = { class: "trans-title" };
+const _hoisted_3$5 = {
   key: 1,
   class: "group"
 };
-const _hoisted_4$4 = { class: "item appearance" };
-const _hoisted_5$4 = { class: "label" };
+const _hoisted_4$2 = { class: "item appearance" };
+const _hoisted_5$2 = { class: "label" };
 const _hoisted_6$1 = { class: "appearance-action" };
 const _hoisted_7 = {
   key: 2,
   class: "group"
 };
 const _hoisted_8 = { class: "item social-links" };
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarExtra",
   setup(__props) {
     const { site, theme: theme2 } = useData();
@@ -1970,8 +1986,8 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
         label: "extra navigation"
       }, {
         default: withCtx(() => [
-          unref(localeLinks).length && unref(currentLang).label ? (openBlock(), createElementBlock("div", _hoisted_1$h, [
-            createBaseVNode("p", _hoisted_2$d, toDisplayString(unref(currentLang).label), 1),
+          unref(localeLinks).length && unref(currentLang).label ? (openBlock(), createElementBlock("div", _hoisted_1$j, [
+            createBaseVNode("p", _hoisted_2$9, toDisplayString(unref(currentLang).label), 1),
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(localeLinks), (locale) => {
               return openBlock(), createBlock(VPMenuLink, {
                 key: locale.link,
@@ -1979,9 +1995,9 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
               }, null, 8, ["item"]);
             }), 128))
           ])) : createCommentVNode("", true),
-          unref(site).appearance && unref(site).appearance !== "force-dark" ? (openBlock(), createElementBlock("div", _hoisted_3$9, [
-            createBaseVNode("div", _hoisted_4$4, [
-              createBaseVNode("p", _hoisted_5$4, toDisplayString(unref(theme2).darkModeSwitchLabel || "Appearance"), 1),
+          unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto" ? (openBlock(), createElementBlock("div", _hoisted_3$5, [
+            createBaseVNode("div", _hoisted_4$2, [
+              createBaseVNode("p", _hoisted_5$2, toDisplayString(unref(theme2).darkModeSwitchLabel || "Appearance"), 1),
               createBaseVNode("div", _hoisted_6$1, [
                 createVNode(VPSwitchAppearance)
               ])
@@ -2001,18 +2017,9 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavBarExtra = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-d0bd9dde"]]);
-const _withScopeId$6 = (n) => (pushScopeId("data-v-e5dd9c1c"), n = n(), popScopeId(), n);
-const _hoisted_1$g = ["aria-expanded"];
-const _hoisted_2$c = /* @__PURE__ */ _withScopeId$6(() => /* @__PURE__ */ createBaseVNode("span", { class: "container" }, [
-  /* @__PURE__ */ createBaseVNode("span", { class: "top" }),
-  /* @__PURE__ */ createBaseVNode("span", { class: "middle" }),
-  /* @__PURE__ */ createBaseVNode("span", { class: "bottom" })
-], -1));
-const _hoisted_3$8 = [
-  _hoisted_2$c
-];
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const VPNavBarExtra = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-bb2aa2f0"]]);
+const _hoisted_1$i = ["aria-expanded"];
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarHamburger",
   props: {
     active: { type: Boolean }
@@ -2027,13 +2034,19 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
         "aria-expanded": _ctx.active,
         "aria-controls": "VPNavScreen",
         onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("click"))
-      }, _hoisted_3$8, 10, _hoisted_1$g);
+      }, _cache[1] || (_cache[1] = [
+        createBaseVNode("span", { class: "container" }, [
+          createBaseVNode("span", { class: "top" }),
+          createBaseVNode("span", { class: "middle" }),
+          createBaseVNode("span", { class: "bottom" })
+        ], -1)
+      ]), 10, _hoisted_1$i);
     };
   }
 });
-const VPNavBarHamburger = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-e5dd9c1c"]]);
-const _hoisted_1$f = ["innerHTML"];
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const VPNavBarHamburger = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-e5dd9c1c"]]);
+const _hoisted_1$h = ["innerHTML"];
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarMenuLink",
   props: {
     item: {}
@@ -2041,7 +2054,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const { page } = useData();
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$P, {
+      return openBlock(), createBlock(_sfc_main$Q, {
         class: normalizeClass({
           VPNavBarMenuLink: true,
           active: unref(isActive)(
@@ -2053,20 +2066,21 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
         href: _ctx.item.link,
         target: _ctx.item.target,
         rel: _ctx.item.rel,
+        "no-icon": _ctx.item.noIcon,
         tabindex: "0"
       }, {
         default: withCtx(() => [
           createBaseVNode("span", {
             innerHTML: _ctx.item.text
-          }, null, 8, _hoisted_1$f)
+          }, null, 8, _hoisted_1$h)
         ]),
         _: 1
-      }, 8, ["class", "href", "target", "rel"]);
+      }, 8, ["class", "href", "target", "rel", "no-icon"]);
     };
   }
 });
-const VPNavBarMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-42ef59de"]]);
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
+const VPNavBarMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-e56f3d57"]]);
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarMenuGroup",
   props: {
     item: {}
@@ -2075,26 +2089,22 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     const props = __props;
     const { page } = useData();
     const isChildActive = (navItem) => {
+      if ("component" in navItem) return false;
       if ("link" in navItem) {
         return isActive(
           page.value.relativePath,
           navItem.link,
           !!props.item.activeMatch
         );
-      } else {
-        return navItem.items.some(isChildActive);
       }
+      return navItem.items.some(isChildActive);
     };
     const childrenActive = computed(() => isChildActive(props.item));
     return (_ctx, _cache) => {
       return openBlock(), createBlock(VPFlyout, {
         class: normalizeClass({
           VPNavBarMenuGroup: true,
-          active: unref(isActive)(
-            unref(page).relativePath,
-            _ctx.item.activeMatch,
-            !!_ctx.item.activeMatch
-          ) || childrenActive.value
+          active: unref(isActive)(unref(page).relativePath, _ctx.item.activeMatch, !!_ctx.item.activeMatch) || childrenActive.value
         }),
         button: _ctx.item.text,
         items: _ctx.item.items
@@ -2102,32 +2112,33 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _withScopeId$5 = (n) => (pushScopeId("data-v-7f418b0f"), n = n(), popScopeId(), n);
-const _hoisted_1$e = {
+const _hoisted_1$g = {
   key: 0,
   "aria-labelledby": "main-nav-aria-label",
   class: "VPNavBarMenu"
 };
-const _hoisted_2$b = /* @__PURE__ */ _withScopeId$5(() => /* @__PURE__ */ createBaseVNode("span", {
-  id: "main-nav-aria-label",
-  class: "visually-hidden"
-}, "Main Navigation", -1));
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarMenu",
   setup(__props) {
     const { theme: theme2 } = useData();
     return (_ctx, _cache) => {
-      return unref(theme2).nav ? (openBlock(), createElementBlock("nav", _hoisted_1$e, [
-        _hoisted_2$b,
+      return unref(theme2).nav ? (openBlock(), createElementBlock("nav", _hoisted_1$g, [
+        _cache[0] || (_cache[0] = createBaseVNode("span", {
+          id: "main-nav-aria-label",
+          class: "visually-hidden"
+        }, " Main Navigation ", -1)),
         (openBlock(true), createElementBlock(Fragment, null, renderList(unref(theme2).nav, (item) => {
           return openBlock(), createElementBlock(Fragment, {
-            key: item.text
+            key: JSON.stringify(item)
           }, [
             "link" in item ? (openBlock(), createBlock(VPNavBarMenuLink, {
               key: 0,
               item
-            }, null, 8, ["item"])) : (openBlock(), createBlock(_sfc_main$l, {
+            }, null, 8, ["item"])) : "component" in item ? (openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps({
               key: 1,
+              ref_for: true
+            }, item.props), null, 16)) : (openBlock(), createBlock(_sfc_main$m, {
+              key: 2,
               item
             }, null, 8, ["item"]))
           ], 64);
@@ -2136,7 +2147,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavBarMenu = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-7f418b0f"]]);
+const VPNavBarMenu = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-dc692963"]]);
 function createSearchTranslate(defaultTranslations) {
   const { localeIndex, theme: theme2 } = useData();
   function translate(key) {
@@ -2178,15 +2189,10 @@ function createSearchTranslate(defaultTranslations) {
   }
   return translate;
 }
-const _hoisted_1$d = ["aria-label"];
-const _hoisted_2$a = { class: "DocSearch-Button-Container" };
-const _hoisted_3$7 = /* @__PURE__ */ createBaseVNode("span", { class: "vp-icon DocSearch-Search-Icon" }, null, -1);
-const _hoisted_4$3 = { class: "DocSearch-Button-Placeholder" };
-const _hoisted_5$3 = /* @__PURE__ */ createBaseVNode("span", { class: "DocSearch-Button-Keys" }, [
-  /* @__PURE__ */ createBaseVNode("kbd", { class: "DocSearch-Button-Key" }),
-  /* @__PURE__ */ createBaseVNode("kbd", { class: "DocSearch-Button-Key" }, "K")
-], -1);
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
+const _hoisted_1$f = ["aria-label"];
+const _hoisted_2$8 = { class: "DocSearch-Button-Container" };
+const _hoisted_3$4 = { class: "DocSearch-Button-Placeholder" };
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarSearchButton",
   setup(__props) {
     const defaultTranslations = {
@@ -2202,22 +2208,25 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
         class: "DocSearch DocSearch-Button",
         "aria-label": unref(translate)("button.buttonAriaLabel")
       }, [
-        createBaseVNode("span", _hoisted_2$a, [
-          _hoisted_3$7,
-          createBaseVNode("span", _hoisted_4$3, toDisplayString(unref(translate)("button.buttonText")), 1)
+        createBaseVNode("span", _hoisted_2$8, [
+          _cache[0] || (_cache[0] = createBaseVNode("span", { class: "vp-icon DocSearch-Search-Icon" }, null, -1)),
+          createBaseVNode("span", _hoisted_3$4, toDisplayString(unref(translate)("button.buttonText")), 1)
         ]),
-        _hoisted_5$3
-      ], 8, _hoisted_1$d);
+        _cache[1] || (_cache[1] = createBaseVNode("span", { class: "DocSearch-Button-Keys" }, [
+          createBaseVNode("kbd", { class: "DocSearch-Button-Key" }),
+          createBaseVNode("kbd", { class: "DocSearch-Button-Key" }, "K")
+        ], -1))
+      ], 8, _hoisted_1$f);
     };
   }
 });
-const _hoisted_1$c = { class: "VPNavBarSearch" };
-const _hoisted_2$9 = { id: "local-search" };
-const _hoisted_3$6 = {
+const _hoisted_1$e = { class: "VPNavBarSearch" };
+const _hoisted_2$7 = { id: "local-search" };
+const _hoisted_3$3 = {
   key: 1,
   id: "docsearch"
 };
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarSearch",
   setup(__props) {
     const VPLocalSearchBox = () => null;
@@ -2251,14 +2260,14 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     const provider = "";
     return (_ctx, _cache) => {
       var _a;
-      return openBlock(), createElementBlock("div", _hoisted_1$c, [
+      return openBlock(), createElementBlock("div", _hoisted_1$e, [
         unref(provider) === "local" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
           showSearch.value ? (openBlock(), createBlock(unref(VPLocalSearchBox), {
             key: 0,
             onClose: _cache[0] || (_cache[0] = ($event) => showSearch.value = false)
           })) : createCommentVNode("", true),
-          createBaseVNode("div", _hoisted_2$9, [
-            createVNode(_sfc_main$j, {
+          createBaseVNode("div", _hoisted_2$7, [
+            createVNode(_sfc_main$k, {
               onClick: _cache[1] || (_cache[1] = ($event) => showSearch.value = true)
             })
           ])
@@ -2268,15 +2277,15 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
             algolia: ((_a = unref(theme2).search) == null ? void 0 : _a.options) ?? unref(theme2).algolia,
             onVnodeBeforeMount: _cache[2] || (_cache[2] = ($event) => actuallyLoaded.value = true)
           }, null, 8, ["algolia"])) : createCommentVNode("", true),
-          !actuallyLoaded.value ? (openBlock(), createElementBlock("div", _hoisted_3$6, [
-            createVNode(_sfc_main$j, { onClick: load })
+          !actuallyLoaded.value ? (openBlock(), createElementBlock("div", _hoisted_3$3, [
+            createVNode(_sfc_main$k, { onClick: load })
           ])) : createCommentVNode("", true)
         ], 64)) : createCommentVNode("", true)
       ]);
     };
   }
 });
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarSocialLinks",
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -2289,11 +2298,11 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavBarSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-0394ad82"]]);
-const _hoisted_1$b = ["href", "rel", "target"];
-const _hoisted_2$8 = { key: 1 };
-const _hoisted_3$5 = { key: 2 };
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const VPNavBarSocialLinks = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-0394ad82"]]);
+const _hoisted_1$d = ["href", "rel", "target"];
+const _hoisted_2$6 = ["innerHTML"];
+const _hoisted_3$2 = { key: 2 };
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarTitle",
   setup(__props) {
     const { site, theme: theme2 } = useData();
@@ -2333,17 +2342,20 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
             class: "logo",
             image: unref(theme2).logo
           }, null, 8, ["image"])) : createCommentVNode("", true),
-          unref(theme2).siteTitle ? (openBlock(), createElementBlock("span", _hoisted_2$8, toDisplayString(unref(theme2).siteTitle), 1)) : unref(theme2).siteTitle === void 0 ? (openBlock(), createElementBlock("span", _hoisted_3$5, toDisplayString(unref(site).title), 1)) : createCommentVNode("", true),
+          unref(theme2).siteTitle ? (openBlock(), createElementBlock("span", {
+            key: 1,
+            innerHTML: unref(theme2).siteTitle
+          }, null, 8, _hoisted_2$6)) : unref(theme2).siteTitle === void 0 ? (openBlock(), createElementBlock("span", _hoisted_3$2, toDisplayString(unref(site).title), 1)) : createCommentVNode("", true),
           renderSlot(_ctx.$slots, "nav-bar-title-after", {}, void 0, true)
-        ], 8, _hoisted_1$b)
+        ], 8, _hoisted_1$d)
       ], 2);
     };
   }
 });
-const VPNavBarTitle = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-ab179fa1"]]);
-const _hoisted_1$a = { class: "items" };
-const _hoisted_2$7 = { class: "title" };
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const VPNavBarTitle = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-1168a8e4"]]);
+const _hoisted_1$c = { class: "items" };
+const _hoisted_2$5 = { class: "title" };
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarTranslations",
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -2356,8 +2368,8 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
         label: unref(theme2).langMenuLabel || "Change language"
       }, {
         default: withCtx(() => [
-          createBaseVNode("div", _hoisted_1$a, [
-            createBaseVNode("p", _hoisted_2$7, toDisplayString(unref(currentLang).label), 1),
+          createBaseVNode("div", _hoisted_1$c, [
+            createBaseVNode("p", _hoisted_2$5, toDisplayString(unref(currentLang).label), 1),
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(localeLinks), (locale) => {
               return openBlock(), createBlock(VPMenuLink, {
                 key: locale.link,
@@ -2371,42 +2383,39 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavBarTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-88af2de4"]]);
-const _withScopeId$4 = (n) => (pushScopeId("data-v-19c990f1"), n = n(), popScopeId(), n);
-const _hoisted_1$9 = { class: "wrapper" };
-const _hoisted_2$6 = { class: "container" };
-const _hoisted_3$4 = { class: "title" };
-const _hoisted_4$2 = { class: "content" };
-const _hoisted_5$2 = { class: "content-body" };
-const _hoisted_6 = /* @__PURE__ */ _withScopeId$4(() => /* @__PURE__ */ createBaseVNode("div", { class: "divider" }, [
-  /* @__PURE__ */ createBaseVNode("div", { class: "divider-line" })
-], -1));
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
+const VPNavBarTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-88af2de4"]]);
+const _hoisted_1$b = { class: "wrapper" };
+const _hoisted_2$4 = { class: "container" };
+const _hoisted_3$1 = { class: "title" };
+const _hoisted_4$1 = { class: "content" };
+const _hoisted_5$1 = { class: "content-body" };
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
   __name: "VPNavBar",
   props: {
     isScreenOpen: { type: Boolean }
   },
   emits: ["toggle-screen"],
   setup(__props) {
+    const props = __props;
     const { y } = useWindowScroll();
     const { hasSidebar } = useSidebar();
-    const { hasLocalNav } = useLocalNav();
     const { frontmatter } = useData();
     const classes = ref({});
     watchPostEffect(() => {
       classes.value = {
         "has-sidebar": hasSidebar.value,
-        "has-local-nav": hasLocalNav.value,
-        top: frontmatter.value.layout === "home" && y.value === 0
+        "home": frontmatter.value.layout === "home",
+        "top": y.value === 0,
+        "screen-open": props.isScreenOpen
       };
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(["VPNavBar", classes.value])
       }, [
-        createBaseVNode("div", _hoisted_1$9, [
-          createBaseVNode("div", _hoisted_2$6, [
-            createBaseVNode("div", _hoisted_3$4, [
+        createBaseVNode("div", _hoisted_1$b, [
+          createBaseVNode("div", _hoisted_2$4, [
+            createBaseVNode("div", _hoisted_3$1, [
               createVNode(VPNavBarTitle, null, {
                 "nav-bar-title-before": withCtx(() => [
                   renderSlot(_ctx.$slots, "nav-bar-title-before", {}, void 0, true)
@@ -2417,10 +2426,10 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
                 _: 3
               })
             ]),
-            createBaseVNode("div", _hoisted_4$2, [
-              createBaseVNode("div", _hoisted_5$2, [
+            createBaseVNode("div", _hoisted_4$1, [
+              createBaseVNode("div", _hoisted_5$1, [
                 renderSlot(_ctx.$slots, "nav-bar-content-before", {}, void 0, true),
-                createVNode(_sfc_main$i, { class: "search" }),
+                createVNode(_sfc_main$j, { class: "search" }),
                 createVNode(VPNavBarMenu, { class: "menu" }),
                 createVNode(VPNavBarTranslations, { class: "translations" }),
                 createVNode(VPNavBarAppearance, { class: "appearance" }),
@@ -2436,31 +2445,34 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
             ])
           ])
         ]),
-        _hoisted_6
+        _cache[1] || (_cache[1] = createBaseVNode("div", { class: "divider" }, [
+          createBaseVNode("div", { class: "divider-line" })
+        ], -1))
       ], 2);
     };
   }
 });
-const VPNavBar = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-19c990f1"]]);
-const _hoisted_1$8 = {
+const VPNavBar = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-6aa21345"]]);
+const _hoisted_1$a = {
   key: 0,
   class: "VPNavScreenAppearance"
 };
-const _hoisted_2$5 = { class: "text" };
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const _hoisted_2$3 = { class: "text" };
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenAppearance",
   setup(__props) {
     const { site, theme: theme2 } = useData();
     return (_ctx, _cache) => {
-      return unref(site).appearance && unref(site).appearance !== "force-dark" ? (openBlock(), createElementBlock("div", _hoisted_1$8, [
-        createBaseVNode("p", _hoisted_2$5, toDisplayString(unref(theme2).darkModeSwitchLabel || "Appearance"), 1),
+      return unref(site).appearance && unref(site).appearance !== "force-dark" && unref(site).appearance !== "force-auto" ? (openBlock(), createElementBlock("div", _hoisted_1$a, [
+        createBaseVNode("p", _hoisted_2$3, toDisplayString(unref(theme2).darkModeSwitchLabel || "Appearance"), 1),
         createVNode(VPSwitchAppearance)
       ])) : createCommentVNode("", true);
     };
   }
 });
-const VPNavScreenAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-2d7af913"]]);
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const VPNavScreenAppearance = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-b44890b2"]]);
+const _hoisted_1$9 = ["innerHTML"];
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenMenuLink",
   props: {
     item: {}
@@ -2468,23 +2480,27 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const closeScreen = inject("close-screen");
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$P, {
+      return openBlock(), createBlock(_sfc_main$Q, {
         class: "VPNavScreenMenuLink",
         href: _ctx.item.link,
         target: _ctx.item.target,
         rel: _ctx.item.rel,
+        "no-icon": _ctx.item.noIcon,
         onClick: unref(closeScreen)
       }, {
         default: withCtx(() => [
-          createTextVNode(toDisplayString(_ctx.item.text), 1)
+          createBaseVNode("span", {
+            innerHTML: _ctx.item.text
+          }, null, 8, _hoisted_1$9)
         ]),
         _: 1
-      }, 8, ["href", "target", "rel", "onClick"]);
+      }, 8, ["href", "target", "rel", "no-icon", "onClick"]);
     };
   }
 });
-const VPNavScreenMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-05f27b2a"]]);
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const VPNavScreenMenuLink = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-df37e6dd"]]);
+const _hoisted_1$8 = ["innerHTML"];
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenMenuGroupLink",
   props: {
     item: {}
@@ -2492,28 +2508,31 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const closeScreen = inject("close-screen");
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$P, {
+      return openBlock(), createBlock(_sfc_main$Q, {
         class: "VPNavScreenMenuGroupLink",
         href: _ctx.item.link,
         target: _ctx.item.target,
         rel: _ctx.item.rel,
+        "no-icon": _ctx.item.noIcon,
         onClick: unref(closeScreen)
       }, {
         default: withCtx(() => [
-          createTextVNode(toDisplayString(_ctx.item.text), 1)
+          createBaseVNode("span", {
+            innerHTML: _ctx.item.text
+          }, null, 8, _hoisted_1$8)
         ]),
         _: 1
-      }, 8, ["href", "target", "rel", "onClick"]);
+      }, 8, ["href", "target", "rel", "no-icon", "onClick"]);
     };
   }
 });
-const VPNavScreenMenuGroupLink = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-19976ae1"]]);
+const VPNavScreenMenuGroupLink = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-3e9c20e4"]]);
 const _hoisted_1$7 = { class: "VPNavScreenMenuGroupSection" };
-const _hoisted_2$4 = {
+const _hoisted_2$2 = {
   key: 0,
   class: "title"
 };
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
+const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenMenuGroupSection",
   props: {
     text: {},
@@ -2522,7 +2541,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   setup(__props) {
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1$7, [
-        _ctx.text ? (openBlock(), createElementBlock("p", _hoisted_2$4, toDisplayString(_ctx.text), 1)) : createCommentVNode("", true),
+        _ctx.text ? (openBlock(), createElementBlock("p", _hoisted_2$2, toDisplayString(_ctx.text), 1)) : createCommentVNode("", true),
         (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.items, (item) => {
           return openBlock(), createBlock(VPNavScreenMenuGroupLink, {
             key: item.text,
@@ -2533,17 +2552,23 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavScreenMenuGroupSection = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-8133b170"]]);
-const _withScopeId$3 = (n) => (pushScopeId("data-v-ff6087d4"), n = n(), popScopeId(), n);
+const VPNavScreenMenuGroupSection = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-8133b170"]]);
 const _hoisted_1$6 = ["aria-controls", "aria-expanded"];
-const _hoisted_2$3 = ["innerHTML"];
-const _hoisted_3$3 = /* @__PURE__ */ _withScopeId$3(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-plus button-icon" }, null, -1));
-const _hoisted_4$1 = ["id"];
-const _hoisted_5$1 = {
+const _hoisted_2$1 = ["innerHTML"];
+const _hoisted_3 = ["id"];
+const _hoisted_4 = {
+  key: 0,
+  class: "item"
+};
+const _hoisted_5 = {
   key: 1,
+  class: "item"
+};
+const _hoisted_6 = {
+  key: 2,
   class: "group"
 };
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenMenuGroup",
   props: {
     text: {},
@@ -2571,8 +2596,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           createBaseVNode("span", {
             class: "button-text",
             innerHTML: _ctx.text
-          }, null, 8, _hoisted_2$3),
-          _hoisted_3$3
+          }, null, 8, _hoisted_2$1),
+          _cache[0] || (_cache[0] = createBaseVNode("span", { class: "vpi-plus button-icon" }, null, -1))
         ], 8, _hoisted_1$6),
         createBaseVNode("div", {
           id: groupId.value,
@@ -2580,14 +2605,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         }, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.items, (item) => {
             return openBlock(), createElementBlock(Fragment, {
-              key: item.text
+              key: JSON.stringify(item)
             }, [
-              "link" in item ? (openBlock(), createElementBlock("div", {
-                key: item.text,
-                class: "item"
-              }, [
+              "link" in item ? (openBlock(), createElementBlock("div", _hoisted_4, [
                 createVNode(VPNavScreenMenuGroupLink, { item }, null, 8, ["item"])
-              ])) : (openBlock(), createElementBlock("div", _hoisted_5$1, [
+              ])) : "component" in item ? (openBlock(), createElementBlock("div", _hoisted_5, [
+                (openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps({ ref_for: true }, item.props, { "screen-menu": "" }), null, 16))
+              ])) : (openBlock(), createElementBlock("div", _hoisted_6, [
                 createVNode(VPNavScreenMenuGroupSection, {
                   text: item.text,
                   items: item.items
@@ -2595,17 +2619,17 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
               ]))
             ], 64);
           }), 128))
-        ], 8, _hoisted_4$1)
+        ], 8, _hoisted_3)
       ], 2);
     };
   }
 });
-const VPNavScreenMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-ff6087d4"]]);
+const VPNavScreenMenuGroup = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-b9ab8c58"]]);
 const _hoisted_1$5 = {
   key: 0,
   class: "VPNavScreenMenu"
 };
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenMenu",
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -2613,13 +2637,16 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       return unref(theme2).nav ? (openBlock(), createElementBlock("nav", _hoisted_1$5, [
         (openBlock(true), createElementBlock(Fragment, null, renderList(unref(theme2).nav, (item) => {
           return openBlock(), createElementBlock(Fragment, {
-            key: item.text
+            key: JSON.stringify(item)
           }, [
             "link" in item ? (openBlock(), createBlock(VPNavScreenMenuLink, {
               key: 0,
               item
-            }, null, 8, ["item"])) : (openBlock(), createBlock(VPNavScreenMenuGroup, {
+            }, null, 8, ["item"])) : "component" in item ? (openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps({
               key: 1,
+              ref_for: true
+            }, item.props, { "screen-menu": "" }), null, 16)) : (openBlock(), createBlock(VPNavScreenMenuGroup, {
+              key: 2,
               text: item.text || "",
               items: item.items
             }, null, 8, ["text", "items"]))
@@ -2629,7 +2656,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenSocialLinks",
   setup(__props) {
     const { theme: theme2 } = useData();
@@ -2642,11 +2669,8 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _withScopeId$2 = (n) => (pushScopeId("data-v-858fe1a4"), n = n(), popScopeId(), n);
-const _hoisted_1$4 = /* @__PURE__ */ _withScopeId$2(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-languages icon lang" }, null, -1));
-const _hoisted_2$2 = /* @__PURE__ */ _withScopeId$2(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-chevron-down icon chevron" }, null, -1));
-const _hoisted_3$2 = { class: "list" };
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _hoisted_1$4 = { class: "list" };
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreenTranslations",
   setup(__props) {
     const { localeLinks, currentLang } = useLangs({ correspondingLink: true });
@@ -2663,17 +2687,17 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           class: "title",
           onClick: toggle
         }, [
-          _hoisted_1$4,
+          _cache[0] || (_cache[0] = createBaseVNode("span", { class: "vpi-languages icon lang" }, null, -1)),
           createTextVNode(" " + toDisplayString(unref(currentLang).label) + " ", 1),
-          _hoisted_2$2
+          _cache[1] || (_cache[1] = createBaseVNode("span", { class: "vpi-chevron-down icon chevron" }, null, -1))
         ]),
-        createBaseVNode("ul", _hoisted_3$2, [
+        createBaseVNode("ul", _hoisted_1$4, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(localeLinks), (locale) => {
             return openBlock(), createElementBlock("li", {
               key: locale.link,
               class: "item"
             }, [
-              createVNode(_sfc_main$P, {
+              createVNode(_sfc_main$Q, {
                 class: "link",
                 href: locale.link
               }, {
@@ -2689,9 +2713,9 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavScreenTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-858fe1a4"]]);
+const VPNavScreenTranslations = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-858fe1a4"]]);
 const _hoisted_1$3 = { class: "container" };
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "VPNavScreen",
   props: {
     open: { type: Boolean }
@@ -2715,10 +2739,10 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
           }, [
             createBaseVNode("div", _hoisted_1$3, [
               renderSlot(_ctx.$slots, "nav-screen-content-before", {}, void 0, true),
-              createVNode(_sfc_main$8, { class: "menu" }),
+              createVNode(_sfc_main$9, { class: "menu" }),
               createVNode(VPNavScreenTranslations, { class: "translations" }),
               createVNode(VPNavScreenAppearance, { class: "appearance" }),
-              createVNode(_sfc_main$7, { class: "social-links" }),
+              createVNode(_sfc_main$8, { class: "social-links" }),
               renderSlot(_ctx.$slots, "nav-screen-content-after", {}, void 0, true)
             ])
           ], 512)) : createCommentVNode("", true)
@@ -2728,12 +2752,12 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNavScreen = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-cc5739dd"]]);
+const VPNavScreen = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-f2779853"]]);
 const _hoisted_1$2 = {
   key: 0,
   class: "VPNav"
 };
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "VPNav",
   setup(__props) {
     const { isScreenOpen, closeScreen, toggleScreen } = useNav();
@@ -2780,19 +2804,13 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPNav = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-ae24b3ad"]]);
-const _withScopeId$1 = (n) => (pushScopeId("data-v-93e7e794"), n = n(), popScopeId(), n);
+const VPNav = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-ae24b3ad"]]);
 const _hoisted_1$1 = ["role", "tabindex"];
-const _hoisted_2$1 = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ createBaseVNode("div", { class: "indicator" }, null, -1));
-const _hoisted_3$1 = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ createBaseVNode("span", { class: "vpi-chevron-right caret-icon" }, null, -1));
-const _hoisted_4 = [
-  _hoisted_3$1
-];
-const _hoisted_5 = {
+const _hoisted_2 = {
   key: 1,
   class: "items"
 };
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   __name: "VPSidebarItem",
   props: {
     item: {},
@@ -2848,8 +2866,8 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
           ), {
             tabindex: _ctx.item.items && 0
           }), [
-            _hoisted_2$1,
-            _ctx.item.link ? (openBlock(), createBlock(_sfc_main$P, {
+            _cache[1] || (_cache[1] = createBaseVNode("div", { class: "indicator" }, null, -1)),
+            _ctx.item.link ? (openBlock(), createBlock(_sfc_main$Q, {
               key: 0,
               tag: linkTag.value,
               class: "link",
@@ -2869,7 +2887,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
               class: "text",
               innerHTML: _ctx.item.text
             }, null, 8, ["innerHTML"])),
-            _ctx.item.collapsed != null ? (openBlock(), createElementBlock("div", {
+            _ctx.item.collapsed != null && _ctx.item.items && _ctx.item.items.length ? (openBlock(), createElementBlock("div", {
               key: 2,
               class: "caret",
               role: "button",
@@ -2877,9 +2895,11 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
               onClick: onCaretClick,
               onKeydown: withKeys(onCaretClick, ["enter"]),
               tabindex: "0"
-            }, _hoisted_4, 32)) : createCommentVNode("", true)
+            }, _cache[0] || (_cache[0] = [
+              createBaseVNode("span", { class: "vpi-chevron-right caret-icon" }, null, -1)
+            ]), 32)) : createCommentVNode("", true)
           ], 16, _hoisted_1$1)) : createCommentVNode("", true),
-          _ctx.item.items && _ctx.item.items.length ? (openBlock(), createElementBlock("div", _hoisted_5, [
+          _ctx.item.items && _ctx.item.items.length ? (openBlock(), createElementBlock("div", _hoisted_2, [
             _ctx.depth < 5 ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(_ctx.item.items, (i) => {
               return openBlock(), createBlock(_component_VPSidebarItem, {
                 key: i.text,
@@ -2894,19 +2914,49 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VPSidebarItem = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-93e7e794"]]);
-const _withScopeId = (n) => (pushScopeId("data-v-575e6a36"), n = n(), popScopeId(), n);
-const _hoisted_1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", { class: "curtain" }, null, -1));
-const _hoisted_2 = {
+const VPSidebarItem = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-b3fd67f8"]]);
+const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+  __name: "VPSidebarGroup",
+  props: {
+    items: {}
+  },
+  setup(__props) {
+    const disableTransition = ref(true);
+    let timer = null;
+    onMounted(() => {
+      timer = setTimeout(() => {
+        timer = null;
+        disableTransition.value = false;
+      }, 300);
+    });
+    onBeforeUnmount(() => {
+      if (timer != null) {
+        clearTimeout(timer);
+        timer = null;
+      }
+    });
+    return (_ctx, _cache) => {
+      return openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.items, (item) => {
+        return openBlock(), createElementBlock("div", {
+          key: item.text,
+          class: normalizeClass(["group", { "no-transition": disableTransition.value }])
+        }, [
+          createVNode(VPSidebarItem, {
+            item,
+            depth: 0
+          }, null, 8, ["item"])
+        ], 2);
+      }), 128);
+    };
+  }
+});
+const VPSidebarGroup = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-c40bc020"]]);
+const _hoisted_1 = {
   class: "nav",
   id: "VPSidebarNav",
   "aria-labelledby": "sidebar-aria-label",
   tabindex: "-1"
 };
-const _hoisted_3 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("span", {
-  class: "visually-hidden",
-  id: "sidebar-aria-label"
-}, " Sidebar Navigation ", -1));
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "VPSidebar",
   props: {
@@ -2924,10 +2974,17 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         if (props.open) {
           isLocked.value = true;
           (_a = navEl.value) == null ? void 0 : _a.focus();
-        } else
-          isLocked.value = false;
+        } else isLocked.value = false;
       },
       { immediate: true, flush: "post" }
+    );
+    const key = ref(0);
+    watch(
+      sidebarGroups,
+      () => {
+        key.value += 1;
+      },
+      { deep: true }
     );
     return (_ctx, _cache) => {
       return unref(hasSidebar) ? (openBlock(), createElementBlock("aside", {
@@ -2938,31 +2995,28 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         onClick: _cache[0] || (_cache[0] = withModifiers(() => {
         }, ["stop"]))
       }, [
-        _hoisted_1,
-        createBaseVNode("nav", _hoisted_2, [
-          _hoisted_3,
+        _cache[2] || (_cache[2] = createBaseVNode("div", { class: "curtain" }, null, -1)),
+        createBaseVNode("nav", _hoisted_1, [
+          _cache[1] || (_cache[1] = createBaseVNode("span", {
+            class: "visually-hidden",
+            id: "sidebar-aria-label"
+          }, " Sidebar Navigation ", -1)),
           renderSlot(_ctx.$slots, "sidebar-nav-before", {}, void 0, true),
-          (openBlock(true), createElementBlock(Fragment, null, renderList(unref(sidebarGroups), (item) => {
-            return openBlock(), createElementBlock("div", {
-              key: item.text,
-              class: "group"
-            }, [
-              createVNode(VPSidebarItem, {
-                item,
-                depth: 0
-              }, null, 8, ["item"])
-            ]);
-          }), 128)),
+          (openBlock(), createBlock(VPSidebarGroup, {
+            items: unref(sidebarGroups),
+            key: key.value
+          }, null, 8, ["items"])),
           renderSlot(_ctx.$slots, "sidebar-nav-after", {}, void 0, true)
         ])
       ], 2)) : createCommentVNode("", true);
     };
   }
 });
-const VPSidebar = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-575e6a36"]]);
+const VPSidebar = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-319d5ca6"]]);
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "VPSkipLink",
   setup(__props) {
+    const { theme: theme2 } = useData();
     const route = useRoute();
     const backToTop = ref();
     watch(() => route.path, () => backToTop.value.focus());
@@ -2992,12 +3046,12 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
           href: "#VPContent",
           class: "VPSkipLink visually-hidden",
           onClick: focusOnTargetAnchor
-        }, " Skip to content ")
+        }, toDisplayString(unref(theme2).skipToContentLabel || "Skip to content"), 1)
       ], 64);
     };
   }
 });
-const VPSkipLink = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-0f60ec36"]]);
+const VPSkipLink = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-0b0ada53"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "Layout",
   setup(__props) {
@@ -3142,7 +3196,7 @@ const Layout = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-5d9
 const theme = {
   Layout,
   enhanceApp: ({ app }) => {
-    app.component("Badge", _sfc_main$W);
+    app.component("Badge", _sfc_main$X);
   }
 };
 export {

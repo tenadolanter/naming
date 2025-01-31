@@ -1,11 +1,5 @@
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = []
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
-import { j as inBrowser, ax as useUpdateHead, ay as RouterSymbol, az as initData, aA as dataSymbol, aB as Content, aC as ClientOnly, aD as siteDataRef, aE as createSSRApp, aF as createRouter, aG as pathToFile, aH as __vitePreload, d as defineComponent, u as useData, l as onMounted, z as watchEffect, aI as usePrefetch, aJ as useCopyCode, aK as useCodeGroups, aL as h } from "./chunks/framework.jFWLL5KV.js";
-import { t as theme } from "./chunks/theme.DY_itaKC.js";
+import { t as theme } from "./chunks/theme.YBTXvLcm.js";
+import { R as inBrowser, a0 as useUpdateHead, a1 as RouterSymbol, a2 as initData, a3 as dataSymbol, a4 as Content, a5 as ClientOnly, a6 as siteDataRef, a7 as createSSRApp, a8 as createRouter, a9 as pathToFile, d as defineComponent, u as useData, v as onMounted, s as watchEffect, aa as usePrefetch, ab as useCopyCode, ac as useCodeGroups, ad as h } from "./chunks/framework.ByEDUqkj.js";
 function resolveThemeExtends(theme2) {
   if (theme2.extends) {
     const base = resolveThemeExtends(theme2.extends);
@@ -78,24 +72,19 @@ function newApp() {
 }
 function newRouter() {
   let isInitialPageLoad = inBrowser;
-  let initialPath;
   return createRouter((path) => {
     let pageFilePath = pathToFile(path);
     let pageModule = null;
     if (pageFilePath) {
       if (isInitialPageLoad) {
-        initialPath = pageFilePath;
-      }
-      if (isInitialPageLoad || initialPath === pageFilePath) {
         pageFilePath = pageFilePath.replace(/\.js$/, ".lean.js");
       }
-      if (false)
-        ;
+      if (false) ;
       else {
-        pageModule = __vitePreload(() => import(
+        pageModule = import(
           /*@vite-ignore*/
           pageFilePath
-        ), true ? __vite__mapDeps([]) : void 0);
+        );
       }
     }
     if (inBrowser) {
